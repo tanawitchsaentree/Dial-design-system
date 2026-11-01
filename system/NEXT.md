@@ -7,7 +7,7 @@
 - Lab contrast + screenshots: `node tooling/kiln/anchor-contrast.mjs` → `apps/lab/anchor/shots/`.
 
 ## Where it stopped
-Phase 0–4 done; anchor round rendered (kiln state phase=5), waiting for the user's pick of A, B, C or D
+Phase 0–4 done; anchor round rendered (kiln state phase=5), **the user picked A (D-001)**; anchor-likeness recorded from the estimated card
 (`apps/lab/anchor/index.html`, cards `[data-anchor="a".."d"]`). `system/refs/ref-01.png` is still not on
 disk (temp screenshot was deleted), so every value is estimated from chat. Nothing in packages/ changed yet; tokens are still SEED
 (`tokens.allowSeed: true`, `baseTheme: "dark"` kept because seed `$value` is dark — Phase 2 flips it
