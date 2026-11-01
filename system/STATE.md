@@ -8,9 +8,10 @@
 - **Phase ปัจจุบัน:** 2 เสร็จ → **wave 1** ถัดไป (kiln state phase=6) · anchor = A (D-001) · tokens D-002 (estimated)
 - **งานล่าสุดที่เสร็จ:** Phase 2 tokens 376 ตัว light+dark, allowSeed false, rationale 0 problems, contrast 24/24 คู่, verify:quick 14/14; book ใส่สี dial แล้ว
 - **งานถัดไป:** wave 1 (session ใหม่) ตาม `system/NEXT.md` → Next, in order
-- **Wave ปัจจุบัน:** 1 · **ผ่าน QA (verify:quick):** Button, Text, Heading, IconButton, Checkbox, Switch, Slider, Rotary, Display, Grille (+ layout 3) · batch 2 กำลังทำ: Input, Select, Card, DeviceCard, SegmentedControl, Tabs, Chip, Badge, Progress, Dialog, Toast · หลังจากนั้น: controls.tsx → dial Select/Slider (G-N1), docs.anchor, book chapters, full verify, milestone
+- **Wave ปัจจุบัน:** 1 เสร็จ (24 components, verify:quick 14/14, conformance 172/172) · **กำลังแก้ full verify** (16/20; gates แดง 25 ตัว) ด้วย 4 agents ตาม system/reports/m1-triage.md: components / book shell / book content / component docs · G-SL1 รอ kiln แก้ K-10
 - **ค้าง/blocked:** ไม่มี block; ref-01.png ยังไม่มี (user สั่งใช้ค่าประมาณ 2026-11-01) วัดใหม่เมื่อไฟล์มา
 ## Log ย่อ (ใหม่สุดบน ≤15 บรรทัด)
+- 2026-11-01 full verify 16/20 → triage; K-11 smoke-import แก้ในเครื่อง (27/27); แจ้ง kiln session เรื่อง K-8..K-11
 - 2026-11-01 batch 1 (9 components) verify:quick 14/14, commit c065409; K-9 docs.css lede p, K-10 G-SL1 vs Rotary
 - 2026-11-01 user: "ตัดสินใจเองแล้วไปต่อเลยไม่ต้องถาม" → ทำ wave 1 ต่อใน session เดิม; Button เสร็จ (template), D-003 FORM.md, PLAYBOOK.md
 - 2026-11-01 Phase 2: D-002 tokens (ค่าประมาณตามที่ user สั่ง), Container/Grid/Stack why.json ใหม่, K-8 ลง BACKLOG
