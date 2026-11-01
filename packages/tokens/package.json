@@ -1,0 +1,37 @@
+{
+  "name": "dial-tokens",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "description": "dial design tokens built from DTCG in three tiers: CSS custom properties, JSON, ESM (+types), SCSS, Swift, Kotlin, Dart, a Tailwind preset and Figma variables.",
+  "exports": {
+    "./css": {
+      "types": "./css.d.ts",
+      "default": "./build/css/tokens.css"
+    },
+    "./json": "./build/json/tokens.json",
+    "./js": {
+      "types": "./build/js/tokens.d.ts",
+      "default": "./build/js/tokens.mjs"
+    },
+    "./scss": "./build/scss/_tokens.scss",
+    "./tailwind": "./build/tailwind/preset.cjs",
+    "./figma": "./build/figma/variables.json",
+    "./swift": "./build/swift/Tokens.swift",
+    "./kotlin": "./build/kotlin/Tokens.kt",
+    "./dart": "./build/dart/tokens.dart",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "build",
+    "README.md",
+    "css.d.ts"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "prepack": "node build.mjs"
+  },
+  "sideEffects": [
+    "*.css"
+  ]
+}
