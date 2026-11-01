@@ -18,3 +18,10 @@
 - **เพราะ:** P1–P6 ใน CONCEPT.md; ทุก group มี kiln.why; contrast ทุกคู่ข้อความ ≥4.5:1 ทั้งสองธีม (24 คู่, /tmp script ใน session นี้; ดู NEXT)
 - **ตัวเลือกที่ตัดทิ้ง:** ส้มเข้มขึ้นให้ 3:1 กับตัวเครื่อง (ทำให้ ink บนส้มต่ำกว่า 4.5:1) → ใช้ rim แทน · weight semibold (P5 อนุญาต 2 weight) · scale.press < 1 (key ยุบลงตามความสูง ไม่หด)
 - **กระทบ:** เมื่อมี ref-01.png ต้องวัดใหม่: primitive color.abs/charcoal/orange/lcd, ratio.*, material.*, shadow.* → rebuild tokens, re-render anchor + `anchor-likeness --record`, re-run contrast ทุกคู่ และ G-AN1
+
+### D-003: Form language (system/FORM.md)
+- **วันที่:** 2026-11-01 · **Phase:** wave 1 start (form-language)
+- **เลือก:** ห้า class: control (round/capsule key, rotary disc + index, fader cap in groove, rocker), input (recessed well), surface (radius = 0.16 × short side capped at corner.panel, inner = outer − inset), display (recessed window, grille holes, printed lamp + word), separator (1px seam); NEVER rules ต่อ class; matte ABS + spring m1.4/k520/c46
+- **เพราะ:** P1–P6 + tactile recipe; user ให้ agent ตัดสินเองทั้งหมดหลัง anchor ("ตัดสินใจเองแล้วไปต่อเลยไม่ต้องถาม", 2026-11-01)
+- **ตัวเลือกที่ตัดทิ้ง:** flat pill + intent fills, bordered 8px input, white card 12–16px soft shadow, iOS-clone switch
+- **กระทบ:** ทุก component ใน wave 1+; ถ้าแก้ class ไหน ต้อง re-derive สมาชิกของ class นั้น (why.json derivation + lab + REVIEW)
