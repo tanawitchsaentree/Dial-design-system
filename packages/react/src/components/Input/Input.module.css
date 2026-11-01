@@ -87,7 +87,7 @@
 }
 .root[data-invalid='true'] .well { border-color: var(--ds-status-critical-mark); }
 .root[data-disabled='true'] .well { box-shadow: none; cursor: not-allowed; }
-.root[data-disabled='true'] { opacity: var(--ds-opacity-disabled); }
+.root[data-disabled='true'] .field { opacity: var(--ds-opacity-disabled); }
 
 @media (forced-colors: active) {
   .well { border-color: CanvasText; }

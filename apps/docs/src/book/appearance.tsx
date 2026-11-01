@@ -46,7 +46,7 @@ export function AppearanceMenu({ look, open, onToggle }: { look: Appearance; ope
   const controls = Object.fromEntries(APPEARANCE.map((a) => [`data-${a.id}-control`, '']));
   return (
     <details className="tb-appearance" open={open} onToggle={(e) => onToggle(e.currentTarget.open)} {...controls}>
-      <summary aria-label={`Appearance of the examples: ${summary}`} aria-controls="appearance-panel">Appearance <span className="muted">{summary}</span></summary>
+      <summary>Appearance <span className="muted">{summary}</span><span className="visually-hidden">, how the examples look</span></summary>
     </details>
   );
 }
