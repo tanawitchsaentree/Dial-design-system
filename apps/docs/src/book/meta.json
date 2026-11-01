@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T13:54:18.918Z",
+  "generatedAt": "2026-11-01T14:04:05.268Z",
   "version": "0.0.0",
   "components": {
     "Badge": {
@@ -1924,8 +1924,8 @@
       "demoFloor": 4,
       "bundle": {
         "jsMin": 1209,
-        "cssMin": 3147,
-        "gzip": 1521
+        "cssMin": 3106,
+        "gzip": 1523
       }
     },
     "Tabs": {

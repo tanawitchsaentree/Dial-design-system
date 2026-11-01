@@ -42,6 +42,6 @@
 - ✓ fixed in kiln 2.5.3 — **K-11 smoke-import imports the ESM build in plain Node, which cannot load the per-component CSS imports** the
   library build adds for tree-shaking: `ERR_UNKNOWN_FILE_EXTENSION ".css" … dist/css/components/Badge/Badge.css`
   (esm=0 cjs=27). Patched locally in `tooling/smoke-import.mjs`: probes run with a `--import` hook that stubs `.css`.
-- **K-12 G-NC1 reads only the top-left radius of a nested shape.** In a SegmentedControl bank the last key's top-left
+- ✓ fixed in kiln 2.5.4 — **K-12 G-NC1 reads only the top-left radius of a nested shape.** In a SegmentedControl bank the last key's top-left
   corner is the 6px seam to its neighbour, while its real end corners nest the bank; the gate reports
   "SegmentedControl … corner 6px". It should take the corner that faces the container's corner.
