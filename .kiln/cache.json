@@ -1,0 +1,18 @@
+{
+ "preflight": "empty repo from kiln 2.5.1 starter",
+ "reference_table": {
+  "status": "estimated from chat, re-measure from ref-01.png",
+  "source": "system/refs/ref-01.png (lead), ref-02.png",
+  "1_hierarchy": "colour reserved for one thing (the orange primary control) + enclosure (each device is its own body; the display is a recessed window)",
+  "2_colour_roles": "ground (warm white plastic, slightly lighter page behind), structure ink (mid/dark grey printing, grille holes), one reserved accent (orange, primary control only; small side buttons sometimes orange too \u2014 secondary), display families: LCD grey-green with dark segments, OLED/CRT near-black with white or green text",
+  "3_rhythm": "body inset \u2248 1/12 of the short side; grille pitch \u2248 hole diameter \u00d7 1.6; radius \u2248 15\u201318% of the short side; labels on the bottom inset line",
+  "4_density": "dense inside grilles and keypads, generous everywhere else; the display + one control occupies ~60% of the face",
+  "5_signature": "one orange control per unit against a calm white body",
+  "6_type": "set grotesk, single weight, lowercase model name bottom-right, wordmark bottom-left; 7-segment numerals on LCD; tabular",
+  "7_material": "matte ABS, soft top-left light, short soft shadow below, faint lit top edge; translated as material tokens (height/gloss/roughness/mass), never as texture",
+  "8_edges": "rounded rectangle bodies with a fine seam line; recessed windows with an inner shade; no hard rules between regions, gaps instead",
+  "9_absent": "no gradients, no patterns as ornament, no second accent hue, no bold display type, no icons where a printed word fits",
+  "10_failure": "the photographed light-grey-on-white labels fail 4.5:1 and would be unreadable on screen; a dense app list would break the one-device-per-unit rhythm \u2014 lists need a quieter row form",
+  "divergence": "reference labels are too faint: P5 overrides the reference and raises ink to \u22654.5:1; no pull on the vector"
+ }
+}

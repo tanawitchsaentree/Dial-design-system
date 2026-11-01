@@ -2,7 +2,7 @@
   "$comment": "Per-system settings the kiln engine and gates read. Created by kiln create; Phase 0 fills the names, Phase 2 flips tokens.allowSeed to false. Empty lists make gates FAIL on purpose (nothing proven), never pass.",
   "name": "dial",
   "intake": {
-    "appType": null,
+    "appType": "home-iot",
     "$comment": "intake question 3: a key of tooling/kiln/app-types.json; milestone M1 requires its wave 1"
   },
   "budget": "standard",

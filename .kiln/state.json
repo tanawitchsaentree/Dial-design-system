@@ -1,0 +1,166 @@
+{
+  "verb": "build",
+  "scale": "Package",
+  "current_phase": 5,
+  "has_reference": true,
+  "checkpoints": {},
+  "carry_forward": {
+    "brief": "dial: home-iot control + media app (web+mobile, everyday people at home); lineage Braun/Ulm (Rams), light warm-white ABS base + charcoal dark; one orange accent per unit; plain backdrops; targets React/Tailwind/Figma/SwiftUI; budget standard; full answers in system/INTAKE.md",
+    "scale": "Package",
+    "has_reference": true,
+    "lineage_name": "Braun / Ulm school industrial design (Dieter Rams, Weniger aber besser) \u2014 user-declared; nearest catalogued structure 07-instrument-panel",
+    "home_vector": [
+      3,
+      1,
+      2,
+      8,
+      3,
+      4
+    ],
+    "signature_move": "One loud thing per unit: the single orange part is the primary control you turn or press, everything else is warm-white matte plastic and grey ink",
+    "fit_statement": "A home control app has the appliance problem Rams solved: an everyday person must read state and find the one control that matters at a glance, with nothing decorative competing",
+    "vector": [
+      3,
+      1,
+      2,
+      8,
+      3,
+      4
+    ],
+    "loud_axis": "surface at 8: one matte ABS material lit from top-left, perforated grilles, LCD/OLED windows, detented mechanisms",
+    "loud_axis_payment": "type at 1 (one grotesk) and grid at 2 (one module, fixed positions)",
+    "concept_file": "system/CONCEPT.md",
+    "principles": [
+      "P1 One loud thing per unit",
+      "P2 The display tells the state",
+      "P3 Parts behave like parts",
+      "P4 Holes are information",
+      "P5 Type is a label, not a voice",
+      "P6 Lasts, so it stays still"
+    ],
+    "reference_table": {
+      "status": "estimated from chat, re-measure from ref-01.png",
+      "source": "system/refs/ref-01.png (lead), ref-02.png",
+      "1_hierarchy": "colour reserved for one thing (the orange primary control) + enclosure (each device is its own body; the display is a recessed window)",
+      "2_colour_roles": "ground (warm white plastic, slightly lighter page behind), structure ink (mid/dark grey printing, grille holes), one reserved accent (orange, primary control only; small side buttons sometimes orange too \u2014 secondary), display families: LCD grey-green with dark segments, OLED/CRT near-black with white or green text",
+      "3_rhythm": "body inset \u2248 1/12 of the short side; grille pitch \u2248 hole diameter \u00d7 1.6; radius \u2248 15\u201318% of the short side; labels on the bottom inset line",
+      "4_density": "dense inside grilles and keypads, generous everywhere else; the display + one control occupies ~60% of the face",
+      "5_signature": "one orange control per unit against a calm white body",
+      "6_type": "set grotesk, single weight, lowercase model name bottom-right, wordmark bottom-left; 7-segment numerals on LCD; tabular",
+      "7_material": "matte ABS, soft top-left light, short soft shadow below, faint lit top edge; translated as material tokens (height/gloss/roughness/mass), never as texture",
+      "8_edges": "rounded rectangle bodies with a fine seam line; recessed windows with an inner shade; no hard rules between regions, gaps instead",
+      "9_absent": "no gradients, no patterns as ornament, no second accent hue, no bold display type, no icons where a printed word fits",
+      "10_failure": "the photographed light-grey-on-white labels fail 4.5:1 and would be unreadable on screen; a dense app list would break the one-device-per-unit rhythm \u2014 lists need a quieter row form",
+      "divergence": "reference labels are too faint: P5 overrides the reference and raises ink to \u22654.5:1; no pull on the vector"
+    },
+    "plan": "Anchor round: device card (display + grille + loud knob + keys + ruler scale + model name + wordmark), 4 variants in apps/lab/anchor/ over display:grille ratio, knob size, shadow depth, label placement; user picks. Then Phase 2 tokens (matte ABS material, warm-white/charcoal themes, one orange, LCD/OLED families, allowSeed false). Wave 1 per kiln:production-run: layout primitives, atoms (Button/key, Switch/rocker, Slider/fader, Rotary, Select, Display LCD+OLED, Grille meter, Label, Icon, Focus), home-iot wave 1 extras, docs controls. Book at standard depth; verify full; milestone M1.",
+    "out_of_scope": "npm publish / git push; native SwiftUI components (tokens only); Braun name or logo; photographic textures; waves 2-3 media (player, progress, list) beyond M1; brand identity beyond a plain dial wordmark",
+    "acceptance_criteria": [
+      "Every unit shows at most one orange part, and it is the primary control",
+      "Every text and label is >=4.5:1 on its material in light and dark",
+      "A person can read a device state from its display in one glance without reading any other text",
+      "Every rotary/fader/key works by keyboard (arrows step a detent, Home/End, Space/Enter) and declares mechanism+spring in why.json",
+      "No Braun name or mark anywhere in code, docs or assets"
+    ],
+    "riskiest_slice": "device card anchor: material + display + grille + knob must read as one honest appliance without becoming a retro costume or a bloated toy"
+  },
+  "history": [
+    {
+      "phase": 0,
+      "entered_at": "2026-11-01T08:54:23.469436+00:00",
+      "exited_at": "2026-11-01T08:54:30.531167+00:00",
+      "data": {
+        "brief": "dial: home-iot control + media app (web+mobile, everyday people at home); lineage Braun/Ulm (Rams), light warm-white ABS base + charcoal dark; one orange accent per unit; plain backdrops; targets React/Tailwind/Figma/SwiftUI; budget standard; full answers in system/INTAKE.md",
+        "scale": "Package",
+        "has_reference": true
+      }
+    },
+    {
+      "phase": 1,
+      "entered_at": "2026-11-01T08:54:30.531295+00:00",
+      "exited_at": "2026-11-01T08:55:15.137432+00:00",
+      "data": {
+        "lineage_name": "Braun / Ulm school industrial design (Dieter Rams, Weniger aber besser) \u2014 user-declared; nearest catalogued structure 07-instrument-panel",
+        "home_vector": [
+          3,
+          1,
+          2,
+          8,
+          3,
+          4
+        ],
+        "signature_move": "One loud thing per unit: the single orange part is the primary control you turn or press, everything else is warm-white matte plastic and grey ink",
+        "fit_statement": "A home control app has the appliance problem Rams solved: an everyday person must read state and find the one control that matters at a glance, with nothing decorative competing"
+      }
+    },
+    {
+      "phase": 2,
+      "entered_at": "2026-11-01T08:55:15.137608+00:00",
+      "exited_at": "2026-11-01T08:56:03.288110+00:00",
+      "data": {
+        "vector": [
+          3,
+          1,
+          2,
+          8,
+          3,
+          4
+        ],
+        "loud_axis": "surface at 8: one matte ABS material lit from top-left, perforated grilles, LCD/OLED windows, detented mechanisms",
+        "loud_axis_payment": "type at 1 (one grotesk) and grid at 2 (one module, fixed positions)",
+        "concept_file": "system/CONCEPT.md",
+        "principles": [
+          "P1 One loud thing per unit",
+          "P2 The display tells the state",
+          "P3 Parts behave like parts",
+          "P4 Holes are information",
+          "P5 Type is a label, not a voice",
+          "P6 Lasts, so it stays still"
+        ]
+      }
+    },
+    {
+      "phase": 3,
+      "entered_at": "2026-11-01T08:56:03.288262+00:00",
+      "exited_at": "2026-11-01T08:56:17.947361+00:00",
+      "data": {
+        "reference_table": {
+          "status": "estimated from chat, re-measure from ref-01.png",
+          "source": "system/refs/ref-01.png (lead), ref-02.png",
+          "1_hierarchy": "colour reserved for one thing (the orange primary control) + enclosure (each device is its own body; the display is a recessed window)",
+          "2_colour_roles": "ground (warm white plastic, slightly lighter page behind), structure ink (mid/dark grey printing, grille holes), one reserved accent (orange, primary control only; small side buttons sometimes orange too \u2014 secondary), display families: LCD grey-green with dark segments, OLED/CRT near-black with white or green text",
+          "3_rhythm": "body inset \u2248 1/12 of the short side; grille pitch \u2248 hole diameter \u00d7 1.6; radius \u2248 15\u201318% of the short side; labels on the bottom inset line",
+          "4_density": "dense inside grilles and keypads, generous everywhere else; the display + one control occupies ~60% of the face",
+          "5_signature": "one orange control per unit against a calm white body",
+          "6_type": "set grotesk, single weight, lowercase model name bottom-right, wordmark bottom-left; 7-segment numerals on LCD; tabular",
+          "7_material": "matte ABS, soft top-left light, short soft shadow below, faint lit top edge; translated as material tokens (height/gloss/roughness/mass), never as texture",
+          "8_edges": "rounded rectangle bodies with a fine seam line; recessed windows with an inner shade; no hard rules between regions, gaps instead",
+          "9_absent": "no gradients, no patterns as ornament, no second accent hue, no bold display type, no icons where a printed word fits",
+          "10_failure": "the photographed light-grey-on-white labels fail 4.5:1 and would be unreadable on screen; a dense app list would break the one-device-per-unit rhythm \u2014 lists need a quieter row form",
+          "divergence": "reference labels are too faint: P5 overrides the reference and raises ink to \u22654.5:1; no pull on the vector"
+        }
+      }
+    },
+    {
+      "phase": 4,
+      "entered_at": "2026-11-01T08:56:17.947550+00:00",
+      "exited_at": "2026-11-01T08:56:28.871398+00:00",
+      "data": {
+        "plan": "Anchor round: device card (display + grille + loud knob + keys + ruler scale + model name + wordmark), 4 variants in apps/lab/anchor/ over display:grille ratio, knob size, shadow depth, label placement; user picks. Then Phase 2 tokens (matte ABS material, warm-white/charcoal themes, one orange, LCD/OLED families, allowSeed false). Wave 1 per kiln:production-run: layout primitives, atoms (Button/key, Switch/rocker, Slider/fader, Rotary, Select, Display LCD+OLED, Grille meter, Label, Icon, Focus), home-iot wave 1 extras, docs controls. Book at standard depth; verify full; milestone M1.",
+        "out_of_scope": "npm publish / git push; native SwiftUI components (tokens only); Braun name or logo; photographic textures; waves 2-3 media (player, progress, list) beyond M1; brand identity beyond a plain dial wordmark",
+        "acceptance_criteria": [
+          "Every unit shows at most one orange part, and it is the primary control",
+          "Every text and label is >=4.5:1 on its material in light and dark",
+          "A person can read a device state from its display in one glance without reading any other text",
+          "Every rotary/fader/key works by keyboard (arrows step a detent, Home/End, Space/Enter) and declares mechanism+spring in why.json",
+          "No Braun name or mark anywhere in code, docs or assets"
+        ],
+        "riskiest_slice": "device card anchor: material + display + grille + knob must read as one honest appliance without becoming a retro costume or a bloated toy"
+      }
+    },
+    {
+      "phase": 5,
+      "entered_at": "2026-11-01T08:56:28.871544+00:00"
+    }
+  ]
+}

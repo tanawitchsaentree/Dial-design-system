@@ -1,10 +1,104 @@
 # Concept — dial
 
-<!-- Phase 1 writes this from INTAKE.md and the anchor pick. One paragraph of what the system is and
-must never become, then 5–8 principles. Each principle has a **Therefore** line with a consequence
-for every axis: space, shape, depth, colour, type, motion, interaction ("not affected" is allowed,
-with the principle that does decide it). Derivations quote these lines word for word, and
-tooling/kiln/rationale.mjs fails any token or component reason that cites a principle silent on
-its axis. See kiln references/concept.md. -->
+dial is the face of a household appliance, drawn on a screen. People at home use it on a phone or a
+laptop to turn the heating down, dim a lamp, see whether the washer is done, or skip a track. They
+look at it for a few seconds and then go back to their lives, so every unit (a card, a sheet, a
+screen) behaves like one small appliance in the Braun / Ulm tradition: a warm-white matte plastic
+body, one display that says the state, a perforated grille where something is happening, and one
+orange part, the control you turn or press. The rest is grey ink on plastic. Its source is Dieter
+Rams' ten principles and "Weniger, aber besser": less, but better. It must never become a retro
+costume (fake logos, fake plastic grain, grime), never use the Braun name or mark (dial has its own
+wordmark), never spread orange across the screen, never set light grey on light grey below 4.5:1,
+and never swell into a bloated round toy.
+
+**Lineage:** Braun / Ulm school industrial design (user-declared; nearest catalogued structure
+`07-instrument-panel`). **Vector:** C3 T1 G2 S8 M3 D4 — surface is loud at 8 (one material, real
+mechanisms), paid for by type at 1 and grid at 2.
+
+## Light model
+
+One light, top-left, for every part in every theme. A raised part (body, key, knob cap) casts a
+short soft shadow down and right, offset = height × light vector, and carries a faint lit hairline
+on its top-left edge (matte ABS, gloss ~0.2). A recess (display window, fader groove, grille hole)
+is the inverse: shade on its top-left inner edge, a faint lit edge bottom-right. A pressed part
+drops to height 0 and its shadow collapses under it. The chosen or "on" item is not lit brighter;
+it is the one in orange or the one whose indicator is on. Disabled parts lose height (flat, no
+shadow) and keep ≥3:1 for their outline. **What emits:** only the displays (LCD segments do not
+emit, OLED text does) and the small status lamp; in dark theme nothing else glows, and no white
+part glows because it is white.
+
+Material row (tactile recipe): **matte ABS** — height 5px, gloss 0.2, roughness 3px, mass 1.4.
+Accent material: the same ABS dyed orange; it has the same height and light, never a different
+finish.
 
 ## Principles
+
+Values in this file that come from the reference are **(estimated from chat, re-measure from
+ref-01.png)** until `system/refs/ref-01.png` is on disk.
+
+### P1 One loud thing per unit
+(Rams: good design is unobtrusive.) Each unit has exactly one primary control, and only that control
+is orange. Everything else is ink, plastic or display.
+**Therefore** space: the loud control gets the largest clear area in the unit and sits where the
+hand expects it (lower or right of the display). shape: the loud control is the one round or
+largest part; secondary controls are smaller keys. depth: same material height as everything else;
+loudness comes from hue, never from extra elevation. colour: orange appears once per unit, on the
+primary control's body only; links, borders, icons, selections and charts never use it. type: not
+affected (P5 decides type). motion: the loud control is the only part whose response may carry the
+spring's settle; secondary keys press and return without settle. interaction: the loud control is
+first in the unit's tab order after the display's label.
+
+### P2 The display tells the state
+(Rams: good design makes a product understandable.) Every unit has one window that says what the
+device is doing now, in numbers or a few words, and nothing else in the unit repeats it.
+**Therefore** space: the display window sits at the top of the unit, aligned to the body's inner
+inset. shape: the window is a rounded rectangle whose radius nests in the body (inner = outer −
+inset). depth: the window is recessed into the body (inverse light). colour: two display families —
+LCD (dark grey segments on grey-green, ≥4.5:1) and OLED (white on near-black). type: tabular
+numerals, a 7-segment face for LCD values, the system grotesk for OLED text. motion: values change
+at once; only a segment's on/off fades, ≤80ms. interaction: the display is a live region (polite)
+and never a control.
+
+### P3 Parts behave like parts
+(Rams: good design is honest; it is thorough down to the last detail.) A control in dial is a key,
+rocker, rotary, fader or slide switch, and it moves like that mechanism and nothing else.
+**Therefore** space: every part keeps ≥44px hit area even when it draws smaller. shape: keys are
+round or capsule; rotaries are circles with one index mark; faders ride a groove with a ruler scale.
+depth: press drops height to 0 in 60–70ms, return runs on the material's spring (ζ 0.75–1, settle
+<600ms). colour: not affected (P1 decides colour). type: scale numerals on a fader are tabular, the
+smallest size step, ink at ≥4.5:1. motion: fast in, slow out (`kiln.state`); rotaries and faders
+settle into the nearest detent; under Reduce motion nothing overshoots and detents change at once
+with a short fade. interaction: every mechanism has its keyboard map (arrows step a detent, Home and
+End reach the ends, Space and Enter press) and a visible value and label.
+
+### P4 Holes are information
+(Rams: good design is as little design as possible.) A perforated grille appears only where it
+carries a reading — level, activity, signal — and the dots themselves are the meter.
+**Therefore** space: grille pitch is one module step, so holes sit on the same grid as the body's
+inset. shape: holes are circles; their field is a rectangle or circle that nests in the body.
+depth: each hole is a recess (inverse light), never a printed dot. colour: holes are ink at a
+lower step; a lit level uses ink at full step, never orange. type: not affected (no text in a
+grille). motion: a level change fills holes in reading order, ≤120ms, none under Reduce motion.
+interaction: a grille that shows a value exposes it as text to assistive tech; a decorative grille
+is not allowed to exist.
+
+### P5 Type is a label, not a voice
+(Rams: good design is aesthetic only through usefulness.) One grotesk, few sizes. The wordmark sits
+bottom-left, the model name in lowercase bottom-right, like printing on a case.
+**Therefore** space: labels sit on the body's inset line, never floating mid-surface. shape: not
+affected (P3 decides shape). depth: printing is flat on the material — no shadow, no emboss.
+colour: ink on plastic at ≥4.5:1 in both themes; no tinted text. type: one grotesk, regular and
+medium only; hierarchy by size and position; lowercase model names; tabular figures everywhere a
+number changes. motion: text does not animate. interaction: labels name their control
+(`aria-labelledby`), and the model name is never the only identifier.
+
+### P6 Lasts, so it stays still
+(Rams: good design is long-lasting; it is environmentally friendly.) dial does not chase attention.
+Surfaces stay put; only a state change moves anything.
+**Therefore** space: fixed positions — a unit's layout does not reflow between states. shape:
+radius ≈ 15–18% of the body's short side (estimated from chat, re-measure from ref-01.png), capped so
+large panels do not swell into pillows. depth: shadows are short and soft; a unit never floats more
+than its material height. colour: no gradients, no glow except P2's emitters. type: not affected
+(P5 decides type). motion: no entry choreography, no idle animation; transitions only on state.
+interaction: no hover lift; hover only darkens a key's ink a step, because a real key does not rise
+when you approach it.
