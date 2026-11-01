@@ -1,0 +1,54 @@
+{
+  "concept": "IconButton is the round 44px key of an appliance with a symbol printed on it in place of a word: the same matte plastic as Button, dropping by its height when pressed, with only the unit's one primary key dyed orange.",
+  "kind": ["icon button", "button", "key"],
+  "default_to_avoid": [
+    { "pattern": "ghost icon button: a transparent icon with a grey hover circle (Material IconButton, shadcn ghost icon button)", "why_not": "A transparent glyph is not a part you can press; P3 makes every control a key with height and travel, and P6 forbids a hover effect that is not an ink step." },
+    { "pattern": "icon button with an orange or tinted icon to mark it as important", "why_not": "P1 forbids orange on icons; loudness belongs to the primary key's body and appears once per unit." }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): round function keys with printed symbols" },
+    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): round keys in body colour with one coloured key" },
+    { "source": "apps/lab/button/index.html variant B: round key kept for IconButton when Button picked the capsule" }
+  ],
+  "derivation": [
+    { "p": "P3", "axis": "shape", "consequence": "keys are round or capsule", "form": "With no word to fit, the key is a disc: corner.round on a square of control.key, 44px across." },
+    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "The md disc is exactly control.key and lg is control.lg, so the round target never drops under 44px." },
+    { "p": "P3", "axis": "depth", "consequence": "press drops height to 0 in 60–70ms, return runs on the material's spring", "form": "Active removes elevation.part and moves the disc by motion.press-travel in motion.press; release eases back over motion.release." },
+    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only; links, borders, icons, selections and charts never use it", "form": "kind primary dyes the disc action.accent with an action.accent-rim edge, while the icon itself always stays printing ink." },
+    { "p": "P5", "axis": "interaction", "consequence": "labels name their control", "form": "The required label prop becomes the accessible name and the icon is aria-hidden printing, so the key is never named by its picture." }
+  ],
+  "variants": {
+    "lab": "apps/lab/icon-button/index.html",
+    "options": [
+      { "id": "A", "name": "round key, icon on the key, name for assistive tech" },
+      { "id": "B", "name": "round key, word printed below on the case" },
+      { "id": "C", "name": "calculator key, squarish, small radius" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A is the round key P3 asks for and keeps rows of transport and power keys compact; B needs a word under every key, which makes the icon redundant and belongs to Button with a printed label, and C breaks P3 because keys are round or capsule."
+  },
+  "mechanism": { "kind": "key", "travel": "3px", "spring": { "mass": 1.4, "stiffness": 520, "damping": 46 } },
+  "parts": {
+    "root": { "p": "P3", "axis": "shape", "why": "A disc of matte plastic, square box with a round corner, holding one printed symbol in its centre." },
+    "key": { "p": "P5", "axis": "colour", "why": "A body-coloured key carries its symbol in printing ink at 4.5:1 or more and spends no accent." },
+    "primary": { "p": "P1", "axis": "colour", "why": "The unit's one primary key is dyed orange with a darker rim that holds 3:1 against the body." },
+    "md": { "p": "P3", "axis": "space", "why": "The default disc is 44px across, the smallest target any part of dial keeps." },
+    "lg": { "p": "P3", "axis": "space", "why": "A 52px disc for the main key of a phone sheet, held and pressed with one thumb." },
+    "icon": { "p": "P5", "axis": "depth", "why": "The symbol is flat printing on the key, sized to the icon step and hidden from assistive tech." }
+  },
+  "states": {
+    "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens the printed symbol one step and never lifts the key, because real keys do not rise." },
+    "active": { "p": "P3", "axis": "depth", "why": "Pressing drops the disc by its travel and collapses its shadow underneath it, at once." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "The same dark ring as every other part shows keyboard focus, so focus never depends on the orange." },
+    "disabled": { "p": "P6", "axis": "depth", "why": "A disabled key loses its height and fades to half, while its outline stays readable against the body." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes state at once with no travel and no spring return." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the disc keeps a real border so its edge survives without shadows or fills." }
+  },
+  "motion": {
+    "transform": { "p": "P3", "axis": "motion", "why": "The disc travels down in 65ms and returns on the spring so a press reads as a physical stroke." },
+    "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses with the press and grows back with the return, following the single light." },
+    "color": { "p": "P6", "axis": "interaction", "why": "The ink step on hover fades briefly so the change is a reply to the pointer, not a flash." },
+    "background-color": { "p": "P1", "axis": "colour", "why": "The primary key's orange shifts one step on hover with the same brief fade as the ink." }
+  }
+}

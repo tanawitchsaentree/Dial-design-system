@@ -399,11 +399,21 @@ What each one is, and the generic default it must not turn into.
 | component | what it is | never becomes |
 |---|---|---|
 | Button | Button is a key on the case of an appliance: a capsule of the same matte plastic that drops by its height when pressed and returns on the spring, with only the unit's one primary key dyed orange. | flat pill button with primary, secondary and ghost intent fills (Material contained/outlined/text, shadcn button) |
+| Checkbox | Checkbox is a small square key on the case of an appliance with its function printed beside it: you press it, it drops and springs back, and a tick in printing ink appears on its face to say the option is on. | 18px rounded-square checkbox filled blue with a white tick (Material and Bootstrap checkbox) |
 | Container | Container holds a page of units to a width the eye can scan, with a margin from the page edge that grows with the screen. |  |
+| Display | Display is the one window of a dial unit that says what the device is doing now, recessed into the plastic body, drawn as LCD segments or OLED text, announced politely and never pressed. | dashboard display: a stat card or KPI tile with a big bold number and a coloured up/down delta |
 | Grid | Grid places whole units on four, eight or twelve columns, so each appliance keeps one fixed place on the screen and its face is never stretched. |  |
+| Grille | Grille is the perforated field of a dial unit whose recessed holes are the meter itself: lit holes in printing ink show a level, activity or signal, and the value is always named for assistive tech. | decorative grille: a CSS radial-gradient dot-pattern background behind content |
+| Heading | Heading is the name printed largest on a unit or a page: the same grotesk and grey ink as the rest of the case, louder only by size and by sitting first on the inset line. |  |
+| IconButton | IconButton is the round 44px key of an appliance with a symbol printed on it in place of a word: the same matte plastic as Button, dropping by its height when pressed, with only the unit's one primary key dyed orange. | ghost icon button: a transparent icon with a grey hover circle (Material IconButton, shadcn ghost icon button) |
+| Rotary | Rotary is the knob of the appliance: a flat disc with one printed index mark over a ring of detent ticks across 270 degrees, dyed orange as the unit's one loud part, that turns with the hand and settles into the nearest detent on the material's spring. | skeuomorphic chrome audio plugin knob with gradients, knurling and a glowing LED arc |
+| Slider | Slider is the fader on the face of an appliance: a plastic cap riding a recessed groove under a printed ruler scale, which follows the hand and settles into the nearest detent on the material's spring, while the orange stays on the unit's rotary. | thin Material or iOS slider with a coloured filled track and a round white thumb |
 | Stack | Stack lines up units and parts on the 4px step, so the gaps between appliances on a screen follow the same rhythm as the holes and insets inside them. |  |
+| Switch | Switch is the slide switch on the side of an appliance: a plastic cap that slides in a recessed groove between two printed positions, with a small printed lamp that is lit while it is on. | iOS-clone pill switch with a sliding white knob and a green or blue track |
+| Text | Text is the printing on the case of an appliance: one grotesk in two weights, grey ink flat on the plastic, with hierarchy told by size and by where the words sit on the unit. | generic typography text component with h1 to h6 variants and bold, italic and colour props (MUI Typography, Chakra Text) |
 
 ## Locked decisions
 
 - D-001 Anchor = device card A (display-led)
 - D-002 Tokens ของ dial (Phase 2, ค่าประมาณ)
+- D-003 Form language (system/FORM.md)

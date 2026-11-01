@@ -1,0 +1,56 @@
+{
+  "concept": "Checkbox is a small square key on the case of an appliance with its function printed beside it: you press it, it drops and springs back, and a tick in printing ink appears on its face to say the option is on.",
+  "kind": ["checkbox", "key", "toggle"],
+  "default_to_avoid": [
+    { "pattern": "18px rounded-square checkbox filled blue with a white tick (Material and Bootstrap checkbox)", "why_not": "A coloured fill spends a hue on a selection, which P1 forbids, and a flat square drawn on the page is not a key with height and travel as P3 asks." },
+    { "pattern": "checkbox that tells on from off by fill colour alone", "why_not": "P2 and P4 make a state readable as a shape; a colour change alone vanishes for colour-blind readers and in forced colours." }
+  ],
+  "references": [
+    { "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): small keys with their function printed beside them" },
+    { "source": "Braun cassette deck and amplifier fronts of the 1970s: square push keys with an indicator beside each one" },
+    { "source": "apps/lab/checkbox/index.html: tick on the key, key with lamp, latching key" }
+  ],
+  "derivation": [
+    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "The key draws at control.check, 24px, while the whole printed row is the label and stands control.md tall, so the target is 44px." },
+    { "p": "P3", "axis": "depth", "consequence": "press drops height to 0 in 60–70ms, return runs on the material's spring", "form": "Pressing anywhere on the row removes the key's elevation.part and moves it by motion.press-travel; release returns it on motion.release." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "The on state is a tick in text.primary printing ink on the plastic key face; no orange and no fill colour mark the selection." },
+    { "p": "P4", "axis": "colour", "consequence": "a lit level uses ink at full step, never orange", "form": "The tick and the mixed dash are drawn at the full ink step with the ring stroke width, readable at 4.5:1 on the key." },
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "The printed label sits beside the key on the same line, a gap.lg away, and is part of the native label element." }
+  ],
+  "variants": {
+    "lab": "apps/lab/checkbox/index.html",
+    "options": [
+      { "id": "A", "name": "tick printed on the key face" },
+      { "id": "B", "name": "key with an indicator lamp beside it" },
+      { "id": "C", "name": "latching key that stays down when on" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A shows on, off and mixed as three different shapes on the key itself, so state survives without colour; B puts the state on an 8px lamp too small to read as a shape, and C makes on look like disabled and leaves no travel to show the next press (P3)."
+  },
+  "mechanism": { "kind": "key", "travel": "3px", "spring": { "mass": 1.4, "stiffness": 520, "damping": 46 } },
+  "parts": {
+    "root": { "p": "P3", "axis": "space", "why": "The whole row, key and printed word, is one native label at least 44px tall, so any of it presses the key." },
+    "input": { "p": "P3", "axis": "interaction", "why": "A native checkbox sits under the key, hidden from sight but focusable, so Space toggles and the state is announced." },
+    "key": { "p": "P3", "axis": "depth", "why": "A small square key of matte plastic with the part shadow and a ring edge that holds 3:1 against the body." },
+    "mark": { "p": "P4", "axis": "colour", "why": "The mark is drawn in full-step printing ink with the ring stroke, never orange, on the plastic key face." },
+    "tick": { "p": "P2", "axis": "shape", "why": "A tick shape says on, so the state can be read with no colour at all and in forced colours." },
+    "dash": { "p": "P2", "axis": "shape", "why": "A short dash says mixed, a third shape distinct from the empty key and the tick." },
+    "label": { "p": "P5", "axis": "type", "why": "The printed word uses the label size in regular weight, in ink, beside the key like printing on a case." }
+  },
+  "states": {
+    "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens the key's printed edge one step and never lifts it, because real keys do not rise." },
+    "active": { "p": "P3", "axis": "depth", "why": "Pressing the row drops the key by its travel and collapses its shadow underneath it, at once." },
+    "checked": { "p": "P2", "axis": "motion", "why": "When the input is checked the tick appears at once on the key, with no animation of the value." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "Keyboard focus on the hidden input draws the same dark ring around the visible key as on every part." },
+    "disabled": { "p": "P6", "axis": "depth", "why": "A disabled key loses its height and fades to half, while its ring edge and mark stay readable." },
+    "data-disabled": { "p": "P3", "axis": "depth", "why": "A disabled row shows the not-allowed cursor and its key no longer travels when pressed by a pointer." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes state at once with no travel and no spring return." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the key keeps a system border and the mark uses the text colour, so both survive." }
+  },
+  "motion": {
+    "transform": { "p": "P3", "axis": "motion", "why": "The key travels down in 65ms and returns on the spring so a press reads as a physical stroke." },
+    "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses with the press and grows back with the return, following the single light." },
+    "border-color": { "p": "P6", "axis": "interaction", "why": "The edge step on hover fades briefly so the change is a reply to the pointer, not a flash." }
+  }
+}

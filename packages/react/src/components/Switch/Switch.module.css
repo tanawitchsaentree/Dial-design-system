@@ -1,0 +1,105 @@
+/* Switch — a slide switch of matte ABS (system/FORM.md control class, D-003): a raised cap riding a
+   recessed groove, the two positions printed either side and a printed lamp. One light, top-left. */
+.field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-lg);
+  font-family: var(--ds-type-family);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+  cursor: pointer;
+}
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  min-block-size: var(--ds-control-md);
+  min-inline-size: var(--ds-layout-touch);
+  padding-block: var(--ds-gap-none);
+  padding-inline: var(--ds-gap-xs);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-mark);
+  background: transparent;
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-type-family);
+  cursor: pointer;
+}
+.word {
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+  transition: color var(--ds-motion-hover) linear;
+}
+.off { text-align: end; }
+.on { text-align: start; }
+.slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: none;
+  inline-size: var(--ds-control-switch);
+  block-size: var(--ds-control-track);
+  border-radius: var(--ds-corner-mark);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.cap {
+  position: absolute;
+  inset-inline-start: var(--ds-gap-none);
+  inline-size: var(--ds-control-cap-w);
+  block-size: var(--ds-control-cap-h);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-raised);
+  box-shadow: var(--ds-elevation-part);
+  transition: inset-inline-start var(--ds-motion-release) var(--ds-motion-easing);
+}
+.cap::after {
+  content: '';
+  position: absolute;
+  inset-block: var(--ds-gap-md);
+  inset-inline-start: calc(50% - var(--ds-width-ring) / 2);
+  inline-size: var(--ds-width-ring);
+  background: var(--ds-text-secondary);
+}
+.lamp {
+  flex: none;
+  inline-size: var(--ds-control-lamp);
+  block-size: var(--ds-control-lamp);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  transition:
+    background-color var(--ds-motion-segment) linear,
+    box-shadow var(--ds-motion-segment) linear;
+}
+
+.root[aria-checked='true'] .cap { inset-inline-start: calc(100% - var(--ds-control-cap-w)); }
+.root[aria-checked='true'] .lamp { background: var(--ds-text-primary); box-shadow: none; }
+.root[aria-checked='true'] .on,
+.root[aria-checked='false'] .off { color: var(--ds-text-primary); font-weight: var(--ds-type-weight-medium); }
+
+.root:hover .word { color: var(--ds-text-primary); }
+.root:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.root:disabled { cursor: not-allowed; opacity: var(--ds-opacity-disabled); }
+.root:disabled .cap { box-shadow: none; }
+.root:disabled:hover .word { color: var(--ds-text-secondary); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cap, .lamp, .word { transition: none; }
+}
+@media (forced-colors: active) {
+  .slot { border: var(--ds-width-hairline) solid ButtonText; }
+  .cap { border-color: ButtonText; }
+  .cap::after { background: ButtonText; }
+  .lamp { forced-color-adjust: none; border: var(--ds-width-hairline) solid ButtonText; background: Canvas; }
+  .root[aria-checked='true'] .lamp { background: ButtonText; }
+}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T10:34:16.500Z",
+  "generatedAt": "2026-11-01T10:55:04.615Z",
   "version": "0.0.0",
   "components": {
     "Button": {
@@ -66,6 +66,83 @@
         "gzip": 916
       }
     },
+    "Checkbox": {
+      "source": "packages/react/src/components/Checkbox/Checkbox.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Checkbox",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The word printed beside the key. It is the accessible name, and clicking it presses the key.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "checked",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Controlled: whether the option is on. Pair it with `onChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultChecked",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Uncontrolled: whether the option starts on.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onChange",
+              "type": "ChangeEventHandler<HTMLInputElement>",
+              "required": false,
+              "default": null,
+              "description": "Called when the key is pressed by pointer, Space or the label; read `event.target.checked`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The key loses its height and cannot be pressed.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "indeterminate",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Mixed: some of the things this option covers are on. Shows a dash and is announced as mixed.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "disabled",
+        "indeterminate"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 925,
+        "cssMin": 2077,
+        "gzip": 1283
+      }
+    },
     "Container": {
       "source": "packages/react/src/components/Container/Container.tsx",
       "kinds": {},
@@ -107,6 +184,108 @@
         "jsMin": 359,
         "cssMin": 335,
         "gzip": 403
+      }
+    },
+    "Display": {
+      "source": "packages/react/src/components/Display/Display.tsx",
+      "kinds": {
+        "kind": [
+          "lcd",
+          "oled"
+        ]
+      },
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "exports": [
+        {
+          "displayName": "Display",
+          "props": [
+            {
+              "name": "kind",
+              "type": "\"lcd\" | \"oled\"",
+              "required": false,
+              "default": "lcd",
+              "description": "`lcd` (default) draws the value as dark 7-segment digits on grey-green; `oled` sets it in white grotesk on near-black.",
+              "enum": true,
+              "options": [
+                "lcd",
+                "oled"
+              ]
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The reading, as text. On `lcd` the digits 0–9, a minus, a space, a decimal point and a few letters (A b C d E F H L n o P r t U) are drawn as segments.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The unit printed beside the value, such as °C, min or MHz.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "detail",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "One short line of detail with the value, such as \"Heating to 22.0\" or \"Rinse\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The accessible name of the window, such as \"Thermostat\". The window is announced politely when its reading changes.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "size",
+              "type": "\"sm\" | \"md\" | \"lg\"",
+              "required": false,
+              "default": "md",
+              "description": "`sm` 24px digits, `md` (default) 40px digits, `lg` 56px digits; on `oled` the value line steps with it.",
+              "enum": true,
+              "options": [
+                "sm",
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "digits",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "`lcd` only: the number of digit cells. Shorter values are padded on the left with unlit cells, so the window never changes width.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "kind",
+        "size"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 2287,
+        "cssMin": 1850,
+        "gzip": 1790
       }
     },
     "Grid": {
@@ -168,6 +347,582 @@
         "jsMin": 676,
         "cssMin": 110,
         "gzip": 482
+      }
+    },
+    "Grille": {
+      "source": "packages/react/src/components/Grille/Grille.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Grille",
+          "props": [
+            {
+              "name": "value",
+              "type": "number",
+              "required": true,
+              "default": null,
+              "description": "The reading, from 0 to `max`. Values outside the range are clamped.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "required": false,
+              "default": "10",
+              "description": "The top of the range. Defaults to 10.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "cols",
+              "type": "number",
+              "required": false,
+              "default": "12",
+              "description": "Holes per row. Defaults to 12.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "rows",
+              "type": "number",
+              "required": false,
+              "default": "4",
+              "description": "Rows of holes. Defaults to 4.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "shape",
+              "type": "\"rect\" | \"circle\"",
+              "required": false,
+              "default": "rect",
+              "description": "`rect` (default) is a rectangular field; `circle` leaves out the holes outside the inscribed circle, like a speaker grille.",
+              "enum": true,
+              "options": [
+                "rect",
+                "circle"
+              ]
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "What the holes measure, such as \"Volume\" or \"Fan speed\". Required: a grille with no reading is not allowed.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "fill",
+              "type": "\"inline\" | \"up\"",
+              "required": false,
+              "default": "inline",
+              "description": "Fill order. `inline` (default) lights holes column by column in reading order (left to right, mirrored in RTL); `up` lights rows from the bottom.",
+              "enum": true,
+              "options": [
+                "inline",
+                "up"
+              ]
+            },
+            {
+              "name": "valueText",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The reading as words for assistive tech. Defaults to \"`value` of `max`\".",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "shape",
+        "fill"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 1017,
+        "cssMin": 642,
+        "gzip": 972
+      }
+    },
+    "Heading": {
+      "source": "packages/react/src/components/Heading/Heading.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Heading",
+          "props": [
+            {
+              "name": "level",
+              "type": "1 | 2 | 3 | 4",
+              "required": false,
+              "default": "3",
+              "description": "Renders `h1`–`h4` and sets the size: 1 display (37px, the page title), 2 headline (26px, a section), 3 title (22px, a unit, the default), 4 emphasis (18px, a group inside a unit).",
+              "enum": false,
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [],
+      "variantCount": 0,
+      "demoFloor": 3,
+      "bundle": {
+        "jsMin": 349,
+        "cssMin": 396,
+        "gzip": 440
+      }
+    },
+    "IconButton": {
+      "source": "packages/react/src/components/IconButton/IconButton.tsx",
+      "kinds": {
+        "kind": [
+          "key",
+          "primary"
+        ]
+      },
+      "sizes": [
+        "md",
+        "lg"
+      ],
+      "exports": [
+        {
+          "displayName": "IconButton",
+          "props": [
+            {
+              "name": "label",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The accessible name, required: what the key does, in words (for example \"Next track\"). The icon is never the name.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "kind",
+              "type": "\"key\" | \"primary\"",
+              "required": false,
+              "default": "key",
+              "description": "`key` (default) is a body-coloured key. `primary` is the unit's one orange key; use it once per unit.",
+              "enum": true,
+              "options": [
+                "key",
+                "primary"
+              ]
+            },
+            {
+              "name": "size",
+              "type": "\"md\" | \"lg\"",
+              "required": false,
+              "default": "md",
+              "description": "`md` (default) is a 44px disc; `lg` is 52px, for the main key of a sheet on a phone.",
+              "enum": true,
+              "options": [
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The symbol printed on the key: one icon, drawn in `currentColor`. It is hidden from assistive tech.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "kind",
+        "size"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 503,
+        "cssMin": 1587,
+        "gzip": 889
+      }
+    },
+    "Rotary": {
+      "source": "packages/react/src/components/Rotary/Rotary.tsx",
+      "kinds": {
+        "kind": [
+          "primary",
+          "key"
+        ]
+      },
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "exports": [
+        {
+          "displayName": "Rotary",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The printed name under the knob. Required: it is also the knob's accessible name.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "kind",
+              "type": "\"primary\" | \"key\"",
+              "required": false,
+              "default": "primary",
+              "description": "`primary` (default) is the unit's one orange knob; use it once per unit. `key` is a body-coloured knob for secondary dials.",
+              "enum": true,
+              "options": [
+                "primary",
+                "key"
+              ]
+            },
+            {
+              "name": "size",
+              "type": "\"sm\" | \"md\" | \"lg\"",
+              "required": false,
+              "default": "md",
+              "description": "`sm` is 44px, `md` (default) 72px, `lg` 108px across. Ignored when `diameter` or `unitSide` is set.",
+              "enum": true,
+              "options": [
+                "sm",
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "diameter",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The knob's diameter in px, at least 44. Overrides `size` and `unitSide`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "unitSide",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The short side of the unit the knob sits on, in px. The diameter becomes `knobRatio` × this (anchor A: 0.36).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "knobRatio",
+              "type": "number",
+              "required": false,
+              "default": "0.36",
+              "description": "The share of the unit's short side the knob takes when `unitSide` is set. Default 0.36 (corner.knob-ratio).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "min",
+              "type": "number",
+              "required": false,
+              "default": "0",
+              "description": "The lowest value, at the start of the sweep. Default 0.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "required": false,
+              "default": "10",
+              "description": "The highest value, at the end of the sweep. Default 10.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "step",
+              "type": "number",
+              "required": false,
+              "default": "1",
+              "description": "The distance between detents. Default 1, so 0 to 10 gives the 11 detents of mechanism.detents.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "value",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The value when controlled. Pair it with `onValueChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultValue",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The starting value when uncontrolled. Default `min`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onValueChange",
+              "type": "((value: number) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the new value whenever a key or a drag turns the knob to another detent.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "formatValue",
+              "type": "((value: number) => string)",
+              "required": false,
+              "default": "(v: number) => String(Number(v.toFixed(2)))",
+              "description": "Turns a value into the printed and announced text, for example `(v) => \\`${v} °C\\``.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "pageStep",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The distance PageUp and PageDown turn. Default: a tenth of the range, at least two detents.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "sweep",
+              "type": "number",
+              "required": false,
+              "default": "270",
+              "description": "The angle from the first detent to the last, in degrees. Default 270 (mechanism.sweep).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "dragDistance",
+              "type": "number",
+              "required": false,
+              "default": "180",
+              "description": "How far, in px, a vertical drag goes to turn through the whole sweep. Default 180.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The knob cannot be turned; it loses its height.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "mass",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.mass",
+              "description": "Spring mass of the knob. Default 1.4 (mechanism.mass).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "stiffness",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.stiffness",
+              "description": "Spring stiffness. Default 520 (mechanism.stiffness).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "damping",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.damping",
+              "description": "Spring damping. Default 46 (mechanism.damping).",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "kind",
+        "size",
+        "disabled"
+      ],
+      "variantCount": 3,
+      "demoFloor": 6,
+      "bundle": {
+        "jsMin": 4289,
+        "cssMin": 2496,
+        "gzip": 2970
+      }
+    },
+    "Slider": {
+      "source": "packages/react/src/components/Slider/Slider.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Slider",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The printed name above the fader. Required: it is also the slider's accessible name.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "min",
+              "type": "number",
+              "required": false,
+              "default": "0",
+              "description": "The lowest value, at the start of the groove. Default 0.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "required": false,
+              "default": "10",
+              "description": "The highest value, at the end of the groove. Default 10.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "step",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The distance between detents. When set, the cap settles into the nearest detent and the ruler prints one tick per detent (up to 20). Leave it out for a fader with no detents.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "value",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The value when controlled. Pair it with `onValueChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultValue",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The starting value when uncontrolled. Default `min`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onValueChange",
+              "type": "((value: number) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the new value whenever a key, a drag or a click moves the cap to another value.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "scale",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Print the ruler's numerals under the groove (\"audio 1\" scale). Default false.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "formatValue",
+              "type": "((value: number) => string)",
+              "required": false,
+              "default": "(v: number) => String(Number(v.toFixed(2)))",
+              "description": "Turns a value into the printed and announced text, for example `(v) => \\`${v} %\\``.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "pageStep",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The distance PageUp and PageDown move. Default: a tenth of the range (at least two detents).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The fader cannot be moved; the cap loses its height.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "mass",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.mass",
+              "description": "Spring mass of the cap. Default 1.4 (mechanism.mass).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "stiffness",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.stiffness",
+              "description": "Spring stiffness. Default 520 (mechanism.stiffness).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "damping",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.damping",
+              "description": "Spring damping. Default 46 (mechanism.damping).",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "disabled"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 4375,
+        "cssMin": 3070,
+        "gzip": 2967
       }
     },
     "Stack": {
@@ -233,6 +988,189 @@
         "jsMin": 481,
         "cssMin": 324,
         "gzip": 488
+      }
+    },
+    "Switch": {
+      "source": "packages/react/src/components/Switch/Switch.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Switch",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "What the switch turns on or off, printed beside it. It names the switch for assistive tech. Without it, pass `aria-label`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onLabel",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "Word printed at the on end of the groove, such as \"On\" or \"Cook\". Printing only; the state is announced by the role.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "offLabel",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "Word printed at the off end of the groove, such as \"Off\" or \"Warm\". Printing only; the state is announced by the role.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "checked",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Whether the switch is on (controlled). Pair it with `onCheckedChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultChecked",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Whether the switch starts on when it is uncontrolled. Defaults to `false`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onCheckedChange",
+              "type": "((checked: boolean) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the new position each time the switch is thrown by pointer, Space or Enter.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Flattens the cap and stops the switch from being thrown.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "disabled"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 1177,
+        "cssMin": 2905,
+        "gzip": 1438
+      }
+    },
+    "Text": {
+      "source": "packages/react/src/components/Text/Text.tsx",
+      "kinds": {
+        "tone": [
+          "primary",
+          "secondary"
+        ]
+      },
+      "sizes": [
+        "label",
+        "micro",
+        "caption",
+        "body",
+        "reading"
+      ],
+      "exports": [
+        {
+          "displayName": "Text",
+          "props": [
+            {
+              "name": "as",
+              "type": "\"p\" | \"span\" | \"div\" | \"label\"",
+              "required": false,
+              "default": "p",
+              "description": "The element to render: `p` (default) for a paragraph, `span` inline, `div` for a block, `label` to name a field (pass `htmlFor`).",
+              "enum": true,
+              "options": [
+                "p",
+                "span",
+                "div",
+                "label"
+              ]
+            },
+            {
+              "name": "size",
+              "type": "\"label\" | \"micro\" | \"caption\" | \"body\" | \"reading\"",
+              "required": false,
+              "default": "body",
+              "description": "`micro` (11px, model names and scale numerals), `caption` (13px), `label` (14px), `body` (15px, the default) or `reading` (16px, prose capped at the measure).",
+              "enum": true,
+              "options": [
+                "label",
+                "micro",
+                "caption",
+                "body",
+                "reading"
+              ]
+            },
+            {
+              "name": "tone",
+              "type": "\"primary\" | \"secondary\"",
+              "required": false,
+              "default": "primary",
+              "description": "`primary` (default) is the darkest ink on plastic; `secondary` is one step lighter for notes and units. Both hold 4.5:1.",
+              "enum": true,
+              "options": [
+                "primary",
+                "secondary"
+              ]
+            },
+            {
+              "name": "weight",
+              "type": "\"regular\" | \"medium\"",
+              "required": false,
+              "default": "regular",
+              "description": "`regular` (default) or `medium`. There is no bold and no italic.",
+              "enum": true,
+              "options": [
+                "regular",
+                "medium"
+              ]
+            },
+            {
+              "name": "numeric",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Tabular figures, so a number that changes keeps its width.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "as",
+        "size",
+        "tone",
+        "weight"
+      ],
+      "variantCount": 4,
+      "demoFloor": 7,
+      "bundle": {
+        "jsMin": 493,
+        "cssMin": 699,
+        "gzip": 569
       }
     }
   }

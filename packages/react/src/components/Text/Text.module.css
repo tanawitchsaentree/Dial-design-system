@@ -1,0 +1,16 @@
+/* Text — printing on the case (system/FORM.md display class, D-003). Flat ink on plastic, no motion. */
+.root {
+  margin: 0;
+  font-family: var(--ds-type-family);
+  font-weight: var(--ds-type-weight-regular);
+}
+.micro { font-size: var(--ds-type-micro); line-height: var(--ds-type-leading-tight); }
+.caption { font-size: var(--ds-type-caption); line-height: var(--ds-type-leading-tight); }
+.label { font-size: var(--ds-type-label); line-height: var(--ds-type-leading-tight); }
+.body { font-size: var(--ds-type-body); line-height: var(--ds-type-leading-body); }
+.reading { font-size: var(--ds-type-reading); line-height: var(--ds-type-leading-reading); max-inline-size: var(--ds-type-measure); }
+.primary { color: var(--ds-text-primary); }
+.secondary { color: var(--ds-text-secondary); }
+.regular { font-weight: var(--ds-type-weight-regular); }
+.medium { font-weight: var(--ds-type-weight-medium); }
+.numeric { font-variant-numeric: tabular-nums; }

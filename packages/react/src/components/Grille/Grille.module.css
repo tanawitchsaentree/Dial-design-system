@@ -1,0 +1,26 @@
+/* Grille — a field of recessed holes that is the meter (system/FORM.md display class, P4). */
+.root {
+  display: inline-grid;
+  grid-template-columns: repeat(var(--grille-cols), var(--ds-space-2));
+  gap: var(--ds-space-1);
+  vertical-align: middle;
+}
+.hole {
+  display: block;
+  inline-size: var(--ds-space-2);
+  block-size: var(--ds-space-2);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-grille-hole);
+  box-shadow: var(--ds-elevation-well);
+  transition: background-color var(--ds-motion-fill) linear;
+}
+.on { background: var(--ds-grille-hole-on); }
+.void { visibility: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hole { transition: none; }
+}
+@media (forced-colors: active) {
+  .hole { forced-color-adjust: none; background: Canvas; border: var(--ds-width-hairline) solid CanvasText; }
+  .on { background: CanvasText; }
+}

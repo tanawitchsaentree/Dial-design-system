@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Text and Heading · three ways to print</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  body > h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } body > p { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 340px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 14px; align-content: start; }
+  .tag { font-size: 13px; font-weight: 500; margin: 0; color: var(--ds-text-secondary); }
+  .win { background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); border-radius: 18px; padding: 14px 18px; font-variant-numeric: tabular-nums; font-size: 37px; text-align: end; }
+  .foot { display: flex; justify-content: space-between; align-items: baseline; }
+  .t { margin: 0; color: var(--ds-text-primary); font-weight: 400; }
+  .sec { color: var(--ds-text-secondary); } .med { font-weight: 500; } .num { font-variant-numeric: tabular-nums; }
+  .micro { font-size: var(--ds-type-micro); line-height: 1.15; } .caption { font-size: var(--ds-type-caption); line-height: 1.15; }
+  .label { font-size: var(--ds-type-label); line-height: 1.15; } .body { font-size: var(--ds-type-body); line-height: 1.45; }
+  .reading { font-size: var(--ds-type-reading); line-height: 1.6; max-inline-size: 60ch; }
+  .h2 { font-size: var(--ds-type-headline); font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; margin: 0; }
+  .h3 { font-size: var(--ds-type-title); font-weight: 500; line-height: 1.15; margin: 0; }
+  /* B: spaced capitals for the small printing */
+  .b .micro, .b .caption, .b .label { text-transform: uppercase; letter-spacing: var(--ds-type-tracking-caps); }
+  /* C: everything printed lowercase, like the model name */
+  .c .t, .c .h2, .c .h3 { text-transform: lowercase; }
+</style>
+</head>
+<body>
+<h1>Text and Heading — three ways to print on the case</h1>
+<p>Same grotesk, same two weights (400 and 500), same inks (text.primary, text.secondary). Only the rule for hierarchy changes: A by size and position in sentence case, B adds spaced capitals for the small printing, C prints everything lowercase like a model name. Values estimated from chat.</p>
+<div class="row">
+  <section class="unit a" aria-label="A size and position">
+    <p class="tag">A · size and position, sentence case</p>
+    <h2 class="h3">Living room heater</h2>
+    <div class="win">21.5°</div>
+    <p class="t label sec">Target <span class="num">22.0</span>° · eco from <span class="num">23:00</span></p>
+    <p class="t reading">The heater holds the room at the target and drops two degrees at night. Change the schedule from the settings sheet.</p>
+    <div class="foot"><span class="t caption med">dial</span><span class="t micro sec">hc 21</span></div>
+  </section>
+  <section class="unit b" aria-label="B spaced capitals">
+    <p class="tag">B · spaced capitals for small printing</p>
+    <h2 class="h3">Living room heater</h2>
+    <div class="win">21.5°</div>
+    <p class="t label sec">Target <span class="num">22.0</span>° · eco from <span class="num">23:00</span></p>
+    <p class="t reading">The heater holds the room at the target and drops two degrees at night. Change the schedule from the settings sheet.</p>
+    <div class="foot"><span class="t caption med">dial</span><span class="t micro sec">hc 21</span></div>
+  </section>
+  <section class="unit c" aria-label="C lowercase printing">
+    <p class="tag">C · lowercase printing throughout</p>
+    <h2 class="h3">Living room heater</h2>
+    <div class="win">21.5°</div>
+    <p class="t label sec">Target <span class="num">22.0</span>° · eco from <span class="num">23:00</span></p>
+    <p class="t reading">The heater holds the room at the target and drops two degrees at night. Change the schedule from the settings sheet.</p>
+    <div class="foot"><span class="t caption med">dial</span><span class="t micro sec">hc 21</span></div>
+  </section>
+</div>
+</body>
+</html>

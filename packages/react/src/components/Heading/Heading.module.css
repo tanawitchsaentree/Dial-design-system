@@ -1,0 +1,12 @@
+/* Heading — the largest printing on a unit or page (family of Text, system/FORM.md display class). */
+.root {
+  margin: 0;
+  font-family: var(--ds-type-family);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.l1 { font-size: var(--ds-type-display); letter-spacing: var(--ds-type-tracking-display); }
+.l2 { font-size: var(--ds-type-headline); letter-spacing: var(--ds-type-tracking-display); }
+.l3 { font-size: var(--ds-type-title); }
+.l4 { font-size: var(--ds-type-emphasis); }

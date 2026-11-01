@@ -1,13 +1,22 @@
 # dial
 
-> 4 React components and 376 design tokens. dial-react is not on npm yet. Install the release tarball (pnpm run release:pack writes it to release/): npm install /path/to/release/dial-react-0.0.0.tgz, then import 'dial-react/all.css' once at the root.
+> 13 React components and 376 design tokens. dial-react is not on npm yet. Install the release tarball (pnpm run release:pack writes it to release/): npm install /path/to/release/dial-react-0.0.0.tgz, then import 'dial-react/all.css' once at the root.
 
 ## Components
 
 - Button: Button is a key on the case of an appliance: a capsule of the same matte plastic that drops by its height when pressed and returns on the spring, with only the unit's one primary key dyed orange. `import { Button } from 'dial-react';`
+- Checkbox: Checkbox is a small square key on the case of an appliance with its function printed beside it: you press it, it drops and springs back, and a tick in printing ink appears on its face to say the option is on. `import { Checkbox } from 'dial-react';`
 - Container: Container holds a page of units to a width the eye can scan, with a margin from the page edge that grows with the screen. `import { Container } from 'dial-react';`
+- Display: Display is the one window of a dial unit that says what the device is doing now, recessed into the plastic body, drawn as LCD segments or OLED text, announced politely and never pressed. `import { Display } from 'dial-react';`
 - Grid: Grid places whole units on four, eight or twelve columns, so each appliance keeps one fixed place on the screen and its face is never stretched. `import { Grid, GridItem } from 'dial-react';`
+- Grille: Grille is the perforated field of a dial unit whose recessed holes are the meter itself: lit holes in printing ink show a level, activity or signal, and the value is always named for assistive tech. `import { Grille } from 'dial-react';`
+- Heading: Heading is the name printed largest on a unit or a page: the same grotesk and grey ink as the rest of the case, louder only by size and by sitting first on the inset line. `import { Heading } from 'dial-react';`
+- IconButton: IconButton is the round 44px key of an appliance with a symbol printed on it in place of a word: the same matte plastic as Button, dropping by its height when pressed, with only the unit's one primary key dyed orange. `import { IconButton } from 'dial-react';`
+- Rotary: Rotary is the knob of the appliance: a flat disc with one printed index mark over a ring of detent ticks across 270 degrees, dyed orange as the unit's one loud part, that turns with the hand and settles into the nearest detent on the material's spring. `import { Rotary } from 'dial-react';`
+- Slider: Slider is the fader on the face of an appliance: a plastic cap riding a recessed groove under a printed ruler scale, which follows the hand and settles into the nearest detent on the material's spring, while the orange stays on the unit's rotary. `import { Slider } from 'dial-react';`
 - Stack: Stack lines up units and parts on the 4px step, so the gaps between appliances on a screen follow the same rhythm as the holes and insets inside them. `import { Stack } from 'dial-react';`
+- Switch: Switch is the slide switch on the side of an appliance: a plastic cap that slides in a recessed groove between two printed positions, with a small printed lamp that is lit while it is on. `import { Switch } from 'dial-react';`
+- Text: Text is the printing on the case of an appliance: one grotesk in two weights, grey ink flat on the plastic, with hierarchy told by size and by where the words sit on the unit. `import { Text } from 'dial-react';`
 
 ## Tokens
 

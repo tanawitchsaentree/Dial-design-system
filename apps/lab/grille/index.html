@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Grille · three hole fields</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 340px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 16px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .tools button { font: inherit; min-block-size: 44px; padding-inline: 16px; border-radius: 22px; border: 1px solid var(--ds-text-primary); background: none; color: inherit; }
+  /* pitch on the 4px step: 8px hole + 4px gap = 12px */
+  .g { display: grid; grid-template-columns: repeat(var(--cols), 8px); gap: 4px; justify-content: start; }
+  .g i { inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--ds-grille-hole); box-shadow: var(--ds-elevation-well); transition: background-color var(--ds-motion-fill) linear; }
+  .g i.on { background: var(--ds-grille-hole-on); }
+  .g i.void { visibility: hidden; }
+  /* C: sparse strip, larger holes, pitch 24px */
+  .c .g { grid-template-columns: repeat(var(--cols), 16px); gap: 8px; }
+  .c .g i { inline-size: 16px; block-size: 16px; }
+  .cap { font-size: 13px; color: var(--ds-text-secondary); }
+  @media (prefers-reduced-motion: reduce) { .g i { transition: none; } }
+</style>
+</head>
+<body>
+<h1>Grille — three hole fields that are the meter</h1>
+<p>Every hole is a recess in the body. A lit hole is ink at full step, never orange. The holes are the reading, so every grille has a name and a value for assistive tech. Press "Step" to change the level; holes fill in reading order in 120ms. Values estimated from chat.</p>
+<p class="tools"><button type="button" id="step">Step the level</button> <button type="button" id="theme">Toggle theme</button></p>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · rectangle field, columns fill left to right</h2>
+    <div class="g" data-v="a" role="meter" aria-label="Volume" aria-valuemin="0" aria-valuemax="10" style="--cols:16"></div>
+    <span class="cap">Volume</span>
+    <p class="note">A level meter: 16 × 4 holes, whole columns light from the start of the line. Same grid as the anchor card's grille.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · circle field, rows fill bottom to top</h2>
+    <div class="g" data-v="b" role="meter" aria-label="Fan speed" aria-valuemin="0" aria-valuemax="10" style="--cols:11"></div>
+    <span class="cap">Fan speed</span>
+    <p class="note">A speaker-style round field: the level rises like liquid in the circle. Holes outside the circle are not drawn.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · sparse strip, one hole per step</h2>
+    <div class="g" data-v="c" role="meter" aria-label="Wi-Fi signal" aria-valuemin="0" aria-valuemax="5" style="--cols:5"></div>
+    <span class="cap">Wi-Fi signal</span>
+    <p class="note">Five big holes for a coarse reading (signal, filter life). Fewer holes, each one a step you can count.</p></section>
+</div>
+<script>
+  const F = {
+    a: { cols: 16, rows: 4, max: 10, shape: 'rect', fill: 'inline' },
+    b: { cols: 11, rows: 11, max: 10, shape: 'circle', fill: 'up' },
+    c: { cols: 5, rows: 1, max: 5, shape: 'rect', fill: 'inline' },
+  };
+  const levels = { a: 6, b: 4, c: 3 };
+  function inside(c, r, cols, rows) { const dx = (c + .5) / cols - .5, dy = (r + .5) / rows - .5; return dx * dx + dy * dy <= .25; }
+  function build(k) {
+    const f = F[k], el = document.querySelector(`[data-v="${k}"]`);
+    for (let r = 0; r < f.rows; r++) for (let c = 0; c < f.cols; c++) {
+      const i = document.createElement('i'); i.dataset.c = c; i.dataset.r = r;
+      if (f.shape === 'circle' && !inside(c, r, f.cols, f.rows)) i.className = 'void';
+      el.append(i);
+    }
+    // order: inline = by column, then bottom row first; up = by row from the bottom, then along the line
+    const holes = [...el.children].filter((i) => !i.classList.contains('void'));
+    holes.sort((x, y) => f.fill === 'inline' ? (x.dataset.c - y.dataset.c) || (y.dataset.r - x.dataset.r) : (y.dataset.r - x.dataset.r) || (x.dataset.c - y.dataset.c));
+    f.holes = holes;
+  }
+  function render(k) {
+    const f = F[k], v = levels[k], n = Math.round((v / f.max) * f.holes.length), el = document.querySelector(`[data-v="${k}"]`);
+    f.holes.forEach((h, i) => h.classList.toggle('on', i < n));
+    el.setAttribute('aria-valuenow', v); el.setAttribute('aria-valuetext', `${v} of ${f.max}`);
+  }
+  for (const k of Object.keys(F)) { build(k); render(k); }
+  document.getElementById('step').addEventListener('click', () => { for (const k of Object.keys(F)) { levels[k] = (levels[k] + 1) % (F[k].max + 1); render(k); } });
+  document.getElementById('theme').addEventListener('click', () => { const r = document.documentElement; r.dataset.theme = r.dataset.theme === 'dark' ? 'light' : 'dark'; });
+</script>
+</body>
+</html>

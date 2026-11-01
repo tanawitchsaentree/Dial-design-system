@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · IconButton · three keys</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 340px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 18px; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .keys { display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap; }
+  .k { display: inline-grid; place-items: center; padding: 0; cursor: pointer; border: 1px solid transparent; color: var(--ds-text-secondary);
+       background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); transition: transform var(--ds-motion-release) cubic-bezier(.3,1.25,.5,1), box-shadow var(--ds-motion-release), color 120ms linear; }
+  .k:hover { color: var(--ds-text-primary); }
+  .k:active { transform: translate(1px, 3px); box-shadow: none; transition-duration: var(--ds-motion-press); }
+  .k.pri { background: var(--ds-action-accent); color: var(--ds-text-on-accent); border-color: var(--ds-action-accent-rim); }
+  .k:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .k svg { inline-size: 20px; block-size: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .k.lg { inline-size: 52px; block-size: 52px; }
+  /* A: round key, icon on the key, name given to assistive tech only */
+  .a .k { inline-size: 44px; block-size: 44px; border-radius: 50%; }
+  /* B: round key, word printed below on the case */
+  .b .cell { display: grid; justify-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--ds-text-secondary); }
+  .b .k { inline-size: 44px; block-size: 44px; border-radius: 50%; }
+  /* C: calculator key, squarish */
+  .c .k { inline-size: 52px; block-size: 44px; border-radius: 10px; }
+  @media (prefers-reduced-motion: reduce) { .k { transition: none; } .k:active { transform: none; } }
+</style>
+</head>
+<body>
+<h1>IconButton — three keys for an action with no word on it</h1>
+<p>Same matte ABS, same light, same spring (mass 1.4, stiffness 520, damping 46), travel 3px. The mechanism is a key in all three. Only the silhouette and where the name is printed change. Icons are 2px strokes in the printing ink.</p>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · round key, icon on the key</h2>
+    <div class="keys">
+      <button class="k pri" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></button>
+      <button class="k" aria-label="Previous track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6l-8 6 8 6zM6 6v12"/></svg></button>
+      <button class="k" aria-label="Next track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l8 6-8 6zM18 6v12"/></svg></button>
+      <button class="k lg" aria-label="Turn off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v8M7 7a7 7 0 1 0 10 0"/></svg></button>
+    </div>
+    <p class="note">The literal round key of the reference, 44px. The name is the aria-label; the icon is the printing.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · round key, word printed below</h2>
+    <div class="keys">
+      <span class="cell"><button class="k pri" aria-labelledby="b1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></button><span id="b1">Play</span></span>
+      <span class="cell"><button class="k" aria-labelledby="b2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6l-8 6 8 6zM6 6v12"/></svg></button><span id="b2">Previous</span></span>
+      <span class="cell"><button class="k" aria-labelledby="b3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l8 6-8 6zM18 6v12"/></svg></button><span id="b3">Next</span></span>
+    </div>
+    <p class="note">Printing on the case under each key, like FM/AM. Every key needs a word, so rows get wide and the icon becomes redundant.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · calculator key</h2>
+    <div class="keys">
+      <button class="k pri" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></button>
+      <button class="k" aria-label="Previous track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6l-8 6 8 6zM6 6v12"/></svg></button>
+      <button class="k" aria-label="Next track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l8 6-8 6zM18 6v12"/></svg></button>
+    </div>
+    <p class="note">Squarish keys with a small radius. Reads as a keypad, and P3 asks keys to be round or capsule.</p></section>
+</div>
+</body>
+</html>

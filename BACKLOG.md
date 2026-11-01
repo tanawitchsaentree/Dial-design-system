@@ -35,3 +35,7 @@
 - **K-8 `tooling/contrast-check.mjs` reads a file the token build no longer writes.** `node tooling/contrast-check.mjs text-primary:surface-solid`
   → `ENOENT ... packages/tokens/build/css/light.css`. The build writes `build/css/tokens.css` (themes as `[data-theme]`).
   Workaround: `python3 -I tooling/dial/token-contrast.py` (24 dial pairs).
+- **K-9 docs.css `.page-head .lede p` overrides a component that renders a `<p>`.** The live demo sits in the page
+  head, so `<Text size="body">` measured 18px (want 15px) in conformance. Patched locally with `:not([data-component])`.
+- **K-10 G-SL1 measures Rotary as a slider.** It checks every `[role="slider"]` against the 200px minimum length;
+  a rotary is a slider by role but has no length. Exempt `[data-component="Rotary"]` (or `data-mechanism="rotary"`).

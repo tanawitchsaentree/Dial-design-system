@@ -1,0 +1,46 @@
+{
+  "concept": "Text is the printing on the case of an appliance: one grotesk in two weights, grey ink flat on the plastic, with hierarchy told by size and by where the words sit on the unit.",
+  "kind": ["text", "typography", "label"],
+  "default_to_avoid": [
+    { "pattern": "generic typography text component with h1 to h6 variants and bold, italic and colour props (MUI Typography, Chakra Text)", "why_not": "A colour prop invites orange or tinted words, and bold or italic add voices that P5 forbids, since printing has two weights and one ink." },
+    { "pattern": "text with uppercase letter-spaced small labels as a house style", "why_not": "Spaced capitals turn every small label into a second voice and break the lowercase model name, which P5 keeps as the only case change." }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): small grey grotesk printed along the inset lines of the case" },
+    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): one grotesk in two weights, numbers set on a fixed width" },
+    { "source": "system/refs/ref-01.png: wordmark bottom-left and lowercase model name bottom-right (estimated from chat)" }
+  ],
+  "derivation": [
+    { "p": "P5", "axis": "type", "consequence": "one grotesk, regular and medium only; hierarchy by size and position", "form": "Text exposes five size steps from type.micro to type.reading and a weight prop limited to regular and medium, with no bold or italic." },
+    { "p": "P5", "axis": "colour", "consequence": "ink on plastic at ≥4.5:1 in both themes; no tinted text", "form": "The tone prop picks text.primary or text.secondary only, both measured at 4.5:1 or more on surface.solid and surface.raised." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Text has no colour prop at all, so words can never be painted action.accent and the orange stays on the unit's one control." },
+    { "p": "P5", "axis": "type", "consequence": "tabular figures everywhere a number changes","form": "The numeric prop switches on tabular figures so a changing number keeps its width and the line beside it never shifts." },
+    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material — no shadow, no emboss", "form": "Text never carries text-shadow, outline or elevation tokens; it sits flat in the same plane as the plastic it is printed on." }
+  ],
+  "variants": {
+    "lab": "apps/lab/text/index.html",
+    "options": [
+      { "id": "A", "name": "size and position, sentence case" },
+      { "id": "B", "name": "spaced capitals for small printing" },
+      { "id": "C", "name": "lowercase printing throughout" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A tells hierarchy only by size and position as P5 asks, keeps sentence case readable at every step, and leaves lowercase to the model name; B adds spaced capitals as a second voice and capitalises the model name, and C makes every label look like a model name so it can no longer identify anything."
+  },
+  "parts": {
+    "root": { "p": "P5", "axis": "depth", "why": "Printing sits flat on the plastic with no outer margin, no shadow and the system grotesk." },
+    "micro": { "p": "P5", "axis": "type", "why": "The smallest step prints the model name and scale numerals on the case, at 11px." },
+    "caption": { "p": "P5", "axis": "type", "why": "Caption prints the wordmark and short notes under a part, one step above micro." },
+    "label": { "p": "P5", "axis": "type", "why": "Label names a control or a reading beside it, at the same size as the word on a key." },
+    "body": { "p": "P5", "axis": "type", "why": "Body carries a sentence or two inside a unit, with the leading set for short lines." },
+    "reading": { "p": "P5", "axis": "space", "why": "Reading prose is capped at the measure so long lines never stretch across a sheet." },
+    "primary": { "p": "P5", "axis": "colour", "why": "Primary ink is the darkest grey on plastic and holds 4.5:1 or more in both themes." },
+    "secondary": { "p": "P5", "axis": "colour", "why": "Secondary ink is one step lighter for notes and units, and still holds 4.5:1 on plastic." },
+    "regular": { "p": "P5", "axis": "type", "why": "Regular weight is the default for printing, so medium is left to name things." },
+    "medium": { "p": "P5", "axis": "type", "why": "Medium weight marks a name or a label, the only heavier weight the grotesk is allowed." },
+    "numeric": { "p": "P2", "axis": "type", "why": "Tabular figures keep a changing number at a fixed width so the line beside it stays put." }
+  },
+  "states": {},
+  "motion": {}
+}

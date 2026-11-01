@@ -134,6 +134,96 @@
             "code",
             "accessibility"
           ]
+        },
+        {
+          "path": "/components/switch",
+          "title": "Switch",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/text",
+          "title": "Text",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/heading",
+          "title": "Heading",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/icon-button",
+          "title": "IconButton",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/checkbox",
+          "title": "Checkbox",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/display",
+          "title": "Display",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/grille",
+          "title": "Grille",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/slider",
+          "title": "Slider",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/rotary",
+          "title": "Rotary",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
         }
       ]
     },

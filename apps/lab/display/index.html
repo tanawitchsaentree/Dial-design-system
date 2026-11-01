@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Display · three windows</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { --r: 54px; --inset: 26px; inline-size: 340px; padding: var(--inset); border-radius: var(--r); background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 16px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .win { border-radius: max(4px, calc(var(--r) - var(--inset))); box-shadow: var(--ds-elevation-well); padding: 10px 14px; }
+  .lcd { background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); }
+  .oled { background: var(--ds-display-oled-bg); color: var(--ds-display-oled-ink); }
+  .seg { display: block; block-size: 40px; inline-size: auto; }
+  .seg .on { fill: var(--ds-display-lcd-ink); transition: fill var(--ds-motion-segment) linear; }
+  .seg .off { fill: var(--ds-display-lcd-ghost); transition: fill var(--ds-motion-segment) linear; }
+  .sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  /* A segment window: detail top-left, value right-aligned, unit beside it */
+  .a .win { display: grid; gap: 4px; justify-items: end; }
+  .a .detail { justify-self: start; font-size: 13px; }
+  .a .val { display: flex; align-items: flex-end; gap: 8px; } .a .u { font-size: 14px; font-weight: 500; }
+  /* B digits-only window, unit and detail printed on the body beside it */
+  .b .pair { display: flex; gap: 12px; align-items: flex-end; }
+  .b .win { padding: 8px 12px; }
+  .b .print { display: grid; gap: 2px; font-size: 13px; } .b .print strong { font-weight: 500; font-size: 14px; }
+  /* C text window: one grotesk value line and one detail line */
+  .c .win { display: grid; gap: 2px; }
+  .c .big { font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; } .c .small { font-size: 13px; }
+  .c .lcd .big, .c .lcd .small { color: var(--ds-display-lcd-ink); }
+  .tools button { font: inherit; min-block-size: 44px; padding-inline: 16px; border-radius: 22px; border: 1px solid var(--ds-text-primary); background: none; color: inherit; }
+  @media (prefers-reduced-motion: reduce) { .seg .on, .seg .off { transition: none; } }
+</style>
+</head>
+<body>
+<h1>Display — three windows for the state</h1>
+<p>Each window is recessed into the body and its radius nests in the unit (inner = outer − inset). The value changes at once; only a segment's on/off fades in 80ms. Press "Step" to change the reading. Values estimated from chat.</p>
+<p class="tools"><button type="button" id="step">Step the reading</button> <button type="button" id="theme">Toggle theme</button></p>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · segment window, unit beside the value</h2>
+    <div class="win lcd" role="status" aria-live="polite" aria-label="Heating" data-v="a"></div>
+    <p class="note">LCD segments right-aligned with tabular cells, unit in the grotesk at the baseline, detail line top-left. The value never shifts sideways when it changes.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · digits-only window, unit printed on the body</h2>
+    <div class="pair"><div class="win lcd" role="status" aria-live="polite" aria-label="Heating" data-v="b"></div><div class="print" aria-hidden="true"><strong>°C</strong><span class="bd">Target</span></div></div>
+    <p class="note">The window holds only digits; the unit and detail are printed on the plastic. Smaller window, but the reading splits across two surfaces.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · text window, value line and detail line</h2>
+    <div class="win oled" role="status" aria-live="polite" aria-label="Heating" data-v="c"></div>
+    <div class="win lcd" role="status" aria-live="polite" aria-label="Washer" data-v="c2"></div>
+    <p class="note">The grotesk for both lines, no segments. Right for OLED; on LCD it loses the segment face P2 asks for.</p></section>
+</div>
+<script>
+  const SEGS = { '0': 'abcdef', '1': 'bc', '2': 'abged', '3': 'abgcd', '4': 'fgbc', '5': 'afgcd', '6': 'afgedc', '7': 'abc', '8': 'abcdefg', '9': 'abcdfg', '-': 'g', ' ': '' };
+  function cell(ch, x, w, h, t, dp) {
+    const on = SEGS[ch] ?? '', m = h / 2, s = t / 2;
+    const H = (y) => `${x + s},${y} ${x + t},${y - s} ${x + w - t},${y - s} ${x + w - s},${y} ${x + w - t},${y + s} ${x + t},${y + s}`;
+    const V = (xx, y0, y1) => `${xx},${y0 + s} ${xx + s},${y0 + t} ${xx + s},${y1 - t} ${xx},${y1 - s} ${xx - s},${y1 - t} ${xx - s},${y0 + t}`;
+    const P = { a: H(s), g: H(m), d: H(h - s), f: V(x + s, s, m), b: V(x + w - s, s, m), e: V(x + s, m, h - s), c: V(x + w - s, m, h - s) };
+    return Object.entries(P).map(([k, p]) => `<polygon class="${on.includes(k) ? 'on' : 'off'}" points="${p}"/>`).join('') +
+      `<rect class="${dp ? 'on' : 'off'}" x="${x + w + 2}" y="${h - t}" width="${t}" height="${t}"/>`;
+  }
+  function seg(str, cells) {
+    const chars = []; for (const ch of str) { if (ch === '.' && chars.length) chars[chars.length - 1].dp = true; else chars.push({ ch, dp: false }); }
+    while (chars.length < cells) chars.unshift({ ch: ' ', dp: false });
+    const h = 40, w = 20, t = 4.4, pitch = 32; let out = '';
+    chars.forEach((c, i) => { out += cell(c.ch, 2 + i * pitch, w, h, t, c.dp); });
+    const W = 2 + chars.length * pitch;
+    return `<svg class="seg" aria-hidden="true" viewBox="0 0 ${W} ${h}">${out}</svg>`;
+  }
+  const READINGS = [['21.5', 'Heating to 22.0'], ['21.0', 'Holding'], ['8.5', 'Frost guard'], ['22.0', 'Heating to 22.0']];
+  let i = 0;
+  function render() {
+    const [v, d] = READINGS[i % READINGS.length];
+    document.querySelector('[data-v="a"]').innerHTML = `<span class="sr">${v} °C. ${d}</span><span class="detail" aria-hidden="true">${d}</span><span class="val" aria-hidden="true">${seg(v, 3)}<span class="u">°C</span></span>`;
+    document.querySelector('[data-v="b"]').innerHTML = `<span class="sr">${v} °C. ${d}</span>${seg(v, 3)}`;
+    document.querySelector('.b .bd').textContent = d;
+    document.querySelector('[data-v="c"]').innerHTML = `<span class="sr">${v} °C. ${d}</span><span class="big" aria-hidden="true">${v} °C</span><span class="small" aria-hidden="true">${d}</span>`;
+    document.querySelector('[data-v="c2"]').innerHTML = `<span class="sr">${38 - i} min. Rinse</span><span class="big" aria-hidden="true">${38 - i} min</span><span class="small" aria-hidden="true">Rinse</span>`;
+  }
+  render();
+  document.getElementById('step').addEventListener('click', () => { i++; render(); });
+  document.getElementById('theme').addEventListener('click', () => { const r = document.documentElement; r.dataset.theme = r.dataset.theme === 'dark' ? 'light' : 'dark'; });
+</script>
+</body>
+</html>

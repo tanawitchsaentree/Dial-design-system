@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Checkbox · three keys with a mark</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 340px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 14px; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  label.cb { display: inline-flex; align-items: center; gap: 12px; min-block-size: 44px; cursor: pointer; font-size: 15px; }
+  .cb input { position: absolute; opacity: 0; inline-size: 1px; block-size: 1px; margin: 0; }
+  .key { position: relative; display: inline-grid; place-items: center; inline-size: 24px; block-size: 24px; border-radius: 6px; flex: none;
+         background: var(--ds-surface-raised); border: 1px solid var(--ds-line-ring); box-shadow: var(--ds-elevation-part); color: var(--ds-text-primary);
+         transition: transform var(--ds-motion-release) cubic-bezier(.3,1.25,.5,1), box-shadow var(--ds-motion-release); }
+  .cb:active .key { transform: translate(1px, 3px); box-shadow: none; transition-duration: var(--ds-motion-press); }
+  .cb input:focus-visible + .key { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .key svg { inline-size: 16px; block-size: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+  .cb input:checked + .key .tick { opacity: 1; }
+  /* B: key plus a printed lamp beside it */
+  .lamp { inline-size: 8px; block-size: 8px; border-radius: 50%; border: 2px solid var(--ds-text-secondary); box-sizing: border-box; }
+  .cb input:checked ~ .lamp { background: var(--ds-text-primary); border-color: var(--ds-text-primary); }
+  /* C: latching key, stays down when on */
+  .c .cb input:checked + .key { transform: translate(1px, 3px); box-shadow: none; background: var(--ds-surface-sunken); }
+  .c .key svg { opacity: 0; } .c .cb input:checked + .key svg { opacity: 1; }
+  .mixed .dash { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .key { transition: none; } .cb:active .key { transform: none; } }
+</style>
+</head>
+<body>
+<h1>Checkbox — three ways a small square key shows it is on</h1>
+<p>Same matte ABS, same light, same spring, travel 3px. The mechanism is a key in all three: press drops it and the spring returns it. What changes is how the on state is shown. The mark is printing ink, never orange. Off and on must differ in shape, not only in colour.</p>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · tick printed on the key</h2>
+    <label class="cb"><input type="checkbox" checked><span class="key"><svg class="tick" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>Eco mode</label>
+    <label class="cb"><input type="checkbox"><span class="key"><svg class="tick" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>Pre-wash</label>
+    <label class="cb mixed"><input type="checkbox"><span class="key"><svg class="dash" viewBox="0 0 24 24"><path d="M6 12h12"/></svg></span>All lamps (some on)</label>
+    <p class="note">The key always stands at its height; a 2px ink tick appears on its face. A dash shows mixed.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · key with a lamp beside it</h2>
+    <label class="cb"><input type="checkbox" checked><span class="key"></span><span class="lamp"></span>Eco mode</label>
+    <label class="cb"><input type="checkbox"><span class="key"></span><span class="lamp"></span>Pre-wash</label>
+    <p class="note">The appliance key with an indicator: a hollow ring when off, a filled dot when on. The lamp is 8px, so the state rides on a very small shape.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · latching key</h2>
+    <label class="cb"><input type="checkbox" checked><span class="key"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>Eco mode</label>
+    <label class="cb"><input type="checkbox"><span class="key"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>Pre-wash</label>
+    <p class="note">Like old radio keys that lock down: an on key stays pressed and flat. Flat is also how disabled looks, and a held-down key can no longer show a press.</p></section>
+</div>
+</body>
+</html>

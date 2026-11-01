@@ -1,0 +1,95 @@
+/* Rotary — the knob: a flat disc with one printed index mark over a printed ring of detent ticks
+   across the sweep (FORM.md control class, D-003, anchor A). kind primary is the unit's one orange
+   part. One light, top-left: only the face turns, so the cast shadow stays down and to the right.
+   --d (diameter) and --a (tick angle) come from Rotary.tsx; --deg is written by the spring. */
+.root {
+  display: inline-grid;
+  justify-items: center;
+  gap: var(--ds-gap-xs);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.dial {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: calc(var(--d) + (var(--ds-gap-xs) + var(--ds-control-tick)) * 2);
+  aspect-ratio: 1;
+}
+.tick {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  block-size: var(--ds-control-tick);
+  inline-size: 0;
+  margin-inline-start: calc(var(--ds-width-ring) / -2);
+  border-inline-start: var(--ds-width-ring) solid var(--ds-text-primary);
+  transform-origin: 50% 0;
+  transform: rotate(calc(var(--a) * 1deg)) translateY(calc((var(--d) / 2 + var(--ds-gap-xs) + var(--ds-control-tick)) * -1));
+}
+.knob {
+  position: relative;
+  box-sizing: border-box;
+  inline-size: var(--d);
+  min-inline-size: var(--ds-control-knob-min);
+  aspect-ratio: 1;
+  border: var(--ds-width-ring) solid transparent;
+  border-radius: var(--ds-corner-round);
+  box-shadow: var(--ds-elevation-part);
+  cursor: grab;
+  touch-action: none;
+  outline: none;
+  transition: background-color var(--ds-motion-hover) linear;
+}
+.primary { background: var(--ds-action-accent); border-color: var(--ds-action-accent-rim); }
+.key { background: var(--ds-surface-raised); border-color: var(--ds-line-ring); }
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--ds-corner-round);
+  transform: rotate(calc(var(--deg, 0) * 1deg));
+}
+.index {
+  position: absolute;
+  inset-block-start: calc(var(--d) * 0.07);
+  inset-inline-start: calc(50% - var(--ds-width-bar) / 2);
+  block-size: calc(var(--d) * 0.22);
+  border-inline-start: var(--ds-width-bar) solid var(--ds-text-on-accent);
+  border-radius: var(--ds-corner-mark);
+  transition: border-color var(--ds-motion-hover) linear;
+}
+.key .index { border-inline-start-color: var(--ds-text-secondary); }
+.value {
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  font-variant-numeric: tabular-nums;
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+
+.primary:hover { background: var(--ds-action-accent-hover); }
+.key:hover .index { border-inline-start-color: var(--ds-text-primary); }
+.knob:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.knob[aria-disabled='true'] {
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .knob, .index { transition: none; }
+}
+@media (forced-colors: active) {
+  .knob, .primary, .key { border-color: ButtonText; }
+  .index, .key .index, .key:hover .index { border-inline-start-color: ButtonText; }
+  .tick { border-inline-start-color: CanvasText; }
+  .knob:focus-visible { outline-color: Highlight; }
+}

@@ -1,0 +1,85 @@
+/* Checkbox — a small square key of matte ABS with a printed tick, label printed beside it (system/FORM.md control class, D-003). */
+.root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-lg);
+  min-block-size: var(--ds-control-md);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+  cursor: pointer;
+}
+/* Visually hidden, still focusable and announced */
+.input {
+  position: absolute;
+  inset-block-start: var(--ds-gap-none);
+  inset-inline-start: var(--ds-gap-none);
+  inline-size: var(--ds-width-hairline);
+  block-size: var(--ds-width-hairline);
+  margin: var(--ds-gap-none);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.key {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  inline-size: var(--ds-control-check);
+  block-size: var(--ds-control-check);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-check);
+  background: var(--ds-surface-raised);
+  color: var(--ds-text-primary);
+  box-shadow: var(--ds-elevation-part);
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing),
+    border-color var(--ds-motion-hover) linear;
+}
+.mark {
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--ds-width-ring);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tick, .dash { display: none; }
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+}
+
+.input:checked + .key .tick { display: inline; }
+.input:indeterminate + .key .tick { display: none; }
+.input:indeterminate + .key .dash { display: inline; }
+
+.root:hover .key { border-color: var(--ds-text-secondary); }
+.root:active .key {
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+  box-shadow: none;
+  transition-duration: var(--ds-motion-press);
+}
+.input:focus-visible + .key {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.input:disabled + .key {
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+}
+.root[data-disabled] { cursor: not-allowed; }
+.root[data-disabled]:hover .key { border-color: var(--ds-line-ring); }
+.root[data-disabled]:active .key { transform: none; box-shadow: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .key { transition: none; }
+  .root:active .key { transform: none; }
+}
+@media (forced-colors: active) {
+  .key { border-color: ButtonText; }
+  .mark { stroke: CanvasText; }
+}

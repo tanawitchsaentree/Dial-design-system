@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Switch · three mechanisms</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 340px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 18px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .line { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; }
+  .sw { font: inherit; background: none; border: 0; padding: 0 4px; min-block-size: 44px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; color: var(--ds-text-secondary); }
+  .sw:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; border-radius: 6px; }
+  .word { font-size: 13px; } .sw[aria-checked=false] .w-off, .sw[aria-checked=true] .w-on { color: var(--ds-text-primary); font-weight: 500; }
+  .lamp { inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .sw[aria-checked=true] .lamp { background: var(--ds-text-primary); box-shadow: none; }
+
+  /* A slide switch: a raised cap in a recessed groove, positions printed either side */
+  .slot { position: relative; inline-size: 52px; block-size: 8px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .cap { position: absolute; inset-block-start: -12px; inset-inline-start: 0; inline-size: 24px; block-size: 32px; border-radius: 12px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part);
+         transition: inset-inline-start 245ms cubic-bezier(.2,0,0,1); }
+  .cap::after { content: ""; position: absolute; inset-inline-start: 11px; inset-block: 8px; inline-size: 2px; background: var(--ds-text-secondary); }
+  .sw[aria-checked=true] .cap { inset-inline-start: 28px; }
+
+  /* B rocker: two faces on a pivot, the pressed face goes down and loses its light */
+  .rocker { display: inline-flex; inline-size: 64px; block-size: 36px; border-radius: 10px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); padding: 2px; gap: 2px; }
+  .face { flex: 1; display: grid; place-items: center; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--ds-text-secondary); background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); transition: box-shadow 245ms, transform 245ms cubic-bezier(.2,0,0,1); }
+  .sw[aria-checked=false] .f-off, .sw[aria-checked=true] .f-on { box-shadow: none; transform: translateY(2px); color: var(--ds-text-primary); }
+
+  /* C toggle key: a latching key that stays down while on, a printed lamp beside it */
+  .tkey { inline-size: 44px; block-size: 44px; border-radius: 50%; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); transition: transform 245ms cubic-bezier(.2,0,0,1), box-shadow 245ms; }
+  .sw[aria-checked=true] .tkey { transform: translate(1px, 3px); box-shadow: inset 1px 1px 2px var(--ds-material-shade); }
+
+  @media (prefers-reduced-motion: reduce) { .cap, .face, .tkey { transition: none; } }
+</style>
+</head>
+<body>
+<h1>Switch — three mechanisms from the same material</h1>
+<p>Same matte ABS, same light, same spring (mass 1.4, stiffness 520, damping 46). The mechanism changes: a cap that slides in a groove, a rocker on a pivot, a key that latches down. None of them uses colour for "on"; orange stays with the unit's one primary control. Values estimated from chat.</p>
+<div class="row">
+  <section class="unit" aria-labelledby="ha"><h2 id="ha">A · slide switch, cap in a groove</h2>
+    <div class="line"><span id="la">Keep warm</span><button class="sw" role="switch" aria-checked="false" aria-labelledby="la"><span class="word w-off" aria-hidden="true">Off</span><span class="slot"><span class="cap"></span></span><span class="word w-on" aria-hidden="true">On</span><span class="lamp"></span></button></div>
+    <div class="line"><span id="la2">Mode</span><button class="sw" role="switch" aria-checked="true" aria-labelledby="la2"><span class="word w-off" aria-hidden="true">Warm</span><span class="slot"><span class="cap"></span></span><span class="word w-on" aria-hidden="true">Cook</span><span class="lamp"></span></button></div>
+    <p class="note">Like the rice cooker: the cap's position is the state, readable from across the room, with the positions printed either side.</p></section>
+  <section class="unit" aria-labelledby="hb"><h2 id="hb">B · rocker, two faces on a pivot</h2>
+    <div class="line"><span id="lb">Keep warm</span><button class="sw" role="switch" aria-checked="false" aria-labelledby="lb"><span class="rocker"><span class="face f-off">O</span><span class="face f-on">I</span></span><span class="lamp"></span></button></div>
+    <div class="line"><span id="lb2">Night light</span><button class="sw" role="switch" aria-checked="true" aria-labelledby="lb2"><span class="rocker"><span class="face f-off">O</span><span class="face f-on">I</span></span><span class="lamp"></span></button></div>
+    <p class="note">The pressed face sinks and loses its lit edge. State is read from shading, which is faint at 36px.</p></section>
+  <section class="unit" aria-labelledby="hc"><h2 id="hc">C · toggle key with a printed lamp</h2>
+    <div class="line"><span id="lc">Keep warm</span><button class="sw" role="switch" aria-checked="false" aria-labelledby="lc"><span class="tkey"></span><span class="lamp"></span><span class="word w-on" aria-hidden="true">On</span></button></div>
+    <div class="line"><span id="lc2">Night light</span><button class="sw" role="switch" aria-checked="true" aria-labelledby="lc2"><span class="tkey"></span><span class="lamp"></span><span class="word w-on" aria-hidden="true">On</span></button></div>
+    <p class="note">A latching key stays 3px down while on. Looks like a Button, so the two are easy to confuse in one unit.</p></section>
+</div>
+<script>
+  for (const b of document.querySelectorAll('.sw')) b.addEventListener('click', () => b.setAttribute('aria-checked', b.getAttribute('aria-checked') === 'true' ? 'false' : 'true'));
+</script>
+</body>
+</html>

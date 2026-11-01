@@ -1,0 +1,57 @@
+{
+  "concept": "Display is the one window of a dial unit that says what the device is doing now, recessed into the plastic body, drawn as LCD segments or OLED text, announced politely and never pressed.",
+  "kind": ["display", "lcd", "oled", "readout"],
+  "default_to_avoid": [
+    { "pattern": "dashboard display: a stat card or KPI tile with a big bold number and a coloured up/down delta", "why_not": "A KPI tile floats on the page and tells change by colour, while P2 asks for a window recessed into the body that says the state in numbers or words." },
+    { "pattern": "glowing neon LCD display with a blurred text-shadow on the digits", "why_not": "LCD segments do not emit light, so P6 allows no glow there and the reading must stay crisp at 4.5:1." }
+  ],
+  "references": [
+    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): a recessed grey-green LCD with dark segments, right-aligned digits" },
+    { "source": "Braun AB 312 radio clock: one window for the time, unit and mode printed small beside it" },
+    { "source": "apps/lab/anchor/anchor.js: the anchor card A's 7-segment SVG renderer segText (D-001)" }
+  ],
+  "derivation": [
+    { "p": "P2", "axis": "depth", "consequence": "the window is recessed into the body (inverse light)", "form": "The root carries elevation.well, shade on the top-left inner edge and a lit edge bottom-right, never a cast shadow." },
+    { "p": "P2", "axis": "shape", "consequence": "the window is a rounded rectangle whose radius nests in the body (inner = outer − inset)", "form": "border-radius is the container's outer radius minus its inset, read from --display-outer and --display-inset, defaulting to corner.inner." },
+    { "p": "P2", "axis": "colour", "consequence": "two display families — LCD (dark grey segments on grey-green, ≥4.5:1) and OLED (white on near-black)", "form": "kind lcd paints display.lcd-bg with display.lcd-ink segments and display.lcd-ghost unlit ones; kind oled paints display.oled-bg with display.oled-ink." },
+    { "p": "P2", "axis": "type", "consequence": "tabular numerals, a 7-segment face for LCD values, the system grotesk for OLED text", "form": "LCD values are SVG segment cells on a fixed pitch with the unit in the grotesk beside them; OLED sets value and detail in the grotesk with tabular figures." },
+    { "p": "P2", "axis": "motion", "consequence": "values change at once; only a segment's on/off fades, ≤80ms", "form": "Only the fill of each segment polygon transitions, over motion.segment, and nothing moves or counts up between readings." },
+    { "p": "P2", "axis": "interaction", "consequence": "the display is a live region (polite) and never a control", "form": "The root is role status with aria-live polite and a label, holds no focusable element and reads the full reading as text." },
+    { "p": "P6", "axis": "colour", "consequence": "no gradients, no glow except P2's emitters", "form": "LCD segments carry no shadow, filter or blur; only flat ink on the flat grey-green window." },
+    { "p": "P6", "axis": "space", "consequence": "fixed positions — a unit's layout does not reflow between states", "form": "The digits prop pads short readings with unlit cells so the window keeps one width while the value changes." }
+  ],
+  "variants": {
+    "lab": "apps/lab/display/index.html",
+    "options": [
+      { "id": "A", "name": "segment window, unit beside the value, detail inside" },
+      { "id": "B", "name": "digits-only window, unit and detail printed on the body" },
+      { "id": "C", "name": "text window, grotesk value line and detail line" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps the whole reading inside one recessed window with the LCD segment face P2 asks for and right-aligned tabular cells that never shift (P6); B splits the state across two surfaces so the window alone no longer tells it, and C's grotesk-only layout is kept as the oled kind, where P2 wants the system grotesk."
+  },
+  "parts": {
+    "root": { "p": "P2", "axis": "depth", "why": "The window is a recess in the body with inverse light and a radius nested inside the unit's corner." },
+    "lcd": { "p": "P2", "axis": "colour", "why": "The LCD family puts dark grey segments on grey-green at more than 4.5:1 for every glyph." },
+    "oled": { "p": "P2", "axis": "colour", "why": "The OLED family puts white grotesk text on near-black, the one window allowed to emit light." },
+    "sm": { "p": "P2", "axis": "type", "why": "Small windows draw 24px segment cells for secondary readings inside a dense unit or list row." },
+    "md": { "p": "P2", "axis": "type", "why": "The default window draws 40px segment cells, the size of the anchor card's reading." },
+    "lg": { "p": "P2", "axis": "type", "why": "Large windows draw 56px segment cells for the one reading a whole sheet is about." },
+    "reading": { "p": "P2", "axis": "interaction", "why": "The full reading is kept as hidden text so assistive tech hears the value, unit and detail together." },
+    "face": { "p": "P2", "axis": "space", "why": "The drawn face holds the detail and the value line on the window's inner inset, hidden from assistive tech." },
+    "detail": { "p": "P2", "axis": "type", "why": "One short detail line in the grotesk at caption size says the mode or the target next to the value." },
+    "line": { "p": "P2", "axis": "type", "why": "The value line keeps tabular numerals with the unit beside the value, right-aligned on LCD and start-aligned on OLED." },
+    "seg": { "p": "P2", "axis": "type", "why": "The LCD value is drawn as 7-segment SVG cells on a fixed pitch because no segment font ships with dial." },
+    "on": { "p": "P2", "axis": "colour", "why": "A lit segment is LCD ink at more than 4.5:1 on the grey-green, flat with no glow." },
+    "off": { "p": "P2", "axis": "colour", "why": "An unlit segment stays as a faint ghost so the cell grid reads as a real LCD and widths stay fixed." },
+    "unit": { "p": "P2", "axis": "type", "why": "The unit is printed in the system grotesk at label size beside the value, never as a segment." }
+  },
+  "states": {
+    "@media prefers-reduced-motion: reduce": { "p": "P2", "axis": "motion", "why": "Under reduce motion segments switch on and off at once, with no fade between readings at all." },
+    "@media forced-colors: active": { "p": "P2", "axis": "colour", "why": "In forced colours the window keeps a real border and lit segments take the system text colour so the reading survives." }
+  },
+  "motion": {
+    "fill": { "p": "P2", "axis": "motion", "why": "Only a segment's on and off state fades, within 80ms, so the new value is there at once." }
+  }
+}

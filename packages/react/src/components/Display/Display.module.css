@@ -1,0 +1,60 @@
+/* Display — the window that says the state (system/FORM.md display class, P2). Recessed: inverse light. */
+.root {
+  position: relative;
+  display: block;
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-xl);
+  /* inner = outer − inset; a container sets --display-outer and --display-inset, otherwise corner.inner */
+  border-radius: max(
+    var(--ds-corner-mark),
+    calc(var(--display-outer, calc(var(--ds-corner-inner) + var(--ds-gap-inset))) - var(--display-inset, var(--ds-gap-inset)))
+  );
+  box-shadow: var(--ds-elevation-well);
+  font-family: var(--ds-type-family);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--ds-type-leading-tight);
+}
+.lcd { background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); }
+.oled { background: var(--ds-display-oled-bg); color: var(--ds-display-oled-ink); }
+
+.reading {
+  position: absolute;
+  inline-size: var(--ds-space-px);
+  block-size: var(--ds-space-px);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.face { display: grid; gap: var(--ds-gap-xs); }
+.lcd .face { justify-items: end; }
+.oled .face { justify-items: start; }
+
+.detail { font-size: var(--ds-type-caption); font-weight: var(--ds-type-weight-regular); }
+.lcd .detail { justify-self: start; }
+
+.line { display: inline-flex; align-items: flex-end; gap: var(--ds-gap-md); }
+.oled .line { align-items: baseline; gap: var(--ds-gap-sm); font-weight: var(--ds-type-weight-medium); }
+.unit { font-size: var(--ds-type-label); font-weight: var(--ds-type-weight-medium); }
+.oled .unit { font-size: inherit; font-weight: var(--ds-type-weight-regular); }
+
+/* 7-segment cells: lit segments are flat ink, unlit ones a faint ghost; no glow (FORM display NEVER) */
+.seg { display: block; inline-size: auto; block-size: var(--ds-space-10); }
+.on { fill: var(--ds-display-lcd-ink); transition: fill var(--ds-motion-segment) linear; }
+.off { fill: var(--ds-display-lcd-ghost); transition: fill var(--ds-motion-segment) linear; }
+
+.sm .seg { block-size: var(--ds-space-6); }
+.md .seg { block-size: var(--ds-space-10); }
+.lg .seg { block-size: var(--ds-space-14); }
+.sm.oled .line { font-size: var(--ds-type-emphasis); }
+.md.oled .line { font-size: var(--ds-type-title); }
+.lg.oled .line { font-size: var(--ds-type-display); }
+.sm .unit { font-size: var(--ds-type-caption); }
+
+@media (prefers-reduced-motion: reduce) {
+  .on, .off { transition: none; }
+}
+@media (forced-colors: active) {
+  .root { border: var(--ds-width-hairline) solid CanvasText; }
+  .on { fill: CanvasText; }
+  .off { fill: Canvas; }
+}

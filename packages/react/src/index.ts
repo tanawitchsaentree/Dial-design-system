@@ -12,3 +12,12 @@ export * from './components/Stack';
 // Wave 1: atoms and controls. Keys, switches, faders, the rotary, displays and the device card.
 
 export * from './components/Button';
+export * from './components/Switch';
+export * from './components/Text';
+export * from './components/Heading';
+export * from './components/IconButton';
+export * from './components/Checkbox';
+export * from './components/Display';
+export * from './components/Grille';
+export * from './components/Slider';
+export * from './components/Rotary';
