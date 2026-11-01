@@ -22,7 +22,7 @@ contrast: 0 text below 4.5:1 in light and dark. `pnpm run docs:build` green (war
 2. Measure ratios from pixels (radius/short side, inset, grille pitch, display:face share, knob:face,
    shadow offset) and replace every "(estimated from chat…)" in CONCEPT.md and `.kiln/cache.json`.
 3. Re-render the four cards with measured values (`apps/lab/anchor/index.html` inline style + `anchor.js`),
-   re-run `node apps/lab/anchor/check.mjs`. Wait for the user's pick (the only visual question).
+   re-run `node tooling/kiln/anchor-contrast.mjs`. Wait for the user's pick (the only visual question).
    Then `node tooling/kiln/anchor-likeness.mjs --record apps/lab/anchor/index.html --selector '[data-anchor="<pick>"]'`,
    lock via `kiln:lock-decision`, set `docs.anchor` in kiln.config.json.
 4. `kiln_state.py advance --data '{..."approved": true}'` only after the user's real pick.
