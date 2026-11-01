@@ -1,7 +1,70 @@
 {
-  "generatedAt": "2026-11-01T10:55:04.615Z",
+  "generatedAt": "2026-11-01T11:26:54.844Z",
   "version": "0.0.0",
   "components": {
+    "Badge": {
+      "source": "packages/react/src/components/Badge/Badge.tsx",
+      "kinds": {
+        "tone": [
+          "neutral",
+          "positive",
+          "warning",
+          "critical",
+          "info"
+        ]
+      },
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Badge",
+          "props": [
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The status word, such as \"Online\", \"Filter due\" or \"offline\". Required: status is a glyph and a word, never colour alone.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "tone",
+              "type": "\"neutral\" | \"positive\" | \"warning\" | \"critical\" | \"info\"",
+              "required": false,
+              "default": "neutral",
+              "description": "Which status lamp is printed: `neutral` (default) a hollow ring, `positive` a dot, `warning` a triangle, `critical` a square, `info` a diamond.",
+              "enum": true,
+              "options": [
+                "neutral",
+                "positive",
+                "warning",
+                "critical",
+                "info"
+              ]
+            },
+            {
+              "name": "count",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "A number printed before the word in tabular figures, for the count form such as \"3 offline\".",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "tone"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 865,
+        "cssMin": 944,
+        "gzip": 924
+      }
+    },
     "Button": {
       "source": "packages/react/src/components/Button/Button.tsx",
       "kinds": {
@@ -64,6 +127,102 @@
         "jsMin": 482,
         "cssMin": 1561,
         "gzip": 916
+      }
+    },
+    "Card": {
+      "source": "packages/react/src/components/Card/Card.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Card",
+          "props": [
+            {
+              "name": "as",
+              "type": "\"div\" | \"section\" | \"article\" | \"li\"",
+              "required": false,
+              "default": "div",
+              "description": "The element to render: `div` (default), `section` or `article` for a unit with its own heading, `li` inside a list of cards.",
+              "enum": true,
+              "options": [
+                "div",
+                "section",
+                "article",
+                "li"
+              ]
+            },
+            {
+              "name": "padding",
+              "type": "\"sm\" | \"md\" | \"lg\" | \"unit\"",
+              "required": false,
+              "default": "md",
+              "description": "The inset from the edge of the body to its content. `sm` 16px for small cards in a list, `md` (default) gap.inset (24px), `lg` 32px for a large panel, `unit` corner.inset-ratio (0.077) of the short side, like anchor A.",
+              "enum": true,
+              "options": [
+                "sm",
+                "md",
+                "lg",
+                "unit"
+              ]
+            },
+            {
+              "name": "header",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "A title row on the top inset line, such as a Heading with a Text or a key at its end.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "footer",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "A row of actions at the bottom of the body, above the printed labels.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "wordmark",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "The wordmark printed bottom-left on the inset line, such as \"dial\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "model",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "The model name printed bottom-right on the inset line. It is set in lowercase and is never the only name of the card.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onMeasure",
+              "type": "((box: CardBox) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the body's measured size whenever it changes, so parts can be sized from the unit (for example a Rotary's `unitSide`).",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "as",
+        "padding"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 1455,
+        "cssMin": 1659,
+        "gzip": 1392
       }
     },
     "Checkbox": {
@@ -143,6 +302,116 @@
         "gzip": 1283
       }
     },
+    "Chip": {
+      "source": "packages/react/src/components/Chip/Chip.tsx",
+      "kinds": {},
+      "sizes": [
+        "sm",
+        "md"
+      ],
+      "exports": [
+        {
+          "displayName": "Chip",
+          "props": [
+            {
+              "name": "selected",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Whether the key is latched down (controlled). Pair it with `onSelectedChange`.\nNot available on a removable chip.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultSelected",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Whether the key starts latched when it is uncontrolled. Defaults to `false`.\nNot available on a removable chip.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onSelectedChange",
+              "type": "((selected: boolean) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the new position each time the key is pressed by pointer, Space or Enter.\nNot available on a removable chip.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onRemove",
+              "type": "(() => void)",
+              "required": false,
+              "default": null,
+              "description": "Not available on a toggle chip. Pass `onRemove` alone for a removable chip.\nMakes the chip removable: a separate round remove key with a 44px target sits at its end.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "removeLabel",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "Not available on a toggle chip.\nAccessible name of the remove key. Defaults to \"Remove\" and the word, when the word is a string.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The word on the key, such as \"Eco\" or \"Night\". Short, sentence case.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "size",
+              "type": "\"sm\" | \"md\"",
+              "required": false,
+              "default": null,
+              "description": "`md` (default) draws 44px tall; `sm` draws 36px and keeps a 44px hit area around it.",
+              "enum": true,
+              "options": [
+                "sm",
+                "md"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Flattens the chip and stops it from being pressed or removed.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "icon",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "A small stroke icon printed before the word. Decorative: the word names the chip.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "size",
+        "disabled"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 1387,
+        "cssMin": 4058,
+        "gzip": 1729
+      }
+    },
     "Container": {
       "source": "packages/react/src/components/Container/Container.tsx",
       "kinds": {},
@@ -184,6 +453,223 @@
         "jsMin": 359,
         "cssMin": 335,
         "gzip": 403
+      }
+    },
+    "DeviceCard": {
+      "source": "packages/react/src/components/DeviceCard/DeviceCard.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "DeviceCard",
+          "props": [
+            {
+              "name": "model",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The model name printed bottom-right, such as \"tuner 1\". Printed in lowercase.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "wordmark",
+              "type": "ReactNode",
+              "required": false,
+              "default": "dial",
+              "description": "The wordmark printed bottom-left. Defaults to \"dial\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "display",
+              "type": "DisplayProps",
+              "required": true,
+              "default": null,
+              "description": "The window that says what the device is doing now. Always the first part of the unit.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "knob",
+              "type": "Omit<RotaryProps, \"kind\" | \"unitSide\" | \"diameter\" | \"size\">",
+              "required": false,
+              "default": null,
+              "description": "The orange knob, the unit's one loud part. It is sized to corner.knob-ratio (0.36) of the body's short side.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "primary",
+              "type": "DevicePrimary",
+              "required": false,
+              "default": null,
+              "description": "The main key when there is no knob. It is orange only then; next to a knob it is drawn as a plastic key, so the unit never has two orange parts.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "keys",
+              "type": "DeviceKey[]",
+              "required": false,
+              "default": null,
+              "description": "Secondary keys, body-coloured: modes, bands, transport.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "keysLabel",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The accessible name of the row of keys, such as \"Band\" or \"Playback\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "meter",
+              "type": "GrilleProps",
+              "required": false,
+              "default": null,
+              "description": "A grille meter for a reading that changes, such as volume or heat output. Leave it out when nothing is measured.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "fader",
+              "type": "SliderProps",
+              "required": false,
+              "default": null,
+              "description": "A ruler fader across the body for a second amount, such as volume or brightness.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "layout",
+              "type": "\"a\" | \"tall\" | \"compact\"",
+              "required": false,
+              "default": "a",
+              "description": "`a` (default) is anchor A: display on top, knob left, keys and grille right, fader across. `tall` is one column with the knob centred, for wall devices. `compact` is a wide body with the knob right of the display.",
+              "enum": true,
+              "options": [
+                "a",
+                "tall",
+                "compact"
+              ]
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "layout"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 14658,
+        "cssMin": 14600,
+        "gzip": 8681
+      }
+    },
+    "Dialog": {
+      "source": "packages/react/src/components/Dialog/Dialog.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Dialog",
+          "props": [
+            {
+              "name": "open",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Whether the sheet is open. Pass it with `onOpenChange` to control the dialog; leave it out to let `trigger` open it.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultOpen",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The open state on first render when the dialog is not controlled.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onOpenChange",
+              "type": "((open: boolean) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with `false` when the sheet asks to close: Escape, or any key in `actions`. Called with `true` when `trigger` is pressed.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "title",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The one question the sheet asks, required: \"Turn off all lamps?\". It names the dialog.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "description",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "One or two sentences under the question that say what will happen. It describes the dialog.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "Fields or extra content between the description and the keys. The first field takes focus on open.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "actions",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "The keys at the bottom: plastic `Button`s and at most one `Button kind=\"primary\"`, the main one last. Any key here closes the sheet after its own onClick, unless that onClick calls `event.preventDefault()`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "trigger",
+              "type": "ReactElement<{ onClick?: ((e: MouseEvent<HTMLElement, MouseEvent>) => void); }, string | JSXElementConstructor<any>>",
+              "required": false,
+              "default": null,
+              "description": "An element, usually a `Button`, that opens the sheet when pressed. Focus returns to it on close.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "modal",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "`true` (default) opens with `showModal()`: scrim, focus trap, inert page. `false` shows the sheet in place, with no scrim and no focus move, for previews.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [],
+      "variantCount": 0,
+      "demoFloor": 3,
+      "bundle": {
+        "jsMin": 3782,
+        "cssMin": 2937,
+        "gzip": 2678
       }
     },
     "Display": {
@@ -557,6 +1043,171 @@
         "gzip": 889
       }
     },
+    "Input": {
+      "source": "packages/react/src/components/Input/Input.tsx",
+      "kinds": {},
+      "sizes": [
+        "md",
+        "lg"
+      ],
+      "exports": [
+        {
+          "displayName": "Input",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The printed name above the well. Required: it is also the field's accessible name. Never rely on `placeholder` for this.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "hint",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "A short line printed under the well that says what to enter, for example the format.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "error",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "The problem with the current value. When set, the field is marked invalid and the message is printed under the well with a glyph.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "size",
+              "type": "\"md\" | \"lg\"",
+              "required": false,
+              "default": "md",
+              "description": "`md` (default) is a 44px well; `lg` is a 52px well with larger text, for the main field of a phone sheet.",
+              "enum": true,
+              "options": [
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "unit",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "A unit printed inside the well after the value, for example `°C` or `min`. It is read out with the field.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "className",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "Class name for the outer wrapper (label, well and message).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "style",
+              "type": "CSSProperties",
+              "required": false,
+              "default": null,
+              "description": "Inline style for the outer wrapper.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "size",
+        "error"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 1332,
+        "cssMin": 2195,
+        "gzip": 1410
+      }
+    },
+    "Progress": {
+      "source": "packages/react/src/components/Progress/Progress.tsx",
+      "kinds": {},
+      "sizes": [
+        "sm",
+        "md"
+      ],
+      "exports": [
+        {
+          "displayName": "Progress",
+          "props": [
+            {
+              "name": "value",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "How far the task has run, from 0 to `max`. Values outside the range are clamped. Leave it out for the indeterminate form.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "required": false,
+              "default": "100",
+              "description": "The end of the task. Defaults to 100.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "What is running, such as \"Washer\" or \"Firmware update\". Printed above the groove and used as the accessible name.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "valueText",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The reading in words, printed at the end of the label line and announced, such as \"38 min left\". Defaults to the percent, or \"Working\" when indeterminate.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "size",
+              "type": "\"sm\" | \"md\"",
+              "required": false,
+              "default": "md",
+              "description": "`md` (default) is an 8px groove, the main reading of a unit; `sm` is a 4px groove for rows in a list.",
+              "enum": true,
+              "options": [
+                "sm",
+                "md"
+              ]
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "size"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 1142,
+        "cssMin": 1342,
+        "gzip": 1177
+      }
+    },
     "Rotary": {
       "source": "packages/react/src/components/Rotary/Rotary.tsx",
       "kinds": {
@@ -775,6 +1426,208 @@
         "jsMin": 4289,
         "cssMin": 2496,
         "gzip": 2970
+      }
+    },
+    "SegmentedControl": {
+      "source": "packages/react/src/components/SegmentedControl/SegmentedControl.tsx",
+      "kinds": {},
+      "sizes": [
+        "md",
+        "lg"
+      ],
+      "exports": [
+        {
+          "displayName": "SegmentedControl",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The name printed above the bank, such as Band or Mode. Required: it is also the group's accessible name.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "options",
+              "type": "SegmentedControlOption[]",
+              "required": true,
+              "default": null,
+              "description": "The keys, in order. Two to five keys fit a unit; more belong in a Select.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "Controlled: the value of the latched key. Pair it with `onValueChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "Uncontrolled: the value of the key latched at first. With neither, no key is latched until one is pressed.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onValueChange",
+              "type": "((value: string) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the new value when a key latches, by pointer, arrow keys, Home, End or Space.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "size",
+              "type": "\"md\" | \"lg\"",
+              "required": false,
+              "default": "md",
+              "description": "`md` (default) keys are 44px tall; `lg` keys are 52px, for a phone sheet.",
+              "enum": true,
+              "options": [
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Every key loses its height and none can be pressed.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "size",
+        "disabled"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 1673,
+        "cssMin": 3114,
+        "gzip": 1794
+      }
+    },
+    "Select": {
+      "source": "packages/react/src/components/Select/Select.tsx",
+      "kinds": {},
+      "sizes": [
+        "md",
+        "lg"
+      ],
+      "exports": [
+        {
+          "displayName": "Select",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The printed name above the well. Required: it is also the field's accessible name.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "options",
+              "type": "SelectOption[]",
+              "required": true,
+              "default": null,
+              "description": "The choices, in the order they are listed.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "value",
+              "type": "string | null",
+              "required": false,
+              "default": null,
+              "description": "The chosen value when controlled. Pair it with `onValueChange`. `null` means nothing is chosen yet.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The starting value when uncontrolled.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onValueChange",
+              "type": "((value: string) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the option's value when the person picks a different option.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "A prompt shown in the well before anything is chosen, such as \"Choose a programme\". It never replaces the label.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "size",
+              "type": "\"md\" | \"lg\"",
+              "required": false,
+              "default": "md",
+              "description": "`md` (default) is a 44px well; `lg` is a 52px well with larger text, for the main choice of a phone sheet.",
+              "enum": true,
+              "options": [
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The field cannot be opened; the well loses its shadow and fades to half.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "Submits the chosen value with a form under this name, through a hidden input.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "size",
+        "disabled"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 3880,
+        "cssMin": 2778,
+        "gzip": 2690
       }
     },
     "Slider": {
@@ -1075,6 +1928,85 @@
         "gzip": 1438
       }
     },
+    "Tabs": {
+      "source": "packages/react/src/components/Tabs/Tabs.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Tabs",
+          "props": [
+            {
+              "name": "label",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "What the sections are, such as Rooms. Required: it is the accessible name of the row of names.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "items",
+              "type": "TabsItem[]",
+              "required": true,
+              "default": null,
+              "description": "The sections, in order: each has a value, a printed name and its content.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "Controlled: the value of the chosen section. Pair it with `onValueChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "Uncontrolled: the section chosen at first. Default: the first item.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onValueChange",
+              "type": "((value: string) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the new value when another section is chosen.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "activation",
+              "type": "\"automatic\" | \"manual\"",
+              "required": false,
+              "default": "automatic",
+              "description": "`automatic` (default): arrow keys choose the section they reach, because every panel is already on the page. `manual`: arrows only move focus and Enter or Space chooses, for panels that are slow to show.",
+              "enum": true,
+              "options": [
+                "automatic",
+                "manual"
+              ]
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "activation"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 1766,
+        "cssMin": 1529,
+        "gzip": 1516
+      }
+    },
     "Text": {
       "source": "packages/react/src/components/Text/Text.tsx",
       "kinds": {
@@ -1171,6 +2103,130 @@
         "jsMin": 493,
         "cssMin": 699,
         "gzip": 569
+      }
+    },
+    "Toast": {
+      "source": "packages/react/src/components/Toast/Toast.tsx",
+      "kinds": {
+        "tone": [
+          "neutral",
+          "positive",
+          "warning",
+          "critical"
+        ]
+      },
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "ToastProvider",
+          "props": [
+            {
+              "name": "duration",
+              "type": "number",
+              "required": false,
+              "default": "6000",
+              "description": "Default time on screen in ms for toasts without an action. Never less than 5000.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "required": false,
+              "default": "3",
+              "description": "How many toasts show at once; older ones close first.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "required": false,
+              "default": "Notifications",
+              "description": "Accessible name of the region. Defaults to \"Notifications\".",
+              "enum": false,
+              "options": null
+            }
+          ]
+        },
+        {
+          "displayName": "useToast",
+          "props": []
+        },
+        {
+          "displayName": "Toast",
+          "props": [
+            {
+              "name": "tone",
+              "type": "\"neutral\" | \"positive\" | \"warning\" | \"critical\"",
+              "required": false,
+              "default": "neutral",
+              "description": "`neutral` (default) a plain note, `positive` the action worked, `warning` it worked with a catch, `critical` it failed. No tone is orange.",
+              "enum": true,
+              "options": [
+                "neutral",
+                "positive",
+                "warning",
+                "critical"
+              ]
+            },
+            {
+              "name": "status",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The status word printed beside the glyph. Defaults to Note, Done, Check or Failed by tone.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The message, short and in the past tense: \"Lamp turned off\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "action",
+              "type": "ToastAction",
+              "required": false,
+              "default": null,
+              "description": "One optional plastic key, such as Undo or Try again.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onClose",
+              "type": "(() => void)",
+              "required": false,
+              "default": null,
+              "description": "Shows the round close key and runs when it is pressed.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "closeLabel",
+              "type": "string",
+              "required": false,
+              "default": "Close",
+              "description": "The accessible name of the close key. Defaults to \"Close\".",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "tone"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 4451,
+        "cssMin": 5487,
+        "gzip": 3267
       }
     }
   }

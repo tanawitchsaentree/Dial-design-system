@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Input · three fields</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. A field is a recess in the body: inverse light, no orange anywhere (P1). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 360px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 18px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .field { display: grid; gap: 6px; }
+  .lbl { font-size: 14px; font-weight: 500; line-height: 1.15; }
+  .hint { font-size: 13px; line-height: 1.45; color: var(--ds-text-secondary); }
+  .err { font-size: 13px; line-height: 1.45; color: var(--ds-status-critical); display: flex; gap: 6px; align-items: flex-start; font-weight: 500; }
+  .err svg { inline-size: 16px; block-size: 16px; flex: none; margin-block-start: 1px; }
+  .well { display: flex; align-items: center; gap: 8px; box-sizing: border-box; inline-size: 100%; min-block-size: 44px; padding-inline: 14px;
+          border: 1px solid var(--ds-line-ring); border-radius: 12px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .well input { flex: 1; min-inline-size: 0; border: 0; background: none; font: inherit; font-size: 15px; line-height: 1.45; color: var(--ds-text-primary); padding-block: 9px; outline: none; }
+  .well:focus-within { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .well .unit-sfx { font-size: 14px; font-weight: 500; color: var(--ds-text-secondary); }
+  .well.bad { border-color: var(--ds-status-critical); }
+
+  /* B — window field: the label is printed inside the well's top edge, like a display caption */
+  .b .well { flex-direction: column; align-items: stretch; gap: 0; min-block-size: 60px; padding-block: 8px 2px; }
+  .b .well .cap { font-size: 11px; font-weight: 500; color: var(--ds-text-secondary); }
+  .b .well input { padding-block: 2px 4px; }
+
+  /* C — slot field: label printed beside on the left, the value sits over a narrow recessed slot */
+  .c .field { grid-template-columns: 120px 1fr; align-items: end; column-gap: 12px; }
+  .c .slot { position: relative; display: flex; align-items: center; gap: 6px; min-block-size: 44px; }
+  .c .slot::after { content: ""; position: absolute; inset-inline: 0; inset-block-end: 4px; block-size: 6px; border-radius: 3px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .c .slot input { flex: 1; border: 0; background: none; font: inherit; font-size: 15px; line-height: 1.45; text-align: end; font-variant-numeric: tabular-nums; color: var(--ds-text-primary); padding-block: 4px 12px; outline: none; }
+  .c .slot:focus-within { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; border-radius: 4px; }
+  .c .hint, .c .err { grid-column: 2; }
+  .c .lbl { padding-block-end: 14px; }
+</style>
+</head>
+<body>
+<h1>Input — three fields cut into the same body</h1>
+<p>Same matte ABS and the same light from the top left. A field is a recess, so the light falls into it (elevation.well). Only the silhouette and where the label is printed change. Thai text is set on a 1.45 line box so stacked marks fit. Nothing here is orange; invalid is a glyph and a word.</p>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · recessed well, label printed above</h2>
+    <div class="field"><label class="lbl" for="a1">Room name</label><div class="well"><input id="a1" value="ห้องนั่งเล่น ชั้นบน"></div><span class="hint">Shown on the unit and in the app.</span></div>
+    <div class="field"><label class="lbl" for="a2">Target temperature</label><div class="well"><input id="a2" value="21.5" inputmode="decimal"><span class="unit-sfx">°C</span></div></div>
+    <div class="field"><label class="lbl" for="a3">Wi-Fi password</label><div class="well bad"><input id="a3" value="1234" aria-invalid="true"></div>
+      <span class="err"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.5v4M8 11.2v.1"/></svg>Error: use at least 8 characters.</span></div>
+    <p class="note">Like a recessed window on the case: the full width of the column, the label printed on the inset line above it.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · window field, label inside</h2>
+    <div class="field"><label class="well" for="b1"><span class="cap">Room name</span><input id="b1" value="ห้องนั่งเล่น ชั้นบน"></label></div>
+    <div class="field"><label class="well" for="b2"><span class="cap">Target temperature</span><input id="b2" value="21.5"></label></div>
+    <p class="note">A display caption printed in the top of the well. Taller (60px), and the small caption sits close to the floating label it should avoid.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · slot field, label beside</h2>
+    <div class="field"><label class="lbl" for="c1">Room name</label><div class="slot"><input id="c1" value="ห้องนั่งเล่น ชั้นบน"></div></div>
+    <div class="field"><label class="lbl" for="c2">Target</label><div class="slot"><input id="c2" value="21.5"><span class="unit-sfx">°C</span></div></div>
+    <p class="note">A narrow groove under the value, label printed to the left, like a setting row. Reads like a fader groove, and the field is not the full width of its column.</p></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Select · three selectors</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. The selected option is ink and weight, never orange (P1). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .unit { inline-size: 360px; min-block-size: 420px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 14px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .lbl { font-size: 14px; font-weight: 500; line-height: 1.15; }
+  .field { display: grid; gap: 6px; position: relative; }
+  .well { display: flex; align-items: center; gap: 8px; box-sizing: border-box; inline-size: 100%; min-block-size: 44px; padding-inline: 14px; font: inherit; font-size: 15px; line-height: 1.45; text-align: start;
+          color: var(--ds-text-primary); border: 1px solid var(--ds-line-ring); border-radius: 12px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); cursor: pointer; }
+  .well:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .well .v { flex: 1; }
+  .chev { inline-size: 16px; block-size: 16px; flex: none; color: var(--ds-text-secondary); }
+  .panel { box-sizing: border-box; inline-size: 100%; margin: 0; padding: 6px; list-style: none; border-radius: 20px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-float); }
+  .opt { display: flex; align-items: center; gap: 10px; min-block-size: 44px; padding-inline: 12px; border-radius: 14px; font-size: 15px; line-height: 1.45; color: var(--ds-text-secondary); }
+  .opt .tick { inline-size: 16px; block-size: 16px; flex: none; }
+  .opt[aria-selected="true"] { color: var(--ds-text-primary); font-weight: 500; }
+  .opt.active { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+
+  /* A — popup below: a plastic panel above the page, tick glyph + weight marks the chosen option */
+  .a .panel { position: absolute; inset-block-start: calc(100% + 6px); inset-inline: 0; z-index: 10; }
+
+  /* B — band stepper: no popup; two keys step through the band like a tuner */
+  .b .band { display: flex; gap: 10px; align-items: center; }
+  .b .well { cursor: default; justify-content: center; }
+  .b .key { inline-size: 44px; block-size: 44px; flex: none; border-radius: 50%; border: 1px solid transparent; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); font: inherit; font-size: 18px; color: var(--ds-text-secondary); cursor: pointer; }
+  .b .dots { display: flex; gap: 6px; justify-content: center; } .b .dots i { inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); } .b .dots i.on { background: var(--ds-text-primary); }
+
+  /* C — popup over the trigger: the panel opens so the chosen option sits where the well was; an index bar marks it */
+  .c .panel { position: absolute; inset-block-start: calc(-44px * 2 - 2px); inset-inline: -6px; inline-size: calc(100% + 12px); z-index: 10; }
+  .c .opt .tick { display: none; }
+  .c .opt[aria-selected="true"]::before { content: ""; inline-size: 3px; block-size: 20px; border-radius: 2px; background: var(--ds-text-primary); margin-inline-end: 4px; }
+</style>
+</head>
+<body>
+<h1>Select — three selectors on the same body</h1>
+<p>Same well as Input for the closed field. The open list is a plastic panel above the page (elevation.float, surface.solid, corner.inner). Only where the list opens and how the chosen option is marked change. The chosen option is never orange.</p>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · well + chevron, panel opens below</h2>
+    <div class="field"><span class="lbl" id="la">Programme</span>
+      <button class="well" aria-labelledby="la"><span class="v">Cotton 40°</span><svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></button>
+      <ul class="panel" role="listbox" aria-labelledby="la">
+        <li class="opt" role="option" aria-selected="false"><svg class="tick" viewBox="0 0 16 16"></svg>Eco 40–60</li>
+        <li class="opt" role="option" aria-selected="true"><svg class="tick" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Cotton 40°</li>
+        <li class="opt active" role="option" aria-selected="false"><svg class="tick" viewBox="0 0 16 16"></svg>Synthetics</li>
+        <li class="opt" role="option" aria-selected="false"><svg class="tick" viewBox="0 0 16 16"></svg>Wool / hand wash</li>
+        <li class="opt" role="option" aria-selected="false"><svg class="tick" viewBox="0 0 16 16"></svg>ผ้าฝ้าย ถนอมผ้า</li>
+      </ul></div>
+    <p class="note" style="margin-block-start:260px">The list drops from the well, the chosen option keeps a printed tick and medium weight; the keyboard row is a recess.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · band stepper, no popup</h2>
+    <span class="lbl">Programme</span>
+    <div class="band"><button class="key" aria-label="Previous">‹</button><div class="well"><span>Cotton 40°</span></div><button class="key" aria-label="Next">›</button></div>
+    <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+    <p class="note">Like a tuner's band keys. No list to scan: with twelve options the person presses eleven times, and type-ahead has no place to land.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · panel opens over the well</h2>
+    <div style="block-size:96px"></div>
+    <div class="field"><span class="lbl" id="lc">Programme</span>
+      <div style="position:relative"><button class="well" aria-labelledby="lc"><span class="v">Cotton 40°</span></button>
+      <ul class="panel" role="listbox" aria-labelledby="lc">
+        <li class="opt" role="option" aria-selected="false"><svg class="tick"></svg>Eco 40–60</li>
+        <li class="opt active" role="option" aria-selected="false"><svg class="tick"></svg>Quick 30</li>
+        <li class="opt" role="option" aria-selected="true"><svg class="tick"></svg>Cotton 40°</li>
+        <li class="opt" role="option" aria-selected="false"><svg class="tick"></svg>Synthetics</li>
+        <li class="opt" role="option" aria-selected="false"><svg class="tick"></svg>Wool / hand wash</li>
+      </ul></div></div>
+    <p class="note" style="margin-block-start:180px">The chosen option lands on the well (desktop menu style); it covers the label and the display above it.</p></section>
+</div>
+</body>
+</html>

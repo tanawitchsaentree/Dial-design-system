@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · SegmentedControl · three latching key banks</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 360px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 14px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .cap { font-size: 13px; color: var(--ds-text-primary); margin: 0; }
+  .lamp { inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); flex: none; }
+  [aria-checked="true"] .lamp { background: var(--ds-text-primary); box-shadow: none; }
+  button { font: inherit; color: inherit; }
+  button:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; z-index: 1; }
+
+  /* A: an interlocking bank — keys abut on a seam, the chosen one latched down */
+  .a .bank { display: flex; padding: 3px; gap: 2px; border-radius: 26px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .a .k { flex: 1; display: grid; justify-items: center; gap: 4px; min-block-size: 44px; padding: 6px 12px; border: 1px solid var(--ds-line-ring); background: var(--ds-surface-raised);
+          box-shadow: var(--ds-elevation-part); color: var(--ds-text-secondary); font-size: 15px; cursor: pointer; border-radius: 6px;
+          transition: transform 245ms cubic-bezier(.2,.8,.3,1), box-shadow 245ms; }
+  .a .k:first-child { border-start-start-radius: 22px; border-end-start-radius: 22px; }
+  .a .k:last-child { border-start-end-radius: 22px; border-end-end-radius: 22px; }
+  .a .k[aria-checked="true"] { transform: translate(1px, 3px); box-shadow: none; color: var(--ds-text-primary); font-weight: 500; }
+
+  /* B: separate round keys, words printed under them on the case */
+  .b .bank { display: flex; gap: 22px; }
+  .b .slot { display: grid; justify-items: center; gap: 6px; }
+  .b .k { inline-size: 44px; block-size: 44px; border-radius: 50%; border: 1px solid var(--ds-line-ring); background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); cursor: pointer;
+          display: grid; place-items: center; transition: transform 245ms, box-shadow 245ms; }
+  .b .k[aria-checked="true"] { transform: translate(1px, 3px); box-shadow: none; }
+  .b .w { font-size: 13px; color: var(--ds-text-secondary); }
+  .b .k[aria-checked="true"] + .w { color: var(--ds-text-primary); font-weight: 500; }
+
+  /* C: tall piano keys, the lamp printed on the case above each key */
+  .c .bank { display: flex; gap: 4px; }
+  .c .slot { display: grid; justify-items: center; gap: 8px; flex: 1; }
+  .c .k { inline-size: 100%; block-size: 64px; border-radius: 6px 6px 10px 10px; border: 1px solid var(--ds-line-ring); background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part);
+          cursor: pointer; display: grid; align-items: end; padding-block-end: 8px; font-size: 13px; color: var(--ds-text-secondary); transition: transform 245ms, box-shadow 245ms; }
+  .c .k[aria-checked="true"] { transform: translate(1px, 3px); box-shadow: none; color: var(--ds-text-primary); font-weight: 500; }
+  .c .slot:has([aria-checked="true"]) .lamp { background: var(--ds-text-primary); box-shadow: none; }
+  .primary { justify-self: start; min-block-size: 44px; padding-inline: 20px; border-radius: 22px; border: 1px solid var(--ds-action-accent-rim); background: var(--ds-action-accent); color: var(--ds-text-on-accent); font-weight: 500; box-shadow: var(--ds-elevation-part); }
+  @media (prefers-reduced-motion: reduce) { .k { transition: none !important; } }
+</style>
+</head>
+<body>
+<h1>SegmentedControl — three latching key banks</h1>
+<p>A radio's band keys: press one and it latches down, the others spring back up. Same matte ABS, same light, travel 3px, spring m 1.4 / k 520 / c 46. The chosen key is told by depth (latched, no shadow) and a lit ink lamp with a medium-weight word. Never orange: the unit's orange belongs to its main control. What changes between A, B and C is the silhouette of the bank.</p>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · interlocking bank, lamp on the key</h2>
+    <p class="cap" id="la">Band</p>
+    <div class="bank" role="radiogroup" aria-labelledby="la">
+      <button class="k" role="radio" aria-checked="true"><span class="lamp"></span>FM</button>
+      <button class="k" role="radio" aria-checked="false" tabindex="-1"><span class="lamp"></span>AM</button>
+      <button class="k" role="radio" aria-checked="false" tabindex="-1"><span class="lamp"></span>AUX</button>
+    </div>
+    <button class="primary">Play</button>
+    <p class="note">Keys share a recessed seam, like the key strip of a radio. One row, one width, the word on the key. The latched key sits in the recess with its lamp lit.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · separate round keys, word printed below</h2>
+    <p class="cap" id="lb">Band</p>
+    <div class="bank" role="radiogroup" aria-labelledby="lb">
+      <span class="slot"><button class="k" role="radio" aria-checked="true" aria-label="FM"><span class="lamp"></span></button><span class="w">FM</span></span>
+      <span class="slot"><button class="k" role="radio" aria-checked="false" tabindex="-1" aria-label="AM"><span class="lamp"></span></button><span class="w">AM</span></span>
+      <span class="slot"><button class="k" role="radio" aria-checked="false" tabindex="-1" aria-label="AUX"><span class="lamp"></span></button><span class="w">AUX</span></span>
+    </div>
+    <button class="primary">Play</button>
+    <p class="note">Each key stands alone, like IconButton B. The keys no longer read as one interlocked set, and the round silhouette is IconButton's.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · tall piano keys, lamp on the case</h2>
+    <p class="cap" id="lc">Band</p>
+    <div class="bank" role="radiogroup" aria-labelledby="lc">
+      <span class="slot"><span class="lamp"></span><button class="k" role="radio" aria-checked="true">FM</button></span>
+      <span class="slot"><span class="lamp"></span><button class="k" role="radio" aria-checked="false" tabindex="-1">AM</button></span>
+      <span class="slot"><span class="lamp"></span><button class="k" role="radio" aria-checked="false" tabindex="-1">AUX</button></span>
+    </div>
+    <button class="primary">Play</button>
+    <p class="note">Hi-fi piano keys at 64px with the lamp printed above. Clear, but the keys take a third more height of the unit than any other control.</p></section>
+</div>
+<script>
+  for (const g of document.querySelectorAll('[role=radiogroup]')) {
+    const items = [...g.querySelectorAll('[role=radio]')];
+    const pick = (b) => items.forEach((x) => { x.setAttribute('aria-checked', String(x === b)); x.tabIndex = x === b ? 0 : -1; });
+    items.forEach((b, i) => { b.onclick = () => pick(b); b.onkeydown = (e) => { const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]; if (d) { const n = items[(i + d + items.length) % items.length]; pick(n); n.focus(); e.preventDefault(); } }; });
+  }
+</script>
+</body>
+</html>

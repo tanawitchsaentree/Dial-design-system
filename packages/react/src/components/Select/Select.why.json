@@ -1,0 +1,55 @@
+{
+  "concept": "Select is the same recessed window as Input with a printed chevron, and it opens a plastic panel of options above the page; the chosen option is marked by a printed tick and weight, the way a selector on an appliance marks its setting in ink.",
+  "kind": ["select", "combobox", "dropdown", "listbox"],
+  "default_to_avoid": [
+    { "pattern": "native browser select restyled, opening the operating system's menu", "why_not": "The open menu is drawn by the operating system, so its light, type and marking ignore the material and cannot follow dial's principles." },
+    { "pattern": "Radix or MUI select with a blue highlighted option", "why_not": "A tinted fill for the chosen option tells the state by colour alone and spends a hue that P1 keeps for one part per unit." }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a band selector whose chosen band is marked in printed ink on the case" },
+    { "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): settings printed beside plain plastic parts, no coloured marking" },
+    { "source": "WAI-ARIA Authoring Practices: select-only combobox pattern (https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/)" }
+  ],
+  "derivation": [
+    { "p": "P2", "axis": "depth", "consequence": "the window is recessed into the body (inverse light)", "form": "The closed trigger is the same well as Input: surface.sunken with elevation.well and a line.ring hairline, full width of its column." },
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "The label is printed above the well at its start edge, and the placeholder is a separate grey prompt inside, never the name." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "The chosen option is marked by a printed tick glyph and medium weight in primary ink; no option row is ever filled orange or blue." },
+    { "p": "P6", "axis": "depth", "consequence": "shadows are short and soft", "form": "The open panel is surface.solid plastic with elevation.float and corner.inner, on layer.overlay above the page and nothing deeper." },
+    { "p": "P3", "axis": "interaction", "consequence": "every mechanism has its keyboard map", "form": "Arrows, Home, End, Page keys, type-ahead, Enter and Space select, and Escape closes and keeps focus on the trigger." },
+    { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "The panel appears and disappears at once, with no fade, slide or scale, and the rows never animate while scanning." }
+  ],
+  "variants": {
+    "lab": "apps/lab/select/index.html",
+    "options": [
+      { "id": "A", "name": "well with chevron, plastic panel opens below, tick + weight on the chosen option" },
+      { "id": "B", "name": "band stepper: well between two round keys, no popup" },
+      { "id": "C", "name": "panel opens over the well with the chosen option in place, index bar marks it" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps the label and the unit's display visible while the list is open and marks the choice with a printed tick and weight (P1 colour, P5 space); B makes a long list a chain of key presses with no type-ahead target, and C covers the label and the display above the field."
+  },
+  "parts": {
+    "root": { "p": "P5", "axis": "space", "why": "The field stacks its label above the well in one column, and anchors the panel to the well's edges." },
+    "label": { "p": "P5", "axis": "type", "why": "The printed name uses the label size in medium weight, like the printing beside every other part of the unit." },
+    "trigger": { "p": "P2", "axis": "depth", "why": "The closed field is a recess with the inverse light, the same window that Input uses for typed text." },
+    "value": { "p": "P5", "axis": "colour", "why": "The chosen option is printed in primary ink on the sunken plastic at more than 4.5:1 in both themes." },
+    "placeholder": { "p": "P5", "axis": "colour", "why": "The prompt before a choice is secondary ink above 4.5:1, and it sits beside a printed label that stays." },
+    "chevron": { "p": "P5", "axis": "depth", "why": "The chevron is printed flat at the end of the well, a stroke of ink that tells the field opens a list." },
+    "panel": { "p": "P6", "axis": "depth", "why": "The open list is a plastic panel with one short soft shadow, above the page on the overlay layer and no further." },
+    "option": { "p": "P3", "axis": "space", "why": "Every option row is at least 44px tall so a finger can pick it, with its text inset from the rounded ends." },
+    "tick": { "p": "P1", "axis": "colour", "why": "A printed tick in ink marks the chosen option, so the selection never uses the orange or any tinted fill." },
+    "text": { "p": "P5", "axis": "type", "why": "Option words use the body size of the one grotesk, with a line box tall enough for stacked Thai marks." },
+    "md": { "p": "P3", "axis": "space", "why": "The default well is 44px tall, the smallest target that every part in dial keeps for a finger." },
+    "lg": { "p": "P3", "axis": "space", "why": "A 52px well with larger text for the main choice of a phone sheet held in one hand." }
+  },
+  "states": {
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "The trigger shows the same dark ring as every part, and keeps it while the list is open under it." },
+    "disabled": { "p": "P6", "axis": "depth", "why": "A disabled field loses its recess shadow and fades to half, so it reads as not taking a choice now." },
+    "aria-expanded=true": { "p": "P6", "axis": "interaction", "why": "The chevron turns over at once while the list is open, with no hover lift and no animated turn." },
+    "aria-selected=true": { "p": "P1", "axis": "colour", "why": "The chosen row is primary ink in medium weight with its tick, never a coloured fill behind the words." },
+    "data-active=true": { "p": "P2", "axis": "depth", "why": "The row under the keyboard or the pointer becomes a small recess, so the active row is shown by depth, not hue." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the well and the panel keep real borders and the active row uses the system highlight." }
+  },
+  "motion": {}
+}

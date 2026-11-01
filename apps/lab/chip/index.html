@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Chip · three small keys for filters and presets</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 360px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 14px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  button { font: inherit; color: inherit; }
+  /* A: latching capsule key with a lamp */
+  .a .chip { display: inline-flex; align-items: center; gap: 8px; min-block-size: 36px; padding-inline: 14px; border-radius: 999px; border: 1px solid transparent;
+     background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); color: var(--ds-text-secondary); font-size: 14px; cursor: pointer;
+     transition: transform 245ms cubic-bezier(.3,1.2,.5,1), box-shadow 245ms; }
+  .a .lamp { inline-size: 6px; block-size: 6px; border-radius: 50%; box-shadow: var(--ds-elevation-well); background: var(--ds-grille-hole); }
+  .a .chip[aria-pressed=true] { transform: translate(1px, 3px); box-shadow: none; background: var(--ds-surface-sunken); color: var(--ds-text-primary); font-weight: 500; border-color: var(--ds-line-ring); }
+  .a .chip[aria-pressed=true] .lamp { background: var(--ds-text-primary); box-shadow: none; }
+  .a .chip:active { transform: translate(1px, 3px); box-shadow: none; transition-duration: 65ms; }
+  .a .rm { display: inline-flex; align-items: center; gap: 4px; padding-inline-start: 14px; min-block-size: 36px; border-radius: 999px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); font-size: 14px; color: var(--ds-text-secondary); }
+  .a .x { position: relative; display: inline-grid; place-items: center; inline-size: 28px; block-size: 28px; margin-inline-end: 4px; border-radius: 50%; border: 0; background: var(--ds-surface-sunken); cursor: pointer; }
+  .a .x::after { content: ''; position: absolute; inset: -8px; }
+  .a svg { inline-size: 12px; block-size: 12px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; }
+  /* B: tag with a printed ring when chosen */
+  .b .chip { min-block-size: 36px; padding-inline: 14px; border-radius: 999px; border: 2px solid transparent; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); font-size: 14px; color: var(--ds-text-secondary); cursor: pointer; }
+  .b .chip[aria-pressed=true] { border-color: var(--ds-text-primary); color: var(--ds-text-primary); }
+  /* C: keys joined on one rail */
+  .c .rail { display: inline-flex; padding: 4px; gap: 2px; border-radius: 999px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .c .chip { min-block-size: 36px; padding-inline: 14px; border: 0; border-radius: 999px; background: transparent; font-size: 14px; color: var(--ds-text-secondary); cursor: pointer; }
+  .c .chip[aria-pressed=true] { background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); color: var(--ds-text-primary); font-weight: 500; }
+  @media (prefers-reduced-motion: reduce) { .a .chip { transition: none; } }
+</style>
+</head>
+<body>
+<h1>Chip — three ways a small key shows it is chosen</h1>
+<p>Filters and quick presets ("Eco", "Night", "Away") on one unit. Same matte ABS, same light, same spring, travel 3px. None is orange: orange belongs to the unit's one main control. Chosen must differ in shape or depth, not only in colour.</p>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · latching key with a lamp</h2>
+    <div class="chips">
+      <button class="chip" aria-pressed="true"><span class="lamp"></span>Eco</button>
+      <button class="chip" aria-pressed="false"><span class="lamp"></span>Night</button>
+      <button class="chip" aria-pressed="false"><span class="lamp"></span>Away</button>
+    </div>
+    <div class="chips"><span class="rm">Kitchen<button class="x" aria-label="Remove Kitchen"><svg viewBox="0 0 12 12"><path d="M3 3l6 6M9 3l-6 6"/></svg></button></span><span class="rm">Hall<button class="x" aria-label="Remove Hall"><svg viewBox="0 0 12 12"><path d="M3 3l6 6M9 3l-6 6"/></svg></button></span></div>
+    <p class="note">Like radio keys that lock down: a chosen chip stays pressed, its lamp lights and its word turns medium. Removable chips carry their own small round key.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · raised tag with a printed ring</h2>
+    <div class="chips">
+      <button class="chip" aria-pressed="true">Eco</button>
+      <button class="chip" aria-pressed="false">Night</button>
+      <button class="chip" aria-pressed="false">Away</button>
+    </div>
+    <p class="note">The chip stays at its height; a 2px ink ring marks the chosen one. The ring is the same weight as the focus ring, so focus and chosen are hard to tell apart.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · keys on a shared rail</h2>
+    <div class="rail">
+      <button class="chip" aria-pressed="true">Eco</button>
+      <button class="chip" aria-pressed="false">Night</button>
+      <button class="chip" aria-pressed="false">Away</button>
+    </div>
+    <p class="note">Only the chosen key stands up out of a recessed rail. It reads as pick-one, which is SegmentedControl's job, and chips may be many-of-many.</p></section>
+</div>
+</body>
+</html>

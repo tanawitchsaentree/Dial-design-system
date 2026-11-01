@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Progress · three ways a device shows how far a task has run</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 340px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 18px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .p { display: grid; gap: 6px; }
+  .head { display: flex; justify-content: space-between; font-size: 13px; } .head .v { font-variant-numeric: tabular-nums; color: var(--ds-text-secondary); }
+  /* A: recessed groove filling with ink */
+  .groove { position: relative; block-size: 8px; border-radius: 999px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); overflow: hidden; }
+  .fill { block-size: 100%; border-radius: 999px; background: var(--ds-grille-hole-on); }
+  .work { display: flex; justify-content: space-evenly; align-items: center; block-size: 100%; }
+  .work i { inline-size: 5px; block-size: 4px; border-radius: 999px; background: var(--ds-grille-hole-on); }
+  /* B: grille holes in a row */
+  .holes { display: grid; grid-template-columns: repeat(24, 8px); gap: 4px; }
+  .holes i { inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--ds-grille-hole); box-shadow: var(--ds-elevation-well); }
+  .holes i.on { background: var(--ds-grille-hole-on); }
+  /* C: LCD segments */
+  .lcd { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; padding: 8px 10px; border-radius: 10px; background: var(--ds-display-lcd-bg); box-shadow: var(--ds-elevation-well); }
+  .lcd i { block-size: 12px; background: var(--ds-display-lcd-ghost); }
+  .lcd i.on { background: var(--ds-display-lcd-ink); }
+</style>
+</head>
+<body>
+<h1>Progress — three ways to show how far a device task has run</h1>
+<p>A washer at 38 minutes left, a firmware update at 64%. No orange (it is not the loud control). The indeterminate form stays still: P6 lets nothing move while idle, and a stripe that loops for ever is idle motion.</p>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · groove filling with ink</h2>
+    <div class="p"><div class="head"><span>Washer</span><span class="v">38 min left</span></div><div class="groove"><div class="fill" style="inline-size:55%"></div></div></div>
+    <div class="p"><div class="head"><span>Firmware update</span><span class="v">64%</span></div><div class="groove" style="block-size:4px"><div class="fill" style="inline-size:64%"></div></div></div>
+    <div class="p"><div class="head"><span>Descaling</span><span class="v">Working</span></div><div class="groove"><div class="work"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+    <p class="note">A recess like the fader's groove, with no cap: ink fills it from the start of the line. Indeterminate prints evenly spaced ticks that never move.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · a row of grille holes</h2>
+    <div class="p"><div class="head"><span>Washer</span><span class="v">38 min left</span></div><div class="holes" id="hb1"></div></div>
+    <div class="p"><div class="head"><span>Firmware update</span><span class="v">64%</span></div><div class="holes" id="hb2"></div></div>
+    <p class="note">Holes light in reading order, as in Grille. It reads as a level meter, and 24 holes give a coarse 4% step for a long update.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · LCD bar segments</h2>
+    <div class="p"><div class="head"><span>Washer</span><span class="v">38 min left</span></div><div class="lcd" id="hc1"></div></div>
+    <div class="p"><div class="head"><span>Firmware update</span><span class="v">64%</span></div><div class="lcd" id="hc2"></div></div>
+    <p class="note">Segments in a small LCD window. It is a second window in a unit that already has one, so the display stops being the one place that says the state.</p></section>
+</div>
+<script>
+  const fill = (id, n, f) => { const el = document.getElementById(id); for (let i = 0; i < n; i++) { const h = document.createElement('i'); if (i < Math.round(n * f)) h.className = 'on'; el.append(h); } };
+  fill('hb1', 24, .55); fill('hb2', 24, .64); fill('hc1', 20, .55); fill('hc2', 20, .64);
+</script>
+</body>
+</html>

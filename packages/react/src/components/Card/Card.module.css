@@ -1,0 +1,77 @@
+/* Card — the body of a unit: one rounded rectangle of matte ABS (system/FORM.md surface class, D-003,
+   anchor A). One light, top-left. --card-short (the body's short side, px) is written by Card.tsx from a
+   ResizeObserver; until it is measured the radius falls back to corner.panel. */
+.root {
+  --card-inset: var(--ds-gap-inset);
+  --card-radius: min(calc(var(--card-short, 100vmax) * var(--ds-unit-radius-ratio)), var(--ds-corner-panel));
+  /* inner = outer − inset, for any window or well set inside the body */
+  --card-inner: max(var(--ds-corner-mark), calc(var(--card-radius) - var(--card-inset)));
+  --display-outer: var(--card-radius);
+  --display-inset: var(--card-inset);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-gap-xl);
+  margin: 0;
+  padding: var(--card-inset);
+  /* a body is never shorter than its two corners and an inset (G-CH1): it stays a card, never a pill */
+  min-block-size: calc(var(--card-radius) * 2 + var(--card-inset));
+  border-radius: var(--card-radius);
+  background: var(--ds-unit-bg);
+  box-shadow: var(--ds-unit-shadow);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  list-style: none;
+}
+.sm { --card-inset: var(--ds-gap-2xl); }
+.md { --card-inset: var(--ds-gap-inset); }
+.lg { --card-inset: var(--ds-gap-section); }
+.unit {
+  --card-inset: max(
+    var(--ds-gap-2xl),
+    calc(var(--card-short, calc(var(--ds-gap-inset) / var(--ds-unit-inset-ratio))) * var(--ds-unit-inset-ratio))
+  );
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-gap-lg);
+}
+.body {
+  display: grid;
+  gap: var(--ds-gap-lg);
+  flex: 1 1 auto;
+  align-content: start;
+}
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-gap-md);
+}
+.labels {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-gap-lg);
+  margin-block-start: auto;
+  line-height: var(--ds-type-leading-tight);
+}
+.wordmark {
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-medium);
+  letter-spacing: var(--ds-type-tracking-caps);
+}
+.model {
+  margin-inline-start: auto;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  color: var(--ds-text-secondary);
+  text-transform: lowercase;
+}
+
+@media (forced-colors: active) {
+  .root { border: var(--ds-width-hairline) solid CanvasText; }
+}

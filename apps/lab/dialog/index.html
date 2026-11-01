@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Dialog · three sheets</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lead { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .col { display: grid; gap: 10px; inline-size: 380px; }
+  .col > h2 { font-size: 14px; font-weight: 500; margin: 0; } .col > .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); line-height: 1.45; }
+  /* the room behind the sheet: a plain scrim, nothing blurred */
+  .room { position: relative; block-size: 360px; border-radius: 12px; background: var(--ds-surface-page); overflow: hidden; display: grid; padding: 18px; }
+  .room::before { content: ""; position: absolute; inset: 0; background: var(--ds-surface-scrim); }
+  .room > * { position: relative; }
+  .k { font: inherit; font-size: var(--ds-type-label); font-weight: 500; cursor: pointer; border: 1px solid transparent; color: var(--ds-text-secondary);
+       background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); min-block-size: 44px; padding-inline: 20px; border-radius: 999px; }
+  .k:active { transform: translate(1px, 3px); box-shadow: none; }
+  .k.pri { background: var(--ds-action-accent); color: var(--ds-text-on-accent); border-color: var(--ds-action-accent-rim); }
+  .k:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .sheet h3 { font-size: var(--ds-type-title); font-weight: 500; margin: 0; line-height: 1.2; }
+  .sheet p { margin: 0; font-size: var(--ds-type-body); line-height: 1.45; color: var(--ds-text-secondary); }
+  .keys { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+
+  /* A · floating unit: the sheet is a raised body, keys bottom-right, one light top-left */
+  .a .room { align-content: center; justify-items: center; }
+  .a .sheet { inline-size: 100%; max-inline-size: 340px; box-sizing: border-box; padding: 24px; border-radius: 28px; background: var(--ds-surface-solid);
+              box-shadow: var(--ds-elevation-float), inset 1px 1px 0 var(--ds-material-lit); display: grid; gap: 12px; }
+  .a .keys { margin-block-start: 12px; }
+
+  /* B · display-led: the question sits in a recessed LCD window at the top of the body */
+  .b .room { align-content: center; justify-items: center; }
+  .b .sheet { inline-size: 100%; max-inline-size: 340px; box-sizing: border-box; padding: 16px; border-radius: 28px; background: var(--ds-surface-solid);
+              box-shadow: var(--ds-elevation-float); display: grid; gap: 16px; }
+  .b .win { border-radius: 12px; /* 28 − 16 */ background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); box-shadow: var(--ds-elevation-well); padding: 16px; display: grid; gap: 6px; }
+  .b .win h3, .b .win p { color: var(--ds-display-lcd-ink); }
+  .b .keys { padding-inline: 8px; }
+
+  /* C · docked bottom sheet everywhere: attached to the bottom edge, top corners only, keys stacked */
+  .c .room { align-content: end; padding: 0; }
+  .c .sheet { padding: 24px 24px 20px; border-radius: 28px 28px 0 0; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-float); display: grid; gap: 12px; }
+  .c .grab { justify-self: center; inline-size: 36px; block-size: 4px; border-radius: 2px; background: var(--ds-line-ring); }
+  .c .keys { display: grid; gap: 8px; margin-block-start: 8px; } .c .keys .k { inline-size: 100%; min-block-size: 52px; }
+
+  /* real modal for A, to feel the timing */
+  dialog.real { border: 0; padding: 24px; inline-size: min(340px, calc(100% - 32px)); box-sizing: border-box; border-radius: 28px; background: var(--ds-surface-solid); color: var(--ds-text-primary);
+                box-shadow: var(--ds-elevation-float), inset 1px 1px 0 var(--ds-material-lit); opacity: 0; transform: translateY(8px);
+                transition: opacity var(--ds-motion-exit) var(--ds-easing-exit), transform var(--ds-motion-exit) var(--ds-easing-exit); }
+  dialog.real[data-state=open] { opacity: 1; transform: none; transition-duration: var(--ds-motion-enter); transition-timing-function: var(--ds-easing-enter); }
+  dialog.real::backdrop { background: var(--ds-surface-scrim); opacity: 0; transition: opacity var(--ds-motion-exit); }
+  dialog.real[data-state=open]::backdrop { opacity: 1; transition-duration: var(--ds-motion-enter); }
+  @media (max-width: 639px) { dialog.real { margin: auto 0 0; inline-size: 100%; max-inline-size: none; border-end-start-radius: 0; border-end-end-radius: 0; } }
+  @media (prefers-reduced-motion: reduce) { dialog.real, dialog.real::backdrop { transition: none; } }
+</style>
+</head>
+<body>
+<h1>Dialog — three sheets that ask one question</h1>
+<p class="lead">Same matte ABS, same single light from the top left, same plain scrim (surface.scrim, no blur). Each sheet asks one question about a device and holds at most one orange key. What changes is the silhouette and where the question is printed. <button class="k" id="open">Open A for real</button></p>
+<div class="row">
+  <section class="col a"><h2>A · floating unit, keys bottom-right</h2>
+    <div class="room"><div class="sheet" role="presentation">
+      <h3>Turn off all lamps?</h3><p>Six lamps in four rooms go dark. The schedule stays as it is.</p>
+      <div class="keys"><button class="k">Cancel</button><button class="k pri">Turn off</button></div>
+    </div></div>
+    <p class="note">A unit of its own, radius corner.panel (28px cap), padding 24px, so a field inside nests at 28 − 24. Keys sit lower right, where the hand expects the main key. On a phone it docks to the bottom edge (variant C's shape).</p></section>
+  <section class="col b"><h2>B · display-led, question in an LCD window</h2>
+    <div class="room"><div class="sheet" role="presentation">
+      <div class="win"><h3>Stop the wash?</h3><p>38 min left. The drum drains first.</p></div>
+      <div class="keys"><button class="k">Keep washing</button><button class="k pri">Stop</button></div>
+    </div></div>
+    <p class="note">Most literal to the anchor: a window nested at 28 − 16 = 12. But the window is for the device's state (P2), and a question is not a state; it also takes the one display a sheet about a device would want for the value.</p></section>
+  <section class="col c"><h2>C · docked bottom sheet, keys stacked</h2>
+    <div class="room"><div class="sheet" role="presentation">
+      <div class="grab"></div>
+      <h3>Turn off all lamps?</h3><p>Six lamps in four rooms go dark.</p>
+      <div class="keys"><button class="k pri">Turn off</button><button class="k">Cancel</button></div>
+    </div></div>
+    <p class="note">Thumb-first: 52px keys stacked across the width. On a laptop it is a wide bar glued to the bottom of the screen, far from the opener, and the grab bar promises a drag the sheet does not have.</p></section>
+</div>
+<dialog class="real" id="d" aria-labelledby="dt" aria-describedby="dd">
+  <h3 id="dt" style="font-size:22px;font-weight:500;margin:0 0 12px">Turn off all lamps?</h3>
+  <p id="dd" style="margin:0 0 24px;color:var(--ds-text-secondary)">Six lamps in four rooms go dark.</p>
+  <div class="keys"><button class="k" data-close autofocus>Cancel</button><button class="k pri" data-close>Turn off</button></div>
+</dialog>
+<script>
+  const d = document.getElementById('d');
+  document.getElementById('open').onclick = () => { d.showModal(); requestAnimationFrame(() => requestAnimationFrame(() => d.dataset.state = 'open')); };
+  const close = () => { d.dataset.state = 'closed'; setTimeout(() => d.close(), parseFloat(getComputedStyle(d).transitionDuration) * 1000); };
+  d.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
+  d.querySelectorAll('[data-close]').forEach((b) => b.onclick = close);
+</script>
+</body>
+</html>

@@ -7,6 +7,6 @@ export const BARREL_MANIFEST = [
   },
   {
     header: `Wave 1: atoms and controls. Keys, switches, faders, the rotary, displays and the device card.`,
-    components: ['Button', 'Switch', 'Text', 'Heading', 'IconButton', 'Checkbox', 'Display', 'Grille', 'Slider', 'Rotary'],
+    components: ['Button', 'Switch', 'Text', 'Heading', 'IconButton', 'Checkbox', 'Display', 'Grille', 'Slider', 'Rotary', 'Input', 'Select', 'SegmentedControl', 'Tabs', 'Dialog', 'Toast', 'Chip', 'Badge', 'Progress', 'Card', 'DeviceCard'],
   },
 ];

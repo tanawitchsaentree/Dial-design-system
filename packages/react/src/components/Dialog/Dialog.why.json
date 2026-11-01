@@ -1,0 +1,50 @@
+{
+  "concept": "Dialog is a small appliance body that rises in front of the room to ask one question about a device, with plastic keys at the bottom and at most one orange key for the answer that acts.",
+  "kind": ["dialog", "modal", "sheet"],
+  "default_to_avoid": [
+    { "pattern": "centred white modal dialog with a 12px radius, an X in the corner and a dim black overlay (MUI Dialog, Radix Dialog)", "why_not": "The white card and soft shadow from above are the surface NEVER rule in FORM.md, and the corner X is a second way out that competes with Cancel." },
+    { "pattern": "modal dialog that scales and fades in with a staggered entry of its contents", "why_not": "P6 allows no entry choreography; only the change of state moves, so the sheet rises once and its contents arrive with it." }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a lid that opens to show one panel of controls, then closes over them" },
+    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): body-coloured keys in a row with one coloured key for the main action" },
+    { "source": "WAI-ARIA Authoring Practices, Dialog (Modal) pattern: focus moves in, Escape closes, focus returns to the opener" }
+  ],
+  "derivation": [
+    { "p": "P6", "axis": "shape", "consequence": "capped so large panels do not swell into pillows", "form": "The sheet's radius is corner.panel, the cap of the unit ratio, because every dialog is wider than the cap needs." },
+    { "p": "P2", "axis": "shape", "consequence": "radius nests in the body (inner = outer − inset)", "form": "Anything nested in the sheet takes the radius corner.panel minus gap.inset, exposed to children as --dialog-inner." },
+    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "The actions row holds plastic keys and at most one Button kind primary; the sheet itself never paints orange." },
+    { "p": "P1", "axis": "space", "consequence": "sits where the hand expects it (lower or right of the display)", "form": "Actions sit at the bottom of the sheet, aligned to the inline end, so the last key in reading order is the main one." },
+    { "p": "P3", "axis": "motion", "consequence": "fast in, slow out (`kiln.state`)", "form": "The sheet and scrim arrive over motion.enter on the enter easing and leave over the longer motion.exit on the exit easing." },
+    { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "Only opacity and a short rise of motion.rise move, all parts at once, and nothing moves under reduced motion." }
+  ],
+  "variants": {
+    "lab": "apps/lab/dialog/index.html",
+    "options": [
+      { "id": "A", "name": "floating unit, keys bottom-right, docks to the bottom edge on phones" },
+      { "id": "B", "name": "display-led, question printed in an LCD window" },
+      { "id": "C", "name": "docked bottom sheet on every screen, keys stacked" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps the sheet a unit of its own near the opener with the main key lower right (P1); B spends the display window on a question when P2 keeps the window for a device's state, and C glues a wide bar to the bottom of a laptop screen, so A takes C's docked shape only on phones."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "shape", "why": "The sheet is a body of matte plastic with the capped panel radius and one light from the top left." },
+    "inline": { "p": "P6", "axis": "space", "why": "A non-modal sheet sits in the flow of the page at a fixed place and covers nothing." },
+    "title": { "p": "P5", "axis": "type", "why": "The question is printed at the title size in medium weight, so it is the first thing read." },
+    "description": { "p": "P5", "axis": "colour", "why": "The note under the question uses the secondary ink, which holds 4.5:1 on the plastic body." },
+    "content": { "p": "P5", "axis": "space", "why": "Fields and extra text sit on the same inset line as the question, never floating mid-surface." },
+    "actions": { "p": "P1", "axis": "space", "why": "Keys sit together at the bottom and inline end of the sheet, where the hand expects the main key." }
+  },
+  "states": {
+    "data-state=open": { "p": "P3", "axis": "motion", "why": "The open sheet and its scrim arrive quickly on the enter easing, all parts at the same moment." },
+    "@media pointer: coarse": { "p": "P1", "axis": "space", "why": "On a phone held upright the sheet docks to the bottom edge and its keys span the width, where the thumb is." },
+    "@media prefers-reduced-motion: reduce": { "p": "P6", "axis": "motion", "why": "Under reduced motion the sheet appears and leaves at once, with no rise and no fade." },
+    "@media forced-colors: active": { "p": "P6", "axis": "interaction", "why": "In forced colours the sheet keeps a real border, so its edge survives without the cast shadow." }
+  },
+  "motion": {
+    "opacity": { "p": "P3", "axis": "motion", "why": "The sheet and scrim fade in fast and fade out slower, so leaving reads as the end of the question." },
+    "transform": { "p": "P6", "axis": "motion", "why": "A short rise of a few pixels is the only travel, with no scale, no bounce and no stagger." }
+  }
+}

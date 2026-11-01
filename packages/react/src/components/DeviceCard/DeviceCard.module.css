@@ -1,0 +1,92 @@
+/* DeviceCard — one appliance on the screen, laid out from anchor A (D-001, FORM.md surface class).
+   The body is a Card; the parts are the system's own Display, Rotary, Button, IconButton, Grille and
+   Slider. data-fit is written by DeviceCard.tsx from the measured width of the body. */
+/* a preferred width of eight touch modules (anchor A's 340px class), never wider than the column it sits in */
+.root {
+  inline-size: calc(var(--ds-layout-touch) * 8);
+  max-inline-size: 100%;
+}
+.tall { inline-size: calc(var(--ds-layout-touch) * 7); }
+.compact { inline-size: calc(var(--ds-layout-touch) * 12); }
+
+.face {
+  display: grid;
+  gap: var(--ds-gap-xl) var(--ds-gap-2xl);
+  align-items: center;
+}
+.display { grid-area: display; }
+.knob { grid-area: knob; justify-self: center; }
+.primary { grid-area: knob; justify-self: center; }
+.keys {
+  grid-area: keys;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ds-gap-lg);
+}
+/* a latching key prints a lamp: a ring when off, a filled disc when on, in ink and never orange */
+.lamp {
+  display: inline-block;
+  flex: none;
+  inline-size: var(--ds-control-lamp);
+  block-size: var(--ds-control-lamp);
+  margin-inline-end: var(--ds-gap-sm);
+  vertical-align: middle;
+  border: var(--ds-width-hairline) solid var(--ds-text-secondary);
+  border-radius: var(--ds-corner-round);
+}
+.lamp[data-on="true"] { background: var(--ds-text-primary); border-color: var(--ds-text-primary); }
+.latch {
+  display: inline-grid;
+  justify-items: center;
+  gap: var(--ds-gap-xs);
+}
+.latch .lamp { margin-inline-end: 0; }
+.meter { grid-area: meter; justify-self: center; }
+.fader { grid-area: fader; }
+.extra { grid-area: extra; }
+
+/* a · anchor A: wide display on top, the knob below it on the left, keys and a small grille on the right */
+.a .face {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-areas:
+    "display display"
+    "knob keys"
+    "knob meter"
+    "fader fader"
+    "extra extra";
+}
+.a .keys { align-self: end; }
+.a .meter { align-self: start; }
+
+/* tall · one column: display, meter, the knob centred and largest, keys under it */
+.tall .face {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "display" "meter" "knob" "keys" "fader" "extra";
+}
+
+/* compact · a wide body: display and keys on the left, the knob right of the display */
+.compact .face {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "display knob"
+    "keys knob"
+    "meter knob"
+    "fader fader"
+    "extra extra";
+}
+.compact .keys { justify-content: flex-start; }
+.compact .meter { justify-self: start; }
+
+/* too narrow for two columns of 44px parts: every part takes its own row, none draws smaller */
+.root[data-fit="narrow"] .face {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "display" "knob" "keys" "meter" "fader" "extra";
+}
+.root[data-fit="narrow"] .keys { justify-content: center; }
+.root[data-fit="narrow"] .meter { justify-self: center; }
+
+@media (forced-colors: active) {
+  .lamp { border-color: CanvasText; }
+  .lamp[data-on="true"] { background: CanvasText; }
+}

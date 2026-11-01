@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Card · three bodies</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. Same matte ABS (surface.solid), same light top-left (elevation.unit), same radius rule:
+     0.16 × the short side, capped at corner.panel (28px); inner = outer − inset. Only how the body holds
+     its content changes between the three: printed straight on the case, on a recessed faceplate, or in
+     bands split by a seam. */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } .lede { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .tools { display: flex; gap: 8px; margin: 0 0 24px; }
+  .tools button { font: inherit; font-size: 14px; min-height: 44px; padding: 0 16px; border-radius: 22px; border: 1px solid var(--ds-line-ring); background: var(--ds-surface-raised); color: var(--ds-text-primary); cursor: pointer; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .cell { display: grid; gap: 12px; inline-size: 320px; }
+  .cell h2 { font-size: 15px; font-weight: 500; margin: 0; } .cell > p { font-size: 13px; line-height: 1.45; margin: 0; color: var(--ds-text-secondary); }
+
+  .card { --inset: 24px; --r: min(calc(var(--short, 320px) * 0.16), 28px); --inner: max(4px, calc(var(--r) - var(--inset)));
+    background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); border-radius: var(--r); padding: var(--inset);
+    display: grid; gap: 14px; color: var(--ds-text-primary); }
+  .t { font-size: 18px; font-weight: 500; margin: 0; } .b { font-size: 15px; line-height: 1.5; margin: 0; color: var(--ds-text-secondary); }
+  .labels { display: flex; justify-content: space-between; align-items: baseline; }
+  .wm { font-size: 15px; font-weight: 500; letter-spacing: .06em; } .mn { font-size: 13px; color: var(--ds-text-secondary); }
+  .key { font: inherit; font-size: 14px; font-weight: 500; min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid transparent; background: var(--ds-surface-raised); color: var(--ds-text-secondary); box-shadow: var(--ds-elevation-part); }
+  .key.pri { background: var(--ds-action-accent); color: var(--ds-text-on-accent); border-color: var(--ds-action-accent-rim); }
+  .keys { display: flex; gap: 10px; flex-wrap: wrap; }
+  .lcd { background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); box-shadow: var(--ds-elevation-well); border-radius: var(--inner); padding: 8px 14px; text-align: end; font-size: 28px; font-variant-numeric: tabular-nums; }
+
+  /* A · printed on the case: content sits on the body at the inset; labels on the bottom inset line */
+  .a { }
+  /* B · faceplate: a recessed plate holds the content, labels printed on the rim around it */
+  .b-card { gap: 10px; }
+  .b-card .plate { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); border-radius: var(--inner); padding: 16px; display: grid; gap: 12px; }
+  /* C · banded: a header band and a body band divided by a seam (line.divider) */
+  .c-card { padding: 0; gap: 0; }
+  .c-card > .band { padding: var(--inset); display: grid; gap: 12px; }
+  .c-card > .band + .band { border-block-start: 1px solid var(--ds-line-divider); }
+
+  .phone { inline-size: 343px; }
+</style>
+</head>
+<body>
+<h1>Card — three bodies of the same matte plastic</h1>
+<p class="lede">Each body is the surface class of FORM.md: radius 0.16 × the short side, capped at corner.panel, one light top-left, shallow unit shadow. What changes is how the body holds what is printed and mounted on it. Values from the built tokens; lab scaffolding uses raw px.</p>
+<div class="tools" role="group" aria-label="Theme"><button type="button" data-t="light">light</button><button type="button" data-t="dark">dark</button></div>
+<div class="row">
+  <section class="cell" aria-labelledby="ha"><h2 id="ha">A · printed on the case</h2>
+    <p>Content sits straight on the body at an even inset. Wordmark bottom-left, model bottom-right on the inset line.</p>
+    <div class="card a">
+      <p class="t">Washer</p>
+      <p class="b">Cotton 40 °C, ready at 18:20. Door locked.</p>
+      <div class="keys"><button class="key pri" type="button">Start wash</button><button class="key" type="button">Schedule</button></div>
+      <div class="labels"><span class="wm">dial</span><span class="mn">wash 1</span></div>
+    </div>
+    <div class="card a" style="--short: 120px"><p class="t">Hallway</p><p class="b">All lamps off.</p></div>
+  </section>
+  <section class="cell" aria-labelledby="hb"><h2 id="hb">B · recessed faceplate</h2>
+    <p>A sunken plate holds the content; the body is a rim around it, labels printed on the rim.</p>
+    <div class="card b-card">
+      <div class="plate">
+        <p class="t">Washer</p>
+        <p class="b">Cotton 40 °C, ready at 18:20. Door locked.</p>
+        <div class="keys"><button class="key pri" type="button">Start wash</button><button class="key" type="button">Schedule</button></div>
+      </div>
+      <div class="labels"><span class="wm">dial</span><span class="mn">wash 1</span></div>
+    </div>
+    <div class="card b-card"><div class="lcd">38 min</div><div class="plate"><p class="b">A display and a plate are now two recesses side by side.</p></div></div>
+  </section>
+  <section class="cell" aria-labelledby="hc"><h2 id="hc">C · banded with a seam</h2>
+    <p>A header band and a body band split by a 1px seam, footer band for the labels.</p>
+    <div class="card c-card">
+      <div class="band"><p class="t">Washer</p></div>
+      <div class="band"><p class="b">Cotton 40 °C, ready at 18:20. Door locked.</p>
+        <div class="keys"><button class="key pri" type="button">Start wash</button><button class="key" type="button">Schedule</button></div></div>
+      <div class="band labels"><span class="wm">dial</span><span class="mn">wash 1</span></div>
+    </div>
+  </section>
+</div>
+<script>
+  document.querySelectorAll('[data-t]').forEach((b) => b.addEventListener('click', () => { document.documentElement.dataset.theme = b.dataset.t; }));
+  const q = new URLSearchParams(location.search).get('theme'); if (q) document.documentElement.dataset.theme = q;
+</script>
+</body>
+</html>

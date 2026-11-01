@@ -1,0 +1,48 @@
+{
+  "concept": "Card is the case of a small appliance: one rounded body of warm matte plastic, lit from the top left, with its content printed and mounted straight on it at an even inset and its wordmark and model printed on the bottom inset line.",
+  "kind": ["card", "surface", "panel"],
+  "default_to_avoid": [
+    { "pattern": "white card with a 12px radius, a soft shadow from straight above and header, content and footer sections (shadcn Card, MUI Card)", "why_not": "FORM.md forbids the white rectangle with a soft shadow from above; dial has one light top-left and a radius set by the body's own short side." },
+    { "pattern": "card split into bands by divider rules between header, content and footer", "why_not": "A hard rule between regions of one unit is a separator NEVER; dial separates the parts of one body with gaps first." }
+  ],
+  "references": [
+    { "source": "Braun T 3 pocket radio (Dieter Rams, 1958): one rounded body with the controls and printing set straight on the case" },
+    { "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): plain printed labels at the edge of the case" },
+    { "source": "apps/lab/anchor/index.html variant A (D-001): body radius from the short side, shallow unit shadow, wordmark and model on the inset line" }
+  ],
+  "derivation": [
+    { "p": "P6", "axis": "shape", "consequence": "capped so large panels do not swell into pillows", "form": "The radius is corner.unit-ratio times the measured short side, never more than corner.panel, so a wide panel keeps a firm corner." },
+    { "p": "P6", "axis": "depth", "consequence": "shadows are short and soft; a unit never floats more than its material height", "form": "The body carries elevation.unit, the 3px unit height of anchor A, cast down and to the right from the one light." },
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "The wordmark and the model name are printed in one row at the bottom of the body, on the same inset as everything else." },
+    { "p": "P2", "axis": "shape", "consequence": "the window is a rounded rectangle whose radius nests in the body (inner = outer − inset)", "form": "Card publishes its outer radius and inset so a Display or a well inside it draws its corner as outer radius minus inset." },
+    { "p": "P6", "axis": "colour", "consequence": "no gradients, no glow except P2's emitters", "form": "The body is one flat fill of unit.bg (surface.solid), with no gradient, tint or glow on the plastic." }
+  ],
+  "variants": {
+    "lab": "apps/lab/card/index.html",
+    "options": [
+      { "id": "A", "name": "printed on the case" },
+      { "id": "B", "name": "recessed faceplate inside a rim" },
+      { "id": "C", "name": "bands split by a seam" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A puts content and printing straight on the body at one inset, as P5 and anchor A do; B's sunken plate is a second recess that competes with the display window P2 reserves for state, and C's seams are the hard rules the separator class forbids inside one unit."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "shape", "why": "The body's corner follows its short side and stops at corner.panel, so a card never turns into a pill or a pillow." },
+    "sm": { "p": "P3", "axis": "space", "why": "A tighter inset for small cards in a list, still wide enough that every 44px part keeps its hit area." },
+    "md": { "p": "P2", "axis": "space", "why": "The default inset, gap.inset, is the line the display and every printed label align to." },
+    "lg": { "p": "P2", "axis": "space", "why": "A wider inset for a large panel, so its window still sits on one inset line with room around it." },
+    "unit": { "p": "P2", "axis": "space", "why": "The inset follows corner.inset-ratio of the short side, so a device body keeps anchor A's proportions at any size." },
+    "header": { "p": "P5", "axis": "space", "why": "The title row sits on the top inset line of the body, printed flat, with an optional part at its end." },
+    "body": { "p": "P6", "axis": "space", "why": "The content block keeps fixed positions and only grows, so the layout does not reflow between states." },
+    "footer": { "p": "P1", "axis": "space", "why": "Actions sit low in the body, where the hand expects the unit's loud control to be." },
+    "labels": { "p": "P5", "axis": "space", "why": "The printed wordmark and model share the bottom inset line, like printing on the edge of a case." },
+    "wordmark": { "p": "P5", "axis": "type", "why": "The wordmark is printed in the one grotesk at medium weight, bottom-left, flat on the plastic." },
+    "model": { "p": "P5", "axis": "type", "why": "The model name is lowercase printing in regular weight, bottom-right, and never the card's only identifier." }
+  },
+  "states": {
+    "@media forced-colors: active": { "p": "P2", "axis": "depth", "why": "In forced colours the body keeps a real border, because its shadow and fill are removed and its edge would vanish." }
+  },
+  "motion": {}
+}

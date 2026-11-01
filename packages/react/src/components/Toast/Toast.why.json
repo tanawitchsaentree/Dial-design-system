@@ -1,0 +1,55 @@
+{
+  "concept": "Toast is a short strip of plastic that rises at the bottom of the screen after an action and says in a printed glyph and a word what the device just did, then goes away.",
+  "kind": ["toast", "snackbar", "notification"],
+  "default_to_avoid": [
+    { "pattern": "dark snackbar toast with a coloured left stripe and an icon disc (Carbon inline notification, Material snackbar)", "why_not": "An accent stripe and an icon disc tell status by colour alone and paint a second loud part, which P1 and the habit gate G-X1 forbid." },
+    { "pattern": "toast that disappears after three seconds with no way to pause it", "why_not": "Three seconds is too short to read and reach the action key, so the timer is at least five seconds and stops on hover or focus." }
+  ],
+  "references": [
+    { "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): labels printed beside each control, never inside a coloured badge" },
+    { "source": "Braun T 3 pocket radio (Dieter Rams, 1958): a small status window that reports the station and nothing else" },
+    { "source": "WAI-ARIA Authoring Practices, Alert pattern and WCAG 2.2 4.1.3 Status Messages" }
+  ],
+  "derivation": [
+    { "p": "P2", "axis": "interaction", "consequence": "the display is a live region (polite) and never a control", "form": "Each toast is role status, polite; only the critical tone uses role alert so a failure interrupts the reader." },
+    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "No tone uses orange: the glyph takes a status mark ink and the action key is a plastic Button kind key." },
+    { "p": "P5", "axis": "type", "consequence": "one grotesk, regular and medium only; hierarchy by size and position", "form": "The status word is type.label in medium weight before the message in regular weight, so hierarchy comes from weight and order." },
+    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "The close key is a 44px IconButton and the action key a 44px Button, even inside a short strip." },
+    { "p": "P6", "axis": "space", "consequence": "fixed positions — a unit's layout does not reflow between states", "form": "Toasts stack in a fixed region at the bottom of the viewport and never push the page content around." }
+  ],
+  "variants": {
+    "lab": "apps/lab/toast/index.html",
+    "options": [
+      { "id": "A", "name": "printed strip, glyph and word inline, keys at the end" },
+      { "id": "B", "name": "OLED window inside the case" },
+      { "id": "C", "name": "status line above, message and keys below" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A says the status as printing beside the message in one short strip that covers little of the screen (P5, P6); B brings back the dark snackbar and turns every glyph white so only the word tells the tone, and C needs three rows for a two-word message."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "shape", "why": "A short strip of matte plastic with the capped panel radius, lit from the top left like every unit." },
+    "head": { "p": "P5", "axis": "space", "why": "The glyph and its word sit together at the start, like a label printed beside a lamp." },
+    "glyph": { "p": "P1", "axis": "colour", "why": "The printed symbol is drawn in a status mark ink, never orange, so it reads before the words." },
+    "status": { "p": "P5", "axis": "type", "why": "The status word is printed in medium weight so the tone is told in words and not by colour." },
+    "message": { "p": "P5", "axis": "colour", "why": "The message is primary ink on plastic and holds at least 4.5:1 in both themes." },
+    "mark": { "p": "P5", "axis": "colour", "why": "The cross on the close key is drawn in the key's own ink, never in a tone colour." },
+    "keys": { "p": "P3", "axis": "space", "why": "The action and close keys keep their 44px targets at the end of the strip." },
+    "neutral": { "p": "P5", "axis": "colour", "why": "A neutral note prints its glyph in the information ink, a grey that holds 4.5:1 on plastic." },
+    "positive": { "p": "P5", "axis": "colour", "why": "A finished action prints its tick in the positive mark ink beside the word Done." },
+    "warning": { "p": "P5", "axis": "colour", "why": "A warning prints its triangle in primary ink, because the amber mark fails contrast on light plastic." },
+    "critical": { "p": "P5", "axis": "colour", "why": "A failure prints its octagon in the critical mark ink beside the word Failed." },
+    "region": { "p": "P6", "axis": "space", "why": "A fixed region at the bottom of the viewport stacks toasts above the page without moving it." }
+  },
+  "states": {
+    "data-state=open": { "p": "P3", "axis": "motion", "why": "An arriving toast rises quickly on the enter easing and leaves slower on the exit easing." },
+    "@media pointer: coarse": { "p": "P3", "axis": "space", "why": "On a phone held upright the region spans the screen width with a smaller margin, so the message has room." },
+    "@media prefers-reduced-motion: reduce": { "p": "P6", "axis": "motion", "why": "Under reduced motion a toast appears and leaves at once, with no rise and no fade." },
+    "@media forced-colors: active": { "p": "P6", "axis": "interaction", "why": "In forced colours the strip keeps a real border so its edge survives without the cast shadow." }
+  },
+  "motion": {
+    "opacity": { "p": "P3", "axis": "motion", "why": "A toast fades in fast and fades out slower, so its leaving reads as the end of the message." },
+    "transform": { "p": "P6", "axis": "motion", "why": "A short rise of a few pixels is the only travel, with no slide across the screen and no bounce." }
+  }
+}

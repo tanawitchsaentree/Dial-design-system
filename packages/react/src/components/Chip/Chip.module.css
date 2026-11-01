@@ -1,0 +1,158 @@
+/* Chip — a small capsule key of matte ABS for filters and presets (system/FORM.md control class, D-003).
+   A toggle chip latches down with its lamp lit; a removable chip carries a round remove key. Never orange. */
+.root {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  font-family: var(--ds-type-family);
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-tight);
+}
+.root[data-disabled] { cursor: not-allowed; }
+
+.key {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-raised);
+  color: var(--ds-text-secondary);
+  font: inherit;
+  cursor: pointer;
+  box-shadow: var(--ds-elevation-part);
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing),
+    color var(--ds-motion-hover) linear;
+}
+.body {
+  gap: var(--ds-gap-md);
+  padding-inline-start: var(--ds-gap-xl);
+  padding-inline-end: var(--ds-gap-sm);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-raised);
+  color: var(--ds-text-secondary);
+  box-shadow: var(--ds-elevation-part);
+}
+.md { min-block-size: var(--ds-control-md); }
+.sm { min-block-size: var(--ds-control-sm); }
+/* A 36px key still answers across 44px */
+.key.sm::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--ds-gap-none);
+  inset-block: calc((var(--ds-control-sm) - var(--ds-control-md)) / 2 - var(--ds-width-hairline));
+}
+
+.lamp {
+  flex: none;
+  inline-size: var(--ds-control-lamp);
+  block-size: var(--ds-control-lamp);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  transition: background-color var(--ds-motion-segment) linear;
+}
+.icon {
+  display: inline-grid;
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+}
+.icon svg {
+  inline-size: 100%;
+  block-size: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--ds-width-ring);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* The medium-weight width is reserved, so latching never reflows the row (P6) */
+.word {
+  display: inline-grid;
+  font-weight: var(--ds-type-weight-regular);
+}
+.word::after {
+  content: attr(data-text);
+  font-weight: var(--ds-type-weight-medium);
+  visibility: hidden;
+  block-size: var(--ds-gap-none);
+  overflow: hidden;
+}
+
+.remove {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  inline-size: var(--ds-control-thumb);
+  block-size: var(--ds-control-thumb);
+  padding: var(--ds-gap-none);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-raised);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  box-shadow: var(--ds-elevation-part);
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing),
+    color var(--ds-motion-hover) linear;
+}
+.remove::after {
+  content: '';
+  position: absolute;
+  inset: calc((var(--ds-control-thumb) - var(--ds-control-md)) / 2 - var(--ds-width-hairline));
+}
+.cross {
+  inline-size: calc(var(--ds-control-mark) + var(--ds-space-1));
+  block-size: calc(var(--ds-control-mark) + var(--ds-space-1));
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--ds-width-ring);
+  stroke-linecap: round;
+}
+
+.key:hover, .remove:hover { color: var(--ds-text-primary); }
+.key:active, .remove:active {
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+  box-shadow: none;
+  transition-duration: var(--ds-motion-press);
+}
+/* Latched: the key stays down by its travel, its lamp lit and its word medium */
+.key[aria-pressed='true'] {
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+  box-shadow: none;
+  border-color: var(--ds-line-ring);
+  background: var(--ds-surface-sunken);
+  color: var(--ds-text-primary);
+}
+.key[aria-pressed='true'] .word { font-weight: var(--ds-type-weight-medium); }
+.key[aria-pressed='true'] .lamp { background: var(--ds-text-primary); box-shadow: none; }
+.key:focus-visible, .remove:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.key:disabled, .remove:disabled {
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+  transform: none;
+}
+.key:disabled:hover, .remove:disabled:hover { color: var(--ds-text-secondary); }
+.body[data-disabled] { box-shadow: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .key, .remove, .lamp { transition: none; }
+  .key:active, .remove:active { transform: none; }
+}
+@media (forced-colors: active) {
+  .key, .body, .remove { border-color: ButtonText; }
+  .lamp { forced-color-adjust: none; border: var(--ds-width-hairline) solid ButtonText; background: Canvas; }
+  .key[aria-pressed='true'] .lamp { background: ButtonText; }
+}

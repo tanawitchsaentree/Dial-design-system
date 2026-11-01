@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · DeviceCard · layouts from anchor A</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. Every layout is derived from anchor A (D-001): body surface.solid with elevation.unit,
+     radius 0.16 × short side capped at corner.panel, inset 0.077 × short side, knob 0.36 × short side,
+     wordmark bottom-left and model bottom-right on the inset line. What changes is where the parts sit. */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } .lede { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .tools { display: flex; gap: 8px; margin: 0 0 24px; }
+  .tools button { font: inherit; font-size: 14px; min-height: 44px; padding: 0 16px; border-radius: 22px; border: 1px solid var(--ds-line-ring); background: var(--ds-surface-raised); color: var(--ds-text-primary); cursor: pointer; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .cell { display: grid; gap: 12px; align-content: start; }
+  .cell h2 { font-size: 15px; font-weight: 500; margin: 0; } .cell > p { font-size: 13px; line-height: 1.45; margin: 0; color: var(--ds-text-secondary); max-inline-size: 340px; }
+
+  .unit { --w: 340px; --short: var(--w); --r: min(calc(var(--short) * .16), 28px); --inset: calc(var(--short) * .077); --knob: calc(var(--short) * .36);
+    inline-size: var(--w); padding: var(--inset); border-radius: var(--r); background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit);
+    display: grid; gap: 14px 16px; color: var(--ds-text-primary); }
+  .disp { grid-area: disp; border-radius: max(4px, calc(var(--r) - var(--inset))); box-shadow: var(--ds-elevation-well); padding: 10px 14px; display: grid; justify-items: end; gap: 2px; min-height: 64px; align-content: center; }
+  .lcd { background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); }
+  .oled { background: var(--ds-display-oled-bg); color: var(--ds-display-oled-ink); justify-items: start; }
+  .val { font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: .02em; } .val small { font-size: 14px; font-weight: 500; }
+  .oled .val { font-size: 24px; font-weight: 500; } .det { font-size: 13px; }
+  .knobw { grid-area: knob; display: grid; justify-items: center; align-content: center; gap: 4px; font-size: 14px; }
+  .knob { inline-size: var(--knob); min-inline-size: 44px; aspect-ratio: 1; border-radius: 50%; background: var(--ds-action-accent); border: 1px solid var(--ds-action-accent-rim); box-shadow: var(--ds-elevation-part); position: relative; }
+  .knob::after { content: ""; position: absolute; inset-inline-start: calc(50% - 1.5px); inset-block-start: 9%; inline-size: 3px; block-size: 16%; border-radius: 2px; background: var(--ds-text-on-accent); transform-origin: 1.5px calc(var(--knob) * .41); transform: rotate(-30deg); }
+  .lab { color: var(--ds-text-secondary); font-size: 14px; font-weight: 500; }
+  .keys { grid-area: keys; display: flex; gap: 12px; align-items: flex-end; justify-content: center; flex-wrap: wrap; }
+  .kc { display: grid; justify-items: center; gap: 6px; font-size: 12px; font-weight: 500; }
+  .key { inline-size: 44px; block-size: 44px; border-radius: 50%; border: 0; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); color: var(--ds-text-secondary); display: grid; place-items: center; }
+  .key.cap { inline-size: auto; padding: 0 18px; border-radius: 999px; font: inherit; font-size: 14px; font-weight: 500; }
+  .key.pri { background: var(--ds-action-accent); color: var(--ds-text-on-accent); border: 1px solid var(--ds-action-accent-rim); }
+  .lamp { inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--ds-grille-hole); } .on .lamp { background: var(--ds-grille-hole-on); }
+  .grille { grid-area: meter; display: grid; grid-template-columns: repeat(var(--c, 12), 8px); gap: 4px; justify-content: center; align-content: center; }
+  .grille i { inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--ds-grille-hole); box-shadow: var(--ds-elevation-well); } .grille i.l { background: var(--ds-grille-hole-on); }
+  .fader { grid-area: fader; display: grid; gap: 4px; font-size: 14px; }
+  .fh { display: flex; justify-content: space-between; color: var(--ds-text-secondary); font-weight: 500; }
+  .track { position: relative; block-size: 44px; } .groove { position: absolute; inset: 18px 12px auto; block-size: 8px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .capf { position: absolute; inset-block-start: 6px; inset-inline-start: var(--x, 40%); inline-size: 24px; block-size: 32px; border-radius: 6px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); }
+  .labels { grid-area: labels; display: flex; justify-content: space-between; align-items: baseline; }
+  .wm { font-size: 15px; font-weight: 500; letter-spacing: .06em; } .mn { font-size: 13px; color: var(--ds-text-secondary); }
+
+  /* A · anchor: wide LCD on top, big knob left, keys and a small grille right, ruler fader across */
+  .l-a { grid-template-columns: 1.15fr 1fr; grid-template-areas: "disp disp" "knob keys" "knob meter" "fader fader" "labels labels"; }
+  /* T · tall: same parts in one column, the knob centred under the display (a thermostat on a wall) */
+  .l-t { --w: 300px; grid-template-columns: 1fr; grid-template-areas: "disp" "meter" "knob" "keys" "labels"; }
+  /* C · compact: wide body, display and keys left, knob right of the display (P1: lower or right) */
+  .l-c { --w: 520px; --short: 250px; grid-template-columns: 1fr auto; grid-template-areas: "disp knob" "keys knob" "fader fader" "labels labels"; }
+  /* C without a knob: the primary key takes the knob's place and is the one orange part */
+  .l-c.noknob { grid-template-areas: "disp keys" "fader fader" "labels labels"; }
+  .phone { --w: 343px; }
+</style>
+</head>
+<body>
+<h1>DeviceCard — layouts derived from anchor A</h1>
+<p class="lede">Anchor A (D-001) is the default. The other two keep its material, light, radius rule, knob share and printing; only where the parts sit changes, for devices that hold different parts.</p>
+<div class="tools" role="group" aria-label="Theme"><button type="button" data-t="light">light</button><button type="button" data-t="dark">dark</button></div>
+<div class="row">
+  <section class="cell" aria-labelledby="h1"><h2 id="h1">A · anchor (tuner 1)</h2>
+    <p>Wide LCD, knob left at 0.36 of the short side, FM/AM keys and a 12×4 grille right, ruler fader across.</p>
+    <div class="unit l-a">
+      <div class="disp lcd"><span class="val">88.6 <small>MHz</small></span></div>
+      <div class="knobw"><div class="knob"></div><span class="lab">Tuning</span></div>
+      <div class="keys"><span class="kc">FM<span class="key on"><span class="lamp"></span></span></span><span class="kc">AM<span class="key"><span class="lamp"></span></span></span></div>
+      <div class="grille"><script>document.write(Array.from({length:48},(_, i)=>`<i class="${i%12<5?'l':''}"></i>`).join(''))</script></div>
+      <div class="fader"><div class="fh"><span>Volume</span><span>4</span></div><div class="track"><div class="groove"></div><div class="capf"></div></div></div>
+      <div class="labels"><span class="wm">dial</span><span class="mn">tuner 1</span></div>
+    </div>
+  </section>
+  <section class="cell" aria-labelledby="h2"><h2 id="h2">T · tall (thermostat 1)</h2>
+    <p>One column: display, a heat meter filling up, the knob centred and largest, mode keys under it. No fader.</p>
+    <div class="unit l-t">
+      <div class="disp lcd"><span class="val">21.5 <small>°C</small></span><span class="det">Heating to 22</span></div>
+      <div class="grille" style="--c:16"><script>document.write(Array.from({length:32},(_, i)=>`<i class="${i>=16 && i%16<9?'l':''}"></i>`).join(''))</script></div>
+      <div class="knobw"><div class="knob"></div><span class="lab">Temperature</span></div>
+      <div class="keys"><button class="key cap">Eco</button><button class="key cap">Away</button></div>
+      <div class="labels"><span class="wm">dial</span><span class="mn">thermostat 1</span></div>
+    </div>
+  </section>
+  <section class="cell" aria-labelledby="h3"><h2 id="h3">C · compact (speaker 1, lamp 1)</h2>
+    <p>Wide body: OLED window and transport keys left, knob right. A lamp has no knob, so its On key is the orange part.</p>
+    <div class="unit l-c">
+      <div class="disp oled"><span class="val">Kind of Blue</span><span class="det">So What · 3:12</span></div>
+      <div class="knobw"><div class="knob"></div><span class="lab">Volume</span></div>
+      <div class="keys" style="justify-content:start"><span class="key">◀◀</span><span class="key">▶</span><span class="key">▶▶</span></div>
+      <div class="labels"><span class="wm">dial</span><span class="mn">speaker 1</span></div>
+    </div>
+    <div class="unit l-c noknob">
+      <div class="disp lcd"><span class="val">70 <small>%</small></span><span class="det">Warm white</span></div>
+      <div class="keys" style="align-content:center"><button class="key cap pri">Turn off</button><span class="key">☀</span></div>
+      <div class="fader"><div class="fh"><span>Brightness</span><span>70 %</span></div><div class="track"><div class="groove"></div><div class="capf" style="--x:68%"></div></div></div>
+      <div class="labels"><span class="wm">dial</span><span class="mn">lamp 1</span></div>
+    </div>
+  </section>
+  <section class="cell" aria-labelledby="h4"><h2 id="h4">A on a 375px phone</h2>
+    <p>343px wide inside 16px page margins: every part keeps its 44px target.</p>
+    <div class="unit l-a phone">
+      <div class="disp lcd"><span class="val">88.6 <small>MHz</small></span></div>
+      <div class="knobw"><div class="knob"></div><span class="lab">Tuning</span></div>
+      <div class="keys"><span class="kc">FM<span class="key on"><span class="lamp"></span></span></span><span class="kc">AM<span class="key"><span class="lamp"></span></span></span></div>
+      <div class="grille"><script>document.write(Array.from({length:48},(_, i)=>`<i class="${i%12<5?'l':''}"></i>`).join(''))</script></div>
+      <div class="fader"><div class="fh"><span>Volume</span><span>4</span></div><div class="track"><div class="groove"></div><div class="capf"></div></div></div>
+      <div class="labels"><span class="wm">dial</span><span class="mn">tuner 1</span></div>
+    </div>
+  </section>
+</div>
+<script>
+  document.querySelectorAll('[data-t]').forEach((b) => b.addEventListener('click', () => { document.documentElement.dataset.theme = b.dataset.t; }));
+  const q = new URLSearchParams(location.search).get('theme'); if (q) document.documentElement.dataset.theme = q;
+</script>
+</body>
+</html>

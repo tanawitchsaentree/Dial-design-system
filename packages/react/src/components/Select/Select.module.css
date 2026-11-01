@@ -1,0 +1,110 @@
+/* Select — a select-only combobox (system/FORM.md input class, D-003). The trigger is Input's recessed
+   well with a printed chevron; the list is a plastic panel above the page (elevation.float,
+   surface.solid, corner.inner, layer.overlay). The chosen option is a tick and weight, never orange.
+   Nothing animates: the panel appears and goes at once (P6). */
+.root {
+  position: relative;
+  display: grid;
+  gap: var(--ds-gap-sm);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: var(--ds-control-md);
+  margin: 0;
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  font: inherit;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  text-align: start;
+  color: var(--ds-text-primary);
+  cursor: pointer;
+}
+.value {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ds-text-primary);
+}
+.placeholder { color: var(--ds-text-secondary); }
+.chevron {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  color: var(--ds-text-secondary);
+}
+.panel {
+  position: absolute;
+  inset-block-start: calc(100% + var(--ds-gap-sm));
+  inset-inline: 0;
+  z-index: var(--ds-layer-overlay);
+  box-sizing: border-box;
+  max-block-size: calc(var(--ds-control-md) * 6 + var(--ds-gap-sm) * 2);
+  margin: 0;
+  padding: var(--ds-gap-sm);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-inner);
+  background: var(--ds-surface-solid);
+  box-shadow: var(--ds-elevation-float);
+  outline: none;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  box-sizing: border-box;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-media);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+}
+.tick {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+}
+.text { flex: 1 1 auto; min-inline-size: 0; }
+.md .trigger { min-block-size: var(--ds-control-md); }
+.lg .trigger { min-block-size: var(--ds-control-lg); padding-inline: var(--ds-gap-2xl); font-size: var(--ds-type-emphasis); }
+
+.trigger:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.trigger:disabled { box-shadow: none; cursor: not-allowed; opacity: var(--ds-opacity-disabled); }
+.trigger[aria-expanded='true'] .chevron { transform: rotate(180deg); }
+.option[aria-selected='true'] { color: var(--ds-text-primary); font-weight: var(--ds-type-weight-medium); }
+.option[data-active='true'] { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+
+@media (forced-colors: active) {
+  .trigger { border-color: ButtonText; }
+  .panel { border-color: CanvasText; }
+  .option[data-active='true'] { border-color: Highlight; }
+  .trigger:focus-visible { outline-color: Highlight; }
+}

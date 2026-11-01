@@ -1,0 +1,61 @@
+{
+  "concept": "SegmentedControl is the bank of band keys on the case of a radio (FM, AM, AUX): the keys interlock, pressing one latches it down with its printed lamp lit, and the key that was down springs back up.",
+  "kind": ["segmented control", "radio group", "latching key bank", "mode selector"],
+  "default_to_avoid": [
+    { "pattern": "iOS segmented control: a grey pill track with a sliding white thumb", "why_not": "A thumb that glides between segments is a fader gesture on a key bank, and the white thumb lit brighter breaks the light model, where the chosen part is never lit brighter, only latched and lamped (P3)." },
+    { "pattern": "segmented control that marks the selected segment with the brand colour fill", "why_not": "P1 keeps orange for the one primary control of the unit; a mode key filled orange would be a second loud part and say the selection by colour alone." }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver and RT 20 table radio (Dieter Rams): a row of band keys that latch down and release each other" },
+    { "source": "Braun audio 2 and regie receivers of the 1960s: interlocking piano-style selector keys for FM, AM and phono" },
+    { "source": "WAI-ARIA Authoring Practices, Radio Group pattern: roving tabindex, arrows move and check" },
+    { "source": "apps/lab/segmented-control/index.html: interlocking bank, separate round keys, tall piano keys" }
+  ],
+  "derivation": [
+    { "p": "P3", "axis": "depth", "consequence": "press drops height to 0 in 60–70ms, return runs on the material's spring", "form": "The pressed key drops by motion.press-travel and stays latched at height 0 with no shadow; the key it releases returns on motion.release." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Every key is body-coloured plastic in every state; the latched key is never orange and never filled with a hue." },
+    { "p": "P4", "axis": "colour", "consequence": "a lit level uses ink at full step, never orange", "form": "Each key carries a small recessed lamp; the latched key's lamp is filled with full-step ink, the others stay unlit recesses." },
+    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "Each key stands control.md tall (control.lg for size lg) and at least layout.touch wide, and the keys share the bank's width equally." },
+    { "p": "P3", "axis": "interaction", "consequence": "every mechanism has its keyboard map (arrows step a detent, Home and End reach the ends, Space and Enter press) and a visible value and label", "form": "The bank is one tab stop; arrow keys move to the next key and latch it, Home and End latch the ends, and the printed label names the group." },
+    { "p": "P1", "axis": "motion", "consequence": "secondary keys press and return without settle", "form": "A mode key drops in motion.press and returns on motion.release with the plain easing, carrying none of the loud control's settle." }
+  ],
+  "variants": {
+    "lab": "apps/lab/segmented-control/index.html",
+    "options": [
+      { "id": "A", "name": "interlocking bank: keys abut in one recessed strip, lamp and word on each key" },
+      { "id": "B", "name": "separate round keys with the word printed below each" },
+      { "id": "C", "name": "tall piano keys with the lamp printed on the case above each" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A reads as one set of keys that release each other, which is the latching mechanism P3 asks parts to show, and it keeps the 44px key height of every other control; B is IconButton's silhouette and loses the interlock, C makes the bank taller than the unit's loud control, against P1's space rule."
+  },
+  "mechanism": { "kind": "key", "travel": "3px", "spring": { "mass": 1.4, "stiffness": 520, "damping": 46 } },
+  "parts": {
+    "root": { "p": "P5", "axis": "space", "why": "The root stacks the printed group label over the bank, so the label sits on the inset line above its keys." },
+    "label": { "p": "P5", "axis": "type", "why": "The group name is printed in the label size and regular weight, in ink, like the word Band on a radio case." },
+    "bank": { "p": "P3", "axis": "depth", "why": "The keys sit in one recessed strip lit inversely, so they read as a single bank that interlocks." },
+    "key": { "p": "P3", "axis": "depth", "why": "Each key is matte plastic with the part shadow and a ring edge, standing at full height until it latches." },
+    "lamp": { "p": "P4", "axis": "colour", "why": "A small recessed lamp on each key fills with full-step ink when its key is latched, and is never orange." },
+    "face": { "p": "P5", "axis": "space", "why": "The face lines the optional symbol and the word up on one row under the lamp, on the key's own centre line." },
+    "icon": { "p": "P1", "axis": "colour", "why": "The optional symbol is drawn in the same ink as the word, because icons never use the orange." },
+    "word": { "p": "P5", "axis": "type", "why": "The word on the key uses the label size; it turns medium weight on the latched key, a change of weight and not of hue." },
+    "md": { "p": "P3", "axis": "space", "why": "The md bank keeps every key control.md tall, so each key holds the 44px hit area." },
+    "lg": { "p": "P3", "axis": "space", "why": "The lg bank stands control.lg tall with body-size words, for the main setting on a phone sheet." }
+  },
+  "states": {
+    "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens a released key's word one ink step and never lifts the key, because real keys do not rise." },
+    "active": { "p": "P3", "axis": "depth", "why": "Pressing a released key drops it by its travel and collapses its shadow at once, before it latches." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "Keyboard focus draws the dark ring around the focused key and lifts it above its neighbours so the ring is whole." },
+    "aria-checked=true": { "p": "P3", "axis": "depth", "why": "The latched key stays down at height 0 with no shadow, with its lamp lit and its word in medium weight." },
+    "disabled": { "p": "P6", "axis": "depth", "why": "Disabled keys lose their height and fade to half, while the lit lamp of the chosen key stays readable." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion a key latches at once with no travel animation and no spring return of the others." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the keys keep system borders and the lit lamp fills with the button text colour, so the choice survives." }
+  },
+  "motion": {
+    "transform": { "p": "P3", "axis": "motion", "why": "A key travels down in 65ms when pressed and the released key returns on the spring, so latching reads as a stroke." },
+    "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses under the latching key and grows back under the released one, following the single light." },
+    "color": { "p": "P6", "axis": "interaction", "why": "The word's ink step on hover fades briefly so the change is a reply to the pointer, not a flash." },
+    "background-color": { "p": "P2", "axis": "motion", "why": "The lamp lights within the segment fade of 80ms, the only fade a lit indicator is allowed." }
+  }
+}

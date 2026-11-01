@@ -1,0 +1,63 @@
+/* Progress — a recessed groove that fills with printing ink (system/FORM.md display class, P4).
+   The label and reading are printed on the line above (P5). Indeterminate is a still row of ticks (P6). */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  min-inline-size: var(--ds-control-menu-min);
+  font-family: var(--ds-type-family);
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--ds-gap-lg);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+}
+.label { color: var(--ds-text-primary); font-weight: var(--ds-type-weight-regular); }
+.value {
+  color: var(--ds-text-secondary);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  white-space: nowrap;
+}
+.groove {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.md { block-size: var(--ds-control-track); }
+.sm { block-size: var(--ds-width-bar); }
+.fill {
+  display: block;
+  inline-size: var(--progress-fill);
+  block-size: 100%;
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-grille-hole-on);
+  transition: inline-size var(--ds-motion-fill) var(--ds-motion-easing);
+}
+.ticks {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  block-size: 100%;
+}
+.tick {
+  display: block;
+  inline-size: var(--ds-control-tick);
+  block-size: 50%;
+  min-block-size: var(--ds-width-ring);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-grille-hole-on);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fill { transition: none; }
+}
+@media (forced-colors: active) {
+  .groove { border: var(--ds-width-hairline) solid CanvasText; }
+  .fill, .tick { forced-color-adjust: none; background: CanvasText; }
+}

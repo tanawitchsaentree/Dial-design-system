@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Toast · three notes</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lead { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .col { display: grid; gap: 14px; inline-size: 400px; align-content: start; }
+  .col > h2 { font-size: 14px; font-weight: 500; margin: 0; } .col > .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); line-height: 1.45; }
+  .k { font: inherit; font-size: var(--ds-type-label); font-weight: 500; cursor: pointer; border: 1px solid transparent; color: var(--ds-text-secondary);
+       background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); min-block-size: 44px; padding-inline: 18px; border-radius: 999px; }
+  .x { inline-size: 44px; block-size: 44px; border-radius: 50%; padding: 0; display: grid; place-items: center; flex: none; }
+  .x svg, .g { inline-size: 20px; block-size: 20px; flex: none; }
+  .word { font-size: var(--ds-type-label); font-weight: 500; }
+  .msg { font-size: var(--ds-type-body); line-height: 1.35; color: var(--ds-text-primary); }
+  .positive .g { color: var(--ds-status-positive-mark); } .warning .g { color: var(--ds-text-primary); } .critical .g { color: var(--ds-status-critical-mark); } .neutral .g { color: var(--ds-text-secondary); }
+
+  /* A · printed strip on a raised body: glyph + word + message in one line, keys at the end */
+  .a .t { display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 20px; border-radius: 28px; background: var(--ds-surface-solid);
+          box-shadow: var(--ds-elevation-float), inset 1px 1px 0 var(--ds-material-lit); }
+  .a .head { display: flex; align-items: center; gap: 6px; flex: none; }
+  .a .msg { flex: 1; } .a .sep { inline-size: 1px; align-self: stretch; margin-block: 8px; background: var(--ds-line-divider); flex: none; }
+
+  /* B · display toast: the message in an OLED window, the case around it */
+  .b .t { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 28px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-float); }
+  .b .win { flex: 1; border-radius: 20px; background: var(--ds-display-oled-bg); color: var(--ds-display-oled-ink); box-shadow: var(--ds-elevation-well); padding: 10px 14px; display: grid; gap: 2px; }
+  .b .win .msg, .b .win .word { color: var(--ds-display-oled-ink); } .b .win .g { color: var(--ds-display-oled-ink); }
+  .b .head { display: flex; gap: 6px; align-items: center; }
+
+  /* C · label above the message: a small printed status line, message below, keys on their own row */
+  .c .t { display: grid; gap: 6px; padding: 16px 8px 8px 20px; border-radius: 28px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-float); }
+  .c .top { display: flex; align-items: center; gap: 6px; } .c .top .word { flex: 1; font-size: var(--ds-type-caption); color: var(--ds-text-secondary); }
+  .c .top .x { margin-block-start: -10px; }
+  .c .keys { display: flex; justify-content: flex-end; gap: 8px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="warn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5L21.5 20h-19z"/><path d="M12 10v4.5"/><path d="M12 17.5v.01"/></symbol>
+  <symbol id="crit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h8l4.5 4.5v8L16 20.5H8L3.5 16V8z"/><path d="M12 8v5"/><path d="M12 16.5v.01"/></symbol>
+  <symbol id="info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5"/><path d="M12 7.5v.01"/></symbol>
+  <symbol id="close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+</svg>
+<h1>Toast — three ways to say what just happened</h1>
+<p class="lead">Each toast is a raised body under the single top-left light. Status is a printed glyph and a word, never a coloured dot or an icon disc, and never orange. The close key is a 44px round key. What changes is the silhouette and where the status is printed.</p>
+<div class="row">
+  <section class="col a"><h2>A · printed strip, one line</h2>
+    <div class="t positive"><span class="head"><svg class="g"><use href="#ok"/></svg><span class="word">Done</span></span><span class="msg">Lamp turned off</span><button class="k x" aria-label="Close"><svg><use href="#close"/></svg></button></div>
+    <div class="t critical"><span class="head"><svg class="g"><use href="#crit"/></svg><span class="word">Failed</span></span><span class="msg">Washer didn't answer</span><button class="k">Try again</button><button class="k x" aria-label="Close"><svg><use href="#close"/></svg></button></div>
+    <div class="t warning"><span class="head"><svg class="g"><use href="#warn"/></svg><span class="word">Check</span></span><span class="msg">Filter needs cleaning soon</span><button class="k x" aria-label="Close"><svg><use href="#close"/></svg></button></div>
+    <p class="note">Short: one line on a laptop, wraps to two on a phone. The word sits right beside its glyph like a label printed next to a lamp.</p></section>
+  <section class="col b"><h2>B · OLED window inside the case</h2>
+    <div class="t positive"><div class="win"><span class="head"><svg class="g"><use href="#ok"/></svg><span class="word">Done</span></span><span class="msg">Lamp turned off</span></div><button class="k x" aria-label="Close"><svg><use href="#close"/></svg></button></div>
+    <div class="t critical"><div class="win"><span class="head"><svg class="g"><use href="#crit"/></svg><span class="word">Failed</span></span><span class="msg">Washer didn't answer</span></div><button class="k">Try again</button><button class="k x" aria-label="Close"><svg><use href="#close"/></svg></button></div>
+    <p class="note">Reads as a device. But the dark window is the dark snackbar again, and the glyph loses its tone (white on black) so the word does all the work.</p></section>
+  <section class="col c"><h2>C · status line above, keys below</h2>
+    <div class="t positive"><div class="top"><svg class="g"><use href="#ok"/></svg><span class="word">Done</span><button class="k x" aria-label="Close"><svg><use href="#close"/></svg></button></div><span class="msg">Lamp turned off</span></div>
+    <div class="t critical"><div class="top"><svg class="g"><use href="#crit"/></svg><span class="word">Failed</span><button class="k x" aria-label="Close"><svg><use href="#close"/></svg></button></div><span class="msg">Washer didn't answer. Try again in a minute.</span><div class="keys"><button class="k">Try again</button></div></div>
+    <p class="note">Room for a longer message, but three rows for "Lamp turned off" is a card, not a toast; it covers more of the screen for the same five seconds.</p></section>
+</div>
+</body>
+</html>

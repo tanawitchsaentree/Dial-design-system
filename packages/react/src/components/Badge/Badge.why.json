@@ -1,0 +1,46 @@
+{
+  "concept": "Badge is printing on the case of an appliance: a small status lamp with its own shape per tone and a word beside it, printed flat on the plastic with no box, no fill, no shadow and never orange.",
+  "kind": ["badge", "status badge", "status label"],
+  "default_to_avoid": [
+    { "pattern": "coloured pill badge with white text (Bootstrap badge, Material badge)", "why_not": "A filled pill tells status by colour alone, tints the text, and adds a second loud shape to the unit next to the orange control." },
+    { "pattern": "status dot badge that changes only its colour between tones", "why_not": "A dot that only changes colour fails for colour-blind readers and in forced colours, so each tone needs its own shape and word." }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): band names and indicator marks printed flat beside the keys" },
+    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): small printed marks and words on the case, no frames" },
+    { "source": "system/refs/ref-01.png: lowercase model name printed on the inset line (estimated from chat)" }
+  ],
+  "derivation": [
+    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material — no shadow, no emboss", "form": "A badge has no box, background, border or shadow; the glyph and word are printed straight onto whatever plastic they sit on." },
+    { "p": "P5", "axis": "colour", "consequence": "ink on plastic at ≥4.5:1 in both themes; no tinted text", "form": "The word is always text.primary; only the small glyph carries the tone's status mark colour, never the word." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Tone marks come from status.positive-mark, warning-mark, critical-mark and info-mark; no tone, not even warning, uses the orange." },
+    { "p": "P5", "axis": "type", "consequence": "tabular figures everywhere a number changes", "form": "The count form prints its number in tabular figures and medium weight before the word, as in 3 offline." },
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "A badge is an inline line of printing that sits on the text line beside what it describes, never a floating corner bubble." }
+  ],
+  "variants": {
+    "lab": "apps/lab/badge/index.html",
+    "options": [
+      { "id": "A", "name": "printed lamp and word" },
+      { "id": "B", "name": "word in a printed frame" },
+      { "id": "C", "name": "annunciator window" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A is printing and nothing else, flat on the plastic (P5), with tone told by glyph shape plus word; B's frame makes a status look like a key people try to press (P3), and C adds a second display window per status, which P2 forbids."
+  },
+  "parts": {
+    "root": { "p": "P5", "axis": "space", "why": "An inline line of printing, glyph then word, that sits on the text line next to what it describes." },
+    "glyph": { "p": "P5", "axis": "depth", "why": "The status lamp is a small printed shape, flat on the plastic, with no glow, shadow or emboss." },
+    "word": { "p": "P5", "axis": "colour", "why": "The word is ink on plastic at 4.5:1 or more, never tinted with the tone, so it always reads." },
+    "count": { "p": "P5", "axis": "type", "why": "A number before the word uses tabular figures in medium weight, so a changing count keeps its width." },
+    "neutral": { "p": "P5", "axis": "colour", "why": "Neutral is a hollow ring in secondary ink, a shape that says no particular state at all." },
+    "positive": { "p": "P1", "axis": "colour", "why": "Positive is a filled round lamp in the positive status mark, a green that is never the accent orange." },
+    "warning": { "p": "P1", "axis": "colour", "why": "Warning is a triangle in the warning mark with an ink edge, so the amber holds 3:1 against the plastic." },
+    "critical": { "p": "P1", "axis": "colour", "why": "Critical is a filled square in the critical mark, a shape that differs from every other tone's glyph." },
+    "info": { "p": "P1", "axis": "colour", "why": "Info is a diamond in the info mark, which is dark ink, so information never borrows a warm colour." }
+  },
+  "states": {
+    "@media forced-colors: active": { "p": "P5", "axis": "colour", "why": "In forced colours every glyph is drawn in the text colour, and the shapes alone still tell the tones apart." }
+  },
+  "motion": {}
+}

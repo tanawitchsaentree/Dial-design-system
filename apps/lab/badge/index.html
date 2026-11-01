@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Badge · three ways to print a status</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 340px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 12px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ds-text-primary); }
+  .badge svg { inline-size: 10px; block-size: 10px; flex: none; }
+  .positive svg { fill: var(--ds-status-positive-mark); }
+  .warning svg { fill: var(--ds-status-warning-mark); stroke: var(--ds-text-primary); stroke-width: 1; }
+  .critical svg { fill: var(--ds-status-critical-mark); }
+  .info svg { fill: var(--ds-status-info-mark); }
+  .neutral svg { fill: none; stroke: var(--ds-text-secondary); stroke-width: 1.5; }
+  .num { font-variant-numeric: tabular-nums; font-weight: 500; }
+  /* B: printed frame */
+  .b .badge { padding: 2px 8px; border: 1px solid var(--ds-line-ring); border-radius: 4px; }
+  /* C: annunciator window */
+  .c .badge { padding: 3px 8px; border-radius: 6px; background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); box-shadow: var(--ds-elevation-well); }
+  .c .badge svg { fill: var(--ds-display-lcd-ink) !important; stroke: none; }
+  .c .neutral svg { fill: none !important; stroke: var(--ds-display-lcd-ink); }
+</style>
+</head>
+<body>
+<h1>Badge — three ways to print a status on the case</h1>
+<p>Every tone is a glyph with its own shape and a word: positive a dot, warning a triangle, critical a square, info a diamond, neutral a ring. None is orange. Status is never colour alone.</p>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="dot" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4.5"/></symbol>
+  <symbol id="tri" viewBox="0 0 10 10"><path d="M5 .8 9.5 9.2H.5z"/></symbol>
+  <symbol id="sq" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8"/></symbol>
+  <symbol id="dia" viewBox="0 0 10 10"><path d="M5 0 10 5 5 10 0 5z"/></symbol>
+  <symbol id="ring" viewBox="0 0 10 10"><circle cx="5" cy="5" r="3.8"/></symbol>
+</defs></svg>
+<div class="row">
+  <template id="set"><div class="badges">
+    <span class="badge positive"><svg><use href="#dot"/></svg>Online</span>
+    <span class="badge warning"><svg><use href="#tri"/></svg>Filter due</span>
+    <span class="badge critical"><svg><use href="#sq"/></svg>Door open</span>
+    <span class="badge info"><svg><use href="#dia"/></svg>Update ready</span>
+    <span class="badge neutral"><svg><use href="#ring"/></svg>Standby</span>
+    <span class="badge critical"><svg><use href="#sq"/></svg><span class="num">3</span> offline</span>
+  </div></template>
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · printed lamp and word</h2><div class="slot"></div>
+    <p class="note">Flat printing on the plastic: no box, no fill, no shadow. The glyph is a printed lamp; the word sits on the label line.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · word in a printed frame</h2><div class="slot"></div>
+    <p class="note">A hairline frame printed around glyph and word. It turns a status into something that looks like a key, so people try to press it.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · annunciator window</h2><div class="slot"></div>
+    <p class="note">A small LCD window per status. Every window is a second display in the unit, and P2 allows one; the tones also lose their mark colours.</p></section>
+</div>
+<script>document.querySelectorAll('.slot').forEach((s) => s.append(document.getElementById('set').content.cloneNode(true)));</script>
+</body>
+</html>

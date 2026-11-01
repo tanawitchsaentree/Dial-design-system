@@ -1,0 +1,119 @@
+/* SegmentedControl — a bank of interlocking latching keys of matte ABS, like a radio's band keys
+   (system/FORM.md control class, D-003). One light, top-left. The latched key sits at height 0. */
+.root {
+  display: inline-grid;
+  gap: var(--ds-gap-sm);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.bank {
+  display: flex;
+  gap: var(--ds-width-ring);
+  padding: var(--ds-width-ring);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.key {
+  position: relative;
+  display: inline-grid;
+  justify-items: center;
+  align-content: center;
+  gap: var(--ds-gap-xs);
+  flex: 1 1 0;
+  min-inline-size: var(--ds-layout-touch);
+  min-block-size: var(--ds-control-md);
+  margin: var(--ds-gap-none);
+  padding-block: var(--ds-gap-xs);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-check);
+  background: var(--ds-surface-raised);
+  color: var(--ds-text-secondary);
+  font-family: inherit;
+  box-shadow: var(--ds-elevation-part);
+  cursor: pointer;
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing),
+    color var(--ds-motion-hover) linear;
+}
+.key:first-child {
+  border-start-start-radius: var(--ds-corner-round);
+  border-end-start-radius: var(--ds-corner-round);
+}
+.key:last-child {
+  border-start-end-radius: var(--ds-corner-round);
+  border-end-end-radius: var(--ds-corner-round);
+}
+.lamp {
+  inline-size: var(--ds-control-lamp);
+  block-size: var(--ds-control-lamp);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  transition: background-color var(--ds-motion-segment) linear;
+}
+.face {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-sm);
+}
+.icon {
+  display: inline-flex;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  color: currentColor;
+}
+.icon > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+.word {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  white-space: nowrap;
+}
+.md .key { min-block-size: var(--ds-control-md); }
+.lg .key { min-block-size: var(--ds-control-lg); }
+.lg .word { font-size: var(--ds-type-body); }
+
+.key:hover { color: var(--ds-text-primary); }
+.key:active,
+.key[aria-checked='true'] {
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+  box-shadow: none;
+}
+.key:active { transition-duration: var(--ds-motion-press); }
+.key[aria-checked='true'] { color: var(--ds-text-primary); }
+.key[aria-checked='true'] .word { font-weight: var(--ds-type-weight-medium); }
+.key[aria-checked='true'] .lamp { background: var(--ds-text-primary); box-shadow: none; }
+.key:focus-visible {
+  z-index: var(--ds-layer-raised);
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.key:disabled {
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+}
+.key:disabled:hover { color: var(--ds-text-secondary); }
+.key[aria-checked='true']:disabled:hover { color: var(--ds-text-primary); }
+
+@media (prefers-reduced-motion: reduce) {
+  .key, .lamp { transition: none; }
+  .key:active:not([aria-checked='true']) { transform: none; }
+}
+@media (forced-colors: active) {
+  .key { border-color: ButtonText; }
+  .lamp { forced-color-adjust: none; border: var(--ds-width-hairline) solid ButtonText; background: Canvas; }
+  .key[aria-checked='true'] .lamp { background: ButtonText; }
+}

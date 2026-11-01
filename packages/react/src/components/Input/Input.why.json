@@ -1,0 +1,51 @@
+{
+  "concept": "Input is a window recessed into the appliance's body that takes text: a well the full width of its column, the light falling into it from the top left, with its name printed above on the inset line like the printing on a case.",
+  "kind": ["input", "text field", "field"],
+  "default_to_avoid": [
+    { "pattern": "Material outlined text field: a bordered 8px-radius input rectangle with a floating label", "why_not": "A floating label shrinks into the border and doubles as a placeholder, while P5 prints every label flat on the inset line above its part." },
+    { "pattern": "input whose placeholder is the only label", "why_not": "The placeholder disappears the moment someone types, so the field loses its name exactly when it is being filled in." }
+  ],
+  "references": [
+    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the entry window is a recess in the body, its figures read inside the frame" },
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): band names printed above each window and scale on the case" },
+    { "source": "system/FORM.md input class: recessed well, full width of its column, label printed above on the inset line" }
+  ],
+  "derivation": [
+    { "p": "P2", "axis": "depth", "consequence": "the window is recessed into the body (inverse light)", "form": "The well is surface.sunken with elevation.well, so shade sits on its top-left inner edge and the field reads as cut into the body." },
+    { "p": "P2", "axis": "shape", "consequence": "the window is a rounded rectangle whose radius nests in the body", "form": "The well takes corner.media and stretches to the full inline size of its column, never a floating box of its own width." },
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "The label is printed above the well at its start edge, outside it, and never moves into the border or the text area." },
+    { "p": "P5", "axis": "colour", "consequence": "ink on plastic at ≥4.5:1 in both themes; no tinted text", "form": "Typed text is text.primary on surface.sunken, the unit and hint text.secondary, all above 4.5:1 in light and dark." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Focus is the shared dark ring and invalid is a red mark with a glyph and words, so the field never spends the unit's orange." },
+    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "The well is at least control.md tall (44px) at md and control.lg (52px) at lg, and the line box fits stacked Thai marks." }
+  ],
+  "variants": {
+    "lab": "apps/lab/input/index.html",
+    "options": [
+      { "id": "A", "name": "recessed well, label printed above" },
+      { "id": "B", "name": "window field, caption printed inside the well" },
+      { "id": "C", "name": "slot field, label beside, value over a narrow groove" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps the label printed on the inset line above a full-width recess (P5 space, P2 depth); B's caption inside the well drifts toward the floating label it must avoid and needs a 60px well, and C's narrow groove reads as a fader and leaves the field short of its column."
+  },
+  "parts": {
+    "root": { "p": "P5", "axis": "space", "why": "The field stacks its label, well and message in one column so the label sits on the inset line above the well." },
+    "label": { "p": "P5", "axis": "type", "why": "The printed name uses the label size in medium weight, like the printing beside every other part of the unit." },
+    "well": { "p": "P2", "axis": "depth", "why": "The recess takes the inverse light, shade on its top-left inner edge, so the person sees where text goes." },
+    "field": { "p": "P5", "axis": "colour", "why": "Typed text is primary ink on the sunken plastic at more than 4.5:1, with a line box tall enough for Thai marks." },
+    "unit": { "p": "P2", "axis": "type", "why": "The printed unit sits beside the value inside the window, as the unit sits beside a reading on the display." },
+    "hint": { "p": "P5", "axis": "colour", "why": "The hint is secondary ink on plastic above 4.5:1, printed under the well so it never covers the value." },
+    "error": { "p": "P1", "axis": "colour", "why": "The error message is a red mark with a word, never the orange, which stays reserved for the unit's primary control." },
+    "glyph": { "p": "P3", "axis": "interaction", "why": "A printed mark beside the words means invalid is never told by colour alone, for people who cannot see the red." },
+    "md": { "p": "P3", "axis": "space", "why": "The default well is 44px tall, the smallest target that every part in dial keeps for a finger." },
+    "lg": { "p": "P3", "axis": "space", "why": "A 52px well with larger text for the main field of a phone sheet held in one hand." }
+  },
+  "states": {
+    "focus-within": { "p": "P3", "axis": "interaction", "why": "The well shows the same dark ring as every part when its text area holds the keyboard focus." },
+    "data-invalid=true": { "p": "P1", "axis": "colour", "why": "An invalid well draws its edge in the critical red, which is never orange, and the message below names the problem." },
+    "data-disabled=true": { "p": "P6", "axis": "depth", "why": "A disabled field loses its recess shadow and fades to half, so it reads as not taking input right now." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the well keeps a real border and the focus ring uses the system highlight colour." }
+  },
+  "motion": {}
+}

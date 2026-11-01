@@ -1,0 +1,34 @@
+/* Badge — printing on the case: a status lamp shaped per tone and a word (system/FORM.md display class).
+   Flat: no box, no fill, no shadow (P5). Never orange (P1). */
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-sm);
+  vertical-align: middle;
+  font-family: var(--ds-type-family);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.glyph {
+  flex: none;
+  inline-size: calc(var(--ds-control-mark) + var(--ds-space-0-5));
+  block-size: calc(var(--ds-control-mark) + var(--ds-space-0-5));
+  overflow: visible;
+}
+.count {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--ds-type-weight-medium);
+}
+.word { font-weight: var(--ds-type-weight-regular); }
+
+.neutral .glyph { fill: none; stroke: var(--ds-text-secondary); stroke-width: var(--ds-width-ring); }
+.positive .glyph { fill: var(--ds-status-positive-mark); }
+.warning .glyph { fill: var(--ds-status-warning-mark); stroke: var(--ds-text-primary); stroke-width: var(--ds-width-hairline); stroke-linejoin: round; }
+.critical .glyph { fill: var(--ds-status-critical-mark); }
+.info .glyph { fill: var(--ds-status-info-mark); }
+
+@media (forced-colors: active) {
+  .glyph { forced-color-adjust: none; fill: CanvasText; stroke: CanvasText; }
+  .neutral .glyph { fill: none; }
+}

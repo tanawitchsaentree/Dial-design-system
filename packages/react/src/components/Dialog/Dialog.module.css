@@ -1,0 +1,82 @@
+/* Dialog — a sheet of matte ABS that asks one question (FORM.md surface class, elevation.float, D-003).
+   One light, top-left. Radius corner.panel; anything nested takes corner.panel − gap.inset. */
+.root {
+  --dialog-inner: calc(var(--ds-corner-panel) - var(--ds-gap-inset));
+  box-sizing: border-box;
+  inline-size: calc(100% - var(--ds-gap-inset) * 2);
+  max-inline-size: var(--ds-type-measure);
+  max-block-size: calc(100% - var(--ds-gap-inset) * 2);
+  margin: auto;
+  padding: var(--ds-gap-inset);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-panel);
+  background: var(--ds-surface-solid);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  box-shadow: var(--ds-elevation-float), inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-material-lit);
+  z-index: var(--ds-layer-overlay);
+  overflow: auto;
+  opacity: 0;
+  transform: translateY(var(--ds-motion-rise));
+  transition:
+    opacity var(--ds-motion-exit) var(--ds-motion-easing-exit),
+    transform var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.root::backdrop {
+  background: var(--ds-surface-scrim);
+  opacity: 0;
+  transition: opacity var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.root[data-state='open'] {
+  opacity: 1;
+  transform: none;
+  transition-duration: var(--ds-motion-enter);
+  transition-timing-function: var(--ds-motion-easing);
+}
+.root[data-state='open']::backdrop {
+  opacity: 1;
+  transition-duration: var(--ds-motion-enter);
+  transition-timing-function: var(--ds-motion-easing);
+}
+
+/* modal={false}: the sheet shown in place, in the flow of the page, with no scrim. */
+.inline {
+  position: relative;
+  inset: auto;
+  inline-size: 100%;
+  max-block-size: none;
+  margin: 0;
+  z-index: auto;
+}
+
+.title { margin: 0; }
+.description { margin-block: var(--ds-gap-lg) 0; }
+.content { margin-block-start: var(--ds-gap-xl); display: grid; gap: var(--ds-gap-lg); }
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ds-gap-md);
+  margin-block-start: var(--ds-gap-inset);
+}
+
+/* On a phone (a touch screen held upright) the sheet docks to the bottom edge: square bottom
+   corners, keys across the width. Media queries cannot read tokens, so no width is named here. */
+@media (pointer: coarse) and (orientation: portrait) {
+  .root:not(.inline) {
+    inline-size: 100%;
+    margin-block-end: 0;
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+  .actions > * { flex: 1 1 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root,
+  .root::backdrop { transition: none; }
+  .root { transform: none; }
+}
+@media (forced-colors: active) {
+  .root { border-color: CanvasText; }
+}

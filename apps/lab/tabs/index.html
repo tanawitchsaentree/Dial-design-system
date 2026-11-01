@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Tabs · three ways to pick a section</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .col { display: grid; gap: 10px; align-content: start; inline-size: 380px; }
+  .col h2 { font-size: 14px; font-weight: 500; margin: 0; } .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .unit { padding: 22px 26px; border-radius: 40px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); font-size: 14px; color: var(--ds-text-secondary); min-block-size: 70px; }
+  .unit strong { display: block; color: var(--ds-text-primary); font-weight: 500; font-size: 15px; margin-block-end: 4px; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  button:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  [role=tablist] { display: flex; }
+
+  /* A: printed labels on the case, an ink index mark under the chosen one. The mark does not travel. */
+  .a [role=tablist] { gap: 4px; }
+  .a [role=tab] { display: grid; justify-items: center; gap: 6px; min-block-size: 44px; padding: 8px 14px 4px; font-size: 15px; color: var(--ds-text-secondary); border-radius: 4px; }
+  .a [role=tab]::after { content: ''; inline-size: 24px; block-size: 4px; border-radius: 2px; background: transparent; }
+  .a [role=tab]:hover { color: var(--ds-text-primary); }
+  .a [role=tab][aria-selected=true] { color: var(--ds-text-primary); font-weight: 500; }
+  .a [role=tab][aria-selected=true]::after { background: var(--ds-text-primary); }
+
+  /* B: a latching key bank, the same as SegmentedControl */
+  .b [role=tablist] { padding: 3px; gap: 2px; border-radius: 26px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .b [role=tab] { flex: 1; min-block-size: 44px; border: 1px solid var(--ds-line-ring); border-radius: 6px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); color: var(--ds-text-secondary); font-size: 15px; }
+  .b [role=tab]:first-child { border-radius: 22px 6px 6px 22px; } .b [role=tab]:last-child { border-radius: 6px 22px 22px 6px; }
+  .b [role=tab][aria-selected=true] { transform: translate(1px, 3px); box-shadow: none; color: var(--ds-text-primary); font-weight: 500; }
+
+  /* C: a tuning scale with a pointer needle that slides to the chosen name */
+  .c [role=tablist] { position: relative; justify-content: space-between; padding-block-start: 16px; border-block-start: 1px solid var(--ds-line-ring); }
+  .c [role=tab] { min-block-size: 44px; padding-inline: 10px; font-size: 13px; color: var(--ds-text-secondary); }
+  .c [role=tab][aria-selected=true] { color: var(--ds-text-primary); font-weight: 500; }
+  .c .needle { position: absolute; inset-block-start: -10px; block-size: 22px; inline-size: 2px; background: var(--ds-text-primary); transition: inset-inline-start 245ms cubic-bezier(.2,.8,.3,1); }
+  .c .ticks { display: flex; justify-content: space-between; position: absolute; inset-inline: 0; inset-block-start: 0; }
+  .c .ticks i { inline-size: 1px; block-size: 6px; background: var(--ds-line-ring); }
+  @media (prefers-reduced-motion: reduce) { .needle { transition: none !important; } }
+</style>
+</head>
+<body>
+<h1>Tabs — three ways to choose a section of a screen</h1>
+<p>Tabs move between sections (rooms); they do not change a setting on the device. So they should not look like a key that does something. One light, matte ABS, ink on plastic, never orange. A prints the room names on the case like a scale; B reuses SegmentedControl's latching keys; C is a radio tuning scale with a sliding needle.</p>
+<div class="row">
+  <section class="col a"><h2>A · printed names, ink index mark under the chosen one</h2>
+    <div role="tablist" aria-label="Rooms">
+      <button role="tab" aria-selected="true">Living room</button><button role="tab" aria-selected="false" tabindex="-1">Kitchen</button><button role="tab" aria-selected="false" tabindex="-1">Bedroom</button>
+    </div>
+    <div class="unit" role="tabpanel"><strong>Living room</strong>Heater 21.5 °C · Lamp 60%</div>
+    <p class="note">Printing, not a part: no height, no travel. The chosen name is medium weight with a short 4px ink index mark under it, like the mark on a rotary. The mark appears at once under the new name; it never slides, and there is no rule across the row.</p></section>
+  <section class="col b"><h2>B · latching keys (the SegmentedControl bank)</h2>
+    <div role="tablist" aria-label="Rooms">
+      <button role="tab" aria-selected="true">Living room</button><button role="tab" aria-selected="false" tabindex="-1">Kitchen</button><button role="tab" aria-selected="false" tabindex="-1">Bedroom</button>
+    </div>
+    <div class="unit" role="tabpanel"><strong>Living room</strong>Heater 21.5 °C · Lamp 60%</div>
+    <p class="note">Reads as a mode switch on the device, so a reader expects pressing Kitchen to change the heater. It cannot be told apart from SegmentedControl.</p></section>
+  <section class="col c"><h2>C · tuning scale, needle on the chosen name</h2>
+    <div role="tablist" aria-label="Rooms">
+      <span class="ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <span class="needle" aria-hidden="true"></span>
+      <button role="tab" aria-selected="true">Living room</button><button role="tab" aria-selected="false" tabindex="-1">Kitchen</button><button role="tab" aria-selected="false" tabindex="-1">Bedroom</button>
+    </div>
+    <div class="unit" role="tabpanel"><strong>Living room</strong>Heater 21.5 °C · Lamp 60%</div>
+    <p class="note">A radio dial scale. The sliding needle is a moving indicator between sections, the same gesture as the sliding underline it was meant to avoid, and it moves on navigation, not on a state change.</p></section>
+</div>
+<script>
+  const rooms = { 'Living room': 'Heater 21.5 °C · Lamp 60%', Kitchen: 'Oven off · Hood 2', Bedroom: 'Heater 18.0 °C · Lamp off' };
+  for (const col of document.querySelectorAll('.col')) {
+    const tabs = [...col.querySelectorAll('[role=tab]')]; const panel = col.querySelector('[role=tabpanel]'); const needle = col.querySelector('.needle');
+    const pick = (t) => { tabs.forEach((x) => { x.setAttribute('aria-selected', String(x === t)); x.tabIndex = x === t ? 0 : -1; });
+      panel.innerHTML = `<strong>${t.textContent}</strong>${rooms[t.textContent]}`;
+      if (needle) needle.style.insetInlineStart = `${t.offsetLeft + t.offsetWidth / 2 - 1}px`; };
+    tabs.forEach((t, i) => { t.onclick = () => pick(t); t.onkeydown = (e) => { const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (d) { const n = tabs[(i + d + tabs.length) % tabs.length]; pick(n); n.focus(); } }; });
+    pick(tabs[0]);
+  }
+</script>
+</body>
+</html>

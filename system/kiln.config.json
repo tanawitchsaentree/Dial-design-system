@@ -117,8 +117,8 @@
     "paneAlpha": 0.35,
     "meshMaxShare": 0.1,
     "anchor": {
-      "route": null,
-      "selector": "[data-anchor]",
+      "route": "/components/device-card/code",
+      "selector": "[data-anchor=\"a\"]",
       "reference": "system/anchor/anchor-likeness.json",
       "maxDeltaL": 0.05,
       "maxDeltaC": 0.03,

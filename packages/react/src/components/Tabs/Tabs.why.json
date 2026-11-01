@@ -1,0 +1,53 @@
+{
+  "concept": "Tabs are the section names printed along the case of an appliance, like the scale under a selector: the chosen room's name is set in medium weight with one ink index mark under it, and the screen below shows that room.",
+  "kind": ["tabs", "tab list", "section selector"],
+  "default_to_avoid": [
+    { "pattern": "Material tabs with a coloured sliding underline indicator", "why_not": "A coloured bar spends a hue on a selection, which P1 forbids, and the bar gliding across the row is a movement that no state of the device asked for, against P6." },
+    { "pattern": "browser folder tabs: raised boxes joined to a bordered panel", "why_not": "A raised tab gives navigation the height of a key, so it reads as a part that does something to the device instead of printing that names a section (P5)." }
+  ],
+  "references": [
+    { "source": "Braun T 1000 and SK 55 cases (Dieter Rams): function names printed in one row on the case, the chosen one shown by a mark beside it" },
+    { "source": "Braun regie receiver tuning scale: printed names with one index mark at the chosen station" },
+    { "source": "WAI-ARIA Authoring Practices, Tabs pattern: tablist, tab, tabpanel, roving tabindex, automatic activation" },
+    { "source": "apps/lab/tabs/index.html: printed names with an index mark, latching key bank, tuning scale with a needle" }
+  ],
+  "derivation": [
+    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material — no shadow, no emboss", "form": "A tab has no height, no shadow and no travel: it is printing on the case, so it never reads as a key that changes the device." },
+    { "p": "P3", "axis": "shape", "consequence": "rotaries are circles with one index mark", "form": "The chosen name gets one short ink index mark under it, the same single mark a rotary uses, instead of a bar the width of the word." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Names and the index mark are ink on plastic; the chosen tab is never orange and carries no fill." },
+    { "p": "P5", "axis": "type", "consequence": "one grotesk, regular and medium only; hierarchy by size and position", "form": "Released names are regular weight in secondary ink; the chosen name turns medium weight in primary ink, with the mark under it." },
+    { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "The index mark appears at once under the new name and the panel swaps without a slide or fade between sections." },
+    { "p": "P6", "axis": "space", "consequence": "fixed positions — a unit's layout does not reflow between states", "form": "Each name reserves the width of its medium weight, so choosing a tab never shifts its neighbours along the row." }
+  ],
+  "variants": {
+    "lab": "apps/lab/tabs/index.html",
+    "options": [
+      { "id": "A", "name": "printed names on the case with one ink index mark under the chosen name" },
+      { "id": "B", "name": "latching key bank, the SegmentedControl silhouette" },
+      { "id": "C", "name": "tuning scale with a needle that slides to the chosen name" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps navigation as flat printing (P5) so it cannot be mistaken for a setting; B looks exactly like SegmentedControl and reads as a mode key on the device, and C's sliding needle is the moving indicator P6 forbids for anything that is not a change of state."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "The root holds the printed row above the panels, so the row stays in one fixed position for every section." },
+    "list": { "p": "P5", "axis": "space", "why": "The names sit in one row on the body's inset line, a small gap apart, with no rule drawn across the row." },
+    "tab": { "p": "P3", "axis": "space", "why": "Each printed name is a target at least 44px tall and wide, even though it draws no key around itself." },
+    "word": { "p": "P6", "axis": "space", "why": "The word stacks the visible name over a hidden medium copy, so its width holds when the weight changes." },
+    "text": { "p": "P5", "axis": "type", "why": "The visible name is printed in the label size, regular in secondary ink until its section is chosen." },
+    "ghost": { "p": "P6", "axis": "space", "why": "A hidden copy set in medium weight reserves the chosen width, so the names never shift between states." },
+    "mark": { "p": "P3", "axis": "shape", "why": "One short ink index mark with round ends sits under the chosen name, like the single mark on a rotary." },
+    "panel": { "p": "P2", "axis": "interaction", "why": "The panel shows the chosen section only and is focusable, so a screen reader moves from the name into its content." }
+  },
+  "states": {
+    "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens a released name one ink step and nothing rises, because printing on a case does not move." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "Keyboard focus draws the same dark ring around the name or the panel as on every part of the system." },
+    "aria-selected=true": { "p": "P5", "axis": "type", "why": "The chosen name turns medium weight in primary ink and shows its index mark, a change of weight and shape, not hue." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion even the hover ink step changes at once, so nothing on the row fades." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the index mark is drawn in the system text colour, so the chosen name keeps its mark." }
+  },
+  "motion": {
+    "color": { "p": "P6", "axis": "interaction", "why": "The ink step on hover fades briefly so it reads as a reply to the pointer, while the mark itself never moves." }
+  }
+}
