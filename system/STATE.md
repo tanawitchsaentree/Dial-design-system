@@ -1,9 +1,8 @@
 # STATE — working memory ของ system นี้
 
-> **เปิดดู:** book → `cd ~/Downloads/bauhouse-ds/apps/docs && npx vite preview --port 4317 --strictPort` แล้วเปิด http://localhost:4317/direction
-> (ต้อง `pnpm run docs:build` ก่อนถ้าแก้ source; `pnpm run docs:preview` ใช้ port 4173 ซึ่งตอนนี้มี server ของ Pane ยึดอยู่)
-> **Anchor lab:** http://localhost:4317/lab/anchor/index.html หรือเปิดไฟล์ตรง `open ~/Downloads/bauhouse-ds/apps/lab/anchor/index.html`
-> ตรวจ contrast lab: `node apps/lab/anchor/check.mjs` (จาก root)
+> **เปิดดู:** `pnpm run docs:build && pnpm run docs:preview` → http://localhost:4173/direction
+> **Anchor lab:** http://localhost:4173/lab/anchor/index.html หรือ `open apps/lab/anchor/index.html`
+> ตรวจ contrast lab: `node tooling/kiln/anchor-contrast.mjs`
 
 - **System:** dial (dial-tokens, dial-react) · kiln 2.5.1
 - **Phase ปัจจุบัน:** 5 (anchor round) — `.kiln/state.json` phase=5 · **รอ user เลือก anchor (A–D)**
