@@ -32,3 +32,6 @@
   "(estimated from chat, re-measure from ref-01.png)".
 - Lab is published into the book through the symlink `apps/docs/public/lab -> ../../lab` (dist also
   carries `check.mjs` and `shots/`); replace with a proper build input when the anchor is locked.
+- **K-8 `tooling/contrast-check.mjs` reads a file the token build no longer writes.** `node tooling/contrast-check.mjs text-primary:surface-solid`
+  → `ENOENT ... packages/tokens/build/css/light.css`. The build writes `build/css/tokens.css` (themes as `[data-theme]`).
+  Workaround: `python3 -I tooling/dial/token-contrast.py` (24 dial pairs).

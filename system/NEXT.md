@@ -7,29 +7,30 @@
 - Lab contrast + screenshots: `node tooling/kiln/anchor-contrast.mjs` → `apps/lab/anchor/shots/`.
 
 ## Where it stopped
-Phase 0–4 done; anchor round rendered (kiln state phase=5), **the user picked A (D-001)**; anchor-likeness recorded from the estimated card
-(`apps/lab/anchor/index.html`, cards `[data-anchor="a".."d"]`). `system/refs/ref-01.png` is still not on
-disk (temp screenshot was deleted), so every value is estimated from chat. Nothing in packages/ changed yet; tokens are still SEED
-(`tokens.allowSeed: true`, `baseTheme: "dark"` kept because seed `$value` is dark — Phase 2 flips it
-to `"light"` when it rewrites tokens).
+Phase 2 done (kiln state phase=6). Anchor = A (D-001, user pick). Tokens are dial's own (D-002), values
+estimated from chat because the user said "ประมาณ" (2026-11-01); `tokens.allowSeed: false`,
+`baseTheme: "light"`. Only Container, Grid, Stack exist. **Start wave 1 in this new session.**
 
 ## Verify
-2026-11-01 `pnpm run verify:quick` 14/14 green (quick, not recorded). Full verify not run. Lab
-contrast: 0 text below 4.5:1 in light and dark. `pnpm run docs:build` green (warning K-5).
+2026-11-01 `pnpm run verify:quick` 14/14 (not recorded). `node tooling/kiln/rationale.mjs`: 376 tokens,
+0 problems. `python3 -I tooling/dial/token-contrast.py`: 0 of 24 pairs fail. Full verify not run.
 
 ## Next, in order
-1. Check `system/refs/ref-01.png` (and ref-02.png). If missing, stop and tell the user in one line.
-2. Measure ratios from pixels (radius/short side, inset, grille pitch, display:face share, knob:face,
-   shadow offset) and replace every "(estimated from chat…)" in CONCEPT.md and `.kiln/cache.json`.
-3. Re-render the four cards with measured values (`apps/lab/anchor/index.html` inline style + `anchor.js`),
-   re-run `node tooling/kiln/anchor-contrast.mjs`. Wait for the user's pick (the only visual question).
-   Then `node tooling/kiln/anchor-likeness.mjs --record apps/lab/anchor/index.html --selector '[data-anchor="<pick>"]'`,
-   lock via `kiln:lock-decision`, set `docs.anchor` in kiln.config.json.
-4. `kiln_state.py advance --data '{..."approved": true}'` only after the user's real pick.
-5. Phase 2 tokens (matte ABS row: height 5px, gloss 0.2, roughness 3px, mass 1.4; one light top-left),
-   `allowSeed: false`, `baseTheme: "light"`. Then wave 1 via `kiln:production-run`.
+1. Read `CLAUDE.md`, `system/CONCEPT.md`, `system/DECISIONS.md` (D-001, D-002), then skill `kiln:production-run`
+   and `kiln:ds-conventions`; tactile recipe at `~/.claude/plugins/cache/kiln-marketplace/kiln/2.5.2/docs/style-recipes/tactile.md`.
+2. Wave 1 order (layout done): Text, Heading → Button (key), IconButton → Switch (rocker), Checkbox →
+   Slider (fader), Rotary (dial's knob) → Select, Input → Display (LCD + OLED), Grille (meter) →
+   Card, DeviceCard (anchor A; then set `docs.anchor.route` + re-record) → SegmentedControl, Tabs,
+   Chip, Badge, Progress → Dialog, Toast. Every control: `mechanism` + `spring` in why.json
+   (mass 1.4, stiffness 520, damping 46), 3 variants in `apps/lab/<Name>/`, agent picks, REVIEW.md row.
+3. Replace `apps/docs/src/system/controls.tsx` native controls with dial Select and Slider (G-N1).
+4. Docs page per component the day it passes QA; then the book chapters at standard depth.
+5. `pnpm run verify` (full) → `pnpm run milestone` until M1 prints done → milestone review in Thai.
+6. Rewrite this file at the end of each wave; start a fresh session per wave.
 
 ## Known problems not fixed yet
+- `tooling/contrast-check.mjs` broken (K-8); use `tooling/dial/token-contrast.py`.
+- Token values are estimates (D-002 กระทบ lists what to redo when ref-01.png lands).
 - ref images missing (see above).
 - `pnpm` is enabled via `corepack enable pnpm` on this machine (was not installed globally).
 

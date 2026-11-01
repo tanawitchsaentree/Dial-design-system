@@ -16,8 +16,8 @@
     "$comment": "M1 = infrastructure + wave 1 at full depth; see the kiln skill references/milestones.md"
   },
   "tokens": {
-    "baseTheme": "dark",
-    "allowSeed": true,
+    "baseTheme": "light",
+    "allowSeed": false,
     "$comment": "baseTheme is the theme $value describes. allowSeed lets the starter's SEED tokens build until Phase 2 replaces them; the M1 gate fails while it is true."
   },
   "smokeImport": {

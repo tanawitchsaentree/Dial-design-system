@@ -1,502 +1,919 @@
 {
   "surface": {
-    "$type": "color",
-    "solid": {
-      "$value": "{color.graphite.solid}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.paper.50}"
-        }
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P5",
+          "P6"
+        ],
+        "why": "Plastic in two editions: warm white for light and charcoal for dark, lit by the same light."
       }
-    },
-    "quiet": {
-      "$value": "{color.white-a.08}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.white-a.45}"
-        }
-      }
-    },
-    "light": {
-      "$value": "{color.white}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.ink.900}"
-        }
-      }
-    },
-    "placeholder-hi": {
-      "$value": "{color.graphite.850}",
-      "$description": "decorative image placeholder"
-    },
-    "placeholder-lo": {
-      "$value": "{color.graphite.900}"
     },
     "page": {
-      "$value": "{color.graphite.950}",
+      "$value": "{color.abs.50}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.paper.0}"
+          "dark": "{color.charcoal.950}"
         }
-      }
+      },
+      "$type": "color"
+    },
+    "solid": {
+      "$value": "{color.abs.100}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.charcoal.850}"
+        }
+      },
+      "$type": "color"
     },
     "raised": {
-      "$value": "{color.graphite.900}",
+      "$value": "{color.abs.100}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.paper.50}"
+          "dark": "{color.charcoal.850}"
         }
-      }
+      },
+      "$type": "color"
     },
     "sunken": {
-      "$value": "{color.graphite.850}",
-      "$description": "opaque well on surface.page (code, inputs)",
+      "$value": "{color.abs.150}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.paper.100}"
+          "dark": "{color.charcoal.900}"
         }
-      }
+      },
+      "$type": "color"
+    },
+    "quiet": {
+      "$value": "{color.ink-a.06}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.white-a.06}"
+        }
+      },
+      "$type": "color"
+    },
+    "light": {
+      "$value": "{color.abs.0}",
+      "$type": "color"
+    },
+    "placeholder-hi": {
+      "$value": "{color.abs.150}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.charcoal.800}"
+        }
+      },
+      "$type": "color"
+    },
+    "placeholder-lo": {
+      "$value": "{color.abs.100}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.charcoal.900}"
+        }
+      },
+      "$type": "color"
     },
     "knob": {
-      "$value": "{color.white}",
-      "$description": "white handle that reads on both themes (slider thumb, switch knob); the ring and shadow separate it from light surfaces"
+      "$value": "{color.abs.0}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.charcoal.700}"
+        }
+      },
+      "$type": "color"
     },
     "scrim": {
       "$value": "{color.ink-a.78}",
-      "$description": "dims the page behind a drawer or dialog",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.ink-a.30}"
-        }
-      }
+      "$type": "color"
     }
   },
   "text": {
-    "$type": "color",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P5"
+        ],
+        "why": "Printing on plastic at 4.5:1 or more in both editions; no tinted text anywhere."
+      }
+    },
     "primary": {
-      "$value": "{color.white}",
+      "$value": "{color.abs.800}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.ink.900}"
+          "dark": "{color.charcoal.50}"
         }
-      }
+      },
+      "$type": "color"
     },
     "secondary": {
-      "$value": "{color.white-a.92}",
+      "$value": "{color.abs.700}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.ink-a.78}"
+          "dark": "{color.charcoal.100}"
         }
-      }
+      },
+      "$type": "color"
     },
     "on-light": {
-      "$value": "{color.ink.900}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.white}"
-        }
-      }
+      "$value": "{color.abs.900}",
+      "$type": "color"
     },
     "on-accent": {
-      "$value": "{color.white}"
+      "$value": "{color.abs.900}",
+      "$type": "color"
     }
   },
   "action": {
-    "$type": "color",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P1"
+        ],
+        "why": "The orange is spent once per unit, on its primary control; its rim holds 3:1 against the body and hover moves one step."
+      }
+    },
     "accent": {
-      "$value": "{color.blue.600}"
+      "$value": "{color.orange.500}",
+      "$type": "color"
     },
     "accent-hover": {
-      "$value": "{color.blue.700}"
+      "$value": "{color.orange.400}",
+      "$type": "color"
+    },
+    "accent-rim": {
+      "$value": "{color.orange.600}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.orange.500}"
+        }
+      },
+      "$type": "color"
+    },
+    "accent-shade": {
+      "$value": "{color.orange.600}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.orange.700}"
+        }
+      },
+      "$type": "color"
     }
   },
   "line": {
-    "$type": "color",
-    "ring": {
-      "$value": "{color.white-a.30}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.ink-a.25}"
-        }
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3",
+          "P5"
+        ],
+        "why": "Outlines a control needs at 3:1, and seams that separate regions without a hard rule."
       }
     },
-    "divider": {
-      "$value": "{color.white-a.16}",
+    "ring": {
+      "$value": "{color.abs.500}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.ink-a.14}"
+          "dark": "{color.charcoal.400}"
         }
-      }
+      },
+      "$type": "color"
+    },
+    "divider": {
+      "$value": "{color.abs.200}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.charcoal.900}"
+        }
+      },
+      "$type": "color"
     }
   },
   "focus": {
-    "$type": "color",
-    "ring": {
-      "$value": "{color.white}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.ink.900}"
-        }
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3"
+        ],
+        "why": "Every part shows the same dark ring with a plastic halo, so focus never depends on the orange."
       }
     },
-    "halo": {
-      "$value": "{color.ink-a.78}",
+    "ring": {
+      "$value": "{color.abs.900}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.white-a.90}"
+          "dark": "{color.charcoal.50}"
         }
-      }
+      },
+      "$type": "color"
+    },
+    "halo": {
+      "$value": "{color.abs.0}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.charcoal.950}"
+        }
+      },
+      "$type": "color"
     }
   },
   "elevation": {
-    "$type": "shadow",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3",
+          "P6"
+        ],
+        "why": "Height from the single top-left light; a unit never floats higher than its material allows."
+      }
+    },
+    "unit": {
+      "$value": "{shadow.unit}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{shadow.unit-dark}"
+        }
+      },
+      "$type": "shadow"
+    },
+    "part": {
+      "$value": "{shadow.part}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{shadow.part-dark}"
+        }
+      },
+      "$type": "shadow"
+    },
     "float": {
       "$value": "{shadow.float}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{shadow.float-light}"
+          "dark": "{shadow.float-dark}"
         }
-      }
+      },
+      "$type": "shadow"
     },
     "lift": {
-      "$value": "{shadow.lift}"
+      "$value": "{shadow.part}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{shadow.part-dark}"
+        }
+      },
+      "$type": "shadow"
+    },
+    "well": {
+      "$value": "{shadow.well}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{shadow.well-dark}"
+        }
+      },
+      "$type": "shadow"
+    }
+  },
+  "material": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3"
+        ],
+        "why": "Numbers every mechanism reads to cast its shadow and return on its spring, from the matte ABS row."
+      }
+    },
+    "height": {
+      "$value": "{abs.height}",
+      "$type": "dimension"
+    },
+    "unit-height": {
+      "$value": "{abs.unit-height}",
+      "$type": "dimension"
+    },
+    "rough": {
+      "$value": "{abs.rough}",
+      "$type": "dimension"
+    },
+    "gloss": {
+      "$value": "{gloss.abs}",
+      "$type": "number"
+    },
+    "lit": {
+      "$value": "{color.lit.light}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.lit.dark}"
+        }
+      },
+      "$type": "color"
+    },
+    "shade": {
+      "$value": "{color.shade.light}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.shade.dark}"
+        }
+      },
+      "$type": "color"
+    },
+    "cast": {
+      "$value": "{color.cast.light}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.cast.dark}"
+        }
+      },
+      "$type": "color"
+    }
+  },
+  "mechanism": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3"
+        ],
+        "why": "The spring and detent numbers shared by key, rotary and fader, so all parts move like one material."
+      }
+    },
+    "mass": {
+      "$value": "{spring.mass}",
+      "$type": "number"
+    },
+    "stiffness": {
+      "$value": "{spring.stiffness}",
+      "$type": "number"
+    },
+    "damping": {
+      "$value": "{spring.damping}",
+      "$type": "number"
+    },
+    "detents": {
+      "$value": "{spring.detents}",
+      "$type": "number"
+    },
+    "sweep": {
+      "$value": "{spring.sweep}",
+      "$type": "number"
+    },
+    "travel": {
+      "$value": "{distance.press}",
+      "$type": "dimension"
+    }
+  },
+  "display": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P2"
+        ],
+        "why": "Two window families: LCD dark segments on grey-green and OLED white on near-black, both above 4.5:1."
+      }
+    },
+    "lcd-bg": {
+      "$value": "{color.lcd.bg}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.lcd.bg-dark}"
+        }
+      },
+      "$type": "color"
+    },
+    "lcd-ink": {
+      "$value": "{color.lcd.ink}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.lcd.ink-dark}"
+        }
+      },
+      "$type": "color"
+    },
+    "lcd-ghost": {
+      "$value": "{color.lcd.ghost}",
+      "$type": "color"
+    },
+    "oled-bg": {
+      "$value": "{color.oled.bg}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.oled.bg-dark}"
+        }
+      },
+      "$type": "color"
+    },
+    "oled-ink": {
+      "$value": "{color.oled.ink}",
+      "$type": "color"
+    }
+  },
+  "grille": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P4"
+        ],
+        "why": "Grille holes are recesses in body colour; a lit hole is printing ink at full step, never the orange."
+      }
+    },
+    "hole": {
+      "$value": "{color.abs.300}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.charcoal.950}"
+        }
+      },
+      "$type": "color"
+    },
+    "hole-on": {
+      "$value": "{color.abs.700}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.charcoal.100}"
+        }
+      },
+      "$type": "color"
     }
   },
   "width": {
-    "$type": "dimension",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3"
+        ],
+        "why": "Line widths for outlines, focus rings and bars, thin enough to read as printing."
+      }
+    },
     "hairline": {
-      "$value": "{size.hairline}"
+      "$value": "{size.hairline}",
+      "$type": "dimension"
     },
     "ring": {
-      "$value": "{size.ring}"
+      "$value": "{size.ring}",
+      "$type": "dimension"
     },
     "halo": {
-      "$value": "{size.halo}"
+      "$value": "{size.halo}",
+      "$type": "dimension"
     },
     "avatar-ring": {
-      "$value": "{size.avatar-ring}"
+      "$value": "{size.avatar-ring}",
+      "$type": "dimension"
     },
     "bar": {
-      "$value": "{size.bar}"
+      "$value": "{size.bar}",
+      "$type": "dimension"
     }
   },
   "gap": {
-    "$type": "dimension",
-    "xs": {
-      "$value": "{space.1}"
-    },
-    "sm": {
-      "$value": "{space.1-5}"
-    },
-    "md": {
-      "$value": "{space.2}"
-    },
-    "lg": {
-      "$value": "{space.3}"
-    },
-    "xl": {
-      "$value": "{space.3-5}"
-    },
-    "2xl": {
-      "$value": "{space.4}"
-    },
-    "inset": {
-      "$value": "{space.5-5}"
-    },
-    "section": {
-      "$value": "{space.8}"
-    },
-    "page": {
-      "$value": "{space.12}"
-    },
-    "3xl": {
-      "$value": "{space.6}"
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P4",
+          "P6"
+        ],
+        "why": "Gaps between parts on the 4px step; the inset is the body's own margin, about a thirteenth of its short side."
+      }
     },
     "none": {
-      "$value": "{space.0}"
+      "$value": "{space.0}",
+      "$type": "dimension"
+    },
+    "xs": {
+      "$value": "{space.1}",
+      "$type": "dimension"
+    },
+    "sm": {
+      "$value": "{space.1-5}",
+      "$type": "dimension"
+    },
+    "md": {
+      "$value": "{space.2}",
+      "$type": "dimension"
+    },
+    "lg": {
+      "$value": "{space.3}",
+      "$type": "dimension"
+    },
+    "xl": {
+      "$value": "{space.3-5}",
+      "$type": "dimension"
+    },
+    "2xl": {
+      "$value": "{space.4}",
+      "$type": "dimension"
+    },
+    "3xl": {
+      "$value": "{space.6}",
+      "$type": "dimension"
+    },
+    "inset": {
+      "$value": "{space.6}",
+      "$type": "dimension"
+    },
+    "section": {
+      "$value": "{space.8}",
+      "$type": "dimension"
+    },
+    "page": {
+      "$value": "{space.12}",
+      "$type": "dimension"
     }
   },
   "control": {
-    "$type": "dimension",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3"
+        ],
+        "why": "Part sizes: 44px targets for keys, knobs and fader caps, even when the visible part is smaller."
+      }
+    },
     "sm": {
-      "$value": "{size.control-sm}"
+      "$value": "{size.control-sm}",
+      "$type": "dimension"
     },
     "md": {
-      "$value": "{size.control-md}"
+      "$value": "{size.control-md}",
+      "$type": "dimension"
     },
     "lg": {
-      "$value": "{size.control-lg}"
+      "$value": "{size.control-lg}",
+      "$type": "dimension"
     },
     "icon-sm": {
-      "$value": "{size.icon-sm}"
+      "$value": "{size.icon-sm}",
+      "$type": "dimension"
     },
     "icon-md": {
-      "$value": "{size.icon-md}"
+      "$value": "{size.icon-md}",
+      "$type": "dimension"
     },
     "avatar-sm": {
-      "$value": "{size.avatar-sm}"
+      "$value": "{size.avatar-sm}",
+      "$type": "dimension"
     },
     "avatar-md": {
-      "$value": "{size.avatar-md}"
+      "$value": "{size.avatar-md}",
+      "$type": "dimension"
     },
     "avatar-lg": {
-      "$value": "{size.avatar-lg}"
-    },
-    "badge": {
-      "$value": "{size.badge}"
-    },
-    "dot": {
-      "$value": "{size.dot}"
-    },
-    "thumb": {
-      "$value": "{size.thumb}"
-    },
-    "track": {
-      "$value": "{size.track}"
+      "$value": "{size.avatar-lg}",
+      "$type": "dimension"
     },
     "menu-min": {
-      "$value": "{size.menu-min}"
+      "$value": "{size.menu-min}",
+      "$type": "dimension"
+    },
+    "knob-min": {
+      "$value": "{size.knob-min}",
+      "$type": "dimension"
+    },
+    "cap-w": {
+      "$value": "{size.cap-w}",
+      "$type": "dimension"
+    },
+    "cap-h": {
+      "$value": "{size.cap-h}",
+      "$type": "dimension"
+    },
+    "badge": {
+      "$value": "{size.badge}",
+      "$type": "dimension"
+    },
+    "dot": {
+      "$value": "{size.dot}",
+      "$type": "dimension"
+    },
+    "thumb": {
+      "$value": "{size.thumb}",
+      "$type": "dimension"
+    },
+    "track": {
+      "$value": "{size.track}",
+      "$type": "dimension"
     },
     "check": {
-      "$value": "{size.check}"
+      "$value": "{size.check}",
+      "$type": "dimension"
     },
     "switch": {
-      "$value": "{size.switch}"
+      "$value": "{size.switch}",
+      "$type": "dimension"
     },
     "mark": {
-      "$value": "{size.mark}"
+      "$value": "{size.mark}",
+      "$type": "dimension"
+    },
+    "key": {
+      "$value": "{size.key}",
+      "$type": "dimension"
+    },
+    "lamp": {
+      "$value": "{size.lamp}",
+      "$type": "dimension"
+    },
+    "tick": {
+      "$value": "{size.tick}",
+      "$type": "dimension"
     }
   },
   "corner": {
-    "$type": "dimension",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P2",
+          "P6"
+        ],
+        "why": "Corners nest: a unit's panel radius minus its inset gives the window and well inside it."
+      }
+    },
     "panel": {
-      "$value": "{radius.xl}"
+      "$value": "{radius.xl}",
+      "$type": "dimension"
     },
     "inner": {
-      "$value": "{radius.lg}"
+      "$value": "{radius.lg}",
+      "$type": "dimension"
     },
     "media": {
-      "$value": "{radius.md}"
+      "$value": "{radius.md}",
+      "$type": "dimension"
     },
     "round": {
-      "$value": "{radius.pill}"
+      "$value": "{radius.pill}",
+      "$type": "dimension"
     },
     "mark": {
-      "$value": "{radius.sm}"
+      "$value": "{radius.sm}",
+      "$type": "dimension"
     },
     "check": {
-      "$value": "{radius.check}"
+      "$value": "{radius.check}",
+      "$type": "dimension"
+    },
+    "unit-ratio": {
+      "$value": "{ratio.unit-radius}",
+      "$type": "number"
+    },
+    "inset-ratio": {
+      "$value": "{ratio.unit-inset}",
+      "$type": "number"
+    },
+    "knob-ratio": {
+      "$value": "{ratio.knob}",
+      "$type": "number"
     }
   },
   "type": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P5"
+        ],
+        "why": "Type roles for printing on a case: one family, two weights, tabular figures, size steps on a 1.2 ratio."
+      }
+    },
     "family": {
-      "$type": "fontFamily",
-      "$value": "{font.family.sans}"
-    },
-    "micro": {
-      "$type": "dimension",
-      "$value": "{font.size.100}"
-    },
-    "caption": {
-      "$type": "dimension",
-      "$value": "{font.size.200}"
-    },
-    "label": {
-      "$type": "dimension",
-      "$value": "{font.size.300}"
-    },
-    "body": {
-      "$type": "dimension",
-      "$value": "{font.size.400}"
-    },
-    "emphasis": {
-      "$type": "dimension",
-      "$value": "{font.size.500}"
-    },
-    "title": {
-      "$type": "dimension",
-      "$value": "{font.size.600}"
-    },
-    "headline": {
-      "$type": "dimension",
-      "$value": "{font.size.700}"
-    },
-    "display": {
-      "$type": "dimension",
-      "$value": "{font.size.800}"
-    },
-    "weight-regular": {
-      "$type": "fontWeight",
-      "$value": "{font.weight.regular}"
-    },
-    "weight-medium": {
-      "$type": "fontWeight",
-      "$value": "{font.weight.medium}"
-    },
-    "weight-semibold": {
-      "$type": "fontWeight",
-      "$value": "{font.weight.semibold}"
-    },
-    "leading-tight": {
-      "$type": "number",
-      "$value": "{font.leading.tight}"
-    },
-    "leading-body": {
-      "$type": "number",
-      "$value": "{font.leading.body}"
-    },
-    "tracking-caps": {
-      "$type": "dimension",
-      "$value": "{font.tracking.caps}"
-    },
-    "tracking-display": {
-      "$type": "dimension",
-      "$value": "{font.tracking.display}"
-    },
-    "measure": {
-      "$type": "dimension",
-      "$value": "{size.measure}"
-    },
-    "reading": {
-      "$type": "dimension",
-      "$value": "{font.size.450}",
-      "$description": "paragraphs people read for more than a line or two"
-    },
-    "leading-reading": {
-      "$type": "number",
-      "$value": "{font.leading.long}"
+      "$value": "{font.family.sans}",
+      "$type": "fontFamily"
     },
     "mono": {
-      "$type": "fontFamily",
       "$value": "{font.family.mono}",
-      "$description": "code, token names and measured values"
+      "$type": "fontFamily"
+    },
+    "micro": {
+      "$value": "{font.size.100}",
+      "$type": "dimension"
+    },
+    "caption": {
+      "$value": "{font.size.200}",
+      "$type": "dimension"
+    },
+    "label": {
+      "$value": "{font.size.300}",
+      "$type": "dimension"
+    },
+    "body": {
+      "$value": "{font.size.400}",
+      "$type": "dimension"
+    },
+    "reading": {
+      "$value": "{font.size.450}",
+      "$type": "dimension"
+    },
+    "emphasis": {
+      "$value": "{font.size.500}",
+      "$type": "dimension"
+    },
+    "title": {
+      "$value": "{font.size.600}",
+      "$type": "dimension"
+    },
+    "headline": {
+      "$value": "{font.size.700}",
+      "$type": "dimension"
+    },
+    "display": {
+      "$value": "{font.size.800}",
+      "$type": "dimension"
+    },
+    "measure": {
+      "$value": "{size.measure}",
+      "$type": "dimension"
+    },
+    "weight-regular": {
+      "$value": "{font.weight.regular}",
+      "$type": "fontWeight"
+    },
+    "weight-medium": {
+      "$value": "{font.weight.medium}",
+      "$type": "fontWeight"
+    },
+    "weight-semibold": {
+      "$value": "{font.weight.medium}",
+      "$description": "P5 allows two weights; the strongest role uses medium",
+      "$type": "fontWeight"
+    },
+    "leading-tight": {
+      "$value": "{font.leading.tight}",
+      "$type": "number"
+    },
+    "leading-body": {
+      "$value": "{font.leading.body}",
+      "$type": "number"
+    },
+    "leading-reading": {
+      "$value": "{font.leading.long}",
+      "$type": "number"
+    },
+    "tracking-caps": {
+      "$value": "{font.tracking.caps}",
+      "$type": "dimension"
+    },
+    "tracking-display": {
+      "$value": "{font.tracking.display}",
+      "$type": "dimension"
     }
   },
   "motion": {
-    "hover": {
-      "$type": "duration",
-      "$value": "{duration.linger}",
-      "$description": "a hover lights up fast and fades slowly when the pointer leaves",
-      "$extensions": {
-        "kiln.state": {
-          ":hover": "{duration.brisk}"
-        },
-        "kiln.reduced": "keep"
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3",
+          "P6"
+        ],
+        "why": "Press lands in 65ms and returns on the spring; states enter fast and leave slower; idle never moves."
       }
+    },
+    "hover": {
+      "$value": "{duration.brisk}",
+      "$type": "duration"
     },
     "press": {
-      "$type": "duration",
-      "$value": "{duration.release}",
-      "$description": "a press goes down at once and comes back up slowly",
-      "$extensions": {
-        "kiln.state": {
-          ":active": "{duration.snap}"
-        },
-        "kiln.reduced": "keep"
-      }
+      "$value": "{duration.press}",
+      "$type": "duration"
+    },
+    "release": {
+      "$value": "{duration.settle}",
+      "$type": "duration"
     },
     "enter": {
-      "$type": "duration",
-      "$value": "{duration.slow}"
+      "$value": "{duration.enter}",
+      "$type": "duration"
     },
     "exit": {
-      "$type": "duration",
       "$value": "{duration.exit}",
-      "$description": "leaving is shorter than arriving"
+      "$type": "duration"
     },
     "scene": {
-      "$type": "duration",
-      "$value": "{duration.slow}"
+      "$value": "{duration.exit}",
+      "$type": "duration"
     },
     "stagger": {
-      "$type": "duration",
-      "$value": "{duration.stagger}"
+      "$value": "{duration.none}",
+      "$type": "duration"
+    },
+    "segment": {
+      "$value": "{duration.segment}",
+      "$type": "duration"
+    },
+    "fill": {
+      "$value": "{duration.fill}",
+      "$type": "duration"
     },
     "easing": {
-      "$type": "cubicBezier",
-      "$value": "{easing.soft}"
+      "$value": "{easing.enter}",
+      "$type": "cubicBezier"
     },
     "easing-exit": {
-      "$type": "cubicBezier",
-      "$value": "{easing.depart}"
+      "$value": "{easing.exit}",
+      "$type": "cubicBezier"
     },
     "easing-inout": {
-      "$type": "cubicBezier",
-      "$value": "{easing.inout}"
-    },
-    "rise": {
-      "$type": "dimension",
-      "$value": "{distance.rise}"
-    },
-    "lift": {
-      "$type": "dimension",
-      "$value": "{distance.lift}"
+      "$value": "{easing.inout}",
+      "$type": "cubicBezier"
     },
     "press-scale": {
-      "$type": "number",
-      "$value": "{scale.press}"
+      "$value": "{scale.press}",
+      "$type": "number"
+    },
+    "press-travel": {
+      "$value": "{distance.press}",
+      "$type": "dimension"
+    },
+    "rise": {
+      "$value": "{distance.rise}",
+      "$type": "dimension"
+    },
+    "lift": {
+      "$value": "{distance.lift}",
+      "$type": "dimension"
     }
   },
   "status": {
-    "$type": "color",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P2",
+          "P5"
+        ],
+        "why": "Status lamps in green, amber and red, kept apart from the orange so a warning never reads as the main control."
+      }
+    },
     "positive": {
-      "$value": "{color.green.600}"
+      "$value": "{color.green.600}",
+      "$type": "color"
     },
     "on-positive": {
-      "$value": "{color.white}"
-    },
-    "warning": {
-      "$value": "{color.amber.400}"
+      "$value": "{color.white}",
+      "$type": "color"
     },
     "on-warning": {
-      "$value": "{color.ink.900}"
-    },
-    "critical": {
-      "$value": "{color.red.600}"
+      "$value": "{color.abs.900}",
+      "$type": "color"
     },
     "on-critical": {
-      "$value": "{color.white}"
-    },
-    "info": {
-      "$value": "{color.blue.600}"
+      "$value": "{color.white}",
+      "$type": "color"
     },
     "on-info": {
-      "$value": "{color.white}"
+      "$value": "{color.white}",
+      "$type": "color"
     },
     "info-mark": {
-      "$value": "{color.blue.400}",
+      "$value": "{color.abs.700}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.blue.600}"
+          "dark": "{color.charcoal.100}"
         }
-      }
+      },
+      "$type": "color"
     },
     "positive-mark": {
-      "$value": "{color.green.400}",
+      "$value": "{color.green.600}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.green.600}"
+          "dark": "{color.green.400}"
         }
-      }
+      },
+      "$type": "color"
     },
     "warning-mark": {
       "$value": "{color.amber.400}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.amber.700}"
-        }
-      }
+      "$type": "color"
     },
     "critical-mark": {
-      "$value": "{color.red.400}",
+      "$value": "{color.red.600}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.red.600}"
+          "dark": "{color.red.400}"
         }
-      }
+      },
+      "$type": "color"
+    },
+    "warning": {
+      "$value": "{color.amber.400}",
+      "$type": "color"
+    },
+    "critical": {
+      "$value": "{color.red.600}",
+      "$type": "color"
+    },
+    "info": {
+      "$value": "{color.abs.800}",
+      "$type": "color"
     }
   },
   "layout": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "Page layout places whole units on a column grid; a unit's own face is never stretched by it."
+      }
+    },
     "columns": {
       "$type": "number",
       "$value": "{columns.4}",
@@ -527,150 +944,164 @@
         }
       }
     },
-    "container-sm": {
-      "$type": "dimension",
-      "$value": "{container.sm}"
-    },
-    "container-md": {
-      "$type": "dimension",
-      "$value": "{container.md}"
-    },
-    "container-lg": {
-      "$type": "dimension",
-      "$value": "{container.lg}"
-    },
-    "container-xl": {
-      "$type": "dimension",
-      "$value": "{container.xl}"
-    },
-    "container-2xl": {
-      "$type": "dimension",
-      "$value": "{container.2xl}"
-    },
     "touch": {
-      "$type": "dimension",
-      "$value": "{size.touch}"
+      "$value": "{size.touch}",
+      "$type": "dimension"
     },
     "sidebar": {
-      "$type": "dimension",
-      "$value": "{size.sidebar}"
+      "$value": "{size.sidebar}",
+      "$type": "dimension"
+    },
+    "container-sm": {
+      "$value": "{container.sm}",
+      "$type": "dimension"
+    },
+    "container-md": {
+      "$value": "{container.md}",
+      "$type": "dimension"
+    },
+    "container-lg": {
+      "$value": "{container.lg}",
+      "$type": "dimension"
+    },
+    "container-xl": {
+      "$value": "{container.xl}",
+      "$type": "dimension"
+    },
+    "container-2xl": {
+      "$value": "{container.2xl}",
+      "$type": "dimension"
     }
   },
   "layer": {
-    "$type": "number",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "Few layers: units sit on the page, and only sheets, menus and messages stack above them."
+      }
+    },
     "base": {
-      "$value": "{z.base}"
+      "$value": "{z.base}",
+      "$type": "number"
     },
     "raised": {
-      "$value": "{z.raised}"
+      "$value": "{z.raised}",
+      "$type": "number"
     },
     "sticky": {
-      "$value": "{z.sticky}"
+      "$value": "{z.sticky}",
+      "$type": "number"
     },
     "overlay": {
-      "$value": "{z.overlay}"
+      "$value": "{z.overlay}",
+      "$type": "number"
     },
     "toast": {
-      "$value": "{z.toast}"
+      "$value": "{z.toast}",
+      "$type": "number"
     }
   },
   "viewport": {
-    "$type": "dimension",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "Viewport steps at which the page grid changes its column count."
+      }
+    },
     "sm": {
-      "$value": "{breakpoint.sm}"
+      "$value": "{breakpoint.sm}",
+      "$type": "dimension"
     },
     "md": {
-      "$value": "{breakpoint.md}"
+      "$value": "{breakpoint.md}",
+      "$type": "dimension"
     },
     "lg": {
-      "$value": "{breakpoint.lg}"
+      "$value": "{breakpoint.lg}",
+      "$type": "dimension"
     },
     "xl": {
-      "$value": "{breakpoint.xl}"
+      "$value": "{breakpoint.xl}",
+      "$type": "dimension"
     },
     "2xl": {
-      "$value": "{breakpoint.2xl}"
+      "$value": "{breakpoint.2xl}",
+      "$type": "dimension"
     }
   },
   "field": {
-    "$type": "color",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "The backdrop is plain plastic page with faint ink guides, because dial sits on plain surfaces only."
+      }
+    },
     "base": {
-      "$value": "{color.graphite.950}",
+      "$value": "{color.abs.50}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.paper.50}"
+          "dark": "{color.charcoal.950}"
         }
-      }
+      },
+      "$type": "color"
     },
     "glow": {
-      "$value": "{color.blue-a.22}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.blue-a.10}"
-        }
-      }
+      "$value": "{color.ink-a.06}",
+      "$type": "color"
     },
     "glow-soft": {
-      "$value": "{color.white-a.06}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.white-a.70}"
-        }
-      }
-    },
-    "line": {
-      "$value": "{color.white-a.05}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.ink-a.06}"
-        }
-      }
+      "$value": "{color.ink-a.06}",
+      "$type": "color"
     },
     "line-major": {
-      "$value": "{color.white-a.08}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.ink-a.08}"
-        }
-      }
-    },
-    "column": {
-      "$value": "{color.blue.400}",
-      "$description": "a solid column fill, so diagram columns stand 3:1 off the field in both themes (G-NT1)",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.blue.600}"
-        }
-      }
-    },
-    "margin": {
-      "$value": "{color.white-a.70}",
-      "$extensions": {
-        "kiln.theme": {
-          "light": "{color.ink-a.78}"
-        }
-      }
+      "$value": "{color.ink-a.14}",
+      "$type": "color"
     },
     "on-column": {
-      "$value": "{color.ink.900}",
-      "$description": "text and numbers drawn on a field column, 4.5:1 in both themes",
+      "$value": "{color.abs.900}",
+      "$type": "color"
+    },
+    "line": {
+      "$value": "{color.ink-a.06}",
+      "$type": "color"
+    },
+    "column": {
+      "$value": "{color.abs.300}",
       "$extensions": {
         "kiln.theme": {
-          "light": "{color.white}"
+          "dark": "{color.charcoal.400}"
         }
-      }
+      },
+      "$type": "color"
+    },
+    "margin": {
+      "$value": "{color.abs.700}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.charcoal.100}"
+        }
+      },
+      "$type": "color"
     }
   },
   "opacity": {
-    "$type": "number",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "Disabled parts lose height and fade to half, and their outline stays above 3:1."
+      }
+    },
     "disabled": {
-      "$value": "{alpha.half}"
-    }
-  },
-  "$extensions": {
-    "kiln.why": {
-      "p": "SEED",
-      "why": "seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason"
+      "$value": "{alpha.half}",
+      "$type": "number"
     }
   }
 }

@@ -1,79 +1,84 @@
 ---
 name: dial
 packages: { tokens: dial-tokens, components: dial-react }
-themes: [dark, light]
+themes: [light, dark]
 colors:
-  primary: {"dark":"#FFFFFF","light":"#111214"}
-  secondary: {"dark":"#FFFFFFEB","light":"#111214C7"}
-  on-light: {"dark":"#111214","light":"#FFFFFF"}
-  on-accent: "#FFFFFF"
+  primary: {"light":"#2E2D2A","dark":"#EDEBE6"}
+  secondary: {"light":"#4A4844","dark":"#D2CFC8"}
+  on-light: "#1F1E1C"
+  on-accent: "#1F1E1C"
 surfaces:
-  solid: {"dark":"#2C2C34","light":"#F2F2F5"}
-  quiet: {"dark":"#FFFFFF14","light":"#FFFFFF73"}
-  light: {"dark":"#FFFFFF","light":"#111214"}
-  placeholder-hi: "#25252C"
-  placeholder-lo: "#1C1C22"
-  page: {"dark":"#141418","light":"#FFFFFF"}
-  raised: {"dark":"#1C1C22","light":"#F2F2F5"}
-  sunken: {"dark":"#25252C","light":"#E9E9EE"}
-  knob: "#FFFFFF"
-  scrim: {"dark":"#111214C7","light":"#1112144D"}
+  page: {"light":"#F3F2EF","dark":"#1C1C1B"}
+  solid: {"light":"#E8E6E1","dark":"#2F2F2D"}
+  raised: {"light":"#E8E6E1","dark":"#2F2F2D"}
+  sunken: {"light":"#DEDBD5","dark":"#232322"}
+  quiet: {"light":"#1F1E1C0F","dark":"#FFFFFF0F"}
+  light: "#FAF9F7"
+  placeholder-hi: {"light":"#DEDBD5","dark":"#3A3A38"}
+  placeholder-lo: {"light":"#E8E6E1","dark":"#232322"}
+  knob: {"light":"#FAF9F7","dark":"#4A4A47"}
+  scrim: "#1F1E1CC7"
 actions:
-  accent: "#0071E3"
-  accent-hover: "#0062C4"
+  accent: "#EC6A2C"
+  accent-hover: "#F27D42"
+  accent-rim: {"light":"#C9531C","dark":"#EC6A2C"}
+  accent-shade: {"light":"#C9531C","dark":"#B94C18"}
 status:
-  positive: "#13803C"
+  positive: "#2E7D46"
   on-positive: "#FFFFFF"
-  warning: "#F5B000"
-  on-warning: "#111214"
-  critical: "#C42B1C"
+  on-warning: "#1F1E1C"
   on-critical: "#FFFFFF"
-  info: "#0071E3"
   on-info: "#FFFFFF"
-  info-mark: {"dark":"#4DA3FF","light":"#0071E3"}
-  positive-mark: {"dark":"#3FCB77","light":"#13803C"}
-  warning-mark: {"dark":"#F5B000","light":"#9A6400"}
-  critical-mark: {"dark":"#FF6B5E","light":"#C42B1C"}
+  info-mark: {"light":"#4A4844","dark":"#D2CFC8"}
+  positive-mark: {"light":"#2E7D46","dark":"#5DBB7A"}
+  warning-mark: "#F2B01E"
+  critical-mark: {"light":"#B3261E","dark":"#F07A72"}
+  warning: "#F2B01E"
+  critical: "#B3261E"
+  info: "#2E2D2A"
 spacing:
+  none: "0px"
   xs: "4px"
   sm: "6px"
   md: "8px"
   lg: "12px"
   xl: "14px"
   2xl: "16px"
-  inset: "22px"
+  3xl: "24px"
+  inset: "24px"
   section: "32px"
   page: "48px"
-  3xl: "24px"
-  none: "0px"
 corners:
-  panel: "40px"
-  inner: "24px"
-  media: "18px"
+  panel: "28px"
+  inner: "20px"
+  media: "12px"
   round: "999px"
   mark: "4px"
-  check: "7px"
+  check: "6px"
+  unit-ratio: "0.16"
+  inset-ratio: "0.077"
+  knob-ratio: "0.36"
 type:
-  family: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+  family: "'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif"
+  mono: "ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
   micro: "11px"
   caption: "13px"
   label: "14px"
   body: "15px"
-  emphasis: "17px"
-  title: "21px"
-  headline: "28px"
-  display: "44px"
-  weight-regular: "400"
-  weight-medium: "550"
-  weight-semibold: "650"
-  leading-tight: "1.15"
-  leading-body: "1.42"
-  tracking-caps: "0.08em"
-  tracking-display: "-0.02em"
-  measure: "32em"
   reading: "16px"
+  emphasis: "18px"
+  title: "22px"
+  headline: "26px"
+  display: "37px"
+  measure: "32em"
+  weight-regular: "400"
+  weight-medium: "500"
+  weight-semibold: "500"
+  leading-tight: "1.15"
+  leading-body: "1.45"
   leading-reading: "1.6"
-  mono: "ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
+  tracking-caps: "0.06em"
+  tracking-display: "-0.01em"
 ---
 
 # dial
@@ -104,197 +109,255 @@ This file cannot check your work, so keep to what kiln would have measured:
 
 ## Semantic tokens
 
-Values are given for dark and light. Component tokens point at these, and primitives sit under them; product code reads this tier.
+Values are given for light and dark. Component tokens point at these, and primitives sit under them; product code reads this tier.
 
 ### surface
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-surface-solid` | #2C2C34 | #F2F2F5 | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
-| `--ds-surface-quiet` | #FFFFFF14 | #FFFFFF73 | 〃 |
-| `--ds-surface-light` | #FFFFFF | #111214 | 〃 |
-| `--ds-surface-placeholder-hi` | #25252C | #25252C | 〃 |
-| `--ds-surface-placeholder-lo` | #1C1C22 | #1C1C22 | 〃 |
-| `--ds-surface-page` | #141418 | #FFFFFF | 〃 |
-| `--ds-surface-raised` | #1C1C22 | #F2F2F5 | 〃 |
-| `--ds-surface-sunken` | #25252C | #E9E9EE | 〃 |
-| `--ds-surface-knob` | #FFFFFF | #FFFFFF | 〃 |
-| `--ds-surface-scrim` | #111214C7 | #1112144D | 〃 |
+| `--ds-surface-page` | #F3F2EF | #1C1C1B | Plastic in two editions: warm white for light and charcoal for dark, lit by the same light. |
+| `--ds-surface-solid` | #E8E6E1 | #2F2F2D | 〃 |
+| `--ds-surface-raised` | #E8E6E1 | #2F2F2D | 〃 |
+| `--ds-surface-sunken` | #DEDBD5 | #232322 | 〃 |
+| `--ds-surface-quiet` | #1F1E1C0F | #FFFFFF0F | 〃 |
+| `--ds-surface-light` | #FAF9F7 | #FAF9F7 | 〃 |
+| `--ds-surface-placeholder-hi` | #DEDBD5 | #3A3A38 | 〃 |
+| `--ds-surface-placeholder-lo` | #E8E6E1 | #232322 | 〃 |
+| `--ds-surface-knob` | #FAF9F7 | #4A4A47 | 〃 |
+| `--ds-surface-scrim` | #1F1E1CC7 | #1F1E1CC7 | 〃 |
 
 ### text
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-text-primary` | #FFFFFF | #111214 | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
-| `--ds-text-secondary` | #FFFFFFEB | #111214C7 | 〃 |
-| `--ds-text-on-light` | #111214 | #FFFFFF | 〃 |
-| `--ds-text-on-accent` | #FFFFFF | #FFFFFF | 〃 |
+| `--ds-text-primary` | #2E2D2A | #EDEBE6 | Printing on plastic at 4.5:1 or more in both editions; no tinted text anywhere. |
+| `--ds-text-secondary` | #4A4844 | #D2CFC8 | 〃 |
+| `--ds-text-on-light` | #1F1E1C | #1F1E1C | 〃 |
+| `--ds-text-on-accent` | #1F1E1C | #1F1E1C | 〃 |
 
 ### action
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-action-accent` | #0071E3 | #0071E3 | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
-| `--ds-action-accent-hover` | #0062C4 | #0062C4 | 〃 |
+| `--ds-action-accent` | #EC6A2C | #EC6A2C | The orange is spent once per unit, on its primary control; its rim holds 3:1 against the body and hover moves one step. |
+| `--ds-action-accent-hover` | #F27D42 | #F27D42 | 〃 |
+| `--ds-action-accent-rim` | #C9531C | #EC6A2C | 〃 |
+| `--ds-action-accent-shade` | #C9531C | #B94C18 | 〃 |
 
 ### line
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-line-ring` | #FFFFFF4D | #11121440 | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
-| `--ds-line-divider` | #FFFFFF29 | #11121424 | 〃 |
+| `--ds-line-ring` | #85827C | #7E7C77 | Outlines a control needs at 3:1, and seams that separate regions without a hard rule. |
+| `--ds-line-divider` | #D3D0C9 | #232322 | 〃 |
 
 ### focus
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-focus-ring` | #FFFFFF | #111214 | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
-| `--ds-focus-halo` | #111214C7 | #FFFFFFE6 | 〃 |
+| `--ds-focus-ring` | #1F1E1C | #EDEBE6 | Every part shows the same dark ring with a plastic halo, so focus never depends on the orange. |
+| `--ds-focus-halo` | #FAF9F7 | #1C1C1B | 〃 |
 
 ### elevation
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-elevation-float` | 0 30px 60px -20px #00000059 | 0 30px 60px -24px #00000033 | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
-| `--ds-elevation-lift` | 0 8px 20px -8px #00000066 | 0 8px 20px -8px #00000066 | 〃 |
+| `--ds-elevation-unit` | 1px 3px 10px #3C322833, inset 1px 1px 0 #FFFFFF8C, inset -1px -1px 0 #3C322829 | 1px 3px 10px #0000008C, inset 1px 1px 0 #FFFFFF1A, inset -1px -1px 0 #00000073 | Height from the single top-left light; a unit never floats higher than its material allows. |
+| `--ds-elevation-part` | 2px 5px 15px #3C322833, inset 1px 1px 0 #FFFFFF8C, inset -1px -1px 1px #3C322829 | 2px 5px 15px #0000008C, inset 1px 1px 0 #FFFFFF1A, inset -1px -1px 1px #00000073 | 〃 |
+| `--ds-elevation-float` | 2px 8px 24px #3C32283D | 2px 8px 24px #000000A6 | 〃 |
+| `--ds-elevation-lift` | 2px 5px 15px #3C322833, inset 1px 1px 0 #FFFFFF8C, inset -1px -1px 1px #3C322829 | 2px 5px 15px #0000008C, inset 1px 1px 0 #FFFFFF1A, inset -1px -1px 1px #00000073 | 〃 |
+| `--ds-elevation-well` | inset 2px 2px 3px #00000038, inset -1px -1px 0 #FFFFFF8C | inset 2px 2px 3px #00000066, inset -1px -1px 0 #FFFFFF1A | 〃 |
+
+### material
+
+| token | light | dark | why |
+|---|---|---|---|
+| `--ds-material-height` | 5px | 5px | Numbers every mechanism reads to cast its shadow and return on its spring, from the matte ABS row. |
+| `--ds-material-unit-height` | 3px | 3px | 〃 |
+| `--ds-material-rough` | 3px | 3px | 〃 |
+| `--ds-material-gloss` | 0.2 | 0.2 | 〃 |
+| `--ds-material-lit` | #FFFFFF8C | #FFFFFF1A | 〃 |
+| `--ds-material-shade` | #3C322829 | #00000073 | 〃 |
+| `--ds-material-cast` | #3C322833 | #0000008C | 〃 |
+
+### mechanism
+
+| token | light | dark | why |
+|---|---|---|---|
+| `--ds-mechanism-mass` | 1.4 | 1.4 | The spring and detent numbers shared by key, rotary and fader, so all parts move like one material. |
+| `--ds-mechanism-stiffness` | 520 | 520 | 〃 |
+| `--ds-mechanism-damping` | 46 | 46 | 〃 |
+| `--ds-mechanism-detents` | 11 | 11 | 〃 |
+| `--ds-mechanism-sweep` | 270 | 270 | 〃 |
+| `--ds-mechanism-travel` | 3px | 3px | 〃 |
+
+### display
+
+| token | light | dark | why |
+|---|---|---|---|
+| `--ds-display-lcd-bg` | #C7CBBD | #9FA597 | Two window families: LCD dark segments on grey-green and OLED white on near-black, both above 4.5:1. |
+| `--ds-display-lcd-ink` | #2F322D | #1D201C | 〃 |
+| `--ds-display-lcd-ghost` | #2F322D12 | #2F322D12 | 〃 |
+| `--ds-display-oled-bg` | #141414 | #0B0B0B | 〃 |
+| `--ds-display-oled-ink` | #F2F2F0 | #F2F2F0 | 〃 |
+
+### grille
+
+| token | light | dark | why |
+|---|---|---|---|
+| `--ds-grille-hole` | #BFBCB5 | #1C1C1B | Grille holes are recesses in body colour; a lit hole is printing ink at full step, never the orange. |
+| `--ds-grille-hole-on` | #4A4844 | #D2CFC8 | 〃 |
 
 ### width
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-width-hairline` | 1px | 1px | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
+| `--ds-width-hairline` | 1px | 1px | Line widths for outlines, focus rings and bars, thin enough to read as printing. |
 | `--ds-width-ring` | 2px | 2px | 〃 |
-| `--ds-width-halo` | 5px | 5px | 〃 |
-| `--ds-width-avatar-ring` | 4px | 4px | 〃 |
+| `--ds-width-halo` | 4px | 4px | 〃 |
+| `--ds-width-avatar-ring` | 2px | 2px | 〃 |
 | `--ds-width-bar` | 4px | 4px | 〃 |
 
 ### gap
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-gap-xs` | 4px | 4px | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
+| `--ds-gap-none` | 0px | 0px | Gaps between parts on the 4px step; the inset is the body's own margin, about a thirteenth of its short side. |
+| `--ds-gap-xs` | 4px | 4px | 〃 |
 | `--ds-gap-sm` | 6px | 6px | 〃 |
 | `--ds-gap-md` | 8px | 8px | 〃 |
 | `--ds-gap-lg` | 12px | 12px | 〃 |
 | `--ds-gap-xl` | 14px | 14px | 〃 |
 | `--ds-gap-2xl` | 16px | 16px | 〃 |
-| `--ds-gap-inset` | 22px | 22px | 〃 |
+| `--ds-gap-3xl` | 24px | 24px | 〃 |
+| `--ds-gap-inset` | 24px | 24px | 〃 |
 | `--ds-gap-section` | 32px | 32px | 〃 |
 | `--ds-gap-page` | 48px | 48px | 〃 |
-| `--ds-gap-3xl` | 24px | 24px | 〃 |
-| `--ds-gap-none` | 0px | 0px | 〃 |
 
 ### control
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-control-sm` | 32px | 32px | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
-| `--ds-control-md` | 36px | 36px | 〃 |
-| `--ds-control-lg` | 44px | 44px | 〃 |
+| `--ds-control-sm` | 36px | 36px | Part sizes: 44px targets for keys, knobs and fader caps, even when the visible part is smaller. |
+| `--ds-control-md` | 44px | 44px | 〃 |
+| `--ds-control-lg` | 52px | 52px | 〃 |
 | `--ds-control-icon-sm` | 16px | 16px | 〃 |
-| `--ds-control-icon-md` | 18px | 18px | 〃 |
-| `--ds-control-avatar-sm` | 30px | 30px | 〃 |
+| `--ds-control-icon-md` | 20px | 20px | 〃 |
+| `--ds-control-avatar-sm` | 32px | 32px | 〃 |
 | `--ds-control-avatar-md` | 44px | 44px | 〃 |
-| `--ds-control-avatar-lg` | 84px | 84px | 〃 |
-| `--ds-control-badge` | 22px | 22px | 〃 |
-| `--ds-control-dot` | 6px | 6px | 〃 |
-| `--ds-control-thumb` | 20px | 20px | 〃 |
-| `--ds-control-track` | 6px | 6px | 〃 |
+| `--ds-control-avatar-lg` | 80px | 80px | 〃 |
 | `--ds-control-menu-min` | 180px | 180px | 〃 |
+| `--ds-control-knob-min` | 44px | 44px | 〃 |
+| `--ds-control-cap-w` | 24px | 24px | 〃 |
+| `--ds-control-cap-h` | 32px | 32px | 〃 |
+| `--ds-control-badge` | 20px | 20px | 〃 |
+| `--ds-control-dot` | 6px | 6px | 〃 |
+| `--ds-control-thumb` | 24px | 24px | 〃 |
+| `--ds-control-track` | 8px | 8px | 〃 |
 | `--ds-control-check` | 24px | 24px | 〃 |
 | `--ds-control-switch` | 52px | 52px | 〃 |
-| `--ds-control-mark` | 10px | 10px | 〃 |
+| `--ds-control-mark` | 8px | 8px | 〃 |
+| `--ds-control-key` | 44px | 44px | 〃 |
+| `--ds-control-lamp` | 6px | 6px | 〃 |
+| `--ds-control-tick` | 5px | 5px | 〃 |
 
 ### corner
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-corner-panel` | 40px | 40px | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
-| `--ds-corner-inner` | 24px | 24px | 〃 |
-| `--ds-corner-media` | 18px | 18px | 〃 |
+| `--ds-corner-panel` | 28px | 28px | Corners nest: a unit's panel radius minus its inset gives the window and well inside it. |
+| `--ds-corner-inner` | 20px | 20px | 〃 |
+| `--ds-corner-media` | 12px | 12px | 〃 |
 | `--ds-corner-round` | 999px | 999px | 〃 |
 | `--ds-corner-mark` | 4px | 4px | 〃 |
-| `--ds-corner-check` | 7px | 7px | 〃 |
+| `--ds-corner-check` | 6px | 6px | 〃 |
+| `--ds-corner-unit-ratio` | 0.16 | 0.16 | 〃 |
+| `--ds-corner-inset-ratio` | 0.077 | 0.077 | 〃 |
+| `--ds-corner-knob-ratio` | 0.36 | 0.36 | 〃 |
 
 ### type
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-type-family` | system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif | system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
+| `--ds-type-family` | 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif | 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif | Type roles for printing on a case: one family, two weights, tabular figures, size steps on a 1.2 ratio. |
+| `--ds-type-mono` | ui-monospace, 'SF Mono', Menlo, Consolas, monospace | ui-monospace, 'SF Mono', Menlo, Consolas, monospace | 〃 |
 | `--ds-type-micro` | 11px | 11px | 〃 |
 | `--ds-type-caption` | 13px | 13px | 〃 |
 | `--ds-type-label` | 14px | 14px | 〃 |
 | `--ds-type-body` | 15px | 15px | 〃 |
-| `--ds-type-emphasis` | 17px | 17px | 〃 |
-| `--ds-type-title` | 21px | 21px | 〃 |
-| `--ds-type-headline` | 28px | 28px | 〃 |
-| `--ds-type-display` | 44px | 44px | 〃 |
-| `--ds-type-weight-regular` | 400 | 400 | 〃 |
-| `--ds-type-weight-medium` | 550 | 550 | 〃 |
-| `--ds-type-weight-semibold` | 650 | 650 | 〃 |
-| `--ds-type-leading-tight` | 1.15 | 1.15 | 〃 |
-| `--ds-type-leading-body` | 1.42 | 1.42 | 〃 |
-| `--ds-type-tracking-caps` | 0.08em | 0.08em | 〃 |
-| `--ds-type-tracking-display` | -0.02em | -0.02em | 〃 |
-| `--ds-type-measure` | 32em | 32em | 〃 |
 | `--ds-type-reading` | 16px | 16px | 〃 |
+| `--ds-type-emphasis` | 18px | 18px | 〃 |
+| `--ds-type-title` | 22px | 22px | 〃 |
+| `--ds-type-headline` | 26px | 26px | 〃 |
+| `--ds-type-display` | 37px | 37px | 〃 |
+| `--ds-type-measure` | 32em | 32em | 〃 |
+| `--ds-type-weight-regular` | 400 | 400 | 〃 |
+| `--ds-type-weight-medium` | 500 | 500 | 〃 |
+| `--ds-type-weight-semibold` | 500 | 500 | 〃 |
+| `--ds-type-leading-tight` | 1.15 | 1.15 | 〃 |
+| `--ds-type-leading-body` | 1.45 | 1.45 | 〃 |
 | `--ds-type-leading-reading` | 1.6 | 1.6 | 〃 |
-| `--ds-type-mono` | ui-monospace, 'SF Mono', Menlo, Consolas, monospace | ui-monospace, 'SF Mono', Menlo, Consolas, monospace | 〃 |
+| `--ds-type-tracking-caps` | 0.06em | 0.06em | 〃 |
+| `--ds-type-tracking-display` | -0.01em | -0.01em | 〃 |
 
 ### motion
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-motion-hover` | 360ms | 360ms | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
-| `--ds-motion-press` | 300ms | 300ms | 〃 |
-| `--ds-motion-enter` | 640ms | 640ms | 〃 |
+| `--ds-motion-hover` | 120ms | 120ms | Press lands in 65ms and returns on the spring; states enter fast and leave slower; idle never moves. |
+| `--ds-motion-press` | 65ms | 65ms | 〃 |
+| `--ds-motion-release` | 245ms | 245ms | 〃 |
+| `--ds-motion-enter` | 160ms | 160ms | 〃 |
 | `--ds-motion-exit` | 240ms | 240ms | 〃 |
-| `--ds-motion-scene` | 640ms | 640ms | 〃 |
-| `--ds-motion-stagger` | 70ms | 70ms | 〃 |
-| `--ds-motion-easing` | cubic-bezier(0.22, 1, 0.36, 1) | cubic-bezier(0.22, 1, 0.36, 1) | 〃 |
+| `--ds-motion-scene` | 240ms | 240ms | 〃 |
+| `--ds-motion-stagger` | 0ms | 0ms | 〃 |
+| `--ds-motion-segment` | 80ms | 80ms | 〃 |
+| `--ds-motion-fill` | 120ms | 120ms | 〃 |
+| `--ds-motion-easing` | cubic-bezier(0.2, 0, 0, 1) | cubic-bezier(0.2, 0, 0, 1) | 〃 |
 | `--ds-motion-easing-exit` | cubic-bezier(0.4, 0, 1, 1) | cubic-bezier(0.4, 0, 1, 1) | 〃 |
 | `--ds-motion-easing-inout` | cubic-bezier(0.45, 0, 0.2, 1) | cubic-bezier(0.45, 0, 0.2, 1) | 〃 |
-| `--ds-motion-rise` | 16px | 16px | 〃 |
-| `--ds-motion-lift` | 2px | 2px | 〃 |
-| `--ds-motion-press-scale` | 0.97 | 0.97 | 〃 |
+| `--ds-motion-press-scale` | 1 | 1 | 〃 |
+| `--ds-motion-press-travel` | 3px | 3px | 〃 |
+| `--ds-motion-rise` | 8px | 8px | 〃 |
+| `--ds-motion-lift` | 0px | 0px | 〃 |
 
 ### status
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-status-positive` | #13803C | #13803C | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
+| `--ds-status-positive` | #2E7D46 | #2E7D46 | Status lamps in green, amber and red, kept apart from the orange so a warning never reads as the main control. |
 | `--ds-status-on-positive` | #FFFFFF | #FFFFFF | 〃 |
-| `--ds-status-warning` | #F5B000 | #F5B000 | 〃 |
-| `--ds-status-on-warning` | #111214 | #111214 | 〃 |
-| `--ds-status-critical` | #C42B1C | #C42B1C | 〃 |
+| `--ds-status-on-warning` | #1F1E1C | #1F1E1C | 〃 |
 | `--ds-status-on-critical` | #FFFFFF | #FFFFFF | 〃 |
-| `--ds-status-info` | #0071E3 | #0071E3 | 〃 |
 | `--ds-status-on-info` | #FFFFFF | #FFFFFF | 〃 |
-| `--ds-status-info-mark` | #4DA3FF | #0071E3 | 〃 |
-| `--ds-status-positive-mark` | #3FCB77 | #13803C | 〃 |
-| `--ds-status-warning-mark` | #F5B000 | #9A6400 | 〃 |
-| `--ds-status-critical-mark` | #FF6B5E | #C42B1C | 〃 |
+| `--ds-status-info-mark` | #4A4844 | #D2CFC8 | 〃 |
+| `--ds-status-positive-mark` | #2E7D46 | #5DBB7A | 〃 |
+| `--ds-status-warning-mark` | #F2B01E | #F2B01E | 〃 |
+| `--ds-status-critical-mark` | #B3261E | #F07A72 | 〃 |
+| `--ds-status-warning` | #F2B01E | #F2B01E | 〃 |
+| `--ds-status-critical` | #B3261E | #B3261E | 〃 |
+| `--ds-status-info` | #2E2D2A | #2E2D2A | 〃 |
 
 ### layout
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-layout-columns` | 4 | 4 | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
+| `--ds-layout-columns` | 4 | 4 | Page layout places whole units on a column grid; a unit's own face is never stretched by it. |
 | `--ds-layout-gutter` | 16px | 16px | 〃 |
 | `--ds-layout-margin` | 16px | 16px | 〃 |
+| `--ds-layout-touch` | 44px | 44px | 〃 |
+| `--ds-layout-sidebar` | 280px | 280px | 〃 |
 | `--ds-layout-container-sm` | 640px | 640px | 〃 |
 | `--ds-layout-container-md` | 768px | 768px | 〃 |
 | `--ds-layout-container-lg` | 1024px | 1024px | 〃 |
 | `--ds-layout-container-xl` | 1200px | 1200px | 〃 |
 | `--ds-layout-container-2xl` | 1440px | 1440px | 〃 |
-| `--ds-layout-touch` | 44px | 44px | 〃 |
-| `--ds-layout-sidebar` | 280px | 280px | 〃 |
 
 ### layer
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-layer-base` | 0 | 0 | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
+| `--ds-layer-base` | 0 | 0 | Few layers: units sit on the page, and only sheets, menus and messages stack above them. |
 | `--ds-layer-raised` | 10 | 10 | 〃 |
 | `--ds-layer-sticky` | 100 | 100 | 〃 |
 | `--ds-layer-overlay` | 1000 | 1000 | 〃 |
@@ -302,9 +365,9 @@ Values are given for dark and light. Component tokens point at these, and primit
 
 ### viewport
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-viewport-sm` | 640px | 640px | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
+| `--ds-viewport-sm` | 640px | 640px | Viewport steps at which the page grid changes its column count. |
 | `--ds-viewport-md` | 768px | 768px | 〃 |
 | `--ds-viewport-lg` | 1024px | 1024px | 〃 |
 | `--ds-viewport-xl` | 1280px | 1280px | 〃 |
@@ -312,22 +375,22 @@ Values are given for dark and light. Component tokens point at these, and primit
 
 ### field
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-field-base` | #141418 | #F2F2F5 | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
-| `--ds-field-glow` | #0071E338 | #0071E31A | 〃 |
-| `--ds-field-glow-soft` | #FFFFFF0F | #FFFFFFB3 | 〃 |
-| `--ds-field-line` | #FFFFFF0D | #1112140F | 〃 |
-| `--ds-field-line-major` | #FFFFFF14 | #11121414 | 〃 |
-| `--ds-field-column` | #4DA3FF | #0071E3 | 〃 |
-| `--ds-field-margin` | #FFFFFFB3 | #111214C7 | 〃 |
-| `--ds-field-on-column` | #111214 | #FFFFFF | 〃 |
+| `--ds-field-base` | #F3F2EF | #1C1C1B | The backdrop is plain plastic page with faint ink guides, because dial sits on plain surfaces only. |
+| `--ds-field-glow` | #1F1E1C0F | #1F1E1C0F | 〃 |
+| `--ds-field-glow-soft` | #1F1E1C0F | #1F1E1C0F | 〃 |
+| `--ds-field-line-major` | #1F1E1C24 | #1F1E1C24 | 〃 |
+| `--ds-field-on-column` | #1F1E1C | #1F1E1C | 〃 |
+| `--ds-field-line` | #1F1E1C0F | #1F1E1C0F | 〃 |
+| `--ds-field-column` | #BFBCB5 | #7E7C77 | 〃 |
+| `--ds-field-margin` | #4A4844 | #D2CFC8 | 〃 |
 
 ### opacity
 
-| token | dark | light | why |
+| token | light | dark | why |
 |---|---|---|---|
-| `--ds-opacity-disabled` | 0.5 | 0.5 | seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason |
+| `--ds-opacity-disabled` | 0.5 | 0.5 | Disabled parts lose height and fade to half, and their outline stays above 3:1. |
 
 ## Components
 
@@ -335,9 +398,10 @@ What each one is, and the generic default it must not turn into.
 
 | component | what it is | never becomes |
 |---|---|---|
-| Container | A starter layout primitive with no form of its own, which Phase 1 restates in this system's own terms. |  |
-| Grid | A starter layout primitive with no form of its own, which Phase 1 restates in this system's own terms. |  |
-| Stack | A starter layout primitive with no form of its own, which Phase 1 restates in this system's own terms. |  |
+| Container | Container holds a page of units to a width the eye can scan, with a margin from the page edge that grows with the screen. |  |
+| Grid | Grid places whole units on four, eight or twelve columns, so each appliance keeps one fixed place on the screen and its face is never stretched. |  |
+| Stack | Stack lines up units and parts on the 4px step, so the gaps between appliances on a screen follow the same rhythm as the holes and insets inside them. |  |
 
 ## Locked decisions
 
+- D-001 Anchor = device card A (display-led)

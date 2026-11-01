@@ -1,38 +1,14 @@
 {
   "identity": false,
   "identity_reason": "a layout primitive only places other components and has no look of its own to derive",
-  "concept": "A starter layout primitive with no form of its own, which Phase 1 restates in this system's own terms.",
+  "concept": "Container holds a page of units to a width the eye can scan, with a margin from the page edge that grows with the screen.",
   "parts": {
-    "root": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "s-sm": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "s-md": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "s-lg": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "s-xl": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "s-2xl": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    }
+    "root": { "p": "P6", "axis": "space", "why": "The page margin and centred width keep units in the same place at every visit." },
+    "s-sm": { "p": "P6", "axis": "space", "why": "The narrowest page width holds one column of units for a phone held in one hand." },
+    "s-md": { "p": "P6", "axis": "space", "why": "The tablet width holds two units side by side without stretching either face." },
+    "s-lg": { "p": "P6", "axis": "space", "why": "The laptop width holds a room of three units in a row at a glance." },
+    "s-xl": { "p": "P6", "axis": "space", "why": "The wide width holds four units in a row before the line becomes too long to scan." },
+    "s-2xl": { "p": "P6", "axis": "space", "why": "The widest page stops growing here, so units never drift far apart on large screens." }
   },
   "states": {},
   "motion": {}

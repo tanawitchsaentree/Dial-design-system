@@ -1,184 +1,262 @@
 {
   "color": {
     "$type": "color",
-    "white": {
-      "$value": "#FFFFFF"
-    },
-    "white-a": {
-      "10": {
-        "$value": "#FFFFFF1A"
-      },
-      "14": {
-        "$value": "#FFFFFF24"
-      },
-      "16": {
-        "$value": "#FFFFFF29"
-      },
-      "28": {
-        "$value": "#FFFFFF47"
-      },
-      "30": {
-        "$value": "#FFFFFF4D"
-      },
-      "42": {
-        "$value": "#FFFFFF6B"
-      },
-      "45": {
-        "$value": "#FFFFFF73"
-      },
-      "55": {
-        "$value": "#FFFFFF8C"
-      },
-      "62": {
-        "$value": "#FFFFFF9E"
-      },
-      "70": {
-        "$value": "#FFFFFFB3"
-      },
-      "85": {
-        "$value": "#FFFFFFD9"
-      },
-      "90": {
-        "$value": "#FFFFFFE6"
-      },
-      "92": {
-        "$value": "#FFFFFFEB"
-      },
-      "06": {
-        "$value": "#FFFFFF0F"
-      },
-      "08": {
-        "$value": "#FFFFFF14"
-      },
-      "03": {
-        "$value": "#FFFFFF08"
-      },
-      "05": {
-        "$value": "#FFFFFF0D"
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P5",
+          "P6"
+        ],
+        "why": "Warm plastic, grey printing and one dyed orange: every hue dial owns, so nothing outside this list can appear. Value estimated from chat; re-measure from ref-01.png."
       }
     },
-    "graphite": {
-      "850": {
-        "$value": "#25252C",
-        "$description": "sunken well (code) on a solid dark page"
+    "abs": {
+      "50": {
+        "$value": "#F3F2EF",
+        "$description": "page behind the units"
       },
-      "900": {
-        "$value": "#1C1C22"
+      "0": {
+        "$value": "#FAF9F7",
+        "$description": "lightest plastic, chips and fader caps"
       },
-      "950": {
-        "$value": "#141418"
+      "100": {
+        "$value": "#E8E6E1",
+        "$description": "warm white matte ABS body"
       },
-      "solid": {
-        "$value": "#2C2C34"
-      }
-    },
-    "ink": {
-      "900": {
-        "$value": "#111214"
-      }
-    },
-    "blue": {
-      "400": {
-        "$value": "#4DA3FF"
+      "150": {
+        "$value": "#DEDBD5",
+        "$description": "sunken well"
       },
-      "600": {
-        "$value": "#0071E3"
+      "200": {
+        "$value": "#D3D0C9",
+        "$description": "seam and divider"
+      },
+      "300": {
+        "$value": "#BFBCB5",
+        "$description": "unlit grille hole"
+      },
+      "500": {
+        "$value": "#85827C",
+        "$description": "control outline, 3.3:1 on the body"
       },
       "700": {
-        "$value": "#0062C4"
+        "$value": "#4A4844",
+        "$description": "printing, secondary"
+      },
+      "800": {
+        "$value": "#2E2D2A",
+        "$description": "printing, primary"
+      },
+      "900": {
+        "$value": "#1F1E1C",
+        "$description": "deepest ink, focus ring"
+      }
+    },
+    "charcoal": {
+      "950": {
+        "$value": "#1C1C1B",
+        "$description": "page in the dark edition"
+      },
+      "900": {
+        "$value": "#232322",
+        "$description": "seam, dark"
+      },
+      "850": {
+        "$value": "#2F2F2D",
+        "$description": "charcoal ABS body"
+      },
+      "800": {
+        "$value": "#3A3A38",
+        "$description": "raised part on charcoal"
+      },
+      "700": {
+        "$value": "#4A4A47",
+        "$description": "fader cap on charcoal"
+      },
+      "400": {
+        "$value": "#7E7C77",
+        "$description": "control outline on charcoal"
+      },
+      "200": {
+        "$value": "#BDBAB3",
+        "$description": "printing, secondary, dark"
+      },
+      "100": {
+        "$value": "#D2CFC8",
+        "$description": "printing, dark"
+      },
+      "50": {
+        "$value": "#EDEBE6",
+        "$description": "primary printing and focus ring, dark"
+      }
+    },
+    "orange": {
+      "400": {
+        "$value": "#F27D42",
+        "$description": "orange, hover: one step lighter, ink 6.2:1"
+      },
+      "500": {
+        "$value": "#EC6A2C",
+        "$description": "the one dyed part, ink 5.3:1"
+      },
+      "600": {
+        "$value": "#C9531C",
+        "$description": "orange rim and shade, 3.55:1 on white ABS"
+      },
+      "700": {
+        "$value": "#B94C18",
+        "$description": "orange shade on charcoal"
+      }
+    },
+    "lcd": {
+      "bg": {
+        "$value": "#C7CBBD"
+      },
+      "bg-dark": {
+        "$value": "#9FA597"
+      },
+      "ink": {
+        "$value": "#2F322D"
+      },
+      "ink-dark": {
+        "$value": "#1D201C"
+      },
+      "ghost": {
+        "$value": "#2F322D12"
+      }
+    },
+    "oled": {
+      "bg": {
+        "$value": "#141414"
+      },
+      "bg-dark": {
+        "$value": "#0B0B0B"
+      },
+      "ink": {
+        "$value": "#F2F2F0"
       }
     },
     "green": {
-      "400": {
-        "$value": "#3FCB77"
-      },
       "600": {
-        "$value": "#13803C",
-        "$description": "white text 5.02:1"
+        "$value": "#2E7D46",
+        "$description": "white text 5.1:1"
+      },
+      "400": {
+        "$value": "#5DBB7A"
       }
     },
     "amber": {
       "400": {
-        "$value": "#F5B000",
-        "$description": "ink text 9.90:1"
-      },
-      "700": {
-        "$value": "#9A6400"
+        "$value": "#F2B01E",
+        "$description": "ink text above 9:1"
       }
     },
     "red": {
-      "400": {
-        "$value": "#FF6B5E"
-      },
       "600": {
-        "$value": "#C42B1C",
-        "$description": "white text 5.66:1"
+        "$value": "#B3261E",
+        "$description": "white text 6.5:1, clearly not the orange"
+      },
+      "400": {
+        "$value": "#F07A72"
+      }
+    },
+    "white": {
+      "$value": "#FFFFFF"
+    },
+    "lit": {
+      "light": {
+        "$value": "#FFFFFF8C",
+        "$description": "lit hairline, gloss 0.2 on white ABS"
+      },
+      "dark": {
+        "$value": "#FFFFFF1A"
+      }
+    },
+    "shade": {
+      "light": {
+        "$value": "#3C322829"
+      },
+      "dark": {
+        "$value": "#00000073"
+      }
+    },
+    "cast": {
+      "light": {
+        "$value": "#3C322833"
+      },
+      "dark": {
+        "$value": "#0000008C"
       }
     },
     "ink-a": {
-      "14": {
-        "$value": "#11121424"
-      },
-      "25": {
-        "$value": "#11121440"
-      },
-      "30": {
-        "$value": "#1112144D"
-      },
-      "78": {
-        "$value": "#111214C7"
+      "06": {
+        "$value": "#1F1E1C0F"
       },
       "08": {
-        "$value": "#11121414"
+        "$value": "#1F1E1C14"
       },
+      "14": {
+        "$value": "#1F1E1C24"
+      },
+      "78": {
+        "$value": "#1F1E1CC7"
+      }
+    },
+    "white-a": {
       "06": {
-        "$value": "#1112140F"
-      }
-    },
-    "paper": {
-      "0": {
-        "$value": "#FFFFFF",
-        "$description": "page background for solid screens, light theme"
+        "$value": "#FFFFFF0F"
       },
-      "50": {
-        "$value": "#F2F2F5",
-        "$description": "opaque fallback surface in the light theme"
-      },
-      "100": {
-        "$value": "#E9E9EE",
-        "$description": "sunken well (code) on a solid light page"
-      }
-    },
-    "blue-a": {
-      "10": {
-        "$value": "#0071E31A"
-      },
-      "22": {
-        "$value": "#0071E338"
-      },
-      "80": {
-        "$value": "#0071E3CC"
+      "14": {
+        "$value": "#FFFFFF24"
       }
     }
   },
   "space": {
+    "$type": "dimension",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P4",
+          "P6"
+        ],
+        "why": "A 4px step, so a grille hole, the body inset and a gap between parts all land on the same lines."
+      }
+    },
     "0": {
       "$value": "0px"
+    },
+    "px": {
+      "$value": "1px"
+    },
+    "0-5": {
+      "$value": "2px"
     },
     "1": {
       "$value": "4px"
     },
+    "1-5": {
+      "$value": "6px"
+    },
     "2": {
       "$value": "8px"
     },
+    "2-5": {
+      "$value": "10px"
+    },
     "3": {
       "$value": "12px"
+    },
+    "3-5": {
+      "$value": "14px"
     },
     "4": {
       "$value": "16px"
     },
     "5": {
       "$value": "20px"
+    },
+    "5-5": {
+      "$value": "22px"
     },
     "6": {
       "$value": "24px"
@@ -209,30 +287,18 @@
     },
     "32": {
       "$value": "128px"
-    },
-    "$type": "dimension",
-    "$description": "4px-base spacing scale; key × 4 = px (e.g. space.6 = 24px)",
-    "px": {
-      "$value": "1px"
-    },
-    "0-5": {
-      "$value": "2px"
-    },
-    "1-5": {
-      "$value": "6px"
-    },
-    "2-5": {
-      "$value": "10px"
-    },
-    "3-5": {
-      "$value": "14px"
-    },
-    "5-5": {
-      "$value": "22px"
     }
   },
   "size": {
     "$type": "dimension",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3"
+        ],
+        "why": "Sizes of parts: every control keeps a 44px target even where it draws smaller, as a real knob does."
+      }
+    },
     "hairline": {
       "$value": "1px"
     },
@@ -240,48 +306,46 @@
       "$value": "2px"
     },
     "halo": {
-      "$value": "5px"
-    },
-    "avatar-ring": {
       "$value": "4px"
     },
+    "avatar-ring": {
+      "$value": "2px"
+    },
     "avatar-sm": {
-      "$value": "30px"
+      "$value": "32px"
     },
     "avatar-md": {
       "$value": "44px"
     },
     "avatar-lg": {
-      "$value": "84px"
+      "$value": "80px"
     },
     "control-sm": {
-      "$value": "32px"
-    },
-    "control-md": {
       "$value": "36px"
     },
-    "control-lg": {
+    "control-md": {
       "$value": "44px"
+    },
+    "control-lg": {
+      "$value": "52px"
     },
     "icon-sm": {
       "$value": "16px"
     },
     "icon-md": {
-      "$value": "18px"
+      "$value": "20px"
     },
     "measure": {
-      "$value": "32em",
-      "$description": "about 70 characters per line in proportional type (the ch unit is the width of \"0\", wider than the average letter, so 64ch ran to 85+ characters)"
+      "$value": "32em"
     },
     "touch": {
-      "$value": "44px",
-      "$description": "minimum touch target (WCAG 2.5.8 asks 24px; Apple HIG 44pt)"
+      "$value": "44px"
     },
     "sidebar": {
       "$value": "280px"
     },
     "badge": {
-      "$value": "22px"
+      "$value": "20px"
     },
     "dot": {
       "$value": "6px"
@@ -290,16 +354,13 @@
       "$value": "4px"
     },
     "thumb": {
-      "$value": "20px",
-      "$description": "slider thumb"
+      "$value": "24px"
     },
     "track": {
-      "$value": "6px",
-      "$description": "slider track thickness"
+      "$value": "8px"
     },
     "menu-min": {
-      "$value": "180px",
-      "$description": "narrowest a dropdown list may be"
+      "$value": "180px"
     },
     "check": {
       "$value": "24px"
@@ -308,41 +369,101 @@
       "$value": "52px"
     },
     "mark": {
-      "$value": "10px"
+      "$value": "8px"
+    },
+    "key": {
+      "$value": "44px"
+    },
+    "lamp": {
+      "$value": "6px"
+    },
+    "knob-min": {
+      "$value": "44px"
+    },
+    "cap-w": {
+      "$value": "24px"
+    },
+    "cap-h": {
+      "$value": "32px"
+    },
+    "tick": {
+      "$value": "5px"
     }
   },
   "radius": {
     "$type": "dimension",
-    "md": {
-      "$value": "18px"
-    },
-    "lg": {
-      "$value": "24px"
-    },
-    "xl": {
-      "$value": "40px"
-    },
-    "pill": {
-      "$value": "999px"
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P2",
+          "P6"
+        ],
+        "why": "Corners about a sixth of the short side, capped so large panels never swell; inner corners nest by subtracting the inset. Value estimated from chat; re-measure from ref-01.png."
+      }
     },
     "sm": {
       "$value": "4px"
     },
+    "md": {
+      "$value": "12px"
+    },
+    "lg": {
+      "$value": "20px"
+    },
+    "xl": {
+      "$value": "28px"
+    },
+    "pill": {
+      "$value": "999px"
+    },
     "check": {
-      "$value": "7px"
+      "$value": "6px"
+    }
+  },
+  "ratio": {
+    "$type": "number",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "Proportions of a unit face read from the reference, so a card of any size keeps the same corner and inset. Value estimated from chat; re-measure from ref-01.png."
+      }
+    },
+    "unit-radius": {
+      "$value": 0.16,
+      "$description": "radius / short side (15\u201318%)"
+    },
+    "unit-inset": {
+      "$value": 0.077,
+      "$description": "inset / short side (\u22481/13)"
+    },
+    "knob": {
+      "$value": 0.36,
+      "$description": "knob diameter / short side, anchor A"
     }
   },
   "font": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P5"
+        ],
+        "why": "One grotesk in two weights, set like printing on a case, with size and position doing the hierarchy."
+      }
+    },
     "family": {
       "$type": "fontFamily",
       "sans": {
-        "$value": "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+        "$value": "'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif"
       },
       "mono": {
         "$value": "ui-monospace, 'SF Mono', Menlo, Consolas, monospace"
       }
     },
     "size": {
+      "$type": "dimension",
+      "$description": "ratio 1.2 from a 15px base, rounded to whole pixels: 15 \u00d7 1.2^n",
       "100": {
         "$value": "11px"
       },
@@ -356,22 +477,20 @@
         "$value": "15px"
       },
       "450": {
-        "$value": "16px",
-        "$description": "long-form reading size (docs prose, articles); Carbon body-long and Material body-large are 16px"
+        "$value": "16px"
       },
       "500": {
-        "$value": "17px"
+        "$value": "18px"
       },
       "600": {
-        "$value": "21px"
+        "$value": "22px"
       },
       "700": {
-        "$value": "28px"
+        "$value": "26px"
       },
       "800": {
-        "$value": "44px"
-      },
-      "$type": "dimension"
+        "$value": "37px"
+      }
     },
     "weight": {
       "$type": "fontWeight",
@@ -379,10 +498,7 @@
         "$value": 400
       },
       "medium": {
-        "$value": 550
-      },
-      "semibold": {
-        "$value": 650
+        "$value": 500
       }
     },
     "leading": {
@@ -391,87 +507,122 @@
         "$value": 1.15
       },
       "body": {
-        "$value": 1.42
+        "$value": 1.45
       },
       "long": {
-        "$value": 1.6,
-        "$description": "line height for long-form reading at 16px"
+        "$value": 1.6
       }
     },
     "tracking": {
       "$type": "dimension",
       "caps": {
-        "$value": "0.08em"
+        "$value": "0.06em"
       },
       "display": {
-        "$value": "-0.02em"
+        "$value": "-0.01em"
       }
     }
   },
   "shadow": {
     "$type": "shadow",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3",
+          "P6"
+        ],
+        "why": "Shadows from one light at the top left: offset is the part's height times the light vector, short and soft."
+      }
+    },
+    "unit": {
+      "$value": "1px 3px 10px #3C322833, inset 1px 1px 0 #FFFFFF8C, inset -1px -1px 0 #3C322829",
+      "$description": "anchor A: unit height 3px"
+    },
+    "unit-dark": {
+      "$value": "1px 3px 10px #0000008C, inset 1px 1px 0 #FFFFFF1A, inset -1px -1px 0 #00000073"
+    },
+    "part": {
+      "$value": "2px 5px 15px #3C322833, inset 1px 1px 0 #FFFFFF8C, inset -1px -1px 1px #3C322829",
+      "$description": "raised part, height 5px"
+    },
+    "part-dark": {
+      "$value": "2px 5px 15px #0000008C, inset 1px 1px 0 #FFFFFF1A, inset -1px -1px 1px #00000073"
+    },
     "float": {
-      "$value": "0 30px 60px -20px #00000059"
+      "$value": "2px 8px 24px #3C32283D"
     },
-    "lift": {
-      "$value": "0 8px 20px -8px #00000066"
-    },
-    "halo": {
-      "$value": "0 0 14px #00000073, 0 1px 2px #00000059"
-    },
-    "float-light": {
-      "$value": "0 30px 60px -24px #00000033"
-    },
-    "halo-light": {
-      "$value": "0 0 12px #FFFFFF99, 0 1px 1px #FFFFFF80"
+    "float-dark": {
+      "$value": "2px 8px 24px #000000A6"
     },
     "well": {
-      "$value": "inset 0 1px 2px #0000004D"
+      "$value": "inset 2px 2px 3px #00000038, inset -1px -1px 0 #FFFFFF8C",
+      "$description": "recess, inverse light"
     },
-    "well-light": {
-      "$value": "inset 0 1px 2px #00000024"
+    "well-dark": {
+      "$value": "inset 2px 2px 3px #00000066, inset -1px -1px 0 #FFFFFF1A"
     }
   },
   "duration": {
     "$type": "duration",
-    "snap": {
-      "$value": "70ms"
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3",
+          "P6"
+        ],
+        "why": "Fast in, slow out: a press lands at once, the spring returns, and nothing moves while idle."
+      }
+    },
+    "none": {
+      "$value": "0ms"
+    },
+    "press": {
+      "$value": "65ms"
+    },
+    "segment": {
+      "$value": "80ms"
     },
     "brisk": {
-      "$value": "130ms"
+      "$value": "120ms"
     },
-    "quick": {
-      "$value": "200ms"
+    "enter": {
+      "$value": "160ms"
+    },
+    "settle": {
+      "$value": "245ms"
     },
     "exit": {
       "$value": "240ms"
     },
-    "release": {
-      "$value": "300ms"
-    },
-    "linger": {
-      "$value": "360ms"
-    },
-    "gentle": {
-      "$value": "420ms"
-    },
-    "slow": {
-      "$value": "640ms"
-    },
-    "stagger": {
-      "$value": "70ms"
+    "fill": {
+      "$value": "120ms"
     }
   },
   "easing": {
     "$type": "cubicBezier",
-    "soft": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3"
+        ],
+        "why": "Enter decelerates into place; exit accelerates away, because nobody watches what leaves."
+      }
+    },
+    "enter": {
       "$value": [
-        0.22,
-        1,
-        0.36,
+        0.2,
+        0,
+        0,
         1
-      ],
-      "$description": "long, soft settle. no snap, no overshoot"
+      ]
+    },
+    "exit": {
+      "$value": [
+        0.4,
+        0,
+        1,
+        1
+      ]
     },
     "inout": {
       "$value": [
@@ -480,35 +631,114 @@
         0.2,
         1
       ]
-    },
-    "depart": {
-      "$value": [
-        0.4,
-        0,
-        1,
-        1
-      ],
-      "$description": "accelerates away: for exits, which nobody watches"
     }
   },
   "distance": {
     "$type": "dimension",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "Parts do not lift on hover; only a sheet travels, and only a short way."
+      }
+    },
     "rise": {
-      "$value": "16px"
+      "$value": "8px"
     },
     "lift": {
-      "$value": "2px"
+      "$value": "0px"
+    },
+    "press": {
+      "$value": "3px"
     }
   },
   "scale": {
     "$type": "number",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3"
+        ],
+        "why": "A key goes down by its height instead of shrinking, so press scale stays at one."
+      }
+    },
     "press": {
-      "$value": 0.97
+      "$value": 1
+    }
+  },
+  "spring": {
+    "$type": "number",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3"
+        ],
+        "why": "Matte ABS spring: mass 1.4, stiffness 520, damping 46, \u03b6 about 0.85, settling in about 245ms."
+      }
+    },
+    "mass": {
+      "$value": 1.4
+    },
+    "stiffness": {
+      "$value": 520
+    },
+    "damping": {
+      "$value": 46
+    },
+    "detents": {
+      "$value": 11
+    },
+    "sweep": {
+      "$value": 270
+    }
+  },
+  "abs": {
+    "$type": "dimension",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3",
+          "P6"
+        ],
+        "why": "The matte ABS row of the tactile recipe: height, gloss and roughness every part reads from."
+      }
+    },
+    "height": {
+      "$value": "5px"
+    },
+    "unit-height": {
+      "$value": "3px",
+      "$description": "anchor A shallow body"
+    },
+    "rough": {
+      "$value": "3px"
+    }
+  },
+  "gloss": {
+    "$type": "number",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P3"
+        ],
+        "why": "Gloss 0.2 for matte ABS sets how strong the lit hairline on each part is."
+      }
+    },
+    "abs": {
+      "$value": 0.2
     }
   },
   "breakpoint": {
     "$type": "dimension",
-    "$description": "min-width breakpoints",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "Breakpoints where units reflow from one column to many, never inside a unit."
+      }
+    },
     "sm": {
       "$value": "640px"
     },
@@ -527,6 +757,14 @@
   },
   "container": {
     "$type": "dimension",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "Page widths that hold whole units side by side without stretching a unit's face."
+      }
+    },
     "sm": {
       "$value": "640px"
     },
@@ -544,6 +782,15 @@
     }
   },
   "columns": {
+    "$type": "number",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "Column counts for placing units: four on a phone, eight on tablet, twelve on desktop."
+      }
+    },
     "4": {
       "$value": 4
     },
@@ -552,11 +799,18 @@
     },
     "12": {
       "$value": 12
-    },
-    "$type": "number"
+    }
   },
   "z": {
     "$type": "number",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "Layers stay few: a unit sits on the page, and only sheets and messages rise above it."
+      }
+    },
     "base": {
       "$value": 0
     },
@@ -575,14 +829,16 @@
   },
   "alpha": {
     "$type": "number",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P6"
+        ],
+        "why": "Disabled parts flatten and fade to half, keeping their outline readable against the body."
+      }
+    },
     "half": {
       "$value": 0.5
-    }
-  },
-  "$extensions": {
-    "kiln.why": {
-      "p": "SEED",
-      "why": "seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason"
     }
   }
 }

@@ -1,68 +1,20 @@
 {
   "identity": false,
   "identity_reason": "a layout primitive only places other components and has no look of its own to derive",
-  "concept": "A starter layout primitive with no form of its own, which Phase 1 restates in this system's own terms.",
+  "concept": "Stack lines up units and parts on the 4px step, so the gaps between appliances on a screen follow the same rhythm as the holes and insets inside them.",
   "parts": {
-    "root": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "column": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "row": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "g-xs": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "g-sm": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "g-md": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "g-lg": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "g-xl": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "a-start": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "a-center": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "a-end": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    },
-    "a-stretch": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    }
+    "root": { "p": "P6", "axis": "space", "why": "A stack keeps its children in fixed positions so a layout never reflows between states." },
+    "column": { "p": "P6", "axis": "space", "why": "Units stack top to bottom on a phone, each keeping its own face and its place in the order." },
+    "row": { "p": "P6", "axis": "space", "why": "Parts sit side by side in one row, like keys printed along the bottom of a case." },
+    "g-xs": { "p": "P4", "axis": "space", "why": "The smallest gap is one 4px step, the same pitch the grille holes sit on." },
+    "g-sm": { "p": "P4", "axis": "space", "why": "A small gap of two steps separates a label from the part it names." },
+    "g-md": { "p": "P4", "axis": "space", "why": "A medium gap of four steps separates neighbouring parts inside one unit face." },
+    "g-lg": { "p": "P6", "axis": "space", "why": "A large gap of six steps separates one unit from the next so each reads as its own appliance." },
+    "g-xl": { "p": "P6", "axis": "space", "why": "The section gap of eight steps separates groups of units, such as rooms on a home screen." },
+    "a-start": { "p": "P5", "axis": "space", "why": "Start alignment keeps labels on the inset line where printing sits on a case." },
+    "a-center": { "p": "P1", "axis": "space", "why": "Centre alignment puts the loud control in the clear area the hand expects to find it in." },
+    "a-end": { "p": "P5", "axis": "space", "why": "End alignment places the lowercase model name on the bottom right inset line." },
+    "a-stretch": { "p": "P2", "axis": "space", "why": "Stretch lets a display window run the full inner width of the unit, aligned to the inset." }
   },
   "states": {},
   "motion": {}

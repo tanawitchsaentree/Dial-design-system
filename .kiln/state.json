@@ -1,9 +1,11 @@
 {
   "verb": "build",
   "scale": "Package",
-  "current_phase": 5,
+  "current_phase": 6,
   "has_reference": true,
-  "checkpoints": {},
+  "checkpoints": {
+    "approved": true
+  },
   "carry_forward": {
     "brief": "dial: home-iot control + media app (web+mobile, everyday people at home); lineage Braun/Ulm (Rams), light warm-white ABS base + charcoal dark; one orange accent per unit; plain backdrops; targets React/Tailwind/Figma/SwiftUI; budget standard; full answers in system/INTAKE.md",
     "scale": "Package",
@@ -56,13 +58,16 @@
     "plan": "Anchor round: device card (display + grille + loud knob + keys + ruler scale + model name + wordmark), 4 variants in apps/lab/anchor/ over display:grille ratio, knob size, shadow depth, label placement; user picks. Then Phase 2 tokens (matte ABS material, warm-white/charcoal themes, one orange, LCD/OLED families, allowSeed false). Wave 1 per kiln:production-run: layout primitives, atoms (Button/key, Switch/rocker, Slider/fader, Rotary, Select, Display LCD+OLED, Grille meter, Label, Icon, Focus), home-iot wave 1 extras, docs controls. Book at standard depth; verify full; milestone M1.",
     "out_of_scope": "npm publish / git push; native SwiftUI components (tokens only); Braun name or logo; photographic textures; waves 2-3 media (player, progress, list) beyond M1; brand identity beyond a plain dial wordmark",
     "acceptance_criteria": [
-      "Every unit shows at most one orange part, and it is the primary control",
-      "Every text and label is >=4.5:1 on its material in light and dark",
-      "A person can read a device state from its display in one glance without reading any other text",
-      "Every rotary/fader/key works by keyboard (arrows step a detent, Home/End, Space/Enter) and declares mechanism+spring in why.json",
-      "No Braun name or mark anywhere in code, docs or assets"
+      "one orange per unit, primary control only",
+      "all text >=4.5:1 both themes",
+      "state readable from the display at a glance",
+      "every rotary/fader/key keyboard-operable with mechanism+spring in why.json",
+      "no Braun name or mark"
     ],
-    "riskiest_slice": "device card anchor: material + display + grille + knob must read as one honest appliance without becoming a retro costume or a bloated toy"
+    "riskiest_slice": "device card anchor: material + display + grille + knob must read as one honest appliance without becoming a retro costume or a bloated toy",
+    "stamp": "dial \u00b7 lineage Braun/Ulm (Rams) \u00b7 vector C3 T1 G2 S8 M3 D4 \u00b7 loud surface 8 paid by type 1 + grid 2 \u00b7 anchor A (D-001)",
+    "token_block": "packages/tokens/src/{primitive,semantic,component}.json \u2014 376 tokens, light+dark, allowSeed false (D-002, estimated)",
+    "approved": true
   },
   "history": [
     {
@@ -160,7 +165,24 @@
     },
     {
       "phase": 5,
-      "entered_at": "2026-11-01T08:56:28.871544+00:00"
+      "entered_at": "2026-11-01T08:56:28.871544+00:00",
+      "exited_at": "2026-11-01T09:51:19.158954+00:00",
+      "data": {
+        "stamp": "dial \u00b7 lineage Braun/Ulm (Rams) \u00b7 vector C3 T1 G2 S8 M3 D4 \u00b7 loud surface 8 paid by type 1 + grid 2 \u00b7 anchor A (D-001)",
+        "token_block": "packages/tokens/src/{primitive,semantic,component}.json \u2014 376 tokens, light+dark, allowSeed false (D-002, estimated)",
+        "acceptance_criteria": [
+          "one orange per unit, primary control only",
+          "all text >=4.5:1 both themes",
+          "state readable from the display at a glance",
+          "every rotary/fader/key keyboard-operable with mechanism+spring in why.json",
+          "no Braun name or mark"
+        ],
+        "approved": true
+      }
+    },
+    {
+      "phase": 6,
+      "entered_at": "2026-11-01T09:51:19.159204+00:00"
     }
   ]
 }

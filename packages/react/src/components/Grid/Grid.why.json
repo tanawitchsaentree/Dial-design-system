@@ -1,13 +1,9 @@
 {
   "identity": false,
   "identity_reason": "a layout primitive only places other components and has no look of its own to derive",
-  "concept": "A starter layout primitive with no form of its own, which Phase 1 restates in this system's own terms.",
+  "concept": "Grid places whole units on four, eight or twelve columns, so each appliance keeps one fixed place on the screen and its face is never stretched.",
   "parts": {
-    "root": {
-      "p": "SEED",
-      "axis": "space",
-      "why": "seed reason from the kiln starter; Phase 1 rewrites it against this system's own principles in system/CONCEPT.md"
-    }
+    "root": { "p": "P6", "axis": "space", "why": "Columns and gutters place whole units in fixed positions that stay put between states and visits." }
   },
   "states": {},
   "motion": {}

@@ -1,129 +1,167 @@
 # dial
 
-> 3 React components and 307 design tokens. dial-react is not on npm yet. Install the release tarball (pnpm run release:pack writes it to release/): npm install /path/to/release/dial-react-0.0.0.tgz, then import 'dial-react/all.css' once at the root.
+> 3 React components and 376 design tokens. dial-react is not on npm yet. Install the release tarball (pnpm run release:pack writes it to release/): npm install /path/to/release/dial-react-0.0.0.tgz, then import 'dial-react/all.css' once at the root.
 
 ## Components
 
-- Container: A starter layout primitive with no form of its own, which Phase 1 restates in this system's own terms. `import { Container } from 'dial-react';`
-- Grid: A starter layout primitive with no form of its own, which Phase 1 restates in this system's own terms. `import { Grid, GridItem } from 'dial-react';`
-- Stack: A starter layout primitive with no form of its own, which Phase 1 restates in this system's own terms. `import { Stack } from 'dial-react';`
+- Container: Container holds a page of units to a width the eye can scan, with a margin from the page edge that grows with the screen. `import { Container } from 'dial-react';`
+- Grid: Grid places whole units on four, eight or twelve columns, so each appliance keeps one fixed place on the screen and its face is never stretched. `import { Grid, GridItem } from 'dial-react';`
+- Stack: Stack lines up units and parts on the 4px step, so the gaps between appliances on a screen follow the same rhythm as the holes and insets inside them. `import { Stack } from 'dial-react';`
 
 ## Tokens
 
-- `--ds-surface-solid` #2C2C34 (light #F2F2F5)
-- `--ds-surface-quiet` #FFFFFF14 (light #FFFFFF73)
-- `--ds-surface-light` #FFFFFF (light #111214)
-- `--ds-surface-placeholder-hi` #25252C
-- `--ds-surface-placeholder-lo` #1C1C22
-- `--ds-surface-page` #141418 (light #FFFFFF)
-- `--ds-surface-raised` #1C1C22 (light #F2F2F5)
-- `--ds-surface-sunken` #25252C (light #E9E9EE)
-- `--ds-surface-knob` #FFFFFF
-- `--ds-surface-scrim` #111214C7 (light #1112144D)
-- `--ds-text-primary` #FFFFFF (light #111214)
-- `--ds-text-secondary` #FFFFFFEB (light #111214C7)
-- `--ds-text-on-light` #111214 (light #FFFFFF)
-- `--ds-text-on-accent` #FFFFFF
-- `--ds-action-accent` #0071E3
-- `--ds-action-accent-hover` #0062C4
-- `--ds-line-ring` #FFFFFF4D (light #11121440)
-- `--ds-line-divider` #FFFFFF29 (light #11121424)
-- `--ds-focus-ring` #FFFFFF (light #111214)
-- `--ds-focus-halo` #111214C7 (light #FFFFFFE6)
-- `--ds-elevation-float` 0 30px 60px -20px #00000059 (light 0 30px 60px -24px #00000033)
-- `--ds-elevation-lift` 0 8px 20px -8px #00000066
+- `--ds-surface-page` #F3F2EF
+- `--ds-surface-solid` #E8E6E1
+- `--ds-surface-raised` #E8E6E1
+- `--ds-surface-sunken` #DEDBD5
+- `--ds-surface-quiet` #1F1E1C0F
+- `--ds-surface-light` #FAF9F7
+- `--ds-surface-placeholder-hi` #DEDBD5
+- `--ds-surface-placeholder-lo` #E8E6E1
+- `--ds-surface-knob` #FAF9F7
+- `--ds-surface-scrim` #1F1E1CC7
+- `--ds-text-primary` #2E2D2A
+- `--ds-text-secondary` #4A4844
+- `--ds-text-on-light` #1F1E1C
+- `--ds-text-on-accent` #1F1E1C
+- `--ds-action-accent` #EC6A2C
+- `--ds-action-accent-hover` #F27D42
+- `--ds-action-accent-rim` #C9531C
+- `--ds-action-accent-shade` #C9531C
+- `--ds-line-ring` #85827C
+- `--ds-line-divider` #D3D0C9
+- `--ds-focus-ring` #1F1E1C
+- `--ds-focus-halo` #FAF9F7
+- `--ds-elevation-unit` 1px 3px 10px #3C322833, inset 1px 1px 0 #FFFFFF8C, inset -1px -1px 0 #3C322829
+- `--ds-elevation-part` 2px 5px 15px #3C322833, inset 1px 1px 0 #FFFFFF8C, inset -1px -1px 1px #3C322829
+- `--ds-elevation-float` 2px 8px 24px #3C32283D
+- `--ds-elevation-lift` 2px 5px 15px #3C322833, inset 1px 1px 0 #FFFFFF8C, inset -1px -1px 1px #3C322829
+- `--ds-elevation-well` inset 2px 2px 3px #00000038, inset -1px -1px 0 #FFFFFF8C
+- `--ds-material-height` 5px
+- `--ds-material-unit-height` 3px
+- `--ds-material-rough` 3px
+- `--ds-material-gloss` 0.2
+- `--ds-material-lit` #FFFFFF8C
+- `--ds-material-shade` #3C322829
+- `--ds-material-cast` #3C322833
+- `--ds-mechanism-mass` 1.4
+- `--ds-mechanism-stiffness` 520
+- `--ds-mechanism-damping` 46
+- `--ds-mechanism-detents` 11
+- `--ds-mechanism-sweep` 270
+- `--ds-mechanism-travel` 3px
+- `--ds-display-lcd-bg` #C7CBBD
+- `--ds-display-lcd-ink` #2F322D
+- `--ds-display-lcd-ghost` #2F322D12
+- `--ds-display-oled-bg` #141414
+- `--ds-display-oled-ink` #F2F2F0
+- `--ds-grille-hole` #BFBCB5
+- `--ds-grille-hole-on` #4A4844
 - `--ds-width-hairline` 1px
 - `--ds-width-ring` 2px
-- `--ds-width-halo` 5px
-- `--ds-width-avatar-ring` 4px
+- `--ds-width-halo` 4px
+- `--ds-width-avatar-ring` 2px
 - `--ds-width-bar` 4px
+- `--ds-gap-none` 0px
 - `--ds-gap-xs` 4px
 - `--ds-gap-sm` 6px
 - `--ds-gap-md` 8px
 - `--ds-gap-lg` 12px
 - `--ds-gap-xl` 14px
 - `--ds-gap-2xl` 16px
-- `--ds-gap-inset` 22px
+- `--ds-gap-3xl` 24px
+- `--ds-gap-inset` 24px
 - `--ds-gap-section` 32px
 - `--ds-gap-page` 48px
-- `--ds-gap-3xl` 24px
-- `--ds-gap-none` 0px
-- `--ds-control-sm` 32px
-- `--ds-control-md` 36px
-- `--ds-control-lg` 44px
+- `--ds-control-sm` 36px
+- `--ds-control-md` 44px
+- `--ds-control-lg` 52px
 - `--ds-control-icon-sm` 16px
-- `--ds-control-icon-md` 18px
-- `--ds-control-avatar-sm` 30px
+- `--ds-control-icon-md` 20px
+- `--ds-control-avatar-sm` 32px
 - `--ds-control-avatar-md` 44px
-- `--ds-control-avatar-lg` 84px
-- `--ds-control-badge` 22px
-- `--ds-control-dot` 6px
-- `--ds-control-thumb` 20px
-- `--ds-control-track` 6px
+- `--ds-control-avatar-lg` 80px
 - `--ds-control-menu-min` 180px
+- `--ds-control-knob-min` 44px
+- `--ds-control-cap-w` 24px
+- `--ds-control-cap-h` 32px
+- `--ds-control-badge` 20px
+- `--ds-control-dot` 6px
+- `--ds-control-thumb` 24px
+- `--ds-control-track` 8px
 - `--ds-control-check` 24px
 - `--ds-control-switch` 52px
-- `--ds-control-mark` 10px
-- `--ds-corner-panel` 40px
-- `--ds-corner-inner` 24px
-- `--ds-corner-media` 18px
+- `--ds-control-mark` 8px
+- `--ds-control-key` 44px
+- `--ds-control-lamp` 6px
+- `--ds-control-tick` 5px
+- `--ds-corner-panel` 28px
+- `--ds-corner-inner` 20px
+- `--ds-corner-media` 12px
 - `--ds-corner-round` 999px
 - `--ds-corner-mark` 4px
-- `--ds-corner-check` 7px
-- `--ds-type-family` system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif
+- `--ds-corner-check` 6px
+- `--ds-corner-unit-ratio` 0.16
+- `--ds-corner-inset-ratio` 0.077
+- `--ds-corner-knob-ratio` 0.36
+- `--ds-type-family` 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif
+- `--ds-type-mono` ui-monospace, 'SF Mono', Menlo, Consolas, monospace
 - `--ds-type-micro` 11px
 - `--ds-type-caption` 13px
 - `--ds-type-label` 14px
 - `--ds-type-body` 15px
-- `--ds-type-emphasis` 17px
-- `--ds-type-title` 21px
-- `--ds-type-headline` 28px
-- `--ds-type-display` 44px
-- `--ds-type-weight-regular` 400
-- `--ds-type-weight-medium` 550
-- `--ds-type-weight-semibold` 650
-- `--ds-type-leading-tight` 1.15
-- `--ds-type-leading-body` 1.42
-- `--ds-type-tracking-caps` 0.08em
-- `--ds-type-tracking-display` -0.02em
-- `--ds-type-measure` 32em
 - `--ds-type-reading` 16px
+- `--ds-type-emphasis` 18px
+- `--ds-type-title` 22px
+- `--ds-type-headline` 26px
+- `--ds-type-display` 37px
+- `--ds-type-measure` 32em
+- `--ds-type-weight-regular` 400
+- `--ds-type-weight-medium` 500
+- `--ds-type-weight-semibold` 500
+- `--ds-type-leading-tight` 1.15
+- `--ds-type-leading-body` 1.45
 - `--ds-type-leading-reading` 1.6
-- `--ds-type-mono` ui-monospace, 'SF Mono', Menlo, Consolas, monospace
-- `--ds-motion-hover` 360ms
-- `--ds-motion-press` 300ms
-- `--ds-motion-enter` 640ms
+- `--ds-type-tracking-caps` 0.06em
+- `--ds-type-tracking-display` -0.01em
+- `--ds-motion-hover` 120ms
+- `--ds-motion-press` 65ms
+- `--ds-motion-release` 245ms
+- `--ds-motion-enter` 160ms
 - `--ds-motion-exit` 240ms
-- `--ds-motion-scene` 640ms
-- `--ds-motion-stagger` 70ms
-- `--ds-motion-easing` cubic-bezier(0.22, 1, 0.36, 1)
+- `--ds-motion-scene` 240ms
+- `--ds-motion-stagger` 0ms
+- `--ds-motion-segment` 80ms
+- `--ds-motion-fill` 120ms
+- `--ds-motion-easing` cubic-bezier(0.2, 0, 0, 1)
 - `--ds-motion-easing-exit` cubic-bezier(0.4, 0, 1, 1)
 - `--ds-motion-easing-inout` cubic-bezier(0.45, 0, 0.2, 1)
-- `--ds-motion-rise` 16px
-- `--ds-motion-lift` 2px
-- `--ds-motion-press-scale` 0.97
-- `--ds-status-positive` #13803C
+- `--ds-motion-press-scale` 1
+- `--ds-motion-press-travel` 3px
+- `--ds-motion-rise` 8px
+- `--ds-motion-lift` 0px
+- `--ds-status-positive` #2E7D46
 - `--ds-status-on-positive` #FFFFFF
-- `--ds-status-warning` #F5B000
-- `--ds-status-on-warning` #111214
-- `--ds-status-critical` #C42B1C
+- `--ds-status-on-warning` #1F1E1C
 - `--ds-status-on-critical` #FFFFFF
-- `--ds-status-info` #0071E3
 - `--ds-status-on-info` #FFFFFF
-- `--ds-status-info-mark` #4DA3FF (light #0071E3)
-- `--ds-status-positive-mark` #3FCB77 (light #13803C)
-- `--ds-status-warning-mark` #F5B000 (light #9A6400)
-- `--ds-status-critical-mark` #FF6B5E (light #C42B1C)
+- `--ds-status-info-mark` #4A4844
+- `--ds-status-positive-mark` #2E7D46
+- `--ds-status-warning-mark` #F2B01E
+- `--ds-status-critical-mark` #B3261E
+- `--ds-status-warning` #F2B01E
+- `--ds-status-critical` #B3261E
+- `--ds-status-info` #2E2D2A
 - `--ds-layout-columns` 4
 - `--ds-layout-gutter` 16px
 - `--ds-layout-margin` 16px
+- `--ds-layout-touch` 44px
+- `--ds-layout-sidebar` 280px
 - `--ds-layout-container-sm` 640px
 - `--ds-layout-container-md` 768px
 - `--ds-layout-container-lg` 1024px
 - `--ds-layout-container-xl` 1200px
 - `--ds-layout-container-2xl` 1440px
-- `--ds-layout-touch` 44px
-- `--ds-layout-sidebar` 280px
 - `--ds-layer-base` 0
 - `--ds-layer-raised` 10
 - `--ds-layer-sticky` 100
@@ -134,19 +172,19 @@
 - `--ds-viewport-lg` 1024px
 - `--ds-viewport-xl` 1280px
 - `--ds-viewport-2xl` 1536px
-- `--ds-field-base` #141418 (light #F2F2F5)
-- `--ds-field-glow` #0071E338 (light #0071E31A)
-- `--ds-field-glow-soft` #FFFFFF0F (light #FFFFFFB3)
-- `--ds-field-line` #FFFFFF0D (light #1112140F)
-- `--ds-field-line-major` #FFFFFF14 (light #11121414)
-- `--ds-field-column` #4DA3FF (light #0071E3)
-- `--ds-field-margin` #FFFFFFB3 (light #111214C7)
-- `--ds-field-on-column` #111214 (light #FFFFFF)
+- `--ds-field-base` #F3F2EF
+- `--ds-field-glow` #1F1E1C0F
+- `--ds-field-glow-soft` #1F1E1C0F
+- `--ds-field-line-major` #1F1E1C24
+- `--ds-field-on-column` #1F1E1C
+- `--ds-field-line` #1F1E1C0F
+- `--ds-field-column` #BFBCB5
+- `--ds-field-margin` #4A4844
 - `--ds-opacity-disabled` 0.5
-- `--ds-focus-ring-color` #FFFFFF
-- `--ds-focus-ring-halo` #111214C7
+- `--ds-focus-ring-color` #1F1E1C
+- `--ds-focus-ring-halo` #FAF9F7
 - `--ds-focus-ring-width` 2px
-- `--ds-focus-ring-halo-width` 5px
+- `--ds-focus-ring-halo-width` 4px
 - `--ds-grid-columns` 4
 - `--ds-grid-gutter` 16px
 - `--ds-grid-margin` 16px
@@ -161,3 +199,11 @@
 - `--ds-stack-gap-md` 16px
 - `--ds-stack-gap-lg` 24px
 - `--ds-stack-gap-xl` 32px
+- `--ds-unit-bg` #E8E6E1
+- `--ds-unit-shadow` 1px 3px 10px #3C322833, inset 1px 1px 0 #FFFFFF8C, inset -1px -1px 0 #3C322829
+- `--ds-unit-radius-ratio` 0.16
+- `--ds-unit-inset-ratio` 0.077
+- `--ds-unit-knob-ratio` 0.36
+- `--ds-unit-knob-bg` #EC6A2C
+- `--ds-unit-knob-shade` #C9531C
+- `--ds-unit-window-shadow` inset 2px 2px 3px #00000038, inset -1px -1px 0 #FFFFFF8C

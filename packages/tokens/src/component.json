@@ -81,8 +81,55 @@
   },
   "$extensions": {
     "kiln.why": {
-      "p": "SEED",
-      "why": "seed value from the kiln starter so the build and docs work from day one; Phase 2 replaces it with this system's own decision and reason"
+      "p": [
+        "P3",
+        "P6"
+      ],
+      "why": "Component tokens for layout primitives and focus, pointing only at semantic roles named by the principles."
+    }
+  },
+  "unit": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P1",
+          "P2",
+          "P6"
+        ],
+        "why": "The device card read from anchor A: body, panel radius ratio, inset ratio, knob share and the one orange."
+      }
+    },
+    "bg": {
+      "$value": "{surface.solid}",
+      "$type": "color"
+    },
+    "shadow": {
+      "$value": "{elevation.unit}",
+      "$type": "shadow"
+    },
+    "radius-ratio": {
+      "$value": "{corner.unit-ratio}",
+      "$type": "number"
+    },
+    "inset-ratio": {
+      "$value": "{corner.inset-ratio}",
+      "$type": "number"
+    },
+    "knob-ratio": {
+      "$value": "{corner.knob-ratio}",
+      "$type": "number"
+    },
+    "knob-bg": {
+      "$value": "{action.accent}",
+      "$type": "color"
+    },
+    "knob-shade": {
+      "$value": "{action.accent-shade}",
+      "$type": "color"
+    },
+    "window-shadow": {
+      "$value": "{elevation.well}",
+      "$type": "shadow"
     }
   }
 }
