@@ -11,26 +11,6 @@ costume (fake logos, fake plastic grain, grime), never use the Braun name or mar
 wordmark), never spread orange across the screen, never set light grey on light grey below 4.5:1,
 and never swell into a bloated round toy.
 
-**Lineage:** Braun / Ulm school industrial design (user-declared; nearest catalogued structure
-`07-instrument-panel`). **Vector:** C3 T1 G2 S8 M3 D4 — surface is loud at 8 (one material, real
-mechanisms), paid for by type at 1 and grid at 2.
-
-## Light model
-
-One light, top-left, for every part in every theme. A raised part (body, key, knob cap) casts a
-short soft shadow down and right, offset = height × light vector, and carries a faint lit hairline
-on its top-left edge (matte ABS, gloss ~0.2). A recess (display window, fader groove, grille hole)
-is the inverse: shade on its top-left inner edge, a faint lit edge bottom-right. A pressed part
-drops to height 0 and its shadow collapses under it. The chosen or "on" item is not lit brighter;
-it is the one in orange or the one whose indicator is on. Disabled parts lose height (flat, no
-shadow) and keep ≥3:1 for their outline. **What emits:** only the displays (LCD segments do not
-emit, OLED text does) and the small status lamp; in dark theme nothing else glows, and no white
-part glows because it is white.
-
-Material row (tactile recipe): **matte ABS** — height 5px, gloss 0.2, roughness 3px, mass 1.4.
-Accent material: the same ABS dyed orange; it has the same height and light, never a different
-finish.
-
 ## Principles
 
 Values in this file that come from the reference are **(estimated from chat, re-measure from
@@ -102,3 +82,26 @@ than its material height. colour: no gradients, no glow except P2's emitters. ty
 (P5 decides type). motion: no entry choreography, no idle animation; transitions only on state.
 interaction: no hover lift; hover only darkens a key's ink a step, because a real key does not rise
 when you approach it.
+
+## Direction
+
+**Lineage:** Braun / Ulm school industrial design (user-declared; nearest catalogued structure
+`07-instrument-panel`). **Vector:** C3 T1 G2 S8 M3 D4 — surface is loud at 8 (one material, real
+mechanisms), paid for by type at 1 and grid at 2.
+
+## Light model
+
+
+One light, top-left, for every part in every theme. A raised part (body, key, knob cap) casts a
+short soft shadow down and right, offset = height × light vector, and carries a faint lit hairline
+on its top-left edge (matte ABS, gloss ~0.2). A recess (display window, fader groove, grille hole)
+is the inverse: shade on its top-left inner edge, a faint lit edge bottom-right. A pressed part
+drops to height 0 and its shadow collapses under it. The chosen or "on" item is not lit brighter;
+it is the one in orange or the one whose indicator is on. Disabled parts lose height (flat, no
+shadow) and keep ≥3:1 for their outline. **What emits:** only the displays (LCD segments do not
+emit, OLED text does) and the small status lamp; in dark theme nothing else glows, and no white
+part glows because it is white.
+
+Material row (tactile recipe): **matte ABS** — height 5px, gloss 0.2, roughness 3px, mass 1.4.
+Accent material: the same ABS dyed orange; it has the same height and light, never a different
+finish.

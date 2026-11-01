@@ -9,6 +9,10 @@
           "title": "Overview"
         },
         {
+          "path": "/direction",
+          "title": "Direction"
+        },
+        {
           "path": "/principles",
           "title": "Principles"
         }

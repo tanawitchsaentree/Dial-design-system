@@ -3,7 +3,8 @@
 // the system's to write, and stay TODO until then (gate G-TODO1).
 import type { ReactElement, ReactNode } from 'react';
 import { FocusPlayground, LabelPlayground } from '../book/playgrounds';
-import { Code, Page, Section } from '../book/kit';
+import { Callout, Code, Markdown, Page, Section } from '../book/kit';
+import intakeMd from '../../../../system/INTAKE.md?raw';
 import { NAME, PACKAGES } from './content';
 import meta from '../book/meta.json';
 
@@ -70,7 +71,43 @@ export function Contributing() {
 }
 
 
+// The direction the user set at intake, and the anchor round waiting on their pick.
+const VECTOR: Array<[string, number, string]> = [
+  ['Chroma', 3, 'One orange, spent on one control per unit; everything else is plastic and ink.'],
+  ['Type', 1, 'One grotesk, two weights. Size and position do the work.'],
+  ['Grid', 2, 'One module and fixed positions, like the face of an appliance.'],
+  ['Surface', 8, 'The loud axis: one matte plastic lit from the top left, grilles, display windows and real mechanisms.'],
+  ['Motion', 3, 'Presses, springs and detents. Nothing moves while idle.'],
+  ['Density', 4, 'A few readings per unit, many units per screen.'],
+];
+function Direction() {
+  return (
+    <Page eyebrow="Introduction" title="Direction" lede={<p>Where dial comes from, how loud each axis is, and the one visual choice still open.</p>}>
+      <Section id="anchor" title="Pick the anchor">
+        <Callout tone="rule" title="The anchor pick is yours">
+          <p>Four device cards are waiting in the anchor lab. Turn the knob, press FM and AM, slide the fader and switch to dark. Then tell the agent which one to build on, for example “pick B”, or a mix such as “B with the shadow of C”.</p>
+          <p><a href="/lab/anchor/index.html">Open the anchor lab</a></p>
+        </Callout>
+        <p>Every colour and size in the lab is estimated from the reference seen in chat. They are measured again from <code>system/refs/ref-01.png</code> once that file is in the repo, and the four cards are drawn again.</p>
+      </Section>
+      <Section id="lineage" title="Lineage">
+        <p>dial borrows from Braun and Ulm school industrial design: Dieter Rams and “Weniger, aber besser”. His ten principles are the source of the system's principles. A home control app has the problem those appliances solved. Someone glances at it, reads the state and finds the one control that matters, and nothing decorative gets in the way.</p>
+        <p>dial uses its own wordmark. It never uses the Braun name or logo.</p>
+      </Section>
+      <Section id="vector" title="Intensity vector">
+        <table className="token-table"><thead><tr><th scope="col">Axis</th><th scope="col">Score</th><th scope="col">What it spends</th></tr></thead>
+          <tbody>{VECTOR.map(([a, n, w]) => <tr key={a}><th scope="row">{a}</th><td>{n}</td><td>{w}</td></tr>)}</tbody></table>
+        <p>Surface is loud at 8, and type at 1 and grid at 2 pay for it.</p>
+      </Section>
+      <Section id="intake" title="The brief">
+        <Markdown source={intakeMd} skipUntil={/^\| #/} />
+      </Section>
+    </Page>
+  );
+}
+
 export const GUIDES: Record<string, () => ReactElement> = {
+  '/direction': Direction,
   '/getting-started/designing': Designing,
   '/getting-started/developing': Developing,
   '/getting-started/contributing': Contributing,
