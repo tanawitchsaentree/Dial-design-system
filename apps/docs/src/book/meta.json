@@ -1,7 +1,71 @@
 {
-  "generatedAt": "2026-11-01T09:50:16.435Z",
+  "generatedAt": "2026-11-01T10:34:16.500Z",
   "version": "0.0.0",
   "components": {
+    "Button": {
+      "source": "packages/react/src/components/Button/Button.tsx",
+      "kinds": {
+        "kind": [
+          "key",
+          "primary"
+        ]
+      },
+      "sizes": [
+        "md",
+        "lg"
+      ],
+      "exports": [
+        {
+          "displayName": "Button",
+          "props": [
+            {
+              "name": "kind",
+              "type": "\"key\" | \"primary\"",
+              "required": false,
+              "default": "key",
+              "description": "`key` (default) is a body-coloured key. `primary` is the unit's one orange key; use it once per unit.",
+              "enum": true,
+              "options": [
+                "key",
+                "primary"
+              ]
+            },
+            {
+              "name": "size",
+              "type": "\"md\" | \"lg\"",
+              "required": false,
+              "default": "md",
+              "description": "`md` (default) is 44px tall; `lg` is 52px, for the main action of a sheet on a phone.",
+              "enum": true,
+              "options": [
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "full",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Stretch to the full width of the container.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "kind",
+        "size"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 482,
+        "cssMin": 1561,
+        "gzip": 916
+      }
+    },
     "Container": {
       "source": "packages/react/src/components/Container/Container.tsx",
       "kinds": {},

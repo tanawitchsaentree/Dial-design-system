@@ -8,3 +8,7 @@
 export * from './components/Container';
 export * from './components/Grid';
 export * from './components/Stack';
+
+// Wave 1: atoms and controls. Keys, switches, faders, the rotary, displays and the device card.
+
+export * from './components/Button';

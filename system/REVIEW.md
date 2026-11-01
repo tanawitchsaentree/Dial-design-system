@@ -10,3 +10,4 @@ Put the component name alone in the What cell (`| <Name> |`); `tooling/kiln/mile
 
 | Date | What | Picked | Alternatives (lab) | Why, quoting the principles |
 |---|---|---|---|---|
+| 2026-11-01 | Button | A capsule key, word on the key | apps/lab/button/index.html (A capsule, B round + printed label, C calculator key) | P3 keys are round or capsule; P5 the word stays legible on the key; P1 one orange key per unit. B kept for IconButton. |

@@ -124,6 +124,16 @@
             "code",
             "accessibility"
           ]
+        },
+        {
+          "path": "/components/button",
+          "title": "Button",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
         }
       ]
     },

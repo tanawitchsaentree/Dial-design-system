@@ -147,4 +147,40 @@ export const COMPONENTS: ComponentChapter[] = [
     inherits: 'HTMLAttributes<HTMLDivElement>',
     related: [['/components/grid', 'Grid', 'When you need columns.'], ['/foundations/spacing', 'Spacing', 'The gap scale.']],
   },
+  {
+    name: 'Button',
+    slug: 'button',
+    status: 'beta',
+    limitations: ['There is no loading state; show progress on the unit’s display instead.', 'There is no icon slot yet. Use IconButton for an icon on its own.'],
+    youMust: ['Use one primary key per unit at most, and none when the unit already has an orange knob.', 'Write a verb on the key that says what happens.'],
+    usage: '<Button kind="primary">Start wash</Button>',
+    backdrops: 'In light the key is warm white plastic, in dark it is charcoal. The orange and its rim are the same in both themes, and the shadow always falls down and to the right.',
+    purpose: 'Starts, stops or confirms one action, as a key that drops when pressed and returns on a spring.',
+    importLine: "import { Button } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Button</code> is a capsule key of matte plastic, 44px tall by default. <code>kind="primary"</code> dyes it orange for the one action a unit exists for; every other key stays plastic. Pressing drops it by 3px in 65ms and the spring brings it back.</p>
+      </>
+    ),
+    hero: ex('ButtonBasic', 'One orange key for the main action and plastic keys for the rest.'),
+    ladder: [
+      ex('ButtonKinds', 'kind is key (the default) or primary.'),
+      ex('ButtonSizes', 'size is md (44px, the default) or lg (52px).'),
+      ex('ButtonStates', 'A disabled key loses its height. full stretches the key across its unit.'),
+      ex('ButtonInUnit', 'In a unit, keys sit at the bottom, under the display.'),
+    ],
+    whenToUse: ['Start, stop, pause or confirm an action.', 'The main action of a sheet or dialog.'],
+    whenNotToUse: [['An action shown only as an icon', 'IconButton'], ['A setting that stays on or off', 'Switch']],
+    anatomy: [['Key body', 'A capsule, elevation.part, corner.round, at least control.md tall.'], ['Printed word', 'type.label in type.weight-medium.']],
+    states: [['Hover', 'Ink one step darker; orange one step lighter on primary. No lift.'], ['Pressed', 'Drops motion.press-travel in motion.press, shadow collapses.'], ['Disabled', 'Flat, opacity.disabled.']],
+    content: ['A verb first, then the object: Start wash, Turn off.', 'Sentence case and no full stop.'],
+    dodont: [
+      { do: 'Use one orange key per unit.', dont: 'Put two orange keys side by side.' },
+      { do: 'Say what happens on the key.', dont: 'Write OK or Yes.' },
+    ],
+    a11y: ['A native button, so Space and Enter work and it is announced as a button.', 'The printed word is the accessible name.', 'The focus ring is 2px of the darkest ink with a gap, on every key.'],
+    keyboard: [['Tab', 'Moves focus to the key', 'Button: Tab reaches the key and the focus ring shows'], ['Space / Enter', 'Presses the key', 'Button: Space and Enter run the action']],
+    inherits: 'ButtonHTMLAttributes<HTMLButtonElement>',
+    related: [['/components/icon-button', 'IconButton', 'An icon with no word.'], ['/components/switch', 'Switch', 'Something that stays on or off.']],
+  },
 ];

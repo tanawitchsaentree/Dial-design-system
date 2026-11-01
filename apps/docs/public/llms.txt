@@ -1,9 +1,10 @@
 # dial
 
-> 3 React components and 376 design tokens. dial-react is not on npm yet. Install the release tarball (pnpm run release:pack writes it to release/): npm install /path/to/release/dial-react-0.0.0.tgz, then import 'dial-react/all.css' once at the root.
+> 4 React components and 376 design tokens. dial-react is not on npm yet. Install the release tarball (pnpm run release:pack writes it to release/): npm install /path/to/release/dial-react-0.0.0.tgz, then import 'dial-react/all.css' once at the root.
 
 ## Components
 
+- Button: Button is a key on the case of an appliance: a capsule of the same matte plastic that drops by its height when pressed and returns on the spring, with only the unit's one primary key dyed orange. `import { Button } from 'dial-react';`
 - Container: Container holds a page of units to a width the eye can scan, with a margin from the page edge that grows with the screen. `import { Container } from 'dial-react';`
 - Grid: Grid places whole units on four, eight or twelve columns, so each appliance keeps one fixed place on the screen and its face is never stretched. `import { Grid, GridItem } from 'dial-react';`
 - Stack: Stack lines up units and parts on the 4px step, so the gaps between appliances on a screen follow the same rhythm as the holes and insets inside them. `import { Stack } from 'dial-react';`

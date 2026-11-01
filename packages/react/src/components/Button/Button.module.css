@@ -1,0 +1,51 @@
+/* Button — a capsule key of matte ABS (system/FORM.md control class, D-003). One light, top-left. */
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-gap-md);
+  min-block-size: var(--ds-control-md);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-round);
+  font-family: var(--ds-type-family);
+  cursor: pointer;
+  box-shadow: var(--ds-elevation-part);
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing),
+    color var(--ds-motion-hover) linear,
+    background-color var(--ds-motion-hover) linear;
+}
+.key { background: var(--ds-surface-raised); color: var(--ds-text-secondary); }
+.primary { background: var(--ds-action-accent); color: var(--ds-text-on-accent); border-color: var(--ds-action-accent-rim); }
+.md { min-block-size: var(--ds-control-md); }
+.lg { min-block-size: var(--ds-control-lg); padding-inline: var(--ds-gap-2xl); }
+.full { inline-size: 100%; }
+.label { font-size: var(--ds-type-label); font-weight: var(--ds-type-weight-medium); line-height: var(--ds-type-leading-tight); }
+
+.key:hover { color: var(--ds-text-primary); }
+.primary:hover { background: var(--ds-action-accent-hover); }
+.root:active {
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+  box-shadow: none;
+  transition-duration: var(--ds-motion-press);
+}
+.root:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.root:disabled {
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root { transition: none; }
+  .root:active { transform: none; }
+}
+@media (forced-colors: active) {
+  .root { border-color: ButtonText; }
+}
