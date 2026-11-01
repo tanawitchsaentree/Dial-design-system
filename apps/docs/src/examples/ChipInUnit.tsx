@@ -1,4 +1,4 @@
-// @example In a unit: option chips under the display, the one orange key after them
+// @example In a unit, option chips sit under the display with the one orange key after them
 import { useState } from 'react';
 import { Button, Chip, Display, Stack } from 'dial-react';
 

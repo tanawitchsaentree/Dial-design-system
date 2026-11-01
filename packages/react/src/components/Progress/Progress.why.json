@@ -34,7 +34,7 @@
     "head": { "p": "P5", "axis": "space", "why": "One printed line above the groove holds the name at the start and the reading at the end." },
     "label": { "p": "P5", "axis": "type", "why": "The task name is the caption size in regular weight, printed in ink like a label on the case." },
     "value": { "p": "P2", "axis": "type", "why": "The reading uses tabular numerals in secondary ink so minutes and percent keep their width while counting." },
-    "groove": { "p": "P4", "axis": "depth", "why": "One long recess with inverse light: shade on its top-left inner edge, sunk into the body like a grille hole." },
+    "groove": { "p": "P4", "axis": "depth", "why": "One long recess takes the inverse light, with shade on its top-left inner edge, sunk into the body like a grille hole." },
     "fill": { "p": "P4", "axis": "colour", "why": "The fill is full-step ink from the start of the line, the same as a lit hole, and never orange." },
     "ticks": { "p": "P6", "axis": "motion", "why": "The indeterminate pattern spreads its ticks along the groove and holds them still, because nothing moves while idle." },
     "tick": { "p": "P4", "axis": "colour", "why": "Each tick is a short capsule of full-step ink in the groove, so working reads as ink, not as a colour." },

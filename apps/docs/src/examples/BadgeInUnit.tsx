@@ -1,4 +1,4 @@
-// @example In a unit: the badge is printed on the line under the display, beside the model name
+// @example In a unit, the badge is printed on the line under the display, beside the model name
 import { Badge, Display, Stack } from 'dial-react';
 
 export default function BadgeInUnit() {

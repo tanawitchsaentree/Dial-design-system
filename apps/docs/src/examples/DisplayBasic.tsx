@@ -1,4 +1,4 @@
-// @example A thermostat's LCD window: segment digits, the unit beside them, one detail line
+// @example A thermostat's LCD window with segment digits, the unit beside them and one detail line
 import { Display } from 'dial-react';
 
 export default function DisplayBasic() {

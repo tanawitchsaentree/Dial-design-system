@@ -1,4 +1,4 @@
-// @example Transport keys: one orange key to play, plastic keys to skip
+// @example Transport keys, one orange key to play and plastic keys to skip
 import { IconButton, Stack } from 'dial-react';
 
 const icon = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;

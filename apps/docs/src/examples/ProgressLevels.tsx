@@ -1,4 +1,4 @@
-// @example Not started, part way and done: the reading is printed and announced
+// @example Not started, part way and done, with the reading printed and announced
 import { Progress, Stack } from 'dial-react';
 
 export default function ProgressLevels() {

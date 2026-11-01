@@ -14,7 +14,7 @@ export interface CardBox {
 }
 
 export interface CardProps extends HTMLAttributes<HTMLElement> {
-  /** The element to render: `div` (default), `section` or `article` for a unit with its own heading, `li` inside a list of cards. */
+  /** The element to render. Use `div` (default), `section` or `article` for a unit with its own heading, `li` inside a list of cards. */
   as?: CardElement;
   /** The inset from the edge of the body to its content. `sm` 16px for small cards in a list, `md` (default) gap.inset (24px), `lg` 32px for a large panel, `unit` corner.inset-ratio (0.077) of the short side, like anchor A. */
   padding?: CardPadding;

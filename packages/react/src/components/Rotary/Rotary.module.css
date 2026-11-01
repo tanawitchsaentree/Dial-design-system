@@ -39,7 +39,7 @@
   cursor: grab;
   touch-action: none;
   outline: none;
-  transition: background-color var(--ds-motion-hover) linear;
+  transition: background-color var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .primary { background: var(--ds-action-accent); border-color: var(--ds-action-accent-rim); }
 .key { background: var(--ds-surface-raised); border-color: var(--ds-line-ring); }
@@ -56,7 +56,7 @@
   block-size: calc(var(--d) * 0.22);
   border-inline-start: var(--ds-width-bar) solid var(--ds-text-on-accent);
   border-radius: var(--ds-corner-mark);
-  transition: border-color var(--ds-motion-hover) linear;
+  transition: border-color var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .key .index { border-inline-start-color: var(--ds-text-secondary); }
 .value {

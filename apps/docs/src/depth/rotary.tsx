@@ -8,7 +8,7 @@ const temp = (v: number) => `${v} °C`;
 export const ROTARY: Depth = {
   overview: (
     <>
-      <p>Rotary is the knob. It sets the one value a unit exists for: the temperature of a heater, the station of a radio, the time on an oven. It is a flat disc with one printed index line, over a ring of ticks that marks every step across 270 degrees.</p>
+      <p>Rotary is the knob. It sets the one value a unit exists for, such as the temperature of a heater, the station of a radio or the time on an oven. It is a flat disc with one printed index line, over a ring of ticks that marks every step across 270 degrees.</p>
       <p>The primary knob is the unit’s one orange part. You turn it by dragging up or down, or with the arrow keys, and it settles into the nearest step on a spring. Its value and its label are printed under it.</p>
     </>
   ),
@@ -39,7 +39,7 @@ export const ROTARY: Depth = {
     lg: { use: '108px across, 0.36 of a 300px unit. The main knob of a device card.', pairs: 'A wide display on top and keys beside it, as on anchor card A.' },
   },
   emphasis: {
-    text: <p>One orange part per unit. If the unit has a primary knob, every other control on it is plastic: keys, faders and key knobs. Never put an orange key next to an orange knob.</p>,
+    text: <p>One orange part per unit. If the unit has a primary knob, every other control on it is plastic, and that means keys, faders and key knobs. Never put an orange key next to an orange knob.</p>,
     pair: {
       do: <Unit><Stack direction="row" gap="xl" align="end"><Rotary label="Temperature" min={16} max={26} defaultValue={21} formatValue={temp} /><Rotary kind="key" size="sm" label="Fan" min={0} max={5} defaultValue={2} /></Stack></Unit>,
       doNote: 'One orange knob and a key knob beside it.',
@@ -56,12 +56,12 @@ export const ROTARY: Depth = {
     avoid: [{ title: 'an orange knob next to an orange key', why: 'Two orange parts in one unit split attention, and the person does not know where to start.', render: <Unit><Stack direction="row" gap="xl" align="center"><Rotary size="sm" label="Timer" max={60} step={5} defaultValue={20} /><Button kind="primary">Start</Button></Stack></Unit> }],
   },
   content: {
-    formula: <p>The label names the setting: <em>Temperature</em>, <em>Station</em>, <em>Timer</em>. The value carries the unit, through <code>formatValue</code>: <em>21 °C</em>, <em>20 min</em>.</p>,
+    formula: <p>The label names the setting, as in <em>Temperature</em>, <em>Station</em> or <em>Timer</em>. The value carries the unit through <code>formatValue</code>, as in <em>21 °C</em> or <em>20 min</em>.</p>,
     pair: {
       do: <Rotary size="sm" label="Timer" max={60} step={5} defaultValue={20} formatValue={(v) => `${v} min`} />, doNote: 'The label names it and the value has its unit.',
       dont: <Rotary size="sm" label="Turn" max={60} step={5} defaultValue={20} />, dontNote: 'Turn says nothing, and 20 has no unit.',
     },
-    overflow: { text: 'A long label wraps under the knob. The knob keeps its size and its place.', render: <div style={{ inlineSize: 120 }}><Rotary size="md" label="Temperature in the guest room" min={16} max={26} defaultValue={20} formatValue={temp} /></div> },
+    overflow: { text: 'A long label wraps under the knob. The knob keeps its size and its place.', render: <div data-overflow-demo="" style={{ inlineSize: 120 }}><Rotary size="md" label="Temperature in the guest room" min={16} max={26} defaultValue={20} formatValue={temp} /></div> },
     rtl: { text: 'In right-to-left languages the knob still turns clockwise to go up, like a knob on any device. Only the text around it follows the direction.', render: <div dir="rtl"><Rotary size="md" label="درجة الحرارة" min={16} max={26} defaultValue={20} formatValue={temp} /></div> },
     expansion: { text: 'German and Finnish labels can run 30% longer. The label wraps under the knob and the disc does not move.', render: <Rotary size="md" label="Raumtemperatur" min={16} max={26} defaultValue={20} formatValue={temp} /> },
   },
@@ -102,7 +102,7 @@ export const ROTARY: Depth = {
   modifiers: [
     {
       name: 'unitSide',
-      rules: <p>Sizes the knob from the unit it sits on: the diameter is 0.36 of the unit’s short side, as on anchor card A. <code>diameter</code> sets it in pixels instead. Neither goes below 44px.</p>,
+      rules: <p>Sizes the knob from the unit it sits on. The diameter is 0.36 of the unit’s short side, as on anchor card A. <code>diameter</code> sets it in pixels instead. Neither goes below 44px.</p>,
       pair: { do: <Unit><Rotary unitSide={240} label="Temperature" min={16} max={26} defaultValue={21} formatValue={temp} /></Unit>, doNote: 'The knob takes 0.36 of a 240px unit.', dont: <Unit><Rotary diameter={200} label="Temperature" min={16} max={26} defaultValue={21} formatValue={temp} /></Unit>, dontNote: 'A knob that fills the unit swells into a toy.' },
     },
   ],
@@ -110,6 +110,6 @@ export const ROTARY: Depth = {
   references: [
     { title: 'WAI-ARIA Authoring Practices · Slider pattern', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/', why: 'A knob is announced and driven as a slider.' },
     { title: 'WCAG 2.2 · 2.5.7 Dragging Movements', url: 'https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html', why: 'Why a press on the tick ring also turns the knob, with no drag.' },
-    { title: 'Vitsœ · Dieter Rams: ten principles for good design', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
+    { title: 'Dieter Rams, ten principles for good design (Vitsœ)', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
   ],
 };

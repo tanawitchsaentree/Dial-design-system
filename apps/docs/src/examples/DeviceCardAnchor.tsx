@@ -1,4 +1,4 @@
-// @example Anchor A: a radio with its LCD across the top, the orange tuning knob, band keys, a volume grille and a ruler fader
+// @example Anchor A, a radio with its LCD across the top, the orange tuning knob, band keys, a volume grille and a ruler fader
 import { useState } from 'react';
 import { DeviceCard } from 'dial-react';
 

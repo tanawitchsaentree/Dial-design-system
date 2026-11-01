@@ -3,7 +3,7 @@ import { PAGES, PARTS, navigate, pageOf, useRoute } from './book/router';
 import { Link, SceneContext, VerifyContext, type Conformance, type Evidence } from './book/kit';
 import { PAGE_COMPONENTS } from './book/pages';
 import { plannedWaves } from './book/catalog';
-import { AppearanceMenu, useAppearance } from './book/appearance';
+import { AppearanceMenu, AppearancePanel, useAppearance } from './book/appearance';
 import { NAME } from './system/content';
 
 // Verification results ship inside the bundle (the verify run rebuilds the docs after writing them),
@@ -34,6 +34,7 @@ export function App() {
   const scene = look.scene;
   const [q, setQ] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lookOpen, setLookOpen] = useState(false);
   // Theme: system follows prefers-color-scheme. A chosen theme is stored; the default (system) never is,
   // and ?theme= overrides for tests. Unknown values in either place fall back to system (G-ST1).
   const asPref = (v: string | null) => (v === 'light' || v === 'dark' || v === 'system' ? v : null);
@@ -101,10 +102,11 @@ export function App() {
                 <button key={t} type="button" className="seg-btn" aria-pressed={t === themePref} data-theme-value={t} onClick={() => setThemePref(t)}>{t[0].toUpperCase() + t.slice(1)}</button>
               ))}
             </div>
-            <AppearanceMenu look={look} onChange={setLook} />
+            <AppearanceMenu look={look} open={lookOpen} onToggle={setLookOpen} />
           </div>
           <button ref={menuButton} type="button" className="menu-btn" data-menu-toggle="" aria-expanded={menuOpen} aria-controls="book-nav" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Close' : 'Menu'}</button>
         </header>
+        {lookOpen && <AppearancePanel look={look} onChange={setLook} />}
         {menuOpen && <div className="drawer-scrim" aria-hidden="true" onClick={() => setMenuOpen(false)} />}
 
         <aside className={`rail${menuOpen ? ' open' : ''}`} id="book-nav" aria-label="Book navigation">

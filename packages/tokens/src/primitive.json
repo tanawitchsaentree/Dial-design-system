@@ -7,13 +7,13 @@
           "P5",
           "P6"
         ],
-        "why": "Warm plastic, grey printing and one dyed orange: every hue dial owns, so nothing outside this list can appear. Value estimated from chat; re-measure from ref-01.png."
+        "why": "Warm plastic, grey printing and one dyed orange. These are every hue dial owns, so nothing outside this list can appear. Value estimated from chat; re-measure from ref-01.png."
       }
     },
     "abs": {
       "50": {
-        "$value": "#F3F2EF",
-        "$description": "page behind the units"
+        "$value": "#F8F7F5",
+        "$description": "page behind the units, a step lighter than the body (1.17:1, G-EL1)"
       },
       "0": {
         "$value": "#FAF9F7",
@@ -36,8 +36,8 @@
         "$description": "unlit grille hole"
       },
       "500": {
-        "$value": "#85827C",
-        "$description": "control outline, 3.3:1 on the body"
+        "$value": "#7C7973",
+        "$description": "control outline, 3.5:1 on the body and 3.1:1 on a sunken well"
       },
       "700": {
         "$value": "#4A4844",
@@ -296,7 +296,7 @@
         "p": [
           "P3"
         ],
-        "why": "Sizes of parts: every control keeps a 44px target even where it draws smaller, as a real knob does."
+        "why": "Every control keeps a 44px target even where it draws smaller, as a real knob does."
       }
     },
     "hairline": {
@@ -531,7 +531,7 @@
           "P3",
           "P6"
         ],
-        "why": "Shadows from one light at the top left: offset is the part's height times the light vector, short and soft."
+        "why": "Shadows come from one light at the top left. The offset is the part's height times the light vector, so they stay short and soft."
       }
     },
     "unit": {
@@ -560,6 +560,18 @@
     },
     "well-dark": {
       "$value": "inset 2px 2px 3px #00000066, inset -1px -1px 0 #FFFFFF1A"
+    },
+    "emit-none": {
+      "$value": "0 0 0 0 #00000000",
+      "$description": "nothing emits in the light edition"
+    },
+    "emit-display-dark": {
+      "$value": "0 0 10px 1px #F2F2F040",
+      "$description": "an OLED window's own light on the charcoal body, gone within 32px"
+    },
+    "emit-lamp-dark": {
+      "$value": "0 0 6px 2px #EDEBE699",
+      "$description": "a lit status lamp's own light, a few pixels round the dot"
     }
   },
   "duration": {
@@ -570,7 +582,7 @@
           "P3",
           "P6"
         ],
-        "why": "Fast in, slow out: a press lands at once, the spring returns, and nothing moves while idle."
+        "why": "Fast in, slow out. A press lands at once, the spring brings it back, and nothing moves while idle."
       }
     },
     "none": {
@@ -591,8 +603,11 @@
     "settle": {
       "$value": "245ms"
     },
-    "exit": {
+    "linger": {
       "$value": "240ms"
+    },
+    "exit": {
+      "$value": "120ms"
     },
     "fill": {
       "$value": "120ms"
@@ -611,8 +626,8 @@
     "enter": {
       "$value": [
         0.2,
-        0,
-        0,
+        0.8,
+        0.2,
         1
       ]
     },
@@ -674,7 +689,7 @@
         "p": [
           "P3"
         ],
-        "why": "Matte ABS spring: mass 1.4, stiffness 520, damping 46, \u03b6 about 0.85, settling in about 245ms."
+        "why": "The matte ABS spring has mass 1.4, stiffness 520, damping 46, \u03b6 about 0.85, settling in about 245ms."
       }
     },
     "mass": {
@@ -701,7 +716,7 @@
           "P3",
           "P6"
         ],
-        "why": "The matte ABS row of the tactile recipe: height, gloss and roughness every part reads from."
+        "why": "The matte ABS row of the tactile recipe. Every part reads its height, gloss and roughness from here."
       }
     },
     "height": {
@@ -788,7 +803,7 @@
         "p": [
           "P6"
         ],
-        "why": "Column counts for placing units: four on a phone, eight on tablet, twelve on desktop."
+        "why": "Units are placed on four columns on a phone, eight on a tablet and twelve on a desktop."
       }
     },
     "4": {
@@ -808,7 +823,7 @@
         "p": [
           "P6"
         ],
-        "why": "Layers stay few: a unit sits on the page, and only sheets and messages rise above it."
+        "why": "Layers stay few. A unit sits on the page, and only sheets and messages rise above it."
       }
     },
     "base": {

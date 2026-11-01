@@ -6,7 +6,7 @@
           "P5",
           "P6"
         ],
-        "why": "Plastic in two editions: warm white for light and charcoal for dark, lit by the same light."
+        "why": "Plastic in two editions, warm white for light and charcoal for dark, lit by the same light."
       }
     },
     "page": {
@@ -362,13 +362,42 @@
       "$type": "dimension"
     }
   },
+  "emit": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P2",
+          "P6"
+        ],
+        "why": "Only P2's emitters give off light, and only in the dark edition. They are the OLED window and a lit status lamp. LCD segments and white parts never glow."
+      }
+    },
+    "display": {
+      "$value": "{shadow.emit-none}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{shadow.emit-display-dark}"
+        }
+      },
+      "$type": "shadow"
+    },
+    "lamp": {
+      "$value": "{shadow.emit-none}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{shadow.emit-lamp-dark}"
+        }
+      },
+      "$type": "shadow"
+    }
+  },
   "display": {
     "$extensions": {
       "kiln.why": {
         "p": [
           "P2"
         ],
-        "why": "Two window families: LCD dark segments on grey-green and OLED white on near-black, both above 4.5:1."
+        "why": "Two window families, LCD dark segments on grey-green and OLED white on near-black, both above 4.5:1."
       }
     },
     "lcd-bg": {
@@ -526,7 +555,7 @@
         "p": [
           "P3"
         ],
-        "why": "Part sizes: 44px targets for keys, knobs and fader caps, even when the visible part is smaller."
+        "why": "Keys, knobs and fader caps get 44px targets, even when the visible part is smaller."
       }
     },
     "sm": {
@@ -625,7 +654,7 @@
           "P2",
           "P6"
         ],
-        "why": "Corners nest: a unit's panel radius minus its inset gives the window and well inside it."
+        "why": "Corners nest. A unit's panel radius minus its inset gives the window and the well inside it."
       }
     },
     "panel": {
@@ -671,7 +700,7 @@
         "p": [
           "P5"
         ],
-        "why": "Type roles for printing on a case: one family, two weights, tabular figures, size steps on a 1.2 ratio."
+        "why": "Type roles for printing on a case. One family and two weights, with tabular figures and size steps on a 1.2 ratio."
       }
     },
     "family": {
@@ -767,7 +796,14 @@
       }
     },
     "hover": {
-      "$value": "{duration.brisk}",
+      "$value": "{duration.linger}",
+      "$description": "out of hover 240ms; into hover 120ms (kiln.state)",
+      "$extensions": {
+        "kiln.state": {
+          ":hover": "{duration.brisk}"
+        },
+        "kiln.reduced": "keep"
+      },
       "$type": "duration"
     },
     "press": {
@@ -979,7 +1015,7 @@
         "p": [
           "P6"
         ],
-        "why": "Few layers: units sit on the page, and only sheets, menus and messages stack above them."
+        "why": "Few layers. Units sit on the page, and only sheets, menus and messages stack above them."
       }
     },
     "base": {
@@ -1064,7 +1100,12 @@
       "$type": "color"
     },
     "on-column": {
-      "$value": "{color.abs.900}",
+      "$value": "{color.abs.0}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.abs.900}"
+        }
+      },
       "$type": "color"
     },
     "line": {
@@ -1072,10 +1113,10 @@
       "$type": "color"
     },
     "column": {
-      "$value": "{color.abs.300}",
+      "$value": "{color.abs.700}",
       "$extensions": {
         "kiln.theme": {
-          "dark": "{color.charcoal.400}"
+          "dark": "{color.charcoal.200}"
         }
       },
       "$type": "color"

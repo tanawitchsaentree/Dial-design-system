@@ -1,4 +1,4 @@
-// @example In a list of devices: one badge per row, at the end of the line
+// @example In a list of devices, one badge per row at the end of the line
 import { Badge, Stack } from 'dial-react';
 
 const ROWS: Array<[string, 'positive' | 'critical' | 'neutral', string]> = [

@@ -22,17 +22,17 @@ export interface TabsItem {
 }
 
 export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue' | 'children'> {
-  /** What the sections are, such as Rooms. Required: it is the accessible name of the row of names. */
+  /** What the sections are, such as Rooms. It is required, because it is the accessible name of the row of names. */
   label: string;
-  /** The sections, in order: each has a value, a printed name and its content. */
+  /** The sections in order. Each has a value, a printed name and its content. */
   items: TabsItem[];
-  /** Controlled: the value of the chosen section. Pair it with `onValueChange`. */
+  /** The value of the chosen section, when you control it. Pair it with `onValueChange`. */
   value?: string;
-  /** Uncontrolled: the section chosen at first. Default: the first item. */
+  /** The section chosen at first, when the tabs keep their own state. It defaults to the first item. */
   defaultValue?: string;
   /** Called with the new value when another section is chosen. */
   onValueChange?: (value: string) => void;
-  /** `automatic` (default): arrow keys choose the section they reach, because every panel is already on the page. `manual`: arrows only move focus and Enter or Space chooses, for panels that are slow to show. */
+  /** With `automatic` (default) the arrow keys choose the section they reach, because every panel is already on the page. With `manual` the arrows only move focus and Enter or Space chooses, for panels that are slow to show. */
   activation?: TabsActivation;
 }
 

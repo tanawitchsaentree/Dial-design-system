@@ -5,7 +5,7 @@ def lum(h):
 def r(a,b): A,B=sorted([lum(a),lum(b)],reverse=True); return (A+.05)/(B+.05)
 pairs={
 'light text.primary/body':('#2E2D2A','#E8E6E1',4.5),'light text.secondary/body':('#4A4844','#E8E6E1',4.5),
-'light text.secondary/page':('#4A4844','#F3F2EF',4.5),'light text.secondary/sunken':('#4A4844','#DEDBD5',4.5),
+'light text.secondary/page':('#4A4844','#F8F7F5',4.5),'light text.secondary/sunken':('#4A4844','#DEDBD5',4.5),
 'light lcd':('#2F322D','#C7CBBD',4.5),'oled':('#F2F2F0','#141414',4.5),
 'ink on orange':('#1F1E1C','#EC6A2C',4.5),'ink on orange-hover':('#1F1E1C','#F27D42',4.5),
 'light ring/body':('#85827C','#E8E6E1',3),'light hole-on/hole':('#4A4844','#BFBCB5',3),'light focus/body':('#1F1E1C','#E8E6E1',3),

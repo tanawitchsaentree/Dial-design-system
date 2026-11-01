@@ -1,4 +1,4 @@
-// @example Off, latched, and disabled: a disabled chip loses its height
+// @example Off, latched, and disabled, where a disabled chip loses its height
 import { Chip, Stack } from 'dial-react';
 
 export default function ChipStates() {

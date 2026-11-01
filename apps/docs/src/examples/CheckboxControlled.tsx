@@ -1,4 +1,4 @@
-// @example Controlled: the screen keeps the value and the display repeats it in words
+// @example Controlled, so the screen keeps the value and the display repeats it in words
 import { useState } from 'react';
 import { Checkbox, Stack } from 'dial-react';
 

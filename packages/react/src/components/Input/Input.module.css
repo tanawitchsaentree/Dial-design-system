@@ -29,9 +29,12 @@
 }
 .field {
   flex: 1 1 auto;
+  align-self: stretch;
   min-inline-size: 0;
   inline-size: 100%;
-  margin: 0;
+  /* the field runs over the well's hairline, so the whole 44px well is its press area */
+  margin-block: calc(var(--ds-width-hairline) * -1);
+  margin-inline: 0;
   padding-block: var(--ds-gap-md);
   padding-inline: 0;
   border: 0;

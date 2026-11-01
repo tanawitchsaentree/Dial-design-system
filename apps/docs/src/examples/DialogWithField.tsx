@@ -1,4 +1,4 @@
-// @example A field in the sheet: the fader takes focus when the sheet opens
+// @example A field in the sheet, where the fader takes focus when the sheet opens
 import { useState } from 'react';
 import { Button, Dialog, Slider } from 'dial-react';
 

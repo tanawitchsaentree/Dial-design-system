@@ -1,7 +1,7 @@
 // Behaviour checks for Toast, run by tooling/kiln/conformance.mjs on the built book.
 export default async function toast({ check, expect, page, go, main, tokens }) {
   const px = (s) => parseFloat(s);
-  await check('Toast', 'each toast is a live region: status, or alert when critical', async () => {
+  await check('Toast', 'each toast is a live region, a status or an alert when critical', async () => {
     await go('/components/toast/code');
     const st = await main().locator('[data-component="Toast"]').evaluateAll((els) => els.map((e) => ({ tone: e.dataset.tone, role: e.getAttribute('role') })));
     expect(st.length > 0, 'no toasts on the page');

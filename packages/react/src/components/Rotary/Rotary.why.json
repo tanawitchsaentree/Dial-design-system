@@ -1,5 +1,5 @@
 {
-  "concept": "Rotary is the knob of the appliance: a flat disc with one printed index mark over a ring of detent ticks across 270 degrees, dyed orange as the unit's one loud part, that turns with the hand and settles into the nearest detent on the material's spring.",
+  "concept": "Rotary is the knob of the appliance. It is a flat disc with one printed index mark over a ring of detent ticks across 270 degrees, dyed orange as the unit's one loud part, and it turns with the hand and settles into the nearest detent on the material's spring.",
   "kind": ["rotary", "knob", "dial"],
   "default_to_avoid": [
     { "pattern": "skeuomorphic chrome audio plugin knob with gradients, knurling and a glowing LED arc", "why_not": "P6 allows no gradients and no glow outside the displays, and P3 says a rotary is a circle with one index mark, so the value is never told by a lit arc." },
@@ -51,6 +51,6 @@
   },
   "motion": {
     "background-color": { "p": "P1", "axis": "colour", "why": "The primary knob's orange shifts one step on hover with a brief fade, the same as the primary key." },
-    "border-color": { "p": "P6", "axis": "interaction", "why": "A key dial's index ink step on hover fades briefly so it reads as a reply rather than a flash." }
+    "border-color": { "p": "P3", "axis": "motion", "why": "A key dial's index ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out." }
   }
 }

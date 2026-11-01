@@ -39,7 +39,7 @@ export default async function card({ check, expect, page, go, main }) {
     return 'bodies skipped, keys reached';
   });
 
-  await check('Card', 'a Display inside nests its corner: outer radius minus inset', async () => {
+  await check('Card', 'a Display inside nests its corner, so its radius is the outer radius minus the inset', async () => {
     await go('/components/card/code');
     const r = await main().locator('[data-component="Card"] [data-component="Display"]').evaluateAll((els) => els.map((d) => {
       const c = d.closest('[data-component="Card"]'); const cs = getComputedStyle(c);

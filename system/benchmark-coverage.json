@@ -1,0 +1,61 @@
+{
+  "/foundations/grid": {
+    "scope": "grid-scope", "unit": "grid-unit", "anatomy": "anatomy", "breakpoints": "breakpoints",
+    "breakpoint-basis": "grid-basis", "column-width": "grid-columns", "spans": "spans", "types": "grid-types",
+    "max-width": "grid-max", "gutters": "grid-gutters", "margins": "grid-margins", "padding": "grid-padding",
+    "what-aligns": "grid-aligns", "nested": "grid-nested", "behaviours": "grid-behaviours", "ui-behaviours": "grid-ui",
+    "regions": "grid-regions", "key-lines": "grid-keylines", "density": "grid-density", "sizing-scale": "grid-sizing",
+    "aspect-ratios": { "na": "A unit takes the height its readings and controls need, and its corner follows its own short side (P6), so dial sets no aspect ratio tokens for boxes." },
+    "vertical-rhythm": "grid-rhythm", "components": "grid-components", "dodont": "grid-dodont", "tools": "tools",
+    "demos": "demos", "further-reading": "grid-reading"
+  },
+  "/foundations/color": {
+    "anatomy": "color-anatomy", "layering": "color-layering", "roles": "roles", "tokens": "color-tokens",
+    "states": "color-states", "themes": "color-themes", "high-contrast": "color-high-contrast", "accessibility": "color-a11y",
+    "specs": "palette",
+    "on-materials": { "na": "dial has one material, matte ABS plastic, and no translucent or glass surfaces (P6 and the one-material light model), so there is no colour on glass to specify." },
+    "management": "color-platforms", "platforms": "color-platforms"
+  },
+  "/foundations/typography": {
+    "principles": "type-principles", "typeface": "type-typeface", "custom-fonts": "type-custom-fonts", "scale": "scale",
+    "weights": "weights", "styles": "type-styles", "user-size": "type-user-size", "tracking": "weights",
+    "color": "type-color", "legibility": "type-legibility", "platforms": "type-platforms"
+  },
+  "/foundations/spacing": {
+    "base-unit": "space-base", "scale": "scale", "tokens": "space-tokens", "applying": "space-applying",
+    "stacking": "space-stacking", "relationships": "space-relationships", "hierarchy": "space-hierarchy",
+    "white-space": "space-white", "optical": "space-optical", "safe-areas": "space-safe"
+  },
+  "/foundations/motion": {
+    "principles": "motion-principles", "duration": "motion-duration", "easing": "motion-easing", "properties": "motion-properties",
+    "feedback": "motion-feedback", "choreography": "motion-choreography", "accessibility": "motion-a11y", "evaluation": "motion-evaluation",
+    "platforms": { "na": "dial targets the web on phones and laptops; its SwiftUI output is tokens only, and there is no visionOS or spatial target, so spatial motion has nothing to govern." }
+  },
+  "/foundations/icons": {
+    "principles": "icon-principles", "sizing": "icon-sizing", "targets": "icon-targets", "color": "icon-color",
+    "alignment": "icon-alignment", "style": "icon-style", "standard": "icon-standard", "contribution": "icon-contribute"
+  },
+  "/foundations/themes": {
+    "basics": "theme-basics", "default": "theme-default", "customising": "theme-customising", "tokens": "changes",
+    "dark-colors": "theme-dark", "images": "theme-images", "text": "theme-text", "respect-setting": "switch", "applied": "theme-applied"
+  },
+  "/foundations/shape": {
+    "radius-scale": "shape-scale", "radius-usage": "shape-usage", "focus-radius": "shape-focus", "elevation-types": "shape-elevation",
+    "pairings": "shape-pairings", "dark": "shape-dark", "interaction": "shape-interaction", "z-index": "shape-z",
+    "materials": { "na": "Depth in dial comes from one opaque material, matte ABS, lit from the top left (P3, P6); there is no translucency or blur, so materials as depth do not apply." },
+    "contrast": "shape-contrast"
+  },
+  "/foundations/dimensions": {
+    "hierarchy": "dim-hierarchy", "size-classes": "breakpoints", "safe-areas": "dim-safe", "density": "dim-density",
+    "controls": "controls", "stacking": "layers"
+  },
+  "/foundations/content": {
+    "audience": "audience", "voice": "voice", "tone": "tone", "clarity": "clarity", "inclusive": "inclusive",
+    "labels": "label-words", "capitalisation": "capitalisation", "consistency": "consistency", "multistep": "multistep",
+    "accessibility": "writing-a11y"
+  },
+  "/foundations/accessibility": {
+    "vision": "vision", "hearing": "hearing", "mobility": "mobility", "cognitive": "cognitive", "speech": "speech",
+    "standards": "standards", "principles": "a11y-principles", "tools": "a11y-tools"
+  }
+}

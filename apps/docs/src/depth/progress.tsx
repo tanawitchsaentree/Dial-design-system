@@ -12,7 +12,7 @@ export const PROGRESS: Depth = {
       <p>The fill is ink, never orange. When the device cannot say how far it is, the groove shows a still row of ink ticks and the word Working. Nothing moves while the task runs. The groove only changes when the device reports a new value.</p>
     </>
   ),
-  whenToUse: ['For a task with a known end: a wash cycle, a download, an update.', 'Under the display, when the display shows the time and the groove shows the share done.', 'In a list of devices, one small groove per row.'],
+  whenToUse: ['For a task with a known end, such as a wash cycle, a download or an update.', 'Under the display, when the display shows the time and the groove shows the share done.', 'In a list of devices, one small groove per row.'],
   whenNot: [
     { situation: 'A level that goes up and down, such as volume', to: '/components/grille', label: 'Grille' },
     { situation: 'The person sets the amount', to: '/components/slider', label: 'Slider' },
@@ -50,12 +50,12 @@ export const PROGRESS: Depth = {
     avoid: [{ title: 'a groove for a level that goes up and down', why: 'Progress only moves toward the end of a task. A level such as volume belongs in a Grille.', render: <Progress label="Volume" value={60} valueText="6 of 10" style={W} /> }],
   },
   content: {
-    formula: <p>The label names the task: <em>Washer</em>, <em>Firmware update</em>. valueText says the reading people care about: <em>38 min left</em>, <em>12 of 48 MB</em>. Without valueText the reading is the percent.</p>,
+    formula: <p>The label names the task, as in <em>Washer</em> or <em>Firmware update</em>. valueText says the reading people care about, as in <em>38 min left</em> or <em>12 of 48 MB</em>. Without valueText the reading is the percent.</p>,
     pair: {
       do: <Progress label="Washer" value={55} valueText="38 min left" style={W} />, doNote: 'Time left is what people wait for.',
       dont: <Progress label="Progress" value={55} style={W} />, dontNote: 'The label names the component. Name the task that is running.',
     },
-    overflow: { text: 'A long label wraps on the line above the groove, and the reading stays on one line at the end.', render: <div style={{ inlineSize: 220 }}><Progress label="Firmware update for the hall speaker" value={64} valueText="64%" /></div> },
+    overflow: { text: 'A long label wraps on the line above the groove, and the reading stays on one line at the end.', render: <div data-overflow-demo="" style={{ inlineSize: 220 }}><Progress label="Firmware update for the hall speaker" value={64} valueText="64%" /></div> },
     rtl: { text: 'In right-to-left languages the fill starts from the right, because it follows the reading direction.', render: <div dir="rtl" style={W}><Progress label="الغسالة" value={55} valueText="٣٨ دقيقة" /></div> },
     expansion: { text: 'German and Finnish labels can run 30% longer. The label line wraps first. The groove keeps its height.', render: <Progress label="Firmware-Aktualisierung" value={64} valueText="64 %" style={W} /> },
   },

@@ -1,4 +1,4 @@
-// @example A controlled switch: the unit's display says what the switch did
+// @example A controlled switch, with the unit's display saying what the switch did
 import { useState } from 'react';
 import { Switch, Stack } from 'dial-react';
 

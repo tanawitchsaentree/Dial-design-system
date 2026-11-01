@@ -1,4 +1,4 @@
-// @example digits keeps the window one width: short readings get unlit cells on the left
+// @example digits keeps the window one width, so short readings get unlit cells on the left
 import { Display, Stack } from 'dial-react';
 
 export default function DisplayDigits() {

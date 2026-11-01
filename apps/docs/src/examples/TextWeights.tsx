@@ -1,4 +1,4 @@
-// @example Two weights only: medium names a part, regular says the rest
+// @example Two weights only. Medium names a part and regular says the rest
 import { Stack, Text } from 'dial-react';
 
 export default function TextWeights() {

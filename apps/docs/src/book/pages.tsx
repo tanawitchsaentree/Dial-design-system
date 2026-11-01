@@ -8,7 +8,7 @@ import exceptionsMd from '../../../../system/EXCEPTIONS.md?raw';
 import * as Icons from '../icons';
 import { AgentOnboard } from './AgentOnboard';
 import { ThemePlayground, ContrastPlayground, TypePlayground, SpacingPlayground, ShapePlayground, MotionPlayground, IconBrowser, TouchTargetPlayground } from './playgrounds';
-import { inline, PRINCIPLES, CONCEPT_INTRO, Callout, Code, CopyButton, ConformanceList, EvidenceTable, Link, Markdown, Page, Section, TOKENS, TokenTable, VerifiedTags, useVerify } from './kit';
+import { installLine, inline, PRINCIPLES, CONCEPT_INTRO, Callout, Code, CopyButton, ConformanceList, EvidenceTable, Link, Markdown, Page, Section, TOKENS, TokenTable, VerifiedTags, useVerify } from './kit';
 import { COMPONENTS } from './components-data';
 import { GridLayoutPage } from './grid-page';
 import { ComponentPage, EVIDENCE_GROUPS, HISTORY, STATUS_LABEL, TABS } from './ComponentPage';
@@ -66,7 +66,8 @@ function GettingStarted() {
   return (
     <Page eyebrow="Getting started" title="Getting started" lede={<p>One install and one import. {PACKAGES.react} carries the tokens inside it, so a React app needs nothing else. It needs React 18 or newer.</p>}>
       <Section id="install" title="1 · Install">
-        <Code label="Install">{`npm install ${PACKAGES.react}`}</Code>
+        <p data-unpublished=""><b>{PACKAGES.react} is not on npm yet.</b> Installing it by name from the registry fails with a 404 until it is published. Pack the tarball in this repo and install that file, as below.</p>
+        <Code label="Install">{installLine(PACKAGES.react, meta.version)}</Code>
         <Code label="main.tsx">{`import '${PACKAGES.react}/all.css';\nimport { Container, Stack } from '${PACKAGES.react}';`}</Code>
         <p>A first screen, laid out only with the layout components, so no spacing or width is typed by hand.</p>
         <Code label="App.tsx">{`import '${PACKAGES.react}/all.css';
@@ -238,6 +239,15 @@ function Shape() {
       <Section id="playground" title="Corner and shadow" wide><ShapePlayground /></Section>
       <Section id="corners" title="Corners">
         <ul className="radius-scale flush">{Object.entries(TOKENS).filter(([p]) => p.startsWith('corner.')).map(([p, t]) => <li key={p}><span className="radius-chip" style={{ borderRadius: `var(${t.css})` }} aria-hidden="true" /><code>{p}</code> <span className="muted">{t.value}</span></li>)}</ul>
+      </Section>
+      <Section id="levels" title="Levels">
+        <p>Two levels stack in a unit. The body sits on the page with <code>elevation.unit</code>, and a key sits on the body with <code>elevation.part</code>. Each level is measured against what is under it, in both themes (G-EL1).</p>
+        <div className="level-demo" data-level-demo="">
+          <div className="level-unit" data-level-sample="unit">
+            <span className="level-label">unit · surface.solid · elevation.unit</span>
+            <div className="level-part" data-level-sample="part"><span className="level-label">part · surface.knob · elevation.part</span></div>
+          </div>
+        </div>
       </Section>
       <Section id="elevation" title="Elevation"><TokenTable prefix="elevation." /></Section>
     </Page>

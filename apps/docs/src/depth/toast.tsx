@@ -8,8 +8,8 @@ const Unit = ({ children }: { children: React.ReactNode }) => <div className="de
 export const TOAST: Depth = {
   overview: (
     <>
-      <p>Toast says what just happened after someone pressed a key: the lamp is off, the washer did not answer. It rises at the bottom of the screen, stays for at least five seconds, and goes away on its own. It never asks a question and never blocks the page.</p>
-      <p>The status is printed twice: a glyph and a word, such as a tick and Done. Each tone has its own glyph shape, so the tone reads without colour. No tone is orange, because orange belongs to the one main key of a unit. Use <code>ToastProvider</code> once near the root and <code>useToast()</code> to post a toast from anywhere; <code>Toast</code> on its own renders one strip in place.</p>
+      <p>Toast says what just happened after someone pressed a key, for example that the lamp is off or that the washer did not answer. It rises at the bottom of the screen, stays for at least five seconds, and goes away on its own. It never asks a question and never blocks the page.</p>
+      <p>The status is printed twice, as a glyph and a word, such as a tick and Done. Each tone has its own glyph shape, so the tone reads without colour. No tone is orange, because orange belongs to the one main key of a unit. Use <code>ToastProvider</code> once near the root and <code>useToast()</code> to post a toast from anywhere; <code>Toast</code> on its own renders one strip in place.</p>
     </>
   ),
   whenToUse: ['To confirm an action that ran, such as Lamp turned off.', 'To report that a device did not answer, with a Try again key.', 'To offer Undo for an action that was easy to run by mistake.'],
@@ -29,7 +29,7 @@ export const TOAST: Depth = {
     parts: [
       { part: 'Strip', selector: '[data-component="Toast"]', what: 'A short plastic body with the capped panel radius and a shadow down and to the right.' },
       { part: 'Glyph', selector: '[data-component="Toast"] svg', what: 'A printed symbol, one shape per tone, drawn in the tone’s mark ink.' },
-      { part: 'Status word', selector: '[data-component="Toast"] > span:first-child > span', what: 'The tone in a word: Note, Done, Check or Failed.' },
+      { part: 'Status word', selector: '[data-component="Toast"] > span:first-child > span', what: 'The tone in one word, which is Note, Done, Check or Failed.' },
       { part: 'Message', selector: '[data-component="Toast"] > span:nth-child(2)', what: 'What happened, in a few words.' },
       { part: 'Keys', selector: '[data-component="Toast"] > span:last-child', what: 'An optional plastic action key and the 44px round close key.' },
     ],
@@ -41,7 +41,7 @@ export const TOAST: Depth = {
       do: <Toast tone="positive" action={{ label: 'Undo', onAction: none }} onClose={none}>All lamps turned off</Toast>,
       doNote: 'One message, one plastic key.',
       dont: <Stack gap="sm"><Toast tone="positive" onClose={none}>Kitchen lamp turned off</Toast><Toast tone="positive" onClose={none}>Hall lamp turned off</Toast><Toast tone="positive" onClose={none}>Porch lamp turned off</Toast></Stack>,
-      dontNote: 'One toast per lamp. Say it once: All lamps turned off.',
+      dontNote: 'One toast per lamp. Say it once, as in All lamps turned off.',
     },
   },
   placement: {
@@ -53,12 +53,12 @@ export const TOAST: Depth = {
     avoid: [{ title: 'a toast that asks a question', why: 'It leaves after a few seconds, so the question can go unanswered. Use a Dialog.', render: <Toast tone="warning" action={{ label: 'Yes', onAction: none }} onClose={none}>Stop the wash?</Toast> }],
   },
   content: {
-    formula: <p>Say what happened in the past tense, in a few words: <em>Lamp turned off</em>. For a failure, say what failed and offer a way out: <em>Washer didn’t answer</em> with <em>Try again</em>. No full stop, no exclamation mark.</p>,
+    formula: <p>Say what happened in the past tense, in a few words, as in <em>Lamp turned off</em>. For a failure, say what failed and offer a way out, as in <em>Washer didn’t answer</em> with <em>Try again</em>. No full stop, no exclamation mark.</p>,
     pair: {
       do: <Toast tone="positive" onClose={none}>Lamp turned off</Toast>, doNote: 'What happened, in four words.',
       dont: <Toast tone="positive" onClose={none}>Success! Your request was processed.</Toast>, dontNote: 'Says nothing about the lamp.',
     },
-    overflow: { text: 'A long message wraps onto more lines. The glyph, word and keys stay centred on the strip.', render: <div style={{ inlineSize: 360 }}><Toast tone="warning" onClose={none}>The hallway lamp lost its connection and will try again in two minutes</Toast></div> },
+    overflow: { text: 'A long message wraps onto more lines. The glyph, word and keys stay centred on the strip.', render: <div data-overflow-demo="" style={{ inlineSize: 360 }}><Toast tone="warning" onClose={none}>The hallway lamp lost its connection and will try again in two minutes</Toast></div> },
     rtl: { text: 'In right-to-left languages the glyph and word move to the right and the keys to the left.', render: <div dir="rtl"><Toast tone="positive" status="تم" onClose={none} closeLabel="إغلاق">أُطفئ المصباح</Toast></div> },
     expansion: { text: 'German runs about 30% longer. The message takes the room; the keys keep their size.', render: <Toast tone="critical" status="Fehler" action={{ label: 'Erneut versuchen', onAction: none }} onClose={none} closeLabel="Schließen">Waschmaschine antwortet nicht</Toast> },
   },
@@ -66,7 +66,7 @@ export const TOAST: Depth = {
     states: [
       ['Arriving', 'Rises 8px and fades in over 160ms.', 'Announced politely, or at once when critical.'],
       ['Shown', 'Stays at least 5 s; 10 s with an action key.', 'The timer pauses while the pointer or focus is on a toast.'],
-      ['Leaving', 'Fades out over 240ms, slower than it came in.', 'Removed from the region after the fade.'],
+      ['Leaving', 'Fades out over 120ms, quicker than it came in.', 'Removed from the region after the fade.'],
       ['Reduced motion', 'Appears and goes at once.', 'No rise and no fade.'],
     ],
     interactions: [
@@ -80,7 +80,7 @@ export const TOAST: Depth = {
   },
   deepDive: {
     neutral: {
-      purpose: <p>A plain note: something changed and it is neither good nor bad.</p>,
+      purpose: <p>A plain note says something changed, and the change is neither good nor bad.</p>,
       context: <Toast tone="neutral" onClose={none}>Schedule saved for tomorrow</Toast>,
       practices: ['Use it for saves and small changes.', 'Do not use it to soften a failure.'],
       pair: { do: <Toast tone="neutral" onClose={none}>Schedule saved</Toast>, doNote: 'A plain fact.', dont: <Toast tone="neutral" onClose={none}>Washer didn’t answer</Toast>, dontNote: 'A failure told as a note.' },
@@ -107,7 +107,7 @@ export const TOAST: Depth = {
   modifiers: [
     {
       name: 'action',
-      rules: <p>One plastic key, a verb: Undo or Try again. Pressing it closes the toast. A toast with an action stays 10 s.</p>,
+      rules: <p>One plastic key with a verb on it, such as Undo or Try again. Pressing it closes the toast. A toast with an action stays 10 s.</p>,
       pair: { do: <Toast tone="positive" action={{ label: 'Undo', onAction: none }} onClose={none}>Lamp turned off</Toast>, doNote: 'One verb.', dont: <Toast tone="positive" action={{ label: 'OK', onAction: none }} onClose={none}>Lamp turned off</Toast>, dontNote: 'OK does what the close key does.' },
     },
     {
@@ -121,7 +121,7 @@ export const TOAST: Depth = {
       pair: { do: <Toast tone="neutral" onClose={none}>Schedule saved</Toast>, doNote: 'A way to close it early.', dont: <Toast tone="neutral">Schedule saved</Toast>, dontNote: 'It can only wait out its timer.' },
     },
   ],
-  related: [['/components/dialog', 'Dialog', 'Ask before an action that is hard to undo.'], ['/components/display', 'Display', 'A state that stays, not an event.'], ['/components/button', 'Button', 'The action key on the toast.']],
+  related: [['/components/dialog', 'Dialog', 'Ask before an action that is hard to undo.'], ['/components/display', 'Display', 'A state that stays, as opposed to an event.'], ['/components/button', 'Button', 'The action key on the toast.']],
   references: [
     { title: 'WCAG 2.2 · 4.1.3 Status Messages', url: 'https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html', why: 'Why a toast is a live region that does not take focus.' },
     { title: 'WCAG 2.2 · 2.2.1 Timing Adjustable', url: 'https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html', why: 'Why the timer is at least five seconds and pauses on hover and focus.' },

@@ -7,7 +7,7 @@ const Unit = ({ children }: { children: React.ReactNode }) => <div className="de
 export const INPUT: Depth = {
   overview: (
     <>
-      <p>Input takes a short piece of text: a room name, a password, a temperature. It is a well cut into the body of the unit. The light falls into it from the top left, so it reads as a recess and not as a box on top.</p>
+      <p>Input takes a short piece of text, such as a room name, a password or a temperature. It is a well cut into the body of the unit. The light falls into it from the top left, so it reads as a recess and not as a box on top.</p>
       <p>The name of the field is printed above the well, on the same line as the other printing on the unit. It stays there while you type. A placeholder is never the name.</p>
     </>
   ),
@@ -17,7 +17,7 @@ export const INPUT: Depth = {
     { situation: 'Setting an amount along a range', to: '/components/slider', label: 'Slider' },
     { situation: 'The main setting of a unit, such as its temperature', to: '/components/rotary', label: 'Rotary' },
   ],
-  variants: { na: 'Input has one look: a recessed well with the label above it. The hint, the error and the unit are options, covered under Modifiers.' },
+  variants: { na: 'Input has one look, a recessed well with the label above it. The hint, the error and the unit are options, covered under Modifiers.' },
   anatomy: {
     render: <Input label="Target temperature" unit="°C" defaultValue="21.5" hint="Between 5 and 30." />,
     parts: [
@@ -29,7 +29,7 @@ export const INPUT: Depth = {
     ],
   },
   sizes: {
-    md: { use: '44px well. Fields in a unit and in settings sheets.', pairs: 'Other 44px controls: Button, Select, Switch.' },
+    md: { use: '44px well. Fields in a unit and in settings sheets.', pairs: 'Other 44px controls, such as Button, Select and Switch.' },
     lg: { use: '52px well with larger text. The main field of a sheet on a phone.', pairs: 'A large Button below it, one field per row.' },
   },
   emphasis: { na: 'A field is never the loud part of a unit. It has no orange and no emphasis levels; the unit’s one orange key does the action.' },
@@ -42,12 +42,12 @@ export const INPUT: Depth = {
     avoid: [{ title: 'a placeholder in place of the label', why: 'The words disappear as soon as someone types, and the field has no name left.', render: <Unit><Input label="" aria-label="Room name" placeholder="Room name" /></Unit> }],
   },
   content: {
-    formula: <p>Name the thing, not the action: <em>Room name</em>, <em>Wi-Fi password</em>, <em>Target temperature</em>. Put the unit in <code>unit</code>, the format in <code>hint</code>, and say what is wrong in <code>error</code>.</p>,
+    formula: <p>Name the thing the field holds, as in <em>Room name</em>, <em>Wi-Fi password</em> or <em>Target temperature</em>, and leave the action to the key. Put the unit in <code>unit</code>, the format in <code>hint</code>, and say what is wrong in <code>error</code>.</p>,
     pair: {
       do: <Input label="Delay start by" unit="min" defaultValue="30" />, doNote: 'The label names the setting and the unit is printed after the value.',
       dont: <Input label="Please type the delay in minutes here" defaultValue="30" />, dontNote: 'An instruction as the label, with the unit buried in it.',
     },
-    overflow: { text: 'A long label wraps above the well. A long value scrolls inside the well, and the well keeps its width while you type.', render: <div style={{ inlineSize: 240 }}><Input label="Name shown on the lamp above the dining table" defaultValue="Dining table pendant, left side" /></div> },
+    overflow: { text: 'A long label wraps above the well. A long value scrolls inside the well, and the well keeps its width while you type.', render: <div data-overflow-demo="" style={{ inlineSize: 240 }}><Input label="Name shown on the lamp above the dining table" defaultValue="Dining table pendant, left side" /></div> },
     rtl: { text: 'In right-to-left languages the label starts on the right and the unit sits on the left of the value.', render: <div dir="rtl"><Input label="درجة الحرارة" unit="°C" defaultValue="21" /></div> },
     expansion: { text: 'German and Finnish labels can run 30% longer. The label wraps and the well does not change.', render: <Input label="Zieltemperatur im Wohnzimmer" unit="°C" defaultValue="21" /> },
   },
@@ -69,11 +69,11 @@ export const INPUT: Depth = {
     loading: <p>Input has no loading state. If the device checks a value, say so on the unit’s display and keep the text where the person typed it.</p>,
     focus: <p>A field is not focused on page load, except the first field of a sheet that opens only to ask for it, such as a Wi-Fi password.</p>,
   },
-  deepDive: { na: 'Input has a single variant, so there is no per-variant deep dive.' },
+  deepDive: { na: 'Input has a single variant, so there is no section per variant.' },
   modifiers: [
     {
       name: 'unit',
-      rules: <p>Prints the unit after the value, inside the well. It is part of the field’s description, so a screen reader says it too. Keep it short: <em>°C</em>, <em>min</em>, <em>%</em>.</p>,
+      rules: <p>Prints the unit after the value, inside the well. It is part of the field’s description, so a screen reader says it too. Keep it short, such as <em>°C</em>, <em>min</em> or <em>%</em>.</p>,
       pair: { do: <Input label="Target temperature" unit="°C" defaultValue="21.5" />, doNote: 'The unit is printed beside the value.', dont: <Input label="Target temperature (°C)" defaultValue="21.5 °C" />, dontNote: 'The unit is typed into the value, so the device has to parse it out.' },
     },
     {
@@ -83,14 +83,14 @@ export const INPUT: Depth = {
     },
     {
       name: 'error',
-      rules: <p>Marks the field invalid and prints the problem under the well with a glyph. Say what to do: <em>Use at least 8 characters.</em> Show it after the person leaves the field or submits, not on the first key press.</p>,
+      rules: <p>Marks the field invalid and prints the problem under the well with a glyph. Say what to do, as in <em>Use at least 8 characters.</em> Show it after the person leaves the field or submits. The first key press is too early.</p>,
       pair: { do: <Input label="Wi-Fi password" type="password" defaultValue="1234" error="Use at least 8 characters." />, doNote: 'The fix, in words, with a glyph.', dont: <Input label="Wi-Fi password" type="password" defaultValue="1234" error="Invalid." />, dontNote: 'It says something is wrong but not what to do.' },
     },
   ],
   related: [['/components/select', 'Select', 'A choice from a known list.'], ['/components/slider', 'Slider', 'An amount along a range.'], ['/components/rotary', 'Rotary', 'The main setting of a unit.']],
   references: [
     { title: 'WCAG 2.2 · 3.3.2 Labels or Instructions', url: 'https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html', why: 'Why the label is printed and stays while typing.' },
-    { title: 'WCAG 2.2 · 1.4.1 Use of Color', url: 'https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html', why: 'Why the error has a glyph and words, not only a red edge.' },
+    { title: 'WCAG 2.2 · 1.4.1 Use of Color', url: 'https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html', why: 'Why the error has a glyph and words as well as a red edge.' },
     { title: 'GOV.UK Design System · Text input', url: 'https://design-system.service.gov.uk/components/text-input/', why: 'Labels above the field, hints and error messages in words.' },
   ],
 };

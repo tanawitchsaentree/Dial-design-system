@@ -1,4 +1,4 @@
-// @example The two families: LCD segments on grey-green and OLED text on near-black
+// @example The two families, LCD segments on grey-green and OLED text on near-black
 import { Display, Stack } from 'dial-react';
 
 export default function DisplayKinds() {

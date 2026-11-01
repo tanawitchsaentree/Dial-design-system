@@ -1,4 +1,4 @@
-// @example A list of small cards: the list keeps its count for screen readers
+// @example A list of small cards that keeps its count for screen readers
 import { Card, Stack, Text } from 'dial-react';
 
 export default function CardList() {

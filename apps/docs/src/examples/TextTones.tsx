@@ -1,4 +1,4 @@
-// @example Two inks: primary for what you read first, secondary for notes and units
+// @example Two inks, primary for what you read first and secondary for notes and units
 import { Stack, Text } from 'dial-react';
 
 export default function TextTones() {

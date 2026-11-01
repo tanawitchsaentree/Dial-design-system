@@ -14,8 +14,8 @@
   transition:
     transform var(--ds-motion-release) var(--ds-motion-easing),
     box-shadow var(--ds-motion-release) var(--ds-motion-easing),
-    color var(--ds-motion-hover) linear,
-    background-color var(--ds-motion-hover) linear;
+    color var(--ds-motion-hover) var(--ds-motion-easing),
+    background-color var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .key { background: var(--ds-surface-raised); color: var(--ds-text-secondary); }
 .primary { background: var(--ds-action-accent); color: var(--ds-text-on-accent); border-color: var(--ds-action-accent-rim); }
@@ -26,6 +26,7 @@
 
 .key:hover { color: var(--ds-text-primary); }
 .primary:hover { background: var(--ds-action-accent-hover); }
+.root:hover { transition-duration: var(--ds-motion-hover); }
 .root:active {
   transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
   box-shadow: none;
@@ -43,7 +44,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .root { transition: none; }
+  .root {
+    transition:
+      color var(--ds-motion-hover) var(--ds-motion-easing),
+      background-color var(--ds-motion-hover) var(--ds-motion-easing);
+  }
   .root:active { transform: none; }
 }
 @media (forced-colors: active) {

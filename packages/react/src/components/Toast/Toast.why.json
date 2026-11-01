@@ -15,7 +15,7 @@
     { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "No tone uses orange: the glyph takes a status mark ink and the action key is a plastic Button kind key." },
     { "p": "P5", "axis": "type", "consequence": "one grotesk, regular and medium only; hierarchy by size and position", "form": "The status word is type.label in medium weight before the message in regular weight, so hierarchy comes from weight and order." },
     { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "The close key is a 44px IconButton and the action key a 44px Button, even inside a short strip." },
-    { "p": "P6", "axis": "space", "consequence": "fixed positions — a unit's layout does not reflow between states", "form": "Toasts stack in a fixed region at the bottom of the viewport and never push the page content around." }
+    { "p": "P6", "axis": "space", "consequence": "fixed positions, so a unit's layout does not reflow between states", "form": "Toasts stack in a fixed region at the bottom of the viewport and never push the page content around." }
   ],
   "variants": {
     "lab": "apps/lab/toast/index.html",

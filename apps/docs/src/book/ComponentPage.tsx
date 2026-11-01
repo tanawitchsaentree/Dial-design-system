@@ -9,7 +9,7 @@ import { StageWrap, MATRIX, backdropById } from '../system/backdrops';
 import { Choice } from '../system/controls';
 import { PACKAGES } from '../system/content';
 import meta from './meta.json';
-import { inline, WhyText, type Why, Code, CodeBlock, ConformanceList, DoDont, EvidenceTable, Example, Link, Page, Section, Stage, TokensUsed, useVerify } from './kit';
+import { installLine, inline, WhyText, type Why, Code, CodeBlock, ConformanceList, DoDont, EvidenceTable, Example, Link, Page, Section, Stage, TokensUsed, useVerify } from './kit';
 import type { ComponentChapter } from './components-data';
 import { DEPTH } from '../depth';
 import { UsageTab } from '../depth/UsageTab';
@@ -228,7 +228,7 @@ export function ComponentPage({ c, tab }: { c: ComponentChapter; tab: Tab }) {
       {tab === 'code' && (
         <>
           <Section id="import" title="Import and use">
-            <Code label="Install">{`npm install ${PACKAGES.react}`}</Code>
+            <Code label="Install">{installLine(PACKAGES.react, meta.version)}</Code>
             <Code label="Import">{c.importLine}</Code>
             <Code label="Usage">{c.usage}</Code>
           </Section>

@@ -1,4 +1,4 @@
-// @example Controlled filters: the screen keeps the set and says what it shows
+// @example Controlled filters, where the screen keeps the set and says what it shows
 import { useState } from 'react';
 import { Chip, Stack } from 'dial-react';
 

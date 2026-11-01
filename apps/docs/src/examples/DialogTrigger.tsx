@@ -1,4 +1,4 @@
-// @example Uncontrolled: the trigger opens the sheet and takes focus back when it closes
+// @example Uncontrolled, so the trigger opens the sheet and takes focus back when it closes
 import { Button, Dialog } from 'dial-react';
 
 export default function DialogTrigger() {

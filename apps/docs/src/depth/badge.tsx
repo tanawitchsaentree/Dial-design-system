@@ -21,11 +21,11 @@ export const BADGE: Depth = {
     { situation: 'A message that needs a reply', to: '/components/toast', label: 'Toast' },
   ],
   variants: {
-    neutral: { purpose: 'No particular state: Standby, Paused, Not set up. A hollow ring.', pairing: 'Beside positive and critical badges in a list, for the rows that are neither.' },
-    positive: { purpose: 'Working as it should: Online, Done, Up to date. A filled dot.', pairing: 'The usual state of a row. Most rows in a list carry it, or none.' },
-    warning: { purpose: 'Needs care soon but still works: Filter due, Low battery. A triangle.', pairing: 'Beside the control or setting that fixes it.' },
-    critical: { purpose: 'Stopped or unsafe: Offline, Door open, Leak. A filled square.', pairing: 'At the top of a list, with what to do next nearby.' },
-    info: { purpose: 'Something to know with no harm: Update ready, New. A diamond.', pairing: 'Beside the item it is about, with the action on its page.' },
+    neutral: { purpose: 'No particular state, such as Standby, Paused or Not set up. A hollow ring.', pairing: 'Beside positive and critical badges in a list, for the rows that are neither.' },
+    positive: { purpose: 'Working as it should, such as Online, Done or Up to date. A filled dot.', pairing: 'The usual state of a row. Most rows in a list carry it, or none.' },
+    warning: { purpose: 'Needs care soon but still works, such as Filter due or Low battery. A triangle.', pairing: 'Beside the control or setting that fixes it.' },
+    critical: { purpose: 'Stopped or unsafe, such as Offline, Door open or Leak. A filled square.', pairing: 'At the top of a list, with what to do next nearby.' },
+    info: { purpose: 'Something to know that does no harm, such as Update ready or New. A diamond.', pairing: 'Beside the item it is about, with the action on its page.' },
   },
   anatomy: {
     render: <Badge tone="critical" count={3}>offline</Badge>,
@@ -36,7 +36,7 @@ export const BADGE: Depth = {
       { part: 'Word', selector: '[data-component="Badge"] > span:last-of-type', what: 'The status word in ink, caption size, never tinted.' },
     ],
   },
-  sizes: { na: 'Badge has one size: caption text with a 10px lamp.' },
+  sizes: { na: 'Badge has one size. It prints caption text beside a 10px lamp.' },
   emphasis: {
     text: <p>A badge is quiet printing. One badge per row or per unit is enough. When every row is fine, leave the positive badges out and show only the rows that need care.</p>,
     pair: {
@@ -55,12 +55,12 @@ export const BADGE: Depth = {
     avoid: [{ title: 'two states for one device', why: 'A device is in one state at a time. Show the one that needs care first.', render: <Line name="Hall speaker"><Stack direction="row" gap="sm"><Badge tone="warning">Low battery</Badge><Badge tone="critical">Offline</Badge></Stack></Line> }],
   },
   content: {
-    formula: <p>Name the state in one to three words: <em>Online</em>, <em>Filter due</em>, <em>Door open</em>. With a count, use lowercase after the number: <em>3 offline</em>.</p>,
+    formula: <p>Name the state in one to three words, such as <em>Online</em>, <em>Filter due</em> or <em>Door open</em>. With a count, write the word after the number in lowercase, as in <em>3 offline</em>.</p>,
     pair: {
       do: <Badge tone="critical">Door open</Badge>, doNote: 'Says what is wrong.',
       dont: <Badge tone="critical">Error</Badge>, dontNote: 'Something is wrong, and the reader has to guess what.',
     },
-    overflow: { text: 'A long word wraps under itself, and the lamp stays on the first line. Keep the word short.', render: <div style={{ inlineSize: 160 }}><Badge tone="warning">Water tank almost empty, fill it soon</Badge></div> },
+    overflow: { text: 'A long word wraps under itself, and the lamp stays on the first line. Keep the word short.', render: <div data-overflow-demo="" style={{ inlineSize: 160 }}><Badge tone="warning">Water tank almost empty, fill it soon</Badge></div> },
     rtl: { text: 'In right-to-left languages the lamp sits to the right of the word.', render: <div dir="rtl"><Badge tone="positive">متصل</Badge></div> },
     expansion: { text: 'German and Finnish words can run 30% longer. The line grows sideways.', render: <Badge tone="warning">Filterwechsel fällig</Badge> },
   },
@@ -105,14 +105,14 @@ export const BADGE: Depth = {
     info: {
       purpose: <p>Info says there is something to know and no harm. It is a dark diamond.</p>,
       context: <Line name="Thermostat"><Badge tone="info">Update ready</Badge></Line>,
-      practices: ['Use it for news: updates, new devices, tips.', 'Remove it once the person has seen it.'],
+      practices: ['Use it for news, such as updates, new devices and tips.', 'Remove it once the person has seen it.'],
       pair: { do: <Badge tone="info">Update ready</Badge>, doNote: 'News about the device.', dont: <Badge tone="info">Filter due</Badge>, dontNote: 'This needs care. Use warning.' },
     },
   },
   modifiers: [
     {
       name: 'count',
-      rules: <p>Prints a number before the word, in tabular figures. Use it in summaries: <em>3 offline</em>. The word that follows is lowercase.</p>,
+      rules: <p>Prints a number before the word, in tabular figures. Use it in summaries, as in <em>3 offline</em>. The word that follows is lowercase.</p>,
       pair: { do: <Badge tone="critical" count={3}>offline</Badge>, doNote: 'A number and a word.', dont: <Badge tone="critical" count={3}>3 offline</Badge>, dontNote: 'The number is printed twice.' },
     },
   ],
@@ -120,6 +120,6 @@ export const BADGE: Depth = {
   references: [
     { title: 'WCAG 2.2 · 1.4.1 Use of Color', url: 'https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html', why: 'Why each tone has a shape and a word.' },
     { title: 'WCAG 2.2 · 1.4.11 Non-text Contrast', url: 'https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html', why: 'Why the amber triangle carries an ink edge.' },
-    { title: 'Vitsœ · Dieter Rams: ten principles for good design', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
+    { title: 'Dieter Rams, ten principles for good design (Vitsœ)', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
   ],
 };

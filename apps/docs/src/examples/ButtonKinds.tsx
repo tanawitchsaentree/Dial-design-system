@@ -1,4 +1,4 @@
-// @example The two kinds: a plastic key and the one orange key
+// @example The two kinds, a plastic key and the one orange key
 import { Button, Stack } from 'dial-react';
 
 export default function ButtonKinds() {

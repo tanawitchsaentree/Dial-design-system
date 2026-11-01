@@ -5,7 +5,7 @@ import styles from './Input.module.css';
 export type InputSize = 'md' | 'lg';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
-  /** The printed name above the well. Required: it is also the field's accessible name. Never rely on `placeholder` for this. */
+  /** The printed name above the well. It is required, because it is also the field's accessible name, which `placeholder` cannot be. */
   label: ReactNode;
   /** A short line printed under the well that says what to enter, for example the format. */
   hint?: ReactNode;

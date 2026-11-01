@@ -16,14 +16,14 @@ export const HEADING: Depth = {
     { situation: 'The name of a control or a reading', to: '/components/text', label: 'Text' },
     { situation: 'The live state of a device', to: '/components/display', label: 'Display' },
   ],
-  variants: { na: 'Heading has one look: medium weight and primary ink. Level picks the size and the element, and is described under Modifiers.' },
+  variants: { na: 'Heading has one look, medium weight in primary ink. Level picks the size and the element, and is described under Modifiers.' },
   anatomy: {
     render: <Heading level={3}>Living room heater</Heading>,
     parts: [{ part: 'Printed name', selector: '[data-component="Heading"]', what: 'An h1 to h4 element in medium weight, primary ink and tight leading, with no outer margin.' }],
   },
   sizes: { na: 'Heading has no size prop. Each level has its own size, from 37px at level 1 to 18px at level 4.' },
   emphasis: {
-    text: <p>One level 1 per page. Inside a unit, one heading at most, so the unit reads as one appliance. A heading is never orange and never tinted: size and position make it loud enough.</p>,
+    text: <p>One level 1 per page. Inside a unit, one heading at most, so the unit reads as one appliance. A heading is never orange and never tinted. Size and position make it loud enough.</p>,
     pair: {
       do: <Unit><Stack gap="xs"><Heading level={3}>Washer</Heading><Text size="label" tone="secondary">38 min left</Text></Stack></Unit>,
       doNote: 'One heading names the unit and a note sits under it.',
@@ -40,7 +40,7 @@ export const HEADING: Depth = {
     avoid: [{ title: 'skipping levels', why: 'A level 4 straight under a level 2 leaves a gap in the outline that screen reader users hear.', render: <Stack gap="sm"><Heading level={2}>Kitchen</Heading><Heading level={4}>Hob light</Heading></Stack> }],
   },
   content: {
-    formula: <p>A noun or a short name in sentence case, with no full stop: <em>Living room</em>, <em>Heater settings</em>, <em>Night setback</em>.</p>,
+    formula: <p>A noun or a short name in sentence case, with no full stop, such as <em>Living room</em>, <em>Heater settings</em> or <em>Night setback</em>.</p>,
     pair: {
       do: <Heading level={3}>Heater settings</Heading>, doNote: 'Sentence case and a plain name.',
       dont: <Heading level={3}>Configure Your Heater Settings Here</Heading>, dontNote: 'Title case and extra words.',
@@ -58,7 +58,7 @@ export const HEADING: Depth = {
     loading: <p>Heading has no loading state. Print the name as soon as it is known. It does not wait for the device.</p>,
     focus: <p>Heading never takes focus by itself. When a page opens, the docs shell moves focus to the page’s level 1.</p>,
   },
-  deepDive: { na: 'Heading has a single variant, so there is no per-variant deep dive.' },
+  deepDive: { na: 'Heading has a single variant, so there is nothing to describe per variant here.' },
   modifiers: [
     {
       name: 'level',
@@ -70,6 +70,6 @@ export const HEADING: Depth = {
   references: [
     { title: 'WAI · Headings tutorial', url: 'https://www.w3.org/WAI/tutorials/page-structure/headings/', why: 'How heading levels build the outline of a page.' },
     { title: 'WCAG 2.2 · 1.3.1 Info and Relationships', url: 'https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html', why: 'Why the level is a real h1 to h4 element.' },
-    { title: 'Vitsœ · Dieter Rams: ten principles for good design', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
+    { title: 'Dieter Rams, ten principles for good design (Vitsœ)', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
   ],
 };

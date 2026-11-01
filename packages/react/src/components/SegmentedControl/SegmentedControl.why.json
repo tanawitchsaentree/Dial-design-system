@@ -1,5 +1,5 @@
 {
-  "concept": "SegmentedControl is the bank of band keys on the case of a radio (FM, AM, AUX): the keys interlock, pressing one latches it down with its printed lamp lit, and the key that was down springs back up.",
+  "concept": "SegmentedControl is the bank of band keys on the case of a radio (FM, AM, AUX). The keys interlock, pressing one latches it down with its printed lamp lit, and the key that was down springs back up.",
   "kind": ["segmented control", "radio group", "latching key bank", "mode selector"],
   "default_to_avoid": [
     { "pattern": "iOS segmented control: a grey pill track with a sliding white thumb", "why_not": "A thumb that glides between segments is a fader gesture on a key bank, and the white thumb lit brighter breaks the light model, where the chosen part is never lit brighter, only latched and lamped (P3)." },
@@ -34,7 +34,7 @@
   "parts": {
     "root": { "p": "P5", "axis": "space", "why": "The root stacks the printed group label over the bank, so the label sits on the inset line above its keys." },
     "label": { "p": "P5", "axis": "type", "why": "The group name is printed in the label size and regular weight, in ink, like the word Band on a radio case." },
-    "bank": { "p": "P3", "axis": "depth", "why": "The keys sit in one recessed strip lit inversely, so they read as a single bank that interlocks." },
+    "bank": { "p": "P3", "axis": "depth", "why": "The keys sit in one recessed strip lit inversely, so they read as a single bank that interlocks; every key takes the width of the widest word, so no word crowds its key." },
     "key": { "p": "P3", "axis": "depth", "why": "Each key is matte plastic with the part shadow and a ring edge, standing at full height until it latches." },
     "lamp": { "p": "P4", "axis": "colour", "why": "A small recessed lamp on each key fills with full-step ink when its key is latched, and is never orange." },
     "face": { "p": "P5", "axis": "space", "why": "The face lines the optional symbol and the word up on one row under the lamp, on the key's own centre line." },
@@ -49,13 +49,14 @@
     "focus-visible": { "p": "P3", "axis": "interaction", "why": "Keyboard focus draws the dark ring around the focused key and lifts it above its neighbours so the ring is whole." },
     "aria-checked=true": { "p": "P3", "axis": "depth", "why": "The latched key stays down at height 0 with no shadow, with its lamp lit and its word in medium weight." },
     "disabled": { "p": "P6", "axis": "depth", "why": "Disabled keys lose their height and fade to half, while the lit lamp of the chosen key stays readable." },
-    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion a key latches at once with no travel animation and no spring return of the others." },
+    "data-glow": { "p": "P6", "axis": "colour", "why": "A lit lamp is one of the emitters P2 allows, so in the dark edition it gives off a few pixels of its own light; in light, unlit or disabled it gives off none." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion a key latches at once with no travel animation and no spring return of the others; only the ink fade stays." },
     "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the keys keep system borders and the lit lamp fills with the button text colour, so the choice survives." }
   },
   "motion": {
     "transform": { "p": "P3", "axis": "motion", "why": "A key travels down in 65ms when pressed and the released key returns on the spring, so latching reads as a stroke." },
     "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses under the latching key and grows back under the released one, following the single light." },
-    "color": { "p": "P6", "axis": "interaction", "why": "The word's ink step on hover fades briefly so the change is a reply to the pointer, not a flash." },
+    "color": { "p": "P3", "axis": "motion", "why": "The word's ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing." },
     "background-color": { "p": "P2", "axis": "motion", "why": "The lamp lights within the segment fade of 80ms, the only fade a lit indicator is allowed." }
   }
 }

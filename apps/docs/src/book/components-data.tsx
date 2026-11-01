@@ -173,7 +173,7 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['An action shown only as an icon', 'IconButton'], ['A setting that stays on or off', 'Switch']],
     anatomy: [['Key body', 'A capsule, elevation.part, corner.round, at least control.md tall.'], ['Printed word', 'type.label in type.weight-medium.']],
     states: [['Hover', 'Ink one step darker; orange one step lighter on primary. No lift.'], ['Pressed', 'Drops motion.press-travel in motion.press, shadow collapses.'], ['Disabled', 'Flat, opacity.disabled.']],
-    content: ['A verb first, then the object: Start wash, Turn off.', 'Sentence case and no full stop.'],
+    content: ['A verb first, then the object, as in Start wash or Turn off.', 'Sentence case and no full stop.'],
     dodont: [
       { do: 'Use one orange key per unit.', dont: 'Put two orange keys side by side.' },
       { do: 'Say what happens on the key.', dont: 'Write OK or Yes.' },
@@ -195,7 +195,7 @@ export const COMPONENTS: ComponentChapter[] = [
     importLine: "import { Switch } from 'dial-react';",
     overview: (
       <>
-        <p><code>Switch</code> is a slide switch: a raised cap in a 52px recessed groove, a printed label beside it, optional position words at each end and a 6px lamp. It is a native button with <code>role="switch"</code>, 44px tall. Space or Enter throws it, and the cap slides to the other end over 245ms, at once under reduced motion.</p>
+        <p><code>Switch</code> is a slide switch. It has a raised cap in a 52px recessed groove, a printed label beside it, optional position words at each end and a 6px lamp. It is a native button with <code>role="switch"</code>, 44px tall. Space or Enter throws it, and the cap slides to the other end over 245ms, at once under reduced motion.</p>
       </>
     ),
     hero: ex('SwitchBasic', 'A label, the two position words and the lamp.'),
@@ -209,7 +209,7 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['An action that runs once', 'Button'], ['A choice in a form that is sent later', 'Checkbox']],
     anatomy: [['Label', 'type.label, text.primary, printed before the switch.'], ['Groove', 'control.switch long, control.track tall, surface.sunken with elevation.well.'], ['Cap', 'control.cap-w by control.cap-h, corner.media, elevation.part, one index line.'], ['Position words', 'type.caption; the current one in type.weight-medium.'], ['Lamp', 'control.lamp, a recess while off, filled with text.primary while on.']],
     states: [['On', 'Cap at the far end, lamp filled, on word in medium weight.'], ['Hover', 'Position words one step darker. No lift.'], ['Disabled', 'Cap flat, opacity.disabled.']],
-    content: ['The label names the setting as a noun: Keep warm, Child lock.', 'Position words are short: Off and On, or Warm and Cook.'],
+    content: ['The label names the setting as a noun, such as Keep warm or Child lock.', 'Position words are short, like Off and On, or Warm and Cook.'],
     dodont: [
       { do: 'Show on by the cap, the lamp and the word.', dont: 'Colour the groove green or orange when on.' },
       { do: 'Name the setting in the label.', dont: 'Ask a question with Yes and No.' },
@@ -246,7 +246,7 @@ export const COMPONENTS: ComponentChapter[] = [
     whenToUse: ['Name a control or a reading.', 'Add a short note under a part.', 'Write prose on a sheet.'],
     whenNotToUse: [['The name of a unit, a section or a page', 'Heading'], ['The live state of a device', 'Display']],
     anatomy: [['Printed line', 'p, span, div or label in type.family, margin 0.'], ['Size', 'type.micro to type.reading; reading caps at type.measure.'], ['Ink', 'text.primary or text.secondary.']],
-    content: ['Sentence case and plain words.', 'Write the model name in lowercase.', 'Put the unit next to the number: 22.0°, 38 min.'],
+    content: ['Sentence case and plain words.', 'Write the model name in lowercase.', 'Put the unit next to the number, as in 22.0° or 38 min.'],
     dodont: [
       { do: 'Use size and position for hierarchy.', dont: 'Make words orange or tinted to stand out.' },
       { do: 'Turn on numeric for numbers that change.', dont: 'Set labels in spaced capitals.' },
@@ -273,7 +273,7 @@ export const COMPONENTS: ComponentChapter[] = [
     hero: ex('HeadingBasic', 'A unit name as a level 3 heading, with a note under it.'),
     ladder: [
       ex('HeadingLevels', 'level is 1, 2, 3 (the default) or 4.'),
-      ex('HeadingPage', 'A page outline: the page, then rooms, then units.'),
+      ex('HeadingPage', 'A page outline runs from the page to rooms to units.'),
       ex('HeadingInUnit', 'On a unit, the heading sits first, above the reading and the keys.'),
       ex('HeadingSheet', 'Level 4 names a group of settings inside a sheet.'),
     ],
@@ -315,7 +315,7 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['An action that needs a word', 'Button'], ['A setting that stays on or off', 'Switch']],
     anatomy: [['Key body', 'A disc, elevation.part, corner.round, control.key across.'], ['Printed symbol', 'control.icon-md, 2px stroke in currentColor, aria-hidden.']],
     states: [['Hover', 'Symbol one step darker; orange one step lighter on primary. No lift.'], ['Pressed', 'Drops motion.press-travel in motion.press, shadow collapses.'], ['Disabled', 'Flat, opacity.disabled.']],
-    content: ['The label is a verb first: Next track, Turn off, Volume up.', 'Name the action, not the picture.'],
+    content: ['The label starts with a verb, as in Next track, Turn off or Volume up.', 'Name the action, not the picture.'],
     dodont: [
       { do: 'Write a label that says what the key does.', dont: 'Name the icon, such as Plus or Arrow.' },
       { do: 'Use one orange key per unit.', dont: 'Make every transport key orange.' },
@@ -351,12 +351,12 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['A setting that takes effect at once', 'Switch'], ['Exactly one of a few modes', 'SegmentedControl']],
     anatomy: [['Row', 'A native label, at least control.md tall, gap.lg between key and name.'], ['Key', 'control.check square, corner.check, line.ring edge, elevation.part.'], ['Tick', 'control.icon-sm, width.ring stroke in text.primary.'], ['Printed name', 'type.label in type.weight-regular.']],
     states: [['On', 'Ink tick on the key.'], ['Mixed', 'Ink dash on the key.'], ['Hover', 'Edge one step darker. No lift.'], ['Pressed', 'Drops motion.press-travel in motion.press, shadow collapses.'], ['Disabled', 'Flat, opacity.disabled.']],
-    content: ['Name the option: Pre-wash, Child lock.', 'Sentence case, no full stop, no negatives.'],
+    content: ['Name the option, such as Pre-wash or Child lock.', 'Sentence case, no full stop, no negatives.'],
     dodont: [
       { do: 'Show on as a tick in ink.', dont: 'Fill the key with orange or blue.' },
       { do: 'Write Child lock.', dont: 'Write Don’t lock the door.' },
     ],
-    a11y: ['A native checkbox, so Space toggles it and it is announced as checked, not checked or mixed.', 'The printed label is the accessible name, and clicking it presses the key.', 'On, off and mixed are three shapes, so the state does not depend on colour.'],
+    a11y: ['A native checkbox, so Space toggles it and it is announced as checked, unchecked or mixed.', 'The printed label is the accessible name, and clicking it presses the key.', 'On, off and mixed are three shapes, so the state does not depend on colour.'],
     keyboard: [['Tab', 'Moves focus to the checkbox', 'Checkbox: Tab reaches the checkbox and the focus ring shows'], ['Space', 'Turns the option on or off', 'Checkbox: Space toggles the option']],
     inherits: 'InputHTMLAttributes<HTMLInputElement>',
     related: [['/components/switch', 'Switch', 'The setting acts at once.'], ['/components/button', 'Button', 'Run an action.']],
@@ -376,7 +376,7 @@ export const COMPONENTS: ComponentChapter[] = [
         <p><code>Display</code> is a window recessed into the body. <code>kind="lcd"</code> draws the value as 7-segment digits with the unit beside them; <code>kind="oled"</code> sets value and detail in white grotesk on near-black. The window is a polite live region and is never a control.</p>
       </>
     ),
-    hero: ex('DisplayBasic', 'A thermostat reading: segment digits, the unit, one detail line.'),
+    hero: ex('DisplayBasic', 'A thermostat reading shows segment digits, the unit and one detail line.'),
     ladder: [
       ex('DisplayKinds', 'kind is lcd (the default) or oled.'),
       ex('DisplaySizes', 'size is sm (24px digits), md (40px, the default) or lg (56px).'),
@@ -387,12 +387,12 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['A level shown as lit holes', 'Grille'], ['A number inside a sentence', 'Text']],
     anatomy: [['Window', 'elevation.well, radius = outer − inset (corner.inner by default).'], ['Value', 'SVG segments in display.lcd-ink, ghosts in display.lcd-ghost; or grotesk in display.oled-ink.'], ['Unit and detail', 'type.label and type.caption in the grotesk.']],
     states: [['Changing', 'The new value at once; each segment fades on or off in motion.segment.'], ['Reduce motion', 'Segments switch with no fade.']],
-    content: ['The value, the unit, then a short detail: 21.5 °C, Heating to 22.0.', 'Keep words out of the segments.'],
+    content: ['The value, the unit, then a short detail, as in 21.5 °C with Heating to 22.0.', 'Keep words out of the segments.'],
     dodont: [
       { do: 'Use one window per unit.', dont: 'Stack two windows in one unit.' },
       { do: 'Say the state now, in numbers.', dont: 'Show a coloured arrow for the change.' },
     ],
-    a11y: ['role status with aria-live polite: a changed reading is announced without moving focus.', 'The full reading is in the window as text; the drawn segments are hidden from assistive tech.', 'Every glyph holds 4.5:1 on its window.', 'The window never takes focus.'],
+    a11y: ['role status with aria-live polite, so a changed reading is announced without moving focus.', 'The full reading is in the window as text; the drawn segments are hidden from assistive tech.', 'Every glyph holds 4.5:1 on its window.', 'The window never takes focus.'],
     inherits: 'HTMLAttributes<HTMLDivElement>',
     related: [['/components/grille', 'Grille', 'A level shown as lit holes.'], ['/components/text', 'Text', 'A number inside running text.']],
   },
@@ -408,21 +408,21 @@ export const COMPONENTS: ComponentChapter[] = [
     importLine: "import { Grille } from 'dial-react';",
     overview: (
       <>
-        <p><code>Grille</code> is a field of round recesses. <code>value</code> out of <code>max</code> lights that share of the holes, in the order <code>fill</code> sets. It is a meter: it has a required <code>label</code>, a value and a text reading for assistive tech.</p>
+        <p><code>Grille</code> is a field of round recesses. <code>value</code> out of <code>max</code> lights that share of the holes, in the order <code>fill</code> sets. It is a meter, with a required <code>label</code>, a value and a text reading for assistive tech.</p>
       </>
     ),
     hero: ex('GrilleBasic', 'A volume level, lit column by column from the start of the line.'),
     ladder: [
-      ex('GrilleLevels', 'Empty, partly lit and full: the lit holes are the reading.'),
+      ex('GrilleLevels', 'Empty, partly lit and full. The lit holes are the reading.'),
       ex('GrilleShapes', 'shape is rect (the default) or circle.'),
       ex('GrilleFill', 'fill is inline (the default) or up.'),
       ex('GrilleInUnit', 'In a unit, next to the keys that change it.'),
     ],
-    whenToUse: ['Show a level: volume, fan speed, battery.', 'Show signal or activity in coarse steps.'],
+    whenToUse: ['Show a level, such as volume, fan speed or battery.', 'Show signal or activity in coarse steps.'],
     whenNotToUse: [['The exact number matters', 'Display'], ['The person sets the level', 'Slider']],
     anatomy: [['Field', 'A grid of cols × rows on a space-2 + space-1 pitch.'], ['Hole', 'grille.hole, corner.round, elevation.well.'], ['Lit hole', 'grille.hole-on.']],
     states: [['Changing', 'Holes fade on or off in motion.fill, in fill order.'], ['Reduce motion', 'Holes switch with no fade.']],
-    content: ['The label names what is measured: Volume, Fan speed.', 'valueText says the reading in words: Volume 6 of 10.'],
+    content: ['The label names what is measured, such as Volume or Fan speed.', 'valueText says the reading in words, as in Volume 6 of 10.'],
     dodont: [
       { do: 'Put the grille next to what it measures.', dont: 'Use a grille as a background pattern.' },
       { do: 'Light holes in ink.', dont: 'Colour the holes orange, green or red.' },
@@ -436,14 +436,14 @@ export const COMPONENTS: ComponentChapter[] = [
     slug: 'slider',
     status: 'beta',
     limitations: ['There is no vertical fader yet; the groove always runs along the line of text.', 'There is no range with two caps.', 'The ruler prints its own numbers; it cannot take custom labels yet.'],
-    youMust: ['Give every fader a label that names the amount.', 'Put the unit in formatValue so the value text says it, for example 60 %.', 'Keep the fader plastic: the orange belongs to the unit’s knob.'],
+    youMust: ['Give every fader a label that names the amount.', 'Put the unit in formatValue so the value text says it, for example 60 %.', 'Keep the fader plastic, because the orange belongs to the unit’s knob.'],
     usage: '<Slider label="Volume" min={0} max={10} step={1} defaultValue={4} scale />',
     backdrops: 'In light the cap is warm white plastic over a light grey groove, in dark it is charcoal over a darker groove. The ink and the shadow direction are the same in both themes, and nothing is orange.',
     purpose: 'Sets an amount between two ends, as a plastic cap that rides a groove and settles into the nearest step.',
     importLine: "import { Slider } from 'dial-react';",
     overview: (
       <>
-        <p><code>Slider</code> is a fader: a 24 by 32px plastic cap in a recessed groove, under a printed ruler with one tick per step. The track is 44px tall and as long as its column, at least 220px, and it keeps that size from the lowest value to the highest. <code>scale</code> prints the numerals under the groove. When you let go, the cap settles into the nearest step on the spring (mass 1.4, stiffness 520, damping 46).</p>
+        <p><code>Slider</code> is a fader, a 24 by 32px plastic cap in a recessed groove under a printed ruler with one tick per step. The track is 44px tall and as long as its column, at least 220px, and it keeps that size from the lowest value to the highest. <code>scale</code> prints the numerals under the groove. When you let go, the cap settles into the nearest step on the spring (mass 1.4, stiffness 520, damping 46).</p>
       </>
     ),
     hero: ex('SliderBasic', 'A volume fader with 11 steps and its numerals.'),
@@ -457,7 +457,7 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['The main setting of the unit', 'Rotary'], ['Only on and off', 'Switch']],
     anatomy: [['Label and value', 'type.label in type.weight-medium; the value in tabular figures.'], ['Ruler', 'width.hairline ticks in text.secondary, the ends and middle in text.primary.'], ['Groove', 'control.track tall, surface.sunken, elevation.well.'], ['Cap', 'control.cap-w by control.cap-h, surface.raised, elevation.part, an ink line.'], ['Numerals', 'type.micro, tabular, text.secondary.']],
     states: [['Hover', 'The cap’s ink line darkens one step. No lift.'], ['Dragging', 'The cap follows the pointer.'], ['Released', 'Settles into the nearest step on the spring; at once with reduced motion.'], ['Disabled', 'No cap shadow, opacity.disabled.']],
-    content: ['Name the amount: Volume, Brightness.', 'Put the unit in formatValue, not in the label.'],
+    content: ['Name the amount, such as Volume or Brightness.', 'Put the unit in formatValue, not in the label.'],
     dodont: [
       { do: 'Keep the fader plastic next to an orange knob.', dont: 'Colour the groove or the cap.' },
       { do: 'Set a step when the device has steps.', dont: 'Let a five-speed fan land on 2.37.' },
@@ -486,7 +486,7 @@ export const COMPONENTS: ComponentChapter[] = [
     ladder: [
       ex('RotaryKinds', 'kind is primary (the default) or key.'),
       ex('RotarySizes', 'size is sm (44px), md (72px, the default) or lg (108px).'),
-      ex('RotaryInUnit', 'unitSide sizes the knob from its unit: 0.36 of the short side.'),
+      ex('RotaryInUnit', 'unitSide sizes the knob from its unit, at 0.36 of the short side.'),
       ex('RotaryKeyboard', 'Arrow keys turn one detent, Page keys turn further, and Home and End reach the ends.'),
       ex('RotaryStates', 'Steps of five, and a disabled knob.'),
     ],
@@ -494,7 +494,7 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['A secondary amount along a range', 'Slider'], ['Starting or stopping something', 'Button']],
     anatomy: [['Tick ring', 'One control.tick tick per step in text.primary, across mechanism.sweep.'], ['Disc', 'corner.round, elevation.part; action.accent with action.accent-rim, or surface.raised with line.ring.'], ['Index line', 'width.bar of text.on-accent ink, or text.secondary on a key knob.'], ['Value and label', 'type.body in tabular figures; type.label in text.secondary.']],
     states: [['Hover', 'Orange one step lighter, or the index darkens on a key knob. No lift.'], ['Turning', 'The disc follows the pointer.'], ['Released', 'Settles into the nearest step on the spring; at once with reduced motion.'], ['Disabled', 'No shadow, opacity.disabled.']],
-    content: ['Name the setting: Temperature, Timer.', 'Put the unit in formatValue: 21 °C, 20 min.'],
+    content: ['Name the setting, such as Temperature or Timer.', 'Put the unit in formatValue, as in 21 °C or 20 min.'],
     dodont: [
       { do: 'Use one orange knob per unit.', dont: 'Put an orange key or a second orange knob beside it.' },
       { do: 'Keep a key knob smaller than the primary knob.', dont: 'Make the secondary dial the biggest part.' },
@@ -532,12 +532,12 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['A choice from a known list', 'Select'], ['An amount along a range', 'Slider']],
     anatomy: [['Label', 'type.label in type.weight-medium, printed above the well.'], ['Well', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, at least control.md tall.'], ['Text', 'type.body on type.leading-body, text.primary.'], ['Unit', 'type.label in type.weight-medium, text.secondary.'], ['Hint and error', 'type.caption; the error in status.critical-mark with a glyph.']],
     states: [['Focus', 'width.ring in focus.ring around the well.'], ['Invalid', 'The edge in status.critical-mark, the message with a glyph below.'], ['Disabled', 'No well shadow, opacity.disabled.']],
-    content: ['Name the thing: Room name, Wi-Fi password.', 'Put the unit in unit and the format in hint.', 'Write the error as the fix.'],
+    content: ['Name the thing, such as Room name or Wi-Fi password.', 'Put the unit in unit and the format in hint.', 'Write the error as the fix.'],
     dodont: [
       { do: 'Print the label above the well.', dont: 'Use the placeholder as the label.' },
       { do: 'Say how to fix an error, with the glyph.', dont: 'Show only a red edge.' },
     ],
-    a11y: ['A native input, labelled by the printed label through for and id.', 'The unit, the hint and the error are tied to the field with aria-describedby.', 'An error sets aria-invalid and is shown with a glyph and words, not colour alone.', 'In forced colours the well keeps a real border and the ring uses the highlight colour.'],
+    a11y: ['A native input, labelled by the printed label through for and id.', 'The unit, the hint and the error are tied to the field with aria-describedby.', 'An error sets aria-invalid and is shown with a glyph and words as well as colour.', 'In forced colours the well keeps a real border and the ring uses the highlight colour.'],
     keyboard: [['Tab', 'Moves focus into the field and shows the ring', 'Input: Tab reaches the field and the focus ring shows on the well'], ['Typing', 'Enters text; the field keeps its width', 'Input: typing Thai text keeps the field at its width']],
     inherits: 'InputHTMLAttributes<HTMLInputElement>',
     related: [['/components/select', 'Select', 'A choice from a known list.'], ['/components/slider', 'Slider', 'An amount along a range.']],
@@ -554,7 +554,7 @@ export const COMPONENTS: ComponentChapter[] = [
     importLine: "import { Select } from 'dial-react';",
     overview: (
       <>
-        <p><code>Select</code> is a select-only combobox, built by hand on the WAI-ARIA pattern. The trigger is a native button with <code>role="combobox"</code>: the same well as Input, 44px at <code>md</code> and 52px at <code>lg</code>, with a printed chevron. It opens a listbox panel of surface.solid plastic with elevation.float and corner.inner, on layer.overlay. The chosen option has a tick and medium weight. Pass <code>value</code> and <code>onValueChange</code> to control it, or <code>defaultValue</code> to leave it to the field.</p>
+        <p><code>Select</code> is a select-only combobox, built by hand on the WAI-ARIA pattern. The trigger is a native button with <code>role="combobox"</code> in the same well as Input, 44px at <code>md</code> and 52px at <code>lg</code>, with a printed chevron. It opens a listbox panel of surface.solid plastic with elevation.float and corner.inner, on layer.overlay. The chosen option has a tick and medium weight. Pass <code>value</code> and <code>onValueChange</code> to control it, or <code>defaultValue</code> to leave it to the field.</p>
       </>
     ),
     hero: ex('SelectBasic', 'A well with a printed chevron that opens a panel of options.'),
@@ -568,14 +568,14 @@ export const COMPONENTS: ComponentChapter[] = [
     ],
     whenToUse: ['Pick one of four or more named options.', 'A setting in a sheet, next to text fields.'],
     whenNotToUse: [['Two to five modes that should stay visible', 'SegmentedControl'], ['Only on and off', 'Switch']],
-    anatomy: [['Label', 'type.label in type.weight-medium, printed above the well.'], ['Well', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, at least control.md tall.'], ['Chevron', 'control.icon-sm, text.secondary, printed at the end.'], ['Panel', 'surface.solid, elevation.float, corner.inner, layer.overlay.'], ['Option', 'At least control.md tall, corner.media; chosen: a tick and type.weight-medium in text.primary.']],
+    anatomy: [['Label', 'type.label in type.weight-medium, printed above the well.'], ['Well', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, at least control.md tall.'], ['Chevron', 'control.icon-sm, text.secondary, printed at the end.'], ['Panel', 'surface.solid, elevation.float, corner.inner, layer.overlay.'], ['Option', 'At least control.md tall, corner.media. The chosen one has a tick and type.weight-medium in text.primary.']],
     states: [['Focus', 'width.ring in focus.ring around the well, kept while open.'], ['Active row', 'surface.sunken with elevation.well.'], ['Chosen', 'A tick and type.weight-medium.'], ['Disabled', 'No well shadow, opacity.disabled.']],
-    content: ['Label the setting: Programme, Room.', 'Options are short nouns in sentence case.'],
+    content: ['Label the setting, such as Programme or Room.', 'Options are short nouns in sentence case.'],
     dodont: [
       { do: 'Mark the chosen option with the tick.', dont: 'Fill the chosen row with a colour.' },
       { do: 'Use a switch or a segmented control for two options.', dont: 'Hide two options behind a press.' },
     ],
-    a11y: ['The trigger is a button with role combobox, aria-haspopup listbox, aria-expanded and aria-controls.', 'Focus stays on the trigger; the active option is pointed to with aria-activedescendant.', 'Options have role option and aria-selected; the chosen one is a glyph and a weight, not colour alone.', 'Escape closes the list and keeps focus on the trigger; a press outside closes it too.'],
+    a11y: ['The trigger is a button with role combobox, aria-haspopup listbox, aria-expanded and aria-controls.', 'Focus stays on the trigger; the active option is pointed to with aria-activedescendant.', 'Options have role option and aria-selected; the chosen one is marked by a glyph and a weight, never by colour alone.', 'Escape closes the list and keeps focus on the trigger; a press outside closes it too.'],
     keyboard: [['Down / Up / Enter / Space', 'Open the list on the chosen option', 'Select: Down opens the list on the chosen option and Escape closes it with focus kept'], ['Arrow keys / Home / End', 'Move the active option', 'Select: arrow keys, Home and End move the active option and Enter chooses it'], ['Letters', 'Jump to an option by its first letters', 'Select: type-ahead jumps to the option that starts with the typed letters'], ['Enter / Space', 'Choose the active option and close', 'Select: arrow keys, Home and End move the active option and Enter chooses it'], ['Escape', 'Close without choosing', 'Select: Down opens the list on the chosen option and Escape closes it with focus kept']],
     inherits: 'HTMLAttributes<HTMLDivElement>',
     related: [['/components/input', 'Input', 'Free text in the same well.'], ['/components/switch', 'Switch', 'Only on and off.']],
@@ -592,10 +592,10 @@ export const COMPONENTS: ComponentChapter[] = [
     importLine: "import { SegmentedControl } from 'dial-react';",
     overview: (
       <>
-        <p><code>SegmentedControl</code> is a radio group of button keys in one recessed strip, with its <code>label</code> printed above. Pressing a key latches it: it drops 3px in 65ms, its shadow collapses, its 6px lamp fills with ink and its word turns medium weight. The key that was down returns on the spring. Arrow keys move and latch, Home and End reach the ends. Pass <code>options</code> as value, label and an optional icon; use <code>value</code> and <code>onValueChange</code> to control it.</p>
+        <p><code>SegmentedControl</code> is a radio group of button keys in one recessed strip, with its <code>label</code> printed above. Pressing a key latches it. It drops 3px in 65ms, its shadow collapses, its 6px lamp fills with ink and its word turns medium weight. The key that was down returns on the spring. Arrow keys move and latch, Home and End reach the ends. Pass <code>options</code> as value, label and an optional icon; use <code>value</code> and <code>onValueChange</code> to control it.</p>
       </>
     ),
-    hero: ex('SegmentedControlBasic', 'Band keys: the latched key sits down with its lamp lit.'),
+    hero: ex('SegmentedControlBasic', 'On band keys, the latched key sits down with its lamp lit.'),
     ladder: [
       ex('SegmentedControlControlled', 'value and onValueChange keep the mode in your state.'),
       ex('SegmentedControlSizes', 'size is md (44px, the default) or lg (52px).'),
@@ -607,12 +607,12 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['Moving between sections of a screen', 'Tabs'], ['Turning one setting on or off', 'Switch']],
     anatomy: [['Printed label', 'type.label in type.weight-regular, text.primary, above the bank.'], ['Bank', 'surface.sunken strip, elevation.well, corner.round.'], ['Key', 'At least control.md tall and layout.touch wide, line.ring edge, elevation.part.'], ['Lamp', 'control.lamp recess, filled with text.primary when latched.'], ['Word', 'type.label; type.weight-medium when latched.']],
     states: [['Latched', 'Down motion.press-travel, no shadow, lamp lit, word medium.'], ['Hover', 'Word one step darker. No lift.'], ['Pressed', 'Drops in motion.press; the released key returns in motion.release.'], ['Disabled', 'Flat, opacity.disabled.']],
-    content: ['One or two words per key: Heat, Eco, FM.', 'The label names the setting: Mode, Band.'],
+    content: ['One or two words per key, such as Heat, Eco or FM.', 'The label names the setting, such as Mode or Band.'],
     dodont: [
       { do: 'Show the chosen key by depth, lamp and weight.', dont: 'Fill the chosen key with orange.' },
       { do: 'Use it to set a mode.', dont: 'Use it to move between rooms.' },
     ],
-    a11y: ['A radiogroup named by the printed label, with one radio per key and aria-checked on the latched one.', 'One tab stop: arrows move and latch, Home and End reach the ends.', 'The latched key differs in depth, lamp and weight, so the choice does not depend on colour.'],
+    a11y: ['A radiogroup named by the printed label, with one radio per key and aria-checked on the latched one.', 'The bank is one tab stop. Arrows move and latch, and Home and End reach the ends.', 'The latched key differs in depth, lamp and weight, so the choice does not depend on colour.'],
     keyboard: [['Tab', 'Moves focus to the latched key', 'SegmentedControl: Tab reaches the latched key and the focus ring shows'], ['Arrow keys', 'Move to the next key and latch it', 'SegmentedControl: arrow keys move to the next key and latch it'], ['Home / End', 'Latch the first or last key', 'SegmentedControl: Home and End latch the first and last keys']],
     inherits: 'HTMLAttributes<HTMLDivElement>',
     related: [['/components/tabs', 'Tabs', 'Move between sections.'], ['/components/switch', 'Switch', 'One setting, on or off.']],
@@ -629,13 +629,13 @@ export const COMPONENTS: ComponentChapter[] = [
     importLine: "import { Tabs } from 'dial-react';",
     overview: (
       <>
-        <p><code>Tabs</code> takes <code>items</code>, each a value, a printed label and its content, and follows the WAI-ARIA tabs pattern: a tablist named by <code>label</code>, one tab per item and one tabpanel each. The chosen name is medium weight with a 24px ink mark under it. The mark appears at once and never slides. Activation is automatic by default, because every panel is already on the page; <code>activation="manual"</code> makes arrows move focus only, for panels that are slow to show.</p>
+        <p><code>Tabs</code> takes <code>items</code>, each a value, a printed label and its content, and follows the WAI-ARIA tabs pattern, with a tablist named by <code>label</code>, one tab per item and one tabpanel each. The chosen name is medium weight with a 24px ink mark under it. The mark appears at once and never slides. Activation is automatic by default, because every panel is already on the page; <code>activation="manual"</code> makes arrows move focus only, for panels that are slow to show.</p>
       </>
     ),
     hero: ex('TabsBasic', 'Rooms printed in a row, with an ink mark under the chosen one.'),
     ladder: [
       ex('TabsControlled', 'value and onValueChange keep the chosen section in your state.'),
-      ex('TabsManual', 'activation="manual": arrows move focus, Enter or Space opens.'),
+      ex('TabsManual', 'With activation="manual", arrows move focus and Enter or Space opens.'),
       ex('TabsWithUnits', 'Each panel holds its room’s units.'),
       ex('TabsManyRooms', 'Five names wrap in a narrow column without shifting.'),
       ex('TabsInScreen', 'Tabs pick the room; a SegmentedControl inside sets a mode.'),
@@ -644,12 +644,12 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['Setting a mode on a device', 'SegmentedControl'], ['Turning one setting on or off', 'Switch']],
     anatomy: [['Row of names', 'A flex row, gap.xs, no rule across it.'], ['Name', 'type.label, text.secondary; text.primary in type.weight-medium when chosen; at least control.md tall and layout.touch wide.'], ['Index mark', 'control.thumb wide, width.bar tall, corner.round, text.primary.'], ['Panel', 'The chosen section, focusable, focus.ring on focus.']],
     states: [['Chosen', 'Medium weight, primary ink, index mark under it.'], ['Hover', 'Name one step darker. Nothing rises.'], ['Focus', 'focus.ring around the name or the panel.']],
-    content: ['Name the section with a noun: Kitchen, Schedule.', 'One or two words, sentence case.'],
+    content: ['Name the section with a noun, such as Kitchen or Schedule.', 'One or two words, sentence case.'],
     dodont: [
       { do: 'Use tabs to move between rooms.', dont: 'Use tabs to set a mode on a device.' },
       { do: 'Show the chosen name by weight and a mark.', dont: 'Colour the chosen tab or slide a bar under it.' },
     ],
-    a11y: ['A tablist named by label, tabs with aria-selected and aria-controls, panels labelled by their tab.', 'One tab stop: arrows choose the next tab, Home and End reach the ends; Tab moves on into the panel.', 'The chosen tab differs in weight and by its mark, so the choice does not depend on colour.'],
+    a11y: ['A tablist named by label, tabs with aria-selected and aria-controls, panels labelled by their tab.', 'The row is one tab stop. Arrows choose the next tab, Home and End reach the ends, and Tab moves on into the panel.', 'The chosen tab differs in weight and by its mark, so the choice does not depend on colour.'],
     keyboard: [['Tab', 'Moves focus to the chosen tab, then into its panel', 'Tabs: Tab reaches the chosen tab and the focus ring shows'], ['Left / Right', 'Choose the next or previous tab', 'Tabs: arrow keys choose the next tab and show its panel'], ['Home / End', 'Choose the first or last tab', 'Tabs: Home and End choose the first and last tabs'], ['Enter / Space', 'With manual activation, choose the focused tab', 'Tabs: with manual activation arrows move focus and Enter chooses']],
     inherits: 'HTMLAttributes<HTMLDivElement>',
     related: [['/components/segmented-control', 'SegmentedControl', 'Set a mode on a device.'], ['/components/heading', 'Heading', 'Name the screen above the tabs.']],
@@ -666,7 +666,7 @@ export const COMPONENTS: ComponentChapter[] = [
     importLine: "import { Dialog } from 'dial-react';",
     overview: (
       <>
-        <p><code>Dialog</code> is the native <code>dialog</code> element opened with <code>showModal()</code>, so the focus trap, Escape and the inert page come from the browser. The sheet has the 28px panel radius and 24px inset, so anything nested in it takes 28 − 24. It arrives over 160ms and leaves over 240ms, at once under reduced motion. Focus goes to the first field, or to the first plastic key, and returns to the opener on close.</p>
+        <p><code>Dialog</code> is the native <code>dialog</code> element opened with <code>showModal()</code>, so the focus trap, Escape and the inert page come from the browser. The sheet has the 28px panel radius and 24px inset, so anything nested in it takes 28 − 24. It arrives over 160ms and leaves over 120ms, at once under reduced motion. Focus goes to the first field, or to the first plastic key, and returns to the opener on close.</p>
       </>
     ),
     hero: ex('DialogBasic', 'A question, what will happen, Cancel and the one orange key.'),
@@ -681,12 +681,12 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['Saying an action worked', 'Toast'], ['A setting that takes effect at once', 'Switch']],
     anatomy: [['Sheet', 'surface.solid, corner.panel, gap.inset padding, elevation.float with a lit top-left hairline.'], ['Scrim', 'surface.scrim, plain, no blur, layer.overlay.'], ['Question', 'Heading level 3, type.title.'], ['Description', 'Text, text.secondary.'], ['Keys', 'Buttons at the bottom, gap.md apart, aligned to the end.']],
     states: [['Open', 'Sheet and scrim fade in over motion.enter with a motion.rise lift.'], ['Closing', 'Fade out over motion.exit, slower.'], ['Reduced motion', 'No fade and no rise.']],
-    content: ['The title is the question: Turn off all lamps?', 'Keys are verbs that answer it: Turn off, Keep washing. Avoid Yes and No.'],
+    content: ['The title is the question, such as Turn off all lamps?', 'Keys are verbs that answer it, like Turn off and Keep washing. Avoid Yes and No.'],
     dodont: [
       { do: 'Ask one question with one orange answer.', dont: 'Put an X in the corner as a second way out.' },
       { do: 'Say what will happen in the description.', dont: 'Ask “Are you sure?”.' },
     ],
-    a11y: ['Native modal dialog: focus is trapped and the page behind is inert.', 'aria-labelledby points at the question and aria-describedby at the description.', 'Focus goes to the first field or the first plastic key, and returns to the opener on close.', 'Escape closes the sheet, the same as Cancel.'],
+    a11y: ['It is a native modal dialog, so focus is trapped and the page behind is inert.', 'aria-labelledby points at the question and aria-describedby at the description.', 'Focus goes to the first field or the first plastic key, and returns to the opener on close.', 'Escape closes the sheet, the same as Cancel.'],
     keyboard: [['Enter / Space on the opener', 'Opens the sheet', 'Dialog: Enter on the opener shows a modal sheet named by its question'], ['Tab / Shift+Tab', 'Moves between keys inside the sheet', 'Dialog: Tab and Shift+Tab stay inside the sheet'], ['Escape', 'Closes the sheet and returns focus', 'Dialog: Escape closes the sheet and focus returns to the opener']],
     inherits: 'HTMLAttributes<HTMLDialogElement>',
     related: [['/components/toast', 'Toast', 'Report what happened instead of asking.'], ['/components/button', 'Button', 'The keys in the sheet.']],
@@ -703,7 +703,7 @@ export const COMPONENTS: ComponentChapter[] = [
     importLine: "import { Toast, ToastProvider, useToast } from 'dial-react';",
     overview: (
       <>
-        <p><code>Toast</code> is one plastic strip: a 20px glyph and a status word, the message, an optional plastic action key and a 44px round close key. It is <code>role="status"</code>, or <code>role="alert"</code> when critical. <code>ToastProvider</code> renders a fixed region at the bottom of the viewport on <code>layer.toast</code>, and <code>useToast().show()</code> posts to it. A toast stays 6 s, 10 s with an action, never under 5 s, and the timer pauses on hover and focus.</p>
+        <p><code>Toast</code> is one plastic strip with a 20px glyph and a status word, the message, an optional plastic action key and a 44px round close key. It is <code>role="status"</code>, or <code>role="alert"</code> when critical. <code>ToastProvider</code> renders a fixed region at the bottom of the viewport on <code>layer.toast</code>, and <code>useToast().show()</code> posts to it. A toast stays 6 s, 10 s with an action, never under 5 s, and the timer pauses on hover and focus.</p>
       </>
     ),
     hero: ex('ToastBasic', 'A glyph, the status word, the message and the close key.'),
@@ -718,7 +718,7 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['Asking before an action', 'Dialog'], ['A state that stays', 'Display']],
     anatomy: [['Strip', 'surface.solid, corner.panel, elevation.float with a lit top-left hairline.'], ['Glyph', 'control.icon-md, stroked at width.ring in the tone’s mark ink.'], ['Status word', 'type.label, type.weight-medium.'], ['Message', 'type.body, text.primary.'], ['Keys', 'A Button and a 44px IconButton, gap.sm apart.']],
     states: [['Arriving', 'Fades in and rises motion.rise over motion.enter.'], ['Leaving', 'Fades out over motion.exit.'], ['Reduced motion', 'No fade and no rise.']],
-    content: ['Say what happened: Lamp turned off.', 'For a failure, say what failed and offer Try again.'],
+    content: ['Say what happened, as in Lamp turned off.', 'For a failure, say what failed and offer Try again.'],
     dodont: [
       { do: 'Tell the tone with a glyph and a word.', dont: 'Use a coloured stripe or dot alone.' },
       { do: 'Use a plastic action key.', dont: 'Make the action key orange.' },
@@ -740,7 +740,7 @@ export const COMPONENTS: ComponentChapter[] = [
     importLine: "import { Chip } from 'dial-react';",
     overview: (
       <>
-        <p><code>Chip</code> is a small capsule key. With <code>selected</code> or <code>defaultSelected</code> it is a toggle: pressing it latches it down, lights its lamp and sets <code>aria-pressed</code>. With <code>onRemove</code> it shows a choice already made, with a round remove key at the end. <code>size="sm"</code> draws 36px and still takes a press across 44px.</p>
+        <p><code>Chip</code> is a small capsule key. With <code>selected</code> or <code>defaultSelected</code> it is a toggle. Pressing it latches it down, lights its lamp and sets <code>aria-pressed</code>. With <code>onRemove</code> it shows a choice already made, with a round remove key at the end. <code>size="sm"</code> draws 36px and still takes a press across 44px.</p>
       </>
     ),
     hero: ex('ChipBasic', 'Three presets. The chosen one is latched down with its lamp lit.'),
@@ -756,7 +756,7 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['Only one option may be on', 'SegmentedControl'], ['A setting that takes effect at once', 'Switch'], ['A status nobody presses', 'Badge']],
     anatomy: [['Key', 'A capsule, corner.round, surface.raised, elevation.part, control.md or control.sm tall.'], ['Lamp', 'control.lamp, a recess when off, text.primary when latched.'], ['Printed word', 'type.label, regular, medium when latched.'], ['Remove key', 'control.thumb round key with a 44px target, a 2px ink cross.']],
     states: [['Hover', 'Ink one step darker. No lift.'], ['Pressed', 'Drops motion.press-travel in motion.press, shadow collapses.'], ['Latched', 'Stays down, no shadow, surface.sunken face, line.ring edge, lamp lit.'], ['Disabled', 'Flat, opacity.disabled.']],
-    content: ['One or two words: Eco, Night, Lamps.', 'Sentence case, no full stop, no verb.'],
+    content: ['One or two words, such as Eco, Night or Lamps.', 'Sentence case, no full stop, no verb.'],
     dodont: [
       { do: 'Let any number of chips be on.', dont: 'Use chips for a pick-one choice.' },
       { do: 'Show a chosen chip by its latch and lamp.', dont: 'Paint a chosen chip orange or tint its fill.' },
@@ -770,7 +770,7 @@ export const COMPONENTS: ComponentChapter[] = [
     name: 'Badge',
     slug: 'badge',
     status: 'beta',
-    limitations: ['There is one size: caption text with a 10px lamp.', 'There is no live announcement when a badge changes. Put a live region on the unit if the change matters.'],
+    limitations: ['There is one size, caption text with a 10px lamp.', 'There is no live announcement when a badge changes. Put a live region on the unit if the change matters.'],
     youMust: ['Always pass a word that names the state.', 'Pick the tone from what the state means.'],
     usage: '<Badge tone="positive">Online</Badge>',
     backdrops: 'The word is ink in both themes. The glyph uses the status marks, which have a lighter step in dark. The amber triangle keeps an ink edge so it holds 3:1 on light plastic.',
@@ -778,12 +778,12 @@ export const COMPONENTS: ComponentChapter[] = [
     importLine: "import { Badge } from 'dial-react';",
     overview: (
       <>
-        <p><code>Badge</code> is printing, not a control. <code>tone</code> sets the lamp: a ring for neutral, a dot for positive, a triangle for warning, a square for critical and a diamond for info. The children are the word, and the word is required. <code>count</code> prints a number before it, as in 3 offline.</p>
+        <p><code>Badge</code> is printing, not a control. <code>tone</code> sets the lamp, with a ring for neutral, a dot for positive, a triangle for warning, a square for critical and a diamond for info. The children are the word, and the word is required. <code>count</code> prints a number before it, as in 3 offline.</p>
       </>
     ),
     hero: ex('BadgeBasic', 'A green dot and the word Online, printed flat.'),
     ladder: [
-      ex('BadgeTones', 'tone: five tones, five shapes, each with its word.'),
+      ex('BadgeTones', 'Five tones, five shapes, each with its word.'),
       ex('BadgeCount', 'count prints a number in tabular figures before the word.'),
       ex('BadgeInList', 'Each row of a list ends with one badge.'),
       ex('BadgeSummary', 'A summary line of counts.'),
@@ -793,7 +793,7 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['The person can press it', 'Chip'], ['A value that changes', 'Display'], ['A message that needs a reply', 'Toast']],
     anatomy: [['Lamp', 'A glyph of control.mark + space.0-5, filled with status.*-mark; neutral is a text.secondary ring.'], ['Count', 'Tabular figures, type.weight-medium.'], ['Word', 'type.caption in text.primary.']],
     states: [['Forced colours', 'Glyphs in the text colour; the shapes still differ.']],
-    content: ['Name the state in one to three words: Online, Door open.', 'With a count, lowercase after the number: 3 offline.'],
+    content: ['Name the state in one to three words, such as Online or Door open.', 'With a count, use lowercase after the number, as in 3 offline.'],
     dodont: [
       { do: 'Print a glyph and a word.', dont: 'Show a coloured dot with no word.' },
       { do: 'Keep the badge on the text line.', dont: 'Float a coloured pill over a corner.' },
@@ -814,7 +814,7 @@ export const COMPONENTS: ComponentChapter[] = [
     importLine: "import { Progress } from 'dial-react';",
     overview: (
       <>
-        <p><code>Progress</code> prints its <code>label</code> and reading on one line and fills a recessed groove to <code>value</code> out of <code>max</code>. The reading is <code>valueText</code>, or the percent. Leave <code>value</code> out for the indeterminate form: a still row of ink ticks and the word Working. It does not loop, because nothing in dial moves while idle.</p>
+        <p><code>Progress</code> prints its <code>label</code> and reading on one line and fills a recessed groove to <code>value</code> out of <code>max</code>. The reading is <code>valueText</code>, or the percent. Leave <code>value</code> out for the indeterminate form, a still row of ink ticks and the word Working. It does not loop, because nothing in dial moves while idle.</p>
       </>
     ),
     hero: ex('ProgressBasic', 'A washer cycle with the time left printed above the groove.'),
@@ -822,14 +822,14 @@ export const COMPONENTS: ComponentChapter[] = [
       ex('ProgressSizes', 'size is md (an 8px groove, the default) or sm (4px).'),
       ex('ProgressLevels', 'Not started, part way and done.'),
       ex('ProgressIndeterminate', 'Without a value the groove shows still ticks and says Working.'),
-      ex('ProgressControlled', 'Driven by the device: max in megabytes and a reading to match.'),
+      ex('ProgressControlled', 'Driven by the device, with max in megabytes and a reading to match.'),
       ex('ProgressInUnit', 'The display says the state and the groove says how far the task has run.'),
     ],
-    whenToUse: ['A task with a known end: a wash cycle, an update.', 'Under the display of a running unit.'],
+    whenToUse: ['A task with a known end, such as a wash cycle or an update.', 'Under the display of a running unit.'],
     whenNotToUse: [['A level that goes up and down', 'Grille'], ['The person sets the amount', 'Slider'], ['Only the time left matters', 'Display']],
-    anatomy: [['Label line', 'type.caption: the label in text.primary, the reading in text.secondary with tabular figures.'], ['Groove', 'surface.sunken, elevation.well, corner.round, control.track or width.bar tall.'], ['Fill', 'grille.hole-on from the start of the line.'], ['Ticks', 'Twelve control.tick capsules of grille.hole-on, still.']],
+    anatomy: [['Label line', 'type.caption, with the label in text.primary and the reading in text.secondary with tabular figures.'], ['Groove', 'surface.sunken, elevation.well, corner.round, control.track or width.bar tall.'], ['Fill', 'grille.hole-on from the start of the line.'], ['Ticks', 'Twelve control.tick capsules of grille.hole-on, still.']],
     states: [['New value', 'The fill grows in motion.fill.'], ['Indeterminate', 'Still ticks, no aria-valuenow.'], ['Reduce motion', 'The fill jumps at once.']],
-    content: ['The label names the task: Washer, Firmware update.', 'valueText says what people wait for: 38 min left, 12 of 48 MB.'],
+    content: ['The label names the task, such as Washer or Firmware update.', 'valueText says what people wait for, as in 38 min left or 12 of 48 MB.'],
     dodont: [
       { do: 'Print the reading in words.', dont: 'Leave people to judge the fill by eye.' },
       { do: 'Show a still pattern when the end is unknown.', dont: 'Loop a stripe for as long as the task runs.' },
@@ -850,7 +850,7 @@ export const COMPONENTS: ComponentChapter[] = [
     importLine: "import { Card } from 'dial-react';",
     overview: (
       <>
-        <p><code>Card</code> is the body of a unit: one rounded rectangle of matte plastic, lit from the top left. Its corner is 0.16 of its short side and never more than 28px, so a small card has a small corner and a wide panel stays firm. <code>padding</code> sets the inset: <code>sm</code>, <code>md</code> (the default), <code>lg</code>, or <code>unit</code>, which follows the short side like a device. <code>header</code> and <code>footer</code> are optional rows, and <code>wordmark</code> and <code>model</code> print on the bottom edge. A Display inside it nests its corner.</p>
+        <p><code>Card</code> is the body of a unit, one rounded rectangle of matte plastic lit from the top left. Its corner is 0.16 of its short side and never more than 28px, so a small card has a small corner and a wide panel stays firm. <code>padding</code> sets the inset to <code>sm</code>, <code>md</code> (the default), <code>lg</code>, or <code>unit</code>, which follows the short side like a device. <code>header</code> and <code>footer</code> are optional rows, and <code>wordmark</code> and <code>model</code> print on the bottom edge. A Display inside it nests its corner.</p>
       </>
     ),
     hero: ex('CardBasic', 'A card with a title, a state line, a main key and its printing.'),
@@ -865,12 +865,12 @@ export const COMPONENTS: ComponentChapter[] = [
     whenNotToUse: [['A whole appliance with a display and a knob', 'DeviceCard'], ['Only spacing between blocks', 'Stack']],
     anatomy: [['Body', 'unit.bg (surface.solid), unit.shadow (elevation.unit), radius unit.radius-ratio × short side capped at corner.panel.'], ['Inset', 'gap.2xl, gap.inset or gap.section; unit.inset-ratio × short side for padding unit.'], ['Header, content, footer', 'Rows with gap.xl between them.'], ['Printing', 'Wordmark type.body medium; model type.caption in text.secondary, lowercase.']],
     states: [['Rest', 'Raised 3px with a short shadow down and to the right.'], ['Resized', 'Corner and unit inset follow the new short side.']],
-    content: ['Name the room or device in the header.', 'One short line of state, in sentence case.', 'Print the model in lowercase with a number: wash 1.'],
+    content: ['Name the room or device in the header.', 'One short line of state, in sentence case.', 'Print the model in lowercase with a number, as in wash 1.'],
     dodont: [
       { do: 'Keep one orange key in a card.', dont: 'Put two orange keys in one card.' },
       { do: 'Use gaps between the parts of one card.', dont: 'Put a card inside a card or split it with lines.' },
     ],
-    a11y: ['Card renders the element you pass in as: div, section, article or li. A section or article needs a name.', 'The body is never focusable; Tab goes to the controls inside it.', 'The printing is real text with 4.5:1 contrast on the plastic.', 'In forced colours the body keeps a 1px border.'],
+    a11y: ['Card renders as the element you pass in, one of div, section, article or li. A section or article needs a name.', 'The body is never focusable; Tab goes to the controls inside it.', 'The printing is real text with 4.5:1 contrast on the plastic.', 'In forced colours the body keeps a 1px border.'],
     keyboard: [['Tab', 'Moves to the first control inside the card, never to the body', 'Card: Tab never stops on the body, only on the keys inside it']],
     inherits: 'HTMLAttributes<HTMLElement>',
     related: [['/components/device-card', 'DeviceCard', 'The unit is a whole appliance.'], ['/components/stack', 'Stack', 'Only spacing, no body.']],
@@ -880,7 +880,7 @@ export const COMPONENTS: ComponentChapter[] = [
     slug: 'device-card',
     status: 'beta',
     limitations: ['There is one knob per card. A second dial needs its own Rotary in children.', 'The layout switches to one column below a set width; there is no in-between layout.', 'The knob and the fader do not talk to the device. Wire their values to your own state.'],
-    youMust: ['Keep the display in step with the device: pass its current reading, not only the set value.', 'Give the key row a name with keysLabel.', 'Use either a knob or a primary key as the orange part, not both.'],
+    youMust: ['Keep the display in step with the device. Pass its current reading as well as the set value.', 'Give the key row a name with keysLabel.', 'Use either a knob or a primary key as the orange part, not both.'],
     usage: '<DeviceCard model="tuner 1" display={{ label: \'Radio\', value: \'88.6\', unit: \'MHz\' }} knob={{ label: \'Tuning\' }} keys={[{ label: \'FM\' }, { label: \'AM\' }]} />',
     backdrops: 'The body is warm white plastic in light and charcoal in dark, 3px above the page like anchor A. The knob and the primary key stay the same orange in both themes; the LCD and OLED windows keep their own inks.',
     purpose: 'Shows one appliance with its display, its one orange control, its keys and its printing, laid out from anchor A.',
@@ -890,21 +890,21 @@ export const COMPONENTS: ComponentChapter[] = [
         <p><code>DeviceCard</code> is a Card with the system’s own parts mounted on it. <code>display</code> is the window across the top. <code>knob</code> is the orange Rotary, 0.36 of the short side; with no knob, <code>primary</code> is the orange key. <code>keys</code> are plastic keys, <code>meter</code> a Grille and <code>fader</code> a ruler Slider. <code>layout</code> is <code>a</code> (anchor A, the default), <code>tall</code> or <code>compact</code>. Below the width where two columns hold 44px parts, every part takes its own row.</p>
       </>
     ),
-    hero: ex('DeviceCardAnchor', 'Anchor A, the card the system is built from: a radio with all its parts.'),
+    hero: ex('DeviceCardAnchor', 'Anchor A, the card the system is built from, is a radio with all its parts.'),
     ladder: [
-      ex('DeviceCardThermostat', 'layout="tall": one column, the knob centred under the display.'),
-      ex('DeviceCardSpeaker', 'layout="compact": the knob right of an OLED window.'),
-      ex('DeviceCardLamp', 'No knob: the primary key is the orange part.'),
+      ex('DeviceCardThermostat', 'layout="tall" puts everything in one column, with the knob centred under the display.'),
+      ex('DeviceCardSpeaker', 'layout="compact" puts the knob right of an OLED window.'),
+      ex('DeviceCardLamp', 'With no knob, the primary key is the orange part.'),
       ex('DeviceCardWasher', 'With a knob, every key stays plastic.'),
       ex('DeviceCardNarrow', 'On a narrow body the parts stack in one column.'),
     ],
     whenToUse: ['Show one device with its state and the controls that change it.', 'A device with one main value, or one main action.'],
     whenNotToUse: [['A unit with text and keys but no display', 'Card'], ['Only the knob, in your own layout', 'Rotary']],
-    anatomy: [['Body', 'Card with padding unit: unit.inset-ratio × short side; elevation.unit.'], ['Display', 'The first row, across the inner width.'], ['Knob', 'Rotary kind primary, unit.knob-ratio × short side.'], ['Keys', 'Button or IconButton kind key, gap.lg apart.'], ['Meter and fader', 'Grille and Slider with its ruler scale.'], ['Printing', 'Wordmark bottom-left, model bottom-right.']],
+    anatomy: [['Body', 'Card with padding unit, unit.inset-ratio × short side, and elevation.unit.'], ['Display', 'The first row, across the inner width.'], ['Knob', 'Rotary kind primary, unit.knob-ratio × short side.'], ['Keys', 'Button or IconButton kind key, gap.lg apart.'], ['Meter and fader', 'Grille and Slider with its ruler scale.'], ['Printing', 'Wordmark bottom-left, model bottom-right.']],
     states: [['Rest', 'The body sits 3px above the page.'], ['Narrow', 'Every part takes its own row.'], ['No knob', 'The primary key takes the knob’s place in orange.']],
-    content: ['Name the device in display.label: Thermostat.', 'Print the model in lowercase with a number: thermostat 1.', 'Name each part by what it sets: Temperature, Volume.'],
+    content: ['Name the device in display.label, as in Thermostat.', 'Print the model in lowercase with a number, as in thermostat 1.', 'Name each part by what it sets, such as Temperature or Volume.'],
     dodont: [
-      { do: 'Use one orange part: the knob, or the primary key when there is no knob.', dont: 'Add an orange key next to the orange knob.' },
+      { do: 'Use one orange part, which is the knob, or the primary key when there is no knob.', dont: 'Add an orange key next to the orange knob.' },
       { do: 'Show a grille only when it carries a level.', dont: 'Add a grille as decoration.' },
     ],
     a11y: ['The body is a region named by the display label, or by aria-label.', 'The display is a polite live region and never a control.', 'Tab order is the knob or primary key first, then the keys, then the fader.', 'Every part keeps a 44px target, on a 375px phone too.'],

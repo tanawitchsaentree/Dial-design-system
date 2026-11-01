@@ -1,4 +1,4 @@
-// @example A controlled bank: the unit's display says which mode is latched
+// @example A controlled bank, where the unit's display says which mode is latched
 import { useState } from 'react';
 import { SegmentedControl, Stack } from 'dial-react';
 

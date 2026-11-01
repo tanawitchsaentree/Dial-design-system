@@ -1,4 +1,4 @@
-// @example A controlled fader: the unit's display says the value, the fader sets it
+// @example A controlled fader. The unit's display says the value and the fader sets it
 import { useState } from 'react';
 import { Slider, Stack } from 'dial-react';
 

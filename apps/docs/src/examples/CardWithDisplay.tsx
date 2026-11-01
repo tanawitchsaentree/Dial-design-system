@@ -1,4 +1,4 @@
-// @example A Display inside a card nests its corner: its radius is the card's radius minus the inset
+// @example A Display inside a card nests its corner, so its radius is the card's radius minus the inset
 import { Button, Card, Display } from 'dial-react';
 
 export default function CardWithDisplay() {

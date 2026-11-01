@@ -30,7 +30,7 @@ export const CHIP: Depth = {
     perVariant: 'A removable chip has no lamp. It has a 24px round remove key at the end instead, with a 44px target.',
   },
   sizes: {
-    md: { use: '44px tall. Chips on their own row, or the main presets of a unit.', pairs: 'Other 44px controls: Button, Switch, IconButton.' },
+    md: { use: '44px tall. Chips on their own row, or the main presets of a unit.', pairs: 'Other 44px controls, such as Button, Switch and IconButton.' },
     sm: { use: '36px drawn, with a 44px area that still takes the press. Dense filter rows.', pairs: 'Rows of many chips, and lists on a settings sheet.' },
   },
   emphasis: {
@@ -51,12 +51,12 @@ export const CHIP: Depth = {
     avoid: [{ title: 'chips used for pick-one', why: 'Chips can all be on at once. When only one may be on, people expect SegmentedControl.', render: <Unit><Row><Chip defaultSelected>Low</Chip><Chip>Medium</Chip><Chip>High</Chip></Row></Unit> }],
   },
   content: {
-    formula: <p>One or two words that name the filter or preset: <em>Eco</em>, <em>Night</em>, <em>Lamps</em>. Sentence case, no full stop, no verb.</p>,
+    formula: <p>One or two words that name the filter or preset, such as <em>Eco</em>, <em>Night</em> or <em>Lamps</em>. Sentence case, no full stop, no verb.</p>,
     pair: {
       do: <Chip>Night</Chip>, doNote: 'Names the preset.',
       dont: <Chip>Turn on night mode now</Chip>, dontNote: 'A sentence on a key. Use a Button for an action.',
     },
-    overflow: { text: 'A long word makes the key wider. It does not wrap inside the key, so the row of chips wraps instead.', render: <div style={{ inlineSize: 220 }}><Row><Chip size="sm">Kitchen</Chip><Chip size="sm">Downstairs bathroom</Chip><Chip size="sm">Hall</Chip></Row></div> },
+    overflow: { text: 'A long word makes the key wider. It does not wrap inside the key, so the row of chips wraps instead.', render: <div data-overflow-demo="" style={{ inlineSize: 220 }}><Row><Chip size="sm">Kitchen</Chip><Chip size="sm">Downstairs bathroom</Chip><Chip size="sm">Hall</Chip></Row></div> },
     rtl: { text: 'In right-to-left languages the lamp sits to the right of the word, and the remove key moves to the left end.', render: <div dir="rtl"><Row><Chip defaultSelected>ليلي</Chip><Chip onRemove={noop}>المطبخ</Chip></Row></div> },
     expansion: { text: 'German and Finnish words can run 30% longer. The key grows sideways and keeps its height.', render: <Row><Chip defaultSelected>Nachtmodus</Chip><Chip>Abwesenheit</Chip></Row> },
   },

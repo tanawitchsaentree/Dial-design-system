@@ -7,7 +7,7 @@ const Unit = ({ children }: { children: React.ReactNode }) => <div className="de
 export const SWITCH: Depth = {
   overview: (
     <>
-      <p>Switch turns one setting on or off, and the setting stays that way until someone changes it. It is a slide switch: a plastic cap that rides in a short groove. The cap sits at one end for off and at the other end for on.</p>
+      <p>Switch turns one setting on or off, and the setting stays that way until someone changes it. It is a slide switch, a plastic cap that rides in a short groove. The cap sits at one end for off and at the other end for on.</p>
       <p>You read the state in three ways at once. The cap is at the on end, the small lamp beside it is filled with ink, and the word for the current position is printed heavier. None of these is a colour, so the switch never uses orange. Orange belongs to the unit’s one main control.</p>
     </>
   ),
@@ -48,12 +48,12 @@ export const SWITCH: Depth = {
     avoid: [{ title: 'a switch and a Button that do the same thing', why: 'Two controls for one setting leave people unsure which one is true.', render: <Unit><Stack gap="sm"><Switch label="Lamp" offLabel="Off" onLabel="On" /><Button>Turn lamp on</Button></Stack></Unit> }],
   },
   content: {
-    formula: <p>The label names the setting as a noun: <em>Keep warm</em>, <em>Child lock</em>. Position words are short: <em>Off</em> and <em>On</em>, or the two modes, such as <em>Warm</em> and <em>Cook</em>. Sentence case, no full stop.</p>,
+    formula: <p>The label names the setting as a noun, as in <em>Keep warm</em> or <em>Child lock</em>. Position words are short, such as <em>Off</em> and <em>On</em>, or the two modes, such as <em>Warm</em> and <em>Cook</em>. Sentence case, no full stop.</p>,
     pair: {
       do: <Switch label="Child lock" offLabel="Off" onLabel="On" />, doNote: 'The label names the setting.',
-      dont: <Switch label="Turn on child lock?" offLabel="No" onLabel="Yes" />, dontNote: 'A question with Yes and No reads like a form, not a setting.',
+      dont: <Switch label="Turn on child lock?" offLabel="No" onLabel="Yes" />, dontNote: 'A question with Yes and No reads like a form instead of a setting.',
     },
-    overflow: { text: 'A long label wraps onto more lines. The switch stays the same size and stays centred on the label.', render: <div style={{ inlineSize: 240 }}><Switch label="Keep the rice warm for twelve hours after cooking" offLabel="Off" onLabel="On" /></div> },
+    overflow: { text: 'A long label wraps onto more lines. The switch stays the same size and stays centred on the label.', render: <div data-overflow-demo="" style={{ inlineSize: 240 }}><Switch label="Keep the rice warm for twelve hours after cooking" offLabel="Off" onLabel="On" /></div> },
     rtl: { text: 'In right-to-left languages the off word moves to the right and the cap slides to the left for on.', render: <div dir="rtl"><Switch label="إبقاء دافئ" offLabel="إيقاف" onLabel="تشغيل" defaultChecked /></div> },
     expansion: { text: 'German position words can run 30% longer. The groove keeps its length and the words take the room they need.', render: <Switch label="Warmhalten" offLabel="Aus" onLabel="Kochen" /> },
   },
@@ -90,7 +90,7 @@ export const SWITCH: Depth = {
   related: [['/components/button', 'Button', 'An action that runs once.'], ['/components/checkbox', 'Checkbox', 'A choice in a form sent later.'], ['/components/segmented-control', 'SegmentedControl', 'One of three or more modes.']],
   references: [
     { title: 'WAI-ARIA Authoring Practices · Switch pattern', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/switch/', why: 'Role, state and keyboard expectations for a switch.' },
-    { title: 'WCAG 2.2 · 1.4.1 Use of Color', url: 'https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html', why: 'Why on is told by position, lamp and word, not by colour.' },
-    { title: 'Vitsœ · Dieter Rams: ten principles for good design', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
+    { title: 'WCAG 2.2 · 1.4.1 Use of Color', url: 'https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html', why: 'Why on is told by position, lamp and word, and never by colour alone.' },
+    { title: 'Dieter Rams, ten principles for good design (Vitsœ)', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
   ],
 };

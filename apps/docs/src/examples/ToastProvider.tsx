@@ -1,4 +1,4 @@
-// @example ToastProvider and useToast: post a toast from any key, it stays at least 5 s
+// @example ToastProvider and useToast post a toast from any key, and it stays at least 5 s
 import { Button, Stack, ToastProvider, useToast } from 'dial-react';
 
 function Keys() {

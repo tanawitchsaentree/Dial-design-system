@@ -1,4 +1,4 @@
-// @example Opened from a unit: the unit's display shows the answer after the sheet closes
+// @example Opened from a unit, whose display shows the answer after the sheet closes
 import { useState } from 'react';
 import { Button, Dialog, Stack } from 'dial-react';
 

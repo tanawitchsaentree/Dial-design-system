@@ -1,5 +1,5 @@
 {
-  "concept": "Checkbox is a small square key on the case of an appliance with its function printed beside it: you press it, it drops and springs back, and a tick in printing ink appears on its face to say the option is on.",
+  "concept": "Checkbox is a small square key on the case of an appliance with its function printed beside it. You press it, it drops and springs back, and a tick in printing ink appears on its face to say the option is on.",
   "kind": ["checkbox", "key", "toggle"],
   "default_to_avoid": [
     { "pattern": "18px rounded-square checkbox filled blue with a white tick (Material and Bootstrap checkbox)", "why_not": "A coloured fill spends a hue on a selection, which P1 forbids, and a flat square drawn on the page is not a key with height and travel as P3 asks." },
@@ -30,7 +30,7 @@
   },
   "mechanism": { "kind": "key", "travel": "3px", "spring": { "mass": 1.4, "stiffness": 520, "damping": 46 } },
   "parts": {
-    "root": { "p": "P3", "axis": "space", "why": "The whole row, key and printed word, is one native label at least 44px tall, so any of it presses the key." },
+    "root": { "p": "P3", "axis": "space", "why": "The whole row, key and printed word, is one native label at least 44px tall and marked as the hit area (data-hit), so any of it presses the key." },
     "input": { "p": "P3", "axis": "interaction", "why": "A native checkbox sits under the key, hidden from sight but focusable, so Space toggles and the state is announced." },
     "key": { "p": "P3", "axis": "depth", "why": "A small square key of matte plastic with the part shadow and a ring edge that holds 3:1 against the body." },
     "mark": { "p": "P4", "axis": "colour", "why": "The mark is drawn in full-step printing ink with the ring stroke, never orange, on the plastic key face." },
@@ -45,12 +45,12 @@
     "focus-visible": { "p": "P3", "axis": "interaction", "why": "Keyboard focus on the hidden input draws the same dark ring around the visible key as on every part." },
     "disabled": { "p": "P6", "axis": "depth", "why": "A disabled key loses its height and fades to half, while its ring edge and mark stay readable." },
     "data-disabled": { "p": "P3", "axis": "depth", "why": "A disabled row shows the not-allowed cursor and its key no longer travels when pressed by a pointer." },
-    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes state at once with no travel and no spring return." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes state at once with no travel and no spring return; only the edge fade stays." },
     "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the key keeps a system border and the mark uses the text colour, so both survive." }
   },
   "motion": {
     "transform": { "p": "P3", "axis": "motion", "why": "The key travels down in 65ms and returns on the spring so a press reads as a physical stroke." },
     "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses with the press and grows back with the return, following the single light." },
-    "border-color": { "p": "P6", "axis": "interaction", "why": "The edge step on hover fades briefly so the change is a reply to the pointer, not a flash." }
+    "border-color": { "p": "P3", "axis": "motion", "why": "The edge step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing." }
   }
 }

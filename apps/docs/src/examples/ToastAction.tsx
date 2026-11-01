@@ -1,4 +1,4 @@
-// @example One plastic action key: Try again after a failure
+// @example One plastic action key, Try again, after a failure
 import { Toast } from 'dial-react';
 
 export default function ToastAction() {

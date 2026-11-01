@@ -1,4 +1,4 @@
-// @example Two plain keys and no orange: neither answer is the main one
+// @example Two plain keys and no orange, because neither answer is the main one
 import { useState } from 'react';
 import { Button, Dialog } from 'dial-react';
 

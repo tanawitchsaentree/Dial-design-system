@@ -26,7 +26,7 @@ export default async function checkbox({ check, expect, page, go, main, tokens }
     expect(a !== b && a === c, `checked ${a} → ${b} → ${c}`);
     return `${a} → ${b} → ${c}`;
   });
-  await check('Checkbox', 'on and off differ in shape, not only colour', async () => {
+  await check('Checkbox', 'on and off differ in shape as well as in colour', async () => {
     await go('/components/checkbox/code');
     const row = main().locator(ROW).first();
     const input = row.locator('input[type="checkbox"]');

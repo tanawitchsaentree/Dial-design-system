@@ -1,4 +1,4 @@
-// @example Four levels, each one size step: display, headline, title and emphasis
+// @example Four levels, display, headline, title and emphasis, each one size step apart
 import { Heading, Stack } from 'dial-react';
 
 export default function HeadingLevels() {

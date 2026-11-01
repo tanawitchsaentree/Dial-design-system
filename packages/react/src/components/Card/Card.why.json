@@ -1,5 +1,5 @@
 {
-  "concept": "Card is the case of a small appliance: one rounded body of warm matte plastic, lit from the top left, with its content printed and mounted straight on it at an even inset and its wordmark and model printed on the bottom inset line.",
+  "concept": "Card is the case of a small appliance. It is one rounded body of warm matte plastic, lit from the top left, with its content printed and mounted straight on it at an even inset and its wordmark and model printed on the bottom inset line.",
   "kind": ["card", "surface", "panel"],
   "default_to_avoid": [
     { "pattern": "white card with a 12px radius, a soft shadow from straight above and header, content and footer sections (shadcn Card, MUI Card)", "why_not": "FORM.md forbids the white rectangle with a soft shadow from above; dial has one light top-left and a radius set by the body's own short side." },

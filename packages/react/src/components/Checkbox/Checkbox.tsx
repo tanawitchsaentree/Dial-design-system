@@ -13,15 +13,15 @@ import styles from './Checkbox.module.css';
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'children' | 'checked' | 'defaultChecked' | 'onChange' | 'disabled'> {
   /** The word printed beside the key. It is the accessible name, and clicking it presses the key. */
   label: ReactNode;
-  /** Controlled: whether the option is on. Pair it with `onChange`. */
+  /** Whether the option is on, when you control it. Pair it with `onChange`. */
   checked?: boolean;
-  /** Uncontrolled: whether the option starts on. */
+  /** Whether the option starts on, when the checkbox keeps its own state. */
   defaultChecked?: boolean;
   /** Called when the key is pressed by pointer, Space or the label; read `event.target.checked`. */
   onChange?: ChangeEventHandler<HTMLInputElement>;
   /** The key loses its height and cannot be pressed. */
   disabled?: boolean;
-  /** Mixed: some of the things this option covers are on. Shows a dash and is announced as mixed. */
+  /** Some of the things this option covers are on and some are off. Shows a dash and is announced as mixed. */
   indeterminate?: boolean;
 }
 
@@ -44,7 +44,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
   }, [indeterminate]);
 
   return (
-    <label data-component="Checkbox" data-disabled={disabled || undefined} className={cx(styles.root, className)}>
+    <label data-component="Checkbox" data-hit="" data-disabled={disabled || undefined} className={cx(styles.root, className)}>
       <input ref={setRef} type="checkbox" className={styles.input} disabled={disabled} {...rest} />
       <span className={styles.key} aria-hidden="true">
         <svg className={styles.mark} viewBox="0 0 24 24" focusable="false">

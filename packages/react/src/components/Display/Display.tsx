@@ -8,7 +8,7 @@ export type DisplaySize = 'sm' | 'md' | 'lg';
 export interface DisplayProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'role'> {
   /** `lcd` (default) draws the value as dark 7-segment digits on grey-green; `oled` sets it in white grotesk on near-black. */
   kind?: DisplayKind;
-  /** The reading, as text. On `lcd` the digits 0–9, a minus, a space, a decimal point and a few letters (A b C d E F H L n o P r t U) are drawn as segments. */
+  /** The reading, as text. On `lcd` the digits 0 to 9, a minus, a space, a decimal point and a few letters (A b C d E F H L n o P r t U) are drawn as segments. */
   value: string;
   /** The unit printed beside the value, such as °C, min or MHz. */
   unit?: string;
@@ -18,7 +18,7 @@ export interface DisplayProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chil
   label: string;
   /** `sm` 24px digits, `md` (default) 40px digits, `lg` 56px digits; on `oled` the value line steps with it. */
   size?: DisplaySize;
-  /** `lcd` only: the number of digit cells. Shorter values are padded on the left with unlit cells, so the window never changes width. */
+  /** The number of digit cells, on `lcd` only. Shorter values are padded on the left with unlit cells, so the window never changes width. */
   digits?: number;
 }
 
@@ -82,6 +82,7 @@ export const Display = forwardRef<HTMLDivElement, DisplayProps>(function Display
       aria-label={label}
       data-component="Display"
       data-kind={kind}
+      data-glow={kind === 'oled' ? 'soft' : undefined}
       className={cx(styles.root, styles[kind], styles[size], className)}
       {...rest}
     >

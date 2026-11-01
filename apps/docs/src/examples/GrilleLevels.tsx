@@ -1,4 +1,4 @@
-// @example Empty, partly lit and full: the number of lit holes is the reading
+// @example Empty, partly lit and full, where the number of lit holes is the reading
 import { Grille, Stack } from 'dial-react';
 
 export default function GrilleLevels() {

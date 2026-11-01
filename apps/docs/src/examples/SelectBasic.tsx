@@ -1,4 +1,4 @@
-// @example A select: the same well as Input with a printed chevron, opening a plastic panel of options
+// @example A select, the same well as Input with a printed chevron, opening a plastic panel of options
 import { Select } from 'dial-react';
 
 const PROGRAMMES = [

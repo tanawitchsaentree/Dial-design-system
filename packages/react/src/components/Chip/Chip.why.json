@@ -1,5 +1,5 @@
 {
-  "concept": "Chip is a small capsule key on the case for filters and quick presets: a selectable chip latches down like an old radio key and lights its lamp, a removable chip carries its own round remove key, and none of them is ever orange.",
+  "concept": "Chip is a small capsule key on the case for filters and quick presets. A selectable chip latches down like an old radio key and lights its lamp, a removable chip carries its own round remove key, and none of them is ever orange.",
   "kind": ["chip", "filter chip", "tag", "latching key"],
   "default_to_avoid": [
     { "pattern": "Material filter chip with a tinted fill and a check icon when selected", "why_not": "A tinted fill spends colour on a selection, which P1 forbids, and the check icon swaps the mechanism for a web convention." },
@@ -44,17 +44,18 @@
   "states": {
     "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens the printed ink one step and never lifts the key, because real keys do not rise." },
     "active": { "p": "P3", "axis": "depth", "why": "Pressing drops the key by its travel and collapses its shadow underneath it, at once." },
-    "aria-pressed=true": { "p": "P3", "axis": "depth", "why": "A selected chip is latched: it stays down by its travel with no shadow, its lamp lit and its word medium." },
+    "aria-pressed=true": { "p": "P3", "axis": "depth", "why": "A selected chip is latched, so it stays down by its travel with no shadow, its lamp lit and its word medium." },
     "focus-visible": { "p": "P3", "axis": "interaction", "why": "Every part shows the same dark ring with a gap, so focus never depends on a colour change." },
     "disabled": { "p": "P6", "axis": "depth", "why": "A disabled chip loses its height and fades to half, while its edge stays readable against the body." },
     "data-disabled": { "p": "P6", "axis": "interaction", "why": "The whole chip shows the not-allowed cursor when disabled, including the printed word around its keys." },
-    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes position at once, with no travel on press and no spring return." },
+    "data-glow": { "p": "P6", "axis": "colour", "why": "A lit lamp is one of the emitters P2 allows, so in the dark edition it gives off a few pixels of its own light; in light, unlit or disabled it gives off none." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes position at once, with no travel on press and no spring return; only the ink fade stays." },
     "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the key keeps a real border and the lamp fills solid when latched, so selection survives." }
   },
   "motion": {
     "transform": { "p": "P3", "axis": "motion", "why": "The key travels down in 65ms and returns on the spring so a press reads as a physical stroke." },
     "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses with the press or latch and grows back with the return, following the single light." },
-    "color": { "p": "P6", "axis": "interaction", "why": "The ink step on hover fades briefly so the change is a reply to the pointer, not a flash." },
+    "color": { "p": "P3", "axis": "motion", "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing." },
     "background-color": { "p": "P2", "axis": "motion", "why": "The lamp's on and off fades within the segment time, the same as a display segment switching." }
   }
 }

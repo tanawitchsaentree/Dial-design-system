@@ -1,5 +1,5 @@
 {
-  "concept": "IconButton is the round 44px key of an appliance with a symbol printed on it in place of a word: the same matte plastic as Button, dropping by its height when pressed, with only the unit's one primary key dyed orange.",
+  "concept": "IconButton is the round 44px key of an appliance with a symbol printed on it in place of a word. It is the same matte plastic as Button, it drops by its height when pressed, and only the unit's one primary key is dyed orange.",
   "kind": ["icon button", "button", "key"],
   "default_to_avoid": [
     { "pattern": "ghost icon button: a transparent icon with a grey hover circle (Material IconButton, shadcn ghost icon button)", "why_not": "A transparent glyph is not a part you can press; P3 makes every control a key with height and travel, and P6 forbids a hover effect that is not an ink step." },
@@ -42,13 +42,13 @@
     "active": { "p": "P3", "axis": "depth", "why": "Pressing drops the disc by its travel and collapses its shadow underneath it, at once." },
     "focus-visible": { "p": "P3", "axis": "interaction", "why": "The same dark ring as every other part shows keyboard focus, so focus never depends on the orange." },
     "disabled": { "p": "P6", "axis": "depth", "why": "A disabled key loses its height and fades to half, while its outline stays readable against the body." },
-    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes state at once with no travel and no spring return." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes state at once with no travel and no spring return; only the ink fade stays." },
     "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the disc keeps a real border so its edge survives without shadows or fills." }
   },
   "motion": {
     "transform": { "p": "P3", "axis": "motion", "why": "The disc travels down in 65ms and returns on the spring so a press reads as a physical stroke." },
     "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses with the press and grows back with the return, following the single light." },
-    "color": { "p": "P6", "axis": "interaction", "why": "The ink step on hover fades briefly so the change is a reply to the pointer, not a flash." },
-    "background-color": { "p": "P1", "axis": "colour", "why": "The primary key's orange shifts one step on hover with the same brief fade as the ink." }
+    "color": { "p": "P3", "axis": "motion", "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing." },
+    "background-color": { "p": "P1", "axis": "colour", "why": "The primary key's orange shifts one step on hover with the same fast in, slow out fade as the ink." }
   }
 }

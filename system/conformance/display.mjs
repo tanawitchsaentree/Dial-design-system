@@ -16,7 +16,7 @@ export default async function display({ check, expect, page, go, main }) {
     return `${r.length} windows`;
   });
 
-  await check('Display', 'Tab never lands in a window: it is never a control', async () => {
+  await check('Display', 'Tab never lands in a window, because a window is never a control', async () => {
     await go('/components/display/code');
     const n = await all().evaluateAll((els) => els.filter((e) => e.tabIndex >= 0 || e.querySelector('a,button,input,select,textarea,[tabindex]')).length);
     expect(n === 0, `${n} windows hold a focusable element`);

@@ -1,4 +1,4 @@
-// @example A summary line: counts of each state, every one a glyph and a word
+// @example A summary line with counts of each state, every one a glyph and a word
 import { Badge, Stack } from 'dial-react';
 
 export default function BadgeSummary() {

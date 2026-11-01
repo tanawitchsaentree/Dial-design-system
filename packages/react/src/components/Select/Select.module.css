@@ -5,8 +5,10 @@
 .root {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--ds-gap-sm);
   inline-size: 100%;
+  min-inline-size: 0;
   font-family: var(--ds-type-family);
   color: var(--ds-text-primary);
 }

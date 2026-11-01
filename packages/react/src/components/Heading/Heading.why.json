@@ -1,7 +1,7 @@
 {
   "family": "Text",
   "family_difference": "Heading is the same flat printing at the four larger steps (display, headline, title, emphasis), always medium weight and primary ink, rendered as a real h1 to h4 so the outline of a page is in the markup.",
-  "concept": "Heading is the name printed largest on a unit or a page: the same grotesk and grey ink as the rest of the case, louder only by size and by sitting first on the inset line.",
+  "concept": "Heading is the name printed largest on a unit or a page. It uses the same grotesk and grey ink as the rest of the case, and it is louder only by size and by sitting first on the inset line.",
   "kind": ["heading", "title"],
   "parts": {
     "root": { "p": "P5", "axis": "type", "why": "A heading prints in medium weight and primary ink with tight leading, never bold and never tinted." },

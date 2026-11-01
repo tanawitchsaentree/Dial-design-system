@@ -8,7 +8,7 @@ export type TextTone = 'primary' | 'secondary';
 export type TextWeight = 'regular' | 'medium';
 
 export interface TextProps extends Omit<LabelHTMLAttributes<HTMLElement>, 'color'> {
-  /** The element to render: `p` (default) for a paragraph, `span` inline, `div` for a block, `label` to name a field (pass `htmlFor`). */
+  /** The element to render. Use `p` (default) for a paragraph, `span` inline, `div` for a block, `label` to name a field (pass `htmlFor`). */
   as?: TextElement;
   /** `micro` (11px, model names and scale numerals), `caption` (13px), `label` (14px), `body` (15px, the default) or `reading` (16px, prose capped at the measure). */
   size?: TextSize;

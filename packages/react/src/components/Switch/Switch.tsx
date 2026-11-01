@@ -66,7 +66,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(function Switch
           <span className={styles.cap} />
         </span>
         {onLabel != null && <span className={cx(styles.word, styles.on)} aria-hidden="true">{onLabel}</span>}
-        <span className={styles.lamp} aria-hidden="true" />
+        <span className={styles.lamp} aria-hidden="true" data-glow={on && !disabled ? 'mark' : undefined} />
       </button>
     </span>
   );

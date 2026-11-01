@@ -24,7 +24,7 @@ export interface SelectOption {
 }
 
 export interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue' | 'children'> {
-  /** The printed name above the well. Required: it is also the field's accessible name. */
+  /** The printed name above the well. It is required, because it is also the field's accessible name. */
   label: ReactNode;
   /** The choices, in the order they are listed. */
   options: SelectOption[];

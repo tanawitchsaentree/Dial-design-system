@@ -1,4 +1,4 @@
-// @example layout="tall": a thermostat in one column, with a heat meter and the knob centred under the display
+// @example A thermostat in layout="tall", one column with a heat meter and the knob centred under the display
 import { useState } from 'react';
 import { DeviceCard } from 'dial-react';
 

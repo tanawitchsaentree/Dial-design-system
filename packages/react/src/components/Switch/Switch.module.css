@@ -4,9 +4,12 @@
   display: inline-flex;
   align-items: center;
   gap: var(--ds-gap-lg);
+  max-inline-size: 100%;
   font-family: var(--ds-type-family);
 }
 .label {
+  flex: 1 1 auto;
+  min-inline-size: 0;
   font-size: var(--ds-type-label);
   font-weight: var(--ds-type-weight-regular);
   line-height: var(--ds-type-leading-tight);
@@ -15,13 +18,15 @@
 }
 .root {
   display: inline-flex;
+  flex: none;
   align-items: center;
   gap: var(--ds-gap-md);
   min-block-size: var(--ds-control-md);
   min-inline-size: var(--ds-layout-touch);
   padding-block: var(--ds-gap-none);
-  padding-inline: var(--ds-gap-xs);
-  border: var(--ds-width-hairline) solid transparent;
+  padding-inline: var(--ds-gap-md);
+  /* the button draws no shape of its own: the groove, the cap and the lamp are the switch */
+  border: 0;
   border-radius: var(--ds-corner-mark);
   background: transparent;
   color: var(--ds-text-secondary);
@@ -33,7 +38,7 @@
   font-weight: var(--ds-type-weight-regular);
   line-height: var(--ds-type-leading-tight);
   color: var(--ds-text-secondary);
-  transition: color var(--ds-motion-hover) linear;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .off { text-align: end; }
 .on { text-align: start; }
@@ -42,8 +47,10 @@
   display: flex;
   align-items: center;
   flex: none;
+  box-sizing: border-box;
   inline-size: var(--ds-control-switch);
   block-size: var(--ds-control-track);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
   border-radius: var(--ds-corner-mark);
   background: var(--ds-surface-sunken);
   box-shadow: var(--ds-elevation-well);
@@ -75,12 +82,14 @@
   background: var(--ds-surface-sunken);
   box-shadow: var(--ds-elevation-well);
   transition:
-    background-color var(--ds-motion-segment) linear,
-    box-shadow var(--ds-motion-segment) linear;
+    background-color var(--ds-motion-segment) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-segment) var(--ds-motion-easing);
 }
 
 .root[aria-checked='true'] .cap { inset-inline-start: calc(100% - var(--ds-control-cap-w)); }
 .root[aria-checked='true'] .lamp { background: var(--ds-text-primary); box-shadow: none; }
+/* a lit lamp is one of P2's emitters: its own light in the dark edition, nothing in light (emit.lamp) */
+.root .lamp[data-glow] { box-shadow: var(--ds-emit-lamp); }
 .root[aria-checked='true'] .on,
 .root[aria-checked='false'] .off { color: var(--ds-text-primary); font-weight: var(--ds-type-weight-medium); }
 

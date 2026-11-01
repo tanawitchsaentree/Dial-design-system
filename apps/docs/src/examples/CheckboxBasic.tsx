@@ -1,4 +1,4 @@
-// @example Washer options: each key prints a tick when it is on
+// @example Washer options where each key prints a tick when it is on
 import { Checkbox, Stack } from 'dial-react';
 
 export default function CheckboxBasic() {

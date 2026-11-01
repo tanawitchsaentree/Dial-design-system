@@ -1,5 +1,5 @@
 {
-  "concept": "Input is a window recessed into the appliance's body that takes text: a well the full width of its column, the light falling into it from the top left, with its name printed above on the inset line like the printing on a case.",
+  "concept": "Input is a window recessed into the appliance's body that takes text. It is a well the full width of its column, the light falls into it from the top left, and its name is printed above on the inset line like the printing on a case.",
   "kind": ["input", "text field", "field"],
   "default_to_avoid": [
     { "pattern": "Material outlined text field: a bordered 8px-radius input rectangle with a floating label", "why_not": "A floating label shrinks into the border and doubles as a placeholder, while P5 prints every label flat on the inset line above its part." },
@@ -33,7 +33,7 @@
     "root": { "p": "P5", "axis": "space", "why": "The field stacks its label, well and message in one column so the label sits on the inset line above the well." },
     "label": { "p": "P5", "axis": "type", "why": "The printed name uses the label size in medium weight, like the printing beside every other part of the unit." },
     "well": { "p": "P2", "axis": "depth", "why": "The recess takes the inverse light, shade on its top-left inner edge, so the person sees where text goes." },
-    "field": { "p": "P5", "axis": "colour", "why": "Typed text is primary ink on the sunken plastic at more than 4.5:1, with a line box tall enough for Thai marks." },
+    "field": { "p": "P5", "axis": "colour", "why": "Typed text is primary ink on the sunken plastic at more than 4.5:1, with a line box tall enough for Thai marks, and the field fills the whole well so its press area is 44px tall." },
     "unit": { "p": "P2", "axis": "type", "why": "The printed unit sits beside the value inside the window, as the unit sits beside a reading on the display." },
     "hint": { "p": "P5", "axis": "colour", "why": "The hint is secondary ink on plastic above 4.5:1, printed under the well so it never covers the value." },
     "error": { "p": "P1", "axis": "colour", "why": "The error message is a red mark with a word, never the orange, which stays reserved for the unit's primary control." },

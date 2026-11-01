@@ -8,7 +8,7 @@ export const CHECKBOX: Depth = {
   overview: (
     <>
       <p>Checkbox turns one option on or off, often as one of several options in a list. It is a small square key of matte plastic with its name printed beside it. Press the key or the name, and the key drops and comes back on a spring. When the option is on, a tick in ink appears on the key.</p>
-      <p>The tick is printing ink, never orange, because orange belongs to the one main control of a unit. On, off and mixed are three different shapes: a tick, an empty key and a dash. You can read the state without seeing colour.</p>
+      <p>The tick is printing ink, never orange, because orange belongs to the one main control of a unit. On, off and mixed are three different shapes, a tick, an empty key and a dash. You can read the state without seeing colour.</p>
     </>
   ),
   whenToUse: ['For options that add to a program, such as Pre-wash or Extra rinse.', 'For a list where any number of items can be on.', 'For a single yes or no that takes effect when a form is sent.'],
@@ -21,13 +21,13 @@ export const CHECKBOX: Depth = {
   anatomy: {
     render: <Checkbox label="Eco mode" defaultChecked />,
     parts: [
-      { part: 'Row', selector: '[data-component="Checkbox"]', what: 'The native label: key and name together, 44px tall. Any of it presses the key.' },
+      { part: 'Row', selector: '[data-component="Checkbox"]', what: 'The native label holds the key and the name together, 44px tall. Any of it presses the key.' },
       { part: 'Key', selector: '[data-component="Checkbox"] > span:nth-of-type(1)', what: 'A 24px square key with a ring edge and a short shadow down and to the right.' },
       { part: 'Tick', selector: '[data-component="Checkbox"] svg', what: 'A 2px ink tick on the key face when on, a dash when mixed.' },
       { part: 'Printed name', selector: '[data-component="Checkbox"] > span:nth-of-type(2)', what: 'The label in regular weight, printed beside the key.' },
     ],
   },
-  sizes: { na: 'Checkbox has one size: a 24px key in a 44px row.' },
+  sizes: { na: 'Checkbox has one size, a 24px key in a 44px row.' },
   emphasis: {
     text: <p>Checkboxes are never the loud part of a unit. They print no orange. The orange key that runs the program sits after them.</p>,
     pair: {
@@ -46,12 +46,12 @@ export const CHECKBOX: Depth = {
     avoid: [{ title: 'a checkbox that acts at once next to a Switch', why: 'Two controls that look different but both act at once confuse people. Use Switch for both.', render: <Unit><Stack gap="xs"><Checkbox label="Lamp on" defaultChecked /><Checkbox label="Heating on" /></Stack></Unit> }],
   },
   content: {
-    formula: <p>Name the option, not the action: <em>Pre-wash</em>, <em>Child lock</em>, <em>Eco mode</em>. Sentence case, no full stop, and phrased so that a tick means yes.</p>,
+    formula: <p>Name the option rather than the action, such as <em>Pre-wash</em>, <em>Child lock</em> or <em>Eco mode</em>. Sentence case, no full stop, and phrased so that a tick means yes.</p>,
     pair: {
       do: <Checkbox label="Child lock" />, doNote: 'A tick means the lock is on.',
       dont: <Checkbox label="Don’t lock the door" />, dontNote: 'A tick on a negative is hard to read.',
     },
-    overflow: { text: 'A long name wraps onto more lines beside the key. The key stays on the first line.', render: <div style={{ inlineSize: 220 }}><Checkbox label="Send me a message when the wash has finished and the door unlocks" /></div> },
+    overflow: { text: 'A long name wraps onto more lines beside the key. The key stays on the first line.', render: <div data-overflow-demo="" style={{ inlineSize: 220 }}><Checkbox label="Send me a message when the wash has finished and the door unlocks" /></div> },
     rtl: { text: 'In right-to-left languages the key moves to the right of its name.', render: <div dir="rtl"><Checkbox label="غسيل مسبق" defaultChecked /></div> },
     expansion: { text: 'German and Finnish names can run 30% longer. The row grows sideways and the key keeps its size.', render: <Checkbox label="Zusätzlicher Spülgang" defaultChecked /> },
   },
@@ -69,7 +69,7 @@ export const CHECKBOX: Depth = {
       ['Keyboard', 'Tab', 'Moves focus to the checkbox.', 'native input'],
       ['Keyboard', 'Space', 'Turns the option on or off.', 'native input'],
       ['Pointer', 'Press the key or the name', 'The key drops and returns, and the option flips.', 'native label'],
-      ['Screen reader', 'Read', 'Announced as a checkbox with its name and checked, not checked or mixed.', 'role checkbox'],
+      ['Screen reader', 'Read', 'Announced as a checkbox with its name and its state, which is checked, unchecked or mixed.', 'role checkbox'],
     ],
     loading: <p>Checkbox has no loading state. If a device must confirm the change, show that on the unit’s display.</p>,
     focus: <p>Checkbox is never focused on page load. In a sheet, focus goes to the first field, which may be the first checkbox.</p>,

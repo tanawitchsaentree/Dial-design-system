@@ -1,4 +1,4 @@
-// @example A page outline: one level 1, a level 2 per room, a level 3 per unit
+// @example A page outline with one level 1, a level 2 per room and a level 3 per unit
 import { Heading, Stack, Text } from 'dial-react';
 
 export default function HeadingPage() {

@@ -1,4 +1,4 @@
-// @example Undo from the toast: the unit's display follows the action and its undo
+// @example Undo from the toast, with the unit's display following the action and its undo
 import { useState } from 'react';
 import { Button, Stack, ToastProvider, useToast } from 'dial-react';
 

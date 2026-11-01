@@ -1,4 +1,4 @@
-// @example Printing on a unit: the name on top, a note, and the wordmark and model name on the bottom inset line
+// @example Printing on a unit, with the name on top, a note, and the wordmark and model name on the bottom inset line
 import { Heading, Stack, Text } from 'dial-react';
 
 export default function TextInUnit() {

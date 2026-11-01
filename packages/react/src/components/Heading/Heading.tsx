@@ -5,7 +5,7 @@ import styles from './Heading.module.css';
 export type HeadingLevel = 1 | 2 | 3 | 4;
 
 export interface HeadingProps extends Omit<HTMLAttributes<HTMLHeadingElement>, 'color'> {
-  /** Renders `h1`–`h4` and sets the size: 1 display (37px, the page title), 2 headline (26px, a section), 3 title (22px, a unit, the default), 4 emphasis (18px, a group inside a unit). */
+  /** Renders `h1` to `h4` and sets the size. 1 is display (37px, the page title), 2 headline (26px, a section), 3 title (22px, a unit, the default), 4 emphasis (18px, a group inside a unit). */
   level?: HeadingLevel;
 }
 

@@ -1,4 +1,4 @@
-// @example Mixed: a dash on the parent key when only some lamps are on
+// @example Mixed, with a dash on the parent key when only some lamps are on
 import { useState } from 'react';
 import { Checkbox, Stack } from 'dial-react';
 

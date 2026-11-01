@@ -1,4 +1,4 @@
-// @example Driven by the device: each report moves the fill in one step
+// @example Driven by the device, so each report moves the fill in one step
 import { useState } from 'react';
 import { Button, Progress, Stack } from 'dial-react';
 

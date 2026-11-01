@@ -1,4 +1,4 @@
-// @example Off, on, and disabled: a disabled cap loses its height
+// @example Off, on, and disabled, where a disabled cap loses its height
 import { Switch, Stack } from 'dial-react';
 
 export default function SwitchStates() {

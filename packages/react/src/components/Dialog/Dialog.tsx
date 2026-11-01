@@ -25,19 +25,19 @@ export interface DialogProps extends Omit<HTMLAttributes<HTMLDialogElement>, 'ti
   open?: boolean;
   /** The open state on first render when the dialog is not controlled. */
   defaultOpen?: boolean;
-  /** Called with `false` when the sheet asks to close: Escape, or any key in `actions`. Called with `true` when `trigger` is pressed. */
+  /** Called with `false` when the sheet asks to close, on Escape or on any key in `actions`. Called with `true` when `trigger` is pressed. */
   onOpenChange?: (open: boolean) => void;
-  /** The one question the sheet asks, required: "Turn off all lamps?". It names the dialog. */
+  /** The one question the sheet asks, such as "Turn off all lamps?". It is required, because it names the dialog. */
   title: ReactNode;
   /** One or two sentences under the question that say what will happen. It describes the dialog. */
   description?: ReactNode;
   /** Fields or extra content between the description and the keys. The first field takes focus on open. */
   children?: ReactNode;
-  /** The keys at the bottom: plastic `Button`s and at most one `Button kind="primary"`, the main one last. Any key here closes the sheet after its own onClick, unless that onClick calls `event.preventDefault()`. */
+  /** The keys at the bottom, plastic `Button`s and at most one `Button kind="primary"`, the main one last. Any key here closes the sheet after its own onClick, unless that onClick calls `event.preventDefault()`. */
   actions?: ReactNode;
   /** An element, usually a `Button`, that opens the sheet when pressed. Focus returns to it on close. */
   trigger?: ReactElement<{ onClick?: (e: ReactMouseEvent<HTMLElement>) => void }>;
-  /** `true` (default) opens with `showModal()`: scrim, focus trap, inert page. `false` shows the sheet in place, with no scrim and no focus move, for previews. */
+  /** `true` (default) opens with `showModal()`, with a scrim, a focus trap and an inert page. `false` shows the sheet in place, with no scrim and no focus move, for previews. */
   modal?: boolean;
 }
 

@@ -13,16 +13,19 @@ export const TABS: Depth = {
   overview: (
     <>
       <p>Tabs move between sections of one screen, such as the rooms of a home. The names are printed in a row, like the words on the case of an appliance. The chosen name is set in medium weight with one short ink mark under it, and the screen below shows that section.</p>
-      <p>Tabs are printing, not keys. They have no height, no shadow and no travel, because choosing a room does not change any device. That is the difference from SegmentedControl, whose keys latch and change a mode. The mark appears at once under the new name. It does not slide.</p>
+      <p>Tabs are printing on the case. They have no height, no shadow and no travel, because choosing a room does not change any device. That is the difference from SegmentedControl, whose keys latch and change a mode. The mark appears at once under the new name. It does not slide.</p>
+      <p>Every panel is rendered on the page from the start, and only the chosen one is shown. Switching is instant, and what someone typed or set in a panel is still there when they come back to it. Each name is a native button with role tab, and each panel is linked to its name, so a screen reader announces which section it is in.</p>
+      <p>Tabs can be controlled with value and onValueChange, or keep their own choice with defaultValue. When nothing is given, the first section is shown. Keep the chosen section in the address of the screen if people return to it often, so a reload opens the same room.</p>
     </>
   ),
-  whenToUse: ['Moving between rooms, devices or areas on one screen.', 'Two to six sections of the same kind, each with its own content.', 'Content that people compare by switching back and forth.'],
+  whenToUse: ['Moving between rooms, devices or areas on one screen.', 'Two to six sections of the same kind, each with its own content.', 'Content that people compare by switching back and forth.', 'Grouping the settings of one device into a few named parts, such as Program, Schedule and Sound.'],
   whenNot: [
     { situation: 'Setting a mode on a device', to: '/components/segmented-control', label: 'SegmentedControl' },
     { situation: 'Steps that must be done in order', to: '/components/button', label: 'Button' },
     { situation: 'Turning one thing on or off', to: '/components/switch', label: 'Switch' },
+    { situation: 'Picking one value from a long list', to: '/components/select', label: 'Select' },
   ],
-  variants: { na: 'Tabs have one look. Automatic and manual activation change the keyboard, not the form.' },
+  variants: { na: 'Tabs have one look. Automatic and manual activation change only how the keyboard works, so they are described under Modifiers.' },
   anatomy: {
     render: <Tabs label="Rooms" items={ROOMS} />,
     parts: [
@@ -32,9 +35,9 @@ export const TABS: Depth = {
       { part: 'Panel', selector: '[data-component="Tabs"] [role="tabpanel"]:not([hidden])', what: 'The chosen section’s content. It can take focus.' },
     ],
   },
-  sizes: { na: 'Tabs have one size: label-size names in a 44px row.' },
+  sizes: { na: 'Tabs have one size, with label-size names in a 44px row.' },
   emphasis: {
-    text: <p>Tabs are quiet. They print no orange and have no height, so the units in the panel stay the loud parts of the screen. Use one row of tabs per screen.</p>,
+    text: <><p>Tabs are quiet. They print no orange and have no height, so the units in the panel stay the loud parts of the screen. Use one row of tabs per screen.</p><p>The chosen name is told apart three ways at once, by weight, by darker ink and by the mark under it. None of the three relies on colour, so it still reads in forced colours and for people who cannot tell grey steps apart.</p></>,
     pair: {
       do: <Tabs label="Rooms" items={ROOMS} />,
       doNote: 'One row of rooms, then the room.',
@@ -43,20 +46,20 @@ export const TABS: Depth = {
     },
   },
   placement: {
-    rows: [['At the top of a screen, under its heading', 'Sections of the whole screen, such as rooms.'], ['At the top of a sheet', 'Sections of one device’s settings, such as Program and Schedule.']],
+    rows: [['At the top of a screen, under its heading', 'Sections of the whole screen, such as rooms.'], ['At the top of a sheet', 'Sections of one device’s settings, such as Program and Schedule.'], ['Aligned to the start of the column', 'Always. The first name lines up with the heading above it, and the row never stretches to fill the width.']],
     examples: [{ title: 'Rooms on the home screen', render: <Tabs label="Rooms" items={ROOMS} defaultValue="kitchen" /> }],
   },
   combinations: {
-    good: [['Tabs + units in each panel', 'Each room shows its own device units.'], ['Tabs + SegmentedControl inside a panel', 'The tab picks the room; the keys set a mode on a device in it.']],
+    good: [['Tabs + units in each panel', 'Each room shows its own device units.'], ['Tabs + SegmentedControl inside a panel', 'The tab picks the room; the keys set a mode on a device in it.'], ['Heading + Tabs', 'The heading names the screen and the tabs name its parts, so the two never repeat each other.']],
     avoid: [{ title: 'tabs used to set a mode', why: 'Printing that changes the device hides the change. Use SegmentedControl so the choice is a key that latches.', render: <Tabs label="Mode" items={[{ value: 'h', label: 'Heat', content: p('Heating') }, { value: 'e', label: 'Eco', content: p('Saving') }]} /> }],
   },
   content: {
-    formula: <p>Name the section with a noun: <em>Kitchen</em>, <em>Bedroom</em>, <em>Schedule</em>. One or two words, sentence case, no counts or icons in the name.</p>,
+    formula: <><p>Name the section with a noun, such as <em>Kitchen</em>, <em>Bedroom</em> or <em>Schedule</em>. One or two words, sentence case, no counts or icons in the name.</p><p>Use the names people already use for the place or the part. If the home calls a room Den, the tab says Den. Keep the order stable, because people find a tab by where it was last time. Put the section people open most first, since it is the one shown when the screen opens.</p></>,
     pair: {
       do: <Tabs label="Rooms" items={ROOMS} />, doNote: 'Short nouns for places.',
       dont: <Tabs label="Rooms" items={[{ value: 'a', label: 'See the living room', content: p('…') }, { value: 'b', label: 'Go to kitchen', content: p('…') }]} />, dontNote: 'Verbs make the names read as actions.',
     },
-    overflow: { text: 'When the names do not fit, the row wraps onto a second line. The chosen name keeps its mark and no name shifts.', render: <div style={{ inlineSize: 260 }}><Tabs label="Rooms" items={['Living room', 'Kitchen', 'Bedroom', 'Bathroom', 'Study'].map((n) => ({ value: n, label: n, content: p(n) }))} /></div> },
+    overflow: { text: 'When the names do not fit, the row wraps onto a second line. The chosen name keeps its mark and no name shifts.', render: <div data-overflow-demo="" style={{ inlineSize: 260 }}><Tabs label="Rooms" items={['Living room', 'Kitchen', 'Bedroom', 'Bathroom', 'Study'].map((n) => ({ value: n, label: n, content: p(n) }))} /></div> },
     rtl: { text: 'In right-to-left languages the first name sits on the right, and the arrow keys follow the reading order.', render: <div dir="rtl"><Tabs label="الغرف" items={[{ value: 'l', label: 'غرفة المعيشة', content: p('٢١٫٥ °C') }, { value: 'k', label: 'المطبخ', content: p('—') }]} /></div> },
     expansion: { text: 'German names can run 30% longer. The row grows sideways and wraps when it must.', render: <Tabs label="Räume" items={[{ value: 'w', label: 'Wohnzimmer', content: p('21,5 °C') }, { value: 'k', label: 'Küche', content: p('—') }, { value: 's', label: 'Schlafzimmer', content: p('18,0 °C') }]} /> },
   },
@@ -64,6 +67,7 @@ export const TABS: Depth = {
     states: [
       ['Not chosen', 'Name in regular weight, secondary ink, no mark.', 'The name is still a 44px target.'],
       ['Chosen', 'Name in medium weight, primary ink, ink mark under it.', 'The mark appears at once; it never slides.'],
+      ['Forced colours', 'The mark is drawn in the system button text colour.', 'The weight and the mark still tell the chosen name apart.'],
       ['Hover', 'The name darkens one step.', 'Nothing rises.'],
       ['Focus', 'A dark 2px ring around the name, or around the panel.', 'The row is one tab stop.'],
     ],
@@ -75,14 +79,14 @@ export const TABS: Depth = {
       ['Pointer', 'Press a name', 'Shows its section.', 'native button'],
       ['Screen reader', 'Read', 'Announced as a tab list with its label, each name as a tab, selected or not, and the panel by its tab’s name.', 'role tablist'],
     ],
-    loading: <p>Tabs have no loading state. A panel that loads shows its own progress inside it. If a panel is slow to show, use activation="manual".</p>,
+    loading: <p>Tabs have no loading state. A panel that loads shows its own progress inside it, with Progress or a line on the unit’s display, and the row of names stays usable while it loads. If a panel is slow to show, use activation="manual", so moving through the names with the arrow keys does not start a load for every room on the way.</p>,
     focus: <p>Tabs are never focused on page load. Tab lands on the chosen name, and the next Tab goes into its panel.</p>,
   },
   deepDive: { na: 'Tabs have one kind, covered above.' },
   modifiers: [
     {
       name: 'activation',
-      rules: <p>The default is automatic: arrow keys show each section as they reach it, because every panel is already on the page and shows at once. Use manual when a panel is slow to show, such as a camera feed, so arrows only move focus and Enter or Space opens it.</p>,
+      rules: <p>The default is automatic. Arrow keys show each section as they reach it, because every panel is already on the page and shows at once. Use manual when a panel is slow to show, such as a camera feed, so arrows only move focus and Enter or Space opens it.</p>,
       pair: {
         do: <Tabs label="Cameras" activation="manual" items={[{ value: 'h', label: 'Hall', content: p('Camera feed · Hall') }, { value: 'g', label: 'Garden', content: p('Camera feed · Garden') }]} />,
         doNote: 'Manual for slow camera feeds.',

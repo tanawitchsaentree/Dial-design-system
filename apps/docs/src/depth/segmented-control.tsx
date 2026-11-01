@@ -52,12 +52,12 @@ export const SEGMENTED_CONTROL: Depth = {
     avoid: [{ title: 'a SegmentedControl used to move between screens', why: 'Keys change the device. People expect pressing Kitchen to change a setting. Use Tabs for sections.', render: <SegmentedControl label="Room" options={[{ value: 'l', label: 'Living' }, { value: 'k', label: 'Kitchen' }]} defaultValue="l" /> }],
   },
   content: {
-    formula: <p>One or two words per key, naming the mode: <em>Heat</em>, <em>Eco</em>, <em>FM</em>. Sentence case, or the short form printed on the device. The group label names the setting: <em>Mode</em>, <em>Band</em>.</p>,
+    formula: <p>One or two words per key, naming the mode, as in <em>Heat</em>, <em>Eco</em> or <em>FM</em>. Sentence case, or the short form printed on the device. The group label names the setting, as in <em>Mode</em> or <em>Band</em>.</p>,
     pair: {
       do: <SegmentedControl label="Mode" options={MODES} defaultValue="eco" />, doNote: 'Short mode names, one setting.',
       dont: <SegmentedControl label="Mode" options={[{ value: 'a', label: 'Heat the room' }, { value: 'b', label: 'Save energy' }]} defaultValue="a" />, dontNote: 'Sentences on keys crowd the bank.',
     },
-    overflow: { text: 'Words do not wrap on a key. Keys share the width equally, so keep words short or use fewer keys.', render: <div style={{ inlineSize: 300 }}><SegmentedControl label="Program" options={[{ value: 'c', label: 'Cotton' }, { value: 's', label: 'Synthetic' }, { value: 'w', label: 'Wool' }]} defaultValue="s" /></div> },
+    overflow: { text: 'Words do not wrap on a key. Keys share the width equally, so keep words short or use fewer keys.', render: <div data-overflow-demo="" style={{ inlineSize: 300 }}><SegmentedControl label="Program" options={[{ value: 'c', label: 'Cotton' }, { value: 's', label: 'Synthetic' }, { value: 'w', label: 'Wool' }]} defaultValue="s" /></div> },
     rtl: { text: 'In right-to-left languages the first key sits on the right, and the arrow keys follow the reading order.', render: <div dir="rtl"><SegmentedControl label="الموجة" options={[{ value: 'fm', label: 'FM' }, { value: 'am', label: 'AM' }, { value: 'aux', label: 'AUX' }]} defaultValue="fm" /></div> },
     expansion: { text: 'German words can run 30% longer. The bank grows sideways; check that it still fits the unit.', render: <SegmentedControl label="Modus" options={[{ value: 'h', label: 'Heizen' }, { value: 'e', label: 'Sparen' }, { value: 'f', label: 'Frostschutz' }]} defaultValue="h" /> },
   },

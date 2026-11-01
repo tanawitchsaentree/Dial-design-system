@@ -11,15 +11,15 @@ export const DISPLAY: Depth = {
       <p>The window is set into the body, so its shadow falls on the inside edge. It comes in two families. LCD draws dark segments on grey-green, like a clock radio. OLED sets white text on near-black, like a music player. A screen reader hears the full reading whenever it changes.</p>
     </>
   ),
-  whenToUse: ['To show the current state of a device: a temperature, a time left, a station.', 'At the top of a unit, as the first thing anyone reads.', 'For a reading that changes while the person watches.'],
+  whenToUse: ['To show the current state of a device, such as a temperature, a time left or a station.', 'At the top of a unit, as the first thing anyone reads.', 'For a reading that changes while the person watches.'],
   whenNot: [
     { situation: 'A level shown as a row of lit holes', to: '/components/grille', label: 'Grille' },
     { situation: 'A number inside a sentence or a list', to: '/components/text', label: 'Text' },
     { situation: 'Something the person sets', to: '/components/button', label: 'Button' },
   ],
   variants: {
-    lcd: { purpose: 'Numbers that change: a temperature, a timer, a frequency. Dark segments on grey-green.', pairing: 'The usual window on a light unit, with keys or a knob below it.' },
-    oled: { purpose: 'Words and numbers together: a track name, a programme name. White text on near-black.', pairing: 'Media and status units where the detail line carries words.' },
+    lcd: { purpose: 'Numbers that change, such as a temperature, a timer or a frequency. Dark segments on grey-green.', pairing: 'The usual window on a light unit, with keys or a knob below it.' },
+    oled: { purpose: 'Words and numbers together, such as a track name or a programme name. White text on near-black.', pairing: 'Media and status units where the detail line carries words.' },
   },
   anatomy: {
     render: <Display label="Thermostat" value="21.5" unit="°C" detail="Heating to 22.0" digits={3} />,
@@ -54,12 +54,12 @@ export const DISPLAY: Depth = {
     avoid: [{ title: 'a display with a coloured arrow for the change', why: 'The window says the state now. A green or red delta tells change by colour alone.', render: <Unit><Display kind="oled" label="Energy" value="4.2" unit="kWh" detail="Today" /></Unit> }],
   },
   content: {
-    formula: <p>The value, then the unit, then one short detail: <em>21.5 °C · Heating to 22.0</em>. Use the unit people read on the device. Keep the detail to three or four words.</p>,
+    formula: <p>The value, then the unit, then one short detail, as in <em>21.5 °C · Heating to 22.0</em>. Use the unit people read on the device. Keep the detail to three or four words.</p>,
     pair: {
       do: <Display label="Washer" value="38" unit="min" detail="Rinse" digits={3} />, doNote: 'A number, its unit and the step.',
       dont: <Display kind="oled" label="Washer" value="Your wash will be ready soon" />, dontNote: 'A sentence in the value line hides the number.',
     },
-    overflow: { text: 'A long detail line wraps under the value. The value line itself never wraps; set digits so the window keeps one width.', render: <div style={{ inlineSize: 220 }}><Display label="Tuner" value="98.5" unit="MHz" detail="FM · Radio Swiss Classic, stereo" digits={4} /></div> },
+    overflow: { text: 'A long detail line wraps under the value. The value line itself never wraps; set digits so the window keeps one width.', render: <div data-overflow-demo="" style={{ inlineSize: 220 }}><Display label="Tuner" value="98.5" unit="MHz" detail="FM · Radio Swiss Classic, stereo" digits={4} /></div> },
     rtl: { text: 'In right-to-left languages the window keeps the digits in the same order, and the detail line follows the reading direction.', render: <div dir="rtl"><Display kind="oled" label="المؤقت" value="38" unit="دقيقة" detail="شطف" /></div> },
     expansion: { text: 'German and Finnish detail lines can run 30% longer. The detail wraps and the value stays put.', render: <Display label="Waschmaschine" value="38" unit="min" detail="Spülen, danach Schleudern" digits={3} /> },
   },
@@ -85,9 +85,9 @@ export const DISPLAY: Depth = {
       pair: { do: <Display label="Timer" value="25" unit="min" digits={3} />, doNote: 'Numbers in segments.', dont: <Display label="Timer" value="Rinse" digits={5} />, dontNote: 'Words drawn in segments are hard to read.' },
     },
     oled: {
-      purpose: <p>OLED is for readings that need words: a track, a programme, a room. White text on near-black, in the system grotesk.</p>,
+      purpose: <p>OLED is for readings that need words, such as a track, a programme or a room. White text on near-black, in the system grotesk.</p>,
       context: <Unit><Display kind="oled" label="Player" value="2:41" unit="left" detail="Track 4 · Kind of Blue" /></Unit>,
-      practices: ['Keep the value line short: a number and a unit, or two words.', 'Put names in the detail line.'],
+      practices: ['Keep the value line short, a number and a unit, or two words.', 'Put names in the detail line.'],
       pair: { do: <Display kind="oled" label="Player" value="2:41" unit="left" detail="Track 4" />, doNote: 'The time first, the track under it.', dont: <Display kind="oled" label="Player" value="Track 4 · Kind of Blue" detail="2:41 left" />, dontNote: 'The name in the value line pushes the state down.' },
     },
   },
@@ -107,6 +107,6 @@ export const DISPLAY: Depth = {
   references: [
     { title: 'WAI-ARIA 1.2 · status role', url: 'https://www.w3.org/TR/wai-aria-1.2/#status', why: 'A polite live region for advisory information.' },
     { title: 'WCAG 2.2 · 4.1.3 Status Messages', url: 'https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html', why: 'Why a changed reading is announced without moving focus.' },
-    { title: 'Vitsœ · Dieter Rams: ten principles for good design', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
+    { title: 'Dieter Rams, ten principles for good design (Vitsœ)', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
   ],
 };

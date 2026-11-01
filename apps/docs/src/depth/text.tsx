@@ -7,8 +7,8 @@ const Unit = ({ children }: { children: React.ReactNode }) => <div className="de
 export const TEXT: Depth = {
   overview: (
     <>
-      <p>Text prints words on a unit: the name of a control, a reading, a note, a paragraph on a sheet. It works like the printing on the case of an appliance. There is one typeface, two weights and grey ink, and the words sit flat on the plastic.</p>
-      <p>Hierarchy comes from size and position, not from colour or bold. The name of a part sits on the inset line next to it, and a note sits under it in the lighter ink. Numbers that change use tabular figures, so the line beside them never moves.</p>
+      <p>Text prints words on a unit, such as the name of a control, a reading, a note or a paragraph on a sheet. It works like the printing on the case of an appliance. There is one typeface, two weights and grey ink, and the words sit flat on the plastic.</p>
+      <p>Hierarchy comes from size and position. Colour and bold play no part in it. The name of a part sits on the inset line next to it, and a note sits under it in the lighter ink. Numbers that change use tabular figures, so the line beside them never moves.</p>
     </>
   ),
   whenToUse: ['To name a control or a reading on a unit.', 'For a short note under a part, such as a unit or a schedule.', 'For paragraphs of prose on a sheet or a page.', 'For a field label, rendered as a label element.'],
@@ -18,7 +18,7 @@ export const TEXT: Depth = {
     { situation: 'A status with a lamp and a word', to: '/components/badge', label: 'Badge' },
   ],
   variants: {
-    primary: { purpose: 'The darkest ink on plastic, for what you read first: names, readings and prose.', pairing: 'Sits above or beside secondary text that adds a detail.' },
+    primary: { purpose: 'The darkest ink on plastic, for what you read first, which is names, readings and prose.', pairing: 'Sits above or beside secondary text that adds a detail.' },
     secondary: { purpose: 'One step lighter, for notes, units and times that support the primary line.', pairing: 'Always next to a primary line or a heading. It still holds 4.5:1 on plastic.' },
   },
   anatomy: {
@@ -37,7 +37,7 @@ export const TEXT: Depth = {
     reading: { use: '16px. Prose on a sheet or a page, capped at the reading measure.', pairs: 'A level 2 heading above it, with body text for short asides.' },
   },
   emphasis: {
-    text: <p>Use the medium weight for names and keep everything else regular. Primary ink is the default, so give a line the secondary tone only when it supports another line. Never make words orange: the orange belongs to the unit’s one control.</p>,
+    text: <p>Use the medium weight for names and keep everything else regular. Primary ink is the default, so give a line the secondary tone only when it supports another line. Never make words orange, because the orange belongs to the unit’s one control.</p>,
     pair: {
       do: <Unit><Stack gap="xs"><Text size="label" weight="medium">Washer</Text><Text size="caption" tone="secondary">Cotton 40°</Text></Stack></Unit>,
       doNote: 'The name in medium weight, the detail in the lighter ink.',
@@ -54,7 +54,7 @@ export const TEXT: Depth = {
     avoid: [{ title: 'many sizes in one unit', why: 'Four sizes in one small unit make hierarchy noisy. Two or three steps are enough.', render: <Unit><Stack gap="xs"><Text size="reading">Heater</Text><Text size="body">Living room</Text><Text size="label">21.5°</Text><Text size="micro">Eco</Text></Stack></Unit> }],
   },
   content: {
-    formula: <p>Sentence case and plain words. A label is a noun: <em>Volume</em>, <em>Target</em>. A note says the detail: <em>Eco from 23:00</em>. Write the model name in lowercase, and never let it be the only name of a device.</p>,
+    formula: <p>Sentence case and plain words. A label is a noun, as in <em>Volume</em> or <em>Target</em>. A note says the detail, as in <em>Eco from 23:00</em>. Write the model name in lowercase, and never let it be the only name of a device.</p>,
     pair: {
       do: <Text size="label">Target 22.0°</Text>, doNote: 'Sentence case, the unit next to the number.',
       dont: <Text size="label">TARGET TEMPERATURE SETTING</Text>, dontNote: 'Capitals shout, and the words repeat what the reading already says.',
@@ -77,13 +77,13 @@ export const TEXT: Depth = {
   },
   deepDive: {
     primary: {
-      purpose: <p>Primary ink carries the words you read first: the name of a part, a reading, a paragraph. It is the darkest grey the plastic carries.</p>,
+      purpose: <p>Primary ink carries the words you read first, such as the name of a part, a reading or a paragraph. It is the darkest grey the plastic carries.</p>,
       context: <Unit><Text size="body">The washer finishes at 11:15.</Text></Unit>,
       practices: ['Use it for names, readings and prose.', 'Keep it as the default and leave the tone prop out.'],
       pair: { do: <Text size="label" weight="medium">Living room</Text>, doNote: 'The name in primary ink.', dont: <Text size="label" tone="secondary" weight="medium">Living room</Text>, dontNote: 'The name in the lighter ink reads like a note.' },
     },
     secondary: {
-      purpose: <p>Secondary ink is one step lighter. It marks a line as support for the line above or beside it: a unit, a time, a short note.</p>,
+      purpose: <p>Secondary ink is one step lighter. It marks a line as support for the line above or beside it, such as a unit, a time or a short note.</p>,
       context: <Unit><Stack gap="xs"><Text size="label" weight="medium">Heater</Text><Text size="caption" tone="secondary">Eco from 23:00</Text></Stack></Unit>,
       practices: ['Use it next to a primary line or a heading.', 'Do not use it for a whole paragraph.'],
       pair: { do: <Stack gap="xs"><Text size="label">Target 22.0°</Text><Text size="caption" tone="secondary">Set by schedule</Text></Stack>, doNote: 'A note under its reading.', dont: <Text size="reading" tone="secondary">The heater holds the room at the target and drops two degrees at night.</Text>, dontNote: 'A whole paragraph in the lighter ink is harder to read.' },
@@ -92,7 +92,7 @@ export const TEXT: Depth = {
   modifiers: [
     {
       name: 'numeric',
-      rules: <p>Turns on tabular figures. Use it on any number that changes or that lines up in a column: times, readings, counters.</p>,
+      rules: <p>Turns on tabular figures. Use it on any number that changes or that lines up in a column, such as times, readings and counters.</p>,
       pair: { do: <Stack gap="xs"><Text size="label" numeric>11:15</Text><Text size="label" numeric>23:00</Text></Stack>, doNote: 'Times line up digit for digit.', dont: <Stack gap="xs"><Text size="label">11:15</Text><Text size="label">23:00</Text></Stack>, dontNote: 'Proportional digits shift as the number changes.' },
     },
     {
@@ -105,6 +105,6 @@ export const TEXT: Depth = {
   references: [
     { title: 'WCAG 2.2 · 1.4.3 Contrast (Minimum)', url: 'https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html', why: 'Why both inks hold 4.5:1 on plastic.' },
     { title: 'MDN · font-variant-numeric', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric', why: 'How tabular figures work.' },
-    { title: 'Vitsœ · Dieter Rams: ten principles for good design', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
+    { title: 'Dieter Rams, ten principles for good design (Vitsœ)', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
   ],
 };

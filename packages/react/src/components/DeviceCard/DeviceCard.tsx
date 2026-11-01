@@ -17,7 +17,7 @@ export interface DeviceKey {
   label: string;
   /** A symbol drawn in `currentColor`. With an icon the key is a round IconButton; without one it is a capsule Button. */
   icon?: ReactNode;
-  /** For a key that latches (a mode, a band): whether it is on now. Leave it out for a key that only acts. */
+  /** Whether a key that latches, such as a mode or a band, is on now. Leave it out for a key that only acts. */
   pressed?: boolean;
   /** Called when the key is pressed. */
   onPress?: () => void;
@@ -27,7 +27,7 @@ export interface DeviceKey {
 
 /** The unit's main key, used when the device has no knob. */
 export interface DevicePrimary {
-  /** The word on the key: a verb, such as "Turn off" or "Start wash". */
+  /** The word on the key, a verb such as "Turn off" or "Start wash". */
   label: ReactNode;
   /** Called when the key is pressed. */
   onPress?: () => void;
@@ -46,7 +46,7 @@ export interface DeviceCardProps extends Omit<CardProps, 'as' | 'padding' | 'hea
   knob?: Omit<RotaryProps, 'kind' | 'unitSide' | 'diameter' | 'size'>;
   /** The main key when there is no knob. It is orange only then; next to a knob it is drawn as a plastic key, so the unit never has two orange parts. */
   primary?: DevicePrimary;
-  /** Secondary keys, body-coloured: modes, bands, transport. */
+  /** Secondary keys in the body colour, for modes, bands and transport. */
   keys?: DeviceKey[];
   /** The accessible name of the row of keys, such as "Band" or "Playback". */
   keysLabel?: string;
@@ -54,7 +54,7 @@ export interface DeviceCardProps extends Omit<CardProps, 'as' | 'padding' | 'hea
   meter?: GrilleProps;
   /** A ruler fader across the body for a second amount, such as volume or brightness. */
   fader?: SliderProps;
-  /** `a` (default) is anchor A: display on top, knob left, keys and grille right, fader across. `tall` is one column with the knob centred, for wall devices. `compact` is a wide body with the knob right of the display. */
+  /** `a` (default) is anchor A, with the display on top, the knob left, keys and grille right and the fader across. `tall` is one column with the knob centred, for wall devices. `compact` is a wide body with the knob right of the display. */
   layout?: DeviceCardLayout;
 }
 

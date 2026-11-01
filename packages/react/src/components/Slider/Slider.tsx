@@ -15,7 +15,7 @@ import { MECHANISM, snapTo, useIsoLayoutEffect, useSpring } from '../../spring';
 import styles from './Slider.module.css';
 
 export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue' | 'children'> {
-  /** The printed name above the fader. Required: it is also the slider's accessible name. */
+  /** The printed name above the fader. It is required, because it is also the slider's accessible name. */
   label: ReactNode;
   /** The lowest value, at the start of the groove. Default 0. */
   min?: number;
@@ -31,9 +31,9 @@ export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   onValueChange?: (value: number) => void;
   /** Print the ruler's numerals under the groove ("audio 1" scale). Default false. */
   scale?: boolean;
-  /** Turns a value into the printed and announced text, for example `(v) => \`${v} %\``. */
+  /** Turns a value into the printed and announced text, for example `(v) => v + ' %'`. */
   formatValue?: (value: number) => string;
-  /** The distance PageUp and PageDown move. Default: a tenth of the range (at least two detents). */
+  /** The distance PageUp and PageDown move. It defaults to a tenth of the range, and at least two detents. */
   pageStep?: number;
   /** The fader cannot be moved; the cap loses its height. */
   disabled?: boolean;

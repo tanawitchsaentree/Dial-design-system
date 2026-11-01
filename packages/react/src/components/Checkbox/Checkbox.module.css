@@ -35,7 +35,7 @@
   transition:
     transform var(--ds-motion-release) var(--ds-motion-easing),
     box-shadow var(--ds-motion-release) var(--ds-motion-easing),
-    border-color var(--ds-motion-hover) linear;
+    border-color var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .mark {
   inline-size: var(--ds-control-icon-sm);
@@ -57,7 +57,7 @@
 .input:indeterminate + .key .tick { display: none; }
 .input:indeterminate + .key .dash { display: inline; }
 
-.root:hover .key { border-color: var(--ds-text-secondary); }
+.root:hover .key { border-color: var(--ds-text-secondary); transition-duration: var(--ds-motion-hover); }
 .root:active .key {
   transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
   box-shadow: none;
@@ -76,7 +76,7 @@
 .root[data-disabled]:active .key { transform: none; box-shadow: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .key { transition: none; }
+  .key { transition: border-color var(--ds-motion-hover) var(--ds-motion-easing); }
   .root:active .key { transform: none; }
 }
 @media (forced-colors: active) {

@@ -23,7 +23,7 @@ const DIAMETER: Record<RotarySize, number> = { sm: 44, md: 72, lg: 108 };
 const MIN_DIAMETER = 44;
 
 export interface RotaryProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue' | 'children'> {
-  /** The printed name under the knob. Required: it is also the knob's accessible name. */
+  /** The printed name under the knob. It is required, because it is also the knob's accessible name. */
   label: ReactNode;
   /** `primary` (default) is the unit's one orange knob; use it once per unit. `key` is a body-coloured knob for secondary dials. */
   kind?: RotaryKind;
@@ -31,7 +31,7 @@ export interface RotaryProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   size?: RotarySize;
   /** The knob's diameter in px, at least 44. Overrides `size` and `unitSide`. */
   diameter?: number;
-  /** The short side of the unit the knob sits on, in px. The diameter becomes `knobRatio` × this (anchor A: 0.36). */
+  /** The short side of the unit the knob sits on, in px. The diameter becomes `knobRatio` × this, which is 0.36 in anchor A. */
   unitSide?: number;
   /** The share of the unit's short side the knob takes when `unitSide` is set. Default 0.36 (corner.knob-ratio). */
   knobRatio?: number;
@@ -47,9 +47,9 @@ export interface RotaryProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   defaultValue?: number;
   /** Called with the new value whenever a key or a drag turns the knob to another detent. */
   onValueChange?: (value: number) => void;
-  /** Turns a value into the printed and announced text, for example `(v) => \`${v} °C\``. */
+  /** Turns a value into the printed and announced text, for example `(v) => v + ' °C'`. */
   formatValue?: (value: number) => string;
-  /** The distance PageUp and PageDown turn. Default: a tenth of the range, at least two detents. */
+  /** The distance PageUp and PageDown turn. It defaults to a tenth of the range, and at least two detents. */
   pageStep?: number;
   /** The angle from the first detent to the last, in degrees. Default 270 (mechanism.sweep). */
   sweep?: number;
@@ -192,6 +192,7 @@ export const Rotary = forwardRef<HTMLDivElement, RotaryProps>(function Rotary(
     <div
       ref={ref}
       data-component="Rotary"
+      data-mechanism="rotary"
       data-kind={kind}
       data-size={diameter || unitSide ? undefined : size}
       className={cx(styles.root, className)}

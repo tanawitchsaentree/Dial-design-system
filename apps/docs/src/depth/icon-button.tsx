@@ -15,11 +15,11 @@ const Minus = () => <svg {...ic}><path d="M5 12h14" /></svg>;
 export const ICON_BUTTON: Depth = {
   overview: (
     <>
-      <p>IconButton runs one action that a symbol says better than a word: play, skip, power, volume. It is a round key of the same matte plastic as the unit. When you press it, it drops by its height and its shadow disappears under it. When you let go, it comes back on a spring.</p>
+      <p>IconButton runs one action that a symbol says better than a word, such as play, skip, power or volume. It is a round key of the same matte plastic as the unit. When you press it, it drops by its height and its shadow disappears under it. When you let go, it comes back on a spring.</p>
       <p>The symbol is printing on the key. The name lives in the <code>label</code> prop, which screen readers announce. Only one key in a unit is orange, and the symbol itself is never orange.</p>
     </>
   ),
-  whenToUse: ['For transport keys on a player: previous, play or pause, next.', 'For power, volume up and volume down on a device unit.', 'Where a row of keys must stay short and every symbol is well known.'],
+  whenToUse: ['For the transport keys on a player, which are previous, play or pause, and next.', 'For power, volume up and volume down on a device unit.', 'Where a row of keys must stay short and every symbol is well known.'],
   whenNot: [
     { situation: 'The action needs a word to be understood', to: '/components/button', label: 'Button' },
     { situation: 'Something stays on or off', to: '/components/switch', label: 'Switch' },
@@ -42,7 +42,7 @@ export const ICON_BUTTON: Depth = {
     lg: { use: '52px across. The main key of a sheet on a phone.', pairs: 'Button lg, in a sheet’s bottom row.' },
   },
   emphasis: {
-    text: <p>One orange key per unit, counting Buttons and knobs too. A row of transport keys has one orange key in the middle: the one that starts or pauses.</p>,
+    text: <p>One orange key per unit, counting Buttons and knobs too. A row of transport keys has one orange key in the middle, and that is the one that starts or pauses.</p>,
     pair: {
       do: <Unit><Stack direction="row" gap="sm"><IconButton label="Previous track"><Prev /></IconButton><IconButton label="Play" kind="primary"><Play /></IconButton><IconButton label="Next track"><Next /></IconButton></Stack></Unit>,
       doNote: 'One orange key in the row.',
@@ -55,16 +55,16 @@ export const ICON_BUTTON: Depth = {
     examples: [{ title: 'Under a display', render: <Unit><Stack gap="md"><p className="flush">Kitchen speaker · Track 4 of 12</p><Stack direction="row" gap="sm"><IconButton label="Previous track"><Prev /></IconButton><IconButton label="Pause" kind="primary"><Pause /></IconButton><IconButton label="Next track"><Next /></IconButton></Stack></Stack></Unit> }],
   },
   combinations: {
-    good: [['Primary + plastic icon keys', 'A player: the main action and the alternatives.'], ['Plastic icon keys + a plastic Button', 'Volume keys next to a worded action such as Group speakers.']],
+    good: [['Primary + plastic icon keys', 'A player, with the main action in orange and the alternatives in plastic.'], ['Plastic icon keys + a plastic Button', 'Volume keys next to a worded action such as Group speakers.']],
     avoid: [{ title: 'an orange icon key next to an orange Button', why: 'Two orange parts in one unit split attention, and neither reads as the main action.', render: <Unit><Stack direction="row" gap="sm"><IconButton label="Play" kind="primary"><Play /></IconButton><Button kind="primary">Start wash</Button></Stack></Unit> }],
   },
   content: {
-    formula: <p>The <code>label</code> is a verb, then the object if needed: <em>Next track</em>, <em>Turn off</em>, <em>Volume up</em>. Sentence case, no full stop. Pick a symbol people already know.</p>,
+    formula: <p>The <code>label</code> is a verb, then the object if needed, as in <em>Next track</em>, <em>Turn off</em> or <em>Volume up</em>. Sentence case, no full stop. Pick a symbol people already know.</p>,
     pair: {
-      do: <IconButton label="Volume up"><Plus /></IconButton>, doNote: 'The label says what happens: Volume up.',
-      dont: <IconButton label="Plus"><Plus /></IconButton>, dontNote: 'Plus names the picture, not the action.',
+      do: <IconButton label="Volume up"><Plus /></IconButton>, doNote: 'The label says what happens, here Volume up.',
+      dont: <IconButton label="Plus"><Plus /></IconButton>, dontNote: 'Plus names the picture instead of the action.',
     },
-    overflow: { text: 'The key never grows. A long label is read out but never printed, so it cannot overflow the disc.', render: <IconButton label="Turn off every lamp in the living room"><Power /></IconButton> },
+    overflow: { text: 'The key never grows. A long label is read out but never printed, so it cannot overflow the disc.', render: <div data-overflow-demo=""><IconButton label="Turn off every lamp in the living room"><Power /></IconButton></div> },
     rtl: { text: 'In right-to-left languages the order of keys mirrors. Direction symbols such as previous and next swap places with the row.', render: <div dir="rtl"><Stack direction="row" gap="sm"><IconButton label="السابق"><Next /></IconButton><IconButton label="تشغيل" kind="primary"><Play /></IconButton><IconButton label="التالي"><Prev /></IconButton></Stack></div> },
     expansion: { text: 'German and Finnish labels can run 30% longer. Only the spoken name gets longer; the key stays 44px.', render: <Stack direction="row" gap="sm"><IconButton label="Lautstärke verringern"><Minus /></IconButton><IconButton label="Lautstärke erhöhen"><Plus /></IconButton></Stack> },
   },
@@ -89,7 +89,7 @@ export const ICON_BUTTON: Depth = {
     key: {
       purpose: <p>The plastic key carries every icon action that is not the reason the unit exists. It spends no colour, so it never competes with the orange part.</p>,
       context: <Unit><Stack direction="row" gap="sm"><IconButton label="Volume down"><Minus /></IconButton><IconButton label="Volume up"><Plus /></IconButton></Stack></Unit>,
-      practices: ['Use it for skip, volume and close.', 'Keep the symbol simple: one stroke shape, no text inside it.'],
+      practices: ['Use it for skip, volume and close.', 'Keep the symbol simple, with one stroke shape and no text inside it.'],
       pair: { do: <IconButton label="Turn off"><Power /></IconButton>, doNote: 'Power as a plastic key on a unit with another main action.', dont: <IconButton label="Turn off" kind="primary"><Power /></IconButton>, dontNote: 'An orange power key next to a main action takes its place.' },
     },
     primary: {

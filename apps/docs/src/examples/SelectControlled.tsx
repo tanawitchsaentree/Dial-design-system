@@ -1,4 +1,4 @@
-// @example Controlled with value and onValueChange: the unit's display says the choice
+// @example Controlled with value and onValueChange, with the unit's display saying the choice
 import { useState } from 'react';
 import { Select, Stack } from 'dial-react';
 

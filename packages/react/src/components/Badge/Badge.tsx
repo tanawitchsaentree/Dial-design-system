@@ -5,9 +5,9 @@ import styles from './Badge.module.css';
 export type BadgeTone = 'neutral' | 'positive' | 'warning' | 'critical' | 'info';
 
 export interface BadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
-  /** The status word, such as "Online", "Filter due" or "offline". Required: status is a glyph and a word, never colour alone. */
+  /** The status word, such as "Online", "Filter due" or "offline". It is required, because status is a glyph and a word, never colour alone. */
   children: ReactNode;
-  /** Which status lamp is printed: `neutral` (default) a hollow ring, `positive` a dot, `warning` a triangle, `critical` a square, `info` a diamond. */
+  /** Which status lamp is printed. `neutral` (default) is a hollow ring, `positive` a dot, `warning` a triangle, `critical` a square, `info` a diamond. */
   tone?: BadgeTone;
   /** A number printed before the word in tabular figures, for the count form such as "3 offline". */
   count?: number;

@@ -1,4 +1,4 @@
-// @example padding sets the inset: sm, md (the default), lg, or unit, which follows the short side
+// @example padding sets the inset to sm, md (the default), lg, or unit, which follows the short side
 import { Card, Stack, Text } from 'dial-react';
 
 export default function CardPadding() {

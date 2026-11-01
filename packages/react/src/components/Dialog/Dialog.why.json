@@ -15,7 +15,7 @@
     { "p": "P2", "axis": "shape", "consequence": "radius nests in the body (inner = outer − inset)", "form": "Anything nested in the sheet takes the radius corner.panel minus gap.inset, exposed to children as --dialog-inner." },
     { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "The actions row holds plastic keys and at most one Button kind primary; the sheet itself never paints orange." },
     { "p": "P1", "axis": "space", "consequence": "sits where the hand expects it (lower or right of the display)", "form": "Actions sit at the bottom of the sheet, aligned to the inline end, so the last key in reading order is the main one." },
-    { "p": "P3", "axis": "motion", "consequence": "fast in, slow out (`kiln.state`)", "form": "The sheet and scrim arrive over motion.enter on the enter easing and leave over the longer motion.exit on the exit easing." },
+    { "p": "P3", "axis": "motion", "consequence": "fast in, slow out, through the state motion tokens", "form": "The sheet and scrim arrive over motion.enter on the enter easing and leave over the longer motion.exit on the exit easing." },
     { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "Only opacity and a short rise of motion.rise move, all parts at once, and nothing moves under reduced motion." }
   ],
   "variants": {

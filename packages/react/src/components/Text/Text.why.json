@@ -1,5 +1,5 @@
 {
-  "concept": "Text is the printing on the case of an appliance: one grotesk in two weights, grey ink flat on the plastic, with hierarchy told by size and by where the words sit on the unit.",
+  "concept": "Text is the printing on the case of an appliance. It is one grotesk in two weights, grey ink flat on the plastic, with hierarchy told by size and by where the words sit on the unit.",
   "kind": ["text", "typography", "label"],
   "default_to_avoid": [
     { "pattern": "generic typography text component with h1 to h6 variants and bold, italic and colour props (MUI Typography, Chakra Text)", "why_not": "A colour prop invites orange or tinted words, and bold or italic add voices that P5 forbids, since printing has two weights and one ink." },
@@ -15,7 +15,7 @@
     { "p": "P5", "axis": "colour", "consequence": "ink on plastic at ≥4.5:1 in both themes; no tinted text", "form": "The tone prop picks text.primary or text.secondary only, both measured at 4.5:1 or more on surface.solid and surface.raised." },
     { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Text has no colour prop at all, so words can never be painted action.accent and the orange stays on the unit's one control." },
     { "p": "P5", "axis": "type", "consequence": "tabular figures everywhere a number changes","form": "The numeric prop switches on tabular figures so a changing number keeps its width and the line beside it never shifts." },
-    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material — no shadow, no emboss", "form": "Text never carries text-shadow, outline or elevation tokens; it sits flat in the same plane as the plastic it is printed on." }
+    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material, with no shadow and no emboss", "form": "Text never carries text-shadow, outline or elevation tokens; it sits flat in the same plane as the plastic it is printed on." }
   ],
   "variants": {
     "lab": "apps/lab/text/index.html",

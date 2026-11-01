@@ -2,14 +2,14 @@
 import { DeviceCard } from 'dial-react';
 import type { Depth } from './types';
 
-const W = ({ children, w = 340 }: { children: React.ReactNode; w?: number }) => <div style={{ inlineSize: w }}>{children}</div>;
+const W = ({ children, o, w = 340 }: { children: React.ReactNode; o?: boolean; w?: number }) => <div data-overflow-demo={o ? '' : undefined} style={{ inlineSize: w }}>{children}</div>;
 const radio = { label: 'Radio', value: '88.6', unit: 'MHz', digits: 4 };
 const band = [{ label: 'FM', pressed: true }, { label: 'AM', pressed: false }];
 
 export const DEVICE_CARD: Depth = {
   overview: (
     <>
-      <p>DeviceCard is one appliance on the screen: a radio, a thermostat, a lamp. It is a Card with the system’s own parts mounted on it. The display runs across the top and says what the device is doing now. Below it sits the one orange part, the knob you turn, and beside that the plain keys and a small grille. A ruler fader can run across the bottom. The wordmark and the model are printed on the bottom edge.</p>
+      <p>DeviceCard is one appliance on the screen, such as a radio, a thermostat or a lamp. It is a Card with the system’s own parts mounted on it. The display runs across the top and says what the device is doing now. Below it sits the one orange part, the knob you turn, and beside that the plain keys and a small grille. A ruler fader can run across the bottom. The wordmark and the model are printed on the bottom edge.</p>
       <p>The layout comes from anchor A, the card picked at the start of the system. The knob is 0.36 of the card’s short side. On a narrow screen the parts stack in one column instead of shrinking, so every key, the knob and the fader keep a 44px target.</p>
     </>
   ),
@@ -39,14 +39,14 @@ export const DEVICE_CARD: Depth = {
       do: <W><DeviceCard model="wash 1" display={{ label: 'Washer', value: '38', unit: 'min', digits: 3 }} knob={{ label: 'Programme', defaultValue: 3 }} keys={[{ label: 'Start' }]} /></W>,
       doNote: 'The knob is orange; Start is a plastic key.',
       dont: <W><DeviceCard model="wash 1" display={{ label: 'Washer', value: '38', unit: 'min', digits: 3 }} keys={[{ label: 'Start' }, { label: 'Stop' }, { label: 'Pause' }, { label: 'Spin' }]} /></W>,
-      dontNote: 'No orange part at all: nothing says which key the device is for.',
+      dontNote: 'No orange part at all, so nothing says which key the device is for.',
     },
   },
   placement: {
     rows: [
-      ['layout a (the default)', 'Most devices: display on top, knob left, keys and grille right, fader across.'],
-      ['layout tall', 'A device on a wall or a narrow column: one column, knob centred under the display.'],
-      ['layout compact', 'A wide slot: display and keys left, knob or main key right of the display.'],
+      ['layout a (the default)', 'Most devices. The display is on top, the knob left, keys and grille right, and the fader across.'],
+      ['layout tall', 'A device on a wall or in a narrow column. It uses one column, with the knob centred under the display.'],
+      ['layout compact', 'A wide slot. The display and keys sit left, and the knob or main key sits right of the display.'],
       ['A 375px phone', 'Any layout fits; below the two-column width the parts take one row each.'],
     ],
     examples: [
@@ -59,20 +59,20 @@ export const DEVICE_CARD: Depth = {
     avoid: [{ title: 'a grille with no reading', why: 'A grille that shows nothing is decoration. Leave meter out when the device has no level to show.', render: <W><DeviceCard model="tuner 1" display={radio} knob={{ label: 'Tuning', defaultValue: 2 }} meter={{ label: 'Nothing', value: 0, cols: 10, rows: 4 }} /></W> }],
   },
   content: {
-    formula: <p>Name the device in the display label (<em>Thermostat</em>), print the model in lowercase with a number (<em>thermostat 1</em>), and name each part by what it sets: <em>Temperature</em>, <em>Volume</em>, <em>Band</em>.</p>,
+    formula: <p>Name the device in the display label (<em>Thermostat</em>), print the model in lowercase with a number (<em>thermostat 1</em>), and name each part by what it sets, such as <em>Temperature</em>, <em>Volume</em> or <em>Band</em>.</p>,
     pair: {
       do: <W><DeviceCard model="lamp 1" display={{ label: 'Lamp', value: '70', unit: '%', digits: 3 }} primary={{ label: 'Turn off' }} /></W>,
       doNote: 'The key says what it does.',
       dont: <W><DeviceCard model="lamp 1" display={{ label: 'Lamp', value: '70', unit: '%', digits: 3 }} primary={{ label: 'Toggle' }} /></W>,
       dontNote: 'Toggle does not say whether the lamp goes on or off.',
     },
-    overflow: { text: 'A long detail line wraps inside the display, and long key labels wrap onto a second row of keys. The knob keeps its place.', render: <W><DeviceCard model="wash 1" display={{ label: 'Washer', value: '38', unit: 'min', detail: 'Cotton, 40 degrees, extra rinse, spin 1200', digits: 3 }} knob={{ label: 'Programme', defaultValue: 3 }} keys={[{ label: 'Pre-wash' }, { label: 'Extra rinse' }]} /></W> },
+    overflow: { text: 'A long detail line wraps inside the display, and long key labels wrap onto a second row of keys. The knob keeps its place.', render: <W o><DeviceCard model="wash 1" display={{ label: 'Washer', value: '38', unit: 'min', detail: 'Cotton, 40 degrees, extra rinse, spin 1200', digits: 3 }} knob={{ label: 'Programme', defaultValue: 3 }} keys={[{ label: 'Pre-wash' }, { label: 'Extra rinse' }]} /></W> },
     rtl: { text: 'In right-to-left languages the knob moves to the right and the keys to the left. The wordmark moves to the bottom right.', render: <div dir="rtl"><W><DeviceCard model="tuner 1" display={radio} knob={{ label: 'الموجة', defaultValue: 2 }} keys={band} /></W></div> },
     expansion: { text: 'German and Finnish run about 30% longer. Key labels wrap onto a second row; the body grows taller and never wider.', render: <W><DeviceCard model="thermostat 1" display={{ label: 'Thermostat', value: '21.5', unit: '°C', digits: 3 }} knob={{ label: 'Temperatur', defaultValue: 5 }} keys={[{ label: 'Sparbetrieb' }, { label: 'Abwesend' }]} /></W> },
   },
   behaviours: {
     states: [
-      ['Rest', 'The body sits 3px above the page, like anchor A.', 'The parts keep their own states: pressed keys, a turning knob.'],
+      ['Rest', 'The body sits 3px above the page, like anchor A.', 'The parts keep their own states, such as pressed keys and a turning knob.'],
       ['Narrow', 'Below the two-column width every part takes one row.', 'No part draws below 44px.'],
       ['No knob', 'The primary key takes the knob’s place and is orange.', 'With a knob, the primary key is plastic.'],
     ],
@@ -117,6 +117,6 @@ export const DEVICE_CARD: Depth = {
   references: [
     { title: 'WAI-ARIA Authoring Practices · Slider pattern', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/', why: 'The keyboard map of the knob and the fader.' },
     { title: 'WCAG 2.2 · 2.5.8 Target Size (Minimum)', url: 'https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html', why: 'Why every part keeps a 44px target on a phone.' },
-    { title: 'Vitsœ · Dieter Rams: ten principles for good design', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
+    { title: 'Dieter Rams, ten principles for good design (Vitsœ)', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
   ],
 };

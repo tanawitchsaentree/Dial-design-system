@@ -1,37 +1,37 @@
 # dial
 
-> 24 React components and 376 design tokens. dial-react is not on npm yet. Install the release tarball (pnpm run release:pack writes it to release/): npm install /path/to/release/dial-react-0.0.0.tgz, then import 'dial-react/all.css' once at the root.
+> 24 React components and 382 design tokens. dial-react is not on npm yet. Install the release tarball (pnpm run release:pack writes it to release/): npm install /path/to/release/dial-react-0.0.0.tgz, then import 'dial-react/all.css' once at the root.
 
 ## Components
 
-- Badge: Badge is printing on the case of an appliance: a small status lamp with its own shape per tone and a word beside it, printed flat on the plastic with no box, no fill, no shadow and never orange. `import { Badge } from 'dial-react';`
-- Button: Button is a key on the case of an appliance: a capsule of the same matte plastic that drops by its height when pressed and returns on the spring, with only the unit's one primary key dyed orange. `import { Button } from 'dial-react';`
-- Card: Card is the case of a small appliance: one rounded body of warm matte plastic, lit from the top left, with its content printed and mounted straight on it at an even inset and its wordmark and model printed on the bottom inset line. `import { Card } from 'dial-react';`
-- Checkbox: Checkbox is a small square key on the case of an appliance with its function printed beside it: you press it, it drops and springs back, and a tick in printing ink appears on its face to say the option is on. `import { Checkbox } from 'dial-react';`
-- Chip: Chip is a small capsule key on the case for filters and quick presets: a selectable chip latches down like an old radio key and lights its lamp, a removable chip carries its own round remove key, and none of them is ever orange. `import { Chip } from 'dial-react';`
+- Badge: Badge is printing on the case of an appliance. It is a small status lamp with its own shape per tone and a word beside it, printed flat on the plastic with no box, no fill, no shadow and never orange. `import { Badge } from 'dial-react';`
+- Button: Button is a key on the case of an appliance. It is a capsule of the same matte plastic that drops by its height when pressed and returns on the spring, and only the unit's one primary key is dyed orange. `import { Button } from 'dial-react';`
+- Card: Card is the case of a small appliance. It is one rounded body of warm matte plastic, lit from the top left, with its content printed and mounted straight on it at an even inset and its wordmark and model printed on the bottom inset line. `import { Card } from 'dial-react';`
+- Checkbox: Checkbox is a small square key on the case of an appliance with its function printed beside it. You press it, it drops and springs back, and a tick in printing ink appears on its face to say the option is on. `import { Checkbox } from 'dial-react';`
+- Chip: Chip is a small capsule key on the case for filters and quick presets. A selectable chip latches down like an old radio key and lights its lamp, a removable chip carries its own round remove key, and none of them is ever orange. `import { Chip } from 'dial-react';`
 - Container: Container holds a page of units to a width the eye can scan, with a margin from the page edge that grows with the screen. `import { Container } from 'dial-react';`
-- DeviceCard: DeviceCard is one small appliance on the screen, built from anchor A: a plastic body with the display across the top, one big orange knob or key where the hand goes, plain keys and a grille beside it, a ruler fader across, and the wordmark and model printed on the bottom edge. `import { DeviceCard } from 'dial-react';`
+- DeviceCard: DeviceCard is one small appliance on the screen, built from anchor A. Its plastic body has the display across the top, one big orange knob or key where the hand goes, plain keys and a grille beside it, a ruler fader across, and the wordmark and model printed on the bottom edge. `import { DeviceCard } from 'dial-react';`
 - Dialog: Dialog is a small appliance body that rises in front of the room to ask one question about a device, with plastic keys at the bottom and at most one orange key for the answer that acts. `import { Dialog } from 'dial-react';`
 - Display: Display is the one window of a dial unit that says what the device is doing now, recessed into the plastic body, drawn as LCD segments or OLED text, announced politely and never pressed. `import { Display } from 'dial-react';`
 - Grid: Grid places whole units on four, eight or twelve columns, so each appliance keeps one fixed place on the screen and its face is never stretched. `import { Grid, GridItem } from 'dial-react';`
-- Grille: Grille is the perforated field of a dial unit whose recessed holes are the meter itself: lit holes in printing ink show a level, activity or signal, and the value is always named for assistive tech. `import { Grille } from 'dial-react';`
-- Heading: Heading is the name printed largest on a unit or a page: the same grotesk and grey ink as the rest of the case, louder only by size and by sitting first on the inset line. `import { Heading } from 'dial-react';`
-- IconButton: IconButton is the round 44px key of an appliance with a symbol printed on it in place of a word: the same matte plastic as Button, dropping by its height when pressed, with only the unit's one primary key dyed orange. `import { IconButton } from 'dial-react';`
-- Input: Input is a window recessed into the appliance's body that takes text: a well the full width of its column, the light falling into it from the top left, with its name printed above on the inset line like the printing on a case. `import { Input } from 'dial-react';`
+- Grille: Grille is the perforated field of a dial unit whose recessed holes are the meter itself. Lit holes in printing ink show a level, activity or signal, and the value is always named for assistive tech. `import { Grille } from 'dial-react';`
+- Heading: Heading is the name printed largest on a unit or a page. It uses the same grotesk and grey ink as the rest of the case, and it is louder only by size and by sitting first on the inset line. `import { Heading } from 'dial-react';`
+- IconButton: IconButton is the round 44px key of an appliance with a symbol printed on it in place of a word. It is the same matte plastic as Button, it drops by its height when pressed, and only the unit's one primary key is dyed orange. `import { IconButton } from 'dial-react';`
+- Input: Input is a window recessed into the appliance's body that takes text. It is a well the full width of its column, the light falls into it from the top left, and its name is printed above on the inset line like the printing on a case. `import { Input } from 'dial-react';`
 - Progress: Progress shows how far a device task has run, like a washer's cycle or a firmware update, as a recessed groove in the body that fills with printing ink, with its name and reading printed above, and it never moves while idle. `import { Progress } from 'dial-react';`
-- Rotary: Rotary is the knob of the appliance: a flat disc with one printed index mark over a ring of detent ticks across 270 degrees, dyed orange as the unit's one loud part, that turns with the hand and settles into the nearest detent on the material's spring. `import { Rotary } from 'dial-react';`
-- SegmentedControl: SegmentedControl is the bank of band keys on the case of a radio (FM, AM, AUX): the keys interlock, pressing one latches it down with its printed lamp lit, and the key that was down springs back up. `import { SegmentedControl } from 'dial-react';`
+- Rotary: Rotary is the knob of the appliance. It is a flat disc with one printed index mark over a ring of detent ticks across 270 degrees, dyed orange as the unit's one loud part, and it turns with the hand and settles into the nearest detent on the material's spring. `import { Rotary } from 'dial-react';`
+- SegmentedControl: SegmentedControl is the bank of band keys on the case of a radio (FM, AM, AUX). The keys interlock, pressing one latches it down with its printed lamp lit, and the key that was down springs back up. `import { SegmentedControl } from 'dial-react';`
 - Select: Select is the same recessed window as Input with a printed chevron, and it opens a plastic panel of options above the page; the chosen option is marked by a printed tick and weight, the way a selector on an appliance marks its setting in ink. `import { Select } from 'dial-react';`
-- Slider: Slider is the fader on the face of an appliance: a plastic cap riding a recessed groove under a printed ruler scale, which follows the hand and settles into the nearest detent on the material's spring, while the orange stays on the unit's rotary. `import { Slider } from 'dial-react';`
+- Slider: Slider is the fader on the face of an appliance. A plastic cap rides a recessed groove under a printed ruler scale, follows the hand and settles into the nearest detent on the material's spring, while the orange stays on the unit's rotary. `import { Slider } from 'dial-react';`
 - Stack: Stack lines up units and parts on the 4px step, so the gaps between appliances on a screen follow the same rhythm as the holes and insets inside them. `import { Stack } from 'dial-react';`
-- Switch: Switch is the slide switch on the side of an appliance: a plastic cap that slides in a recessed groove between two printed positions, with a small printed lamp that is lit while it is on. `import { Switch } from 'dial-react';`
-- Tabs: Tabs are the section names printed along the case of an appliance, like the scale under a selector: the chosen room's name is set in medium weight with one ink index mark under it, and the screen below shows that room. `import { Tabs } from 'dial-react';`
-- Text: Text is the printing on the case of an appliance: one grotesk in two weights, grey ink flat on the plastic, with hierarchy told by size and by where the words sit on the unit. `import { Text } from 'dial-react';`
+- Switch: Switch is the slide switch on the side of an appliance. A plastic cap slides in a recessed groove between two printed positions, and a small lamp beside it is lit while it is on. `import { Switch } from 'dial-react';`
+- Tabs: Tabs are the section names printed along the case of an appliance, like the scale under a selector. The chosen room's name is set in medium weight with one ink index mark under it, and the screen below shows that room. `import { Tabs } from 'dial-react';`
+- Text: Text is the printing on the case of an appliance. It is one grotesk in two weights, grey ink flat on the plastic, with hierarchy told by size and by where the words sit on the unit. `import { Text } from 'dial-react';`
 - Toast: Toast is a short strip of plastic that rises at the bottom of the screen after an action and says in a printed glyph and a word what the device just did, then goes away. `import { ToastProvider, useToast, Toast } from 'dial-react';`
 
 ## Tokens
 
-- `--ds-surface-page` #F3F2EF
+- `--ds-surface-page` #F8F7F5
 - `--ds-surface-solid` #E8E6E1
 - `--ds-surface-raised` #E8E6E1
 - `--ds-surface-sunken` #DEDBD5
@@ -49,7 +49,7 @@
 - `--ds-action-accent-hover` #F27D42
 - `--ds-action-accent-rim` #C9531C
 - `--ds-action-accent-shade` #C9531C
-- `--ds-line-ring` #85827C
+- `--ds-line-ring` #7C7973
 - `--ds-line-divider` #D3D0C9
 - `--ds-focus-ring` #1F1E1C
 - `--ds-focus-halo` #FAF9F7
@@ -71,6 +71,8 @@
 - `--ds-mechanism-detents` 11
 - `--ds-mechanism-sweep` 270
 - `--ds-mechanism-travel` 3px
+- `--ds-emit-display` 0 0 0 0 #00000000
+- `--ds-emit-lamp` 0 0 0 0 #00000000
 - `--ds-display-lcd-bg` #C7CBBD
 - `--ds-display-lcd-ink` #2F322D
 - `--ds-display-lcd-ghost` #2F322D12
@@ -145,16 +147,16 @@
 - `--ds-type-leading-reading` 1.6
 - `--ds-type-tracking-caps` 0.06em
 - `--ds-type-tracking-display` -0.01em
-- `--ds-motion-hover` 120ms
+- `--ds-motion-hover` 240ms
 - `--ds-motion-press` 65ms
 - `--ds-motion-release` 245ms
 - `--ds-motion-enter` 160ms
-- `--ds-motion-exit` 240ms
-- `--ds-motion-scene` 240ms
+- `--ds-motion-exit` 120ms
+- `--ds-motion-scene` 120ms
 - `--ds-motion-stagger` 0ms
 - `--ds-motion-segment` 80ms
 - `--ds-motion-fill` 120ms
-- `--ds-motion-easing` cubic-bezier(0.2, 0, 0, 1)
+- `--ds-motion-easing` cubic-bezier(0.2, 0.8, 0.2, 1)
 - `--ds-motion-easing-exit` cubic-bezier(0.4, 0, 1, 1)
 - `--ds-motion-easing-inout` cubic-bezier(0.45, 0, 0.2, 1)
 - `--ds-motion-press-scale` 1
@@ -193,13 +195,13 @@
 - `--ds-viewport-lg` 1024px
 - `--ds-viewport-xl` 1280px
 - `--ds-viewport-2xl` 1536px
-- `--ds-field-base` #F3F2EF
+- `--ds-field-base` #F8F7F5
 - `--ds-field-glow` #1F1E1C0F
 - `--ds-field-glow-soft` #1F1E1C0F
 - `--ds-field-line-major` #1F1E1C24
-- `--ds-field-on-column` #1F1E1C
+- `--ds-field-on-column` #FAF9F7
 - `--ds-field-line` #1F1E1C0F
-- `--ds-field-column` #BFBCB5
+- `--ds-field-column` #4A4844
 - `--ds-field-margin` #4A4844
 - `--ds-opacity-disabled` 0.5
 - `--ds-focus-ring-color` #1F1E1C

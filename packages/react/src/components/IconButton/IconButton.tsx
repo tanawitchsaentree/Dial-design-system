@@ -6,13 +6,13 @@ export type IconButtonKind = 'key' | 'primary';
 export type IconButtonSize = 'md' | 'lg';
 
 export interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'aria-label'> {
-  /** The accessible name, required: what the key does, in words (for example "Next track"). The icon is never the name. */
+  /** The accessible name, which is required. It says in words what the key does, for example "Next track". The icon is never the name. */
   label: string;
   /** `key` (default) is a body-coloured key. `primary` is the unit's one orange key; use it once per unit. */
   kind?: IconButtonKind;
   /** `md` (default) is a 44px disc; `lg` is 52px, for the main key of a sheet on a phone. */
   size?: IconButtonSize;
-  /** The symbol printed on the key: one icon, drawn in `currentColor`. It is hidden from assistive tech. */
+  /** The symbol printed on the key, one icon drawn in `currentColor`. It is hidden from assistive tech. */
   children: ReactNode;
 }
 

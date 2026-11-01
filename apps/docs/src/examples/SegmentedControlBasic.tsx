@@ -1,4 +1,4 @@
-// @example A radio's band keys: press one and it latches down with its lamp lit
+// @example A radio's band keys. Press one and it latches down with its lamp lit
 import { SegmentedControl } from 'dial-react';
 
 const BANDS = [

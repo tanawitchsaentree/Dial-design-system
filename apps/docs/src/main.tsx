@@ -10,3 +10,9 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>,
 );
+
+// G-PWA1: the built book installs as an app and reads offline (public/sw.js). Not in dev, where a
+// cached shell would hide edits.
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(() => {}); });
+}

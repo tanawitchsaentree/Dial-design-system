@@ -57,7 +57,7 @@
   inset-inline: calc(var(--ds-control-cap-w) / 2);
   inset-block-start: calc(50% - var(--ds-control-track) / 2);
   block-size: var(--ds-control-track);
-  border: var(--ds-width-hairline) solid transparent;
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
   border-radius: var(--ds-corner-round);
   background: var(--ds-surface-sunken);
   box-shadow: var(--ds-elevation-well);
@@ -80,7 +80,7 @@
   inset-block: var(--ds-gap-sm);
   inset-inline-start: calc(50% - var(--ds-width-ring) / 2);
   border-inline-start: var(--ds-width-ring) solid var(--ds-text-secondary);
-  transition: border-color var(--ds-motion-hover) linear;
+  transition: border-color var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .scale {
   position: relative;

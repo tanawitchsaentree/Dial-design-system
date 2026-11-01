@@ -16,6 +16,8 @@
 }
 .lcd { background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); }
 .oled { background: var(--ds-display-oled-bg); color: var(--ds-display-oled-ink); }
+/* the OLED window is one of P2's emitters: its own light in the dark edition, nothing in light (emit.display) */
+.oled[data-glow] { box-shadow: var(--ds-elevation-well), var(--ds-emit-display); }
 
 .reading {
   position: absolute;
@@ -39,8 +41,8 @@
 
 /* 7-segment cells: lit segments are flat ink, unlit ones a faint ghost; no glow (FORM display NEVER) */
 .seg { display: block; inline-size: auto; block-size: var(--ds-space-10); }
-.on { fill: var(--ds-display-lcd-ink); transition: fill var(--ds-motion-segment) linear; }
-.off { fill: var(--ds-display-lcd-ghost); transition: fill var(--ds-motion-segment) linear; }
+.on { fill: var(--ds-display-lcd-ink); transition: fill var(--ds-motion-segment) var(--ds-motion-easing); }
+.off { fill: var(--ds-display-lcd-ghost); transition: fill var(--ds-motion-segment) var(--ds-motion-easing); }
 
 .sm .seg { block-size: var(--ds-space-6); }
 .md .seg { block-size: var(--ds-space-10); }

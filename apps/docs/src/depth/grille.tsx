@@ -7,11 +7,11 @@ const Unit = ({ children }: { children: React.ReactNode }) => <div className="de
 export const GRILLE: Depth = {
   overview: (
     <>
-      <p>Grille is a field of small round holes in the body. The holes are the meter: lit holes show a level, an activity or a signal, and the rest stay dark. It reads at a glance, from across a room.</p>
-      <p>Every hole is a recess, not a printed dot. A lit hole is grey ink at full strength and never orange. A grille always measures something, so it always has a name and a value that a screen reader can read.</p>
+      <p>Grille is a field of small round holes in the body. The holes are the meter. Lit holes show a level, an activity or a signal, and the rest stay dark. It reads at a glance, from across a room.</p>
+      <p>Every hole is a recess rather than a printed dot. A lit hole is grey ink at full strength and never orange. A grille always measures something, so it always has a name and a value that a screen reader can read.</p>
     </>
   ),
-  whenToUse: ['To show a level: volume, fan speed, battery, water in a tank.', 'To show activity or signal strength in coarse steps.', 'Next to the display or the control that sets the level.'],
+  whenToUse: ['To show a level, such as volume, fan speed, battery or the water in a tank.', 'To show activity or signal strength in coarse steps.', 'Next to the display or the control that sets the level.'],
   whenNot: [
     { situation: 'The exact number matters', to: '/components/display', label: 'Display' },
     { situation: 'The person sets the level by dragging', to: '/components/slider', label: 'Slider' },
@@ -45,12 +45,12 @@ export const GRILLE: Depth = {
     avoid: [{ title: 'a grille with no reading', why: 'Holes that measure nothing are decoration, and dial does not allow them.', render: <Unit><Grille label="Volume" value={0} cols={12} rows={3} valueText="Volume off" /></Unit> }],
   },
   content: {
-    formula: <p>The label names what is measured: <em>Volume</em>, <em>Fan speed</em>, <em>Battery</em>. valueText says the reading in words: <em>Volume 6 of 10</em>.</p>,
+    formula: <p>The label names what is measured, such as <em>Volume</em>, <em>Fan speed</em> or <em>Battery</em>. valueText says the reading in words, as in <em>Volume 6 of 10</em>.</p>,
     pair: {
       do: <Grille label="Battery" value={7} cols={10} rows={2} valueText="Battery 70 percent" />, doNote: 'A name and a reading in words.',
       dont: <Grille label="Grille" value={7} cols={10} rows={2} />, dontNote: 'The name says what it is, not what it measures.',
     },
-    overflow: { text: 'The field never wraps: it keeps cols holes per row. Choose cols that fit the narrowest column you expect, about 12 holes per 144px.', render: <div style={{ inlineSize: 160 }}><Grille label="Volume" value={6} cols={12} rows={3} /></div> },
+    overflow: { text: 'The field never wraps. It keeps cols holes per row. Choose cols that fit the narrowest column you expect, about 12 holes per 144px.', render: <div data-overflow-demo="" style={{ inlineSize: 160 }}><Grille label="Volume" value={6} cols={12} rows={3} /></div> },
     rtl: { text: 'In right-to-left languages fill inline starts from the right, because it follows the reading direction.', render: <div dir="rtl"><Grille label="الصوت" value={6} cols={12} rows={3} /></div> },
     expansion: { text: 'The grille has no words of its own. A longer label only changes what a screen reader says.', render: <Grille label="Lüftergeschwindigkeit" value={4} cols={12} rows={3} /> },
   },
@@ -84,6 +84,6 @@ export const GRILLE: Depth = {
   references: [
     { title: 'WAI-ARIA 1.2 · meter role', url: 'https://www.w3.org/TR/wai-aria-1.2/#meter', why: 'A scalar value within a known range.' },
     { title: 'WCAG 2.2 · 1.4.11 Non-text Contrast', url: 'https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html', why: 'Lit holes must stand apart from unlit ones at 3:1.' },
-    { title: 'Vitsœ · Dieter Rams: ten principles for good design', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
+    { title: 'Dieter Rams, ten principles for good design (Vitsœ)', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
   ],
 };

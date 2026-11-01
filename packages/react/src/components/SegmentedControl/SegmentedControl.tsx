@@ -22,13 +22,13 @@ export interface SegmentedControlOption {
 }
 
 export interface SegmentedControlProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue' | 'children'> {
-  /** The name printed above the bank, such as Band or Mode. Required: it is also the group's accessible name. */
+  /** The name printed above the bank, such as Band or Mode. It is required, because it is also the group's accessible name. */
   label: ReactNode;
   /** The keys, in order. Two to five keys fit a unit; more belong in a Select. */
   options: SegmentedControlOption[];
-  /** Controlled: the value of the latched key. Pair it with `onValueChange`. */
+  /** The value of the latched key, when you control it. Pair it with `onValueChange`. */
   value?: string;
-  /** Uncontrolled: the value of the key latched at first. With neither, no key is latched until one is pressed. */
+  /** The value of the key latched at first, when the bank keeps its own state. With neither, no key is latched until one is pressed. */
   defaultValue?: string;
   /** Called with the new value when a key latches, by pointer, arrow keys, Home, End or Space. */
   onValueChange?: (value: string) => void;
@@ -114,7 +114,7 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
               className={styles.key}
               onClick={() => latch(i)}
             >
-              <span className={styles.lamp} aria-hidden="true" />
+              <span className={styles.lamp} aria-hidden="true" data-glow={on && !disabled ? 'mark' : undefined} />
               <span className={styles.face}>
                 {o.icon != null && (
                   <span className={styles.icon} aria-hidden="true">

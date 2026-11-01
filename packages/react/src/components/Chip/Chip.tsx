@@ -11,7 +11,7 @@ interface ChipBase extends Omit<HTMLAttributes<HTMLSpanElement>, 'children' | 'o
   size?: ChipSize;
   /** Flattens the chip and stops it from being pressed or removed. */
   disabled?: boolean;
-  /** A small stroke icon printed before the word. Decorative: the word names the chip. */
+  /** A small stroke icon printed before the word. It is decorative, because the word names the chip. */
   icon?: ReactNode;
 }
 
@@ -29,7 +29,7 @@ export interface ChipToggleProps extends ChipBase {
 }
 
 export interface ChipRemovableProps extends ChipBase {
-  /** Makes the chip removable: a separate round remove key with a 44px target sits at its end. */
+  /** Makes the chip removable, with a separate round remove key with a 44px target sits at its end. */
   onRemove: () => void;
   /** Accessible name of the remove key. Defaults to "Remove" and the word, when the word is a string. */
   removeLabel?: string;
@@ -94,7 +94,7 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(function Chip(props, 
   return (
     <span ref={ref} data-component="Chip" data-form="toggle" data-disabled={disabled || undefined} className={cx(styles.root, className)} {...rest}>
       <button type="button" aria-pressed={on} disabled={disabled} onClick={press} className={cx(styles.key, styles[size])}>
-        <span className={styles.lamp} aria-hidden="true" />
+        <span className={styles.lamp} aria-hidden="true" data-glow={on && !disabled ? 'mark' : undefined} />
         {glyph}
         {word}
       </button>

@@ -1,4 +1,4 @@
-// @example The two kinds: the orange primary knob and a body-coloured key knob for a secondary dial
+// @example The two kinds, the orange primary knob and a body-coloured key knob for a secondary dial
 import { Rotary, Stack } from 'dial-react';
 
 export default function RotaryKinds() {

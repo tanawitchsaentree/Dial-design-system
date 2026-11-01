@@ -1,5 +1,5 @@
 {
-  "concept": "Grille is the perforated field of a dial unit whose recessed holes are the meter itself: lit holes in printing ink show a level, activity or signal, and the value is always named for assistive tech.",
+  "concept": "Grille is the perforated field of a dial unit whose recessed holes are the meter itself. Lit holes in printing ink show a level, activity or signal, and the value is always named for assistive tech.",
   "kind": ["grille", "meter", "level meter", "perforation"],
   "default_to_avoid": [
     { "pattern": "decorative grille: a CSS radial-gradient dot-pattern background behind content", "why_not": "A printed dot pattern carries no reading, and P4 says holes exist only where they carry a value and are recesses, never printed dots." },

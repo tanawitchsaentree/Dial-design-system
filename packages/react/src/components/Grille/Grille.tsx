@@ -16,7 +16,7 @@ export interface GrilleProps extends Omit<HTMLAttributes<HTMLDivElement>, 'child
   rows?: number;
   /** `rect` (default) is a rectangular field; `circle` leaves out the holes outside the inscribed circle, like a speaker grille. */
   shape?: GrilleShape;
-  /** What the holes measure, such as "Volume" or "Fan speed". Required: a grille with no reading is not allowed. */
+  /** What the holes measure, such as "Volume" or "Fan speed". It is required, because every grille carries a reading. */
   label: string;
   /** Fill order. `inline` (default) lights holes column by column in reading order (left to right, mirrored in RTL); `up` lights rows from the bottom. */
   fill?: GrilleFill;

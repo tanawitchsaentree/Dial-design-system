@@ -7,7 +7,7 @@ const Unit = ({ children }: { children: React.ReactNode }) => <div className="de
 export const SLIDER: Depth = {
   overview: (
     <>
-      <p>Slider sets an amount along a range: volume, brightness, fan speed. It is a fader. A plastic cap rides in a narrow groove, with a ruler printed above it. You drag the cap, or use the arrow keys, and it settles into the nearest step on a spring.</p>
+      <p>Slider sets an amount along a range, such as volume, brightness or fan speed. It is a fader. A plastic cap rides in a narrow groove, with a ruler printed above it. You drag the cap, or use the arrow keys, and it settles into the nearest step on a spring.</p>
       <p>The fader is never orange. On a dial unit, the orange part is the knob. The fader is the quiet control next to it, so the cap and the groove stay plastic and ink.</p>
     </>
   ),
@@ -17,7 +17,7 @@ export const SLIDER: Depth = {
     { situation: 'Turning something on or off', to: '/components/switch', label: 'Switch' },
     { situation: 'Picking one of two to five named modes', to: '/components/segmented-control', label: 'SegmentedControl' },
   ],
-  variants: { na: 'Slider has one look: a plastic cap in a recessed groove. The numerals and the steps are options, covered under Modifiers.' },
+  variants: { na: 'Slider has one look, a plastic cap in a recessed groove. The numerals and the steps are options, covered under Modifiers.' },
   anatomy: {
     render: <Slider label="Volume" min={0} max={10} step={1} defaultValue={4} scale />,
     parts: [
@@ -48,12 +48,12 @@ export const SLIDER: Depth = {
     avoid: [{ title: 'a fader as the only control for an on and off setting', why: 'An amount with two values is a switch. A fader makes the person aim for the ends.', render: <Unit><Slider label="Lamp" min={0} max={1} step={1} defaultValue={1} scale /></Unit> }],
   },
   content: {
-    formula: <p>Name the amount, not the action: <em>Volume</em>, <em>Brightness</em>, <em>Fan speed</em>. Put the unit in <code>formatValue</code>, not in the label.</p>,
+    formula: <p>Name the amount the fader sets, as in <em>Volume</em>, <em>Brightness</em> or <em>Fan speed</em>, and leave verbs out. Put the unit in <code>formatValue</code> and keep it out of the label.</p>,
     pair: {
       do: <Slider label="Brightness" min={0} max={100} step={10} defaultValue={60} formatValue={(v) => `${v} %`} />, doNote: 'The label names the amount and the value carries the unit.',
       dont: <Slider label="Drag to change the brightness in percent" min={0} max={100} step={10} defaultValue={60} />, dontNote: 'An instruction as the label, with the unit buried in it.',
     },
-    overflow: { text: 'A long label wraps above the groove and the value stays at the end. The track keeps its length.', render: <div style={{ inlineSize: 240 }}><Slider label="Brightness of the lamp above the dining table" min={0} max={10} step={1} defaultValue={6} /></div> },
+    overflow: { text: 'A long label wraps above the groove and the value stays at the end. The track keeps its length.', render: <div data-overflow-demo="" style={{ inlineSize: 240 }}><Slider label="Brightness of the lamp above the dining table" min={0} max={10} step={1} defaultValue={6} /></div> },
     rtl: { text: 'In right-to-left languages the groove starts on the right. The lowest value is on the right and the arrow keys follow the direction of the groove.', render: <div dir="rtl"><Slider label="مستوى الصوت" min={0} max={10} step={1} defaultValue={3} scale /></div> },
     expansion: { text: 'German and Finnish labels can run 30% longer. The label wraps and the groove does not change.', render: <Slider label="Lautstärke der Lautsprecher" min={0} max={10} step={1} defaultValue={5} /> },
   },
@@ -76,7 +76,7 @@ export const SLIDER: Depth = {
     loading: <p>Slider has no loading state. If the device takes time to apply the value, say so on the unit’s display and keep the cap where the person left it.</p>,
     focus: <p>Slider is never focused on page load. Pressing the track focuses it, so the arrow keys work right after a drag.</p>,
   },
-  deepDive: { na: 'Slider has a single variant, so there is no per-variant deep dive.' },
+  deepDive: { na: 'Slider has a single variant, so there is no section per variant.' },
   modifiers: [
     {
       name: 'scale',
@@ -93,6 +93,6 @@ export const SLIDER: Depth = {
   references: [
     { title: 'WAI-ARIA Authoring Practices · Slider pattern', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/', why: 'The keyboard map and the ARIA values a slider needs.' },
     { title: 'WCAG 2.2 · 2.5.7 Dragging Movements', url: 'https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html', why: 'Why every step can also be reached by a single press or a key.' },
-    { title: 'Vitsœ · Dieter Rams: ten principles for good design', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
+    { title: 'Dieter Rams, ten principles for good design (Vitsœ)', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
   ],
 };

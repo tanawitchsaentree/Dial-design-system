@@ -21,7 +21,7 @@ export type ToastTone = 'neutral' | 'positive' | 'warning' | 'critical';
 
 /** An optional key on the toast that undoes or retries what just happened. */
 export interface ToastAction {
-  /** The word on the key: "Undo", "Try again". */
+  /** The word on the key, such as "Undo" or "Try again". */
   label: string;
   /** Runs when the key is pressed. The toast closes afterwards. */
   onAction: () => void;
@@ -32,7 +32,7 @@ export interface ToastProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childr
   tone?: ToastTone;
   /** The status word printed beside the glyph. Defaults to Note, Done, Check or Failed by tone. */
   status?: string;
-  /** The message, short and in the past tense: "Lamp turned off". */
+  /** The message, short and in the past tense, such as "Lamp turned off". */
   children: ReactNode;
   /** One optional plastic key, such as Undo or Try again. */
   action?: ToastAction;

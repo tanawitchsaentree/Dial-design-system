@@ -1,4 +1,4 @@
-// @example A washer in layout a: the programme knob is orange, so Start is a plastic key beside the keys
+// @example A washer in layout a. The programme knob is orange, so Start is a plastic key beside the keys
 import { useState } from 'react';
 import { DeviceCard } from 'dial-react';
 

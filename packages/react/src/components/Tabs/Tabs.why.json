@@ -1,5 +1,5 @@
 {
-  "concept": "Tabs are the section names printed along the case of an appliance, like the scale under a selector: the chosen room's name is set in medium weight with one ink index mark under it, and the screen below shows that room.",
+  "concept": "Tabs are the section names printed along the case of an appliance, like the scale under a selector. The chosen room's name is set in medium weight with one ink index mark under it, and the screen below shows that room.",
   "kind": ["tabs", "tab list", "section selector"],
   "default_to_avoid": [
     { "pattern": "Material tabs with a coloured sliding underline indicator", "why_not": "A coloured bar spends a hue on a selection, which P1 forbids, and the bar gliding across the row is a movement that no state of the device asked for, against P6." },
@@ -12,12 +12,12 @@
     { "source": "apps/lab/tabs/index.html: printed names with an index mark, latching key bank, tuning scale with a needle" }
   ],
   "derivation": [
-    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material — no shadow, no emboss", "form": "A tab has no height, no shadow and no travel: it is printing on the case, so it never reads as a key that changes the device." },
+    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material, with no shadow and no emboss", "form": "A tab has no height, no shadow and no travel: it is printing on the case, so it never reads as a key that changes the device." },
     { "p": "P3", "axis": "shape", "consequence": "rotaries are circles with one index mark", "form": "The chosen name gets one short ink index mark under it, the same single mark a rotary uses, instead of a bar the width of the word." },
     { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Names and the index mark are ink on plastic; the chosen tab is never orange and carries no fill." },
     { "p": "P5", "axis": "type", "consequence": "one grotesk, regular and medium only; hierarchy by size and position", "form": "Released names are regular weight in secondary ink; the chosen name turns medium weight in primary ink, with the mark under it." },
     { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "The index mark appears at once under the new name and the panel swaps without a slide or fade between sections." },
-    { "p": "P6", "axis": "space", "consequence": "fixed positions — a unit's layout does not reflow between states", "form": "Each name reserves the width of its medium weight, so choosing a tab never shifts its neighbours along the row." }
+    { "p": "P6", "axis": "space", "consequence": "fixed positions, so a unit's layout does not reflow between states", "form": "Each name reserves the width of its medium weight, so choosing a tab never shifts its neighbours along the row." }
   ],
   "variants": {
     "lab": "apps/lab/tabs/index.html",
@@ -44,10 +44,10 @@
     "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens a released name one ink step and nothing rises, because printing on a case does not move." },
     "focus-visible": { "p": "P3", "axis": "interaction", "why": "Keyboard focus draws the same dark ring around the name or the panel as on every part of the system." },
     "aria-selected=true": { "p": "P5", "axis": "type", "why": "The chosen name turns medium weight in primary ink and shows its index mark, a change of weight and shape, not hue." },
-    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion even the hover ink step changes at once, so nothing on the row fades." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion nothing on the row moves, and the hover ink step keeps its short fade because a fade of colour moves nothing." },
     "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the index mark is drawn in the system text colour, so the chosen name keeps its mark." }
   },
   "motion": {
-    "color": { "p": "P6", "axis": "interaction", "why": "The ink step on hover fades briefly so it reads as a reply to the pointer, while the mark itself never moves." }
+    "color": { "p": "P3", "axis": "motion", "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, while the mark itself never moves." }
   }
 }

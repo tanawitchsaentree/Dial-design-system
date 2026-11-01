@@ -1,4 +1,4 @@
-// @example layout="compact": a speaker with an OLED window, transport keys and the volume knob right of the display
+// @example A speaker in layout="compact" with an OLED window, transport keys and the volume knob right of the display
 import { useState } from 'react';
 import { DeviceCard } from 'dial-react';
 

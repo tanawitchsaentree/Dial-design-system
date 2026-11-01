@@ -1,4 +1,4 @@
-// @example activation="manual": arrows move focus only, Enter or Space opens the room
+// @example activation="manual", where arrows move focus only and Enter or Space opens the room
 import { Tabs } from 'dial-react';
 
 const ROOMS = [

@@ -1,5 +1,5 @@
 {
-  "concept": "Button is a key on the case of an appliance: a capsule of the same matte plastic that drops by its height when pressed and returns on the spring, with only the unit's one primary key dyed orange.",
+  "concept": "Button is a key on the case of an appliance. It is a capsule of the same matte plastic that drops by its height when pressed and returns on the spring, and only the unit's one primary key is dyed orange.",
   "kind": ["button", "key"],
   "default_to_avoid": [
     { "pattern": "flat pill button with primary, secondary and ghost intent fills (Material contained/outlined/text, shadcn button)", "why_not": "Intent fills spend colour on every button, while P1 allows exactly one orange part per unit and everything else must be plastic." },
@@ -43,13 +43,13 @@
     "active": { "p": "P3", "axis": "depth", "why": "Pressing drops the key by its travel and collapses its shadow underneath it, at once." },
     "focus-visible": { "p": "P3", "axis": "interaction", "why": "Every part shows the same dark ring with a plastic halo, so focus never depends on the orange." },
     "disabled": { "p": "P6", "axis": "depth", "why": "A disabled key loses its height and fades to half, while its outline stays readable against the body." },
-    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes state at once with no travel and no spring return." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes state at once with no travel and no spring return; only the ink fade stays." },
     "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the key keeps a real border so its edge survives without shadows or fills." }
   },
   "motion": {
     "transform": { "p": "P3", "axis": "motion", "why": "The key travels down in 65ms and returns on the spring so a press reads as a physical stroke." },
     "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses with the press and grows back with the return, following the single light." },
-    "color": { "p": "P6", "axis": "interaction", "why": "The ink step on hover fades briefly so the change is a reply, not a flash." },
-    "background-color": { "p": "P1", "axis": "colour", "why": "The primary key's orange shifts one step on hover with the same brief fade as the ink." }
+    "color": { "p": "P3", "axis": "motion", "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing." },
+    "background-color": { "p": "P1", "axis": "colour", "why": "The primary key's orange shifts one step on hover with the same fast in, slow out fade as the ink." }
   }
 }

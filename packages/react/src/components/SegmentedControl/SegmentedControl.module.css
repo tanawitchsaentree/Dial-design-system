@@ -13,7 +13,9 @@
   color: var(--ds-text-primary);
 }
 .bank {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
   gap: var(--ds-width-ring);
   padding: var(--ds-width-ring);
   border-radius: var(--ds-corner-round);
@@ -26,7 +28,6 @@
   justify-items: center;
   align-content: center;
   gap: var(--ds-gap-xs);
-  flex: 1 1 0;
   min-inline-size: var(--ds-layout-touch);
   min-block-size: var(--ds-control-md);
   margin: var(--ds-gap-none);
@@ -42,7 +43,7 @@
   transition:
     transform var(--ds-motion-release) var(--ds-motion-easing),
     box-shadow var(--ds-motion-release) var(--ds-motion-easing),
-    color var(--ds-motion-hover) linear;
+    color var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .key:first-child {
   border-start-start-radius: var(--ds-corner-round);
@@ -58,7 +59,7 @@
   border-radius: var(--ds-corner-round);
   background: var(--ds-surface-sunken);
   box-shadow: var(--ds-elevation-well);
-  transition: background-color var(--ds-motion-segment) linear;
+  transition: background-color var(--ds-motion-segment) var(--ds-motion-easing);
 }
 .face {
   display: inline-flex;
@@ -85,7 +86,7 @@
 .lg .key { min-block-size: var(--ds-control-lg); }
 .lg .word { font-size: var(--ds-type-body); }
 
-.key:hover { color: var(--ds-text-primary); }
+.key:hover { color: var(--ds-text-primary); transition-duration: var(--ds-motion-hover); }
 .key:active,
 .key[aria-checked='true'] {
   transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
@@ -95,6 +96,8 @@
 .key[aria-checked='true'] { color: var(--ds-text-primary); }
 .key[aria-checked='true'] .word { font-weight: var(--ds-type-weight-medium); }
 .key[aria-checked='true'] .lamp { background: var(--ds-text-primary); box-shadow: none; }
+/* a lit lamp is one of P2's emitters: its own light in the dark edition, nothing in light (emit.lamp) */
+.key .lamp[data-glow] { box-shadow: var(--ds-emit-lamp); }
 .key:focus-visible {
   z-index: var(--ds-layer-raised);
   outline: var(--ds-width-ring) solid var(--ds-focus-ring);
@@ -109,7 +112,8 @@
 .key[aria-checked='true']:disabled:hover { color: var(--ds-text-primary); }
 
 @media (prefers-reduced-motion: reduce) {
-  .key, .lamp { transition: none; }
+  .key { transition: color var(--ds-motion-hover) var(--ds-motion-easing); }
+  .lamp { transition: none; }
   .key:active:not([aria-checked='true']) { transform: none; }
 }
 @media (forced-colors: active) {

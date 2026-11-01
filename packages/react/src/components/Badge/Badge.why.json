@@ -1,5 +1,5 @@
 {
-  "concept": "Badge is printing on the case of an appliance: a small status lamp with its own shape per tone and a word beside it, printed flat on the plastic with no box, no fill, no shadow and never orange.",
+  "concept": "Badge is printing on the case of an appliance. It is a small status lamp with its own shape per tone and a word beside it, printed flat on the plastic with no box, no fill, no shadow and never orange.",
   "kind": ["badge", "status badge", "status label"],
   "default_to_avoid": [
     { "pattern": "coloured pill badge with white text (Bootstrap badge, Material badge)", "why_not": "A filled pill tells status by colour alone, tints the text, and adds a second loud shape to the unit next to the orange control." },
@@ -11,7 +11,7 @@
     { "source": "system/refs/ref-01.png: lowercase model name printed on the inset line (estimated from chat)" }
   ],
   "derivation": [
-    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material — no shadow, no emboss", "form": "A badge has no box, background, border or shadow; the glyph and word are printed straight onto whatever plastic they sit on." },
+    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material, with no shadow and no emboss", "form": "A badge has no box, background, border or shadow; the glyph and word are printed straight onto whatever plastic they sit on." },
     { "p": "P5", "axis": "colour", "consequence": "ink on plastic at ≥4.5:1 in both themes; no tinted text", "form": "The word is always text.primary; only the small glyph carries the tone's status mark colour, never the word." },
     { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Tone marks come from status.positive-mark, warning-mark, critical-mark and info-mark; no tone, not even warning, uses the orange." },
     { "p": "P5", "axis": "type", "consequence": "tabular figures everywhere a number changes", "form": "The count form prints its number in tabular figures and medium weight before the word, as in 3 offline." },

@@ -1,4 +1,4 @@
-// @example Rooms printed in a row: the chosen room has an ink index mark under its name
+// @example Rooms printed in a row, with an ink index mark under the chosen room's name
 import { Tabs } from 'dial-react';
 
 const ROOMS = [

@@ -1,4 +1,4 @@
-// @example A washer cycle: ink fills the groove from the start of the line
+// @example A washer cycle, where ink fills the groove from the start of the line
 import { Progress } from 'dial-react';
 
 export default function ProgressBasic() {

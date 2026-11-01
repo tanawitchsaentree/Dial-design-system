@@ -25,3 +25,10 @@
 - **เพราะ:** P1–P6 + tactile recipe; user ให้ agent ตัดสินเองทั้งหมดหลัง anchor ("ตัดสินใจเองแล้วไปต่อเลยไม่ต้องถาม", 2026-11-01)
 - **ตัวเลือกที่ตัดทิ้ง:** flat pill + intent fills, bordered 8px input, white card 12–16px soft shadow, iOS-clone switch
 - **กระทบ:** ทุก component ใน wave 1+; ถ้าแก้ class ไหน ต้อง re-derive สมาชิกของ class นั้น (why.json derivation + lab + REVIEW)
+
+### D-004: Page a step lighter (amends D-002)
+- **วันที่:** 2026-11-01 · **Phase:** M1 gates
+- **เลือก:** `color.abs.50` (surface.page, light) #F3F2EF → #F8F7F5; the body (#E8E6E1) stays, so anchor A's body is unchanged
+- **เพราะ:** G-EL1: a unit must stand 1.15:1 from what is under it; it was 1.07:1. P6 (a unit never floats higher than its material allows): the lightest fix is the ground, not a deeper shadow (CLAUDE.md rule 14). The reference also shows the page lighter than the bodies.
+- **ตัวเลือกที่ตัดทิ้ง:** darker body (moves the anchor), deeper shadow (against P6)
+- **กระทบ:** G-AN1 rim on the page; re-record `system/anchor/anchor-likeness.json` only if G-AN1 goes red. Also field.column/on-column changed by the shell fix (G-NT1): field.column abs.700/charcoal.200, on-column abs.0/abs.900

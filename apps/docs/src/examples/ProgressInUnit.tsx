@@ -1,4 +1,4 @@
-// @example In a unit: the display says the state, the groove how far it has run
+// @example In a unit, the display says the state and the groove how far it has run
 import { Button, Display, Progress, Stack } from 'dial-react';
 
 export default function ProgressInUnit() {

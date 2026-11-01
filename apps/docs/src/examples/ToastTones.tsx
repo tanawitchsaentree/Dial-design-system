@@ -1,4 +1,4 @@
-// @example The four tones: each has its own glyph and word, and none is orange
+// @example The four tones, each with its own glyph and word, and none of them orange
 import { Stack, Toast } from 'dial-react';
 
 export default function ToastTones() {

@@ -2,13 +2,13 @@
 import { Button, Card, Display, Heading, Stack, Text } from 'dial-react';
 import type { Depth } from './types';
 
-const W = ({ children, w = 300 }: { children: React.ReactNode; w?: number }) => <div style={{ inlineSize: w }}>{children}</div>;
+const W = ({ children, o, w = 300 }: { children: React.ReactNode; o?: boolean; w?: number }) => <div data-overflow-demo={o ? '' : undefined} style={{ inlineSize: w }}>{children}</div>;
 
 export const CARD: Depth = {
   overview: (
     <>
       <p>Card is the body of a unit. It is one rounded case of the same warm plastic as the keys on it, lit from the top left, with a short shadow down and to the right. Content sits straight on the case at one even inset.</p>
-      <p>The corner follows the card’s short side: 0.16 of it, and never more than 28px. A small card gets a small corner and a large panel keeps a firm one. The card also hands its corner and inset to a window inside it, so the window’s corner nests.</p>
+      <p>The corner follows the card’s short side. It is 0.16 of that side, and never more than 28px. A small card gets a small corner and a large panel keeps a firm one. The card also hands its corner and inset to a window inside it, so the window’s corner nests.</p>
     </>
   ),
   whenToUse: ['To hold one device, one room or one topic as a unit on a screen.', 'To group a short state line with the keys that act on it.', 'As the body of a list of rooms or devices.'],
@@ -36,7 +36,7 @@ export const CARD: Depth = {
   },
   sizes: { na: 'Card has no size prop. Its width comes from the layout it sits in, and padding sets the inset.' },
   emphasis: {
-    text: <p>A card holds at most one orange part: the key or knob the unit exists for. A screen of cards keeps one orange part in each card, never several in one.</p>,
+    text: <p>A card holds at most one orange part, the key or knob the unit exists for. A screen of cards keeps one orange part in each card, never several in one.</p>,
     pair: {
       do: <W w={280}><Card footer={<><Button kind="primary">Start</Button><Button>Schedule</Button></>}><Text>Washer · ready</Text></Card></W>,
       doNote: 'One orange key in the card.',
@@ -56,14 +56,14 @@ export const CARD: Depth = {
     avoid: [{ title: 'a card inside a card', why: 'Two plastic bodies stacked add a second shadow and a second corner. Use gaps inside one card.', render: <W><Card><Card padding="sm"><Text>Inner card</Text></Card></Card></W> }],
   },
   content: {
-    formula: <p>A title that names the room or device, then one short line of state: <em>Washer</em>, then <em>Cotton 40 °C, ready at 18:20</em>. Sentence case. Print the model in lowercase.</p>,
+    formula: <p>A title that names the room or device, then one short line of state. For example, <em>Washer</em>, then <em>Cotton 40 °C, ready at 18:20</em>. Sentence case. Print the model in lowercase.</p>,
     pair: {
       do: <W w={260}><Card header={<Heading level={4}>Kitchen lamp</Heading>}><Text tone="secondary">On, 70 %</Text></Card></W>,
       doNote: 'A name and the state.',
       dont: <W w={260}><Card header={<Heading level={4}>Device 3</Heading>}><Text tone="secondary">Status: OK</Text></Card></W>,
       dontNote: 'A number and a word that say nothing about the device.',
     },
-    overflow: { text: 'Long text wraps inside the inset and the card grows taller. The corner stays the same, because it follows the short side.', render: <W w={220}><Card><Text>The dishwasher in the downstairs kitchen finished its eco programme at 14:05.</Text></Card></W> },
+    overflow: { text: 'Long text wraps inside the inset and the card grows taller. The corner stays the same, because it follows the short side.', render: <W o w={220}><Card><Text>The dishwasher in the downstairs kitchen finished its eco programme at 14:05.</Text></Card></W> },
     rtl: { text: 'In right-to-left languages the wordmark moves to the bottom right and the model to the bottom left.', render: <div dir="rtl"><W w={260}><Card wordmark="dial" model="wash 1"><Text>الغسالة جاهزة</Text></Card></W></div> },
     expansion: { text: 'German and Finnish run about 30% longer. Titles wrap and the card grows taller.', render: <W w={260}><Card header={<Heading level={4}>Waschmaschine Badezimmer</Heading>}><Text tone="secondary">Fertig um 18:20</Text></Card></W> },
   },
@@ -75,7 +75,7 @@ export const CARD: Depth = {
     interactions: [
       ['Keyboard', 'Tab', 'Moves through the keys inside the card. The card itself is not a stop.', 'not focusable'],
       ['Pointer', 'Click on the body', 'Nothing happens. Only the parts on it act.', 'none'],
-      ['Screen reader', 'Read', 'Read as its element: a group, a region with a name, an article or a list item.', 'as + aria-label'],
+      ['Screen reader', 'Read', 'Read as its element, so it is a group, a region with a name, an article or a list item.', 'as + aria-label'],
     ],
     loading: <p>Card has no loading state. While a device answers, the state line or the display inside the card says so.</p>,
     focus: <p>Card never takes focus. Focus goes to the first control inside it, in source order.</p>,
@@ -112,6 +112,6 @@ export const CARD: Depth = {
   references: [
     { title: 'WAI-ARIA Authoring Practices · Landmark regions', url: 'https://www.w3.org/WAI/ARIA/apg/practices/landmark-regions/', why: 'When a card as section needs a name.' },
     { title: 'WCAG 2.2 · 1.4.11 Non-text Contrast', url: 'https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html', why: 'Why the parts on a card keep 3:1 edges.' },
-    { title: 'Vitsœ · Dieter Rams: ten principles for good design', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
+    { title: 'Dieter Rams, ten principles for good design (Vitsœ)', url: 'https://www.vitsoe.com/gb/about/good-design', why: 'The source of dial’s principles.' },
   ],
 };

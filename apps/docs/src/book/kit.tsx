@@ -121,6 +121,12 @@ export function Example({ title, code, children, plain, backdrop }: { title: str
   );
 }
 
+/** The install line the book shows (CLAUDE.md rule 17, G-PUB1). Nothing is on npm yet, so it is the
+ *  tarball `pnpm run release:pack` writes, the one path that installs today. When a package is
+ *  published (kiln.config `published`), this becomes the registry line. */
+export const installLine = (pkg: string, version: string) =>
+  `# not on npm yet: pack it in the dial repo, then install the file\npnpm run release:pack\nnpm install /path/to/dial/release/${pkg}-${version}.tgz`;
+
 export function Code({ children, label }: { children: string; label?: string }) {
   return <CodeBlock code={children} label={label} />;
 }

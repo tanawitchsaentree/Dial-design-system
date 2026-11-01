@@ -27,7 +27,7 @@
   color: var(--ds-text-secondary);
   font-family: inherit;
   cursor: pointer;
-  transition: color var(--ds-motion-hover) linear;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .word {
   display: inline-grid;
@@ -60,7 +60,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tab { transition: none; }
+  /* the ink fade moves nothing, so it stays (motion.hover is kept under Reduce motion) */
+  .tab { transition: color var(--ds-motion-hover) var(--ds-motion-easing); }
 }
 @media (forced-colors: active) {
   .tab[aria-selected='true'] .mark { forced-color-adjust: none; background: ButtonText; }

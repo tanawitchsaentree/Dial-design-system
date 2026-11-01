@@ -1,5 +1,5 @@
 {
-  "concept": "DeviceCard is one small appliance on the screen, built from anchor A: a plastic body with the display across the top, one big orange knob or key where the hand goes, plain keys and a grille beside it, a ruler fader across, and the wordmark and model printed on the bottom edge.",
+  "concept": "DeviceCard is one small appliance on the screen, built from anchor A. Its plastic body has the display across the top, one big orange knob or key where the hand goes, plain keys and a grille beside it, a ruler fader across, and the wordmark and model printed on the bottom edge.",
   "kind": ["device card", "device tile", "smart home tile", "appliance card"],
   "default_to_avoid": [
     { "pattern": "smart home device card or tile with an icon, a name and an on/off toggle (Google Home, Apple Home, SmartThings tiles)", "why_not": "A tile with a toggle hides the device's state behind an icon, while P2 needs one display that says what the device is doing now." },
@@ -30,8 +30,8 @@
   },
   "parts": {
     "root": { "p": "P6", "axis": "shape", "why": "The body is a Card capped at a width of eight touch modules, so the radius rule from the short side holds like the anchor." },
-    "a": { "p": "P2", "axis": "space", "why": "Anchor A: the display spans the top, the knob sits below it on the left with keys and grille on the right." },
-    "tall": { "p": "P1", "axis": "space", "why": "One column for a wall device: the knob is centred under the display and takes the largest clear area." },
+    "a": { "p": "P2", "axis": "space", "why": "In anchor A the display spans the top, and the knob sits below it on the left with keys and grille on the right." },
+    "tall": { "p": "P1", "axis": "space", "why": "A wall device gets one column, so the knob is centred under the display and takes the largest clear area." },
     "compact": { "p": "P1", "axis": "space", "why": "A wide body puts the loud control right of the display, the other place P1 says the hand expects it." },
     "face": { "p": "P4", "axis": "space", "why": "The parts sit on one grid whose gaps are module steps, the same grid the grille holes and the inset use." },
     "display": { "p": "P2", "axis": "space", "why": "The window always takes the first row across the full inner width, so the state is the first thing read." },

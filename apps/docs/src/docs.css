@@ -134,7 +134,7 @@ thead th { font-weight: var(--ds-type-weight-semibold); }
 .book-page { display: flex; flex-direction: column; gap: var(--ds-gap-2xl); }
 .page-head { gap: var(--ds-gap-lg); }
 .page-title { font-size: var(--ds-type-display); line-height: var(--ds-type-leading-tight); font-weight: var(--ds-type-weight-semibold); letter-spacing: var(--ds-type-tracking-display); }
-.page-head .lede p:not([data-component]) { margin: 0 0 var(--ds-gap-lg); }
+.page-head .lede p:not([data-component], [data-component] *) { margin: 0 0 var(--ds-gap-lg); }
 .page-head .lede p:last-child { margin: 0; }
 .book-section { scroll-margin-block-start: var(--ds-gap-section); }
 .prose { gap: var(--ds-gap-lg); max-inline-size: 100%; }
@@ -144,8 +144,8 @@ main td p, main [data-example-live] p { max-inline-size: none; }
 /* book prose rules skip anything inside a live component or example (Pane R-030: .prose ul and .prose a
    restyled Pagination and Sidebar inside the gallery). G-LK1 measures it. */
 /* reading text: 16px / 1.6 (type.reading), the size Carbon, Material and Apple use for long-form docs */
-.prose p:not(:is([data-component], [data-example-live]) *), .prose li:not(:is([data-component], [data-example-live]) *), .page-head .lede p:not([data-component]) { font-size: var(--ds-type-reading); line-height: var(--ds-type-leading-reading); }
-.page-head .lede p:not([data-component]) { font-size: var(--ds-type-emphasis); }
+.prose p:not(:is([data-component], [data-example-live]) *), .prose li:not(:is([data-component], [data-example-live]) *), .page-head .lede p:not([data-component], [data-component] *) { font-size: var(--ds-type-reading); line-height: var(--ds-type-leading-reading); }
+.page-head .lede p:not([data-component], [data-component] *) { font-size: var(--ds-type-emphasis); }
 .prose h3:not(:is([data-component], [data-example-live]) *) { margin-block-start: var(--ds-gap-lg); font-size: var(--ds-type-emphasis); }
 .prose ul:not(:is([data-component], [data-example-live]) *), .prose ol:not(:is([data-component], [data-example-live]) *) { display: flex; flex-direction: column; gap: var(--ds-gap-sm); margin: 0; }
 .prose a:not(:is([data-component], [data-example-live]) *), .callout a:not(:is([data-component], [data-example-live]) *) { color: var(--ds-text-primary); text-decoration: underline; text-underline-offset: 3px; }
@@ -248,7 +248,9 @@ main a:not([class]) { text-decoration: underline; text-underline-offset: 3px; te
 .codeblock-label { font-size: var(--ds-type-micro); letter-spacing: var(--ds-type-tracking-caps); text-transform: uppercase; color: var(--ds-text-secondary); }
 .codeblock-actions { display: flex; gap: var(--ds-gap-sm); }
 .codeblock .code { border-radius: 0; margin: 0; }
-.code.clipped { max-block-size: 22em; overflow: hidden; -webkit-mask-image: linear-gradient(black 75%, transparent); mask-image: linear-gradient(black 75%, transparent); }
+/* a long block shows its first lines (CodeBlock slices them) and says so on its Show all button; no fade,
+   because a fade sinks the last lines under 4.5:1 (evidence measured 3.5:1) */
+.code.clipped { border-block-end: var(--ds-width-hairline) dashed var(--ds-line-ring); }
 [data-theme='light'] .code, [data-theme='light'] .codeblock-bar { text-shadow: none; }
 [data-theme='light'] .code { background: var(--ds-color-ink-a-08); }
 
@@ -447,7 +449,7 @@ main a, .on-page a, .rail a { color: var(--ds-text-primary); }
    .demo-box); token-contract and G-N1 keep them honest until then. ---- */
 .fact { display: inline-flex; align-items: center; padding: var(--ds-gap-xs) var(--ds-gap-md); border-radius: var(--ds-corner-round); background: var(--ds-surface-sunken); color: var(--ds-text-secondary); font-size: var(--ds-type-caption); }
 .specimen { display: flex; flex-direction: column; gap: var(--ds-gap-md); padding: var(--ds-gap-2xl); border-radius: var(--ds-corner-inner); background: var(--ds-surface-raised); color: var(--ds-text-primary); box-shadow: inset 0 0 0 var(--ds-width-hairline) var(--ds-line-ring); }
-.demo-box { display: flex; flex-direction: column; justify-content: center; gap: var(--ds-gap-sm); min-block-size: 48px; padding: var(--ds-gap-lg); border-radius: var(--ds-corner-inner); background: var(--ds-surface-raised); color: var(--ds-text-primary); box-shadow: inset 0 0 0 var(--ds-width-hairline) var(--ds-line-ring); font-size: var(--ds-type-label); }
+.demo-box { display: flex; flex-direction: column; justify-content: center; gap: var(--ds-gap-sm); min-block-size: 48px; padding: var(--ds-gap-lg); border-radius: calc(var(--ds-corner-media) + var(--ds-gap-lg)); --display-outer: calc(var(--ds-corner-media) + var(--ds-gap-lg)); --display-inset: var(--ds-gap-lg); background: var(--ds-surface-raised); color: var(--ds-text-primary); box-shadow: inset 0 0 0 var(--ds-width-hairline) var(--ds-line-ring); font-size: var(--ds-type-label); }
 .demo-chip { display: inline-flex; align-items: center; padding: var(--ds-gap-xs) var(--ds-gap-md); border-radius: var(--ds-corner-round); background: var(--ds-surface-sunken); color: var(--ds-text-primary); font-size: var(--ds-type-caption); }
 .stage-page { background: var(--ds-surface-page); }
 .stage-raised { background: var(--ds-surface-raised); }
@@ -487,11 +489,33 @@ main a, .on-page a, .rail a { color: var(--ds-text-primary); }
 .tb-appearance { position: relative; }
 .tb-appearance > summary { cursor: pointer; list-style: none; display: inline-flex; gap: var(--ds-gap-sm); align-items: center; padding: var(--ds-gap-xs) var(--ds-gap-md); border-radius: var(--ds-corner-round); box-shadow: inset 0 0 0 var(--ds-width-hairline) var(--ds-line-ring); font-size: var(--ds-type-label); }
 .tb-appearance > summary::-webkit-details-marker { display: none; }
-.tb-appearance-body { position: absolute; inset-inline-end: 0; inset-block-start: calc(100% + var(--ds-gap-sm)); z-index: 30; display: flex; flex-direction: column; gap: var(--ds-gap-md); inline-size: min(20rem, 90vw); padding: var(--ds-gap-lg); border-radius: var(--ds-corner-inner); background: var(--ds-surface-raised); box-shadow: inset 0 0 0 var(--ds-width-hairline) var(--ds-line-ring); }
-.tb-appearance-body p { margin: 0; font-size: var(--ds-type-caption); }
+.tb-appearance > summary:focus-visible { outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring-color); outline-offset: var(--ds-focus-ring-width); }
+.tb-appearance[open] > summary { background: var(--ds-surface-raised); }
+/* open, the menu is a strip in the page grid under the top bar: the page moves down, nothing is covered */
+.page:has(> .tb-appearance-body) { grid-template-rows: var(--topbar) auto 1fr; }
+.tb-appearance-body { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--ds-gap-lg) var(--ds-gap-2xl); padding: var(--ds-gap-lg) var(--ds-gap-2xl); background: var(--ds-surface-raised); border-block-end: var(--ds-width-hairline) solid var(--ds-line-divider); }
+.tb-appearance-body p { margin: 0; font-size: var(--ds-type-caption); max-inline-size: var(--ds-type-measure); }
+.tb-appearance-choices { display: flex; flex-wrap: wrap; align-items: end; gap: var(--ds-gap-2xl); }
 .bare-subject { display: contents; }
 
 /* Onboard your agent (home): one pill, its note under it */
 .agent-onboard { display: grid; justify-items: center; gap: var(--ds-gap-sm); margin-block-end: var(--ds-gap-2xl); text-align: center; }
 .agent-pill { min-block-size: var(--ds-control-lg); padding-inline: var(--ds-gap-lg); border-radius: var(--ds-corner-round); border: var(--ds-width-hairline, 1px) solid currentColor; background: transparent; color: inherit; font: inherit; cursor: pointer; }
 .agent-note { margin: 0; font-size: 0.875em; }
+
+/* G-RH1: a step's intro sits 16px above its example (the step's own gap is 8px) */
+.ladder-step > p + .example { margin-block-start: var(--ds-gap-md); }
+
+/* G-LK1: the page's type never reaches into a component. A component root inside the book (a lede,
+   a picker label, a demo box) starts from the body type, as it does on its own. Zero specificity,
+   so every rule the component sets for itself still wins. */
+/* form controls keep the browser's own font, as they do outside the book */
+:where(main [data-component]:not([data-component] *, button, input, select, textarea), dialog [data-component]:not([data-component] *, button, input, select, textarea)) {
+  font-size: var(--ds-type-body); line-height: var(--ds-type-leading-body); font-weight: var(--ds-type-weight-regular); letter-spacing: normal; text-transform: none;
+}
+
+/* G-EL1: the level demo on the shape page, built from the tokens the components use */
+.level-demo { padding: var(--ds-gap-section); border-radius: var(--ds-corner-inner); background: var(--ds-surface-page); }
+.level-unit { display: flex; flex-direction: column; gap: var(--ds-gap-lg); max-inline-size: 420px; padding: var(--ds-gap-inset); border-radius: var(--ds-corner-panel); background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); }
+.level-part { display: grid; place-items: center; min-block-size: 96px; padding: var(--ds-gap-lg); border-radius: var(--ds-corner-inner); background: var(--ds-surface-knob); box-shadow: var(--ds-elevation-part); }
+.level-label { font-size: var(--ds-type-caption); color: var(--ds-text-secondary); }

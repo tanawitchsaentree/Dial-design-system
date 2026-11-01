@@ -4,7 +4,7 @@
 // load (G-ST1). Nothing is written to storage here.
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { APPEARANCE, RETIRED_PARAMS, type AppearanceAxis } from '../system/appearance';
-import { Choice } from '../system/controls';
+import { SegmentedControl } from 'dial-react';
 
 export type Appearance = Record<string, string>;
 
@@ -38,19 +38,32 @@ export function useAppearance(): [Appearance, (id: string, value: string) => voi
   return [look, (id, value) => setLook((l) => ({ ...l, [id]: value }))];
 }
 
-/** The top-bar control. The summary names every current choice, so the reader sees what the book shows. */
-export function AppearanceMenu({ look, onChange }: { look: Appearance; onChange: (id: string, value: string) => void }) {
+/** The top-bar control. The summary names every current choice, so the reader sees what the book shows.
+ *  The choices open as a strip under the top bar (AppearancePanel), in the page flow: the page moves down
+ *  to make room, so the open menu never sits over the text of the page or the On this page list. */
+export function AppearanceMenu({ look, open, onToggle }: { look: Appearance; open: boolean; onToggle: (open: boolean) => void }) {
   const summary = APPEARANCE.map((a) => a.options.find(([id]) => id === look[a.id])?.[1] ?? look[a.id]).join(', ');
   const controls = Object.fromEntries(APPEARANCE.map((a) => [`data-${a.id}-control`, '']));
   return (
-    <details className="tb-appearance" {...controls}>
-      <summary aria-label={`Appearance of the examples: ${summary}`}>Appearance <span className="muted">{summary}</span></summary>
-      <div className="tb-appearance-body">
-        <p className="muted">How the examples in this book look. In a product each of these is one prop, set in code.</p>
+    <details className="tb-appearance" open={open} onToggle={(e) => onToggle(e.currentTarget.open)} {...controls}>
+      <summary aria-label={`Appearance of the examples: ${summary}`} aria-controls="appearance-panel">Appearance <span className="muted">{summary}</span></summary>
+    </details>
+  );
+}
+
+/** The open Appearance menu: a full-width strip in the page grid, right under the top bar. */
+export function AppearancePanel({ look, onChange }: { look: Appearance; onChange: (id: string, value: string) => void }) {
+  const controls = Object.fromEntries(APPEARANCE.map((a) => [`data-${a.id}-control`, '']));
+  return (
+    <section id="appearance-panel" className="tb-appearance-body" aria-label="Appearance of the examples" {...controls}>
+      <p className="muted">How the examples in this book look. In a product each of these is one prop, set in code.</p>
+      <div className="tb-appearance-choices">
+        {/* a bank of keys, not a Select: a few choices read at a glance, and no closed listbox sits in the
+            page ahead of the chapter's own controls (G-F1 picks the first option on the page) */}
         {APPEARANCE.map((a) => (
-          <Choice key={a.id} label={a.label} value={look[a.id]} options={a.options} onChange={(v) => onChange(a.id, v)} />
+          <SegmentedControl key={a.id} label={a.label} value={look[a.id]} options={a.options.map(([value, label]) => ({ value, label }))} onValueChange={(v) => onChange(a.id, v)} />
         ))}
       </div>
-    </details>
+    </section>
   );
 }

@@ -1,4 +1,4 @@
-// @example Removable: each chip has its own round remove key with a 44px target
+// @example Removable chips, each with its own round remove key and a 44px target
 import { useState } from 'react';
 import { Chip, Stack } from 'dial-react';
 

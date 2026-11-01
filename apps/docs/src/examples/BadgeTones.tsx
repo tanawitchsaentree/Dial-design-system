@@ -1,4 +1,4 @@
-// @example tone: each one has its own glyph, so the tones differ without colour
+// @example Each tone has its own glyph, so the tones differ without colour
 import { Badge, Stack } from 'dial-react';
 
 export default function BadgeTones() {

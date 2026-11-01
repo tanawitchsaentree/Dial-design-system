@@ -70,7 +70,7 @@ export default async function select({ check, expect, page, go, main, tokens }) 
     expect(!s.open && s.selected === before.selected, `after a press outside: expanded ${s.open}, selected ${s.selected} (was ${before.selected})`);
     return 'closed';
   });
-  await check('Select', 'the well and every option are at least the touch target tall, and the chosen option is marked by a glyph, not orange', async () => {
+  await check('Select', 'the well and every option are at least the touch target tall, and the chosen option is marked by a glyph in ink', async () => {
     await go('/components/select/code');
     const min = px(tokens['layout.touch']?.value ?? '44px');
     const c = first();
