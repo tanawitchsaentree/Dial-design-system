@@ -54,7 +54,7 @@ main a.tab-link:hover { color: var(--ds-text-primary); }
 /* the height label sits in the end padding; twice the section gap keeps its rule clear of the subject's own text */
 .rl { position: absolute; font-size: var(--ds-type-caption, var(--ds-type-label)); font-family: var(--ds-type-mono); color: var(--ds-text-primary); }
 .rl-h { inset-inline-end: 0; inset-block-start: 50%; transform: translateY(-50%); padding-inline-start: var(--ds-gap-sm); border-inline-start: var(--ds-width-hairline) solid currentColor; }
-.rl-p { inset-inline-start: var(--ds-gap-2xl); inset-block-start: 0; }
+.rl-p { inset-inline-start: 0; inset-block-end: 100%; padding-block-end: var(--ds-gap-xs); } /* above the box, never over the subject's own text */
 /* loading placeholders for the patterns (surface.placeholder tokens), the size of the text they stand for */
 .placeholder-line { display: block; block-size: var(--ds-type-body); border-radius: var(--ds-radius-pill); background: linear-gradient(90deg, var(--ds-surface-placeholder-lo), var(--ds-surface-placeholder-hi)); }
 .indent { padding-inline-start: var(--ds-gap-2xl); }

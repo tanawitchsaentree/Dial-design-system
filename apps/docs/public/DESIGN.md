@@ -8,7 +8,7 @@ colors:
   on-light: "#1F1E1C"
   on-accent: "#1F1E1C"
 surfaces:
-  page: {"light":"#F8F7F5","dark":"#1C1C1B"}
+  page: {"light":"#FCFBF9","dark":"#1C1C1B"}
   solid: {"light":"#E8E6E1","dark":"#2F2F2D"}
   raised: {"light":"#E8E6E1","dark":"#2F2F2D"}
   sunken: {"light":"#DEDBD5","dark":"#232322"}
@@ -115,7 +115,7 @@ Values are given for light and dark. Component tokens point at these, and primit
 
 | token | light | dark | why |
 |---|---|---|---|
-| `--ds-surface-page` | #F8F7F5 | #1C1C1B | Plastic in two editions, warm white for light and charcoal for dark, lit by the same light. |
+| `--ds-surface-page` | #FCFBF9 | #1C1C1B | Plastic in two editions, warm white for light and charcoal for dark, lit by the same light. |
 | `--ds-surface-solid` | #E8E6E1 | #2F2F2D | 〃 |
 | `--ds-surface-raised` | #E8E6E1 | #2F2F2D | 〃 |
 | `--ds-surface-sunken` | #DEDBD5 | #232322 | 〃 |
@@ -384,7 +384,7 @@ Values are given for light and dark. Component tokens point at these, and primit
 
 | token | light | dark | why |
 |---|---|---|---|
-| `--ds-field-base` | #F8F7F5 | #1C1C1B | The backdrop is plain plastic page with faint ink guides, because dial sits on plain surfaces only. |
+| `--ds-field-base` | #FCFBF9 | #1C1C1B | The backdrop is plain plastic page with faint ink guides, because dial sits on plain surfaces only. |
 | `--ds-field-glow` | #1F1E1C0F | #1F1E1C0F | 〃 |
 | `--ds-field-glow-soft` | #1F1E1C0F | #1F1E1C0F | 〃 |
 | `--ds-field-line-major` | #1F1E1C24 | #1F1E1C24 | 〃 |

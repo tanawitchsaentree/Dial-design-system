@@ -669,3 +669,9 @@ thead th { font-weight: var(--ds-type-weight-medium); color: var(--ds-text-secon
 @media (max-width: 640px) { .topbar { padding-inline: var(--ds-gap-lg); } }
 .pager { flex-wrap: wrap; }
 .pager-link { min-inline-size: min(100%, calc(var(--m) * 27)); }
+
+/* G-NC1: demo cells that touch the corner of an example frame nest it (inner = panel − inset) */
+.example-live [data-component="Grid"] .demo-box, .example-live [data-component="Grid"] .grid-demo-cell { border-radius: calc(var(--ds-corner-panel) - var(--ds-gap-2xl)); }
+
+/* the verdict chips print in the swatch's own ink, so they read on any fill they describe */
+.pg-swatch .fact { color: inherit; background: transparent; box-shadow: none; }
