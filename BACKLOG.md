@@ -39,3 +39,6 @@
   head, so `<Text size="body">` measured 18px (want 15px) in conformance. Patched locally with `:not([data-component])`.
 - **K-10 G-SL1 measures Rotary as a slider.** It checks every `[role="slider"]` against the 200px minimum length;
   a rotary is a slider by role but has no length. Exempt `[data-component="Rotary"]` (or `data-mechanism="rotary"`).
+- **K-11 smoke-import imports the ESM build in plain Node, which cannot load the per-component CSS imports** the
+  library build adds for tree-shaking: `ERR_UNKNOWN_FILE_EXTENSION ".css" … dist/css/components/Badge/Badge.css`
+  (esm=0 cjs=27). Patched locally in `tooling/smoke-import.mjs`: probes run with a `--import` hook that stubs `.css`.
