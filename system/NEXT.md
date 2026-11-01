@@ -1,11 +1,10 @@
 # NEXT — the handoff
 
 ## How to open it
-- Book: `pnpm run docs:build` then `cd apps/docs && npx vite preview --port 4317 --strictPort` →
-  http://localhost:4317/ (Direction page: /direction). Port 4173 (`pnpm run docs:preview`) is held by
-  another project's server (Pane); see BACKLOG K-4. Stop the preview when done.
-- Anchor lab: http://localhost:4317/lab/anchor/index.html, or open `apps/lab/anchor/index.html` as a file.
-- Lab contrast + screenshots: `node apps/lab/anchor/check.mjs` → `apps/lab/anchor/shots/`.
+- Book: `pnpm run docs:build && pnpm run docs:preview` → http://localhost:4173/direction (if 4173 is
+  busy, the preview moves to the next port and prints it). Stop the preview when done.
+- Anchor lab: http://localhost:4173/lab/anchor/index.html, or open `apps/lab/anchor/index.html` as a file.
+- Lab contrast + screenshots: `node tooling/kiln/anchor-contrast.mjs` → `apps/lab/anchor/shots/`.
 
 ## Where it stopped
 Phase 0–4 done; anchor round rendered (kiln state phase=5), waiting for the user's pick of A, B, C or D
