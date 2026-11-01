@@ -519,3 +519,153 @@ main a, .on-page a, .rail a { color: var(--ds-text-primary); }
 .level-unit { display: flex; flex-direction: column; gap: var(--ds-gap-lg); max-inline-size: 420px; padding: var(--ds-gap-inset); border-radius: var(--ds-corner-panel); background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); }
 .level-part { display: grid; place-items: center; min-block-size: 96px; padding: var(--ds-gap-lg); border-radius: var(--ds-corner-inner); background: var(--ds-surface-knob); box-shadow: var(--ds-elevation-part); }
 .level-label { font-size: var(--ds-type-caption); color: var(--ds-text-secondary); }
+
+/* ======================================================================================================
+   Book shell A · product leaflet (apps/lab/book/derivation.json, REVIEW "Book shell", R-001).
+   The page is a Braun/Ulm leaflet printed in grey ink on warm-white ABS: one module (8px, space.2), the
+   unit inset (24px, gap.inset) as the gutter, hierarchy by size and position (P5), no pills or boxes
+   around words, no orange in the chrome (P1: the one orange part is the demo's own control), and only
+   the live demo stands on a plastic unit with its shadow (P6). Code sits in a recessed window, the
+   inverse of a raised part (Light model). Dark is the charcoal edition: the same layout, units a step
+   lighter than the page with their lit top-left edge (elevation.unit in dark).
+   Book scale: the two headline sizes are multiples of type.display, the largest step of the system's
+   own scale, because a leaflet's headline is the product's name set large, not a new voice.
+   ====================================================================================================== */
+.page {
+  --m: var(--ds-space-2);
+  --gutter: var(--ds-gap-inset);
+  --rail: calc(var(--m) * 32);
+  --topbar: calc(var(--m) * 8);
+  --hang: calc(var(--m) * 21);
+  --book-headline: calc(var(--ds-type-display) * 1.5);
+  --book-name: calc(var(--ds-type-display) * 2.4);
+  grid-template-columns: var(--rail) minmax(0, 1fr) calc(var(--m) * 26);
+  background: var(--ds-surface-page);
+}
+
+/* top bar: printing on the sheet, not a bar. The wordmark sits on the rail's inset line. */
+.topbar { padding-inline: calc(var(--gutter) * 2); gap: calc(var(--gutter) * 2); border-block-end: 0; background: var(--ds-surface-page); }
+.brand-link { align-items: baseline; gap: var(--ds-gap-md); }
+.brand { font-size: var(--ds-type-headline); font-weight: var(--ds-type-weight-medium); letter-spacing: -0.03em; line-height: 1; }
+.brand-sub { font-size: var(--ds-type-caption); color: var(--ds-text-secondary); }
+.topbar-tools { gap: var(--gutter); }
+/* the theme words are printed names; the chosen one carries the ink index mark, as on dial's Tabs */
+.seg { padding: 0; gap: var(--ds-gap-md); background: none; border-radius: 0; }
+.seg-btn { min-block-size: var(--ds-layout-touch); padding: 0 var(--ds-gap-sm); border-radius: 0; font-size: var(--ds-type-label); color: var(--ds-text-secondary); text-underline-offset: var(--ds-gap-md); text-decoration-thickness: var(--ds-focus-ring-width); }
+.seg-btn[aria-pressed='true'] { background: none; box-shadow: none; color: var(--ds-text-primary); font-weight: var(--ds-type-weight-medium); text-decoration-line: underline; }
+.tb-appearance > summary { min-block-size: var(--ds-layout-touch); padding: 0 var(--ds-gap-sm); border-radius: 0; box-shadow: none; color: var(--ds-text-secondary); }
+.tb-appearance > summary .muted { color: var(--ds-text-primary); }
+.tb-appearance[open] > summary { background: none; color: var(--ds-text-primary); text-decoration-line: underline; text-underline-offset: var(--ds-gap-md); text-decoration-thickness: var(--ds-focus-ring-width); }
+.tb-appearance-body { padding: var(--gutter) calc(var(--gutter) * 2); background: var(--ds-surface-raised); border-block-end: 0; }
+
+/* the rail is a printed side index: part names small, page names numbered, an ink mark for where you are */
+.rail { padding: var(--gutter) var(--gutter) calc(var(--gutter) * 3) calc(var(--gutter) * 2); border-inline-end: 0; background: var(--ds-surface-page); }
+.rail nav { gap: calc(var(--gutter) * 1.5); }
+.rail .field input { border-radius: var(--ds-corner-round); background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+.nav-part-title { font-size: var(--ds-type-caption); font-weight: var(--ds-type-weight-medium); letter-spacing: 0; text-transform: lowercase; color: var(--ds-text-secondary); margin-block-end: var(--ds-gap-xs); }
+.toc { gap: 0; counter-reset: idx; }
+.toc li { counter-increment: idx; }
+.rail .toc a, .on-page .toc a { position: relative; display: grid; grid-template-columns: var(--gutter) minmax(0, 1fr); align-items: center; min-block-size: calc(var(--m) * 4); padding: 0; margin: 0; border-radius: 0; background: none; box-shadow: none; font-size: var(--ds-type-label); color: var(--ds-text-secondary); text-transform: lowercase; transition: color var(--ds-motion-hover) var(--ds-motion-easing); }
+.rail .toc a::before { content: counter(idx, decimal-leading-zero); font-size: var(--ds-type-micro); color: var(--ds-text-secondary); }
+.on-page .toc a { display: block; min-block-size: 0; padding-block: var(--ds-gap-xs); text-transform: none; }
+.rail .toc a:hover, .on-page .toc a:hover { background: none; color: var(--ds-text-primary); }
+.rail .toc a[aria-current='page'] { background: none; box-shadow: none; color: var(--ds-text-primary); font-weight: var(--ds-type-weight-medium); }
+.rail .toc a[aria-current='page']::after { content: ''; position: absolute; inset-inline-start: calc(var(--ds-gap-2xl) * -1); inline-size: var(--m); block-size: var(--ds-focus-ring-width); background: var(--ds-text-primary); }
+.nav-planned summary { color: var(--ds-text-secondary); }
+.nav-planned li { padding-inline-start: var(--gutter); }
+.on-page { padding: calc(var(--gutter) * 2) var(--gutter); }
+
+/* the content column: a leaflet column of 38 modules */
+.content { padding: calc(var(--gutter) * 2) calc(var(--gutter) * 2) var(--ds-gap-page); gap: calc(var(--gutter) * 3); }
+.content > article { max-inline-size: calc(var(--m) * 114); }
+.book-page { gap: calc(var(--gutter) * 2); counter-reset: sec; }
+.page-head { gap: var(--gutter); }
+.page-head .eyebrow { font-size: var(--ds-type-caption); font-weight: var(--ds-type-weight-regular); letter-spacing: 0; text-transform: lowercase; }
+.page-title { font-size: var(--book-headline); line-height: 1.02; font-weight: var(--ds-type-weight-medium); letter-spacing: -0.035em; max-inline-size: 18ch; }
+/* a component page names its product: lowercase, the largest size on the sheet (P5 lowercase model names) */
+.book-page:has([data-component-header]) .page-title { font-size: var(--book-name); line-height: 0.95; letter-spacing: -0.045em; text-transform: lowercase; }
+.page-head .lede p:not([data-component], [data-component] *) { font-size: var(--ds-type-emphasis); line-height: 1.5; letter-spacing: -0.005em; max-inline-size: 52ch; }
+.page-head .lede .live-demo > p { font-size: var(--ds-type-label); line-height: 1.5; color: var(--ds-text-secondary); max-inline-size: 60ch; }
+/* a component page opens straight on its tabs: the tab bar's hairline is the only rule above the first section */
+.book-page:has([data-component-header]) > .page-head + .book-section { border-block-start: 0; padding-block-start: 0; }
+.purpose { font-size: var(--ds-type-title); line-height: 1.4; letter-spacing: -0.01em; max-inline-size: 36ch; margin-block-end: calc(var(--gutter) * 2); }
+
+/* facts printed on the case: a value, a small label beside it on narrow screens and under it on wide */
+.stats { gap: var(--ds-gap-md) calc(var(--gutter) * 2); }
+.facts li { display: grid; gap: var(--ds-gap-xs); }
+.fact-value { font-size: var(--ds-type-body); color: var(--ds-text-primary); }
+.fact-value a { text-decoration: none; }
+.fact-label { font-size: var(--ds-type-caption); color: var(--ds-text-secondary); }
+.fact { padding: 0; border-radius: 0; background: none; font-size: var(--ds-type-label); color: var(--ds-text-secondary); }
+
+/* sections: a hairline, then a hanging label column (number over name), the text on the right, as in a
+   leaflet's spec column. A wide section keeps the label above its full-width demo. */
+.book-section { counter-increment: sec; padding-block-start: calc(var(--gutter) * 2); border-block-start-color: var(--ds-line-divider); }
+.book-section > .prose > h2 { font-size: var(--ds-type-emphasis); font-weight: var(--ds-type-weight-medium); letter-spacing: -0.01em; line-height: 1.25; }
+.book-section > .prose > h2::before { content: counter(sec, decimal-leading-zero); display: block; margin-block-end: var(--ds-gap-xs); font-size: var(--ds-type-caption); font-weight: var(--ds-type-weight-regular); letter-spacing: 0; color: var(--ds-text-secondary); }
+@media (min-width: 861px) {
+  .book-section:not(.wide) > .prose { position: relative; padding-inline-start: calc(var(--hang) + var(--gutter) * 2); }
+  .book-section:not(.wide) > .prose > h2 { position: absolute; inset-block-start: 0; inset-inline-start: 0; inline-size: var(--hang); }
+  .book-section .heading-anchor { display: none; }
+}
+.prose h3:not(:is([data-component], [data-example-live]) *) { font-size: var(--ds-type-body); font-weight: var(--ds-type-weight-medium); margin-block-start: var(--gutter); }
+
+/* demo stages: the object on a quiet ground, no ring around it */
+.example-live { border-radius: var(--ds-corner-panel); }
+
+/* code: a recessed window in the sheet, its label printed on the window's edge */
+.codeblock { border-radius: var(--ds-corner-inner); background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+.codeblock-bar { background: none; padding-inline-start: var(--gutter); }
+.codeblock-label { letter-spacing: 0; text-transform: lowercase; font-size: var(--ds-type-caption); }
+.code, [data-theme='light'] .code { background: none; padding-inline: var(--gutter); }
+.copy-btn { background: none; color: var(--ds-text-secondary); text-decoration-line: underline; text-underline-offset: 3px; }
+.copy-btn:hover { background: none; color: var(--ds-text-primary); }
+
+/* tables, callouts, pager: printed, flat on the sheet */
+thead th { font-weight: var(--ds-type-weight-medium); color: var(--ds-text-secondary); font-size: var(--ds-type-caption); }
+.callout { border-radius: 0; background: none; box-shadow: inset var(--ds-focus-ring-width) 0 0 var(--ds-text-primary); padding-inline-start: var(--gutter); }
+.callout-kind { padding: 0; border-radius: 0; box-shadow: none; letter-spacing: 0; text-transform: lowercase; font-size: var(--ds-type-caption); color: var(--ds-text-secondary); }
+.callout-caution .callout-kind { background: none; color: var(--ds-text-primary); font-weight: var(--ds-type-weight-medium); }
+.pager { max-inline-size: calc(var(--m) * 114); padding-block-start: var(--gutter); border-block-start: var(--ds-width-hairline) solid var(--ds-line-divider); }
+.pager-link { padding: var(--ds-gap-md) 0; border-radius: 0; box-shadow: none; }
+.pager-link:hover { background: none; }
+.pager-link .eyebrow { text-transform: lowercase; letter-spacing: 0; font-weight: var(--ds-type-weight-regular); }
+.pager-title { font-size: var(--ds-type-title); font-weight: var(--ds-type-weight-medium); letter-spacing: -0.02em; }
+.pager-link:hover .pager-title { text-decoration: underline; text-underline-offset: var(--ds-gap-sm); text-decoration-thickness: var(--ds-focus-ring-width); }
+
+@media (max-width: 1100px) {
+  .topbar { padding-inline: var(--gutter); }
+  .content { padding: var(--gutter) var(--gutter) var(--ds-gap-page); }
+  .book-page:has([data-component-header]) .page-title { font-size: var(--book-headline); }
+}
+
+/* ---- home hero (book/home.tsx): anchor A named part by part, and a rack of units on one module grid ---- */
+.home-hero { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--gutter); }
+.hero-stage, .rack-stage { padding: calc(var(--gutter) * 2); }
+.hero-anchor { position: relative; inline-size: 100%; display: grid; justify-items: center; padding-inline: calc(var(--m) * 14); }
+.hero-card-host { inline-size: min(100%, calc(var(--m) * 50)); }
+.hero-leads { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+.hero-leads path { fill: none; stroke: var(--ds-text-primary); stroke-width: var(--ds-width-hairline); }
+.hero-parts { list-style: none; padding: 0; }
+.hero-part { position: absolute; inline-size: calc(var(--m) * 11); transform: translateY(-50%); font-size: var(--ds-type-caption); line-height: 1; color: var(--ds-text-primary); text-shadow: none; }
+.hero-part.start { inset-inline-start: 0; text-align: end; }
+.hero-part.end { inset-inline-end: 0; text-align: start; }
+.hero-rack { inline-size: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, calc(var(--m) * 36)), 1fr)); gap: var(--gutter); align-items: start; }
+.rack-row { display: flex; flex-wrap: wrap; gap: var(--ds-gap-lg); justify-content: flex-end; }
+@media (max-width: 860px) {
+  .hero-anchor { padding-inline: 0; gap: var(--gutter); }
+  .hero-leads { display: none; }
+  .hero-parts { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ds-gap-md) var(--gutter); }
+  .hero-part { position: static; inline-size: auto; transform: none; }
+  .hero-stage, .rack-stage { padding: var(--gutter) var(--ds-gap-lg); }
+}
+
+/* narrow top bar: the leaflet's wide spacing gives way so the bar never runs past the screen */
+@media (max-width: 1100px) { .topbar { gap: var(--ds-gap-lg); } .topbar-tools { gap: var(--ds-gap-md); } }
+@media (max-width: 640px) { .tb-appearance > summary .muted { display: none; } .seg { gap: 0; } }
+/* the leaflet columns above are the wide sheet; narrower screens drop the On this page column, then the rail */
+@media (max-width: 1280px) { .page { grid-template-columns: var(--rail) minmax(0, 1fr); } }
+@media (max-width: 1100px) { .page { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) { .topbar { padding-inline: var(--ds-gap-lg); } }
+.pager { flex-wrap: wrap; }
+.pager-link { min-inline-size: min(100%, calc(var(--m) * 27)); }

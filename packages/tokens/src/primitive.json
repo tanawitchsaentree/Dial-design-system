@@ -12,8 +12,8 @@
     },
     "abs": {
       "50": {
-        "$value": "#F8F7F5",
-        "$description": "page behind the units, a step lighter than the body (1.17:1, G-EL1)"
+        "$value": "#FCFBF9",
+        "$description": "page behind the units, a step lighter than the body (1.21:1 flat, 1.15 measured past its shadow, G-EL1)"
       },
       "0": {
         "$value": "#FAF9F7",

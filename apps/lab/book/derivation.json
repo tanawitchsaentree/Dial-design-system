@@ -1,0 +1,29 @@
+{
+  "concept": "The book is a dial product leaflet: a warm-white sheet printed in grey ink on one 8px module, with one plastic unit per page that holds the live demo, so the page itself reads like Braun's printed matter and the only body with depth is the appliance it documents.",
+  "kind": ["docs shell", "book", "leaflet"],
+  "default_to_avoid": [
+    { "pattern": "generic docs shell (Docusaurus/Mintlify/Carbon site: pills, neutral grey chrome, dark by OS)", "why_not": "R-001: the user saw a murky dark specimen site with pills and plain lists. P5 asks for hierarchy by size and position, printed labels on an inset line, and P6 for a base that stays put, so the book opens in warm-white light and draws no pills or boxes around words." },
+    { "pattern": "a bento/card dashboard where every section is its own floating panel", "why_not": "P1 allows one loud thing per unit and P6 caps radius so large panels do not swell into pillows; a rack of raised panels gives every paragraph the height of an appliance." }
+  ],
+  "references": [
+    { "source": "Braun product leaflets and price lists, Wolfgang Schmittel and Otl Aicher's Ulm grid (1960s): wide margins, a narrow spec column, lowercase product names, Akzidenz set tight" },
+    { "source": "Braun instruction manuals (SK 4, T 1000): numbered sections, the drawing as the lead, small grey captions" },
+    { "source": "Vitsœ's Rams pages: one object large on a quiet ground, text set small and exact under it" },
+    { "source": "apps/lab/anchor/index.html card A: warm-white ABS, grey printing, LCD grey-green, one orange knob, dial bottom-left and the model name lowercase bottom-right" }
+  ],
+  "derivation": [
+    { "p": "P5", "axis": "type", "consequence": "one grotesk, regular and medium only; hierarchy by size and position; lowercase model names; tabular figures everywhere a number changes", "form": "The component title is set lowercase at 88px medium with tight tracking (-0.045em), the purpose at 22px, labels at 12–13px secondary ink. No pills, no boxed facts: status, size and dates are printed values with a small label under each, and every number is tabular." },
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "One module (8px) and the unit inset (24px) set every measure: page margins 48, column gap 48, section rhythm 48, a hanging 168px label column for numbered section names, like the spec column of a leaflet." },
+    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only; links, borders, icons, selections and charts never use it", "form": "The chrome uses no orange at all. The chosen nav item, tab and option are marked with an ink index bar, so the page's one orange part is the demo's own primary control." },
+    { "p": "P6", "axis": "shape", "consequence": "radius ≈ 15–18% of the body's short side, capped so large panels do not swell into pillows", "form": "Only the live demo stands on a plastic unit (unit.bg, elevation.unit, panel radius). The page, nav and sections are flat printing on the sheet; code sits in a recessed window (elevation.well), the inverse of a raised part (Light model)." },
+    { "p": "P6", "axis": "interaction", "consequence": "no hover lift; hover only darkens a key's ink a step", "form": "Nav rows and tabs change ink on hover and never gain a fill or a lift. The book opens in the base theme (light); dark is the charcoal edition the reader chooses, with units a step lighter than the page and a lit top-left edge." }
+  ],
+  "variants": [
+    { "id": "A", "name": "product leaflet", "file": "apps/lab/book/a-leaflet.html", "summary": "Printed side index with numbers and an ink mark, a huge lowercase headline, printed facts, the demo standing on one plastic unit with its picker printed beside it, a recessed code window, numbered sections with a hanging label column." },
+    { "id": "B", "name": "the case", "file": "apps/lab/book/b-case.html", "summary": "The page is one ABS body with a groove-separated printed nav on its edge; every section is a raised unit in a rack; tabs as a latching bank." },
+    { "id": "C", "name": "manual page", "file": "apps/lab/book/c-manual.html", "summary": "Running head with a heavy rule, a contents line, the section number set large beside the title, an anatomy drawing with numbered leaders as the lead, three-column numbered sections." }
+  ],
+  "screenshots": "apps/lab/book/shots/{a-leaflet,b-case,c-manual}-{display,home}-{light,dark}.png",
+  "picked": "A",
+  "reason": "A follows P5 most closely (hierarchy by size and position, printed labels on an inset line, lowercase names) and keeps P1 and P6: one plastic body per page, the demo's, so the one orange part is the component's own control. B gives every section the height of an appliance and turns the page into a pillow of panels (P6 cap, P1 one unit). C reads well as print, but its anatomy lead exists only on component pages, and its running heads and rules add weight the screen does not need. A takes C's hanging numbered section column."
+}

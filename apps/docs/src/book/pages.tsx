@@ -7,6 +7,7 @@ import decisionsMd from '../../../../system/DECISIONS.md?raw';
 import exceptionsMd from '../../../../system/EXCEPTIONS.md?raw';
 import * as Icons from '../icons';
 import { AgentOnboard } from './AgentOnboard';
+import { HomeHero } from './home';
 import { ThemePlayground, ContrastPlayground, TypePlayground, SpacingPlayground, ShapePlayground, MotionPlayground, IconBrowser, TouchTargetPlayground } from './playgrounds';
 import { installLine, inline, PRINCIPLES, CONCEPT_INTRO, Callout, Code, CopyButton, ConformanceList, EvidenceTable, Link, Markdown, Page, Section, TOKENS, TokenTable, VerifiedTags, useVerify } from './kit';
 import { COMPONENTS } from './components-data';
@@ -31,6 +32,7 @@ const OPEN_EXCEPTIONS = (exceptionsMd.match(/^### E-\d{3}:.*— OPEN\s*$/gm) ?? 
 function Overview() {
   return (
     <Page eyebrow={`${NAME} · design system`} title={CONTENT.overview.title} lede={<p>{CONTENT.overview.lede}</p>}>
+      <HomeHero />
       <AgentOnboard name={NAME} />
       <Section id="box" title="What is in the box">
         <ul>

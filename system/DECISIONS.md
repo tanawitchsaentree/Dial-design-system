@@ -14,7 +14,7 @@
 
 ### D-002: Tokens ของ dial (Phase 2, ค่าประมาณ)
 - **วันที่:** 2026-11-01 · **Phase:** 2 Foundations
-- **เลือก:** user สั่ง "ประมาณ": ใช้ค่าประมาณจากรูปในแชทไปก่อน (ref-01.png ยังไม่มี) · baseTheme light (warm white ABS #E8E6E1 บน page #F3F2EF), dark = charcoal #2F2F2D · ink #2E2D2A/#4A4844 · orange #EC6A2C เป็น `action.accent` ตัวเดียว, hover #F27D42 (ink 6.2:1), rim #C9531C (3.55:1 กับตัวเครื่อง) · LCD #C7CBBD/ink #2F322D · OLED #141414/#F2F2F0 · type Helvetica-like grotesk 2 weights (400/500), scale ratio 1.2 จาก 15px · radius ratio 0.16, inset 0.077, knob 0.36 · matte ABS: height 5px, unit height 3px (anchor A), rough 3px, gloss 0.2 · spring m 1.4 k 520 c 46 (ζ≈0.85, settle≈245ms), detents 11/270° · press 65ms, enter 160ms, exit 240ms, stagger 0, hover lift 0 · allowSeed false
+- **เลือก:** user สั่ง "ประมาณ": ใช้ค่าประมาณจากรูปในแชทไปก่อน (ref-01.png ยังไม่มี) · baseTheme light (warm white ABS #E8E6E1 บน page F3F2EF, lightened in D-004), dark = charcoal #2F2F2D · ink #2E2D2A/#4A4844 · orange #EC6A2C เป็น `action.accent` ตัวเดียว, hover #F27D42 (ink 6.2:1), rim #C9531C (3.55:1 กับตัวเครื่อง) · LCD #C7CBBD/ink #2F322D · OLED #141414/#F2F2F0 · type Helvetica-like grotesk 2 weights (400/500), scale ratio 1.2 จาก 15px · radius ratio 0.16, inset 0.077, knob 0.36 · matte ABS: height 5px, unit height 3px (anchor A), rough 3px, gloss 0.2 · spring m 1.4 k 520 c 46 (ζ≈0.85, settle≈245ms), detents 11/270° · press 65ms, enter 160ms, exit 240ms, stagger 0, hover lift 0 · allowSeed false
 - **เพราะ:** P1–P6 ใน CONCEPT.md; ทุก group มี kiln.why; contrast ทุกคู่ข้อความ ≥4.5:1 ทั้งสองธีม (24 คู่, /tmp script ใน session นี้; ดู NEXT)
 - **ตัวเลือกที่ตัดทิ้ง:** ส้มเข้มขึ้นให้ 3:1 กับตัวเครื่อง (ทำให้ ink บนส้มต่ำกว่า 4.5:1) → ใช้ rim แทน · weight semibold (P5 อนุญาต 2 weight) · scale.press < 1 (key ยุบลงตามความสูง ไม่หด)
 - **กระทบ:** เมื่อมี ref-01.png ต้องวัดใหม่: primitive color.abs/charcoal/orange/lcd, ratio.*, material.*, shadow.* → rebuild tokens, re-render anchor + `anchor-likeness --record`, re-run contrast ทุกคู่ และ G-AN1
@@ -28,7 +28,7 @@
 
 ### D-004: Page a step lighter (amends D-002)
 - **วันที่:** 2026-11-01 · **Phase:** M1 gates
-- **เลือก:** `color.abs.50` (surface.page, light) #F3F2EF → #F8F7F5; the body (#E8E6E1) stays, so anchor A's body is unchanged
+- **เลือก:** `color.abs.50` (surface.page, light) F3F2EF → F8F7F5 → #FCFBF9; the body (#E8E6E1) stays, so anchor A's body is unchanged. F8F7F5 was 1.17:1 flat but G-EL1 measured 1.12:1 past the unit's own shadow, so the page went one more step (1.21:1 flat, passes as measured).
 - **เพราะ:** G-EL1: a unit must stand 1.15:1 from what is under it; it was 1.07:1. P6 (a unit never floats higher than its material allows): the lightest fix is the ground, not a deeper shadow (CLAUDE.md rule 14). The reference also shows the page lighter than the bodies.
 - **ตัวเลือกที่ตัดทิ้ง:** darker body (moves the anchor), deeper shadow (against P6)
-- **กระทบ:** G-AN1 rim on the page; re-record `system/anchor/anchor-likeness.json` only if G-AN1 goes red. Also field.column/on-column changed by the shell fix (G-NT1): field.column abs.700/charcoal.200, on-column abs.0/abs.900
+- **กระทบ:** G-AN1 rim on the page; re-record `system/anchor/anchor-likeness.json` only if G-AN1 goes red. At #FCFBF9 G-AN1 passes: body L 0.9251 C 0.0071 unchanged, rim 1.165:1 against the recorded 1.056:1, inside the allowed delta. Also field.column/on-column changed by the shell fix (G-NT1): field.column abs.700/charcoal.200, on-column abs.0/abs.900

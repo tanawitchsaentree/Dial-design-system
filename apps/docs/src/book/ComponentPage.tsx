@@ -3,8 +3,8 @@
 // updated, purpose and a live demo whose theme and variant selectors come from the enum props.
 // Usage is written per component in ../depth; Style is measured (spec-capture); Code and
 // Accessibility are generated from meta.json, the CSS module and the conformance run.
-import { useState } from 'react';
-import { Fact as Tag } from './kit';
+import { useState, type ReactNode } from 'react';
+import { Badge } from 'dial-react';
 import { StageWrap, MATRIX, backdropById } from '../system/backdrops';
 import { Choice } from '../system/controls';
 import { PACKAGES } from '../system/content';
@@ -71,17 +71,20 @@ const twoCol = (rows: Array<[string, string]>, a: string, b: string) => (
   </div>
 );
 
+/** The facts printed on the case (book shell A): each a value with a small label under it, no pills.
+ *  Status is dial's own Badge, a printed lamp and word; a stable component lights the positive lamp. */
 function Facts({ c, m }: { c: ComponentChapter; m: Meta }) {
   const { conformance } = useVerify();
   const checks = conformance?.checks.filter((x) => x.component === c.name) ?? [];
-  const a11y = !conformance ? 'a11y: unverified (no run)' : checks.length === 0 ? 'a11y: unverified. No test' : checks.every((x) => x.ok) ? `a11y: verified · ${checks.length} checks` : `a11y: ${checks.filter((x) => !x.ok).length} failing`;
+  const a11y = !conformance ? 'unverified (no run)' : checks.length === 0 ? 'unverified, no test' : checks.every((x) => x.ok) ? `${checks.length} checks pass` : `${checks.filter((x) => !x.ok).length} failing`;
+  const fact = (k: string, value: ReactNode, label: string) => <li data-fact={k}><span className="fact-value">{value}</span> <span className="fact-label">{label}</span></li>;
   return (
-    <ul className="stats flush" aria-label="Component facts" data-facts="">
-      <li data-fact="status"><Link to="/reference/status"><Tag>{`status: ${STATUS_LABEL[c.status]}`}</Tag></Link></li>
-      <li data-fact="updated"><Tag>{`updated ${HISTORY.find((h) => h.component === c.name)?.date ?? 'never'}`}</Tag></li>
-      <li data-fact="size"><Tag>{`${(m.bundle.gzip / 1024).toFixed(1)} kB min+gz`}</Tag></li>
-      <li data-fact="a11y"><Tag>{a11y}</Tag></li>
-      <li data-fact="since"><Tag>{`since v${HISTORY.filter((h) => h.component === c.name).at(-1)?.version ?? meta.version}`}</Tag></li>
+    <ul className="stats facts flush" aria-label="Component facts" data-facts="">
+      {fact('status', <Link to="/reference/status"><Badge tone={c.status === 'stable' ? 'positive' : 'neutral'}>{STATUS_LABEL[c.status]}</Badge></Link>, 'status')}
+      {fact('updated', HISTORY.find((h) => h.component === c.name)?.date ?? 'never', 'updated')}
+      {fact('size', `${(m.bundle.gzip / 1024).toFixed(1)} kB`, 'min+gz')}
+      {fact('a11y', a11y, 'a11y')}
+      {fact('since', `v${HISTORY.filter((h) => h.component === c.name).at(-1)?.version ?? meta.version}`, 'since')}
     </ul>
   );
 }

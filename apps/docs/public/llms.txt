@@ -31,7 +31,7 @@
 
 ## Tokens
 
-- `--ds-surface-page` #F8F7F5
+- `--ds-surface-page` #FCFBF9
 - `--ds-surface-solid` #E8E6E1
 - `--ds-surface-raised` #E8E6E1
 - `--ds-surface-sunken` #DEDBD5
@@ -195,7 +195,7 @@
 - `--ds-viewport-lg` 1024px
 - `--ds-viewport-xl` 1280px
 - `--ds-viewport-2xl` 1536px
-- `--ds-field-base` #F8F7F5
+- `--ds-field-base` #FCFBF9
 - `--ds-field-glow` #1F1E1C0F
 - `--ds-field-glow-soft` #1F1E1C0F
 - `--ds-field-line-major` #1F1E1C24

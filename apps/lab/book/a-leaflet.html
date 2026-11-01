@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · book A · product leaflet</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<link rel="stylesheet" href="parts.css">
+<style>
+  /* A · product leaflet. One module: 8px. The unit inset (24px = 3 modules) is the page's gutter; columns
+     and margins are multiples of it. Hierarchy by size and position only: no boxes, no pills. */
+  :root { --m: 8px; --inset: 24px; }
+  .sheet { display: grid; grid-template-columns: 216px minmax(0, 1fr); column-gap: calc(var(--inset) * 2); padding: calc(var(--inset) * 2) calc(var(--inset) * 2) 0; max-inline-size: 1440px; }
+  /* printed side index: wordmark top, numbered names, one ink mark for where you are */
+  .index { position: sticky; top: calc(var(--inset) * 2); align-self: start; display: grid; gap: calc(var(--inset) * 1.5); }
+  .wordmark { font-size: 28px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
+  .wordmark small { display: block; margin-top: 6px; font-size: 13px; font-weight: 400; letter-spacing: 0; color: var(--ds-text-secondary); }
+  .index h2 { margin: 0 0 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.02em; color: var(--ds-text-secondary); }
+  .index ol { list-style: none; margin: 0; padding: 0; display: grid; }
+  .index li a { display: grid; grid-template-columns: 24px 1fr; align-items: center; min-block-size: 32px; font-size: 14px; color: var(--ds-text-primary); text-decoration: none; position: relative; }
+  .index li a span { font-size: 11px; color: var(--ds-text-secondary); }
+  .index li a[aria-current] { font-weight: 500; }
+  .index li a[aria-current]::before { content: ''; position: absolute; inset-inline-start: -16px; inline-size: 8px; block-size: 2px; background: var(--ds-text-primary); }
+  .tools { position: absolute; top: calc(var(--inset) * 2); right: calc(var(--inset) * 2); display: flex; gap: var(--inset); font-size: 13px; color: var(--ds-text-secondary); }
+  .tools b { color: var(--ds-text-primary); font-weight: 500; border-bottom: 2px solid currentColor; }
+  main { min-inline-size: 0; max-inline-size: 912px; padding-block-end: 96px; }
+  .eyebrow { font-size: 13px; color: var(--ds-text-secondary); margin: 0 0 var(--inset); }
+  h1 { margin: 0; font-size: 88px; line-height: 0.95; font-weight: 500; letter-spacing: -0.045em; }
+  h1.long { font-size: 56px; line-height: 1.05; letter-spacing: -0.035em; max-inline-size: 16ch; }
+  .purpose { margin: var(--inset) 0 0; font-size: 22px; line-height: 1.4; letter-spacing: -0.01em; max-inline-size: 32ch; }
+  /* facts printed on the case: a lamp, a value, a small label under it */
+  .facts { display: flex; gap: calc(var(--inset) * 2); margin: calc(var(--inset) * 2) 0 0; padding: 0; list-style: none; }
+  .facts li { display: grid; gap: 4px; font-size: 15px; } .facts small { font-size: 12px; color: var(--ds-text-secondary); }
+  /* the demo stands on a plastic unit: the one place with a body and a shadow */
+  .stage { margin-top: calc(var(--inset) * 3); display: grid; grid-template-columns: auto 1fr; gap: calc(var(--inset) * 2); align-items: end; }
+  .stage .unit-body { inline-size: 360px; padding: var(--inset); display: grid; gap: var(--inset); }
+  .stage .unit-body .lcd-win { justify-self: stretch; border-radius: calc(32px - var(--inset)); }
+  .stage .unit-body .keys { display: flex; justify-content: flex-end; gap: 12px; }
+  .stage .unit-body .print { display: flex; justify-content: space-between; font-size: 13px; } .stage .unit-body .print span:last-child { color: var(--ds-text-secondary); }
+  .pick { display: grid; gap: var(--inset); align-content: end; }
+  .pick div { display: grid; gap: 8px; font-size: 13px; color: var(--ds-text-secondary); }
+  .pick .opts { display: flex; gap: 20px; font-size: 15px; color: var(--ds-text-primary); }
+  .pick .opts b { font-weight: 500; border-bottom: 2px solid currentColor; padding-bottom: 2px; }
+  .code-win { margin-top: var(--inset); }
+  /* tabs: printed names, one ink index mark under the chosen one */
+  .tabs { display: flex; gap: calc(var(--inset) * 1.5); margin-top: calc(var(--inset) * 3); border-bottom: 1px solid var(--ds-line-divider); }
+  .tabs a { padding: 12px 0; font-size: 16px; color: var(--ds-text-secondary); text-decoration: none; }
+  .tabs a[aria-current] { color: var(--ds-text-primary); font-weight: 500; box-shadow: inset 0 -2px 0 var(--ds-text-primary); }
+  /* sections with a hanging number and label, like a Braun leaflet's spec column */
+  .sec { display: grid; grid-template-columns: 168px minmax(0, 1fr); column-gap: calc(var(--inset) * 2); padding-top: calc(var(--inset) * 2); margin-top: calc(var(--inset) * 2); border-top: 1px solid var(--ds-line-divider); }
+  .sec h2 { margin: 0; font-size: 15px; font-weight: 500; display: grid; gap: 4px; } .sec h2 span { font-size: 12px; font-weight: 400; color: var(--ds-text-secondary); }
+  .sec p { margin: 0; font-size: 17px; line-height: 1.6; max-inline-size: 60ch; }
+  .numbers { display: flex; gap: calc(var(--inset) * 3); margin-top: calc(var(--inset) * 3); }
+  .numbers div { display: grid; gap: 4px; } .numbers b { font-size: 48px; font-weight: 400; letter-spacing: -0.03em; line-height: 1; } .numbers span { font-size: 13px; color: var(--ds-text-secondary); }
+  .box { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(var(--inset) * 2); margin-top: calc(var(--inset) * 3); }
+  .box h3 { margin: 0 0 8px; font-size: 15px; font-weight: 500; } .box p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ds-text-secondary); }
+  .model { position: fixed; right: calc(var(--inset) * 2); bottom: var(--inset); font-size: 13px; color: var(--ds-text-secondary); }
+</style>
+</head>
+<body>
+<div class="sheet" id="root"></div>
+<script type="module">
+  import { PAGE, NAV, DISPLAY as D, HOME as H, lcd, key } from './book.js';
+  const index = `<nav class="index" aria-label="Book"><div class="wordmark">dial<small>design system</small></div>${NAV.map(([part, pages]) => `<div><h2>${part}</h2><ol>${pages.map((p, i) => `<li><a href="#" ${(PAGE === 'home' ? p === 'Overview' : p === 'Display') ? 'aria-current="page"' : ''}><span>${String(i + 1).padStart(2, '0')}</span>${p.toLowerCase()}</a></li>`).join('')}</ol></div>`).join('')}</nav>`;
+  const tools = `<div class="tools"><span><b>light</b></span><span>dark</span><span>backdrop · page</span></div>`;
+  const display = `<main><p class="eyebrow">${D.eyebrow}</p><h1>${D.title.toLowerCase()}</h1><p class="purpose">${D.purpose}</p>
+    <ul class="facts">${D.facts.map(([v, l], i) => `<li><span>${i === 0 ? '<span class="lamp"></span> ' : ''}${v}</span><small>${l}</small></li>`).join('')}</ul>
+    <div class="stage"><div class="unit-body">${lcd()}<div class="keys">${key('Off')}${key('Heat', true)}</div><div class="print"><span>dial</span><span>thermostat 1</span></div></div>
+      <div class="pick"><div>theme<span class="opts"><b>light</b><span>dark</span></span></div><div>kind<span class="opts"><b>lcd</b><span>oled</span></span></div><div>size<span class="opts"><span>sm</span><b>md</b><span>lg</span></span></div></div></div>
+    <pre class="code-win"><code>${D.code.replace(/</g, '&lt;')}</code></pre>
+    <nav class="tabs">${D.tabs.map((t, i) => `<a href="#" ${i ? '' : 'aria-current="page"'}>${t}</a>`).join('')}</nav>
+    ${D.sections.map(([h, p], i) => `<section class="sec"><h2><span>${String(i + 1).padStart(2, '0')}</span>${h}</h2><p>${p}</p></section>`).join('')}</main>`;
+  const home = `<main><p class="eyebrow">${H.eyebrow}</p><h1 class="long">${H.title}</h1><p class="purpose" style="max-inline-size:40ch">${H.lede}</p>
+    <div class="numbers">${H.numbers.map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join('')}</div>
+    <div class="box">${H.box.map(([h, p]) => `<div><h3>${h}</h3><p>${p}</p></div>`).join('')}</div>
+    <section class="sec"><h2><span>01</span>The book</h2><p>Start with the principles, then the foundations. Every component has four tabs: how to use it, how it looks, how to build with it, and what it promises to assistive tech.</p></section></main>`;
+  document.getElementById('root').innerHTML = index + (PAGE === 'home' ? home : display) + tools + `<p class="model">book 0.0.0</p>`;
+</script>
+</body>
+</html>

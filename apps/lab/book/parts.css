@@ -1,0 +1,15 @@
+/* Parts every book variant shares, drawn from the real tokens: the Display window, a key, the unit body. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font-family: var(--ds-type-family); color: var(--ds-text-primary); background: var(--ds-surface-page); -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+.lcd-win { display: inline-grid; gap: 4px; justify-items: end; padding: 10px 16px 12px; border-radius: 14px; background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); box-shadow: var(--ds-elevation-well); }
+.lcd-detail { justify-self: start; font-size: 13px; }
+.lcd-val { display: flex; align-items: flex-end; gap: 8px; }
+.lcd-unit { font-size: 14px; font-weight: 500; }
+.seg { display: block; inline-size: auto; }
+.seg .on { fill: var(--ds-display-lcd-ink); } .seg .off { fill: var(--ds-display-lcd-ghost); }
+.key { font: inherit; font-size: 14px; font-weight: 500; min-block-size: 44px; padding-inline: 20px; border: 0; border-radius: 22px; color: var(--ds-text-primary); background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-part); }
+.key.loud { background: var(--ds-action-accent); color: var(--ds-color-abs-900); }
+.unit-body { background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); border-radius: 32px; }
+.code-win { margin: 0; padding: 16px 20px; border-radius: 14px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); font: 13px/1.6 var(--ds-font-family-mono); overflow-x: auto; }
+.lamp { display: inline-block; inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--ds-text-primary); vertical-align: 1px; }

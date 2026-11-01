@@ -35,24 +35,19 @@ export function App() {
   const [q, setQ] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const [lookOpen, setLookOpen] = useState(false);
-  // Theme: system follows prefers-color-scheme. A chosen theme is stored; the default (system) never is,
-  // and ?theme= overrides for tests. Unknown values in either place fall back to system (G-ST1).
-  const asPref = (v: string | null) => (v === 'light' || v === 'dark' || v === 'system' ? v : null);
-  const [themePref, setThemePref] = useState<'system' | 'light' | 'dark'>(() => asPref(new URLSearchParams(location.search).get('theme')) ?? asPref(localStorage.getItem('ds-theme')) ?? 'system');
-  // an unknown ?theme= falls back (above) and leaves the address on the first frame
+  // Theme: the book opens in its base theme, light (the warm-white ABS of the anchor), whatever the OS
+  // says (R-001). Dark, the charcoal edition, is a choice: it alone is stored, and ?theme= overrides for
+  // tests. Light is the default, so it is never written; a stored or linked "system" from the old book
+  // and any unknown value fall back to light and are dropped (G-ST1, rule 15).
+  const asPref = (v: string | null) => (v === 'light' || v === 'dark' ? v : null);
+  const [theme, setThemeState] = useState<'light' | 'dark'>(() => asPref(new URLSearchParams(location.search).get('theme')) ?? (localStorage.getItem('ds-theme') === 'dark' ? 'dark' : 'light'));
   useEffect(() => {
     const u = new URL(location.href);
     if (u.searchParams.has('theme') && !asPref(u.searchParams.get('theme'))) { u.searchParams.delete('theme'); history.replaceState(null, '', u); }
+    if (localStorage.getItem('ds-theme') !== null && localStorage.getItem('ds-theme') !== 'dark') localStorage.removeItem('ds-theme');
   }, []);
-  const [systemLight, setSystemLight] = useState(() => matchMedia('(prefers-color-scheme: light)').matches);
-  useEffect(() => {
-    const mq = matchMedia('(prefers-color-scheme: light)');
-    const on = () => setSystemLight(mq.matches);
-    mq.addEventListener('change', on);
-    return () => mq.removeEventListener('change', on);
-  }, []);
-  const theme = themePref === 'system' ? (systemLight ? 'light' : 'dark') : themePref;
-  useLayoutEffect(() => { document.documentElement.dataset.theme = theme; if (themePref === 'system') localStorage.removeItem('ds-theme'); else localStorage.setItem('ds-theme', themePref); }, [theme, themePref]);
+  const setTheme = (t: 'light' | 'dark') => { setThemeState(t); if (t === 'dark') localStorage.setItem('ds-theme', 'dark'); else localStorage.removeItem('ds-theme'); };
+  useLayoutEffect(() => { document.documentElement.dataset.theme = theme; }, [theme]);
   const menuButton = useRef<HTMLButtonElement>(null);
   const firstRender = useRef(true);
 
@@ -98,8 +93,8 @@ export function App() {
           <span className="topbar-title">{here?.title}</span>
           <div className="topbar-tools">
             <div className="seg" role="group" aria-label="Theme" data-theme-control="">
-              {(['system', 'light', 'dark'] as const).map((t) => (
-                <button key={t} type="button" className="seg-btn" aria-pressed={t === themePref} data-theme-value={t} onClick={() => setThemePref(t)}>{t[0].toUpperCase() + t.slice(1)}</button>
+              {(['light', 'dark'] as const).map((t) => (
+                <button key={t} type="button" className="seg-btn" aria-pressed={t === theme} data-theme-value={t} onClick={() => setTheme(t)}>{t}</button>
               ))}
             </div>
             <AppearanceMenu look={look} open={lookOpen} onToggle={setLookOpen} />

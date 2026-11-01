@@ -3,18 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Design system</title>
+    <title>dial</title>
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#1C1C1B" />
+    <meta name="theme-color" content="#F3F2EF" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <script>
       // Runs before the first paint so the theme is known up front and nothing flips after load.
       (function () {
         var q = new URLSearchParams(location.search);
-        var pref = q.get('theme') || localStorage.getItem('ds-theme') || 'system';
-        var theme = pref === 'system' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : pref;
+        // the base theme is light whatever the OS says (R-001); dark only when chosen or linked
+        var q1 = q.get('theme');
+        var theme = q1 === 'dark' || q1 === 'light' ? q1 : localStorage.getItem('ds-theme') === 'dark' ? 'dark' : 'light';
         document.documentElement.dataset.theme = theme;
       })();
     </script>

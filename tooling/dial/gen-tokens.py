@@ -18,7 +18,7 @@ def grp(p, w, typ=None, **items):
 # ---------------------------------------------------------------- primitive
 P = {
  "color": grp(["P5","P6"], "Warm plastic, grey printing and one dyed orange. These are every hue dial owns, so nothing outside this list can appear." + EST, "color",
-   abs={"50":t("#F8F7F5",desc="page behind the units, a step lighter than the body (1.17:1, G-EL1)"),"0":t("#FAF9F7",desc="lightest plastic, chips and fader caps"),
+   abs={"50":t("#FCFBF9",desc="page behind the units, a step lighter than the body (1.21:1 flat, 1.15 measured past its shadow, G-EL1)"),"0":t("#FAF9F7",desc="lightest plastic, chips and fader caps"),
         "100":t("#E8E6E1",desc="warm white matte ABS body"),"150":t("#DEDBD5",desc="sunken well"),
         "200":t("#D3D0C9",desc="seam and divider"),"300":t("#BFBCB5",desc="unlit grille hole"),
         "500":t("#7C7973",desc="control outline, 3.5:1 on the body and 3.1:1 on a sunken well"),"700":t("#4A4844",desc="printing, secondary"),

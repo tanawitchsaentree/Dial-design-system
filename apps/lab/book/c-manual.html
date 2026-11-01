@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · book C · manual page</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<link rel="stylesheet" href="parts.css">
+<style>
+  /* C · manual page. A technical manual: running head with a rule, numbered sections in two columns
+     (number and name left, text right), and an anatomy drawing with numbered leaders as the lead. */
+  .page { max-inline-size: 1200px; margin: 0 auto; padding: 32px 48px 96px; }
+  .run { display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; padding-bottom: 12px; border-bottom: 2px solid var(--ds-text-primary); font-size: 13px; }
+  .run .c { text-align: center; } .run .r { text-align: right; color: var(--ds-text-secondary); }
+  .run b { font-size: 18px; font-weight: 500; letter-spacing: -0.02em; }
+  .toc { display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 10px 0; border-bottom: 1px solid var(--ds-line-divider); font-size: 13px; color: var(--ds-text-secondary); }
+  .toc b { color: var(--ds-text-primary); font-weight: 500; }
+  .title { display: grid; grid-template-columns: 120px 1fr; gap: 24px; margin-top: 48px; }
+  .title .no { font-size: 64px; font-weight: 300; line-height: 1; color: var(--ds-text-secondary); }
+  .title h1 { margin: 0; font-size: 64px; font-weight: 500; line-height: 1; letter-spacing: -0.04em; }
+  .title p { margin: 16px 0 0; font-size: 19px; line-height: 1.45; max-inline-size: 46ch; }
+  .fig { display: grid; grid-template-columns: 120px minmax(0, 1fr) 280px; gap: 24px; margin-top: 48px; align-items: center; }
+  .fig .cap { font-size: 12px; color: var(--ds-text-secondary); align-self: start; }
+  .draw { position: relative; padding: 48px; display: grid; place-items: center; background: var(--ds-surface-raised); border-radius: 8px; }
+  .draw svg.lead { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; overflow: visible; }
+  .draw svg.lead path { fill: none; stroke: var(--ds-text-primary); stroke-width: 1; }
+  .draw .n { position: absolute; inline-size: 22px; block-size: 22px; border-radius: 50%; border: 1px solid var(--ds-text-primary); display: grid; place-items: center; font-size: 12px; background: var(--ds-surface-raised); }
+  .legend { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; font-size: 14px; counter-reset: l; }
+  .legend li { display: grid; grid-template-columns: 28px 1fr; } .legend li::before { counter-increment: l; content: counter(l); color: var(--ds-text-secondary); }
+  .sec { display: grid; grid-template-columns: 120px 220px minmax(0, 1fr); gap: 24px; padding: 24px 0; border-top: 1px solid var(--ds-line-divider); margin-top: 24px; }
+  .sec .no { font-size: 14px; color: var(--ds-text-secondary); } .sec h2 { margin: 0; font-size: 16px; font-weight: 500; }
+  .sec p { margin: 0; font-size: 16px; line-height: 1.6; max-inline-size: 62ch; }
+  .spec { display: grid; grid-template-columns: repeat(5, auto); justify-content: start; gap: 4px 40px; margin-top: 24px; font-size: 13px; }
+  .spec dt { color: var(--ds-text-secondary); } .spec dd { margin: 0; font-size: 15px; }
+  .code-win { margin-top: 0; }
+  .home-toc { columns: 2; column-gap: 48px; margin-top: 48px; font-size: 16px; }
+  .home-toc div { break-inside: avoid; margin-bottom: 24px; } .home-toc h2 { margin: 0 0 8px; font-size: 13px; font-weight: 500; color: var(--ds-text-secondary); }
+  .home-toc li { display: grid; grid-template-columns: 1fr auto; padding: 4px 0; border-bottom: 1px dotted var(--ds-line-ring); }
+  .home-toc ol { list-style: none; margin: 0; padding: 0; }
+</style>
+</head>
+<body>
+<div class="page" id="root"></div>
+<script type="module">
+  import { PAGE, NAV, DISPLAY as D, HOME as H, lcd } from './book.js';
+  const run = (c, r) => `<header class="run"><b>dial</b><span class="c">${c}</span><span class="r">${r}</span></header>`;
+  const toc = `<nav class="toc">${NAV.map(([p]) => `<span${p === (PAGE === 'home' ? 'introduction' : 'components') ? ' style="color:var(--ds-text-primary)"' : ''}>${p}</span>`).join('')}<span style="margin-left:auto">light · dark</span></nav>`;
+  const display = `${run('4 · components', 'manual p. 4.7')}${toc}
+    <div class="title"><span class="no">4.7</span><div><h1>display</h1><p>${D.purpose}</p><dl class="spec">${D.facts.map(([v, l]) => `<div><dt>${l}</dt><dd>${v}</dd></div>`).join('')}</dl></div></div>
+    <div class="fig"><span class="cap">fig. 4.7.1<br>the window, parts numbered</span><div class="draw" id="draw">${lcd('21.5', 'Heating to 22.0', 56)}</div><ol class="legend">${D.anatomy.map((a) => `<li>${a}</li>`).join('')}</ol></div>
+    ${D.sections.map(([h, p], i) => `<section class="sec"><span class="no">4.7.${i + 1}</span><h2>${h}</h2><p>${p}</p></section>`).join('')}
+    <section class="sec"><span class="no">4.7.5</span><h2>Code</h2><pre class="code-win"><code>${D.code.replace(/</g, '&lt;')}</code></pre></section>`;
+  const home = `${run('contents', 'manual p. 1')}${toc}<div class="title"><span class="no">1</span><div><h1 style="font-size:52px;max-inline-size:18ch">${H.title}</h1><p>${H.lede}</p></div></div>
+    <div class="home-toc">${NAV.map(([part, pages], j) => `<div><h2>${j + 1} · ${part}</h2><ol>${pages.map((p, i) => `<li><span>${j + 1}.${i + 1} ${p}</span><span>${j + 1}.${i + 1}</span></li>`).join('')}</ol></div>`).join('')}</div>`;
+  document.getElementById('root').innerHTML = PAGE === 'home' ? home : display;
+  // numbered leaders from the anatomy parts to marks in the right margin of the drawing
+  const draw = document.getElementById('draw');
+  if (draw) requestAnimationFrame(() => {
+    const o = draw.getBoundingClientRect();
+    const parts = [draw.querySelector('.lcd-win'), draw.querySelector('.lcd-detail'), draw.querySelector('.seg'), draw.querySelector('.lcd-unit')].map((e) => e.getBoundingClientRect());
+    const lane = o.width - 28; let svg = '<svg class="lead" aria-hidden="true">', marks = '';
+    parts.forEach((r, i) => { const y = 24 + i * 34, fx = r.right - o.left - (i === 0 ? 0 : 4), fy = r.top - o.top + (i === 0 ? 6 : r.height / 2); svg += `<path d="M${fx} ${fy} L${lane - 30} ${y + 11} H${lane - 12}"/>`; marks += `<span class="n" aria-hidden="true" style="left:${lane - 12}px;top:${y}px">${i + 1}</span>`; });
+    draw.insertAdjacentHTML('beforeend', svg + '</svg>' + marks);
+  });
+</script>
+</body>
+</html>
