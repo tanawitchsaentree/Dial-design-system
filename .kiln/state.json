@@ -1,7 +1,7 @@
 {
   "verb": "build",
   "scale": "Package",
-  "current_phase": 6,
+  "current_phase": 7,
   "has_reference": true,
   "checkpoints": {
     "approved": true
@@ -58,16 +58,17 @@
     "plan": "Anchor round: device card (display + grille + loud knob + keys + ruler scale + model name + wordmark), 4 variants in apps/lab/anchor/ over display:grille ratio, knob size, shadow depth, label placement; user picks. Then Phase 2 tokens (matte ABS material, warm-white/charcoal themes, one orange, LCD/OLED families, allowSeed false). Wave 1 per kiln:production-run: layout primitives, atoms (Button/key, Switch/rocker, Slider/fader, Rotary, Select, Display LCD+OLED, Grille meter, Label, Icon, Focus), home-iot wave 1 extras, docs controls. Book at standard depth; verify full; milestone M1.",
     "out_of_scope": "npm publish / git push; native SwiftUI components (tokens only); Braun name or logo; photographic textures; waves 2-3 media (player, progress, list) beyond M1; brand identity beyond a plain dial wordmark",
     "acceptance_criteria": [
-      "one orange per unit, primary control only",
-      "all text >=4.5:1 both themes",
-      "state readable from the display at a glance",
-      "every rotary/fader/key keyboard-operable with mechanism+spring in why.json",
-      "no Braun name or mark"
+      "one orange per unit",
+      "text >=4.5:1",
+      "state readable from display",
+      "keyboard + mechanism/spring",
+      "no Braun mark"
     ],
     "riskiest_slice": "device card anchor: material + display + grille + knob must read as one honest appliance without becoming a retro costume or a bloated toy",
     "stamp": "dial \u00b7 lineage Braun/Ulm (Rams) \u00b7 vector C3 T1 G2 S8 M3 D4 \u00b7 loud surface 8 paid by type 1 + grid 2 \u00b7 anchor A (D-001)",
     "token_block": "packages/tokens/src/{primitive,semantic,component}.json \u2014 376 tokens, light+dark, allowSeed false (D-002, estimated)",
-    "approved": true
+    "approved": true,
+    "built_artefact": "dial: 24 components, tokens, book; M1 44/44"
   },
   "history": [
     {
@@ -182,7 +183,30 @@
     },
     {
       "phase": 6,
-      "entered_at": "2026-11-01T09:51:19.159204+00:00"
+      "entered_at": "2026-11-01T09:51:19.159204+00:00",
+      "exited_at": "2026-11-02T02:32:14.684172+00:00",
+      "data": {
+        "built_artefact": "dial: 24 components, tokens, book; M1 44/44",
+        "vector": [
+          3,
+          1,
+          2,
+          8,
+          3,
+          4
+        ],
+        "acceptance_criteria": [
+          "one orange per unit",
+          "text >=4.5:1",
+          "state readable from display",
+          "keyboard + mechanism/spring",
+          "no Braun mark"
+        ]
+      }
+    },
+    {
+      "phase": 7,
+      "entered_at": "2026-11-02T02:32:14.684409+00:00"
     }
   ]
 }

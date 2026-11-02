@@ -5,12 +5,14 @@
 > ตรวจ contrast lab: `node tooling/kiln/anchor-contrast.mjs`
 
 - **System:** dial (dial-tokens, dial-react) · kiln 2.5.1
-- **Phase ปัจจุบัน:** 2 เสร็จ → **wave 1** ถัดไป (kiln state phase=6) · anchor = A (D-001) · tokens D-002 (estimated)
-- **งานล่าสุดที่เสร็จ:** Phase 2 tokens 376 ตัว light+dark, allowSeed false, rationale 0 problems, contrast 24/24 คู่, verify:quick 14/14; book ใส่สี dial แล้ว
-- **งานถัดไป:** wave 1 (session ใหม่) ตาม `system/NEXT.md` → Next, in order
-- **Wave ปัจจุบัน:** 1 เสร็จ (24 components, verify:quick 14/14, conformance 172/172) · **กำลังแก้ full verify** (16/20; gates แดง 25 ตัว) ด้วย 4 agents ตาม system/reports/m1-triage.md: components / book shell / book content / component docs · G-SL1 รอ kiln แก้ K-10
-- **ค้าง/blocked:** ไม่มี block; ref-01.png ยังไม่มี (user สั่งใช้ค่าประมาณ 2026-11-01) วัดใหม่เมื่อไฟล์มา
+- **Phase ปัจจุบัน:** **M1 done** (pnpm run milestone 44/44, 2026-11-02) → milestone review กับ user
+- **งานล่าสุดที่เสร็จ:** full verify 20/20 (recorded), milestone M1 44/44; book shell A (R-001), 24 components
+- **งานถัดไป:** user review ของ system/REVIEW.md + book → RETRO สำหรับสิ่งที่ส่งกลับ → wave 2 (home-iot: RangeSlider, Meter, List, Sheet, Banner, EmptyState, Skeleton, TimePicker + media: player, progress, list)
+- **Wave ปัจจุบัน:** 1 เสร็จ · 24 components ผ่าน QA
+- **ค้าง/blocked:** ค่าสีและสัดส่วนยังเป็นค่าประมาณ (ref-01.png ไม่มี); ไม่ publish (Phase 8 เป็นของ user)
 ## Log ย่อ (ใหม่สุดบน ≤15 บรรทัด)
+- 2026-11-02 M1 done: verify 20/20, milestone 44/44; advisory ว่าง; REVIEW rows ครบ
+- 2026-11-01 R-001 book shell ใหม่ (leaflet A + home hero), D-004 page #FCFBF9
 - 2026-11-01 full verify 16/20 → triage; K-11 smoke-import แก้ในเครื่อง (27/27); แจ้ง kiln session เรื่อง K-8..K-11
 - 2026-11-01 batch 1 (9 components) verify:quick 14/14, commit c065409; K-9 docs.css lede p, K-10 G-SL1 vs Rotary
 - 2026-11-01 user: "ตัดสินใจเองแล้วไปต่อเลยไม่ต้องถาม" → ทำ wave 1 ต่อใน session เดิม; Button เสร็จ (template), D-003 FORM.md, PLAYBOOK.md
