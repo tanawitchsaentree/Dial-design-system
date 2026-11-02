@@ -58,3 +58,11 @@ Read first: `CLAUDE.md` (iron rules), `system/CONCEPT.md` (P1–P6), `system/FOR
   tooling/kiln/data/carbon-depth.json); overflow renders carry data-overflow-demo; CHANGELOG entry under the version heading.
 - Never claim done from gates alone: screenshot your demos light + dark, open every popup, read the words.
 - Do not run full `pnpm run verify` (75 min). The orchestrator runs one full verify per wave.
+
+## Wave 4 (concept depth, D-006)
+- CONCEPT.md now has P7 The legend is the state, P8 Relations are drawn, P9 Glass is for the part that moves.
+  Quote their Therefore text in derivations like P1–P6. Glass (P9) is ONLY for caps, lamps, latched keys and chips.
+- References for this wave (the user's): a synth panel printing every parameter with the active ones lit; a pedal
+  whose face is a schematic (boxes and lines joining knobs, curve glyphs under keys); the SK 4 manual naming parts
+  on the photographed object; translucent frosted fader caps tinted like their track; Yoto cards inserted to pick
+  content and a dot-matrix face; a recessed tray grouping small keys; a big top key under the thumb.

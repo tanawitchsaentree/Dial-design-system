@@ -39,3 +39,10 @@
 - **เพราะ:** user supplied it ("จัดการหน่อย"); it carries P1 itself: grey printing and one orange part
 - **ตัวเลือกที่ตัดทิ้ง:** text-only wordmark
 - **กระทบ:** apps/docs/public icons + manifest, App.tsx top bar, docs.css .brand-mark; regenerate from system/brand if the logo changes
+
+### D-006: Concept depth: P7 legend, P8 relations, P9 glass (wave 4)
+- **วันที่:** 2026-11-02 · **Phase:** wave 4
+- **เลือก:** three principles drawn from the user's references (OP-XY printed legends, superlunar schematic face, SK 4 manual, translucent fader caps, Yoto cards, Sytren tray, N200 top key): P7 The legend is the state; P8 Relations are drawn; P9 Glass is for the part that moves (one accent material: frosted glass tinted in the value's own range, small moving parts only)
+- **เพราะ:** user: "มองให้ถึงแก่น concept … ไม่ใช่แค่ภาพเหมือน product braun แต่ทำผ่าน ux ที่ tailor"; "การเลือกเอา element เล็กมาทำเป็นกระจก ด้วยโทนสีที่อยู่ในระยะเดียวกัน"; "จัดไป"
+- **ตัวเลือกที่ตัดทิ้ง:** colour-blocked function zones (breaks P1), glass bodies or panels (Pane's glass, not dial), childish pixel faces (INTAKE 6)
+- **กระทบ:** tokens (glass accent material), Slider/RangeSlider/Scrubber caps, Chip, SegmentedControl, Switch lamp, Badge lamp; new Legend, Wiring, ExplainMode, SceneCard/Slot, Tray, Icon (dot matrix); book home
