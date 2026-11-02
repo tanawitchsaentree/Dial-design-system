@@ -1,0 +1,100 @@
+{
+  "concept": "MediaPlayer is the small MP3 player of the reference sheet drawn on a screen, one plastic body with an OLED window that says what is playing and how, the tape fader under it, three round transport keys of which only play is orange, the level in recessed holes and a volume fader, and it really plays the audio it names.",
+  "kind": ["media player", "audio player", "player", "music player", "now playing bar"],
+  "default_to_avoid": [
+    {
+      "pattern": "Spotify style media player: a dark bar along the bottom of the screen with album art, a green play circle and a thin progress line",
+      "why_not": "P1 keeps one orange part per unit and P2 asks for a recessed window that says the state in words, while a green circle spends a second accent and album art makes a picture the reading."
+    },
+    {
+      "pattern": "audio player that shows only an icon swap between play and pause with no state in words",
+      "why_not": "P2 says the display tells the state, so playing, paused, ended, loading and the error are printed in the window as a glyph and a word, never by the key's icon alone."
+    }
+  ],
+  "references": [
+    { "source": "MP3 player on system/refs/ref-01.png (the Rams-era sheet the user picked): a white body, an OLED window and three round transport keys" },
+    { "source": "Braun T 1000 world receiver and Braun audio 1 (Dieter Rams, 1962 to 1963): one tuning window, plain keys and linear faders with printed scales" },
+    { "source": "packages/react/src/components/DeviceCard and Scrubber (dial): the anchor's body, print and tape fader" }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "space",
+      "consequence": "the display window sits at the top of the unit, aligned to the body's inner inset",
+      "form": "The OLED window runs the full width at the top of the body and prints the state line, the title and the artist with the source."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "The window is a polite status region that announces the state with the title, and it takes no focus and no press."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Play is the only orange part; previous, next, the scrubber, the volume fader and the level holes stay plastic and ink."
+    },
+    {
+      "p": "P1",
+      "axis": "space",
+      "consequence": "the loud control gets the largest clear area in the unit and sits where the hand expects it (lower or right of the display)",
+      "form": "The transport keys sit below the window and the scrubber, with play as the large 52px disc between two 44px keys."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map (arrows step a detent, Home and End reach the ends, Space and Enter press) and a visible value and label",
+      "form": "Space anywhere in the player outside a key toggles play, the arrows seek through the scrubber and each key has a name and a pressed state."
+    },
+    {
+      "p": "P4",
+      "axis": "colour",
+      "consequence": "a lit level uses ink at full step, never orange",
+      "form": "The optional level meter is a Grille whose lit holes follow the sound in ink while it plays and go dark when it stops."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "Loading, playing, paused, ended, offline and the error change only the words and the glyph in the window, never the place of a part."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/media-player/index.html",
+    "options": [
+      { "id": "A", "name": "MP3 unit: window on top, scrubber, three round keys at the lower start with the level holes at the end, volume fader across" },
+      { "id": "B", "name": "pocket column: everything on the centre line with volume on a plastic rotary under the keys" },
+      { "id": "C", "name": "wide deck: window at the start, keys and a small rotary at the end, scrubber across the bottom" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A reads as the reference player and keeps play the one loud round part (P1) at the lower start of a phone-width body; B makes the volume knob the largest round part and grows the unit to 460px, and C has to fold into A under 420px anyway."
+  },
+  "mechanism": {
+    "kind": "key",
+    "travel": "the transport keys drop by their height on press and return on the spring; the scrubber and the volume fader keep their own fader travel",
+    "spring": { "mass": 1.4, "stiffness": 520, "damping": 46 }
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "The body is eight touch modules wide like the anchor card and never wider than its column, so it sits on a phone in one piece." },
+    "face": { "p": "P6", "axis": "space", "why": "The parts stand in one column with an even gap, in the same places in every state, so nothing jumps when the state changes." },
+    "window": { "p": "P2", "axis": "depth", "why": "The OLED window is recessed into the body with the inverse light and its radius nests inside the body's corner." },
+    "status": { "p": "P2", "axis": "type", "why": "The first line of the window prints the state glyph and word with the track's place in the queue in tabular figures." },
+    "word": { "p": "P2", "axis": "type", "why": "The state is a glyph and a word side by side, so playing, paused or the error never rests on a shape alone." },
+    "glyph": { "p": "P2", "axis": "colour", "why": "The glyph is drawn in the window's own white ink at caption size and never takes a colour of its own." },
+    "count": { "p": "P5", "axis": "type", "why": "The place in the queue is printed with tabular figures so the line keeps its width as the track number changes." },
+    "title": { "p": "P2", "axis": "type", "why": "The title is the largest line in the window in the system grotesk, and a long title wraps instead of being cut." },
+    "meta": { "p": "P2", "axis": "type", "why": "The artist and the source print one size smaller under the title, so the person sees who plays and from where." },
+    "reading": { "p": "P2", "axis": "interaction", "why": "The window's whole reading is one hidden sentence, so assistive tech hears the state and the title once and in order." },
+    "scrubber": { "p": "P2", "axis": "space", "why": "The scrubber's own title line is hidden here because the window already prints the title and nothing else in the unit repeats it." },
+    "deck": { "p": "P1", "axis": "space", "why": "The transport keys and the level holes share one row under the scrubber, keys at the start and the holes at the end." },
+    "keys": { "p": "P3", "axis": "space", "why": "Previous, play and next stand as one group of round keys, each with at least a 44px target and an even gap." },
+    "meter": { "p": "P4", "axis": "space", "why": "The level holes sit at the end of the key row on the body's grid, as the speaker holes sit beside the keys on the reference." },
+    "volume": { "p": "P3", "axis": "shape", "why": "Volume is the system's own fader or a plastic rotary, a part that moves like its mechanism and prints its value." }
+  },
+  "states": {
+    "@media forced-colors: active": { "p": "P2", "axis": "depth", "why": "In forced colours the window keeps a system outline, because its recess and its dark ground are lost there." }
+  },
+  "motion": {}
+}

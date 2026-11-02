@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · BottomNav · three ways to print the app's sections on the case</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lead { margin: 0 0 18px; max-width: 80ch; font-size: 14px; line-height: 1.5; }
+  .variant { margin-block-end: 40px; } .variant > h2 { font-size: 15px; font-weight: 500; margin: 0 0 4px; } .variant > .note { font-size: 13px; margin: 0 0 12px; color: var(--ds-text-secondary); max-width: 90ch; line-height: 1.45; }
+  .row { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
+  .screen { position: relative; overflow: hidden; border-radius: 14px; background: var(--ds-surface-page); outline: 1px solid var(--ds-line-divider); display: grid; }
+  .phone { inline-size: 375px; block-size: 640px; grid-template-rows: 1fr auto; } .wide { inline-size: 760px; block-size: 440px; grid-template-columns: auto 1fr; }
+  .page { padding: 20px; display: grid; gap: 12px; align-content: start; }
+  .page .unit { block-size: 110px; border-radius: 22px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); }
+  .wide .page { grid-template-columns: repeat(3, 1fr); }
+  svg.g { inline-size: 20px; block-size: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .nav { display: flex; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit), inset 0 1px 0 var(--ds-material-lit); padding: 4px 8px calc(8px + 20px); }
+  .nav a { flex: 1; min-block-size: 52px; display: grid; justify-items: center; align-content: center; gap: 4px; color: var(--ds-text-secondary); text-decoration: none; font-size: 13px; border-radius: 4px; }
+  .nav a[aria-current] { color: var(--ds-text-primary); font-weight: 500; }
+  .nav i { display: block; inline-size: 24px; block-size: 4px; border-radius: 999px; }
+  .nav a[aria-current] i { background: var(--ds-text-primary); }
+  .safe { position: absolute; inset-inline: 0; inset-block-end: 6px; display: flex; justify-content: center; } .safe::before { content: ""; inline-size: 120px; block-size: 4px; border-radius: 2px; background: var(--ds-text-secondary); opacity: .4; }
+
+  /* A · printed index: glyph over word printed on the bottom edge of the case, ink mark under the current word */
+  .a .wide .nav { flex-direction: column; justify-content: flex-start; padding: 20px 8px; gap: 4px; inline-size: 168px; box-shadow: var(--ds-elevation-unit), inset -1px 0 0 var(--ds-line-divider); }
+  .a .wide .nav a { flex: none; grid-template-columns: 4px 20px 1fr; justify-items: start; align-items: center; gap: 12px; min-block-size: 48px; padding-inline: 4px 12px; font-size: 14px; }
+  .a .wide .nav i { inline-size: 4px; block-size: 24px; grid-row: 1; grid-column: 1; }
+  .a .wide .nav svg { grid-row: 1; grid-column: 2; } .a .wide .nav span { grid-row: 1; grid-column: 3; }
+
+  /* B · key bank: four raised capsule keys like station keys; the current one is latched low */
+  .b .nav a { margin: 6px 4px; border-radius: 999px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); }
+  .b .nav a[aria-current] { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .b .nav i { display: none; }
+  .b .wide .nav { flex-direction: column; inline-size: 120px; padding: 16px 8px; } .b .wide .nav a { flex: none; min-block-size: 64px; }
+
+  /* C · mode window: a recessed LCD strip; the current section's word is lit, the others ghosted */
+  .c .nav { padding-block: 10px calc(10px + 20px); }
+  .c .nav .win { flex: 1; display: flex; border-radius: 8px; background: var(--ds-display-lcd-bg); box-shadow: var(--ds-elevation-well); }
+  .c .nav a { color: var(--ds-display-lcd-ghost); } .c .nav a[aria-current] { color: var(--ds-display-lcd-ink); }
+  .c .nav i { display: none; }
+  .c .wide .nav { inline-size: 150px; padding: 16px 10px; } .c .wide .nav .win { flex-direction: column; } .c .wide .nav a { flex: none; min-block-size: 56px; }
+</style>
+</head>
+<body>
+<h1>BottomNav · the app's four sections printed along the bottom edge of the case</h1>
+<p class="lead">Home, Rooms, Media, Settings with Rooms current. Each variant on a 375px phone (with the home indicator's safe area) and on a wide screen, where the strip becomes a rail. Switch with ?dark.</p>
+
+<template id="nav">
+  <a href="#home"><svg class="g" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-5h4v5"/></svg><span>Home</span><i></i></a>
+  <a href="#rooms" aria-current="page"><svg class="g" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg><span>Rooms</span><i></i></a>
+  <a href="#media"><svg class="g" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z"/></svg><span>Media</span><i></i></a>
+  <a href="#settings"><svg class="g" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg><span>Settings</span><i></i></a>
+</template>
+
+<section class="variant a"><h2>A · printed index (picked)</h2><p class="note">Glyph over word printed on the plastic strip at the bottom edge, the current section in medium weight with Tabs' ink mark under it. On a wide screen the strip turns into a rail at the inline start: glyph beside word, the mark stands beside the row like the book's side index.</p>
+  <div class="row"><div class="screen phone"><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div><nav class="nav"></nav><div class="safe"></div></div>
+  <div class="screen wide"><nav class="nav"></nav><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div></div></div></section>
+<section class="variant b"><h2>B · key bank</h2><p class="note">Four raised capsule keys like a radio's station keys; the current one latches low. Four raised keys compete with each unit's one loud control, and a link is not a key that latches.</p>
+  <div class="row"><div class="screen phone"><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div><nav class="nav"></nav><div class="safe"></div></div>
+  <div class="screen wide"><nav class="nav"></nav><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div></div></div></section>
+<section class="variant c"><h2>C · mode window</h2><p class="note">A recessed LCD strip with the four words; the current word is lit, the rest ghosted. A display tells the device's state; using one as navigation gives every screen a second display and ghost words read as disabled.</p>
+  <div class="row"><div class="screen phone"><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div><nav class="nav"><div class="win"></div></nav><div class="safe"></div></div>
+  <div class="screen wide"><nav class="nav"><div class="win"></div></nav><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div></div></div></section>
+<script>
+  if (location.search.includes('dark')) document.documentElement.dataset.theme = 'dark';
+  const t = document.getElementById('nav');
+  for (const n of document.querySelectorAll('.nav')) (n.querySelector('.win') ?? n).append(t.content.cloneNode(true));
+</script>
+</body>
+</html>

@@ -682,3 +682,10 @@ thead th { font-weight: var(--ds-type-weight-medium); color: var(--ds-text-secon
 
 /* G-TT1: a demo picker never shrinks below two targets wide, however tight the controls column gets */
 .live-demo-controls .pg-control { min-inline-size: calc(var(--ds-control-md) * 2); }
+
+/* dial's own mark (system/brand/dial-logo.png, the user's logo), printed beside the wordmark; one edition per theme */
+.brand-mark { display: inline-flex; inline-size: var(--ds-control-icon-md); block-size: var(--ds-control-icon-md); transform: scale(1.25); transform-origin: center; margin-inline-end: var(--ds-gap-sm); align-self: center; }
+.brand-mark img { inline-size: 100%; block-size: 100%; }
+.brand-mark [data-mark="dark"] { display: none; }
+[data-theme="dark"] .brand-mark [data-mark="light"] { display: none; }
+[data-theme="dark"] .brand-mark [data-mark="dark"] { display: block; }

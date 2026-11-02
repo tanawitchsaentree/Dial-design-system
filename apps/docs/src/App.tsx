@@ -89,7 +89,7 @@ export function App() {
         <a className="skip" href="#main">Skip to content</a>
 
         <header className="topbar">
-          <Link to="/" className="brand-link"><span className="brand">{NAME}</span><span className="brand-sub">design system</span></Link>
+          <Link to="/" className="brand-link"><span className="brand-mark" aria-hidden="true"><img src="/dial-mark-light.png" alt="" data-mark="light" width="24" height="24" /><img src="/dial-mark-dark.png" alt="" data-mark="dark" width="24" height="24" /></span><span className="brand">{NAME}</span><span className="brand-sub">design system</span></Link>
           <span className="topbar-title">{here?.title}</span>
           <div className="topbar-tools">
             <div className="seg" role="group" aria-label="Theme" data-theme-control="">

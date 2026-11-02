@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Queue · three up-next lists</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. Nothing in a queue is orange: the player's play key is the unit's loud part (P1). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lede { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .col { display: grid; gap: 10px; inline-size: 380px; } .col h2 { font-size: 14px; font-weight: 500; margin: 0; } .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); line-height: 1.45; }
+  ol { list-style: none; margin: 0; padding: 12px; border-radius: 30px; background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); display: grid; gap: 4px; }
+  li { position: relative; display: flex; align-items: center; gap: 12px; min-block-size: 56px; padding: 6px 8px 6px 16px; border-radius: 18px; }
+  li.pressed { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  li .mark { position: absolute; inset-inline-start: 4px; inset-block: 14px; inline-size: 2px; border-radius: 1px; }
+  li.now .mark { background: var(--ds-text-primary); }
+  .n { inline-size: 20px; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--ds-text-secondary); text-align: end; }
+  .tx { flex: 1; display: grid; min-inline-size: 0; } .tx b { font-size: 15px; font-weight: 400; } li.now .tx b { font-weight: 500; }
+  .tx span { font-size: 13px; color: var(--ds-text-secondary); }
+  .d { font-size: 13px; font-variant-numeric: tabular-nums; color: var(--ds-text-secondary); }
+  .now-word { font-size: 11px; font-weight: 500; display: inline-flex; gap: 4px; align-items: center; color: var(--ds-text-primary); }
+  .tri { inline-size: 0; block-size: 0; border-block: 4px solid transparent; border-inline-start: 7px solid currentColor; }
+  .key { flex: none; display: grid; place-items: center; inline-size: 44px; block-size: 44px; border-radius: 50%; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); border: 1px solid var(--ds-line-ring); box-sizing: border-box; font-size: 14px; }
+  .key.sm { inline-size: 36px; block-size: 36px; }
+  .handle { flex: none; display: grid; grid-template-columns: repeat(2, 3px); gap: 3px; padding: 14px 6px; cursor: grab; }
+  .handle i { inline-size: 3px; block-size: 3px; border-radius: 50%; background: var(--ds-text-secondary); }
+  .bar { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 500; padding-inline: 8px; }
+  .cap { padding: 10px 18px; border-radius: 22px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); border: 1px solid var(--ds-line-ring); font-size: 13px; font-weight: 500; }
+  .drop { block-size: 2px; margin-inline: 16px; background: var(--ds-text-primary); border-radius: 1px; }
+</style>
+</head>
+<body>
+<h1>Queue · the up-next list of a player</h1>
+<p class="lede">A family of List: rows printed on one plastic body, kept apart by gaps. The playing track gets List's ink index mark and the word Playing. Every reorder has a key path; the drag handle is the shortcut for a pointer.</p>
+<div class="row">
+  <div class="col"><h2>A · menu row</h2>
+    <ol>
+      <li><span class="mark"></span><span class="handle"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="n">1</span><span class="tx"><b>Kiln song</b><span>Ulm Quartet</span></span><span class="d">3:42</span><span class="key">⋯</span></li>
+      <li class="now"><span class="mark"></span><span class="handle"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="n">2</span><span class="tx"><b>Weniger, aber besser</b><span class="now-word"><span class="tri"></span>Playing · Hochschule</span></span><span class="d">4:10</span><span class="key">⋯</span></li>
+      <div class="drop"></div>
+      <li class="pressed"><span class="mark"></span><span class="handle"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="n">3</span><span class="tx"><b>Slow return</b><span>The Faders</span></span><span class="d">2:58</span><span class="key">⋯</span></li>
+      <li><span class="mark"></span><span class="handle"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="n">4</span><span class="tx"><b>Detent</b><span>Rotary Club</span></span><span class="d">3:05</span><span class="key">⋯</span></li>
+    </ol>
+    <p class="note">The row plays its track. One menu key at the end holds Move up, Move down and Remove from queue; Alt with an arrow moves a row from the keyboard. The printed handle drags, with an ink line where the row will land. One end part per row, as in List.</p></div>
+  <div class="col"><h2>B · key rows</h2>
+    <ol>
+      <li><span class="mark"></span><span class="n">1</span><span class="tx"><b>Kiln song</b><span>Ulm Quartet · 3:42</span></span><span class="key sm">↑</span><span class="key sm">↓</span><span class="key sm">×</span></li>
+      <li class="now"><span class="mark"></span><span class="n">2</span><span class="tx"><b>Weniger, aber besser</b><span class="now-word"><span class="tri"></span>Playing</span></span><span class="key sm">↑</span><span class="key sm">↓</span><span class="key sm">×</span></li>
+      <li><span class="mark"></span><span class="n">3</span><span class="tx"><b>Slow return</b><span>The Faders · 2:58</span></span><span class="key sm">↑</span><span class="key sm">↓</span><span class="key sm">×</span></li>
+    </ol>
+    <p class="note">Three keys on every row, always out. Nothing is hidden, but at 375px the title gets a third of the row and the keys are 36px, under the 44px target (P3).</p></div>
+  <div class="col"><h2>C · edit mode</h2>
+    <div class="bar"><span>Up next · 4 tracks</span><span class="cap">Reorder</span></div>
+    <ol>
+      <li><span class="mark"></span><span class="n">1</span><span class="tx"><b>Kiln song</b><span>Ulm Quartet</span></span><span class="d">3:42</span></li>
+      <li class="now"><span class="mark"></span><span class="n">2</span><span class="tx"><b>Weniger, aber besser</b><span class="now-word"><span class="tri"></span>Playing · Hochschule</span></span><span class="d">4:10</span></li>
+      <li><span class="mark"></span><span class="n">3</span><span class="tx"><b>Slow return</b><span>The Faders</span></span><span class="d">2:58</span></li>
+    </ol>
+    <p class="note">Rows stay clean until a Reorder key latches the list into an edit state with handles and move keys. Two modes to learn, and the layout reflows between states (P6).</p></div>
+</div>
+</body>
+</html>

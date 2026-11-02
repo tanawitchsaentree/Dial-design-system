@@ -1,0 +1,104 @@
+/* PullToRefresh — a fader with one detent laid over a list (P3, P6). Pulling the list down at its top
+   reveals a printed band: an ink index rides down a short ruler into the detent. Released there, the
+   list holds one detent down on the spring while a still Progress reading says Working. The pull is
+   written by PullToRefresh.tsx as --ptr-pull (px) and --ptr-reach (0 to 1); nothing here transitions,
+   because the spring moves it and lands at once under reduce motion. */
+.root {
+  --ptr-pull: 0px;
+  --ptr-reach: 0;
+  --ptr-detent: calc(var(--ds-layout-touch) * 1.5);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-block-size: 0;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  padding-block-end: var(--ds-gap-sm);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+}
+.status {
+  margin-inline-start: auto;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+.scroller {
+  position: relative;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  max-block-size: var(--ptr-height, none);
+}
+/* the band the pull reveals: as tall as the pull, never taller than the detent */
+.gauge {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  box-sizing: border-box;
+  block-size: min(var(--ptr-pull), var(--ptr-detent));
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding-inline: var(--ds-gap-lg);
+}
+.ruler {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: var(--ds-gap-lg);
+  inline-size: var(--ds-gap-lg);
+  block-size: var(--ptr-detent);
+}
+.tick {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: calc(var(--t) * (100% - var(--ds-width-bar)));
+  inline-size: var(--ds-gap-md);
+  border-block-start: var(--ds-width-hairline) solid var(--ds-text-secondary);
+}
+.detent {
+  inline-size: var(--ds-gap-lg);
+  border-block-start: var(--ds-width-ring) solid var(--ds-text-primary);
+}
+.index {
+  position: absolute;
+  inset-inline-start: calc(var(--ds-gap-xs) * -1);
+  inset-block-start: calc(var(--ptr-reach) * (100% - var(--ds-width-bar)));
+  inline-size: calc(var(--ds-gap-lg) + var(--ds-gap-md));
+  border-block-start: var(--ds-width-bar) solid var(--ds-text-primary);
+}
+.word {
+  margin-block-end: var(--ds-gap-sm);
+  margin-inline-start: calc(var(--ds-gap-lg) + var(--ds-gap-lg));
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+  white-space: nowrap;
+}
+.work {
+  flex: 1;
+  margin-block-end: var(--ds-gap-sm);
+  min-inline-size: 0;
+}
+.content {
+  translate: 0 var(--ptr-pull);
+}
+
+.root[data-state="armed"] .word {
+  color: var(--ds-text-primary);
+  font-weight: var(--ds-type-weight-medium);
+}
+.root[data-state="working"] .gauge { block-size: var(--ptr-detent); }
+.root[data-state="failed"] .status { color: var(--ds-text-primary); }
+
+@media (forced-colors: active) {
+  .tick, .detent, .index { border-block-start-color: CanvasText; }
+}

@@ -1,0 +1,90 @@
+/* MediaPlayer — the reference sheet's MP3 player as one unit (system/FORM.md surface class for the body,
+   display class for the window, control class for the keys; lab apps/lab/media-player, variant A).
+   The body is a Card; Scrubber, IconButton, Grille, Slider and Rotary are the system's own. The window
+   takes Display's OLED recipe and adds a state line, so the state is printed where P2 puts it. */
+.root {
+  inline-size: calc(var(--ds-layout-touch) * 8);
+  max-inline-size: 100%;
+}
+.face {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ds-gap-xl);
+}
+/* the one window: recessed, inner = outer − inset like Display, white ink on near-black */
+.window {
+  box-sizing: border-box;
+  display: grid;
+  align-content: start;
+  gap: var(--ds-gap-xs);
+  min-block-size: calc(var(--ds-layout-touch) * 2);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-xl);
+  border-radius: max(
+    var(--ds-corner-mark),
+    calc(var(--display-outer, calc(var(--ds-corner-inner) + var(--ds-gap-inset))) - var(--display-inset, var(--ds-gap-inset)))
+  );
+  background: var(--ds-display-oled-bg);
+  color: var(--ds-display-oled-ink);
+  box-shadow: var(--ds-elevation-well), var(--ds-emit-display);
+  font-family: var(--ds-type-family);
+  line-height: var(--ds-type-leading-tight);
+}
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-gap-md);
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+}
+.word {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-sm);
+}
+.glyph {
+  flex: none;
+  inline-size: calc(var(--ds-control-mark) + var(--ds-space-0-5));
+  block-size: calc(var(--ds-control-mark) + var(--ds-space-0-5));
+  fill: currentColor;
+}
+.count { font-variant-numeric: tabular-nums; }
+.title {
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  overflow-wrap: anywhere;
+}
+.meta {
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  overflow-wrap: anywhere;
+}
+.reading {
+  position: absolute;
+  inline-size: var(--ds-space-px);
+  block-size: var(--ds-space-px);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* the window prints the title, so the scrubber's own title line stays for its accessible name only */
+.scrubber > :first-child { display: none; }
+.deck {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-gap-xl);
+}
+.keys {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-lg);
+}
+.meter { flex: none; }
+.volume { min-inline-size: 0; }
+
+@media (forced-colors: active) {
+  .window { border: var(--ds-width-hairline) solid CanvasText; }
+}

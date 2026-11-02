@@ -1,6 +1,13 @@
 // Usage-tab content per component (component-depth.md U1–U14). A component with no entry here renders
 // its first-edition notes and fails G-K2 until its depth file is written. Each wave adds its files.
 import type { Depth } from './types';
+import { SNACKBAR } from './snackbar';
+import { ACTION_SHEET } from './action-sheet';
+import { BOTTOM_NAV } from './bottom-nav';
+import { QUEUE } from './queue';
+import { MEDIA_PLAYER } from './media-player';
+import { ENVIRONMENT } from './environment';
+import { PULL_TO_REFRESH } from './pull-to-refresh';
 import { TIME_PICKER } from './time-picker';
 import { SKELETON } from './skeleton';
 import { MENU } from './menu';
@@ -34,4 +41,4 @@ import { SWITCH } from './switch';
 import { BUTTON } from './button';
 import { CONTAINER, GRID, STACK } from './layout';
 
-export const DEPTH: Record<string, Depth> = { Container: CONTAINER, Grid: GRID, Stack: STACK, Button: BUTTON, Switch: SWITCH, Text: TEXT, Heading: HEADING, IconButton: ICON_BUTTON, Checkbox: CHECKBOX, Display: DISPLAY, Grille: GRILLE, Slider: SLIDER, Rotary: ROTARY, Input: INPUT, Select: SELECT, SegmentedControl: SEGMENTED_CONTROL, Tabs: TABS, Dialog: DIALOG, Toast: TOAST, Chip: CHIP, Badge: BADGE, Progress: PROGRESS, Card: CARD, DeviceCard: DEVICE_CARD, RangeSlider: RANGE_SLIDER, Scrubber: SCRUBBER, Meter: METER, Sheet: SHEET, Banner: BANNER, EmptyState: EMPTY_STATE, List: LIST, Menu: MENU, Skeleton: SKELETON, TimePicker: TIME_PICKER };
+export const DEPTH: Record<string, Depth> = { Container: CONTAINER, Grid: GRID, Stack: STACK, Button: BUTTON, Switch: SWITCH, Text: TEXT, Heading: HEADING, IconButton: ICON_BUTTON, Checkbox: CHECKBOX, Display: DISPLAY, Grille: GRILLE, Slider: SLIDER, Rotary: ROTARY, Input: INPUT, Select: SELECT, SegmentedControl: SEGMENTED_CONTROL, Tabs: TABS, Dialog: DIALOG, Toast: TOAST, Chip: CHIP, Badge: BADGE, Progress: PROGRESS, Card: CARD, DeviceCard: DEVICE_CARD, RangeSlider: RANGE_SLIDER, Scrubber: SCRUBBER, Meter: METER, Sheet: SHEET, Banner: BANNER, EmptyState: EMPTY_STATE, List: LIST, Menu: MENU, Skeleton: SKELETON, TimePicker: TIME_PICKER, PullToRefresh: PULL_TO_REFRESH, Environment: ENVIRONMENT, MediaPlayer: MEDIA_PLAYER, Queue: QUEUE, BottomNav: BOTTOM_NAV, ActionSheet: ACTION_SHEET, Snackbar: SNACKBAR };

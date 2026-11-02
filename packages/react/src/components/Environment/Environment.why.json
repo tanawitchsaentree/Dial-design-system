@@ -1,0 +1,136 @@
+{
+  "concept": "Environment is one room's air drawn as a small dial appliance: a plastic body whose LCD says the temperature, printed meters under it reading humidity, air quality, carbon dioxide or noise, an optional grille for activity, and the room name and the time of the reading printed at the foot of the case like a wordmark and a model name.",
+  "kind": [
+    "environment",
+    "room air",
+    "air monitor"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "environment card drawn as a weather widget with a big sun or cloud icon, a gradient body and a coloured AQI pill",
+      "why_not": "A gradient body breaks P6, a coloured pill tells the state by colour alone, and a big icon becomes a second loud thing that repeats what the display already says (P1, P2)."
+    },
+    {
+      "pattern": "environment dashboard tile with four equal big numbers and no scale",
+      "why_not": "P2 gives a unit one window for its main reading, and the other levels need their regions named in a glyph and a word, which a bare number cannot do."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun weather station and clock radios of the Rams era: one window for the main reading, printed scales for the rest"
+    },
+    {
+      "source": "Braun HL 1 / H 1 room appliances (Dieter Rams, 1960s): one plain body, the name printed small at the foot of the case"
+    },
+    {
+      "source": "apps/lab/anchor (D-001, card A): display top, parts under it, wordmark bottom-left and model bottom-right"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "space",
+      "consequence": "the display window sits at the top of the unit, aligned to the body's inner inset",
+      "form": "The temperature is an LCD Display across the full width at the top of the body, the first thing read."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "The temperature window is Display's polite status region, so a new reading is spoken without taking focus, and the unit has no control."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The room name is printed bottom-left in the wordmark's place and the time of the reading bottom-right in the model name's place."
+    },
+    {
+      "p": "P4",
+      "axis": "interaction",
+      "consequence": "a grille that shows a value exposes it as text to assistive tech",
+      "form": "The optional activity grille carries its label and value text, and a printed caption beside it says the same in words."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The unit only reads, so it has no orange at all; regions are printed glyphs and words and the late or offline state is a Badge glyph and word."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "When the sensor is late or stops answering the readings stay in their places at full contrast, and only the notice line under the window changes its glyph and words."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/environment/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "display-led: LCD on top, meters stacked under it, small grille beside a caption"
+      },
+      {
+        "id": "B",
+        "name": "wide body: LCD on the left, meters in a column on the right"
+      },
+      {
+        "id": "C",
+        "name": "grille-led: a large grille lit by air quality under a small LCD"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps anchor A's order with the window at the top (P2) and one column that holds on a 375px phone; B squeezes the meters too short to read and breaks to one column anyway, and C spends a large grille on a reading that needs a number, while P4 keeps holes for activity."
+  },
+  "parts": {
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The body takes eight touch modules of width, like anchor A, and never grows wider than its column."
+    },
+    "face": {
+      "p": "P2",
+      "axis": "space",
+      "why": "The window, the notice line, the meters and the grille stack in one column inside the body's inset."
+    },
+    "notice": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A notice line is always reserved under the window; it prints the state of the sensor as a Badge glyph and words."
+    },
+    "meters": {
+      "p": "P4",
+      "axis": "space",
+      "why": "The meters stand one under another on the module step, each reading one level of the room's air."
+    },
+    "activity": {
+      "p": "P4",
+      "axis": "space",
+      "why": "The activity grille sits at the end of its row with its printed caption at the start of the same line."
+    },
+    "caption": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The activity caption is printed in the caption size, regular weight, in primary ink on the plastic body."
+    }
+  },
+  "states": {
+    "data-state=stale": {
+      "p": "P2",
+      "axis": "interaction",
+      "why": "A late reading keeps every value and the notice turns to a warning glyph with words saying when the last one came."
+    },
+    "data-state=offline": {
+      "p": "P2",
+      "axis": "interaction",
+      "why": "When the sensor stops answering the window says Not answering and the notice names the time of the last reading in words."
+    },
+    "@media forced-colors: active": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "In forced colours the caption and the notice use the system text colour, so the room's state stays readable."
+    }
+  }
+}

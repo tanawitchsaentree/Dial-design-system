@@ -1,0 +1,82 @@
+/* Snackbar — Toast's strip of matte ABS, one at a time, centred above the bottom nav (FORM.md surface class,
+   elevation.float, D-003). Status is a printed glyph and a word, never a coloured bar, never orange, never dark. */
+.root {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-lg);
+  inline-size: 100%;
+  min-block-size: calc(var(--ds-control-md) + var(--ds-gap-sm) * 2);
+  padding-block: var(--ds-gap-sm);
+  padding-inline: var(--ds-gap-xl) var(--ds-gap-sm);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-panel);
+  background: var(--ds-surface-solid);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  box-shadow: var(--ds-elevation-float), inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-material-lit);
+  pointer-events: auto;
+}
+.head { display: inline-flex; align-items: center; gap: var(--ds-gap-sm); flex: none; }
+.glyph {
+  inline-size: var(--ds-control-icon-md);
+  block-size: var(--ds-control-icon-md);
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--ds-width-ring);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.status { font-size: var(--ds-type-label); font-weight: var(--ds-type-weight-medium); line-height: var(--ds-type-leading-tight); }
+.message { flex: 1 1 auto; min-inline-size: 0; font-size: var(--ds-type-body); line-height: var(--ds-type-leading-body); color: var(--ds-text-primary); }
+.key { display: inline-flex; flex: none; margin-inline-start: auto; }
+
+.neutral .glyph { color: var(--ds-status-info-mark); }
+.positive .glyph { color: var(--ds-status-positive-mark); }
+.warning .glyph { color: var(--ds-text-primary); }
+.critical .glyph { color: var(--ds-status-critical-mark); }
+
+/* The region: fixed at the bottom, centred, one strip at a time. aboveNav lifts it over a bottom nav on a phone. */
+.region {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline: 0;
+  z-index: var(--ds-layer-toast);
+  box-sizing: border-box;
+  display: grid;
+  justify-items: center;
+  margin-inline: auto;
+  inline-size: 100%;
+  max-inline-size: calc(var(--ds-type-measure) + var(--ds-gap-inset) * 2);
+  padding: var(--ds-gap-lg);
+  padding-block-end: max(var(--ds-gap-inset), env(safe-area-inset-bottom, 0));
+  pointer-events: none;
+}
+.region > * {
+  grid-area: 1 / 1;
+  inline-size: 100%;
+  opacity: 0;
+  transform: translateY(var(--ds-motion-rise));
+  transition:
+    opacity var(--ds-motion-exit) var(--ds-motion-easing-exit),
+    transform var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.region > [data-state='open'] {
+  opacity: 1;
+  transform: none;
+  transition-duration: var(--ds-motion-enter);
+  transition-timing-function: var(--ds-motion-easing);
+}
+.aboveNav { padding-block-end: calc(var(--ds-control-lg) + var(--ds-gap-lg) + max(var(--ds-gap-sm), env(safe-area-inset-bottom, 0))); }
+
+@media (orientation: landscape) {
+  .aboveNav { padding-block-end: var(--ds-gap-inset); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .region > * { transition: none; transform: none; }
+}
+@media (forced-colors: active) {
+  .root { border-color: CanvasText; }
+  .glyph { color: CanvasText; }
+}

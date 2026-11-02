@@ -1,0 +1,55 @@
+{
+  "concept": "BottomNav prints the phone app's main sections along the bottom edge of the case like the scale under a radio's dial, glyph over word, with one ink index mark under the section you are in.",
+  "kind": ["bottom nav", "bottom navigation", "tab bar", "navigation rail"],
+  "default_to_avoid": [
+    { "pattern": "Material bottom navigation with a pill-shaped active indicator behind a filled icon", "why_not": "A tinted pill is a second surface language and a filled icon is a loud mark; P1 keeps selections out of colour and P5 keeps printing flat." },
+    { "pattern": "iOS tab bar with a blue tinted current icon and label", "why_not": "A blue tint is colour alone telling the place, and P5 asks for ink on plastic with no tinted text." }
+  ],
+  "references": [
+    { "source": "Braun RT 20 table radio (Dieter Rams, 1961): band names printed in one row on the case, the chosen one marked by an index" },
+    { "source": "Braun SK 4 radio-phonograph (Hans Gugelot and Dieter Rams, 1956): one printed scale, one pointer" },
+    { "source": "WAI-ARIA Authoring Practices, Landmark navigation and aria-current=page for the link to the page being shown" }
+  ],
+  "derivation": [
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "The section words sit on one printed line along the bottom edge of the strip, each glyph straight above its word." },
+    { "p": "P5", "axis": "type", "consequence": "one grotesk, regular and medium only; hierarchy by size and position", "form": "The current section is set in medium weight and the others in regular, at the label size, with no size jump." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "The current section is told by weight and one ink index mark under its word, never by orange or a tinted fill." },
+    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "Each link is a full quarter of the strip and at least the control.lg height, though the glyph draws at twenty pixels." },
+    { "p": "P6", "axis": "space", "consequence": "fixed positions, so a unit's layout does not reflow between states", "form": "A hidden medium-weight copy of each word holds its width, so moving between sections never shifts a neighbour." }
+  ],
+  "variants": {
+    "lab": "apps/lab/bottom-nav/index.html",
+    "options": [
+      { "id": "A", "name": "printed index, glyph over word on the bottom strip with Tabs' ink mark; a printed side index rail on wide screens" },
+      { "id": "B", "name": "key bank, four raised capsule station keys with the current one latched low" },
+      { "id": "C", "name": "mode window, a recessed LCD strip with the current word lit and the others ghosted" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A is printing on the case like Tabs and the book's side index, so the sections stay quiet beside each unit's one orange control (P1, P5); B adds four raised keys that compete with every unit's loud control, and C turns navigation into a second display whose ghost words read as disabled (P2)."
+  },
+  "parts": {
+    "root": { "p": "P5", "axis": "space", "why": "The strip is the bottom edge of the case, a plastic band with the section words printed on its inset line." },
+    "fixed": { "p": "P6", "axis": "space", "why": "Fixed to the bottom of the screen, the strip keeps one place on every page of the app." },
+    "auto": { "p": "P5", "axis": "space", "why": "The layout follows the screen, so a tall phone gets the bottom strip and a wide screen the printed rail." },
+    "rail": { "p": "P5", "axis": "space", "why": "On a wide screen the words are printed down the inline start like an index, each glyph beside its word." },
+    "list": { "p": "P5", "axis": "space", "why": "The links share the strip in equal parts so each word sits on the same printed line." },
+    "link": { "p": "P3", "axis": "space", "why": "Each link fills its share of the strip and stands at least the control.lg height for the thumb." },
+    "glyph": { "p": "P5", "axis": "depth", "why": "The glyph is printed with the two pixel stroke, flat on the plastic, never filled or embossed." },
+    "word": { "p": "P6", "axis": "space", "why": "The word stacks a hidden medium copy under the visible one so its width never changes with the weight." },
+    "text": { "p": "P5", "axis": "type", "why": "The visible word is set at the label size in regular weight, the printing on the case." },
+    "ghost": { "p": "P6", "axis": "space", "why": "The hidden medium copy reserves the widest form of the word so neighbours keep their places." },
+    "mark": { "p": "P1", "axis": "colour", "why": "The index mark is ink at full step on the chosen section only, never orange, like the mark on Tabs." }
+  },
+  "states": {
+    "hover": { "p": "P6", "axis": "interaction", "why": "Hover only darkens the word's ink one step, because printing does not rise when a finger comes near." },
+    "aria-current=page": { "p": "P5", "axis": "type", "why": "The section being shown is set in medium weight with the ink mark under it, told by weight and mark together." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "Keyboard focus draws the shared focus ring around the whole link so the target shows where it is." },
+    "@media orientation: landscape": { "p": "P5", "axis": "space", "why": "On a screen wider than it is tall, auto turns the strip into a rail at the inline start, an index down the edge." },
+    "@media prefers-reduced-motion: reduce": { "p": "P6", "axis": "motion", "why": "The ink fade moves nothing, so it stays under reduced motion just as on Tabs." },
+    "@media forced-colors: active": { "p": "P5", "axis": "colour", "why": "In forced colours the strip keeps a real border and the mark takes the link text colour so it survives." }
+  },
+  "motion": {
+    "color": { "p": "P6", "axis": "motion", "why": "Only the word's ink changes on hover, over motion.hover, so nothing travels or swells." }
+  }
+}

@@ -1,0 +1,40 @@
+/* Environment — one room's air on one plastic unit (FORM.md surface + display classes, D-001 anchor A).
+   The body is a Card; the parts are the system's own Display, Badge, Meter and Grille. Nothing is
+   orange because the unit only reads. The room name and the time are Card's wordmark and model. */
+.root {
+  inline-size: calc(var(--ds-layout-touch) * 8);
+  max-inline-size: 100%;
+}
+.face {
+  display: grid;
+  gap: var(--ds-gap-xl);
+}
+.notice {
+  margin: 0;
+  min-block-size: var(--ds-control-badge);
+  display: flex;
+  align-items: center;
+}
+.meters {
+  display: grid;
+  gap: var(--ds-gap-xl);
+}
+.activity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-gap-lg);
+}
+.caption {
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+
+/* late or offline: every reading stays in place at full contrast; the notice says it in words */
+.root[data-state="stale"] .notice,
+.root[data-state="offline"] .notice { font-weight: var(--ds-type-weight-medium); }
+
+@media (forced-colors: active) {
+  .caption, .notice { color: CanvasText; }
+}

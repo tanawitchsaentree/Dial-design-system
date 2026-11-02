@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Environment · one room's air on one unit</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. The default to avoid: a weather widget card with a big icon, a gradient and a coloured AQI pill. */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  h2 { font-size: 14px; font-weight: 500; margin: 0 0 10px; }
+  .row { display: flex; flex-wrap: wrap; gap: 28px; align-items: start; }
+  .col { display: grid; gap: 8px; max-inline-size: 380px; } .col p { font-size: 13px; color: var(--ds-text-secondary); }
+  .unit { box-sizing: border-box; inline-size: 340px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 18px; }
+  .unit.wide { inline-size: 520px; border-radius: 40px; }
+  .labels { display: flex; justify-content: space-between; font-size: 12px; } .labels b { font-weight: 500; } .labels span:last-child { color: var(--ds-text-secondary); font-variant-numeric: tabular-nums; }
+  .lcd { border-radius: 14px; background: var(--ds-display-lcd-bg); box-shadow: var(--ds-elevation-well); color: var(--ds-display-lcd-ink); padding: 14px 18px; display: grid; justify-items: end; }
+  .lcd .v { font-size: 44px; font-variant-numeric: tabular-nums; letter-spacing: 1px; } .lcd .v small { font-size: 16px; margin-inline-start: 4px; } .lcd .d { font-size: 12px; justify-self: start; }
+  .m { display: grid; gap: 5px; } .m .h { display: flex; justify-content: space-between; font-size: 12px; } .m .h span:last-child { color: var(--ds-text-secondary); font-variant-numeric: tabular-nums; } .m .h b { font-weight: 500; color: var(--ds-text-primary); }
+  .win { position: relative; block-size: 16px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); border: 1px solid var(--ds-line-ring); }
+  .win i { position: absolute; inset-block: -3px; inset-inline-start: calc(var(--v) * 100%); border-inline-start: 2px solid var(--ds-text-primary); }
+  .win u { position: absolute; inset-block: 0; inset-inline-start: calc(var(--v) * 100%); border-inline-start: 1px dashed var(--ds-text-secondary); }
+  .reg { display: flex; justify-content: space-between; font-size: 10px; color: var(--ds-text-secondary); }
+  .grille { display: grid; grid-template-columns: repeat(6, 10px); gap: 6px; } .grille i { inline-size: 10px; block-size: 10px; border-radius: 50%; background: var(--ds-grille-hole); box-shadow: var(--ds-elevation-well); } .grille i.on { background: var(--ds-grille-hole-on); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+  .badge { font-size: 12px; display: inline-flex; gap: 6px; align-items: center; } .badge svg { inline-size: 10px; block-size: 10px; fill: var(--ds-text-primary); }
+  .dim { opacity: 0.55; }
+  .big { display: grid; grid-template-columns: repeat(10, 1fr); gap: 7px; } .big i { aspect-ratio: 1; border-radius: 50%; background: var(--ds-grille-hole); box-shadow: var(--ds-elevation-well); } .big i.on { background: var(--ds-grille-hole-on); }
+</style>
+</head>
+<body>
+<h1>Environment · one room’s air at a glance on one plastic unit</h1>
+<p>Three ways to build it from the parts dial already has. The room name is printed bottom-left and the time of the reading bottom-right, like the wordmark and the model name. Last row: variant A when the sensor is late and when it stops answering.</p>
+<div id="out"></div>
+<script>
+  const meter = (name, text, word, v, lo, hi, regs) => `<div class="m"><div class="h"><span>${name}</span><span>${text} <b>${word}</b></span></div><div class="win"><u style="--v:${lo}"></u><u style="--v:${hi}"></u><i style="--v:${v}"></i></div><div class="reg">${regs.map((r) => `<span>${r}</span>`).join('')}</div></div>`;
+  const hum = meter('Humidity', '38 %', '● Comfort', 0.38, 0.3, 0.6, ['Dry', 'Comfort', 'Damp']);
+  const air = meter('Air quality', '74 AQI', '● Fair', 0.49, 0.33, 0.66, ['Clean', 'Fair', 'Poor']);
+  const co2 = meter('CO₂', '1 180 ppm', '▲ Stuffy', 0.65, 0.25, 0.5, ['Fresh', 'Stale', 'Stuffy']);
+  const grille = (n) => '<div class="grille" aria-label="Noise">' + Array.from({ length: 18 }, (_, i) => `<i class="${i % 6 < n ? 'on' : ''}"></i>`).join('') + '</div>';
+  const lcd = (v, d) => `<div class="lcd"><span class="d">${d}</span><span class="v">${v}<small>°C</small></span></div>`;
+  const labels = (room, t) => `<div class="labels"><b>${room}</b><span>${t}</span></div>`;
+  const V = {
+    a: ['A · display-led, meters stacked under it', 'Anchor A’s order: the LCD on top says the temperature, the meters read the air under it, a small grille shows noise beside the last meter. One column, so it holds on a phone.',
+      `<div class="unit">${lcd('21.5', 'Feels dry')}${hum}${air}${co2}<div class="two"><span style="font-size:12px">Noise, quiet</span>${grille(2)}</div>${labels('Living room', '10:42')}</div>`],
+    b: ['B · display left, meters right', 'A wide body: the window and the meters side by side. It reads faster on a laptop but breaks into one column on a phone, and the meters get too short to read.',
+      `<div class="unit wide"><div class="two">${lcd('21.5', 'Feels dry')}<div style="display:grid;gap:14px">${hum}${air}${co2}</div></div>${labels('Living room', '10:42')}</div>`],
+    c: ['C · grille-led air field', 'A big grille lit by air quality with a small LCD. Holes are for activity (P4), and a grille cannot show 74 AQI to the number.',
+      `<div class="unit">${lcd('21.5', 'Air 74')}<div class="big">${Array.from({ length: 40 }, (_, i) => `<i class="${i % 10 < 5 ? 'on' : ''}"></i>`).join('')}</div>${labels('Living room', '10:42')}</div>`],
+  };
+  let html = '';
+  for (const theme of ['light', 'dark']) {
+    html += `<section data-theme="${theme}" style="padding:16px;background:var(--ds-surface-page);color:var(--ds-text-primary)"><div class="row">`;
+    for (const [, [name, note, body]] of Object.entries(V)) html += `<div class="col"><h2>${name} (${theme})</h2>${body}<p>${note}</p></div>`;
+    html += `<div class="col"><h2>A · late (${theme})</h2><div class="unit">${lcd('21.5', 'Feels dry')}<span class="badge"><svg viewBox="0 0 10 10"><path d="M5 .9 9.4 9.1H.6z"/></svg>No new reading for 25 min</span>${hum}${air}${labels('Living room', '10:17')}</div></div>`;
+    html += `<div class="col"><h2>A · not answering (${theme})</h2><div class="unit">${lcd('21.5', 'Not answering')}<span class="badge"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8"/></svg>Offline, last reading 09:58</span><div class="dim">${hum}${air}</div>${labels('Living room', '09:58')}</div></div>`;
+    html += '</div></section>';
+  }
+  document.getElementById('out').innerHTML = html;
+</script>
+</body>
+</html>

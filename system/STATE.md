@@ -8,9 +8,10 @@
 - **Phase ปัจจุบัน:** wave 2 built (commit fb2b785, targeted checks + sweep green) → **wave 3** กำลังทำ; full verify ครั้งเดียวท้าย wave 3 ปิดทั้ง M2 และ M3
 - **งานล่าสุดที่เสร็จ:** full verify 20/20 (recorded), milestone M1 44/44; book shell A (R-001), 24 components
 - **งานถัดไป:** user review ของ system/REVIEW.md + book → RETRO สำหรับสิ่งที่ส่งกลับ → wave 2 (home-iot: RangeSlider, Meter, List, Sheet, Banner, EmptyState, Skeleton, TimePicker + media: player, progress, list)
-- **Wave ปัจจุบัน:** 3 · agents: BottomNav/ActionSheet/Snackbar, PullToRefresh/Environment, MediaPlayer/Queue
+- **Wave ปัจจุบัน:** 3 built (41 components) · full verify for M2 + M3 running
 - **ค้าง/blocked:** ค่าสีและสัดส่วนยังเป็นค่าประมาณ (ref-01.png ไม่มี); ไม่ publish (Phase 8 เป็นของ user)
 ## Log ย่อ (ใหม่สุดบน ≤15 บรรทัด)
+- 2026-11-02 wave 3 done (7 components); D-005 user logo as dial mark (favicon, PWA icons, top bar)
 - 2026-11-02 wave 2 done (10 components), G-MO3 Switch + G-TT1 picker fixed; wave 3 started; verify deferred to end of wave 3
 - 2026-11-02 user: "ทำต่อไปเรื่อยให้ครบทุก wave"; kiln 2.7 synced, M2/M3 defined, wave 2 started
 - 2026-11-02 R-002 Select clip + single-variant label fixed; visual sweep 21 pages ×2 themes; verify 20/20, milestone 44/44 (engine 2.5.4)

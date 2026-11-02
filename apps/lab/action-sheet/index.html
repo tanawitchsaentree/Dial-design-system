@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · ActionSheet · three ways to offer a few actions for one object</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lead { margin: 0 0 18px; max-width: 80ch; font-size: 14px; line-height: 1.5; }
+  .variant { margin-block-end: 40px; } .variant > h2 { font-size: 15px; font-weight: 500; margin: 0 0 4px; } .variant > .note { font-size: 13px; margin: 0 0 12px; color: var(--ds-text-secondary); max-width: 90ch; line-height: 1.45; }
+  .row { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
+  .screen { position: relative; overflow: hidden; border-radius: 14px; background: var(--ds-surface-page); outline: 1px solid var(--ds-line-divider); }
+  .phone { inline-size: 375px; block-size: 640px; } .wide { inline-size: 760px; block-size: 440px; }
+  .page { padding: 20px; display: grid; gap: 12px; align-content: start; }
+  .page .unit { block-size: 110px; border-radius: 22px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); position: relative; }
+  .wide .page { grid-template-columns: repeat(3, 1fr); }
+  .dots { position: absolute; inset-block-start: 14px; inset-inline-end: 14px; inline-size: 44px; block-size: 44px; border-radius: 999px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); }
+  .phone::after { content: ""; position: absolute; inset: 0; background: var(--ds-surface-scrim); z-index: 1; }
+  svg.g { inline-size: 16px; block-size: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: var(--ds-text-secondary); flex: none; }
+  .sheet { position: absolute; z-index: 2; box-sizing: border-box; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-float), inset 1px 1px 0 var(--ds-material-lit); color: var(--ds-text-primary); }
+  .head { padding: 4px 12px 8px; } .head b { display: block; font-size: 17px; font-weight: 500; } .head span { font-size: 12px; color: var(--ds-text-secondary); }
+  .rows { display: grid; }
+  .item { display: flex; align-items: center; gap: 10px; min-block-size: 48px; padding-inline: 12px; font-size: 16px; border-radius: 12px; }
+  .item.focus { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .item.danger { margin-block-start: 6px; } .lamp { inline-size: 10px; block-size: 10px; margin: 3px; background: var(--ds-status-critical-mark); flex: none; }
+  .cancel { display: grid; place-items: center; min-block-size: 52px; border-radius: 999px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); font-size: 16px; font-weight: 500; }
+
+  /* A · lid with a key: one docked body; rows printed like Menu's, destructive last with the lamp; Cancel a full-width plastic key under a gap */
+  .a .phone .sheet { inset-inline: 0; inset-block-end: 0; border-radius: 28px 28px 0 0; padding: 20px 16px 32px; display: grid; gap: 16px; }
+  .a .wide .sheet, .b .wide .sheet, .c .wide .sheet { inset-block-start: 76px; inset-inline-start: calc(33.3% - 216px); inline-size: 220px; border-radius: 20px; padding: 6px; display: grid; gap: 4px; }
+  .a .wide .head, .b .wide .head, .c .wide .head { padding: 8px 12px 4px; }
+  .a .wide .cancel, .c .wide .cancel { display: none; }
+
+  /* B · two bodies: the actions on one body and Cancel on a second body under it */
+  .b .phone .sheet { inset-inline: 10px; border-radius: 22px; padding: 8px; }
+  .b .phone .sheet.top { inset-block-end: 90px; } .b .phone .sheet.bot { inset-block-end: 22px; padding: 0; background: transparent; box-shadow: none; }
+  .b .phone .sheet.bot .cancel { min-block-size: 60px; border-radius: 22px; }
+  .b .wide .sheet.bot { display: none; }
+
+  /* C · key bank: every action a raised capsule key stacked in the lid; destructive key carries the lamp */
+  .c .phone .sheet { inset-inline: 0; inset-block-end: 0; border-radius: 28px 28px 0 0; padding: 20px 16px 32px; display: grid; gap: 10px; }
+  .c .phone .item { justify-content: center; min-block-size: 52px; border-radius: 999px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); }
+  .c .phone .item.danger { margin: 0; }
+</style>
+</head>
+<body>
+<h1>ActionSheet · Rename, Move to room, Remove for "Kitchen lamp", Cancel apart</h1>
+<p class="lead">Each variant on a 375px phone (rises from the bottom over a scrim) and on a wide screen (a panel by the card's key, like Menu). Light theme; switch with ?dark.</p>
+
+<template id="rows">
+  <div class="head"><b>Kitchen lamp</b><span>lamp 02 · Kitchen</span></div>
+  <div class="rows">
+    <div class="item focus"><svg class="g" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>Rename</div>
+    <div class="item"><svg class="g" viewBox="0 0 24 24"><path d="M4 12h14M13 7l5 5-5 5"/></svg>Move to room</div>
+    <div class="item danger"><i class="lamp"></i>Remove</div>
+  </div>
+  <div class="cancel">Cancel</div>
+</template>
+
+<section class="variant a"><h2>A · lid with a key (picked)</h2><p class="note">One docked body, family of Sheet. Rows are Menu's printing with glyphs; Remove comes last after a gap with the critical square lamp and its word. Cancel is a full-width plastic key under a gap. On a wide screen the same rows open as a panel by the key, flipped or shifted to stay whole, with Escape and a click away as the way out.</p>
+  <div class="row"><div class="screen phone"><div class="page"><div class="unit"><span class="dots"></span></div><div class="unit"></div><div class="unit"></div></div><div class="sheet"></div></div>
+  <div class="screen wide"><div class="page"><div class="unit"><span class="dots"></span></div><div class="unit"></div><div class="unit"></div></div><div class="sheet"></div></div></div></section>
+<section class="variant b"><h2>B · two bodies</h2><p class="note">The actions on one floating body and Cancel on a second one under it: the iOS layout in plastic. Two bodies for one decision, and the inset margins waste a phone's width.</p>
+  <div class="row"><div class="screen phone"><div class="page"><div class="unit"><span class="dots"></span></div><div class="unit"></div><div class="unit"></div></div><div class="sheet top"></div><div class="sheet bot"></div></div>
+  <div class="screen wide"><div class="page"><div class="unit"><span class="dots"></span></div><div class="unit"></div><div class="unit"></div></div><div class="sheet top"></div><div class="sheet bot"></div></div></div></section>
+<section class="variant c"><h2>C · key bank</h2><p class="note">Every action is a raised capsule key, stacked. Four keys of equal weight make Remove as easy to hit as Rename, and a lid of keys reads as a form to fill.</p>
+  <div class="row"><div class="screen phone"><div class="page"><div class="unit"><span class="dots"></span></div><div class="unit"></div><div class="unit"></div></div><div class="sheet"></div></div>
+  <div class="screen wide"><div class="page"><div class="unit"><span class="dots"></span></div><div class="unit"></div><div class="unit"></div></div><div class="sheet"></div></div></div></section>
+<script>
+  if (location.search.includes('dark')) document.documentElement.dataset.theme = 'dark';
+  const t = document.getElementById('rows');
+  for (const s of document.querySelectorAll('.sheet')) {
+    const f = t.content.cloneNode(true);
+    if (s.classList.contains('top')) f.querySelector('.cancel').remove();
+    if (s.classList.contains('bot')) { s.append(f.querySelector('.cancel')); continue; }
+    s.append(f);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · PullToRefresh · three ways to ask the hub again</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. The default to avoid: a circular spinner that drops from the top and loops (P6). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  h2 { font-size: 14px; font-weight: 500; margin: 24px 0 10px; }
+  .row { display: flex; flex-wrap: wrap; gap: 20px; }
+  .frame { display: grid; gap: 6px; } .frame > span { font-size: 12px; color: var(--ds-text-secondary); }
+  .unit { inline-size: 240px; block-size: 300px; overflow: hidden; border-radius: 36px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; grid-template-rows: auto 1fr; }
+  .bar { display: flex; align-items: center; gap: 8px; padding: 14px 16px 6px 20px; font-size: 13px; }
+  .bar b { font-weight: 500; } .bar .st { margin-inline-start: auto; color: var(--ds-text-secondary); font-variant-numeric: tabular-nums; font-size: 12px; }
+  .key { inline-size: 36px; block-size: 36px; border-radius: 50%; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); display: grid; place-items: center; }
+  .key svg { inline-size: 16px; block-size: 16px; fill: none; stroke: var(--ds-text-primary); stroke-width: 2; stroke-linecap: round; }
+  .scroll { position: relative; overflow: hidden; }
+  .band { position: absolute; inset-inline: 0; inset-block-start: 0; block-size: var(--pull); padding-inline: 20px; display: flex; gap: 12px; align-items: end; padding-block-end: 8px; box-sizing: border-box; font-size: 12px; color: var(--ds-text-secondary); overflow: hidden; }
+  .content { transform: translateY(var(--pull)); padding: 4px 12px; display: grid; gap: 8px; }
+  .item { display: flex; justify-content: space-between; padding: 12px; border-radius: 14px; font-size: 13px; }
+  .item span:last-child { font-variant-numeric: tabular-nums; color: var(--ds-text-secondary); }
+  /* A · a printed index down a short ruler into a detent */
+  .a .ruler { position: relative; inline-size: 14px; block-size: 52px; flex: none; }
+  .a .ruler i { position: absolute; inset-inline-start: 0; inline-size: 8px; border-block-start: 1px solid var(--ds-text-secondary); inset-block-start: calc(var(--t) * 100%); }
+  .a .ruler i.det { inline-size: 14px; border-block-start: 2px solid var(--ds-text-primary); }
+  .a .ruler .idx { position: absolute; inset-inline-start: -4px; inline-size: 22px; border-block-start: 2px solid var(--ds-text-primary); inset-block-start: calc(var(--i) * 100%); }
+  .a .word b { font-weight: 500; color: var(--ds-text-primary); }
+  .ticks { display: flex; gap: 4px; } .ticks i { inline-size: 3px; block-size: 8px; background: var(--ds-text-secondary); border-radius: 1px; }
+  .work { display: grid; gap: 6px; inline-size: 100%; } .work .h { display: flex; justify-content: space-between; } .groove { block-size: 4px; border-radius: 2px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); display: flex; gap: 6px; padding-inline: 4px; align-items: center; } .groove i { flex: 1; block-size: 2px; background: var(--ds-text-secondary); }
+  /* B · a cap sliding sideways in a groove */
+  .b .gr { position: relative; flex: 1; block-size: 8px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); margin-block-end: 6px; }
+  .b .cap { position: absolute; inset-block-start: -8px; inline-size: 14px; block-size: 24px; border-radius: 4px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); inset-inline-start: calc(var(--i) * (100% - 14px)); }
+  /* C · an LCD strip that counts */
+  .c .lcd { flex: 1; block-size: 36px; border-radius: 8px; background: var(--ds-display-lcd-bg); box-shadow: var(--ds-elevation-well); color: var(--ds-display-lcd-ink); display: flex; align-items: center; justify-content: end; padding-inline: 10px; font-variant-numeric: tabular-nums; font-size: 18px; letter-spacing: 2px; }
+  [data-theme="dark"] { color-scheme: dark; }
+</style>
+</head>
+<body>
+<h1>PullToRefresh · pulling a list down past a detent asks the hub for fresh readings</h1>
+<p>Each variant is shown in four frames: pulling, past the detent, working, updated. Every frame keeps the refresh key in the bar, so the gesture is never the only way. Nothing loops while it works (P6).</p>
+<div id="out"></div>
+<script>
+  const rows = ['Hall lamp|On', 'Kitchen|21.5 °C', 'Garden sensor|12 %', 'Washer|Rinse', 'Bedroom|19.0 °C'];
+  const list = rows.map((r) => { const [a, b] = r.split('|'); return `<div class="item"><span>${a}</span><span>${b}</span></div>`; }).join('');
+  const key = '<span class="key"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg></span>';
+  const ruler = (i) => { let t = ''; for (let k = 0; k <= 4; k++) t += `<i class="${k === 4 ? 'det' : ''}" style="--t:${k / 4}"></i>`; return `<span class="ruler">${t}<span class="idx" style="--i:${i}"></span></span>`; };
+  const ticks = '<span class="groove">' + '<i></i>'.repeat(12) + '</span>';
+  const work = `<span class="work"><span class="h"><span>Asking the hub</span><span>Working</span></span>${ticks}</span>`;
+  const V = {
+    a: { name: 'A · printed index down a short ruler into a detent', note: 'The pull moves an ink index down five printed ticks; at the heavy detent tick the word changes. On release the band holds at the detent on the spring and shows Progress’s still ticks. Same printing as Slider’s ruler, turned on its side.',
+      frames: [[40, `${ruler(0.45)}<span class="word">Pull to refresh</span>`, 'Updated 10:41'], [64, `${ruler(1)}<span class="word"><b>Release to refresh</b></span>`, 'Updated 10:41'], [64, work, 'Working'], [0, '', 'Updated 10:42']] },
+    b: { name: 'B · cap sliding sideways in a groove', note: 'The vertical pull drives a fader cap across a horizontal groove. It reads as a control, and a part moving at right angles to the hand is not how a mechanism behaves (P3).',
+      frames: [[40, `<span class="gr"><span class="cap" style="--i:0.45"></span></span>`, 'Updated 10:41'], [64, `<span class="gr"><span class="cap" style="--i:1"></span></span>`, 'Updated 10:41'], [64, work, 'Working'], [0, '', 'Updated 10:42']] },
+    c: { name: 'C · LCD strip that counts', note: 'A small LCD drops in and counts the pull up, then reads “- - -” while it works. A second window competes with the unit’s one display (P2), and the dashes say nothing about what is happening.',
+      frames: [[48, `<span class="lcd">45</span>`, 'Updated 10:41'], [64, `<span class="lcd">00</span>`, 'Updated 10:41'], [64, `<span class="lcd">- - -</span>`, 'Working'], [0, '', 'Updated 10:42']] },
+  };
+  const labels = ['pulling', 'past the detent', 'working', 'updated'];
+  let html = '';
+  for (const theme of ['light', 'dark']) {
+    html += `<section data-theme="${theme}" style="padding:16px;background:var(--ds-surface-page);color:var(--ds-text-primary)">`;
+    for (const [id, v] of Object.entries(V)) {
+      html += `<h2>${v.name} (${theme})</h2><div class="row ${id}">` + v.frames.map(([pull, band, st], i) =>
+        `<div class="frame"><span>${labels[i]}</span><div class="unit"><div class="bar"><b>Readings</b><span class="st">${st}</span>${key}</div>` +
+        `<div class="scroll" style="--pull:${pull}px"><div class="band">${band}</div><div class="content">${list}</div></div></div></div>`).join('') + `</div><p>${v.note}</p>`;
+    }
+    html += '</section>';
+  }
+  document.getElementById('out').innerHTML = html;
+</script>
+</body>
+</html>

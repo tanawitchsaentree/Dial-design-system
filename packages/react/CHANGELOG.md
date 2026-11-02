@@ -35,6 +35,13 @@ One line per change, `- Component: what changed`, under a heading of the version
 - Menu: First release. A menu button that opens Select's plastic panel of actions on the page body, flipping and shifting to stay whole, with a destructive action marked by a lamp and a word.
 - Skeleton: First release. Skeleton holds the exact box of content still loading, drawn as the part with its power off (ghost segments, unlit holes, flat plastic). It never moves.
 - TimePicker: First release. TimePicker sets a time of day in a recessed well. Hour and minute are spinbuttons with set keys under them, on the 24 or 12 hour clock.
+- PullToRefresh: First release. PullToRefresh is a list that asks the hub for fresh readings when pulled past one detent or when its refresh key is pressed.
+- Environment: First release. Environment shows one room's air on one unit with the temperature in a window, meters for the other levels and the sensor state in words.
+- MediaPlayer: First release. The MP3 unit with an OLED window with the state in a glyph and a word, scrubber, three round transport keys with play the one orange part, level holes and volume. Plays an HTMLAudioElement, only on a press.
+- Queue: First release. The up-next list on one plastic body, with the playing row in ink and a word. Reorder with Alt and the arrows, a row menu or the printed handle, remove with Delete or the menu.
+- BottomNav: First release. the phone app's main sections printed along the bottom edge, glyph over word, the current one in medium weight with an ink mark, aria-current page links, safe-area padding, and a printed rail on wide screens.
+- ActionSheet: First release. a few actions for one object on the native modal dialog, docked to the bottom with a separate Cancel key on a phone and standing by its trigger like Menu on a wide screen; destructive actions last with the critical lamp and their word.
+- Snackbar: First release. Toast's strip, one at a time, centred above the bottom nav, with one Undo key, role status, at least 5 s and paused on hover and focus; SnackbarProvider and useSnackbar.
 
 ## 0.0.0 (2026-10-27)
 

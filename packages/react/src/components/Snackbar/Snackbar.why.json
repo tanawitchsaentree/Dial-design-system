@@ -1,0 +1,55 @@
+{
+  "concept": "Snackbar is Toast's strip of matte plastic placed once, centred just above the phone's bottom nav, saying what just happened with a printed glyph and word and offering one key that undoes it.",
+  "kind": ["snackbar", "undo bar", "bottom message"],
+  "family": "Toast",
+  "family_difference": "Toast stacks up to three notes at the inline end with a close key each; Snackbar shows one message at a time centred above the bottom nav, has no close key, carries at most one action key that undoes, replaces itself when a new one is posted, and stays a polite status even when something failed.",
+  "default_to_avoid": [
+    { "pattern": "Material dark snackbar, a near-black bar with white text and a coloured action word", "why_not": "A dark bar on a light screen is a second material and a coloured action word is a link in an accent hue; P1 and P5 keep one plastic and ink at full step." },
+    { "pattern": "snackbar that slides in from the edge and bounces before it settles", "why_not": "P6 allows motion only on a change of state, and a bounce is choreography that pulls the eye away from the room." }
+  ],
+  "references": [
+    { "source": "Braun SK 61 radio-phonograph (Dieter Rams, 1962): the one changing reading sits in a fixed slot under the controls" },
+    { "source": "WCAG 2.2 success criterion 2.2.1 Timing Adjustable: a message that leaves on its own can be paused" },
+    { "source": "WAI-ARIA status role: a polite live region read without moving focus" }
+  ],
+  "derivation": [
+    { "p": "P1", "axis": "space", "consequence": "sits where the hand expects it (lower or right of the display)", "form": "The strip sits centred just above the bottom nav, so Undo is under the thumb that just removed the lamp." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "The Undo key is a plastic key, never orange, and the tone is a printed glyph with its word beside it." },
+    { "p": "P6", "axis": "space", "consequence": "fixed positions, so a unit's layout does not reflow between states", "form": "The strip floats over the page and never pushes the nav or the content; one message shows at a time." }
+  ],
+  "variants": {
+    "lab": "apps/lab/snackbar/index.html",
+    "options": [
+      { "id": "A", "name": "strip over the nav, Toast's plastic strip centred just above the bottom nav with one Undo key" },
+      { "id": "B", "name": "printed on the nav, the bottom nav grows a row and prints the message in it" },
+      { "id": "C", "name": "counter window, the message in an LCD window strip with the key beside it" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps Toast's one plastic and puts Undo under the thumb without moving anything (P1, P6); B changes the nav's height while it shows, which moves every section word, and C adds a second display window that competes with the device's own (P2)."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "depth", "why": "The strip is matte plastic at float height with a lit top-left hairline, the same body as Toast." },
+    "head": { "p": "P5", "axis": "space", "why": "The glyph and the status word sit together at the start of the line, printed on the strip." },
+    "glyph": { "p": "P5", "axis": "depth", "why": "The tone glyph is printed with the two pixel stroke, flat on the plastic, never filled." },
+    "status": { "p": "P5", "axis": "type", "why": "The status word is set at the label size in medium weight so the tone is read as a word." },
+    "message": { "p": "P5", "axis": "type", "why": "The message is set at body size in the primary ink, short and in the past tense." },
+    "key": { "p": "P1", "axis": "space", "why": "The one action key sits at the inline end of the strip, where the thumb reaches it." },
+    "neutral": { "p": "P5", "axis": "colour", "why": "A plain note prints its glyph in the info ink, the word beside it in the primary ink." },
+    "positive": { "p": "P5", "axis": "colour", "why": "A done message prints its tick in the positive ink, never as a tinted strip." },
+    "warning": { "p": "P5", "axis": "colour", "why": "A warning prints its triangle in the primary ink, so shape and word carry it alone." },
+    "critical": { "p": "P5", "axis": "colour", "why": "A failure prints its octagon in the critical ink beside the word Failed, never orange." },
+    "region": { "p": "P6", "axis": "space", "why": "The region is fixed and centred at the bottom of the screen, so the message always appears in one place." },
+    "aboveNav": { "p": "P1", "axis": "space", "why": "On a phone the region lifts by the nav's height so the strip sits just above the printed sections." }
+  },
+  "states": {
+    "data-state=open": { "p": "P6", "axis": "motion", "why": "The strip rises a few pixels and fades in on the enter easing, and leaves faster on the exit easing." },
+    "@media orientation: landscape": { "p": "P1", "axis": "space", "why": "On a wide screen the nav is a rail at the side, so the strip drops to the bottom edge inset." },
+    "@media prefers-reduced-motion: reduce": { "p": "P6", "axis": "motion", "why": "Under reduced motion the strip appears and leaves at once, with no rise and no fade." },
+    "@media forced-colors: active": { "p": "P5", "axis": "colour", "why": "In forced colours the strip keeps a real border and the glyph takes the text colour so both survive." }
+  },
+  "motion": {
+    "opacity": { "p": "P6", "axis": "motion", "why": "The strip fades with its short rise so it arrives and leaves as one change of state." },
+    "transform": { "p": "P6", "axis": "motion", "why": "The only travel is motion.rise, a few pixels upward, over motion.enter in and motion.exit out." }
+  }
+}

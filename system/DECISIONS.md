@@ -32,3 +32,10 @@
 - **เพราะ:** G-EL1: a unit must stand 1.15:1 from what is under it; it was 1.07:1. P6 (a unit never floats higher than its material allows): the lightest fix is the ground, not a deeper shadow (CLAUDE.md rule 14). The reference also shows the page lighter than the bodies.
 - **ตัวเลือกที่ตัดทิ้ง:** darker body (moves the anchor), deeper shadow (against P6)
 - **กระทบ:** G-AN1 rim on the page; re-record `system/anchor/anchor-likeness.json` only if G-AN1 goes red. At #FCFBF9 G-AN1 passes: body L 0.9251 C 0.0071 unchanged, rim 1.165:1 against the recorded 1.056:1, inside the allowed delta. Also field.column/on-column changed by the shell fix (G-NT1): field.column abs.700/charcoal.200, on-column abs.0/abs.900
+
+### D-005: dial mark (user's logo)
+- **วันที่:** 2026-11-02 · **Phase:** wave 3
+- **เลือก:** the user's logo (two ink dots + one orange arc, `system/brand/dial-logo.png`, favicon `system/brand/dial-favicon.png`) is dial's mark: favicon, PWA icons (mark on a warm-white ABS tile, radius 0.16), and a 20px mark beside the "dial" wordmark in the book's top bar (ink dots #2E2D2A light / #EDEBE6 dark; the arc stays orange)
+- **เพราะ:** user supplied it ("จัดการหน่อย"); it carries P1 itself: grey printing and one orange part
+- **ตัวเลือกที่ตัดทิ้ง:** text-only wordmark
+- **กระทบ:** apps/docs/public icons + manifest, App.tsx top bar, docs.css .brand-mark; regenerate from system/brand if the logo changes

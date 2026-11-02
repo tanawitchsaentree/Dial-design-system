@@ -1,0 +1,55 @@
+{
+  "concept": "PullToRefresh is the one-detent fader of a dial list. Pulling the list down at its top drags a printed ink index down a short ruler into its detent; released there, the list settles on the material's spring, holds a still Working reading while the hub answers, and prints the time of the new readings. A round refresh key in the bar does the same without the gesture.",
+  "kind": ["pull to refresh", "refresh"],
+  "default_to_avoid": [
+    { "pattern": "Material pull to refresh with a circular spinner that drops from the top of the list and loops while it waits", "why_not": "A looping spinner is idle animation, which P6 rules out, and a disc that falls in from nowhere is no part of the appliance; P3 asks for a mechanism that moves like a fader into a detent." },
+    { "pattern": "pull to refresh as the only way to refresh, hidden behind a gesture with no key and no announcement", "why_not": "P3 gives every mechanism a keyboard path and a visible label, so a printed refresh key stays in the bar and the result is spoken through a polite status line." }
+  ],
+  "references": [
+    { "source": "Braun audio 1 / audio 2 compact systems (Dieter Rams, 1962): linear faders in a slot with a printed ruler scale" },
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a band scale with one printed index and a stop at its end" },
+    { "source": "apps/lab/anchor (D-001, card A) and Slider: the ruler printing and the spring m1.4 k520 c46" }
+  ],
+  "derivation": [
+    { "p": "P3", "axis": "motion", "consequence": "rotaries and faders settle into the nearest detent", "form": "The pull is a fader with one detent: past it the list settles at the detent on the spring of mass 1.4, stiffness 520 and damping 46; short of it the list returns to the top." },
+    { "p": "P3", "axis": "shape", "consequence": "faders ride a groove with a ruler scale", "form": "A short vertical ruler of hairline ticks is printed at the inline start of the revealed band, with a heavier detent tick at its foot and an ink index that rides down it with the pull." },
+    { "p": "P3", "axis": "interaction", "consequence": "every mechanism has its keyboard map (arrows step a detent, Home and End reach the ends, Space and Enter press) and a visible value and label", "form": "A round refresh key sits in the bar at all times, so Enter or Space on it asks the hub with no gesture, and the bar prints the list's name and the time of its readings." },
+    { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "While the hub works the band shows Progress's still row of ink ticks and the word Working, and nothing loops or spins." },
+    { "p": "P2", "axis": "interaction", "consequence": "the display is a live region (polite) and never a control", "form": "The printed time in the bar is a polite status line, so Asking the hub and then Updated 10:42 are spoken without moving focus." },
+    { "p": "P3", "axis": "motion", "consequence": "under Reduce motion nothing overshoots and detents change at once with a short fade", "form": "Under reduce motion the released list lands at the detent or at the top at once, with no throw and no settle." }
+  ],
+  "variants": {
+    "lab": "apps/lab/pull-to-refresh/index.html",
+    "options": [
+      { "id": "A", "name": "printed index down a short ruler into a detent, Progress's still ticks while working" },
+      { "id": "B", "name": "fader cap sliding sideways in a groove as the list is pulled down" },
+      { "id": "C", "name": "LCD strip that counts the pull and reads dashes while working" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A moves its index the same way the hand moves, as P3 asks of a part, and it reuses Slider's ruler printing and Progress's still ticks; B drives a cap at right angles to the hand and reads as a second control, and C adds a second display window that competes with the unit's one display (P2) while its dashes say nothing."
+  },
+  "mechanism": { "kind": "fader", "detents": 1, "travel": "the pull, up to one and a half touch modules", "spring": { "mass": 1.4, "stiffness": 520, "damping": 46 } },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "The bar and the list keep fixed places, so pulling and working never reflow anything around the list." },
+    "bar": { "p": "P5", "axis": "space", "why": "The list's name, the printed time and the refresh key sit on one line on the inset line above the list." },
+    "label": { "p": "P5", "axis": "type", "why": "The list's name is printed in the label size and medium weight, like a word printed above a fader." },
+    "status": { "p": "P5", "axis": "type", "why": "The time of the readings is printed in the caption size with tabular figures, so a new time never shifts the line." },
+    "scroller": { "p": "P6", "axis": "interaction", "why": "The list scrolls natively in every state; the pull starts only at its very top and only on a downward drag." },
+    "gauge": { "p": "P5", "axis": "depth", "why": "The band revealed above the list is printing flat on the material, with no recess and no shadow of its own." },
+    "ruler": { "p": "P3", "axis": "shape", "why": "A short vertical ruler at the inline start holds the printed ticks the index rides down, one detent long." },
+    "tick": { "p": "P5", "axis": "depth", "why": "Each tick is a hairline of secondary ink printed flat on the plastic, so the ruler never reads as a part." },
+    "detent": { "p": "P3", "axis": "shape", "why": "The detent is a longer tick in primary ink at the foot of the ruler, the one stop the pull settles into." },
+    "index": { "p": "P3", "axis": "shape", "why": "The index is a short bar of primary ink that rides down the ruler with the pull, like the index of a band scale." },
+    "word": { "p": "P5", "axis": "type", "why": "One caption line beside the ruler says Pull to refresh, then Release to refresh in medium weight at the detent." },
+    "work": { "p": "P6", "axis": "space", "why": "While the hub works the band holds one detent tall and shows a still Progress reading in the same place." },
+    "content": { "p": "P6", "axis": "space", "why": "The list moves down with the pull as one piece and comes back to the same place, with no rows rearranged." }
+  },
+  "states": {
+    "data-state=armed": { "p": "P3", "axis": "interaction", "why": "Past the detent the index sits in the stop and the word turns medium, so letting go is known to refresh." },
+    "data-state=working": { "p": "P6", "axis": "motion", "why": "Working holds the band open one detent tall with still ink ticks and the word Working, and nothing loops." },
+    "data-state=failed": { "p": "P2", "axis": "interaction", "why": "When the hub does not answer the status line says so in words and keeps the time of the last readings." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the ticks, the detent and the index are drawn in the system text colour so the ruler stays readable." }
+  },
+  "motion": {}
+}

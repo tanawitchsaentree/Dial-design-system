@@ -1,7 +1,132 @@
 {
-  "generatedAt": "2026-11-02T06:15:45.521Z",
+  "generatedAt": "2026-11-02T07:02:57.108Z",
   "version": "0.0.0",
   "components": {
+    "ActionSheet": {
+      "source": "packages/react/src/components/ActionSheet/ActionSheet.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "ActionSheet",
+          "props": [
+            {
+              "name": "open",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Whether the sheet is open. Pass it with `onOpenChange` to control it; leave it out to let `trigger` open it.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultOpen",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The open state on first render when the sheet is not controlled.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onOpenChange",
+              "type": "((open: boolean) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with `false` when the sheet asks to close (Cancel, Escape, a click outside or an action) and with `true` when `trigger` is pressed.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "title",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The object the actions are for, such as \"Kitchen lamp\". It is required, because it names the sheet.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "detail",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "One quiet line under the name, such as \"lamp 02 · Kitchen\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "items",
+              "type": "ActionSheetItem[]",
+              "required": true,
+              "default": null,
+              "description": "The actions, three to six, in the order they are printed. Put destructive actions last.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onAction",
+              "type": "((value: string) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the action's value once the sheet has closed and focus is back on the opener.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "trigger",
+              "type": "ReactElement<{ onClick?: ((e: MouseEvent<HTMLElement, MouseEvent>) => void); }, string | JSXElementConstructor<any>>",
+              "required": false,
+              "default": null,
+              "description": "An element, usually a `Menu`-like round key or a `Button`, that opens the sheet. The anchored panel stands by it and focus returns to it.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "placement",
+              "type": "\"auto\" | \"bottom\" | \"anchored\"",
+              "required": false,
+              "default": "auto",
+              "description": "`auto` (default) docks to the bottom edge on a screen taller than it is wide and stands by the trigger otherwise. `bottom` always docks; `anchored` always stands by the trigger.",
+              "enum": true,
+              "options": [
+                "auto",
+                "bottom",
+                "anchored"
+              ]
+            },
+            {
+              "name": "modal",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "`true` (default) opens with `showModal()`. `false` shows the docked lid in place, for previews.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "cancelLabel",
+              "type": "string",
+              "required": false,
+              "default": "Cancel",
+              "description": "The word on the Cancel key. Defaults to \"Cancel\".",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "placement"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 5979,
+        "cssMin": 5417,
+        "gzip": 4108
+      }
+    },
     "Badge": {
       "source": "packages/react/src/components/Badge/Badge.tsx",
       "kinds": {
@@ -151,6 +276,86 @@
         "jsMin": 2341,
         "cssMin": 5162,
         "gzip": 2046
+      }
+    },
+    "BottomNav": {
+      "source": "packages/react/src/components/BottomNav/BottomNav.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "BottomNav",
+          "props": [
+            {
+              "name": "items",
+              "type": "BottomNavItem[]",
+              "required": true,
+              "default": null,
+              "description": "The sections in order, three to five of them.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "current",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The value of the section on screen now. Its link carries aria-current=\"page\", medium weight and the ink mark.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onNavigate",
+              "type": "((value: string, event: MouseEvent<HTMLAnchorElement, MouseEvent>) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called when a link is pressed, with its value and the click. Call `event.preventDefault()` to route in the app instead of loading the page.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "layout",
+              "type": "\"auto\" | \"bar\" | \"rail\"",
+              "required": false,
+              "default": "auto",
+              "description": "`auto` (default) prints a strip along the bottom on a screen taller than it is wide and a rail at the inline start otherwise. `bar` and `rail` hold one form.",
+              "enum": true,
+              "options": [
+                "auto",
+                "bar",
+                "rail"
+              ]
+            },
+            {
+              "name": "fixed",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Fixes the nav to the screen edge with its safe area, for the app shell. Leave it off to place it yourself.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "required": false,
+              "default": "Main",
+              "description": "The accessible name of the navigation landmark. Defaults to \"Main\".",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "layout"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 1049,
+        "cssMin": 4310,
+        "gzip": 1648
       }
     },
     "Button": {
@@ -924,6 +1129,126 @@
         "gzip": 2774
       }
     },
+    "Environment": {
+      "source": "packages/react/src/components/Environment/Environment.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Environment",
+          "props": [
+            {
+              "name": "room",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The room, such as \"Living room\". Printed bottom-left in the wordmark's place and used to name the unit.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "temperature",
+              "type": "number",
+              "required": true,
+              "default": null,
+              "description": "The temperature, the main reading, shown on the LCD window with one decimal.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false,
+              "default": "°C",
+              "description": "The unit printed beside the temperature. Default °C.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "detail",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "One short line in the window with the temperature, such as \"Feels dry\". When the sensor is offline the window says Not answering instead.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "displayKind",
+              "type": "\"lcd\" | \"oled\"",
+              "required": false,
+              "default": "lcd",
+              "description": "`lcd` (default) or `oled`, the window family of the Display.",
+              "enum": true,
+              "options": [
+                "lcd",
+                "oled"
+              ]
+            },
+            {
+              "name": "readings",
+              "type": "EnvironmentReading[]",
+              "required": false,
+              "default": "[]",
+              "description": "The levels read under the window, in order, such as humidity and air quality. Keep it to three or four.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "activity",
+              "type": "GrilleProps",
+              "required": false,
+              "default": null,
+              "description": "A grille for activity in the room, such as noise or a running fan. Its label is printed beside it.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "readAt",
+              "type": "string | Date",
+              "required": true,
+              "default": null,
+              "description": "When the readings were taken. Printed bottom-right in the model name's place, such as 10:42.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "status",
+              "type": "\"live\" | \"stale\" | \"offline\"",
+              "required": false,
+              "default": "live",
+              "description": "Whether the sensor is answering. A late or offline sensor keeps its last readings and says so in words.",
+              "enum": true,
+              "options": [
+                "live",
+                "stale",
+                "offline"
+              ]
+            },
+            {
+              "name": "statusText",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The words of the notice line, to replace the defaults \"Up to date\", \"No new reading since 10:17\" and \"Not answering since 09:58\".",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "displayKind",
+        "status"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 9934,
+        "cssMin": 8775,
+        "gzip": 6078
+      }
+    },
     "Grid": {
       "source": "packages/react/src/components/Grid/Grid.tsx",
       "kinds": {},
@@ -1445,6 +1770,176 @@
         "gzip": 2632
       }
     },
+    "MediaPlayer": {
+      "source": "packages/react/src/components/MediaPlayer/MediaPlayer.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "MediaPlayer",
+          "props": [
+            {
+              "name": "tracks",
+              "type": "MediaTrack[]",
+              "required": true,
+              "default": null,
+              "description": "The tracks in play order. The player plays them one after another.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "current",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The id of the track in the window when controlled. Pair it with `onCurrentChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultCurrent",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The id of the first track in the window when uncontrolled. Defaults to the first track.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onCurrentChange",
+              "type": "((id: string) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the new track's id when previous, next or the end of a track changes it.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onStatusChange",
+              "type": "((status: MediaPlayerStatus) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called whenever the state in the window changes, such as from paused to playing.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "loading",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The tracks are not ready yet. The window says Loading and every part waits.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "offline",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The source cannot be reached. The window says Offline and play waits for the network.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "volume",
+              "type": "\"slider\" | \"rotary\"",
+              "required": false,
+              "default": "slider",
+              "description": "`slider` (default) is the ruler fader across the body; `rotary` is a plastic knob at the end of the key row.",
+              "enum": true,
+              "options": [
+                "slider",
+                "rotary"
+              ]
+            },
+            {
+              "name": "defaultVolume",
+              "type": "number",
+              "required": false,
+              "default": "70",
+              "description": "The volume at the start, from 0 to 100. Default 70.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "meter",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "Shows the level as lit holes in a Grille beside the keys. Default true.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "autoAdvance",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "Plays the next track when one ends. Default true.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "mediaSession",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "Tells the operating system what is playing through the Media Session API, so lock screens and media keys work. Default true.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "model",
+              "type": "string",
+              "required": false,
+              "default": "mp 1",
+              "description": "The model name printed lowercase at the lower end of the body. Default \"mp 1\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "wordmark",
+              "type": "ReactNode",
+              "required": false,
+              "default": "dial",
+              "description": "The wordmark printed at the lower start of the body. Default \"dial\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The name of the player for assistive tech. Default \"Player\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "words",
+              "type": "Partial<MediaPlayerWords>",
+              "required": false,
+              "default": null,
+              "description": "Your own words for the states and the keys.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "volume",
+        "loading"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 20728,
+        "cssMin": 14456,
+        "gzip": 10330
+      }
+    },
     "Menu": {
       "source": "packages/react/src/components/Menu/Menu.tsx",
       "kinds": {},
@@ -1719,6 +2214,201 @@
         "jsMin": 1142,
         "cssMin": 1342,
         "gzip": 1177
+      }
+    },
+    "PullToRefresh": {
+      "source": "packages/react/src/components/PullToRefresh/PullToRefresh.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "PullToRefresh",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The name of the list, such as \"Readings\" or \"Living room\". Printed in the bar and used to name the list region.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onRefresh",
+              "type": "() => void | Promise<unknown>",
+              "required": true,
+              "default": null,
+              "description": "Asks the hub for fresh readings. Return a promise and the list shows Working until it settles; a rejected promise shows the failed line.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "refreshing",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Controls the working state from outside, for a refresh that the app tracks itself. Leave it out to follow the promise from `onRefresh`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "updated",
+              "type": "Date",
+              "required": false,
+              "default": null,
+              "description": "When the readings were last taken. Printed as \"Updated 10:42\". Leave it out and the time is set when a refresh succeeds.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "formatTime",
+              "type": "((time: Date) => string)",
+              "required": false,
+              "default": "(d: Date) => `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`",
+              "description": "Turns the time into the printed text. Defaults to hours and minutes on a 24 hour clock, such as 10:42.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "height",
+              "type": "string | number",
+              "required": false,
+              "default": null,
+              "description": "The tallest the list may grow before it scrolls, in px or any CSS length. Leave it out to let the page scroll.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "messages",
+              "type": "Partial<PullToRefreshMessages>",
+              "required": false,
+              "default": null,
+              "description": "The words printed and spoken, for other languages.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The pull and the refresh key do nothing.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The list.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "disabled"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 6582,
+        "cssMin": 5314,
+        "gzip": 4270
+      }
+    },
+    "Queue": {
+      "source": "packages/react/src/components/Queue/Queue.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Queue",
+          "props": [
+            {
+              "name": "label",
+              "type": "string",
+              "required": false,
+              "default": "Up next",
+              "description": "The name of the list for assistive tech. Default \"Up next\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "tracks",
+              "type": "T[]",
+              "required": false,
+              "default": null,
+              "description": "The tracks in order when controlled. Pair it with `onTracksChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultTracks",
+              "type": "T[]",
+              "required": false,
+              "default": null,
+              "description": "The tracks at the start when uncontrolled.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onTracksChange",
+              "type": "((tracks: T[]) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the tracks in their new order after a move or a removal.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "playing",
+              "type": "string | null",
+              "required": false,
+              "default": "null",
+              "description": "The id of the track that is playing. Its row gets the ink index mark and the word Playing.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onPlay",
+              "type": "((id: string) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with a track's id when its row is pressed, to play it.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "removable",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "Lets the person remove tracks from the menu or with Delete. Default true.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "words",
+              "type": "Partial<QueueWords>",
+              "required": false,
+              "default": null,
+              "description": "Your own words for the menu and the announcements.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [],
+      "variantCount": 0,
+      "demoFloor": 3,
+      "bundle": {
+        "jsMin": 14896,
+        "cssMin": 11934,
+        "gzip": 8015
       }
     },
     "RangeSlider": {
@@ -2878,6 +3568,112 @@
         "gzip": 2974
       }
     },
+    "Snackbar": {
+      "source": "packages/react/src/components/Snackbar/Snackbar.tsx",
+      "kinds": {
+        "tone": [
+          "neutral",
+          "positive",
+          "warning",
+          "critical"
+        ]
+      },
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "SnackbarProvider",
+          "props": [
+            {
+              "name": "duration",
+              "type": "number",
+              "required": false,
+              "default": "8000",
+              "description": "Default time on screen in ms. Never less than 5000.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "aboveNav",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "`true` (default) lifts the snackbar above a BottomNav strip on a tall screen. Set `false` for an app with no bottom nav.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        },
+        {
+          "displayName": "useSnackbar",
+          "props": []
+        },
+        {
+          "displayName": "Snackbar",
+          "props": [
+            {
+              "name": "tone",
+              "type": "\"neutral\" | \"positive\" | \"warning\" | \"critical\"",
+              "required": false,
+              "default": "positive",
+              "description": "`positive` (default) the action worked, `neutral` a plain note, `warning` it worked with a catch, `critical` it failed. No tone is orange.",
+              "enum": true,
+              "options": [
+                "neutral",
+                "positive",
+                "warning",
+                "critical"
+              ]
+            },
+            {
+              "name": "status",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The status word printed beside the glyph. Defaults to Done, Note, Check or Failed by tone.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The message, short and in the past tense, such as \"Lamp removed\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "action",
+              "type": "SnackbarAction",
+              "required": false,
+              "default": null,
+              "description": "At most one plastic key, the action that undoes, such as Undo.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onDismiss",
+              "type": "(() => void)",
+              "required": false,
+              "default": null,
+              "description": "Runs after the action key is pressed, so the owner can close the snackbar.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "tone"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 3730,
+        "cssMin": 4128,
+        "gzip": 2935
+      }
+    },
     "Stack": {
       "source": "packages/react/src/components/Stack/Stack.tsx",
       "kinds": {},
@@ -3024,8 +3820,8 @@
       "demoFloor": 4,
       "bundle": {
         "jsMin": 1209,
-        "cssMin": 3106,
-        "gzip": 1523
+        "cssMin": 3245,
+        "gzip": 1542
       }
     },
     "Tabs": {

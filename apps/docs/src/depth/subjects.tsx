@@ -1,7 +1,8 @@
 // How to render each component for the Style tab and the header's live demo, given the enum props
 // a reader picks. Only the content is fixed here; which options exist comes from meta.json.
 import type { ReactNode } from 'react';
-import { Badge, Banner, Button, Card, Checkbox, Chip, Container, DeviceCard, Dialog, Display, EmptyState, Grid, GridItem, Grille, Heading, IconButton, Input, List, Menu, Meter, Progress, RangeSlider, Rotary, Scrubber, SegmentedControl, Select, Sheet, Skeleton, Slider, Stack, Switch, Tabs, Text, TimePicker, Toast } from 'dial-react';
+import { useDemoTracks } from '../system/tones';
+import { ActionSheet, Badge, Banner, BottomNav, Button, Card, Checkbox, Chip, Container, DeviceCard, Dialog, Display, EmptyState, Environment, Grid, GridItem, Grille, Heading, IconButton, Input, List, MediaPlayer, Menu, Meter, Progress, PullToRefresh, Queue, RangeSlider, Rotary, Scrubber, SegmentedControl, Select, Sheet, Skeleton, Slider, Snackbar, Stack, Switch, Tabs, Text, TimePicker, Toast } from 'dial-react';
 
 type P = Record<string, string>;
 // bare: the subject must not sit on a second pane. true = it is its own surface (Card, a chart, a chat
@@ -12,6 +13,11 @@ export interface Subject { render: (p: P, disabled?: boolean) => ReactNode; code
 /** Marks a bare subject for the gates: data-bare="surface" must paint a surface (G-BR1), "layout" is skipped. */
 export const BareHost = ({ bare, children }: { bare: boolean | 'layout'; children: ReactNode }) => <div className="bare-subject" data-bare={bare === 'layout' ? 'layout' : 'surface'}>{children}</div>;
 
+/** The Style tab's player plays the book's demo tones, like every other player in the book. */
+function SubjectPlayer() {
+  const tracks = useDemoTracks(2);
+  return <MediaPlayer tracks={tracks ?? []} loading={!tracks} />;
+}
 const attrs = (p: P) => Object.entries(p).map(([k, v]) => ` ${k}="${v}"`).join('');
 
 /** The surface a subject sits on in the docs. A system whose components need a surface under them
@@ -19,6 +25,13 @@ const attrs = (p: P) => Object.entries(p).map(([k, v]) => ` ${k}="${v}"`).join('
 export const OnSurface = ({ children }: { children: ReactNode }) => <div className="demo-row spec-row">{children}</div>;
 
 export const SUBJECTS: Record<string, Subject> = {
+  Snackbar: { bare: true, render: (p) => <div style={{ inlineSize: 'min(100%, 375px)' }}><Snackbar {...p} action={{ label: 'Undo', onAction: () => {} }}>Lamp removed</Snackbar></div>, code: (p) => `<Snackbar${attrs(p)} action={{ label: 'Undo', onAction: restore }}>Lamp removed</Snackbar>` },
+  ActionSheet: { bare: true, render: () => <div style={{ inlineSize: 'min(100%, 375px)' }}><ActionSheet modal={false} open title="Kitchen lamp" detail="lamp 02 · Kitchen" items={[{ value: 'rename', label: 'Rename' }, { value: 'move', label: 'Move to room' }, { value: 'remove', label: 'Remove', destructive: true }]} /></div>, code: () => '<ActionSheet title="Kitchen lamp" items={actions} onAction={run} trigger={key} />' },
+  BottomNav: { bare: true, render: () => <div style={{ inlineSize: 'min(100%, 375px)' }}><BottomNav layout="bar" current="rooms" onNavigate={(_v, e) => e.preventDefault()} items={[{ value: 'home', label: 'Home', href: '/home' }, { value: 'rooms', label: 'Rooms', href: '/rooms' }, { value: 'media', label: 'Media', href: '/media' }, { value: 'settings', label: 'Settings', href: '/settings' }]} /></div>, code: () => '<BottomNav items={sections} current="rooms" onNavigate={go} />' },
+  Queue: { bare: true, render: () => <div style={{ inlineSize: 360 }}><Queue defaultTracks={[{ id: 'q1', title: 'Kiln song', artist: 'Ulm Quartet', duration: 222 }, { id: 'q2', title: 'Weniger, aber besser', artist: 'Hochschule', duration: 250 }, { id: 'q3', title: 'Slow return', artist: 'The Faders', duration: 178 }]} playing="q2" /></div>, code: () => '<Queue defaultTracks={tracks} playing="q2" onPlay={play} />' },
+  MediaPlayer: { bare: true, render: () => <SubjectPlayer />, code: () => '<MediaPlayer tracks={tracks} />' },
+  Environment: { bare: true, render: (p) => <Environment {...p} room="Living room" temperature={21.5} detail="Feels dry" readAt="10:42" readings={[{ kind: 'humidity', value: 38 }, { kind: 'air', value: 74 }]} />, code: (p) => `<Environment${attrs(p)} room="Living room" temperature={21.5} detail="Feels dry" readAt="10:42" readings={[{ kind: 'humidity', value: 38 }, { kind: 'air', value: 74 }]} />` },
+  PullToRefresh: { render: (p) => <PullToRefresh {...p} style={{ inlineSize: 340, maxInlineSize: '100%' }} label="Readings" onRefresh={() => new Promise((d) => setTimeout(d, 1200))} updated={new Date(2026, 10, 2, 10, 41)}><List label="Readings"><List.Item label="Kitchen" description="21.5 °C" /><List.Item label="Bedroom" description="19.0 °C" /></List></PullToRefresh>, code: (p) => `<PullToRefresh${attrs(p)} label="Readings" onRefresh={ask} updated={time}>\n  <List label="Readings">…</List>\n</PullToRefresh>` },
   TimePicker: { render: (p, disabled) => <TimePicker {...p} label="Night mode starts" defaultValue="22:30" disabled={disabled} />, code: (p) => `<TimePicker${attrs(p)} label="Night mode starts" defaultValue="22:30" />`, disabled: true },
   Skeleton: { render: (p) => <div aria-busy="true" aria-label="Thermostat, loading"><Skeleton {...p} kind="display" digits={3} unit="°C" /></div>, code: (p) => `<div aria-busy="true" aria-label="Thermostat, loading"><Skeleton${attrs(p)} kind="display" digits={3} unit="°C" /></div>` },
   Menu: { render: (p, disabled) => <Menu {...p} label={p.trigger === 'word' ? 'Sort' : 'More for Kitchen lamp'} items={[{ value: 'rename', label: 'Rename' }, { value: 'move', label: 'Move to room' }, { value: 'remove', label: 'Remove', destructive: true }]} disabled={disabled} />, code: (p) => `<Menu${attrs(p)} label="More for Kitchen lamp" items={actions} onAction={run} />`, disabled: true },

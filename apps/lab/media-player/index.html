@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · MediaPlayer · three player units</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. One orange part per unit: the play key (P1). Everything else is plastic, ink and the OLED window. */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lede { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .col { display: grid; gap: 10px; } .col h2 { font-size: 14px; font-weight: 500; margin: 0; } .note { font-size: 13px; margin: 0; max-width: 46ch; color: var(--ds-text-secondary); line-height: 1.45; }
+  .unit { box-sizing: border-box; padding: 26px; border-radius: 54px; background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); display: grid; gap: 16px; }
+  .win { box-sizing: border-box; padding: 12px 20px; border-radius: 28px; background: var(--ds-display-oled-bg); color: var(--ds-display-oled-ink); box-shadow: var(--ds-elevation-well), var(--ds-emit-display); display: grid; gap: 2px; }
+  .win .st { display: flex; justify-content: space-between; font-size: 11px; font-weight: 500; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+  .win .st b { display: inline-flex; gap: 6px; align-items: center; font-weight: 500; }
+  .win .t { font-size: 22px; font-weight: 500; line-height: 1.2; } .win .a { font-size: 13px; }
+  .tri { inline-size: 0; block-size: 0; border-block: 4px solid transparent; border-inline-start: 7px solid currentColor; }
+  .groove { position: relative; block-size: 44px; }
+  .groove::before { content: ""; position: absolute; inset-inline: 12px; inset-block-start: 18px; block-size: 8px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); border: 1px solid var(--ds-line-ring); box-sizing: border-box; }
+  .cap { position: absolute; inset-inline-start: 38%; inset-block-start: 6px; inline-size: 24px; block-size: 32px; border-radius: 6px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); }
+  .cap::after { content: ""; position: absolute; inset-inline-start: 11px; inset-block: 5px; border-inline-start: 2px solid var(--ds-text-primary); }
+  .times { display: flex; justify-content: space-between; font-size: 11px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--ds-text-secondary); margin-block-start: -10px; }
+  .keys { display: flex; align-items: center; gap: 12px; }
+  .key { display: grid; place-items: center; inline-size: 44px; block-size: 44px; border-radius: 50%; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); border: 1px solid var(--ds-line-ring); box-sizing: border-box; }
+  .key.lg { inline-size: 56px; block-size: 56px; }
+  .key.loud { background: var(--ds-action-accent); border-color: var(--ds-action-accent-rim); color: var(--ds-text-primary); }
+  .key svg { inline-size: 20px; block-size: 20px; }
+  .grille { display: grid; grid-template-columns: repeat(8, 6px); gap: 4px; margin-inline-start: auto; }
+  .grille i { inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--ds-grille-hole); box-shadow: var(--ds-elevation-well); }
+  .grille i.on { background: var(--ds-grille-hole-on); }
+  .fader { display: grid; gap: 4px; } .fader span { font-size: 13px; font-weight: 500; } .fader .groove::before { inset-block-start: 18px; }
+  .knob { inline-size: 64px; block-size: 64px; border-radius: 50%; background: var(--ds-surface-knob); box-shadow: var(--ds-elevation-part); position: relative; }
+  .knob::after { content: ""; position: absolute; inset-inline-start: 31px; inset-block-start: 8px; block-size: 14px; border-inline-start: 2px solid var(--ds-text-primary); transform-origin: 1px 24px; transform: rotate(40deg); }
+  .print { display: flex; justify-content: space-between; font-size: 13px; color: var(--ds-text-secondary); }
+  .print b { font-weight: 500; color: var(--ds-text-primary); }
+  .a1 { inline-size: 380px; } .b1 { inline-size: 260px; justify-items: center; } .b1 .win, .b1 .groove, .b1 .times, .b1 .print { inline-size: 100%; } .c1 { inline-size: 620px; grid-template-columns: 1fr auto; }
+  .c1 .wide { grid-column: 1 / -1; }
+</style>
+</head>
+<body>
+<h1>MediaPlayer · one unit that plays a queue</h1>
+<p class="lede">The reference has a small MP3 player: an OLED window over three round transport keys. Each variant keeps one orange part, the play key, and one window that says the state with a glyph and a word. Scrubber and Slider are the system's own.</p>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="prev" viewBox="0 0 24 24"><path d="M7 6v12M18 6l-8 6 8 6z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="next" viewBox="0 0 24 24"><path d="M17 6v12M6 6l8 6-8 6z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+</defs></svg>
+<div class="row">
+  <div class="col"><h2>A · MP3 unit</h2>
+    <section class="unit a1">
+      <div class="win"><div class="st"><b><span class="tri"></span>Playing</b><span>2 / 5</span></div><div class="t">Weniger, aber besser</div><div class="a">Hochschule · Library</div></div>
+      <div><div class="groove"><div class="cap"></div></div><div class="times"><span>1:23</span><span>−2:47</span></div></div>
+      <div class="keys"><span class="key"><svg><use href="#prev"/></svg></span><span class="key lg loud"><svg><use href="#pause"/></svg></span><span class="key"><svg><use href="#next"/></svg></span>
+        <span class="grille"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></span></div>
+      <div class="fader"><span>Volume</span><div class="groove"><div class="cap" style="inset-inline-start:62%"></div></div></div>
+      <div class="print"><b>dial</b><span>mp 1</span></div>
+    </section>
+    <p class="note">Window full width at the top, the scrubber under it, the three round keys at the lower start with play the large orange disc, the level holes at the end and the volume fader across. Reads like the reference player.</p></div>
+  <div class="col"><h2>B · pocket column</h2>
+    <section class="unit b1">
+      <div class="win"><div class="st"><b><span class="tri"></span>Playing</b><span>2 / 5</span></div><div class="t">Weniger, aber besser</div><div class="a">Hochschule · Library</div></div>
+      <div style="inline-size:100%"><div class="groove"><div class="cap"></div></div><div class="times"><span>1:23</span><span>−2:47</span></div></div>
+      <div class="keys"><span class="key"><svg><use href="#prev"/></svg></span><span class="key lg loud"><svg><use href="#pause"/></svg></span><span class="key"><svg><use href="#next"/></svg></span></div>
+      <span class="knob" title="Volume rotary, kind key"></span>
+      <div class="print"><b>dial</b><span>mp 1</span></div>
+    </section>
+    <p class="note">A tall body with everything on the centre line and volume on a plastic rotary. The knob is the largest round part, so it competes with the play key (P1), and the unit is 460px tall on a phone.</p></div>
+  <div class="col"><h2>C · wide deck</h2>
+    <section class="unit c1">
+      <div class="win"><div class="st"><b><span class="tri"></span>Playing</b><span>2 / 5</span></div><div class="t">Weniger, aber besser</div><div class="a">Hochschule · Library</div></div>
+      <div class="keys"><span class="key"><svg><use href="#prev"/></svg></span><span class="key lg loud"><svg><use href="#pause"/></svg></span><span class="key"><svg><use href="#next"/></svg></span><span class="knob" style="inline-size:52px;block-size:52px"></span></div>
+      <div class="wide"><div class="groove"><div class="cap"></div></div><div class="times"><span>1:23</span><span>−2:47</span></div></div>
+      <div class="print wide"><b>dial</b><span>mp 1</span></div>
+    </section>
+    <p class="note">A tape-deck strip: window at the start, keys and a small rotary at the end, the scrubber across the bottom. Good on a desk, but under 420px it has to fold into A anyway.</p></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+/* BottomNav — the app's sections printed along the bottom edge of the case (FORM.md control class for the
+   printing, surface class for the strip, D-003). Same printing as Tabs: medium weight and one ink index
+   mark for the current section, never orange. On a wide screen it turns into a printed rail at the inline start. */
+.root {
+  --nav-safe: env(safe-area-inset-bottom, 0);
+  box-sizing: border-box;
+  display: block;
+  inline-size: 100%;
+  padding-block: var(--ds-gap-xs) max(var(--ds-gap-sm), var(--nav-safe));
+  padding-inline: max(var(--ds-gap-md), env(safe-area-inset-left, 0)) max(var(--ds-gap-md), env(safe-area-inset-right, 0));
+  border: var(--ds-width-hairline) solid transparent;
+  background: var(--ds-surface-solid);
+  box-shadow: var(--ds-elevation-unit), inset var(--ds-gap-none) var(--ds-width-hairline) var(--ds-gap-none) var(--ds-material-lit);
+  color: var(--ds-text-secondary);
+  font-family: var(--ds-type-family);
+}
+.fixed {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline: 0;
+  z-index: var(--ds-layer-sticky);
+}
+.list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.list > li { flex: 1 1 0; min-inline-size: 0; display: flex; }
+.link {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  align-content: center;
+  gap: var(--ds-gap-xs);
+  min-inline-size: var(--ds-layout-touch);
+  min-block-size: var(--ds-control-lg);
+  padding-block: var(--ds-gap-sm) var(--ds-gap-xs);
+  padding-inline: var(--ds-gap-xs);
+  border-radius: var(--ds-corner-mark);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.glyph {
+  display: grid;
+  place-items: center;
+  inline-size: var(--ds-control-icon-md);
+  block-size: var(--ds-control-icon-md);
+}
+.glyph > svg { inline-size: 100%; block-size: 100%; }
+.word {
+  display: inline-grid;
+  max-inline-size: 100%;
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-tight);
+  text-align: center;
+}
+.text, .ghost { grid-area: 1 / 1; overflow-wrap: anywhere; }
+.text { font-weight: var(--ds-type-weight-regular); }
+.ghost { font-weight: var(--ds-type-weight-medium); visibility: hidden; }
+.mark {
+  inline-size: var(--ds-control-thumb);
+  block-size: var(--ds-width-bar);
+  border-radius: var(--ds-corner-round);
+  background: transparent;
+}
+
+.link:hover { color: var(--ds-text-primary); }
+.link[aria-current='page'] { color: var(--ds-text-primary); }
+.link[aria-current='page'] .text { font-weight: var(--ds-type-weight-medium); }
+.link[aria-current='page'] .mark { background: var(--ds-text-primary); }
+.link:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: calc(var(--ds-width-ring) * -1);
+}
+
+/* the rail: an index printed down the inline start, glyph beside word, the mark standing beside the row */
+.rail {
+  inline-size: auto;
+  min-inline-size: var(--ds-layout-sidebar);
+  max-inline-size: var(--ds-layout-sidebar);
+  block-size: 100%;
+  padding-block: var(--ds-gap-inset);
+  padding-inline: var(--ds-gap-md) var(--ds-gap-lg);
+  box-shadow: var(--ds-elevation-unit), inset var(--ds-width-hairline) var(--ds-width-hairline) var(--ds-gap-none) var(--ds-material-lit);
+}
+.rail .list { flex-direction: column; gap: var(--ds-gap-xs); }
+.rail .list > li { flex: none; }
+.rail .link {
+  grid-template-columns: var(--ds-width-bar) var(--ds-control-icon-md) minmax(0, 1fr);
+  justify-items: start;
+  align-items: center;
+  column-gap: var(--ds-gap-lg);
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-sm);
+  padding-inline: var(--ds-gap-xs) var(--ds-gap-lg);
+}
+.rail .mark { grid-row: 1; grid-column: 1; inline-size: var(--ds-width-bar); block-size: var(--ds-control-thumb); }
+.rail .glyph { grid-row: 1; grid-column: 2; }
+.rail .word { grid-row: 1; grid-column: 3; text-align: start; font-size: var(--ds-type-body); }
+.rail.fixed { inset-block: 0; inset-inline: 0 auto; padding-block-end: max(var(--ds-gap-inset), var(--nav-safe)); }
+
+@media (orientation: landscape) {
+  .auto {
+    inline-size: auto;
+    min-inline-size: var(--ds-layout-sidebar);
+    max-inline-size: var(--ds-layout-sidebar);
+    block-size: 100%;
+    padding-block: var(--ds-gap-inset);
+    padding-inline: var(--ds-gap-md) var(--ds-gap-lg);
+    box-shadow: var(--ds-elevation-unit), inset var(--ds-width-hairline) var(--ds-width-hairline) var(--ds-gap-none) var(--ds-material-lit);
+  }
+  .auto .list { flex-direction: column; gap: var(--ds-gap-xs); }
+  .auto .list > li { flex: none; }
+  .auto .link {
+    grid-template-columns: var(--ds-width-bar) var(--ds-control-icon-md) minmax(0, 1fr);
+    justify-items: start;
+    align-items: center;
+    column-gap: var(--ds-gap-lg);
+    min-block-size: var(--ds-control-md);
+    padding-block: var(--ds-gap-sm);
+    padding-inline: var(--ds-gap-xs) var(--ds-gap-lg);
+  }
+  .auto .mark { grid-row: 1; grid-column: 1; inline-size: var(--ds-width-bar); block-size: var(--ds-control-thumb); }
+  .auto .glyph { grid-row: 1; grid-column: 2; }
+  .auto .word { grid-row: 1; grid-column: 3; text-align: start; font-size: var(--ds-type-body); }
+  .auto.fixed { inset-block: 0; inset-inline: 0 auto; padding-block-end: max(var(--ds-gap-inset), var(--nav-safe)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* the ink fade moves nothing, so it stays (motion.hover is kept under Reduce motion) */
+  .link { transition: color var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .root { border-color: CanvasText; }
+  .link[aria-current='page'] .mark { forced-color-adjust: none; background: LinkText; }
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Snackbar · three ways to say "Lamp removed" with one Undo</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lead { margin: 0 0 18px; max-width: 80ch; font-size: 14px; line-height: 1.5; }
+  .variant { margin-block-end: 40px; } .variant > h2 { font-size: 15px; font-weight: 500; margin: 0 0 4px; } .variant > .note { font-size: 13px; margin: 0 0 12px; color: var(--ds-text-secondary); max-width: 90ch; line-height: 1.45; }
+  .row { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
+  .screen { position: relative; overflow: hidden; border-radius: 14px; background: var(--ds-surface-page); outline: 1px solid var(--ds-line-divider); display: grid; grid-template-rows: 1fr auto; }
+  .phone { inline-size: 375px; block-size: 600px; } .wide { inline-size: 760px; block-size: 420px; }
+  .page { padding: 20px; display: grid; gap: 12px; align-content: start; }
+  .page .unit { block-size: 110px; border-radius: 22px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); }
+  .wide .page { grid-template-columns: repeat(3, 1fr); }
+  .nav { display: flex; justify-content: space-around; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit), inset 0 1px 0 var(--ds-material-lit); padding: 10px 8px 28px; font-size: 13px; color: var(--ds-text-secondary); }
+  .nav b { font-weight: 500; color: var(--ds-text-primary); }
+  .wide .nav { display: none; }
+  svg.g { inline-size: 20px; block-size: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: var(--ds-status-positive-mark); flex: none; }
+  .bar { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+  .bar .st { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; font-weight: 500; } .bar .msg { flex: 1; }
+  .key { display: grid; place-items: center; min-block-size: 44px; padding-inline: 18px; border-radius: 999px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); font-weight: 500; font-size: 15px; }
+
+  /* A · strip over the nav: one plastic strip centred above the bottom nav, glyph + word, message, one Undo key */
+  .a .bar { position: absolute; inset-inline: 12px; inset-block-end: 92px; padding: 8px 8px 8px 16px; border-radius: 28px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-float), inset 1px 1px 0 var(--ds-material-lit); }
+  .a .wide .bar { inset-inline: auto; inset-block-end: 24px; inset-inline-start: 50%; transform: translateX(-50%); inline-size: 440px; }
+
+  /* B · printed on the nav: the strip grows a row on top of the bottom nav and prints the message there */
+  .b .phone .nav { position: relative; flex-wrap: wrap; padding-block-start: 64px; }
+  .b .bar { position: absolute; inset-inline: 0; inset-block-start: 0; padding: 8px 12px 8px 16px; border-block-end: 1px solid var(--ds-line-divider); }
+  .b .wide .bar { position: absolute; inset-block: auto 0; inset-inline: 0; padding: 10px 16px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); }
+
+  /* C · counter window: the message in an LCD strip with the Undo key beside it */
+  .c .bar { position: absolute; inset-inline: 12px; inset-block-end: 92px; padding: 8px; border-radius: 22px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-float); }
+  .c .bar .lcd { flex: 1; display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 10px; background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); box-shadow: var(--ds-elevation-well); font-variant-numeric: tabular-nums; }
+  .c .bar svg.g { color: var(--ds-display-lcd-ink); }
+  .c .wide .bar { inset-inline: auto; inset-block-end: 24px; inset-inline-start: 50%; transform: translateX(-50%); inline-size: 460px; }
+</style>
+</head>
+<body>
+<h1>Snackbar · a brief bottom message with one action that undoes</h1>
+<p class="lead">"Lamp removed · Undo" after removing the Kitchen lamp. Each variant on a 375px phone above the bottom nav, and on a wide screen. Switch with ?dark.</p>
+
+<template id="bar">
+  <span class="st"><svg class="g" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Done</span><span class="msg">Lamp removed</span><span class="key">Undo</span>
+</template>
+<template id="nav"><span>Home</span><b>Rooms</b><span>Media</span><span>Settings</span></template>
+
+<section class="variant a"><h2>A · strip over the nav (picked)</h2><p class="note">Toast's plastic strip at float height, one at a time, centred just above the bottom nav so the thumb reaches Undo. Glyph and status word, the message, one plastic key. No close key: it leaves on its own after 8 s, paused while touched or focused.</p>
+  <div class="row"><div class="screen phone"><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div><nav class="nav"></nav><div class="bar"></div></div>
+  <div class="screen wide"><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div><nav class="nav"></nav><div class="bar"></div></div></div></section>
+<section class="variant b"><h2>B · printed on the nav</h2><p class="note">The bottom nav grows a row and prints the message in it. The nav changes height while the message shows, which moves every section name (P6 fixed positions).</p>
+  <div class="row"><div class="screen phone"><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div><nav class="nav"><div class="bar"></div></nav></div>
+  <div class="screen wide"><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div><nav class="nav"></nav><div class="bar"></div></div></div></section>
+<section class="variant c"><h2>C · counter window</h2><p class="note">The message sits in an LCD window with the key beside it. The display tells a device's state; a second window at the bottom of the screen competes with the device's own.</p>
+  <div class="row"><div class="screen phone"><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div><nav class="nav"></nav><div class="bar"></div></div>
+  <div class="screen wide"><div class="page"><div class="unit"></div><div class="unit"></div><div class="unit"></div></div><nav class="nav"></nav><div class="bar"></div></div></div></section>
+<script>
+  if (location.search.includes('dark')) document.documentElement.dataset.theme = 'dark';
+  const b = document.getElementById('bar'), n = document.getElementById('nav');
+  for (const x of document.querySelectorAll('.nav')) x.append(n.content.cloneNode(true));
+  for (const x of document.querySelectorAll('.bar')) x.append(b.content.cloneNode(true));
+  for (const x of document.querySelectorAll('.c .bar')) { const l = document.createElement('span'); l.className = 'lcd'; l.append(x.querySelector('.st'), x.querySelector('.msg')); x.prepend(l); }
+</script>
+</body>
+</html>

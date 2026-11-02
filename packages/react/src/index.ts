@@ -45,3 +45,13 @@ export * from './components/List';
 export * from './components/Menu';
 export * from './components/Skeleton';
 export * from './components/TimePicker';
+
+// Wave 3: home and phone organisms. Pull to refresh, room environment and the units built from wave 1 and 2 parts.
+
+export * from './components/PullToRefresh';
+export * from './components/Environment';
+export * from './components/MediaPlayer';
+export * from './components/Queue';
+export * from './components/BottomNav';
+export * from './components/ActionSheet';
+export * from './components/Snackbar';

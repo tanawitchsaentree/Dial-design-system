@@ -13,4 +13,8 @@ export const BARREL_MANIFEST = [
     header: `Wave 2: home and media. Ranges, the scrubber, meters, lists, menus, sheets, banners, empty states, skeletons and the time picker.`,
     components: ['RangeSlider', 'Scrubber', 'Meter', 'Sheet', 'Banner', 'EmptyState', 'List', 'Menu', 'Skeleton', 'TimePicker'],
   },
+  {
+    header: `Wave 3: home and phone organisms. Pull to refresh, room environment and the units built from wave 1 and 2 parts.`,
+    components: ['PullToRefresh', 'Environment', 'MediaPlayer', 'Queue', 'BottomNav', 'ActionSheet', 'Snackbar'],
+  },
 ];

@@ -1,0 +1,61 @@
+{
+  "concept": "ActionSheet is a short lid of actions for one object that rises from the bottom of a phone, the rows printed like Menu's and Cancel a separate plastic key, and on a wide screen it opens as a panel by its key.",
+  "kind": ["action sheet", "actions sheet", "bottom action menu"],
+  "derived_beside": "Sheet",
+  "difference_from_sheet": "Derived in its own round because Sheet is itself a member of Dialog's family. Sheet holds a device's controls that act at once and closes from a header key; ActionSheet holds three to six one-shot actions for one object, closes the moment one runs, ends with a full-width Cancel key instead of a close key, has no drag bar, and on a wide screen stands by its trigger like Menu instead of at the lower end.",
+  "default_to_avoid": [
+    { "pattern": "iOS action sheet with a blue Cancel button and red Delete text on two frosted bodies", "why_not": "Blue and red text is colour alone telling which action is which, and frosted glass is a second material; P1 and FORM's display rule ask for glyph plus word on one plastic body." },
+    { "pattern": "Material modal bottom sheet list with a grey pill handle", "why_not": "A pill handle invites a drag the sheet does not need, and a full list with no Cancel leaves the scrim as the only visible way out." }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a lid that opens to show what the device can do, then closes over it" },
+    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the one key that differs is told by shape and position, the rest are equal" },
+    { "source": "WAI-ARIA Authoring Practices, Dialog (Modal) pattern: focus moves in, Escape closes, focus returns to the opener" }
+  ],
+  "derivation": [
+    { "p": "P1", "axis": "space", "consequence": "sits where the hand expects it (lower or right of the display)", "form": "On a phone the lid docks to the bottom edge under the thumb, with Cancel last where the thumb rests." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "No row and no key is orange; Remove carries the critical square lamp beside its word, so the warning is shape and word." },
+    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "Each row is at least control.md tall across the full width, and Cancel is a control.lg capsule key." },
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "The object's name and its lowercase detail sit on the top inset line, the rows printed on the same line below them." },
+    { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "The lid slides up as one piece on the enter easing and leaves faster; the rows never stagger in." }
+  ],
+  "variants": {
+    "lab": "apps/lab/action-sheet/index.html",
+    "options": [
+      { "id": "A", "name": "lid with a key, one docked body with Menu's printed rows and a full-width plastic Cancel key; a panel by the trigger on wide screens" },
+      { "id": "B", "name": "two bodies, the actions on one floating body and Cancel on a second body under it" },
+      { "id": "C", "name": "key bank, every action a raised capsule key stacked in the lid" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps one body per decision and reuses Menu's printed rows, so Remove is told by its lamp and place while Cancel is the only raised key (P1, P3); B spends two bodies on one choice and wastes phone width, and C gives Remove the same weight and reach as Rename."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "shape", "why": "The lid is a body of matte plastic with the capped panel radius and one light from the top left." },
+    "bottom": { "p": "P1", "axis": "space", "why": "Docked to the bottom edge across the full width, the rows and Cancel sit under the thumb." },
+    "anchored": { "p": "P1", "axis": "space", "why": "On a wide screen the panel stands by the key that opened it, where the pointer already is." },
+    "inline": { "p": "P6", "axis": "space", "why": "A preview lid sits in the flow of the page at a fixed place and covers nothing." },
+    "head": { "p": "P5", "axis": "space", "why": "The object's name and its detail sit together on the top inset line, printed on the case." },
+    "title": { "p": "P5", "axis": "type", "why": "The object's name is printed at the emphasis size in medium weight, so it is read first." },
+    "detail": { "p": "P5", "axis": "type", "why": "The detail is printed at caption size in the secondary ink, a quiet line under the name." },
+    "rows": { "p": "P5", "axis": "space", "why": "The actions are printed one under another on the same inset line as the name." },
+    "item": { "p": "P3", "axis": "space", "why": "Each action row is at least control.md tall across the full width of the lid." },
+    "icon": { "p": "P5", "axis": "depth", "why": "The row glyph is printed flat in the secondary ink, never filled and never embossed." },
+    "lamp": { "p": "P1", "axis": "colour", "why": "The destructive row carries the critical square lamp beside its word, so the warning is shape and word, never orange." },
+    "text": { "p": "P5", "axis": "type", "why": "The action word is printed at body size in the primary ink, a verb first." },
+    "destructive": { "p": "P6", "axis": "space", "why": "A destructive action is printed last after a small gap, in a fixed place away from the thumb's first reach." },
+    "cancel": { "p": "P3", "axis": "space", "why": "Cancel stands apart under a gap as the one raised capsule key, as wide as the lid." }
+  },
+  "states": {
+    "focus": { "p": "P3", "axis": "depth", "why": "The focused row is pressed into the body as a nested recess, the same as a Menu row." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "Keyboard focus also draws the shared focus ring on the row so the target is plain." },
+    "aria-disabled=true": { "p": "P6", "axis": "interaction", "why": "An action that cannot run keeps its place and fades to half, so the rows never move." },
+    "data-state=open": { "p": "P6", "axis": "motion", "why": "The open lid slides up from its edge on the enter easing as one body with all its rows." },
+    "@media prefers-reduced-motion: reduce": { "p": "P6", "axis": "motion", "why": "Under reduced motion the lid appears and leaves at once, with no slide and no fade." },
+    "@media forced-colors: active": { "p": "P6", "axis": "interaction", "why": "In forced colours the lid keeps a real border and the focused row a highlight edge so both survive." }
+  },
+  "motion": {
+    "opacity": { "p": "P6", "axis": "motion", "why": "The body fades with its slide so the scrim and the lid arrive and leave as one change of state." },
+    "transform": { "p": "P6", "axis": "motion", "why": "The only travel is the slide from the bottom edge over motion.release in and the shorter motion.exit out." }
+  }
+}

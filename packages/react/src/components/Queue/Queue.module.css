@@ -1,0 +1,164 @@
+/* Queue — the up-next list of a player, printed on one plastic body like List (system/FORM.md surface
+   class for the body, display class for the printing; lab apps/lab/queue, variant A). Rows are kept
+   apart by gaps; the body takes corner.panel and a row corner.inner, so a row nests in the body.
+   Nothing moves on its own (P6): a moved row takes its place at once. */
+.root {
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+.list {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ds-gap-xs);
+  inline-size: 100%;
+  min-block-size: calc(var(--ds-corner-panel) * 2 + var(--ds-gap-md));
+  margin: 0;
+  padding: var(--ds-gap-md);
+  list-style: none;
+  border-radius: var(--ds-corner-panel);
+  background: var(--ds-unit-bg);
+  box-shadow: var(--ds-unit-shadow);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+}
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-xs);
+  min-inline-size: 0;
+  margin: 0;
+  padding-inline-end: var(--ds-gap-xs);
+  border-radius: var(--ds-corner-inner);
+}
+.mark {
+  position: absolute;
+  inset-block: var(--ds-gap-lg);
+  inset-inline-start: var(--ds-gap-xs);
+  inline-size: var(--ds-width-ring);
+  border-radius: var(--ds-corner-mark);
+  background: transparent;
+}
+.handle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  inline-size: var(--ds-control-icon-md);
+  min-block-size: var(--ds-layout-touch);
+  margin-inline-start: var(--ds-gap-md);
+  color: var(--ds-text-secondary);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.grip {
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  fill: currentColor;
+}
+.row {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-lg);
+  min-inline-size: 0;
+  min-block-size: var(--ds-control-lg);
+  margin: 0;
+  padding-block: var(--ds-gap-md);
+  /* the end clears half the row's corner (G-IN1), so the length never crowds the rounded end */
+  padding-inline: var(--ds-gap-md) var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-inner);
+  background: none;
+  font: inherit;
+  text-align: start;
+  color: inherit;
+  cursor: pointer;
+}
+.index {
+  flex: none;
+  inline-size: var(--ds-control-icon-md);
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-tight);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  color: var(--ds-text-secondary);
+}
+.text {
+  flex: 1 1 auto;
+  display: grid;
+  min-inline-size: 0;
+}
+.title {
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  overflow-wrap: anywhere;
+}
+.meta {
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  overflow-wrap: anywhere;
+}
+.now {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-xs);
+  font-weight: var(--ds-type-weight-medium);
+  color: var(--ds-text-primary);
+}
+.glyph {
+  flex: none;
+  inline-size: var(--ds-control-mark);
+  block-size: var(--ds-control-mark);
+  fill: currentColor;
+}
+.time {
+  flex: none;
+  font-size: var(--ds-type-label);
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-text-secondary);
+}
+.menu { flex: none; }
+.announce {
+  position: absolute;
+  inline-size: var(--ds-space-px);
+  block-size: var(--ds-space-px);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.handle:hover { color: var(--ds-text-primary); }
+.row:active,
+.item[data-dragging='true'] {
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.row:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-gap-none);
+}
+.row[aria-current='true'] .title { font-weight: var(--ds-type-weight-medium); }
+.item:has(.row[aria-current='true']) .mark { background: var(--ds-text-primary); }
+/* where a dragged row will land: one printed ink line in the gap, still */
+.item[data-drop='before']::before,
+.item[data-drop='after']::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--ds-gap-lg);
+  block-size: var(--ds-width-ring);
+  border-radius: var(--ds-corner-mark);
+  background: var(--ds-text-primary);
+}
+.item[data-drop='before']::before { inset-block-start: calc(var(--ds-gap-xs) * -1); }
+.item[data-drop='after']::after { inset-block-end: calc(var(--ds-gap-xs) * -1); }
+
+@media (forced-colors: active) {
+  .list { border: var(--ds-width-hairline) solid CanvasText; }
+  .row:focus-visible { outline-color: Highlight; }
+  .item:has(.row[aria-current='true']) .mark { forced-color-adjust: none; background: Highlight; }
+}
