@@ -5,12 +5,13 @@
 > ตรวจ contrast lab: `node tooling/kiln/anchor-contrast.mjs`
 
 - **System:** dial (dial-tokens, dial-react) · kiln 2.5.1
-- **Phase ปัจจุบัน:** wave 2 built (commit fb2b785, targeted checks + sweep green) → **wave 3** กำลังทำ; full verify ครั้งเดียวท้าย wave 3 ปิดทั้ง M2 และ M3
+- **Phase ปัจจุบัน:** waves 2–3 built · **wave 4 concept depth (D-006: P7 legend, P8 relations, P9 glass)** กำลังทำ · full verify ครั้งเดียวท้าย wave 4 → milestone M2, M3
 - **งานล่าสุดที่เสร็จ:** full verify 20/20 (recorded), milestone M1 44/44; book shell A (R-001), 24 components
 - **งานถัดไป:** user review ของ system/REVIEW.md + book → RETRO สำหรับสิ่งที่ส่งกลับ → wave 2 (home-iot: RangeSlider, Meter, List, Sheet, Banner, EmptyState, Skeleton, TimePicker + media: player, progress, list)
-- **Wave ปัจจุบัน:** 3 built (41 components) · full verify for M2 + M3 running
+- **Wave ปัจจุบัน:** 4 · agents: Glass material (tokens + caps/lamps/chips), Legend, Wiring + ExplainMode, SceneCard + Slot + Tray, Icon (dot matrix)
 - **ค้าง/blocked:** ค่าสีและสัดส่วนยังเป็นค่าประมาณ (ref-01.png ไม่มี); ไม่ publish (Phase 8 เป็นของ user)
 ## Log ย่อ (ใหม่สุดบน ≤15 บรรทัด)
+- 2026-11-02 user refs (OP-XY, superlunar, SK 4 manual, glass caps, Yoto, Sytren, N200) → D-006; wave 4 started; R-003 backdrop picker removed
 - 2026-11-02 wave 3 done (7 components); D-005 user logo as dial mark (favicon, PWA icons, top bar)
 - 2026-11-02 wave 2 done (10 components), G-MO3 Switch + G-TT1 picker fixed; wave 3 started; verify deferred to end of wave 3
 - 2026-11-02 user: "ทำต่อไปเรื่อยให้ครบทุก wave"; kiln 2.7 synced, M2/M3 defined, wave 2 started
