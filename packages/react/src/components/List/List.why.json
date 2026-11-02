@@ -1,0 +1,58 @@
+{
+  "concept": "List prints rows of devices or tracks on one plastic body, the way an appliance prints its programmes on the case, with a glyph or a printed index, a name, the state in words and at most one part to work at the end of the row.",
+  "kind": ["list", "list item", "listbox", "device list", "track list", "queue"],
+  "default_to_avoid": [
+    { "pattern": "Material list with avatar circles, two line text and divider lines everywhere", "why_not": "Avatar circles and full width divider rules turn every row into a separate tile, so the rows read as a table of contacts instead of printing on one device body." },
+    { "pattern": "list of separate cards, one raised card per row", "why_not": "A shadow under every row makes each row look like a unit to open and multiplies the shadows that P6 keeps short and few." }
+  ],
+  "references": [
+    { "source": "Braun TG 60 tape recorder (Dieter Rams, 1965): the counter and functions printed in one column on the case, set apart by space, not rules" },
+    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): rows of keys and printing on one body, kept apart by an even gap" },
+    { "source": "WAI-ARIA Authoring Practices: listbox pattern (https://www.w3.org/WAI/ARIA/apg/patterns/listbox/)" }
+  ],
+  "derivation": [
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "Every row starts its glyph, index and words on the same inset line of one body, and rows are set apart by an even gap instead of seams." },
+    { "p": "P6", "axis": "shape", "consequence": "capped so large panels do not swell into pillows", "form": "The body takes corner.panel and a row's recess takes corner.inner, so the row nests in the body with inner equal to outer minus the inset." },
+    { "p": "P3", "axis": "depth", "consequence": "press drops height to 0", "form": "A row that opens something is printing on the body; pressed, it sinks into a small recess with the inverse light, and it never rises on hover." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "A chosen row in a queue is marked by an ink index mark and medium weight; no row is ever filled with orange or any tint." },
+    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "Every row is at least control.lg tall and the whole row is the target when it opens something, so a finger never aims at a word." },
+    { "p": "P5", "axis": "type", "consequence": "tabular figures everywhere a number changes", "form": "A printed track index uses tabular figures in secondary ink, so the column of numbers stays straight from 1 to 99." }
+  ],
+  "variants": {
+    "lab": "apps/lab/list/index.html",
+    "options": [
+      { "id": "A", "name": "gaps on one body: rows printed on one plastic body, the pressed row a nested recess, an ink mark on the chosen row" },
+      { "id": "B", "name": "seams on one body: rows edge to edge with a hairline seam between each pair" },
+      { "id": "C", "name": "one small raised unit per row, stacked with gaps" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps one body and one shadow for the whole list and separates rows by space, which FORM's separator rule asks for first (gaps first); B draws a seam between every pair of rows inside one unit, which FORM forbids as hard rules between regions, and C gives every row its own shadow and makes each row look like a card to open, against P6 shadows are short and soft."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "depth", "why": "The list is one body of matte plastic with the unit shadow, so it paints its own surface wherever it is dropped." },
+    "item": { "p": "P5", "axis": "space", "why": "Each item is one line of the list body, set apart from the next by an even gap instead of a seam." },
+    "row": { "p": "P5", "axis": "space", "why": "The row lays its glyph, words and end part along the body's inset line with one gap between each of them." },
+    "action": { "p": "P3", "axis": "space", "why": "A row that opens something is one link or button the full size of the row, at least 52px tall for a finger." },
+    "selectable": { "p": "P3", "axis": "interaction", "why": "A queue list is one listbox in the tab order, and the arrow keys move the active row within it." },
+    "lead": { "p": "P5", "axis": "space", "why": "The leading glyph sits in a fixed column at the start of the row, so every name starts on one line." },
+    "index": { "p": "P5", "axis": "type", "why": "A printed track number uses tabular figures in the label size, so a column of numbers keeps its width." },
+    "text": { "p": "P6", "axis": "space", "why": "The words take the free width of the row and wrap, so a long name never pushes the end part off the body." },
+    "primary": { "p": "P5", "axis": "type", "why": "The name is the body size in regular weight with a line box tall enough for stacked Thai tone marks." },
+    "secondary": { "p": "P5", "axis": "colour", "why": "The state in words is secondary ink above 4.5:1 on the plastic, printed one size down under the name." },
+    "trail": { "p": "P1", "axis": "space", "why": "The end of the row holds at most one part, such as a switch or a key, so a row never has two loud controls." },
+    "chevron": { "p": "P5", "axis": "depth", "why": "A printed chevron at the end tells that the row opens another page, flat ink with no shadow and no emboss." },
+    "mark": { "p": "P1", "axis": "colour", "why": "The chosen row carries a short ink index mark at its start edge, never an orange or tinted fill behind the words." }
+  },
+  "states": {
+    "hover": { "p": "P6", "axis": "interaction", "why": "Hover only darkens the printed chevron a step, because a row does not rise or change colour when a pointer comes near." },
+    "active": { "p": "P3", "axis": "depth", "why": "A pressed row sinks into a small recess with the inverse light at once, the way a part drops when it is pressed." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "The focused row shows the same dark ring as every part in dial, drawn inside the row so the body does not cut it." },
+    "disabled": { "p": "P6", "axis": "depth", "why": "A disabled row fades to half and loses its pointer, so it reads as not taking a press right now." },
+    "aria-disabled=true": { "p": "P6", "axis": "depth", "why": "A disabled option in a queue fades to half and the keys and the pointer cannot choose it." },
+    "aria-selected=true": { "p": "P1", "axis": "colour", "why": "The chosen row is medium weight with its ink index mark lit, so the choice is shape and weight, not hue." },
+    "data-active=true": { "p": "P3", "axis": "interaction", "why": "The row the arrow keys point to carries the focus ring while the list has focus, so the keyboard position is always visible." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the body keeps a real border and the ring and the index mark use the system highlight colour." }
+  },
+  "motion": {}
+}

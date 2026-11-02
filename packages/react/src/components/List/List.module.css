@@ -1,0 +1,127 @@
+/* List — rows printed on one plastic body (system/FORM.md surface class for the body, display class for
+   the printing, D-003). Rows are set apart by an even gap, never by seams (FORM separator: gaps first).
+   The body takes corner.panel and a row's recess corner.inner, so a row nests in the body
+   (inner = outer − inset). A pressed row is a recess; nothing animates (P6). */
+.root {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ds-gap-xs);
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: calc(var(--ds-corner-panel) * 2 + var(--ds-gap-md));
+  margin: 0;
+  padding: var(--ds-gap-md);
+  list-style: none;
+  border-radius: var(--ds-corner-panel);
+  background: var(--ds-unit-bg);
+  box-shadow: var(--ds-unit-shadow);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  outline: none;
+}
+.item {
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  border-radius: var(--ds-corner-inner);
+}
+.row {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-xl);
+  inline-size: 100%;
+  min-block-size: var(--ds-control-lg);
+  margin: 0;
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-inner);
+  background: none;
+  font: inherit;
+  text-align: start;
+  text-decoration: none;
+  color: inherit;
+}
+.action { cursor: pointer; }
+.selectable .item { cursor: pointer; }
+.lead {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: var(--ds-control-icon-md);
+  min-block-size: var(--ds-control-icon-md);
+  color: var(--ds-text-secondary);
+}
+.lead > svg { inline-size: 100%; block-size: 100%; }
+.index {
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-tight);
+  font-variant-numeric: tabular-nums;
+}
+.text {
+  flex: 1 1 auto;
+  display: grid;
+  min-inline-size: 0;
+}
+.primary {
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  overflow-wrap: anywhere;
+}
+.secondary {
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  overflow-wrap: anywhere;
+}
+.trail {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+}
+.chevron {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  color: var(--ds-text-secondary);
+}
+.chevron:dir(rtl) { transform: rotate(180deg); }
+.mark {
+  position: absolute;
+  inset-block: var(--ds-gap-lg);
+  inset-inline-start: var(--ds-gap-xs);
+  inline-size: var(--ds-width-ring);
+  border-radius: var(--ds-corner-mark);
+  background: transparent;
+}
+
+.action:hover .chevron { color: var(--ds-text-primary); }
+.action:active,
+.selectable .item:active .row {
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.action:focus-visible,
+.root:focus-visible .item[data-active='true'] .row {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-gap-none);
+}
+.item[aria-selected='true'] .primary { font-weight: var(--ds-type-weight-medium); }
+.item[aria-selected='true'] .mark { background: var(--ds-text-primary); }
+.action:disabled,
+.action[aria-disabled='true'],
+.item[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: var(--ds-opacity-disabled);
+}
+
+@media (forced-colors: active) {
+  .root { border: var(--ds-width-hairline) solid CanvasText; }
+  .action:focus-visible,
+  .root:focus-visible .item[data-active='true'] .row { outline-color: Highlight; }
+  .item[aria-selected='true'] .mark { forced-color-adjust: none; background: Highlight; }
+}

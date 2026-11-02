@@ -45,3 +45,7 @@
 - ✓ fixed in kiln 2.5.4 — **K-12 G-NC1 reads only the top-left radius of a nested shape.** In a SegmentedControl bank the last key's top-left
   corner is the 6px seam to its neighbour, while its real end corners nest the bank; the gate reports
   "SegmentedControl … corner 6px". It should take the corner that faces the container's corner.
+- ✓ fixed in kiln 2.7.1 — **K-14 G-PC1 counts an inline listbox as a popup.** `popupClipProbe` (tooling/kiln/ui-probes.mjs) checks every visible
+  `[role=listbox]`, so a selectable List (a play queue, always on the page, role listbox) further down /components/list/code
+  is reported "478px of it is off the screen" after a Menu opens. It should only measure a listbox that a trigger owns while
+  open (`[aria-expanded=true][aria-controls]` → its id) or one inside `[popover]`/`[role=dialog]`. Found 2026-11-02 (wave 2, List/Menu).

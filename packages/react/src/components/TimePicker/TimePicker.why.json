@@ -1,0 +1,277 @@
+{
+  "concept": "TimePicker is the set window of a clock radio, a recessed well that holds the hour and minute as ink figures, each a field that steps like a detent, with a pair of round set keys under each field and no orange, because a time is a setting and not the unit's loud control.",
+  "kind": [
+    "time picker",
+    "time field",
+    "time input",
+    "spinbutton"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "Material time picker dialog with a round clock face, a sweeping hand and an OK and Cancel bar",
+      "why_not": "A modal clock face hides the unit behind an overlay and asks for a drag on a dial, while P3 asks for parts with a keyboard map and P1 keeps the round part for the one loud control."
+    },
+    {
+      "pattern": "native browser time input with its own spinner arrows and clock popup",
+      "why_not": "The browser draws its own stepper and popup in another light and type, and its layout and AM/PM wording change with the browser, so P5's printed label and P6's fixed positions do not hold."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun AB 312 and ABR 21 clock radios (Dietrich Lubs): hour and minute set keys under a time window with tabular digits"
+    },
+    {
+      "source": "Braun DN 40 alarm clock: AM and PM printed beside the digits, the current one marked"
+    },
+    {
+      "source": "WAI-ARIA 1.2 spinbutton role and the APG date picker spin button pattern: one field per unit of time"
+    },
+    {
+      "source": "apps/lab/time-picker/index.html: four renders (LCD window, set well, rotary pair, printed format) in light and dark"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "The time is set in Input's recessed well, not in an LCD window, so the unit's display keeps saying the state and is never focused."
+    },
+    {
+      "p": "P2",
+      "axis": "type",
+      "consequence": "tabular numerals, a 7-segment face for LCD values, the system grotesk for OLED text",
+      "form": "kind segment draws the figures as 7-segment cells in ink on the well; kind text sets them in the grotesk with tabular figures."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map (arrows step a detent, Home and End reach the ends, Space and Enter press) and a visible value and label",
+      "form": "Each field is a spinbutton: arrows step one, PageUp and PageDown step three hours or ten minutes, Home and End reach the ends, and digits type in."
+    },
+    {
+      "p": "P3",
+      "axis": "shape",
+      "consequence": "keys are round or capsule; rotaries are circles with one index mark; faders ride a groove with a ruler scale",
+      "form": "The set keys are IconButton's 44px round keys with a printed minus and plus, one pair standing under the field it moves."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only; links, borders, icons, selections and charts never use it",
+      "form": "The well, figures, keys, focus and the AM or PM mark are ink and plastic, so the unit's one orange control stays the only one."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "Every field has a fixed two-cell width, the period always reserves both words, and typing anything never changes the well's width."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The label is printed above the well on the inset line, and the hint or error is printed below the keys."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/time-picker/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "LCD clock window with segment digits and set keys below"
+      },
+      {
+        "id": "B",
+        "name": "set well: Input's recessed well, ink segment figures, a key pair under each field, AM and PM printed with a lamp"
+      },
+      {
+        "id": "C",
+        "name": "pair of rotaries for hour and minute with a printed reading above"
+      },
+      {
+        "id": "D",
+        "name": "Input's well with two numeric fields in grotesk figures and a printed format"
+      }
+    ],
+    "picked": "B",
+    "by": "agent",
+    "reason": "B keeps the clock radio's set keys and figures while staying an input-class well, so the display stays the one window that is never a control (P2); A puts a second LCD in the unit and asks people to edit the state window, C spends two round parts that P1 keeps for the loud control and has sixty detents too fine to read, and D is kept as kind text for dense forms."
+  },
+  "mechanism": {
+    "kind": "key",
+    "detents": 60,
+    "travel": "3px",
+    "spring": {
+      "mass": 1.4,
+      "stiffness": 520,
+      "damping": 46
+    }
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The root stacks the printed label, the set well with its keys and the message at fixed positions in one column."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The label is printed in the label size and medium weight above the well and names the group of fields."
+    },
+    "set": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The set lays the fields and their key pairs on one grid, so each key pair stands under the field it moves."
+    },
+    "well": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The well is a recess with the inverse light and a hairline ring that holds the fields, the same well an Input sits in."
+    },
+    "cell": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Each cell is at least 44px each way, so the field is a full touch target even where the figures draw smaller."
+    },
+    "hour": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The hour sits in the first column at a fixed place, so its key pair can stand right under it."
+    },
+    "minute": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The minute sits in the third column after the colon, at a fixed place over its own key pair."
+    },
+    "period": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The period column reserves both AM and PM at once, so switching the half of the day never shifts the well."
+    },
+    "field": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The field is the spinbutton that takes focus, arrows and typed digits; on kind segment its own text is clear over the figures."
+    },
+    "seg": {
+      "p": "P2",
+      "axis": "type",
+      "why": "The figures are 7-segment cells on Display's pitch, so the set time reads like the clock radio's window."
+    },
+    "on": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "Lit segments are the primary ink at full step on the well, at more than 4.5:1 in both themes."
+    },
+    "off": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "Unlit segments sit at a quiet step of ink so they show the cell without reading as a lit figure."
+    },
+    "colon": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The colon holds the second column between hour and minute at a fixed width, never moving as values change."
+    },
+    "dot": {
+      "p": "P2",
+      "axis": "type",
+      "why": "On kind segment the colon is two square dots the width of a segment stroke, as on a clock radio."
+    },
+    "words": {
+      "p": "P5",
+      "axis": "space",
+      "why": "AM and PM are printed one above the other inside the period column, like the printing beside a clock's digits."
+    },
+    "word": {
+      "p": "P5",
+      "axis": "type",
+      "why": "Each half of the day is printed in the smallest size in regular weight, in secondary ink at more than 4.5:1."
+    },
+    "lit": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "The current half of the day turns primary ink in medium weight with its lamp dot lit, never orange."
+    },
+    "keysHour": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The hour key pair stands under the hour field, two 44px keys with the smallest gap between them."
+    },
+    "keysMinute": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The minute key pair stands under the minute field, two 44px keys with the smallest gap between them."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The hint is printed in caption size and secondary ink under the keys and is read with the fields."
+    },
+    "error": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "An error is printed in the critical mark colour with a glyph and words, so it never rests on colour alone."
+    },
+    "glyph": {
+      "p": "P5",
+      "axis": "depth",
+      "why": "The error glyph is printed flat on the material with the printing stroke at icon size, no shadow."
+    },
+    "segment": {
+      "p": "P2",
+      "axis": "type",
+      "why": "kind segment draws the figures in segments and keeps the field's own text clear over them."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "type",
+      "why": "kind text sets hour and minute in the grotesk at title size with tabular figures, for dense forms."
+    },
+    "keys": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The key row shares the well's columns, padding and hairline width, so every key pair lines up under its field."
+    }
+  },
+  "states": {
+    "focus-within": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The focused field draws the dark focus ring around its own cell, so it is clear which field the arrows will step."
+    },
+    "data-invalid=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "An invalid time draws the well's edge in the critical mark colour with words below, never in orange."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled picker loses the well's inner shadow and fades, while its keys lose their height as disabled keys do."
+    },
+    "data-readonly=true": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A read only picker keeps its figures and focus but hides the set keys, so nothing on it can be stepped."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion each segment turns on or off at once with no fade between figures."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the well gets a real edge, lit segments use the text colour and unlit ones vanish, so the time stays readable."
+    }
+  },
+  "motion": {
+    "fill": {
+      "p": "P2",
+      "axis": "motion",
+      "why": "Only a segment's on and off fades, in the segment time, when the field steps to a new value."
+    }
+  }
+}

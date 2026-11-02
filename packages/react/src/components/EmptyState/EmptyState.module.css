@@ -1,0 +1,26 @@
+/* EmptyState — printing on whatever surface it sits in (FORM.md display class: text flat, no body).
+   Start-aligned on the inset line: the quiet drawing, the line, the sentence, the one key. */
+.root {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: var(--ds-gap-md);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.drawing { margin-block-end: var(--ds-gap-md); }
+.line {
+  margin: 0;
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.say {
+  margin: 0;
+  max-inline-size: var(--ds-type-measure);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.action { margin-block-start: var(--ds-gap-md); }

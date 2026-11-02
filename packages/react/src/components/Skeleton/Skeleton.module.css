@@ -1,0 +1,95 @@
+/* Skeleton — the unit with its power off (lab pick A, apps/lab/skeleton). Every kind takes the exact box of
+   the part it stands for and draws that part unlit: ghost segments, unlit holes, flat plastic. Nothing in
+   this file animates or transitions, in any motion setting (P6: no idle animation). */
+.root { display: block; }
+
+/* text: line boxes the height of real text, a flat bar the cap height of the type in each */
+.text {
+  display: grid;
+  inline-size: var(--skeleton-size, 100%);
+  max-inline-size: 100%;
+}
+.line {
+  position: relative;
+  display: block;
+  block-size: 1lh;
+  font-family: var(--ds-type-family);
+}
+.line::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block: calc((1lh - 1cap) / 2);
+  border-radius: var(--ds-corner-mark);
+  background: var(--ds-surface-placeholder-hi);
+}
+.line:last-child { inline-size: var(--skeleton-last, 100%); }
+.text.sm .line { font-size: var(--ds-type-caption); line-height: var(--ds-type-leading-body); }
+.text.md .line { font-size: var(--ds-type-body); line-height: var(--ds-type-leading-body); }
+.text.lg .line { font-size: var(--ds-type-title); line-height: var(--ds-type-leading-tight); }
+
+/* display: Display's window, padding, radius and segment pitch, with every segment unlit */
+.display {
+  position: relative;
+  display: block;
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-xl);
+  border-radius: max(
+    var(--ds-corner-mark),
+    calc(var(--display-outer, calc(var(--ds-corner-inner) + var(--ds-gap-inset))) - var(--display-inset, var(--ds-gap-inset)))
+  );
+  background: var(--ds-display-lcd-bg);
+  box-shadow: var(--ds-elevation-well);
+  font-family: var(--ds-type-family);
+  line-height: var(--ds-type-leading-tight);
+}
+.face { display: grid; gap: var(--ds-gap-xs); justify-items: end; }
+.detail { justify-self: start; font-size: var(--ds-type-caption); visibility: hidden; }
+.unit { font-size: var(--ds-type-label); font-weight: var(--ds-type-weight-medium); visibility: hidden; }
+.value { display: inline-flex; align-items: flex-end; gap: var(--ds-gap-md); }
+.cells { display: block; inline-size: auto; block-size: var(--ds-space-10); }
+.display.sm .cells { block-size: var(--ds-space-6); }
+.display.md .cells { block-size: var(--ds-space-10); }
+.display.lg .cells { block-size: var(--ds-space-14); }
+.display.sm .unit { font-size: var(--ds-type-caption); }
+.ghost { fill: var(--ds-display-lcd-ghost); }
+
+/* grille: Grille's pitch and recess, no hole lit */
+.grille {
+  display: inline-grid;
+  grid-template-columns: repeat(var(--skeleton-cols), var(--ds-space-2));
+  gap: var(--ds-space-1);
+  vertical-align: middle;
+}
+.hole {
+  display: block;
+  inline-size: var(--ds-space-2);
+  block-size: var(--ds-space-2);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-grille-hole);
+  box-shadow: var(--ds-elevation-well);
+}
+
+/* disc and block: flat plastic, no part shadow, so nothing reads as a key to press */
+.disc {
+  display: inline-block;
+  flex: none;
+  inline-size: var(--skeleton-size);
+  block-size: var(--skeleton-size);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-placeholder-hi);
+  vertical-align: middle;
+}
+.block {
+  display: block;
+  inline-size: 100%;
+  block-size: var(--skeleton-size);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-placeholder-hi);
+}
+
+@media (forced-colors: active) {
+  .line::before, .disc, .block, .hole { border: var(--ds-width-hairline) solid GrayText; background: Canvas; }
+  .display { border: var(--ds-width-hairline) solid GrayText; }
+  .ghost { fill: Canvas; stroke: GrayText; }
+}

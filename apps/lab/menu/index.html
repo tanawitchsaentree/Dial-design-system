@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Menu · three ways to offer actions from a key</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. Actions are ink on plastic; the destructive one is a glyph and a word, never orange (P1). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lede { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .col { display: grid; gap: 14px; inline-size: 360px; min-block-size: 420px; align-content: start; }
+  .col h2 { font-size: 14px; font-weight: 500; margin: 0; } .col .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); line-height: 1.45; }
+  .dev { position: relative; display: flex; align-items: center; gap: 14px; padding: 8px 8px 8px 22px; border-radius: 28px; background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); }
+  .dev .txt { flex: 1; display: grid; gap: 2px; } .dev .pri { font-size: 15px; } .dev .sec { font-size: 13px; color: var(--ds-text-secondary); }
+  .key { inline-size: 44px; block-size: 44px; flex: none; border-radius: 50%; border: 1px solid transparent; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); color: var(--ds-text-primary); display: grid; place-items: center; }
+  .key svg { inline-size: 20px; block-size: 20px; }
+  .ico { inline-size: 16px; block-size: 16px; flex: none; color: var(--ds-text-secondary); }
+  .crit { inline-size: 10px; block-size: 10px; flex: none; background: var(--ds-status-critical-mark); margin-inline: 3px; }
+
+  /* A: a plastic panel under the key, as wide as its longest action; rows are printing, the focused row a recess */
+  .a .panel { position: absolute; inset-block-start: calc(100% + 6px); inset-inline-end: 8px; inline-size: max-content; min-inline-size: 180px; padding: 6px; border-radius: 20px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-float); z-index: 2; }
+  .a .item { display: flex; align-items: center; gap: 10px; min-block-size: 44px; padding-inline: 12px; border-radius: 14px; font-size: 15px; white-space: nowrap; }
+  .a .item.focus { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .a .gap { block-size: 6px; }
+
+  /* B: a bank of round keys slides out beside the trigger, each word printed under its key */
+  .b .bank { position: absolute; inset-block-start: calc(100% + 6px); inset-inline-end: 8px; display: flex; gap: 12px; padding: 12px 14px; border-radius: 28px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-float); z-index: 2; }
+  .b .bk { display: grid; justify-items: center; gap: 6px; font-size: 13px; inline-size: 64px; text-align: center; }
+
+  /* C: an inline card that replaces the row, seams between groups, remove asks again in place */
+  .c .sheet { display: grid; padding: 6px 0; border-radius: 28px; background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); }
+  .c .item { display: flex; align-items: center; gap: 10px; min-block-size: 48px; padding-inline: 22px; font-size: 15px; }
+  .c .item + .item { border-block-start: 1px solid var(--ds-line-divider); }
+  .c .confirm { font-size: 13px; color: var(--ds-text-secondary); margin-inline-start: auto; }
+</style>
+</head>
+<body>
+<h1>Menu · three ways to offer actions from a key</h1>
+<p class="lede">The same device row, the same three actions: Rename, Move to room, Remove. The destructive action carries the critical lamp shape (a square, as in Badge) beside its word. What changes is the mechanism: a panel of rows under the key (A), a bank of round keys (B), or the row turning into an inline card (C).</p>
+<div class="row" id="lab"></div>
+<script>
+const dots = '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>';
+const pen = '<svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l1-3 7-7 2 2-7 7z"/></svg>';
+const room = '<svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l6-5 6 5v7H2z"/></svg>';
+const row = '<div class="dev"><div class="txt"><span class="pri">Kitchen lamp</span><span class="sec">On · 40%</span></div><span class="key" aria-label="More for Kitchen lamp">' + dots + '</span>';
+const A = `${row}<div class="panel" role="menu">
+  <div class="item focus">${pen}Rename</div><div class="item">${room}Move to room</div><div class="item">${room}ย้ายไปห้องนั่งเล่นชั้นบน</div><div class="gap"></div><div class="item"><i class="crit"></i>Remove from home</div></div></div>`;
+const B = `${row}<div class="bank"><span class="bk"><span class="key">${pen}</span>Rename</span><span class="bk"><span class="key">${room}</span>Move to room</span><span class="bk"><span class="key"><i class="crit"></i></span>Remove</span></div></div>`;
+const C = `<div class="sheet"><div class="item"><b style="font-weight:500">Kitchen lamp</b><span class="confirm">Close</span></div><div class="item">${pen}Rename</div><div class="item">${room}Move to room</div><div class="item"><i class="crit"></i>Remove<span class="confirm">Press again to remove</span></div></div>`;
+const info = {
+  a: ['A · panel under the key', 'The Select panel again: plastic, elevation.float, as wide as the longest action, never cut. Rows are 44px, the focused row is a recess; the destructive action sits last after a gap.'],
+  b: ['B · bank of keys', 'Each action is a round key with its word printed below. Three actions fit; five do not, and long words wrap into stacks.'],
+  c: ['C · the row becomes a card', 'No popup: the row opens in place into a list of actions with seams. It pushes the rows below it down, so the screen reflows.'],
+};
+document.getElementById('lab').innerHTML = [['a', A], ['b', B], ['c', C]].map(([v, html]) => `
+  <section class="col ${v}"><h2>${info[v][0]}</h2><p class="note">${info[v][1]}</p>${html}</section>`).join('');
+</script>
+</body>
+</html>

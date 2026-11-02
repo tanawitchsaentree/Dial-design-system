@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T02:54:42.980Z",
+  "generatedAt": "2026-11-02T06:15:45.521Z",
   "version": "0.0.0",
   "components": {
     "Badge": {
@@ -63,6 +63,94 @@
         "jsMin": 865,
         "cssMin": 944,
         "gzip": 924
+      }
+    },
+    "Banner": {
+      "source": "packages/react/src/components/Banner/Banner.tsx",
+      "kinds": {
+        "tone": [
+          "neutral",
+          "positive",
+          "warning",
+          "critical"
+        ]
+      },
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Banner",
+          "props": [
+            {
+              "name": "tone",
+              "type": "\"neutral\" | \"positive\" | \"warning\" | \"critical\"",
+              "required": false,
+              "default": "neutral",
+              "description": "`neutral` (default) a standing note, `positive` a good condition, `warning` something needs care soon, `critical` something does not work. No tone is orange.",
+              "enum": true,
+              "options": [
+                "neutral",
+                "positive",
+                "warning",
+                "critical"
+              ]
+            },
+            {
+              "name": "status",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The status word printed beside the glyph, such as \"Offline\". Defaults to Note, Done, Check or Failed by tone.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "What holds and what happens next, such as \"The hub is offline. Controls will work again when it reconnects.\"",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "action",
+              "type": "BannerAction",
+              "required": false,
+              "default": null,
+              "description": "One optional plastic key that helps end the condition.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onDismiss",
+              "type": "(() => void)",
+              "required": false,
+              "default": null,
+              "description": "Shows the round dismiss key and runs when it is pressed. Leave it out for a condition that must stay until it ends.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "dismissLabel",
+              "type": "string",
+              "required": false,
+              "default": "Dismiss",
+              "description": "The accessible name of the dismiss key. Defaults to \"Dismiss\".",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "tone"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 2341,
+        "cssMin": 5162,
+        "gzip": 2046
       }
     },
     "Button": {
@@ -774,6 +862,68 @@
         "gzip": 1836
       }
     },
+    "EmptyState": {
+      "source": "packages/react/src/components/EmptyState/EmptyState.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "EmptyState",
+          "props": [
+            {
+              "name": "title",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The printed line that says what is missing, such as \"No devices in the kitchen yet\". It is required.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "One sentence that says what to do to fill the room or list, such as \"Plug one in near the hub, then add it here.\"",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "action",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "The one key, usually a `Button`. Use `kind=\"primary\"` only when filling this place is the screen's main action.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "drawing",
+              "type": "\"none\" | \"display\" | \"grille\"",
+              "required": false,
+              "default": "none",
+              "description": "A quiet drawing made of the system's own parts. `none` (default) prints words only, `display` an unlit LCD window reading two dashes, `grille` a field of unlit holes. The drawing is hidden from assistive tech; the line says the same thing in words.",
+              "enum": true,
+              "options": [
+                "none",
+                "display",
+                "grille"
+              ]
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "drawing"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 3980,
+        "cssMin": 3140,
+        "gzip": 2774
+      }
+    },
     "Grid": {
       "source": "packages/react/src/components/Grid/Grid.tsx",
       "kinds": {},
@@ -1135,6 +1285,369 @@
         "gzip": 1436
       }
     },
+    "List": {
+      "source": "packages/react/src/components/List/List.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "List",
+          "props": [
+            {
+              "name": "label",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The name of the list for assistive tech, such as \"Devices in the kitchen\" or \"Queue\". Use it when no heading names the list.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "selectable",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Makes the list one listbox where a row can be chosen, as in a play queue. Rows then need a `value`, and the arrow keys move between them.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "value",
+              "type": "string | null",
+              "required": false,
+              "default": null,
+              "description": "The chosen row's value when controlled. Pair it with `onValueChange`. `null` means no row is chosen.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The chosen row's value at the start, when uncontrolled.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onValueChange",
+              "type": "((value: string) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the row's value when the person chooses a different row.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        },
+        {
+          "displayName": "ListItem",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The name of the device or track, printed in primary ink. It wraps onto more lines instead of being cut.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "description",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "The state in words under the name, such as \"On · 40%\" or \"Ulm Quartet · 3:42\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "leading",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "A glyph at the start of the row, such as a lamp or a speaker. It is printing only and hidden from assistive tech.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "index",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "A printed number at the start of the row, such as a track number. It takes the place of `leading`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "trailing",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "One part at the end of the row, such as a Switch, an IconButton, a Menu or a Badge. In a row with `href` or `onPress` it must be printing only, such as a Badge.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "href",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "Makes the whole row a link to this address, with a printed chevron at its end.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onPress",
+              "type": "(() => void)",
+              "required": false,
+              "default": null,
+              "description": "Makes the whole row a button that does this when pressed, such as playing the track.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "chevron",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Shows the printed chevron. It defaults to on for a row with `href` and off for every other row.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The row's value in a selectable list. It is required there and ignored elsewhere.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The row cannot be pressed or chosen; it fades to half.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [],
+      "variantCount": 0,
+      "demoFloor": 3,
+      "bundle": {
+        "jsMin": 3651,
+        "cssMin": 2651,
+        "gzip": 2632
+      }
+    },
+    "Menu": {
+      "source": "packages/react/src/components/Menu/Menu.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Menu",
+          "props": [
+            {
+              "name": "label",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The name of the key, such as \"More for Kitchen lamp\". It is the accessible name of the round key, and the printed word of a word key.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "items",
+              "type": "MenuItem[]",
+              "required": true,
+              "default": null,
+              "description": "The actions, in the order they are printed. Put destructive actions last.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onAction",
+              "type": "((value: string) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the action's value when it runs, after the menu has closed and focus is back on the key.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "trigger",
+              "type": "\"icon\" | \"word\"",
+              "required": false,
+              "default": "icon",
+              "description": "`icon` (default) is a round 44px key with three dots; `word` is a capsule key with the label and a printed chevron.",
+              "enum": true,
+              "options": [
+                "icon",
+                "word"
+              ]
+            },
+            {
+              "name": "icon",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "The glyph on the round key, in place of the three dots.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "align",
+              "type": "\"start\" | \"end\"",
+              "required": false,
+              "default": null,
+              "description": "Which edge of the key the panel lines up with. It defaults to `end` for the round key and `start` for the word key.",
+              "enum": true,
+              "options": [
+                "start",
+                "end"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The key cannot be pressed and the menu cannot open.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "trigger",
+        "align",
+        "disabled"
+      ],
+      "variantCount": 3,
+      "demoFloor": 6,
+      "bundle": {
+        "jsMin": 6060,
+        "cssMin": 5552,
+        "gzip": 3734
+      }
+    },
+    "Meter": {
+      "source": "packages/react/src/components/Meter/Meter.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Meter",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "What is read, such as \"Battery\" or \"Air quality\". Printed above the scale and used as the accessible name.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "value",
+              "type": "number",
+              "required": true,
+              "default": null,
+              "description": "The reading. Values outside the range are clamped.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "min",
+              "type": "number",
+              "required": false,
+              "default": "0",
+              "description": "The lowest value, at the start of the scale. Default 0.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "required": false,
+              "default": "100",
+              "description": "The highest value, at the end of the scale. Default 100.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "low",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "Where the low region ends. Readings under it are in the low region.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "high",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "Where the high region starts. Readings over it are in the high region.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "optimum",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "A value in the preferred region. That region's name carries a printed bracket, and the glyph says whether the reading is in it.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "regionLabels",
+              "type": "Partial<Record<MeterRegion, string>>",
+              "required": false,
+              "default": null,
+              "description": "The names of the three regions, printed under the scale and after the reading. Defaults to Low, Normal and High.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "formatValue",
+              "type": "((value: number) => string)",
+              "required": false,
+              "default": "(v: number) => String(Number(v.toFixed(1)))",
+              "description": "Turns a value into the printed and announced text, for example `(v) => v + ' %'`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "valueText",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The reading in words, when `formatValue` is not enough, such as \"Hard, 14 °dH\". It replaces the printed value.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [],
+      "variantCount": 0,
+      "demoFloor": 3,
+      "bundle": {
+        "jsMin": 2439,
+        "cssMin": 2987,
+        "gzip": 2004
+      }
+    },
     "Progress": {
       "source": "packages/react/src/components/Progress/Progress.tsx",
       "kinds": {},
@@ -1206,6 +1719,181 @@
         "jsMin": 1142,
         "cssMin": 1342,
         "gzip": 1177
+      }
+    },
+    "RangeSlider": {
+      "source": "packages/react/src/components/RangeSlider/RangeSlider.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "RangeSlider",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The printed name above the fader. It is required, because it names both caps.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "min",
+              "type": "number",
+              "required": false,
+              "default": "0",
+              "description": "The lowest value, at the start of the groove. Default 0.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "required": false,
+              "default": "10",
+              "description": "The highest value, at the end of the groove. Default 10.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "step",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The distance between detents. Each cap settles into the nearest detent and the ruler prints one tick per detent (up to 20).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "minGap",
+              "type": "number",
+              "required": false,
+              "default": "0",
+              "description": "The smallest distance the two caps keep between them. Default 0, so both caps may stand on the same value.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "value",
+              "type": "RangeValue",
+              "required": false,
+              "default": null,
+              "description": "The low and high values when controlled. Pair it with `onValueChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultValue",
+              "type": "RangeValue",
+              "required": false,
+              "default": null,
+              "description": "The starting values when uncontrolled. Defaults to the two ends.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onValueChange",
+              "type": "((value: RangeValue) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with both values whenever a key, a drag or a press moves one cap to another value.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "lowLabel",
+              "type": "string",
+              "required": false,
+              "default": "Low",
+              "description": "The announced name of the low cap, after the label. Default \"Low\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "highLabel",
+              "type": "string",
+              "required": false,
+              "default": "High",
+              "description": "The announced name of the high cap, after the label. Default \"High\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "scale",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Print the ruler's numerals under the groove. Default false.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "formatValue",
+              "type": "((value: number) => string)",
+              "required": false,
+              "default": "(v: number) => String(Number(v.toFixed(2)))",
+              "description": "Turns a value into the printed and announced text, for example `(v) => v + ' °C'`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "pageStep",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The distance PageUp and PageDown move. It defaults to a tenth of the range, and at least two detents.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The fader cannot be moved; both caps lose their height.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "mass",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.mass",
+              "description": "Spring mass of each cap. Default 1.4 (mechanism.mass).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "stiffness",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.stiffness",
+              "description": "Spring stiffness. Default 520 (mechanism.stiffness).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "damping",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.damping",
+              "description": "Spring damping. Default 46 (mechanism.damping).",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "disabled"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 5517,
+        "cssMin": 3519,
+        "gzip": 3555
       }
     },
     "Rotary": {
@@ -1428,6 +2116,158 @@
         "gzip": 2983
       }
     },
+    "Scrubber": {
+      "source": "packages/react/src/components/Scrubber/Scrubber.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "formatTime",
+          "props": []
+        },
+        {
+          "displayName": "Scrubber",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "What is playing, such as the track's title. It is printed above the groove and is the scrubber's accessible name.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "duration",
+              "type": "number",
+              "required": true,
+              "default": null,
+              "description": "The length of the track, in seconds.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "value",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The position when controlled, in seconds. Pair it with `onValueChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultValue",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The starting position when uncontrolled, in seconds. Default 0.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onValueChange",
+              "type": "((seconds: number) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the new position, in whole seconds, while a key, a drag or a press moves the cap.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onValueCommit",
+              "type": "((seconds: number) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called once with the final position when a drag ends or a key is pressed, the moment to seek a player that cannot seek while dragging.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "buffered",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "How far the track has loaded, in seconds. The groove floor up to there is drawn one ink step darker.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "chapters",
+              "type": "ScrubberChapter[]",
+              "required": false,
+              "default": null,
+              "description": "Chapter starts, printed as ink marks above the groove.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "step",
+              "type": "number",
+              "required": false,
+              "default": "5",
+              "description": "How far the arrow keys move, in seconds. Default 5.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "pageStep",
+              "type": "number",
+              "required": false,
+              "default": "30",
+              "description": "How far PageUp and PageDown move, in seconds. Default 30.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Nothing is loaded yet; the cap loses its height and cannot be moved.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "mass",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.mass",
+              "description": "Spring mass of the cap. Default 1.4 (mechanism.mass).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "stiffness",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.stiffness",
+              "description": "Spring stiffness. Default 520 (mechanism.stiffness).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "damping",
+              "type": "number",
+              "required": false,
+              "default": "MECHANISM.damping",
+              "description": "Spring damping. Default 46 (mechanism.damping).",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "disabled"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 4552,
+        "cssMin": 2959,
+        "gzip": 3026
+      }
+    },
     "SegmentedControl": {
       "source": "packages/react/src/components/SegmentedControl/SegmentedControl.tsx",
       "kinds": {},
@@ -1628,6 +2468,266 @@
         "jsMin": 3880,
         "cssMin": 2934,
         "gzip": 2742
+      }
+    },
+    "Sheet": {
+      "source": "packages/react/src/components/Sheet/Sheet.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Sheet",
+          "props": [
+            {
+              "name": "open",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Whether the sheet is open. Pass it with `onOpenChange` to control the sheet; leave it out to let `trigger` open it.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultOpen",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The open state on first render when the sheet is not controlled.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onOpenChange",
+              "type": "((open: boolean) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with `false` when the sheet asks to close (the close key, Escape, a scrim click or a drag down) and with `true` when `trigger` is pressed.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "title",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The device the sheet controls, such as \"Living room lamp\". It is required, because it names the sheet.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "model",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "The model name printed lowercase beside the title, such as \"lamp 02\". It is never the only name of the sheet.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "The device's controls, a Display first and then faders, switches and rows. They act at once, so the sheet needs no Save key.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "actions",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "Optional keys at the bottom, such as \"Remove device\". At most one `Button kind=\"primary\"`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "trigger",
+              "type": "ReactElement<{ onClick?: ((e: MouseEvent<HTMLElement, MouseEvent>) => void); }, string | JSXElementConstructor<any>>",
+              "required": false,
+              "default": null,
+              "description": "An element, usually a `Button`, that opens the sheet when pressed. Focus returns to it on close.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "placement",
+              "type": "\"auto\" | \"bottom\" | \"end\"",
+              "required": false,
+              "default": "auto",
+              "description": "`auto` (default) docks to the bottom edge on a screen taller than it is wide and stands at the lower inline end otherwise. `bottom` always docks; `end` always stands at the end.",
+              "enum": true,
+              "options": [
+                "auto",
+                "bottom",
+                "end"
+              ]
+            },
+            {
+              "name": "modal",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "`true` (default) opens with `showModal()`, with a scrim, a focus trap and an inert page. `false` shows the sheet in place, for previews.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "closeLabel",
+              "type": "string",
+              "required": false,
+              "default": "Close",
+              "description": "The accessible name of the round close key in the header. Defaults to \"Close\".",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "placement"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 4627,
+        "cssMin": 5443,
+        "gzip": 3543
+      }
+    },
+    "Skeleton": {
+      "source": "packages/react/src/components/Skeleton/Skeleton.tsx",
+      "kinds": {
+        "kind": [
+          "text",
+          "display",
+          "grille",
+          "disc",
+          "block"
+        ]
+      },
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "exports": [
+        {
+          "displayName": "Skeleton",
+          "props": [
+            {
+              "name": "kind",
+              "type": "\"text\" | \"display\" | \"grille\" | \"disc\" | \"block\"",
+              "required": false,
+              "default": "text",
+              "description": "What is still loading. `text` (default) is lines of text, `display` a Display reading, `grille` a Grille meter, `disc` a key or knob, `block` a chart or picture area.",
+              "enum": true,
+              "options": [
+                "text",
+                "display",
+                "grille",
+                "disc",
+                "block"
+              ]
+            },
+            {
+              "name": "size",
+              "type": "\"sm\" | \"md\" | \"lg\"",
+              "required": false,
+              "default": "md",
+              "description": "Matches the size of the part that will replace it. For `text` it is caption, body (default) or title type. For `display` it is 24, 40 or 56px digits. For `disc` it is a 44, 72 or 108px part.",
+              "enum": true,
+              "options": [
+                "sm",
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "lines",
+              "type": "number",
+              "required": false,
+              "default": "1",
+              "description": "The number of text lines, on `text` only. Default 1.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "lastLine",
+              "type": "number",
+              "required": false,
+              "default": null,
+              "description": "The width of the last text line as a share of the others, from 0 to 1. Default 1 for one line and 0.6 for more.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "extent",
+              "type": "string | number",
+              "required": false,
+              "default": null,
+              "description": "The inline size of a `text` placeholder, or the diameter of a `disc` or the block size of a `block`, in px or any CSS length.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "digits",
+              "type": "number",
+              "required": false,
+              "default": "4",
+              "description": "The number of digit cells, on `display` only. Use the `digits` of the Display it stands for. Default 4.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The unit the Display will print, on `display` only. It is kept hidden, so the window reserves its width.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "detail",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Reserves the Display's detail line, on `display` only.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "cols",
+              "type": "number",
+              "required": false,
+              "default": "6",
+              "description": "The grille's columns, on `grille` only. Use the `cols` of the Grille it stands for. Default 6.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "rows",
+              "type": "number",
+              "required": false,
+              "default": "3",
+              "description": "The grille's rows, on `grille` only. Default 3.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "kind",
+        "size"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 2177,
+        "cssMin": 2448,
+        "gzip": 1812
       }
     },
     "Slider": {
@@ -2103,6 +3203,214 @@
         "jsMin": 493,
         "cssMin": 699,
         "gzip": 569
+      }
+    },
+    "TimePicker": {
+      "source": "packages/react/src/components/TimePicker/TimePicker.tsx",
+      "kinds": {
+        "kind": [
+          "segment",
+          "text"
+        ]
+      },
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "TimePicker",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The printed name above the well. It is required, because it also names the group of fields.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "kind",
+              "type": "\"segment\" | \"text\"",
+              "required": false,
+              "default": "segment",
+              "description": "`segment` (default) draws hour and minute as 7-segment figures, like a clock radio. `text` sets them in the grotesk, for dense forms.",
+              "enum": true,
+              "options": [
+                "segment",
+                "text"
+              ]
+            },
+            {
+              "name": "hourCycle",
+              "type": "\"24\" | \"12\"",
+              "required": false,
+              "default": "24",
+              "description": "`24` (default) runs the hour through 00 to 23. With `12` the hour stops at 12 and AM and PM are printed in the well.",
+              "enum": true,
+              "options": [
+                "24",
+                "12"
+              ]
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The time when controlled, as `HH:MM` on the 24 hour clock, or an empty string when it is not set. Pair it with `onValueChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The starting time when uncontrolled, as `HH:MM` on the 24 hour clock. Leave it out to start with no time set.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onValueChange",
+              "type": "((value: string) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the new time as `HH:MM` whenever a field steps, or with an empty string while hour or minute is not set.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "minuteStep",
+              "type": "number",
+              "required": false,
+              "default": "1",
+              "description": "How far the arrow keys and set keys move the minute. Default 1.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "keys",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Shows the round set keys under hour and minute. Default true for `segment` and false for `text`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "hint",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "A short line printed under the well, for example the time zone or what the time starts.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "error",
+              "type": "ReactNode",
+              "required": false,
+              "default": null,
+              "description": "The problem with the current time. When set, the fields are marked invalid and the message is printed with a glyph.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The fields cannot be changed and the set keys are not shown.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "readOnly",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The time can be read and focused but not changed, and the set keys are not shown.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "required",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The time must be set before the form is sent.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The name of a hidden form field that carries the time as `HH:MM`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "hourLabel",
+              "type": "string",
+              "required": false,
+              "default": "Hour",
+              "description": "The accessible name of the hour field. Default \"Hour\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "minuteLabel",
+              "type": "string",
+              "required": false,
+              "default": "Minute",
+              "description": "The accessible name of the minute field. Default \"Minute\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "periodLabel",
+              "type": "string",
+              "required": false,
+              "default": "AM or PM",
+              "description": "The accessible name of the AM and PM field. Default \"AM or PM\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "periodWords",
+              "type": "[string, string]",
+              "required": false,
+              "default": "['AM', 'PM']",
+              "description": "The printed words for the two halves of the day. Default `['AM', 'PM']`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "keyLabels",
+              "type": "[string, string, string, string]",
+              "required": false,
+              "default": "['Earlier hour', 'Later hour', 'Earlier minute', 'Later minute']",
+              "description": "The names of the four set keys, in the order hour down, hour up, minute down, minute up.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "kind",
+        "hourCycle",
+        "error",
+        "disabled",
+        "readOnly"
+      ],
+      "variantCount": 5,
+      "demoFloor": 8,
+      "bundle": {
+        "jsMin": 7880,
+        "cssMin": 5726,
+        "gzip": 4766
       }
     },
     "Toast": {

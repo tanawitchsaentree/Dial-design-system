@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · EmptyState · three ways to say nothing is here yet</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lead { margin: 0 0 18px; max-width: 80ch; font-size: 14px; line-height: 1.5; }
+  .variant { margin-block-end: 36px; } .variant > h2 { font-size: 15px; font-weight: 500; margin: 0 0 4px; } .variant > .note { font-size: 13px; margin: 0 0 12px; color: var(--ds-text-secondary); max-width: 90ch; line-height: 1.45; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+  .room { inline-size: 360px; box-sizing: border-box; padding: 24px; border-radius: 28px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit), inset 1px 1px 0 var(--ds-material-lit); display: grid; gap: 16px; }
+  .room > h3 { margin: 0; font-size: var(--ds-type-emphasis); font-weight: 500; }
+  .line { margin: 0; font-size: var(--ds-type-emphasis); font-weight: 500; } .say { margin: 0; font-size: var(--ds-type-body); line-height: 1.45; color: var(--ds-text-secondary); }
+  .k { justify-self: start; font: inherit; font-size: var(--ds-type-label); font-weight: 500; border: 0; color: var(--ds-text-on-accent); background: var(--ds-action-accent); box-shadow: var(--ds-elevation-part), inset 0 0 0 1px var(--ds-action-accent-rim); min-block-size: 44px; padding-inline: 20px; border-radius: 999px; }
+  .k.plain { background: var(--ds-surface-raised); color: var(--ds-text-primary); box-shadow: var(--ds-elevation-part); }
+  .lcd { justify-self: start; border-radius: 4px; background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ghost); box-shadow: var(--ds-elevation-well); padding: 10px 16px; font-size: 36px; font-weight: 500; letter-spacing: .1em; }
+  .grille { justify-self: start; display: grid; grid-template-columns: repeat(12, 8px); gap: 4px; }
+  .grille i { inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--ds-grille-hole); box-shadow: inset 1px 1px 1px rgba(0,0,0,.25); }
+  .es { display: grid; gap: 8px; justify-items: start; } .es .k { margin-block-start: 8px; }
+  /* B · slot: the outline of the missing unit, text printed inside */
+  .slot { border-radius: 22px; border: 2px dashed var(--ds-line-ring); padding: 24px; display: grid; gap: 8px; justify-items: start; }
+  /* C · row: drawing at the start, words and key beside it */
+  .es.row-form { grid-template-columns: auto 1fr; column-gap: 16px; align-items: start; } .es.row-form > :not(.draw) { grid-column: 2; } .es.row-form > .draw { grid-row: 1 / span 3; }
+</style>
+</head>
+<body>
+<h1>EmptyState · what a room or list shows when it has nothing yet</h1>
+<p class="lead">"No devices in the kitchen yet." A printed line, one sentence of what to do, one key; the quiet drawing is made of the system's own parts (an unlit LCD, an empty grille field), never an illustration.</p>
+<section class="variant a"><h2>A · printed on the case (picked)</h2><p class="note">Start-aligned on the room's inset line: the drawing, the line, the sentence, the key. The key is orange only because adding a device is this room's main action.</p>
+<div class="row">
+  <div class="room"><h3>Kitchen</h3><div class="es"><div class="lcd">– –</div><p class="line">No devices in the kitchen yet</p><p class="say">Plug one in near the hub, then add it here.</p><button class="k">Add a device</button></div></div>
+  <div class="room"><h3>Schedules</h3><div class="es"><div class="grille"></div><p class="line">No schedules yet</p><p class="say">A schedule turns devices on and off at set times.</p><button class="k plain">New schedule</button></div></div>
+  <div class="room"><h3>Alerts</h3><div class="es"><p class="line">Nothing needs you</p><p class="say">Alerts from the hub show here when they happen.</p></div></div>
+</div></section>
+<section class="variant b"><h2>B · empty slot</h2><p class="note">The dashed outline of the unit that is missing, words inside. Reads as a drop zone, and a dashed rule is a second edge language the case does not have.</p>
+<div class="row"><div class="room"><h3>Kitchen</h3><div class="slot"><p class="line">No devices in the kitchen yet</p><p class="say">Plug one in near the hub, then add it here.</p><button class="k">Add a device</button></div></div></div></section>
+<section class="variant c"><h2>C · row form</h2><p class="note">The drawing at the start, words and key beside it. Good on wide lists; on a 360px room the words wrap into a narrow column.</p>
+<div class="row"><div class="room"><h3>Kitchen</h3><div class="es row-form"><div class="lcd draw">– –</div><p class="line">No devices in the kitchen yet</p><p class="say">Plug one in near the hub, then add it here.</p><button class="k">Add a device</button></div></div></div></section>
+<script>
+  if (location.search.includes('dark')) document.documentElement.dataset.theme = 'dark';
+  for (const g of document.querySelectorAll('.grille')) g.innerHTML = '<i></i>'.repeat(36);
+</script>
+</body>
+</html>

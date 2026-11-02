@@ -1,0 +1,53 @@
+/* Banner — a strip of the case in the flow (FORM.md surface class, elevation.unit, D-003). One light, top-left.
+   Status is a printed glyph and a word, never a stripe, a tint, a disc or orange. Radius corner.media:
+   about 0.16 of a strip one key tall (P6). */
+.root {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--ds-gap-lg);
+  row-gap: var(--ds-gap-xs);
+  inline-size: 100%;
+  min-block-size: calc(var(--ds-control-md) + var(--ds-gap-md) * 2);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-xl) var(--ds-gap-md);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-solid);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  box-shadow: var(--ds-elevation-unit), inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-material-lit);
+}
+.head { display: inline-flex; align-items: center; gap: var(--ds-gap-sm); flex: none; min-block-size: var(--ds-control-md); }
+.glyph {
+  inline-size: var(--ds-control-icon-md);
+  block-size: var(--ds-control-icon-md);
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--ds-width-ring);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mark { fill: none; stroke: currentColor; stroke-width: var(--ds-width-ring); stroke-linecap: round; }
+.status { font-size: var(--ds-type-label); font-weight: var(--ds-type-weight-medium); line-height: var(--ds-type-leading-tight); }
+.message {
+  flex: 1 1 var(--ds-control-menu-min);
+  min-inline-size: 0;
+  padding-block: var(--ds-gap-sm);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+}
+.keys { display: inline-flex; align-items: center; gap: var(--ds-gap-sm); flex: none; margin-inline-start: auto; }
+
+.neutral .glyph { color: var(--ds-status-info-mark); }
+.positive .glyph { color: var(--ds-status-positive-mark); }
+.warning .glyph { color: var(--ds-text-primary); }
+.critical .glyph { color: var(--ds-status-critical-mark); }
+
+@media (forced-colors: active) {
+  .root { border-color: CanvasText; }
+  .glyph { color: CanvasText; }
+}

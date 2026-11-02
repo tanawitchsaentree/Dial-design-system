@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · RangeSlider · three two-cap faders</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. Every part is plastic and ink: the orange belongs to the unit's rotary (P1). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 360px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 14px; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .head { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; }
+  .head output { font-variant-numeric: tabular-nums; color: var(--ds-text-secondary); }
+  .f { position: relative; block-size: 44px; touch-action: none; cursor: pointer; }
+  .thumb { --x: 0; position: absolute; inset-block-start: 0; block-size: 44px; inline-size: 44px; inset-inline-start: calc(var(--x) * (100% - 24px) - 10px); outline: none; }
+  .thumb:focus-visible .cap { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .cap { position: absolute; inset-inline-start: 10px; inline-size: 24px; block-size: 32px; inset-block-start: 6px; box-sizing: border-box;
+         border: 1px solid transparent; border-radius: 6px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); }
+  .cap::after { content: ""; position: absolute; inset-inline-start: 50%; inset-block: 5px; border-inline-start: 2px solid var(--ds-text-secondary); margin-inline-start: -1px; }
+  .groove { position: absolute; inset-inline: 12px; inset-block-start: 18px; block-size: 8px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); border: 1px solid var(--ds-line-ring); box-sizing: border-box; }
+  .ticks { position: absolute; inset-inline: 12px; inset-block-start: 4px; }
+  .ticks i { position: absolute; inset-inline-start: calc(var(--p) * 100%); block-size: 8px; border-inline-start: 1px solid var(--ds-grille-hole); }
+  .ticks i.in { border-inline-start-color: var(--ds-text-primary); block-size: 10px; inset-block-start: -2px; }
+  .nums { position: relative; block-size: 14px; margin-inline: 12px; font-size: 11px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--ds-text-secondary); }
+  .nums span { position: absolute; inset-inline-start: calc(var(--p) * 100%); inline-size: 0; display: flex; justify-content: center; }
+
+  /* A · inked span: the ruler ticks between the caps print in full ink, the rest in the hole step */
+  /* B · ink floor: the groove floor between the caps is lit in grille ink (a filled segment, in ink) */
+  .b .span { position: absolute; inset-block-start: 20px; block-size: 4px; border-radius: 2px; background: var(--ds-grille-hole-on);
+             inset-inline-start: calc(12px + var(--a) * (100% - 24px)); inline-size: calc((var(--b) - var(--a)) * (100% - 24px)); }
+  .b .ticks i.in { border-inline-start-color: var(--ds-grille-hole); block-size: 8px; inset-block-start: 0; }
+  /* C · facing caps: each cap has its index on the inner edge, like schedule pins on a timer dial */
+  .c .cap::after { inset-inline-start: auto; inset-inline-end: 3px; margin: 0; }
+  .c .hi .cap::after { inset-inline-end: auto; inset-inline-start: 3px; }
+  .c .cap { border-start-end-radius: 2px; border-end-end-radius: 2px; }
+  .c .hi .cap { border-radius: 6px; border-start-start-radius: 2px; border-end-start-radius: 2px; }
+  .c .ticks i.in { border-inline-start-color: var(--ds-grille-hole); block-size: 8px; inset-block-start: 0; }
+  @media (forced-colors: active) { .cap, .groove { border: 1px solid CanvasText; } }
+</style>
+</head>
+<body>
+<h1>RangeSlider · two caps in one ruler groove</h1>
+<p>Same matte ABS, same light, same spring as Slider (mass 1.4, stiffness 520, damping 46). Tab to a cap and use arrows, PageUp/PageDown, Home and End; the caps never cross. Drag a cap or press the track and the nearer cap comes. No part is orange.</p>
+<div class="row">
+  <section class="unit a" data-v="a"><h2>A · inked span on the ruler</h2>
+    <div class="head"><span>Heating schedule</span><output></output></div>
+    <div class="f"><div class="ticks"></div><div class="groove"></div><div class="thumb lo" role="slider" tabindex="0"><div class="cap"></div></div><div class="thumb hi" role="slider" tabindex="0"><div class="cap"></div></div></div>
+    <div class="nums"></div>
+    <p class="note">Two Slider caps. The ticks between them print in full ink; outside they drop to the hole step. The groove stays empty.</p></section>
+  <section class="unit b" data-v="b"><h2>B · ink floor between the caps</h2>
+    <div class="head"><span>Heating schedule</span><output></output></div>
+    <div class="f"><div class="ticks"></div><div class="groove"></div><div class="span"></div><div class="thumb lo" role="slider" tabindex="0"><div class="cap"></div></div><div class="thumb hi" role="slider" tabindex="0"><div class="cap"></div></div></div>
+    <div class="nums"></div>
+    <p class="note">The groove floor between the caps is lit in grille ink. Reads at once, and is the Material filled segment in grey.</p></section>
+  <section class="unit c" data-v="c"><h2>C · facing caps</h2>
+    <div class="head"><span>Heating schedule</span><output></output></div>
+    <div class="f"><div class="ticks"></div><div class="groove"></div><div class="thumb lo" role="slider" tabindex="0"><div class="cap"></div></div><div class="thumb hi" role="slider" tabindex="0"><div class="cap"></div></div></div>
+    <div class="nums"></div>
+    <p class="note">Each cap carries its index on the edge that faces the other, like the pins on a timer. Two new cap shapes for one control.</p></section>
+</div>
+<script>
+(() => {
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const M = { m: 1.4, k: 520, c: 46 };
+  const spring = (apply, x0) => { let x = x0, v = 0, t = x0, raf = 0, last = 0;
+    const tick = (ts) => { const dt = Math.min(0.032, (ts - (last || ts)) / 1000 || 1 / 120); last = ts;
+      for (let i = 0, n = Math.ceil(dt * 120); i < n; i++) { v += ((-M.k * (x - t) - M.c * v) / M.m) / 120; x += v / 120; }
+      apply(x); if (Math.abs(x - t) < 1e-4 && Math.abs(v) < 1e-4) { x = t; apply(x); raf = 0; last = 0; return; } raf = requestAnimationFrame(tick); };
+    return { to(nt, snap) { t = nt; if (snap || REDUCED) { x = nt; v = 0; apply(x); return; } if (!raf) raf = requestAnimationFrame(tick); } }; };
+  document.querySelectorAll('[data-v]').forEach((u) => {
+    const MIN = 14, MAX = 26, f = u.querySelector('.f'), out = u.querySelector('output');
+    const th = [u.querySelector('.lo'), u.querySelector('.hi')], val = [18, 22];
+    const ticks = [];
+    for (let i = MIN; i <= MAX; i++) { const t = document.createElement('i'); t.style.setProperty('--p', (i - MIN) / (MAX - MIN)); u.querySelector('.ticks').append(t); ticks.push(t);
+      if (i % 2 === 0) { const s = document.createElement('span'); s.style.setProperty('--p', (i - MIN) / (MAX - MIN)); s.textContent = i; u.querySelector('.nums').append(s); } }
+    const sp = th.map((t, k) => spring((x) => { t.style.setProperty('--x', x.toFixed(4)); f.style.setProperty(k ? '--b' : '--a', x.toFixed(4)); }, (val[k] - MIN) / (MAX - MIN)));
+    const paint = () => { out.textContent = `${val[0]}–${val[1]} °C`; ticks.forEach((t, i) => t.classList.toggle('in', i + MIN >= val[0] && i + MIN <= val[1]));
+      th.forEach((t, k) => { t.setAttribute('aria-valuenow', val[k]); t.setAttribute('aria-valuemin', k ? val[0] : MIN); t.setAttribute('aria-valuemax', k ? MAX : val[1]); t.setAttribute('aria-label', k ? 'High' : 'Low'); }); };
+    const set = (k, n, snap) => { const lo = k ? val[0] : MIN, hi = k ? MAX : val[1]; val[k] = Math.max(lo, Math.min(hi, n)); paint(); sp[k].to((val[k] - MIN) / (MAX - MIN), snap); };
+    set(0, 18, true); set(1, 22, true);
+    th.forEach((t, k) => t.addEventListener('keydown', (e) => { const d = { ArrowUp: 1, ArrowRight: 1, ArrowDown: -1, ArrowLeft: -1, PageUp: 2, PageDown: -2 }[e.key];
+      if (d) { e.preventDefault(); set(k, val[k] + d); } if (e.key === 'Home') { e.preventDefault(); set(k, MIN); } if (e.key === 'End') { e.preventDefault(); set(k, MAX); } }));
+    f.addEventListener('pointerdown', (e) => { f.setPointerCapture(e.pointerId); const r = f.getBoundingClientRect();
+      const at = (ev) => MIN + Math.max(0, Math.min(1, (ev.clientX - r.left - 12) / (r.width - 24))) * (MAX - MIN);
+      const v0 = at(e), k = Math.abs(v0 - val[0]) <= Math.abs(v0 - val[1]) && !(val[0] === val[1] && v0 > val[1]) ? 0 : 1; th[k].focus();
+      const move = (ev) => set(k, Math.round(at(ev)), true);
+      move(e); const end = () => { f.removeEventListener('pointermove', move); sp[k].to((val[k] - MIN) / (MAX - MIN)); };
+      f.addEventListener('pointermove', move); f.addEventListener('pointerup', end, { once: true }); });
+  });
+})();
+</script>
+</body>
+</html>

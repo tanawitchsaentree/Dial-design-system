@@ -26,6 +26,8 @@ const cases = [
   { gate: 'G-PC1 frame shows it', want: 'green', html: '<div style="overflow:visible;height:120px;position:relative"><button>Theme</button><div role=\"listbox\" style=\"position:absolute;top:36px;left:0;width:160px;height:180px;background:#222;color:#fff\"><div role=\"option\">One</div></div></div>', probe: popupClipProbe },
   { gate: 'G-PC1 portalled', want: 'green', html: '<div style="overflow:hidden;height:120px"><button>Theme</button></div><div role="listbox" style="position:fixed;top:60px;left:16px;width:160px;height:180px;background:#222"></div>', probe: popupClipProbe },
   { gate: 'G-PC1 off the screen', want: 'red', html: '<div role="menu" style="position:fixed;top:300px;left:16px;width:160px;height:180px;background:#222"></div>', probe: popupClipProbe },
+  // dial K-14: an in-page selectable list taller than the screen is content, not a popup
+  { gate: 'G-PC1 in-page list', want: 'green', html: '<div role="listbox" style="height:900px;background:#222"><div role="option">Track 1</div></div>', probe: popupClipProbe },
   { gate: 'G-PC1 a tall dialog scrolls', want: 'green', html: '<div role="dialog" style="position:fixed;top:0;left:16px;width:300px;height:900px;background:#222"></div>', probe: popupClipProbe },
 ];
 

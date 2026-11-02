@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Meter · three readings of a level</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. A meter is printing and a recess: no orange, no colour-coded arc (P1, P4). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 360px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 22px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .m { display: grid; gap: 6px; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; }
+  .head .val { font-variant-numeric: tabular-nums; color: var(--ds-text-secondary); display: inline-flex; gap: 6px; align-items: center; }
+  .head .val b { font-weight: 500; color: var(--ds-text-primary); }
+  svg.g { inline-size: 10px; block-size: 10px; fill: var(--ds-text-primary); }
+
+  /* A · printed scale and needle: a narrow recessed window (tuning scale), ticks printed in it, one ink needle; region words printed under their spans */
+  .a .win { position: relative; block-size: 20px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); border: 1px solid var(--ds-line-ring); box-sizing: border-box; }
+  .a .win i { position: absolute; inset-block-end: 0; inset-inline-start: calc(var(--p) * 100%); block-size: 6px; border-inline-start: 1px solid var(--ds-text-secondary); }
+  .a .win i.b { block-size: 100%; border-inline-start-style: dashed; }
+  .a .needle { position: absolute; inset-block: -3px; inset-inline-start: calc(var(--v) * 100%); border-inline-start: 2px solid var(--ds-text-primary); margin-inline-start: -1px; }
+  .a .regions { position: relative; block-size: 14px; font-size: 11px; color: var(--ds-text-secondary); }
+  .a .regions span { position: absolute; inset-inline-start: calc(var(--s) * 100%); inline-size: calc(var(--w) * 100%); text-align: center; }
+  .a .regions span.on { color: var(--ds-text-primary); font-weight: 500; }
+  /* B · LCD bar segments in a display window */
+  .b .win { display: flex; gap: 3px; padding: 8px; border-radius: 8px; background: var(--ds-display-lcd-bg); box-shadow: var(--ds-elevation-well); }
+  .b .win i { flex: 1; block-size: 14px; border-radius: 1px; background: var(--ds-display-lcd-ghost); }
+  .b .win i.on { background: var(--ds-display-lcd-ink); }
+  .b .win i.b { margin-inline-start: 4px; }
+  /* C · grille holes with a printed scale */
+  .c .win { display: grid; grid-template-columns: repeat(20, 1fr); gap: 4px; }
+  .c .win i { aspect-ratio: 1; border-radius: 50%; background: var(--ds-grille-hole); box-shadow: var(--ds-elevation-well); }
+  .c .win i.on { background: var(--ds-grille-hole-on); }
+  .scale { display: flex; justify-content: space-between; font-size: 11px; font-variant-numeric: tabular-nums; color: var(--ds-text-secondary); }
+</style>
+</head>
+<body>
+<h1>Meter · a static reading of a level in a known range</h1>
+<p>A meter reads a level that the person does not set: battery, air quality, water hardness, signal. It is not a task's progress (Progress) and not an activity field (Grille). Regions are told by a glyph and a word, never by colour alone, and nothing is orange.</p>
+<div class="row">
+  <section class="unit a" data-v="a"><h2>A · printed scale and needle</h2>
+    <div class="m" data-val="0.72" data-lo="0.3" data-hi="0.65" data-name="Air quality" data-text="72 AQI"></div>
+    <div class="m" data-val="0.18" data-lo="0.2" data-hi="0.8" data-name="Battery" data-text="18 %"></div>
+    <p class="note">A narrow window with printed ticks, like a radio's tuning scale. One ink needle marks the reading; dashed marks split the regions and their words print under them.</p></section>
+  <section class="unit b" data-v="b"><h2>B · LCD bar segments</h2>
+    <div class="m" data-val="0.72" data-lo="0.3" data-hi="0.65" data-name="Air quality" data-text="72 AQI"></div>
+    <div class="m" data-val="0.18" data-lo="0.2" data-hi="0.8" data-name="Battery" data-text="18 %"></div>
+    <p class="note">Segments in a grey-green window, like a charger's level. Clear, but a second display window competes with the unit's one (P2).</p></section>
+  <section class="unit c" data-v="c"><h2>C · grille holes</h2>
+    <div class="m" data-val="0.72" data-lo="0.3" data-hi="0.65" data-name="Air quality" data-text="72 AQI"></div>
+    <div class="m" data-val="0.18" data-lo="0.2" data-hi="0.8" data-name="Battery" data-text="18 %"></div>
+    <p class="note">A row of recessed holes lit in ink. Reads as Grille with a scale, and the coarse step cannot show a precise reading.</p></section>
+</div>
+<script>
+  const G = { low: '<path d="M5 9.4 .6 1h8.8z"/>', ok: '<circle cx="5" cy="5" r="4.5"/>', high: '<path d="M5 .6 9.4 9H.6z"/>' };
+  document.querySelectorAll('[data-v]').forEach((u) => u.querySelectorAll('.m').forEach((m) => {
+    const v = +m.dataset.val, lo = +m.dataset.lo, hi = +m.dataset.hi, k = v < lo ? 'low' : v > hi ? 'high' : 'ok';
+    const word = { low: 'Low', ok: 'Normal', high: 'High' }[k];
+    let body = '';
+    if (u.dataset.v === 'a') {
+      let t = ''; for (let i = 0; i <= 20; i++) t += `<i style="--p:${i / 20}"></i>`;
+      t += `<i class="b" style="--p:${lo}"></i><i class="b" style="--p:${hi}"></i>`;
+      body = `<div class="win">${t}<span class="needle" style="--v:${v}"></span></div><div class="regions">` +
+        [['low', 0, lo], ['ok', lo, hi], ['high', hi, 1]].map(([n, s, e]) => `<span class="${n === k ? 'on' : ''}" style="--s:${s};--w:${e - s}">${{ low: 'low', ok: 'normal', high: 'high' }[n]}</span>`).join('') + '</div>';
+    } else if (u.dataset.v === 'b') {
+      let t = ''; for (let i = 0; i < 20; i++) t += `<i class="${i / 20 < v ? 'on' : ''} ${Math.abs(i / 20 - lo) < 0.025 || Math.abs(i / 20 - hi) < 0.025 ? 'b' : ''}"></i>`;
+      body = `<div class="win">${t}</div><div class="scale"><span>0</span><span>100</span></div>`;
+    } else {
+      let t = ''; for (let i = 0; i < 20; i++) t += `<i class="${i / 20 < v ? 'on' : ''}"></i>`;
+      body = `<div class="win">${t}</div><div class="scale"><span>0</span><span>50</span><span>100</span></div>`;
+    }
+    m.setAttribute('role', 'meter');
+    m.innerHTML = `<div class="head"><span>${m.dataset.name}</span><span class="val">${m.dataset.text} <svg class="g" viewBox="0 0 10 10">${G[k]}</svg><b>${word}</b></span></div>${body}`;
+  }));
+</script>
+</body>
+</html>

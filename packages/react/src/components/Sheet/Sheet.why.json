@@ -1,0 +1,56 @@
+{
+  "concept": "Sheet is the lid of an appliance opened to show every control of one device at once, rising from the bottom edge of a phone and standing as its own unit at the lower end of a wide screen.",
+  "kind": ["sheet", "bottom sheet", "side panel", "drawer"],
+  "family": "Dialog",
+  "family_difference": "Dialog asks one question and waits for an answer, so the scrim does nothing and its keys close it. Sheet holds a device's full controls that act at once, so it has a close key in its header, closes on a scrim click, slides from its own edge instead of rising a few pixels, and can be dragged down by its printed bar when docked.",
+  "default_to_avoid": [
+    { "pattern": "iOS style bottom sheet with a grey pill handle and a white rounded top", "why_not": "A grey pill is a second edge language and a white top is the surface NEVER rule in FORM.md; the handle here is printed ink with square ends." },
+    { "pattern": "side sheet drawer glued flush to the edge of the window (Material navigation drawer)", "why_not": "A rail fused to the window edge is no longer a unit of its own, and P6 caps panels so they do not become walls." }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a lid that opens to show the full control panel, then closes over it" },
+    { "source": "Braun TP 1 radio-phonograph (Dieter Rams, 1959): the full set of controls on one face, read top to bottom" },
+    { "source": "WAI-ARIA Authoring Practices, Dialog (Modal) pattern: focus moves in, Escape closes, focus returns to the opener" }
+  ],
+  "derivation": [
+    { "p": "P1", "axis": "space", "consequence": "sits where the hand expects it (lower or right of the display)", "form": "On a phone the sheet rises from the bottom edge under the thumb; on a wide screen it stands at the lower inline end, inset from both edges." },
+    { "p": "P6", "axis": "shape", "consequence": "capped so large panels do not swell into pillows", "form": "The radius is corner.panel, the cap, and the docked bottom corners are square because they meet the screen edge." },
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "The device name, the lowercase model name and the close key share one header row on the top inset line." },
+    { "p": "P3", "axis": "interaction", "consequence": "every mechanism has its keyboard map", "form": "Dragging the printed bar is never the only way out: the close key, Escape and a click on the scrim close it too." },
+    { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "The body slides in from its edge as one piece on the enter easing and leaves faster on the exit easing; nothing inside it moves on its own." }
+  ],
+  "variants": {
+    "lab": "apps/lab/sheet/index.html",
+    "options": [
+      { "id": "A", "name": "lid, docked to the bottom on a phone and a unit at the lower end on wide screens" },
+      { "id": "B", "name": "remote, a floating unit sized to its content on every screen" },
+      { "id": "C", "name": "faceplate, the whole phone screen and a drawer flush with the edge on wide screens" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A gives a phone the full width a fader needs and keeps the sheet a unit of its own on a laptop near the lower end where the hand is (P1); B wastes phone width and reads as Dialog's twin, and C hides the room it came from and glues a rail to the window edge (P6)."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "shape", "why": "The sheet is a body of matte plastic with the capped panel radius and one light from the top left." },
+    "bottom": { "p": "P1", "axis": "space", "why": "Docked to the bottom edge across the full width, the controls sit under the thumb on a phone held upright." },
+    "auto": { "p": "P1", "axis": "space", "why": "The placement follows the screen, so a tall screen gets the docked sheet and a wide one the standing unit." },
+    "inline": { "p": "P6", "axis": "space", "why": "A non-modal sheet sits in the flow of the page at a fixed place and covers nothing." },
+    "handle": { "p": "P5", "axis": "colour", "why": "The drag bar is printed in full ink on the plastic with square ends, flat like any printing on the case." },
+    "head": { "p": "P5", "axis": "space", "why": "Device name, model name and close key share the top inset line, so the header is printing on the case." },
+    "title": { "p": "P5", "axis": "type", "why": "The device name is printed at the title size in medium weight, so it is the first thing read." },
+    "model": { "p": "P5", "axis": "type", "why": "The model name is printed lowercase at caption size in the secondary ink, like printing on a case." },
+    "content": { "p": "P5", "axis": "space", "why": "Display, faders and rows sit on the same inset line as the header, never floating mid-surface." },
+    "actions": { "p": "P1", "axis": "space", "why": "Optional keys sit together at the bottom and inline end, where the hand expects the main key." }
+  },
+  "states": {
+    "data-state=open": { "p": "P6", "axis": "motion", "why": "The open sheet slides in from its edge on the enter easing, as one body with all its parts." },
+    "data-dragging=true": { "p": "P3", "axis": "motion", "why": "While the bar is held the body follows the finger directly, with no easing that would lag behind it." },
+    "@media orientation: portrait": { "p": "P1", "axis": "space", "why": "On a screen taller than it is wide the sheet docks to the bottom edge, where the thumb is." },
+    "@media prefers-reduced-motion: reduce": { "p": "P6", "axis": "motion", "why": "Under reduced motion the sheet appears and leaves at once, with no slide and no fade." },
+    "@media forced-colors: active": { "p": "P6", "axis": "interaction", "why": "In forced colours the sheet keeps a real border and the bar takes the text colour, so both survive." }
+  },
+  "motion": {
+    "opacity": { "p": "P6", "axis": "motion", "why": "The body fades with its slide so the scrim and the sheet arrive and leave as one change of state." },
+    "transform": { "p": "P6", "axis": "motion", "why": "The only travel is the slide from the sheet's own edge over motion.release in and the shorter motion.exit out." }
+  }
+}

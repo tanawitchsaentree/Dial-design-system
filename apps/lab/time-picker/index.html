@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · TimePicker · four ways to set the time a night schedule starts</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 74ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 32px; align-items: start; }
+  .unit { inline-size: 320px; padding: 23px; border-radius: 48px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 16px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .lbl { font-size: 13px; font-weight: 500; line-height: 1.4; } .hint { font-size: 12px; color: var(--ds-text-secondary); margin: 0; }
+  .seg { display: block; block-size: 40px; } .seg .on { fill: currentColor; }
+  .field { all: unset; position: relative; display: grid; place-items: center; min-inline-size: 92px; min-block-size: 52px; border-radius: 10px; cursor: text; }
+  .field:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .colon { display: grid; gap: 10px; } .colon i { inline-size: 5px; block-size: 5px; background: currentColor; }
+  .keys { display: flex; gap: 4px; justify-content: center; min-inline-size: 92px; }
+  .key { all: unset; inline-size: 44px; block-size: 44px; border-radius: 50%; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); display: grid; place-items: center; font-size: 18px; color: var(--ds-text-primary); cursor: pointer; }
+  .key:active { box-shadow: none; transform: translateY(2px); }
+  .pm { display: grid; gap: 2px; font-size: 11px; font-weight: 500; line-height: 1.4; } .pm .off { opacity: .3; }
+  /* A: LCD clock window */
+  .a .win { display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 25px; background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); box-shadow: var(--ds-elevation-well); justify-content: center; }
+  .a .seg .off { fill: var(--ds-display-lcd-ghost); }
+  .setrow { display: flex; gap: 12px; justify-content: center; align-items: start; }
+  .setrow .cap { font-size: 12px; text-align: center; color: var(--ds-text-secondary); margin-block-start: 4px; }
+  /* B: set well (input class), segments in ink, unlit at the lower step */
+  .b .well { display: flex; align-items: center; gap: 4px; padding: 4px 16px; border: 1px solid var(--ds-line-ring); border-radius: 12px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); color: var(--ds-text-primary); }
+  /* first render used grille.hole: in light the ghost "8" read as a lit digit (10 looked like 80), so unlit segments moved to surface.quiet */
+  .b .seg .off { fill: var(--ds-surface-quiet); }
+  .b .keys2 { display: flex; gap: 4px; padding-inline: 16px; }
+  /* C: rotary pair */
+  .c .reading { font-size: 28px; font-variant-numeric: tabular-nums; font-weight: 500; text-align: center; }
+  .c .knobs { display: flex; gap: 24px; justify-content: center; }
+  .c .k { display: grid; gap: 6px; justify-items: center; font-size: 13px; }
+  .c .ring { position: relative; inline-size: 88px; block-size: 88px; border-radius: 50%; }
+  .c .ring i { position: absolute; inset-block-start: 0; inset-inline-start: 50%; inline-size: 2px; block-size: 6px; margin-inline-start: -1px; background: var(--ds-text-secondary); transform-origin: 1px 44px; }
+  .c .disc { position: absolute; inset: 10px; border-radius: 50%; background: var(--ds-surface-knob); box-shadow: var(--ds-elevation-part); }
+  .c .disc::after { content: ''; position: absolute; inset-block-start: 6px; inset-inline-start: 50%; inline-size: 3px; block-size: 18px; margin-inline-start: -1.5px; background: var(--ds-text-primary); border-radius: 2px; }
+  /* D: printed-format input */
+  .d .well { display: flex; align-items: center; gap: 2px; min-block-size: 44px; padding-inline: 16px; border: 1px solid var(--ds-line-ring); border-radius: 12px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); font-size: 22px; font-variant-numeric: tabular-nums; line-height: 1.4; }
+  .d .num { all: unset; inline-size: 2ch; text-align: center; padding-block: 4px; border-radius: 6px; }
+  .d .num:focus-visible { outline: 2px solid var(--ds-focus-ring); }
+  .d .ampm { margin-inline-start: auto; font-size: 13px; color: var(--ds-text-secondary); }
+  .sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
+  button.t { font: inherit; margin-block-end: 18px; }
+</style>
+</head>
+<body>
+<h1>TimePicker — four ways to set when the night schedule starts</h1>
+<p>Home-iot scenario: "Night mode starts at 22:30". Each field is a spinbutton: arrows step it, PageUp and PageDown step by ten minutes or three hours, Home and End reach the ends, digits type in. No orange: the time is a setting, not the unit's one loud control. A clock-face dialog and the browser's time input are the defaults to avoid.</p>
+<button class="t" id="theme">Light / dark</button>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · LCD clock window + set keys</h2>
+    <span class="lbl" id="la">Night mode starts</span>
+    <div class="win" role="group" aria-labelledby="la"><button class="field" data-f="h" data-cy="24"></button><span class="colon" aria-hidden="true"><i></i><i></i></span><button class="field" data-f="m"></button></div>
+    <div class="setrow"><div><div class="keys"><button class="key" tabindex="-1" data-k="h-">−</button><button class="key" tabindex="-1" data-k="h+">+</button></div><div class="cap">hour</div></div><div><div class="keys"><button class="key" tabindex="-1" data-k="m-">−</button><button class="key" tabindex="-1" data-k="m+">+</button></div><div class="cap">min</div></div></div>
+    <p class="note">The clock radio's own window. It is a second LCD in a unit that already has one, and P2 says the display is never a control; people will read it as the device's state, not as a setting.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · set well, segment figures, keys under each field</h2>
+    <span class="lbl" id="lb">ช่วงกลางคืนเริ่ม</span>
+    <div class="well" role="group" aria-labelledby="lb"><button class="field" data-f="h" data-cy="12"></button><span class="colon" aria-hidden="true"><i></i><i></i></span><button class="field" data-f="m"></button><span class="pm" aria-hidden="true"><span data-pm="am">AM</span><span data-pm="pm">PM</span></span></div>
+    <div class="keys2"><div class="keys"><button class="key" tabindex="-1" data-k="h-">−</button><button class="key" tabindex="-1" data-k="h+">+</button></div><div class="keys"><button class="key" tabindex="-1" data-k="m-">−</button><button class="key" tabindex="-1" data-k="m+">+</button></div></div>
+    <p class="hint">12-hour, AM and PM printed in the well</p>
+    <p class="note">Input's recessed well holds the figures as ink segments; unlit segments sit at the grille's lower step. The set keys stand under the field they move, like a clock radio's hour and minute keys. One setting, read as a setting.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · pair of rotaries</h2>
+    <div class="reading" id="rc">22:30</div>
+    <div class="knobs"><div class="k"><div class="ring" data-ticks="24"><div class="disc" style="transform:rotate(100deg)"></div></div>hour</div><div class="k"><div class="ring" data-ticks="12"><div class="disc" style="transform:rotate(45deg)"></div></div>minute</div></div>
+    <p class="note">Two knobs beside each other. P1 makes the round part the loud one, so two knobs compete with the unit's real knob, and sixty minute detents are too fine to read on a 88px ring.</p></section>
+  <section class="unit d" aria-labelledby="hd"><h2 id="hd">D · input with a printed format</h2>
+    <span class="lbl" id="ld">Night mode starts</span>
+    <div class="well" role="group" aria-labelledby="ld"><span class="num" tabindex="0">22</span>:<span class="num" tabindex="0">30</span><span class="ampm">24-hour</span></div>
+    <p class="hint">HH:MM</p>
+    <p class="note">Input's well with two numeric fields in grotesk tabular figures. Quick to type and plain, but loses the set keys a pointer needs; kept as the text face for dense forms.</p></section>
+</div>
+<script>
+  const SEGS = { '0': 'abcdef', '1': 'bc', '2': 'abged', '3': 'abgcd', '4': 'fgbc', '5': 'afgcd', '6': 'afgedc', '7': 'abc', '8': 'abcdefg', '9': 'abcdfg' };
+  function cell(ch, x) {
+    const w = 20, h = 40, t = 4.4, m = h / 2, s = t / 2, on = SEGS[ch] ?? '';
+    const H = (y) => `${x + s},${y} ${x + t},${y - s} ${x + w - t},${y - s} ${x + w - s},${y} ${x + w - t},${y + s} ${x + t},${y + s}`;
+    const V = (xx, y0, y1) => `${xx},${y0 + s} ${xx + s},${y0 + t} ${xx + s},${y1 - t} ${xx},${y1 - s} ${xx - s},${y1 - t} ${xx - s},${y0 + t}`;
+    const P = { a: H(s), g: H(m), d: H(h - s), f: V(x + s, s, m), b: V(x + w - s, s, m), e: V(x + s, m, h - s), c: V(x + w - s, m, h - s) };
+    return Object.entries(P).map(([k, p]) => `<polygon class="${on.includes(k) ? 'on' : 'off'}" points="${p}"/>`).join('');
+  }
+  const seg = (s) => `<svg class="seg" aria-hidden="true" viewBox="0 0 ${2 + s.length * 32} 40">${[...s].map((c, i) => cell(c, 2 + i * 32)).join('')}</svg>`;
+  document.querySelectorAll('.a, .b').forEach((unit) => {
+    const st = { h: 22, m: 30 }; const cy = +unit.querySelector('[data-f="h"]').dataset.cy;
+    const draw = () => {
+      const hh = cy === 12 ? ((st.h + 11) % 12) + 1 : st.h;
+      unit.querySelectorAll('.field').forEach((f) => {
+        const isH = f.dataset.f === 'h', v = isH ? hh : st.m;
+        f.innerHTML = seg(String(v).padStart(2, '0')) + `<span class="sr">${v}</span>`;
+        f.setAttribute('role', 'spinbutton'); f.setAttribute('aria-label', isH ? 'Hour' : 'Minute');
+        f.setAttribute('aria-valuenow', isH ? st.h : st.m); f.setAttribute('aria-valuemin', 0); f.setAttribute('aria-valuemax', isH ? 23 : 59);
+      });
+      unit.querySelectorAll('[data-pm]').forEach((p) => p.classList.toggle('off', (p.dataset.pm === 'pm') !== (st.h >= 12)));
+    };
+    const step = (f, d) => { if (f === 'h') st.h = (st.h + d + 24) % 24; else st.m = (st.m + d + 60) % 60; draw(); };
+    unit.querySelectorAll('[data-k]').forEach((k) => k.addEventListener('click', () => step(k.dataset.k[0], k.dataset.k[1] === '+' ? 1 : -1)));
+    unit.querySelectorAll('.field').forEach((f) => f.addEventListener('keydown', (e) => {
+      const map = { ArrowUp: 1, ArrowDown: -1, PageUp: f.dataset.f === 'h' ? 3 : 10, PageDown: f.dataset.f === 'h' ? -3 : -10 };
+      if (e.key in map) { e.preventDefault(); step(f.dataset.f, map[e.key]); }
+    }));
+    draw();
+  });
+  document.querySelectorAll('[data-ticks]').forEach((r) => { const n = +r.dataset.ticks; for (let i = 0; i < n; i++) { const t = document.createElement('i'); t.style.transform = `rotate(${-135 + (270 / (n - 1)) * i}deg)`; r.prepend(t); } });
+  document.getElementById('theme').addEventListener('click', () => { const r = document.documentElement; r.dataset.theme = r.dataset.theme === 'dark' ? 'light' : 'dark'; });
+</script>
+</body>
+</html>

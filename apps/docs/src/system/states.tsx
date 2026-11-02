@@ -15,11 +15,17 @@
 // selected, loading, sorted. A cell may combine them ("disabled checked").
 import type { ReactNode } from 'react';
 import { Button, Checkbox, Chip, IconButton, Input, Rotary, SegmentedControl, Select, Slider, Switch } from 'dial-react';
+import { Meter, RangeSlider, Scrubber } from 'dial-react';
+import { Banner, EmptyState, Sheet } from 'dial-react';
+import { List, Menu } from 'dial-react';
+import { TimePicker } from 'dial-react';
+
+const LAMP_ACTIONS = [{ value: 'rename', label: 'เปลี่ยนชื่อ' }, { value: 'move', label: 'ย้ายห้อง' }, { value: 'remove', label: 'ลบออก', destructive: true }];
 
 export type StateRow = { component: string; family: string; cells: [string, ReactNode][] };
 
 /** Families in reading order. Each family gets one section and the sentence in FAMILY_TEXT. */
-export const FAMILIES: string[] = ['Fields', 'Choices', 'Ranges', 'Actions', 'Tables'];
+export const FAMILIES: string[] = ['Fields', 'Choices', 'Ranges', 'Actions', 'Messages', 'Panels', 'Tables'];
 
 /** One plain paragraph per family: how a state shows itself in this system (shape, tone, words). */
 export const FAMILY_TEXT: Record<string, string> = {
@@ -27,6 +33,8 @@ export const FAMILY_TEXT: Record<string, string> = {
   Choices: 'A choice is a key that latches. On is shown by the key sitting low, a lit lamp or a tick in ink, and the word stays readable in every state. A disabled key loses its height and fades, but keeps showing whether it is on.',
   Ranges: 'A range is a cap in a groove or a knob over a ring of ticks. The reading is printed beside it. A disabled range keeps its position and its reading, and fades so it reads as locked.',
   Actions: 'An action is a raised key. A disabled key loses its height and its shadow and fades, so it looks like a key that cannot be pressed.',
+  Messages: 'A message is printing on the case. A tone shows as its own glyph and a word on the same plastic, never as a stripe or a tint, and an empty place shows its unlit window or holes with one line of words.',
+  Panels: 'A panel is a body of its own. On a tall screen it docks to the bottom edge with a printed bar, and on a wide one it stands as a unit at the lower end.',
 };
 
 const icon = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
@@ -42,6 +50,14 @@ export const STATE_ROWS: StateRow[] = [
     ['invalid', <Input label="ชื่อห้อง" defaultValue="ห้องนั่งเล่นชั้นบน" error="มีห้องชื่อนี้แล้ว" />],
     ['readonly', <Input label="ชื่อห้อง" defaultValue="ห้องครัว" readOnly />],
     ['disabled', <Input label="ชื่อห้อง" defaultValue="ห้องครัว" disabled />],
+  ] },
+  { component: 'TimePicker', family: 'Fields', cells: [
+    ['default', <TimePicker label="เริ่มโหมดกลางคืน" hourLabel="ชั่วโมง" minuteLabel="นาที" />],
+    ['with value', <TimePicker label="เริ่มโหมดกลางคืน" hourLabel="ชั่วโมง" minuteLabel="นาที" defaultValue="22:30" />],
+    ['12-hour', <TimePicker label="เริ่มโหมดกลางคืน" hourLabel="ชั่วโมง" minuteLabel="นาที" periodLabel="ช่วงเวลา" hourCycle="12" defaultValue="22:30" />],
+    ['invalid', <TimePicker label="สิ้นสุดโหมดกลางคืน" hourLabel="ชั่วโมง" minuteLabel="นาที" defaultValue="21:00" error="เวลาสิ้นสุดต้องหลังเวลาเริ่ม" />],
+    ['readonly', <TimePicker label="เริ่มโหมดกลางคืน" hourLabel="ชั่วโมง" minuteLabel="นาที" defaultValue="22:30" readOnly />],
+    ['disabled', <TimePicker label="เริ่มโหมดกลางคืน" hourLabel="ชั่วโมง" minuteLabel="นาที" defaultValue="22:30" disabled />],
   ] },
   { component: 'Select', family: 'Fields', cells: [
     ['default', <Select label="ห้อง" options={ROOMS} placeholder="เลือกห้อง" />],
@@ -73,6 +89,19 @@ export const STATE_ROWS: StateRow[] = [
     ['default', <Slider label="Brightness" defaultValue={60} />],
     ['disabled', <Slider label="Brightness" defaultValue={60} disabled />],
   ] },
+  { component: 'RangeSlider', family: 'Ranges', cells: [
+    ['default', <RangeSlider label="Heating band" min={14} max={26} step={1} defaultValue={[18, 22]} />],
+    ['disabled', <RangeSlider label="Heating band" min={14} max={26} step={1} defaultValue={[18, 22]} disabled />],
+  ] },
+  { component: 'Scrubber', family: 'Ranges', cells: [
+    ['default', <Scrubber label="Ruhe, side A" duration={225} defaultValue={83} buffered={140} />],
+    ['disabled', <Scrubber label="Nothing playing" duration={0} disabled />],
+  ] },
+  { component: 'Meter', family: 'Ranges', cells: [
+    ['default', <Meter label="Battery" value={56} low={20} high={80} formatValue={(v) => `${v} %`} />],
+    ['low', <Meter label="Battery" value={14} low={20} high={80} formatValue={(v) => `${v} %`} />],
+    ['high', <Meter label="Battery" value={92} low={20} high={80} formatValue={(v) => `${v} %`} />],
+  ] },
   { component: 'Rotary', family: 'Ranges', cells: [
     ['default', <Rotary label="Temperature" min={16} max={26} defaultValue={21} />],
     ['disabled', <Rotary label="Temperature" min={16} max={26} defaultValue={21} disabled />],
@@ -84,5 +113,31 @@ export const STATE_ROWS: StateRow[] = [
   { component: 'IconButton', family: 'Actions', cells: [
     ['default', <IconButton label="Power">{power}</IconButton>],
     ['disabled', <IconButton label="Power" disabled>{power}</IconButton>],
+  ] },
+  { component: 'Menu', family: 'Actions', cells: [
+    ['default', <Menu label="ตัวเลือกของโคมไฟ" items={LAMP_ACTIONS} />],
+    ['disabled', <Menu label="ตัวเลือกของโคมไฟ" items={LAMP_ACTIONS} disabled />],
+  ] },
+  { component: 'List', family: 'Choices', cells: [
+    ['default', <List label="คิวเพลง" selectable style={{ inlineSize: 240 }}><List.Item value="a" index={1} label="เพลงกล่อมเตา" description="3:42" /></List>],
+    ['selected', <List label="คิวเพลง" selectable defaultValue="a" style={{ inlineSize: 240 }}><List.Item value="a" index={1} label="เพลงกล่อมเตา" description="3:42" /></List>],
+    ['disabled', <List label="คิวเพลง" selectable style={{ inlineSize: 240 }}><List.Item value="a" index={1} label="เพลงกล่อมเตา" description="ไม่มีในภูมิภาคนี้" disabled /></List>],
+  ] },
+  { component: 'Banner', family: 'Messages', cells: [
+    ['neutral', <Banner status="Away">Holiday mode is on.</Banner>],
+    ['positive', <Banner tone="positive" status="Updated">Every lamp is up to date.</Banner>],
+    ['warning', <Banner tone="warning" status="Filter">The filter is due.</Banner>],
+    ['critical', <Banner tone="critical" status="Offline">The hub is offline.</Banner>],
+    ['dismissible', <Banner status="Away" onDismiss={() => {}}>Holiday mode is on.</Banner>],
+  ] },
+  { component: 'EmptyState', family: 'Messages', cells: [
+    ['words only', <EmptyState title="No devices yet">Add one here.</EmptyState>],
+    ['display', <EmptyState drawing="display" title="No devices yet">Add one here.</EmptyState>],
+    ['grille', <EmptyState drawing="grille" title="No devices yet">Add one here.</EmptyState>],
+    ['with key', <EmptyState title="No devices yet" action={<Button>Add a device</Button>}>Add one here.</EmptyState>],
+  ] },
+  { component: 'Sheet', family: 'Panels', cells: [
+    ['end', <Sheet modal={false} open placement="end" title="Desk lamp"><Slider label="Brightness" max={100} step={10} defaultValue={40} /></Sheet>],
+    ['docked', <Sheet modal={false} open placement="bottom" title="Desk lamp"><Slider label="Brightness" max={100} step={10} defaultValue={40} /></Sheet>],
   ] },
 ];

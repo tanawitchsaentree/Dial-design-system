@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · List · three ways to set rows on plastic</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. One body per list, one light top-left. No orange in any row (P1). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lede { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .col { display: grid; gap: 14px; inline-size: 360px; }
+  .col h2 { font-size: 14px; font-weight: 500; margin: 0; } .col .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); line-height: 1.45; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  .lead { inline-size: 24px; block-size: 24px; flex: none; color: var(--ds-text-secondary); display: grid; place-items: center; }
+  .lead svg { inline-size: 24px; block-size: 24px; }
+  .idx { font-variant-numeric: tabular-nums; font-size: 14px; }
+  .txt { flex: 1 1 auto; min-inline-size: 0; display: grid; gap: 2px; }
+  .pri { font-size: 15px; line-height: 1.45; overflow-wrap: anywhere; }
+  .sec { font-size: 13px; line-height: 1.45; color: var(--ds-text-secondary); }
+  .chev { inline-size: 16px; block-size: 16px; flex: none; color: var(--ds-text-secondary); }
+  .sw { inline-size: 44px; block-size: 24px; border-radius: 999px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); position: relative; flex: none; }
+  .sw::after { content: ""; position: absolute; inset-block: 3px; inset-inline-start: 3px; inline-size: 18px; border-radius: 999px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); }
+  .sw.on::after { inset-inline-start: 23px; }
+  .badge { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; color: var(--ds-text-secondary); flex: none; }
+  .badge i { inline-size: 8px; block-size: 8px; background: var(--ds-status-critical-mark); }
+  .mark { inline-size: 3px; align-self: stretch; border-radius: 2px; background: var(--ds-text-primary); flex: none; }
+
+  /* A: one body, rows printed on it and set apart by gaps; the row under a finger becomes a recess */
+  .a { padding: 8px; border-radius: 28px; background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); display: grid; gap: 2px; }
+  .a li > * { display: flex; align-items: center; gap: 14px; min-block-size: 56px; padding: 8px 14px; border-radius: 20px; box-sizing: border-box; color: inherit; text-decoration: none; }
+  .a li > a:hover, .a li.press > * { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .a li[aria-selected="true"] .pri { font-weight: 500; }
+
+  /* B: one body, rows split by seams inset from the edges, like the joins of a moulded panel */
+  .b { padding: 4px 0; border-radius: 28px; background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); }
+  .b li > * { display: flex; align-items: center; gap: 14px; min-block-size: 56px; padding: 8px 22px; box-sizing: border-box; color: inherit; text-decoration: none; }
+  .b li + li > * { border-block-start: 1px solid var(--ds-line-divider); }
+  .b li[aria-selected="true"] > * { background: var(--ds-surface-sunken); }
+
+  /* C: each row is its own small raised unit in a stack */
+  .c { display: grid; gap: 8px; }
+  .c li > * { display: flex; align-items: center; gap: 14px; min-block-size: 64px; padding: 10px 18px; border-radius: 22px; background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); box-sizing: border-box; color: inherit; text-decoration: none; }
+  .c li[aria-selected="true"] > * { box-shadow: var(--ds-elevation-well); background: var(--ds-surface-sunken); }
+</style>
+</head>
+<body>
+<h1>List · three ways to set rows on plastic</h1>
+<p class="lede">Each column shows the same device list (a switch, a badge, a row that opens a page) and the same queue (printed index, one row chosen). The thing that changes is how rows are set apart: gaps on one body (A), seams on one body (B), or one small unit per row (C). The long Thai name checks wrapping.</p>
+<div class="row" id="lab"></div>
+<script>
+const glyph = {
+  lamp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg>',
+  heat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>',
+  spk: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="3"/><circle cx="12" cy="14" r="3"/></svg>',
+};
+const chev = '<svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>';
+const devices = (v) => `
+  <ul class="${v}" aria-label="Devices">
+    <li class="press"><div><span class="lead">${glyph.lamp}</span><span class="txt"><span class="pri">Kitchen lamp</span><span class="sec">On · 40%</span></span><span class="sw on"></span></div></li>
+    <li><div><span class="lead">${glyph.heat}</span><span class="txt"><span class="pri">โคมไฟห้องนั่งเล่นชั้นบนข้างหน้าต่างบานใหญ่</span><span class="sec">ปิด · ตั้งเวลา 18:30</span></span><span class="sw"></span></div></li>
+    <li><div><span class="lead">${glyph.spk}</span><span class="txt"><span class="pri">Hall speaker</span><span class="sec">Not reachable since 09:12</span></span><span class="badge"><i></i>Offline</span></div></li>
+    <li><a href="#"><span class="lead">${glyph.heat}</span><span class="txt"><span class="pri">Bedroom heater</span><span class="sec">Heating to 21 °C</span></span>${chev}</a></li>
+  </ul>`;
+const queue = (v) => `
+  <ul class="${v}" aria-label="Queue">
+    ${[['Kiln song', 'Ulm Quartet · 3:42'], ['Weniger, aber besser', 'Hochschule · 4:10'], ['Slow return', 'The Faders · 2:58']].map(([t, s], i) => `
+      <li aria-selected="${i === 1}"><div>${i === 1 && v === 'a' ? '<span class="mark"></span>' : ''}<span class="lead idx">${i + 1}</span><span class="txt"><span class="pri">${t}</span><span class="sec">${s}</span></span></div></li>`).join('')}
+  </ul>`;
+const info = {
+  a: ['A · gaps on one body', 'Rows are printing on one plastic body, 2px apart; a pressed or hovered row becomes a recess nested in the body corner (20 = 28 − 8). The chosen track gets an ink index mark and medium weight.'],
+  b: ['B · seams on one body', 'Rows run edge to edge and a 1px seam sits between them. Reads as a settings table; the seams repeat on every row.'],
+  c: ['C · one unit per row', 'Every row is its own raised body. Four shadows for four rows, and each row looks like a card to open.'],
+};
+document.getElementById('lab').innerHTML = ['a', 'b', 'c'].map((v) => `
+  <section class="col"><h2>${info[v][0]}</h2><p class="note">${info[v][1]}</p>${devices(v)}${queue(v)}</section>`).join('');
+</script>
+</body>
+</html>

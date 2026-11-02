@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Scrubber · three seek bars</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. Nothing here is orange: the transport's play key is the loud part (P1). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 380px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 12px; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .head { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; }
+  .times { display: flex; justify-content: space-between; font-size: 11px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--ds-text-secondary); }
+  .f { position: relative; block-size: 44px; touch-action: none; cursor: pointer; border-radius: 6px; outline: none; }
+  .f:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .groove { position: absolute; inset-inline: 12px; inset-block-start: 18px; block-size: 8px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); border: 1px solid var(--ds-line-ring); box-sizing: border-box; overflow: hidden; }
+  .buf { position: absolute; inset-block: 0; inset-inline-start: 0; inline-size: calc(var(--buf) * 100%); background: var(--ds-grille-hole); }
+  .chap { position: absolute; inset-inline: 12px; inset-block-start: 4px; }
+  .chap i { position: absolute; inset-inline-start: calc(var(--p) * 100%); block-size: 10px; border-inline-start: 2px solid var(--ds-text-primary); margin-inline-start: -1px; }
+  .cap { --x: 0; position: absolute; inset-inline-start: calc(var(--x) * (100% - 24px)); inline-size: 24px; block-size: 32px; inset-block-start: 6px; box-sizing: border-box;
+         border: 1px solid transparent; border-radius: 6px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); }
+  .cap::after { content: ""; position: absolute; inset-inline-start: 50%; inset-block: 5px; border-inline-start: 2px solid var(--ds-text-primary); margin-inline-start: -1px; }
+
+  /* A · tape fader: Slider's groove and cap; chapter ticks above, buffered floor in the hole step; times printed under the ends */
+  /* B · counter window: an LCD tape counter above a hairline groove and a thin index needle, no cap */
+  .b .counter { justify-self: start; padding: 6px 12px; border-radius: 8px; background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); box-shadow: var(--ds-elevation-well); font-size: 22px; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+  .b .groove { block-size: 4px; inset-block-start: 20px; }
+  .b .cap { inline-size: 4px; block-size: 28px; inset-block-start: 8px; border-radius: 2px; background: var(--ds-text-primary); box-shadow: none; inset-inline-start: calc(10px + var(--x) * (100% - 24px)); }
+  .b .cap::after { display: none; }
+  /* C · inline transport: elapsed and remaining sit on the groove's own line, at its two ends */
+  .c .line { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; font-size: 11px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--ds-text-secondary); }
+  @media (forced-colors: active) { .cap, .groove { border: 1px solid CanvasText; } }
+</style>
+</head>
+<body>
+<h1>Scrubber · the seekable position of a track</h1>
+<p>Same material and spring as Slider. Tab to the track: arrows move 5 s, PageUp/PageDown 30 s, Home and End the ends. The value text reads "1:23 of 3:45". Chapter marks print on the ruler; the buffered part of the groove is one ink step darker. No part is orange.</p>
+<div class="row">
+  <section class="unit a" data-v="a"><h2>A · tape fader</h2>
+    <div class="head"><span>Ruhe · Side A</span></div>
+    <div class="f" role="slider" tabindex="0"><div class="chap"></div><div class="groove"><div class="buf"></div></div><div class="cap"></div></div>
+    <div class="times"><span class="el"></span><span class="rem"></span></div>
+    <p class="note">Slider's cap and groove. Chapter starts print as ink marks above; the buffered floor is the hole step. Times print under the two ends.</p></section>
+  <section class="unit b" data-v="b"><h2>B · counter window</h2>
+    <div class="counter"><span class="el"></span></div>
+    <div class="f" role="slider" tabindex="0"><div class="chap"></div><div class="groove"><div class="buf"></div></div><div class="cap"></div></div>
+    <div class="times"><span>0:00</span><span class="rem"></span></div>
+    <p class="note">A tape counter in an LCD window and an ink needle over a hairline groove. A second window in the unit, and the needle is 4 px to grab.</p></section>
+  <section class="unit c" data-v="c"><h2>C · inline transport</h2>
+    <div class="head"><span>Ruhe · Side A</span></div>
+    <div class="line"><span class="el"></span><div class="f" role="slider" tabindex="0"><div class="chap"></div><div class="groove"><div class="buf"></div></div><div class="cap"></div></div><span class="rem"></span></div>
+    <p class="note">Elapsed and remaining sit at the two ends of the groove's line. Compact, but the groove's length changes with the width of the times.</p></section>
+</div>
+<script>
+(() => {
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const M = { m: 1.4, k: 520, c: 46 };
+  const spring = (apply, x0) => { let x = x0, v = 0, t = x0, raf = 0, last = 0;
+    const tick = (ts) => { const dt = Math.min(0.032, (ts - (last || ts)) / 1000 || 1 / 120); last = ts;
+      for (let i = 0, n = Math.ceil(dt * 120); i < n; i++) { v += ((-M.k * (x - t) - M.c * v) / M.m) / 120; x += v / 120; }
+      apply(x); if (Math.abs(x - t) < 1e-4 && Math.abs(v) < 1e-4) { x = t; apply(x); raf = 0; last = 0; return; } raf = requestAnimationFrame(tick); };
+    return { to(nt, snap) { t = nt; if (snap || REDUCED) { x = nt; v = 0; apply(x); return; } if (!raf) raf = requestAnimationFrame(tick); } }; };
+  const clock = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  document.querySelectorAll('[data-v]').forEach((u) => {
+    const DUR = 225, f = u.querySelector('.f'), cap = u.querySelector('.cap'); let t = 83;
+    f.style.setProperty('--buf', 0.62);
+    for (const c of [0.18, 0.47, 0.8]) { const i = document.createElement('i'); i.style.setProperty('--p', c); u.querySelector('.chap').append(i); }
+    const sp = spring((x) => cap.style.setProperty('--x', x.toFixed(4)), t / DUR);
+    const set = (n, snap) => { t = Math.max(0, Math.min(DUR, Math.round(n))); f.setAttribute('aria-valuenow', t); f.setAttribute('aria-valuetext', `${clock(t)} of ${clock(DUR)}`);
+      u.querySelectorAll('.el').forEach((e) => (e.textContent = clock(t))); u.querySelectorAll('.rem').forEach((e) => (e.textContent = `−${clock(DUR - t)}`)); sp.to(t / DUR, snap); };
+    set(t, true);
+    f.addEventListener('keydown', (e) => { const d = { ArrowUp: 5, ArrowRight: 5, ArrowDown: -5, ArrowLeft: -5, PageUp: 30, PageDown: -30 }[e.key];
+      if (d) { e.preventDefault(); set(t + d); } if (e.key === 'Home') { e.preventDefault(); set(0); } if (e.key === 'End') { e.preventDefault(); set(DUR); } });
+    f.addEventListener('pointerdown', (e) => { f.setPointerCapture(e.pointerId); f.focus(); const r = f.getBoundingClientRect();
+      const at = (ev) => Math.max(0, Math.min(1, (ev.clientX - r.left - 12) / (r.width - 24))) * DUR;
+      const move = (ev) => set(at(ev), true); move(e);
+      f.addEventListener('pointermove', move); f.addEventListener('pointerup', () => f.removeEventListener('pointermove', move), { once: true }); });
+  });
+})();
+</script>
+</body>
+</html>

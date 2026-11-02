@@ -32,3 +32,16 @@ export * from './components/Badge';
 export * from './components/Progress';
 export * from './components/Card';
 export * from './components/DeviceCard';
+
+// Wave 2: home and media. Ranges, the scrubber, meters, lists, menus, sheets, banners, empty states, skeletons and the time picker.
+
+export * from './components/RangeSlider';
+export * from './components/Scrubber';
+export * from './components/Meter';
+export * from './components/Sheet';
+export * from './components/Banner';
+export * from './components/EmptyState';
+export * from './components/List';
+export * from './components/Menu';
+export * from './components/Skeleton';
+export * from './components/TimePicker';

@@ -1,0 +1,135 @@
+/* RangeSlider — Slider's family: two plastic caps riding one recessed groove under a printed ruler
+   (FORM.md control class, D-003). The span between the caps is told by heavier ruler printing, never
+   by a filled groove, and no part is orange. Each cap's position (--x, 0..1) is written by its own
+   spring in RangeSlider.tsx. */
+.root {
+  display: grid;
+  align-content: start;
+  gap: var(--ds-gap-xs);
+  inline-size: 100%;
+  min-inline-size: calc(var(--ds-layout-touch) * 5);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--ds-gap-md);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+}
+.value {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--ds-text-secondary);
+}
+.fader {
+  position: relative;
+  block-size: var(--ds-layout-touch);
+  cursor: pointer;
+  touch-action: none;
+}
+.rule {
+  position: absolute;
+  inset-inline: calc(var(--ds-control-cap-w) / 2);
+  inset-block-start: var(--ds-gap-xs);
+  block-size: var(--ds-control-mark);
+}
+.tick {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(var(--p) * 100%);
+  border-inline-start: var(--ds-width-hairline) solid var(--ds-text-secondary);
+}
+.major {
+  inset-block-start: calc(var(--ds-space-0-5) * -1);
+  border-inline-start-color: var(--ds-text-primary);
+}
+.inside {
+  inset-block-start: calc(var(--ds-space-0-5) * -1);
+  margin-inline-start: calc(var(--ds-width-hairline) * -1);
+  border-inline-start: var(--ds-width-ring) solid var(--ds-text-primary);
+}
+.groove {
+  position: absolute;
+  box-sizing: border-box;
+  inset-inline: calc(var(--ds-control-cap-w) / 2);
+  inset-block-start: calc(50% - var(--ds-control-track) / 2);
+  block-size: var(--ds-control-track);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.thumb {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(var(--x, 0) * (100% - var(--ds-control-cap-w)) - (var(--ds-layout-touch) - var(--ds-control-cap-w)) / 2);
+  inline-size: var(--ds-layout-touch);
+  outline: none;
+}
+.cap {
+  position: absolute;
+  box-sizing: border-box;
+  inset-block-start: calc(50% - var(--ds-control-cap-h) / 2);
+  inset-inline-start: calc((var(--ds-layout-touch) - var(--ds-control-cap-w)) / 2);
+  inline-size: var(--ds-control-cap-w);
+  block-size: var(--ds-control-cap-h);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-mark);
+  background: var(--ds-surface-raised);
+  box-shadow: var(--ds-elevation-part);
+}
+.cap::after {
+  content: "";
+  position: absolute;
+  inset-block: var(--ds-gap-sm);
+  inset-inline-start: calc(50% - var(--ds-width-ring) / 2);
+  border-inline-start: var(--ds-width-ring) solid var(--ds-text-secondary);
+  transition: border-color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.scale {
+  position: relative;
+  block-size: var(--ds-gap-2xl);
+  margin-inline: calc(var(--ds-control-cap-w) / 2);
+}
+.numeral {
+  position: absolute;
+  inset-inline-start: calc(var(--p) * 100%);
+  inline-size: 0;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+  font-size: var(--ds-type-micro);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-text-secondary);
+}
+
+.thumb:hover .cap::after { border-inline-start-color: var(--ds-text-primary); }
+.thumb:focus-visible { z-index: 1; }
+.thumb:focus-visible .cap {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.fader[aria-disabled='true'] { cursor: not-allowed; opacity: var(--ds-opacity-disabled); }
+.fader[aria-disabled='true'] .cap { box-shadow: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cap::after { transition: none; }
+}
+@media (forced-colors: active) {
+  .cap { border-color: ButtonText; }
+  .cap::after, .thumb:hover .cap::after { border-inline-start-color: ButtonText; }
+  .groove { border-color: CanvasText; }
+  .tick, .major, .inside { border-inline-start-color: CanvasText; }
+  .thumb:focus-visible .cap { outline-color: Highlight; }
+}

@@ -1,0 +1,82 @@
+/* Menu — a key that opens Select's plastic panel (system/FORM.md surface class for the panel, D-003):
+   surface.solid, elevation.float, corner.inner, layer.overlay. The panel is placed by Menu.tsx in the
+   page's top layer (a portal on the body, position fixed), at least the key's width and control.menu-min,
+   as wide as its longest action, flipped above the key or shifted along it so the screen edge never cuts
+   it (G-PC1, R-002). Words wrap only when the screen is narrower than the longest one. Nothing animates (P6). */
+.root {
+  display: inline-flex;
+  flex: none;
+  vertical-align: middle;
+}
+.chevron {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  color: var(--ds-text-secondary);
+}
+.panel {
+  position: fixed;
+  z-index: var(--ds-layer-overlay);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  inline-size: max-content;
+  min-inline-size: max(var(--menu-key, var(--ds-control-menu-min)), var(--ds-control-menu-min));
+  max-inline-size: calc(100vw - var(--ds-gap-lg) * 2);
+  margin: 0;
+  padding: var(--ds-gap-sm);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-inner);
+  background: var(--ds-surface-solid);
+  box-shadow: var(--ds-elevation-float);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  outline: none;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  box-sizing: border-box;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-media);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  cursor: pointer;
+  outline: none;
+}
+.icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  color: var(--ds-text-secondary);
+}
+.icon > svg { inline-size: 100%; block-size: 100%; }
+.lamp {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  fill: var(--ds-status-critical-mark);
+}
+.text { flex: 1 1 auto; min-inline-size: 0; }
+.destructive { margin-block-start: var(--ds-gap-sm); }
+.destructive + .destructive,
+.destructive:first-child { margin-block-start: var(--ds-gap-none); }
+
+.item:focus { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+.item:focus-visible { outline: var(--ds-width-ring) solid var(--ds-focus-ring); outline-offset: var(--ds-gap-none); }
+.item[aria-disabled='true'] { cursor: not-allowed; opacity: var(--ds-opacity-disabled); }
+
+@media (forced-colors: active) {
+  .panel { border-color: CanvasText; }
+  .item:focus { border-color: Highlight; }
+  .item:focus-visible { outline-color: Highlight; }
+}

@@ -70,6 +70,12 @@ export function popupClipProbe({ popups = '[role=listbox], [role=menu], [role=di
   for (const el of document.querySelectorAll(popups)) {
     const r = el.getBoundingClientRect(), cs = getComputedStyle(el);
     if (r.width < 2 || r.height < 2 || cs.visibility === 'hidden' || Number(cs.opacity) === 0) continue;
+    // only a popup is judged: opened by an expanded trigger, an open [popover] or <dialog>, or taken out of the
+    // flow (absolute, or fixed on itself or a wrapper, as a portalled popper is). An in-page list taller than the
+    // screen is content, not a popup (dial K-14: a queue List read as "478px off the screen")
+    const opened = !!el.id && !!document.querySelector(`[aria-expanded=true][aria-controls~="${CSS.escape(el.id)}"]`);
+    let fixed = false; for (let a = el; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).position === 'fixed') { fixed = true; break; }
+    if (!(opened || fixed || cs.position === 'absolute' || el.matches(':popover-open, dialog[open]'))) continue;
     const name = `${el.closest('[data-component]')?.dataset.component ?? el.getAttribute('role') ?? 'popover'} ${el.getAttribute('role') ?? 'popover'}`;
     let parentCut = false;
     for (let p = el.parentElement; p && p !== document.body && p !== document.documentElement; p = p.parentElement) {

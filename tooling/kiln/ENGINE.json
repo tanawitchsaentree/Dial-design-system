@@ -1,6 +1,6 @@
 {
-  "kiln": "9cb5568",
-  "syncedAt": "2026-11-02T05:03:16.323Z",
+  "kiln": "d2a1129",
+  "syncedAt": "2026-11-02T05:58:52.509Z",
   "files": {
     "agent-setup.mjs": "a92e895070252953fd430f5fce8630c563c96dc444654d4b35d0362ad71bbbe8",
     "anchor-contrast.mjs": "9f3ae49241c62efdb32f580afd5aa45ef5d170f03fedaed5d5be094ba2423282",
@@ -35,8 +35,8 @@
     "topup.mjs": "ab354a20149d0379f26ba2dcae58ccff79b4cb6fa7766def3e0e74a09d2ea321",
     "topup.proof.mjs": "562111d8618f44a70e0f7f21e6aa43717dd89b290fbce8d80feceafd91c75964",
     "treeshake-probe.mjs": "f7c6af1078d2f3460b5bf5791da27be26faf8fdbd0bf172e0e3d87099a4602a9",
-    "ui-probes.mjs": "69dc43f539331025feacfea8c7c0ae28bc7a35008c731d4c0d81e631e92f8814",
-    "ui-probes.proof.mjs": "fcd94b68ce8424460da9f08ce46f296bdeeeb17a792680bb2df9b67b54f84d75",
+    "ui-probes.mjs": "4ea445e2cef67c53075b0296705cedfba89b6188ede741279e3f7eab34cfb928",
+    "ui-probes.proof.mjs": "f59fccde3bdc5b0f7762f3badcdc79a8fba9266f4b4d434c19809b3849c1d8b0",
     "usage.mjs": "4591e0804f3ae9757e39c809c4964004a38b8c91f849d5f70172c8f627e2a907",
     "verify.mjs": "74e51105bf2aae7dfdbe52086c9031af7aaf3b75345f65ea7000c48550ea4cca",
     "data/carbon-depth.json": "ae53753abf953e435e738b1beb15662fe68e2f00c13df21d58cc94dfebe9b4b7",

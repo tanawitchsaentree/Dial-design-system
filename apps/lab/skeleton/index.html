@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Skeleton · four ways to hold the size of content that is still loading</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 74ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 32px; align-items: start; }
+  .col { display: grid; gap: 16px; inline-size: 300px; }
+  .col h2 { font-size: 14px; font-weight: 500; margin: 0; } .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .unit { padding: 23px; border-radius: 48px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 16px; }
+  .listrow { display: flex; gap: 12px; align-items: center; padding: 12px 23px; border-radius: 24px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); }
+  .grow { flex: 1; display: grid; gap: 6px; }
+  .split { display: flex; gap: 16px; align-items: center; }
+  /* windows and holes */
+  .win { padding: 8px 16px; border-radius: 25px; background: var(--ds-display-lcd-bg); box-shadow: var(--ds-elevation-well); display: flex; justify-content: flex-end; }
+  .seg { block-size: 40px; display: block; } .seg.sm { block-size: 24px; }
+  .seg .off { fill: var(--ds-display-lcd-ghost); } .seg .on { fill: var(--ds-display-lcd-ink); }
+  .holes { display: inline-grid; grid-template-columns: repeat(6, 8px); gap: 4px; }
+  .holes i { inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--ds-grille-hole); box-shadow: var(--ds-elevation-well); }
+  /* A: unlit parts + flat printing blocks */
+  .a .line { block-size: 10px; margin-block: 5px; border-radius: 3px; background: var(--ds-surface-placeholder-hi); }
+  .a .line.t { block-size: 14px; margin-block: 6px; }
+  .a .key { inline-size: 44px; block-size: 44px; border-radius: 50%; background: var(--ds-surface-placeholder-hi); flex: none; }
+  .a .knob { inline-size: 96px; block-size: 96px; border-radius: 50%; background: var(--ds-surface-placeholder-hi); flex: none; }
+  /* B: all blocks */
+  .b .blk { border-radius: 8px; background: var(--ds-surface-placeholder-hi); }
+  /* C: slow warm-up (a breathing ghost) */
+  .c .seg .off, .c .holes i, .c .line, .c .key, .c .knob { animation: warm 3.2s ease-in-out infinite alternate; }
+  .c .line { block-size: 10px; margin-block: 5px; border-radius: 3px; background: var(--ds-surface-placeholder-hi); }
+  .c .key { inline-size: 44px; block-size: 44px; border-radius: 50%; background: var(--ds-surface-placeholder-hi); flex: none; }
+  .c .knob { inline-size: 96px; block-size: 96px; border-radius: 50%; background: var(--ds-surface-placeholder-hi); flex: none; }
+  @keyframes warm { from { opacity: .45; } to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .c * { animation: none !important; } }
+  /* D: registration outlines */
+  .d .ol { border: 1px dashed var(--ds-line-ring); border-radius: 6px; }
+  .d .ol.round { border-radius: 50%; }
+  .sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
+  button.t { font: inherit; margin-block-end: 18px; }
+</style>
+</head>
+<body>
+<h1>Skeleton — four ways to hold the size of a device card, a list row and a reading while it loads</h1>
+<p>The house is fetching its devices. The region says aria-busy; the placeholder itself is hidden from assistive tech. P6 lets nothing move while idle, so a looping shimmer is out; C shows the slowest motion we could defend, to see whether it earns its place.</p>
+<button class="t" id="theme">Light / dark</button>
+<div class="row">
+  <section class="col a" aria-labelledby="ha"><h2 id="ha">A · the unlit device</h2>
+    <div class="unit" aria-busy="true" aria-label="Thermostat"><div class="win" data-seg="4"></div><div class="split"><div class="knob"></div><div class="grow"><div class="holes" data-holes="18"></div></div></div><div class="grow"><div class="line" style="inline-size:40%"></div></div></div>
+    <div class="listrow" aria-busy="true" aria-label="Devices"><div class="key"></div><div class="grow"><div class="line t" style="inline-size:70%"></div><div class="line" style="inline-size:45%"></div></div><div class="win" data-seg="2" data-sm style="padding:4px 10px;border-radius:12px"></div></div>
+    <p class="note">Every part draws as it looks with the power off: ghost segments 88:88 in the window, unlit holes, flat plastic where the knob and key will stand, flat blocks the height of a printed line. Still in every motion setting.</p></section>
+  <section class="col b" aria-labelledby="hb"><h2 id="hb">B · flat blocks only</h2>
+    <div class="unit" aria-busy="true" aria-label="Thermostat"><div class="blk" style="block-size:56px"></div><div class="split"><div class="blk" style="inline-size:96px;block-size:96px"></div><div class="grow"><div class="blk" style="block-size:44px"></div></div></div><div class="blk" style="inline-size:40%;block-size:10px"></div></div>
+    <div class="listrow" aria-busy="true" aria-label="Devices"><div class="blk" style="inline-size:44px;block-size:44px"></div><div class="grow"><div class="blk" style="inline-size:70%;block-size:14px"></div><div class="blk" style="inline-size:45%;block-size:10px"></div></div></div>
+    <p class="note">Every part becomes the same grey rectangle. Still, but the window, the knob and the holes lose their shape, so it is the generic placeholder again with the shimmer taken out.</p></section>
+  <section class="col c" aria-labelledby="hc"><h2 id="hc">C · slow warm-up</h2>
+    <div class="unit" aria-busy="true" aria-label="Thermostat"><div class="win" data-seg="4"></div><div class="split"><div class="knob"></div><div class="grow"><div class="holes" data-holes="18"></div></div></div><div class="grow"><div class="line" style="inline-size:40%"></div></div></div>
+    <div class="listrow" aria-busy="true" aria-label="Devices"><div class="key"></div><div class="grow"><div class="line" style="inline-size:70%"></div><div class="line" style="inline-size:45%"></div></div></div>
+    <p class="note">A's parts breathe from 45% to full over 3.2s, like a display warming up. Slow, yet a page of twenty rows breathing in step is idle motion, which P6 rules out.</p></section>
+  <section class="col d" aria-labelledby="hd"><h2 id="hd">D · registration outlines</h2>
+    <div class="unit" aria-busy="true" aria-label="Thermostat"><div class="ol" style="block-size:56px"></div><div class="split"><div class="ol round" style="inline-size:96px;block-size:96px"></div><div class="grow"><div class="ol" style="block-size:44px"></div></div></div><div class="ol" style="inline-size:40%;block-size:10px"></div></div>
+    <div class="listrow" aria-busy="true" aria-label="Devices"><div class="ol round" style="inline-size:44px;block-size:44px"></div><div class="grow"><div class="ol" style="inline-size:70%;block-size:14px"></div><div class="ol" style="inline-size:45%;block-size:10px"></div></div></div>
+    <p class="note">Dashed hairlines where parts will go, like a printer's layout. Reads as a drop zone or an empty slot to fill, not as content on its way.</p></section>
+</div>
+<script>
+  function cell(x) {
+    const w = 20, h = 40, t = 4.4, m = h / 2, s = t / 2;
+    const H = (y) => `${x + s},${y} ${x + t},${y - s} ${x + w - t},${y - s} ${x + w - s},${y} ${x + w - t},${y + s} ${x + t},${y + s}`;
+    const V = (xx, y0, y1) => `${xx},${y0 + s} ${xx + s},${y0 + t} ${xx + s},${y1 - t} ${xx},${y1 - s} ${xx - s},${y1 - t} ${xx - s},${y0 + t}`;
+    return [H(s), H(m), H(h - s), V(x + s, s, m), V(x + w - s, s, m), V(x + s, m, h - s), V(x + w - s, m, h - s)].map((p) => `<polygon class="off" points="${p}"/>`).join('') + `<rect class="off" x="${x + w + 2}" y="${h - t}" width="${t}" height="${t}"/>`;
+  }
+  document.querySelectorAll('[data-seg]').forEach((el) => {
+    const n = +el.dataset.seg; let out = ''; for (let i = 0; i < n; i++) out += cell(2 + i * 32);
+    el.innerHTML = `<svg class="seg${el.hasAttribute('data-sm') ? ' sm' : ''}" aria-hidden="true" viewBox="0 0 ${2 + n * 32} 40">${out}</svg>`;
+  });
+  document.querySelectorAll('[data-holes]').forEach((el) => { for (let i = 0; i < +el.dataset.holes; i++) el.append(document.createElement('i')); });
+  document.getElementById('theme').addEventListener('click', () => { const r = document.documentElement; r.dataset.theme = r.dataset.theme === 'dark' ? 'light' : 'dark'; });
+</script>
+</body>
+</html>

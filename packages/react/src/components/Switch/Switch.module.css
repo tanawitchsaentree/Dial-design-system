@@ -80,16 +80,17 @@
   block-size: var(--ds-control-lamp);
   border-radius: var(--ds-corner-round);
   background: var(--ds-surface-sunken);
-  box-shadow: var(--ds-elevation-well);
+  /* every state keeps the same three layers (glow, two inset edges) so the shadow changes instead of swapping (G-MO3) */
+  box-shadow: 0 0 0 0 transparent, var(--ds-elevation-well);
   transition:
     background-color var(--ds-motion-segment) var(--ds-motion-easing),
     box-shadow var(--ds-motion-segment) var(--ds-motion-easing);
 }
 
 .root[aria-checked='true'] .cap { inset-inline-start: calc(100% - var(--ds-control-cap-w)); }
-.root[aria-checked='true'] .lamp { background: var(--ds-text-primary); box-shadow: none; }
+.root[aria-checked='true'] .lamp { background: var(--ds-text-primary); box-shadow: 0 0 0 0 transparent, inset 0 0 0 0 transparent, inset 0 0 0 0 transparent; }
 /* a lit lamp is one of P2's emitters: its own light in the dark edition, nothing in light (emit.lamp) */
-.root .lamp[data-glow] { box-shadow: var(--ds-emit-lamp); }
+.root .lamp[data-glow] { box-shadow: var(--ds-emit-lamp), inset 0 0 0 0 transparent, inset 0 0 0 0 transparent; }
 .root[aria-checked='true'] .on,
 .root[aria-checked='false'] .off { color: var(--ds-text-primary); font-weight: var(--ds-type-weight-medium); }
 

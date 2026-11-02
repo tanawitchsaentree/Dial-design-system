@@ -1,0 +1,39 @@
+{
+  "concept": "EmptyState is the printing a room or a list shows before it holds anything, with one line that says what is missing, one sentence of what to do, one key, and at most a quiet drawing made of the system's own unlit parts.",
+  "kind": ["empty state", "blank slate", "zero state"],
+  "default_to_avoid": [
+    { "pattern": "empty state with a big grey stock illustration, a headline, a body paragraph and two buttons, all centred", "why_not": "An illustration is a second voice the case does not have, and two buttons give an empty room two loud answers where P1 allows one." },
+    { "pattern": "empty state that only says No data with nothing to do next", "why_not": "A blank message leaves the person stuck; the sentence under the line must say what to do to fill the room." }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): an unlit scale and an empty band window before the set is tuned" },
+    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): a display that shows a dash pattern when it holds no reading" },
+    { "source": "Nielsen Norman Group, Designing Empty States in Complex Applications (2020): say why it is empty and how to fill it" }
+  ],
+  "derivation": [
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "The line, the sentence and the key are start-aligned on the inset line of the room they sit in, never centred in the middle of it." },
+    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "The key is plastic by default and orange only when filling the room is the screen's one main action." },
+    { "p": "P4", "axis": "colour", "consequence": "holes are ink at a lower step", "form": "The grille drawing is a field of unlit holes at the lower ink step, the meter of a room with nothing in it." },
+    { "p": "P2", "axis": "type", "consequence": "a 7-segment face for LCD values", "form": "The display drawing is an LCD window reading two dashes in segments, the reading of a device with no value yet." }
+  ],
+  "variants": {
+    "lab": "apps/lab/empty-state/index.html",
+    "options": [
+      { "id": "A", "name": "printed on the case, drawing, line, sentence and key start-aligned" },
+      { "id": "B", "name": "empty slot, a dashed outline of the missing unit with the words inside" },
+      { "id": "C", "name": "row form, the drawing at the start and the words beside it" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A prints the words on the room's own inset line in reading order and needs no new edge or layout (P5); B adds a dashed rule the case never uses and reads as a drop zone, and C squeezes the words into a narrow column in a phone sized room."
+  },
+  "parts": {
+    "root": { "p": "P5", "axis": "space", "why": "The parts stack on the inset line of the surface they sit in, so the empty state has no body of its own." },
+    "drawing": { "p": "P6", "axis": "colour", "why": "The drawing uses the system's own unlit window or holes, with no gradient, no glow and no picture." },
+    "line": { "p": "P5", "axis": "type", "why": "The line that says what is missing is medium weight at emphasis size, the largest printing here." },
+    "say": { "p": "P5", "axis": "colour", "why": "The sentence of what to do is the secondary ink, which holds 4.5:1 on the plastic body." },
+    "action": { "p": "P1", "axis": "space", "why": "The one key sits last in reading order, under the sentence that says what it does." }
+  },
+  "states": {},
+  "motion": {}
+}

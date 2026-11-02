@@ -1,0 +1,136 @@
+/* Sheet — the lid of an appliance opened over the room (FORM.md surface class, elevation.float, D-003).
+   Family of Dialog: same body and light; it holds a device's full controls instead of one question.
+   Wide screens: a unit standing at the lower inline end. Tall screens: docked to the bottom edge. */
+.root {
+  --sheet-inner: calc(var(--ds-corner-panel) - var(--ds-gap-inset));
+  --sheet-from: translateX(calc(100% + var(--ds-gap-inset)));
+  box-sizing: border-box;
+  position: fixed;
+  inset-block: auto var(--ds-gap-inset);
+  inset-inline: auto var(--ds-gap-inset);
+  inline-size: calc(100% - var(--ds-gap-inset) * 2);
+  max-inline-size: var(--ds-type-measure);
+  max-block-size: calc(100% - var(--ds-gap-inset) * 2);
+  margin: 0;
+  padding: var(--ds-gap-inset);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-panel);
+  background: var(--ds-surface-solid);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  box-shadow: var(--ds-elevation-float), inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-material-lit);
+  z-index: var(--ds-layer-overlay);
+  overflow: auto;
+  overscroll-behavior: contain;
+  opacity: 0;
+  transform: var(--sheet-from);
+  transition:
+    opacity var(--ds-motion-exit) var(--ds-motion-easing-exit),
+    transform var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.root:dir(rtl) { --sheet-from: translateX(calc(-100% - var(--ds-gap-inset))); }
+.root[open] { display: flex; flex-direction: column; gap: var(--ds-gap-xl); }
+.root::backdrop {
+  background: var(--ds-surface-scrim);
+  opacity: 0;
+  transition: opacity var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.root[data-state='open'] {
+  opacity: 1;
+  transform: translateY(var(--sheet-drag, 0));
+  transition-duration: var(--ds-motion-release);
+  transition-timing-function: var(--ds-motion-easing);
+}
+.root[data-state='open']::backdrop {
+  opacity: 1;
+  transition-duration: var(--ds-motion-release);
+  transition-timing-function: var(--ds-motion-easing);
+}
+.root[data-dragging='true'] { transition: none; }
+
+/* placement="bottom", and placement="auto" on a tall screen: docked to the bottom edge, square bottom corners */
+.bottom {
+  --sheet-from: translateY(100%);
+  inset-block: auto 0;
+  inset-inline: 0;
+  margin-inline: auto;
+  inline-size: 100%;
+  max-inline-size: calc(var(--ds-type-measure) + var(--ds-gap-inset) * 2);
+  max-block-size: calc(100% - var(--ds-gap-page));
+  padding-block-start: 0;
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}
+.bottom:dir(rtl) { --sheet-from: translateY(100%); }
+.bottom .handle { display: flex; }
+@media (orientation: portrait) {
+  .auto {
+    --sheet-from: translateY(100%);
+    inset-block: auto 0;
+    inset-inline: 0;
+    margin-inline: auto;
+    inline-size: 100%;
+    max-inline-size: calc(var(--ds-type-measure) + var(--ds-gap-inset) * 2);
+    max-block-size: calc(100% - var(--ds-gap-page));
+    padding-block-start: 0;
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+  .auto:dir(rtl) { --sheet-from: translateY(100%); }
+  .auto .handle { display: flex; }
+}
+
+/* modal={false}: the sheet shown in place, in the flow of the page, with no scrim. */
+.root.inline {
+  position: relative;
+  inset: auto;
+  inline-size: 100%;
+  max-block-size: none;
+  margin: 0;
+  z-index: auto;
+}
+
+/* The drag bar: printed ink with square ends on a strip as tall as a control, so a thumb can hold it. */
+.handle {
+  display: none;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--ds-control-sm);
+  margin-block-end: calc(var(--ds-gap-md) - var(--ds-gap-xl));
+  cursor: grab;
+  touch-action: none;
+}
+.handle::before {
+  content: '';
+  inline-size: var(--ds-control-cap-h);
+  block-size: var(--ds-width-bar);
+  background: var(--ds-text-primary);
+}
+
+.head { display: flex; align-items: center; gap: var(--ds-gap-lg); flex: none; }
+.title { margin: 0; flex: 1 1 auto; min-inline-size: 0; }
+.model {
+  flex: none;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+  text-transform: lowercase;
+}
+.content { display: grid; gap: var(--ds-gap-xl); }
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ds-gap-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root,
+  .root::backdrop { transition: none; }
+  .root { transform: none; }
+}
+@media (forced-colors: active) {
+  .root { border-color: CanvasText; }
+  .handle::before { background: CanvasText; }
+}

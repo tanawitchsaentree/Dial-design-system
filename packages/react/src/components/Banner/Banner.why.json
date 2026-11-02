@@ -1,0 +1,48 @@
+{
+  "concept": "Banner is a strip of the case set into the flow at the top of a screen that says in a printed glyph and a word what condition holds, and stays there until the condition ends.",
+  "kind": ["banner", "inline notification", "alert", "callout"],
+  "default_to_avoid": [
+    { "pattern": "inline notification banner with a coloured stripe on the start edge, a tinted background and a bold title over muted body (Carbon inline notification)", "why_not": "The stripe and the tint tell status by colour and paint a second loud part, which P1 forbids and the habit gate G-X1 flags." },
+    { "pattern": "Material banner with a tinted icon disc, two text buttons and a full width rule under it", "why_not": "The tinted disc is the alert habit G-X1 flags, and two text buttons give a message two loud answers when it needs at most one key." }
+  ],
+  "references": [
+    { "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): labels printed beside each control, never inside a coloured badge" },
+    { "source": "Braun HF 1 television (Dieter Rams, 1958): one band of printing across the case that says what the set is doing" },
+    { "source": "WAI-ARIA Authoring Practices, Alert pattern and WCAG 2.2 4.1.3 Status Messages" }
+  ],
+  "derivation": [
+    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "No tone is orange; the glyph takes the tone's mark ink and the action key is a plastic Button, so the screen's orange key stays its own." },
+    { "p": "P5", "axis": "type", "consequence": "one grotesk, regular and medium only; hierarchy by size and position", "form": "The status word is type.label in medium weight before the message in regular weight; no bold title, no muted body." },
+    { "p": "P5", "axis": "colour", "consequence": "ink on plastic at ≥4.5:1 in both themes; no tinted text", "form": "The body stays the plastic of the case in every tone; only the glyph's shape and the word tell the tone." },
+    { "p": "P6", "axis": "space", "consequence": "fixed positions, so a unit's layout does not reflow between states", "form": "The banner takes a fixed place at the top of the region it speaks for and does not slide in; it is there for as long as the condition is." },
+    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "The action key is a 44px Button and the dismiss key a 44px round IconButton." }
+  ],
+  "variants": {
+    "lab": "apps/lab/banner/index.html",
+    "options": [
+      { "id": "A", "name": "strip of the case, a plastic band at unit height in the flow" },
+      { "id": "B", "name": "printed line on the page with a seam under it" },
+      { "id": "C", "name": "engraved plate, the words in a recessed well" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A stands off the page as its own short body so a condition that blocks controls is seen first, while staying plastic in every tone (P1, P5); B sinks into the page text and C adds a second recess that competes with the display window (P2) and reads as a field."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "depth", "why": "The strip is a body at unit height with a short shadow, never floating higher than a card." },
+    "head": { "p": "P5", "axis": "space", "why": "Glyph and status word sit together at the start of the inset line, printed before the message." },
+    "glyph": { "p": "P5", "axis": "depth", "why": "The glyph is printed flat in stroke ink with no disc behind it and no emboss." },
+    "status": { "p": "P5", "axis": "type", "why": "The status word is medium weight at label size, so the tone has a word as well as a shape." },
+    "message": { "p": "P5", "axis": "colour", "why": "The message stays in the primary ink at 4.5:1 on the plastic in every tone." },
+    "keys": { "p": "P1", "axis": "space", "why": "The action and dismiss keys sit together at the inline end, where the hand expects them." },
+    "mark": { "p": "P5", "axis": "depth", "why": "The cross on the dismiss key is printing in stroke ink on the key face." },
+    "neutral": { "p": "P5", "axis": "colour", "why": "A neutral note prints a ring glyph in the info mark ink, with the plastic body unchanged." },
+    "positive": { "p": "P5", "axis": "colour", "why": "A condition that is good prints the tick glyph in the positive mark ink, body unchanged." },
+    "warning": { "p": "P5", "axis": "colour", "why": "A warning prints the triangle glyph in the primary ink, because amber on plastic falls under 3:1." },
+    "critical": { "p": "P5", "axis": "colour", "why": "A failure prints the octagon glyph in the critical mark ink and the word says what failed." }
+  },
+  "states": {
+    "@media forced-colors: active": { "p": "P6", "axis": "interaction", "why": "In forced colours the strip keeps a real border and the glyph takes the text colour." }
+  },
+  "motion": {}
+}

@@ -1,0 +1,56 @@
+{
+  "concept": "Skeleton is the dial unit with its power off. The window shows ghost segments, the grille shows unlit holes, keys and text lines are flat plastic of their own size, and nothing moves until the content arrives.",
+  "kind": ["skeleton", "placeholder", "loading"],
+  "default_to_avoid": [
+    { "pattern": "grey rounded skeleton bars with a looping shimmer gradient sweeping across them", "why_not": "P6 allows no idle animation and no gradients, and a page of rows shimmering in step is motion that never ends while people wait." },
+    { "pattern": "one skeleton rectangle for every part, so a window, a knob and a line of text all become the same grey box", "why_not": "The parts lose their shapes, so the unit reflows when content lands and P6 asks that a unit's layout does not reflow between states." }
+  ],
+  "references": [
+    { "source": "Braun AB 312 and ABR 21 clock radios with the power off: the LCD window keeps its unlit segments, grey ghost 88:88" },
+    { "source": "Braun T 1000 and RT 20 cases: the grille holes and printed fields read as the device's face before it is switched on" },
+    { "source": "apps/lab/skeleton/index.html: four renders (unlit device, flat blocks, slow warm-up, registration outlines) in light and dark" }
+  ],
+  "derivation": [
+    { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "The placeholder carries no animation, transition or keyframes in any motion setting, so it is still from the first frame to the swap." },
+    { "p": "P6", "axis": "space", "consequence": "fixed positions, so a unit's layout does not reflow between states", "form": "Each kind takes the exact box of the part it stands for: a text line is one line box tall, a window has Display's padding and cells, a disc has the key or knob diameter." },
+    { "p": "P2", "axis": "type", "consequence": "tabular numerals, a 7-segment face for LCD values, the system grotesk for OLED text", "form": "The display kind draws Display's segment cells on the same pitch with every segment unlit, so the window reads as 88:88 with the power off." },
+    { "p": "P4", "axis": "depth", "consequence": "each hole is a recess (inverse light), never a printed dot", "form": "The grille kind draws Grille's holes at the same pitch and recess with none of them lit, so the meter's field holds its place." },
+    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material, with no shadow and no emboss", "form": "Text lines, discs and blocks are flat plastic one step off the body, with no shadow, so they do not look like keys to press." },
+    { "p": "P6", "axis": "colour", "consequence": "no gradients, no glow except P2's emitters", "form": "Every placeholder is one flat colour from surface.placeholder-hi, the LCD window or the grille hole, never a gradient band." }
+  ],
+  "variants": {
+    "lab": "apps/lab/skeleton/index.html",
+    "options": [
+      { "id": "A", "name": "the unlit device: ghost segments, unlit holes, flat plastic discs and text lines, still" },
+      { "id": "B", "name": "flat blocks only: every part a grey rectangle, still" },
+      { "id": "C", "name": "slow warm-up: the unlit parts breathe from 45% to full over 3.2s" },
+      { "id": "D", "name": "registration outlines: dashed hairlines where the parts will go" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps every part's own shape and size, so nothing reflows when the reading lands (P6) and the window and grille stay recognisable as the device switched off (P2, P4); B flattens the window and knob into the generic box, C is idle motion that P6 rules out even when slow, and D reads as an empty slot to fill."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "The root holds the place of the part it stands for and is hidden from assistive tech, because the region around it says busy." },
+    "text": { "p": "P6", "axis": "space", "why": "The text kind stacks line boxes the height of the real text, so the paragraph keeps its height when words arrive." },
+    "line": { "p": "P5", "axis": "depth", "why": "Each line is a flat plastic bar the cap height of the type inside a full line box, printed flat with no shadow." },
+    "sm": { "p": "P6", "axis": "space", "why": "The small step matches caption text, 24px segment cells or a 44px key, the parts of a list row." },
+    "md": { "p": "P6", "axis": "space", "why": "The default step matches body text, 40px segment cells or a 72px knob, the parts of a device card." },
+    "lg": { "p": "P6", "axis": "space", "why": "The large step matches title text, 56px segment cells or a 108px knob, the main part of a sheet." },
+    "display": { "p": "P2", "axis": "depth", "why": "The display kind is Display's recessed window with the same padding and nested radius, so the window does not move when lit." },
+    "face": { "p": "P6", "axis": "space", "why": "The face keeps Display's grid of detail line and value line so a reading with a detail keeps its height." },
+    "value": { "p": "P6", "axis": "space", "why": "The value line keeps Display's row of cells and unit with the same gap, so the ghost line is as wide as the reading." },
+    "cells": { "p": "P2", "axis": "type", "why": "The segment cells sit on Display's pitch with the decimal points, so the ghost reading is as wide as the lit one." },
+    "ghost": { "p": "P2", "axis": "colour", "why": "Every segment uses the LCD ghost ink on the grey-green window, the way an LCD shows with the power off." },
+    "unit": { "p": "P6", "axis": "space", "why": "The unit is kept as hidden text in its label size, so the window reserves the width the printed unit will take." },
+    "detail": { "p": "P6", "axis": "space", "why": "The detail is kept as hidden caption text, so the window reserves the line the detail will fill." },
+    "grille": { "p": "P4", "axis": "space", "why": "The grille kind lays its holes on the one module pitch of Grille, so the field holds the meter's exact place." },
+    "hole": { "p": "P4", "axis": "depth", "why": "Each hole is a recess in the lower ink step with the well shadow, the same unlit hole Grille draws at level zero." },
+    "disc": { "p": "P5", "axis": "depth", "why": "The disc is flat plastic where a key or knob will stand, with no part shadow, so nobody tries to press it." },
+    "block": { "p": "P5", "axis": "depth", "why": "The block is a flat plastic area for a chart or a picture, printed flat on the body with no shadow." }
+  },
+  "states": {
+    "@media forced-colors: active": { "p": "P6", "axis": "space", "why": "In forced colours every placeholder is drawn as an outline in the grey text colour, so the reserved space stays visible." }
+  },
+  "motion": {}
+}

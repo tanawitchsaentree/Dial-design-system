@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Banner · three inline messages that stay</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lead { margin: 0 0 18px; max-width: 80ch; font-size: 14px; line-height: 1.5; }
+  .variant { margin-block-end: 36px; display: grid; gap: 12px; max-inline-size: 760px; } .variant > h2 { font-size: 15px; font-weight: 500; margin: 0; } .variant > .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); line-height: 1.45; }
+  .narrow { max-inline-size: 375px; }
+  svg.g { inline-size: 20px; block-size: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .neutral svg.g { color: var(--ds-status-info-mark); } .positive svg.g { color: var(--ds-status-positive-mark); } .critical svg.g { color: var(--ds-status-critical-mark); }
+  .word { font-size: var(--ds-type-label); font-weight: 500; } .msg { font-size: var(--ds-type-body); line-height: 1.45; flex: 1 1 18em; min-inline-size: 0; }
+  .k { font: inherit; font-size: var(--ds-type-label); font-weight: 500; border: 0; color: var(--ds-text-primary); background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); min-block-size: 44px; padding-inline: 20px; border-radius: 999px; }
+  .x { inline-size: 44px; block-size: 44px; border-radius: 999px; border: 0; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); display: grid; place-items: center; color: var(--ds-text-primary); }
+  .keys { display: flex; gap: 8px; margin-inline-start: auto; align-items: center; }
+  .head { display: inline-flex; gap: 6px; align-items: center; flex: none; }
+
+  /* A · strip of the case: a plastic band at unit height in the flow, glyph and word printed at the start */
+  .a .bn { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 8px 8px 8px 20px; border-radius: 22px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit), inset 1px 1px 0 var(--ds-material-lit); }
+  /* B · printed line: no body, printed on the page with a seam under it */
+  .b .bn { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding-block: 8px; border-block-end: 1px solid var(--ds-line-divider); }
+  /* C · engraved plate: a recessed plate holding the words, keys outside it */
+  .c .bn { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+  .c .plate { flex: 1 1 18em; display: flex; gap: 12px; align-items: center; padding: 12px 16px; border-radius: 12px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+</style>
+</head>
+<body>
+<h1>Banner · three ways to keep a condition on screen</h1>
+<p class="lead">"The hub is offline. Controls will work again when it reconnects." Status is the Toast glyph and a word; no stripe on the start edge, no tinted disc, no orange.</p>
+<template id="t">
+  <div class="bn critical"><span class="head"><svg class="g" viewBox="0 0 24 24"><path d="M8 3.5h8l4.5 4.5v8L16 20.5H8L3.5 16V8z"/><path d="M12 8v5M12 16.5v.01"/></svg><span class="word">Offline</span></span><span class="msg">The hub is offline. Controls will work again when it reconnects.</span><span class="keys"><button class="k">Check the hub</button></span></div>
+  <div class="bn warning"><span class="head"><svg class="g" viewBox="0 0 24 24"><path d="M12 3.5L21.5 20h-19z"/><path d="M12 10v4.5M12 17.5v.01"/></svg><span class="word">Check</span></span><span class="msg">The washer filter is due for cleaning.</span><span class="keys"><button class="x" aria-label="Dismiss"><svg class="g" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></div>
+  <div class="bn neutral"><span class="head"><svg class="g" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.5v.01"/></svg><span class="word">Note</span></span><span class="msg">Holiday mode is on until Sunday.</span></div>
+  <div class="bn positive"><span class="head"><svg class="g" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="word">Updated</span></span><span class="msg">Every lamp runs the new firmware.</span><span class="keys"><button class="x" aria-label="Dismiss"><svg class="g" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span></div>
+</template>
+<section class="variant a"><h2>A · strip of the case (picked)</h2><p class="note">A plastic band at unit height, in the flow at the top of the region it speaks for. Keys at the end; wraps under the message when narrow.</p><div class="slot"></div><div class="slot narrow"></div></section>
+<section class="variant b"><h2>B · printed line</h2><p class="note">No body, printed straight on the page with a seam. Quiet, but a condition that blocks controls disappears into the page text.</p><div class="slot"></div></section>
+<section class="variant c"><h2>C · engraved plate</h2><p class="note">The words in a recessed plate. A second recess beside the display window (P2), and it reads as a field to type into.</p><div class="slot"></div></section>
+<script>
+  if (location.search.includes('dark')) document.documentElement.dataset.theme = 'dark';
+  const t = document.getElementById('t');
+  for (const s of document.querySelectorAll('.slot')) {
+    const n = t.content.cloneNode(true); const box = document.createElement('div'); box.style.cssText = 'display:grid;gap:12px'; box.append(n);
+    if (s.closest('.c')) for (const bn of box.querySelectorAll('.bn')) { const p = document.createElement('div'); p.className = 'plate'; p.append(bn.querySelector('.head'), bn.querySelector('.msg')); bn.prepend(p); }
+    s.append(box);
+  }
+</script>
+</body>
+</html>

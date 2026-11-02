@@ -1,0 +1,57 @@
+{
+  "concept": "Meter is a printed scale in a narrow recess with one ink needle, like the tuning scale on a radio, that reads a level the person does not set, such as a battery, the air or the water hardness, and names its region with a glyph and a word, never by colour and never in orange.",
+  "kind": ["meter", "gauge", "level indicator"],
+  "default_to_avoid": [
+    { "pattern": "dashboard donut gauge meter: a coloured arc that runs green to amber to red", "why_not": "A rainbow arc tells the region by colour alone and spends hue across the unit, while P1 keeps one orange part and P4 says a lit level uses ink." },
+    { "pattern": "meter drawn as a progress bar that fills from the start", "why_not": "A fill reads as a task running toward its end, which is the job of Progress, while a meter is a reading that can sit anywhere in its range." }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a linear printed scale behind a window with one pointer" },
+    { "source": "Braun RT 20 table radio (Dieter Rams, 1961): the tuning scale with a single needle and printed band names" },
+    { "source": "Analogue battery testers and hygrometers: a printed scale split into named bands under one needle" }
+  ],
+  "derivation": [
+    { "p": "P2", "axis": "depth", "consequence": "the window is recessed into the body (inverse light)", "form": "The scale sits in a narrow recess with elevation.well and surface.sunken, shallower and smaller than the unit's display window." },
+    { "p": "P4", "axis": "colour", "consequence": "a lit level uses ink at full step, never orange", "form": "The needle is one line of full step ink and the ticks are printed ink, so no part of the meter uses action.accent." },
+    { "p": "P2", "axis": "motion", "consequence": "values change at once", "form": "A new reading moves the needle straight to its place with no sweep, because a meter reports and does not perform." },
+    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "The label and the reading are printed on the line above the scale and the region names on the line under it." },
+    { "p": "P5", "axis": "type", "consequence": "tabular figures everywhere a number changes", "form": "The reading such as 18 % or 72 AQI uses tabular figures so it keeps its width as the level changes." }
+  ],
+  "variants": {
+    "lab": "apps/lab/meter/index.html",
+    "options": [
+      { "id": "A", "name": "printed scale and needle in a narrow recess, region names printed under their spans" },
+      { "id": "B", "name": "LCD bar segments in a grey-green window" },
+      { "id": "C", "name": "a row of grille holes lit in ink with numerals under it" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A reads a precise level anywhere in its range with one needle and prints the regions as words (P4, P5), and its job stays apart from Progress, which fills toward an end, and Grille, which shows activity in holes; B is a second display window that P2 keeps to one, and C is a Grille with a coarse step."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "The meter fills the inline size of its column and keeps the same height whatever the reading or the region says." },
+    "header": { "p": "P5", "axis": "space", "why": "The label and the reading sit on one printed line above the scale, aligned to its two ends." },
+    "label": { "p": "P5", "axis": "type", "why": "The name of what is read is printed at the caption size in regular weight, as on Progress." },
+    "reading": { "p": "P5", "axis": "space", "why": "The value, the region glyph and the region word stay together at the end of the label line." },
+    "value": { "p": "P2", "axis": "type", "why": "The value is set in tabular figures so it keeps its width while the level changes." },
+    "glyph": { "p": "P4", "axis": "interaction", "why": "Each region has its own shape, a down point, a disc or an up point, so the region is told without colour." },
+    "word": { "p": "P5", "axis": "type", "why": "The region word is printed in medium weight next to the glyph, so the region is named in words as well." },
+    "good": { "p": "P4", "axis": "colour", "why": "When the reading sits in the preferred region the glyph takes the positive mark, with the shape and the word still saying it." },
+    "poor": { "p": "P4", "axis": "colour", "why": "When the reading sits two regions from the preferred one the glyph takes the critical mark, never orange." },
+    "window": { "p": "P2", "axis": "depth", "why": "The scale is a narrow recess with inverse light and a hairline edge in line.ring that holds 3:1 against the body." },
+    "tick": { "p": "P5", "axis": "depth", "why": "Each tick is a hairline of printing at the floor of the recess, flat with no shadow, so it never reads as a part." },
+    "major": { "p": "P5", "axis": "colour", "why": "The ends and the middle ticks are taller and printed in the primary ink so the scale can be read at a glance." },
+    "bound": { "p": "P4", "axis": "shape", "why": "A region boundary is a dashed mark across the whole recess, a different shape from the ticks and the needle." },
+    "needle": { "p": "P4", "axis": "colour", "why": "The needle is one ring stroke of full step ink across the recess, the only solid line in the window." },
+    "regions": { "p": "P5", "axis": "space", "why": "The region names are printed on the line under the scale, each centred under its own span of the range." },
+    "region": { "p": "P5", "axis": "type", "why": "Each region name is printed at the smallest size step in regular weight and secondary ink." },
+    "current": { "p": "P5", "axis": "type", "why": "The name of the region the needle sits in is printed in medium weight and primary ink, by weight and not by tint." },
+    "preferred": { "p": "P4", "axis": "shape", "why": "The preferred region carries a printed hairline bracket over its name, a shape that marks it without colour." },
+    "ends": { "p": "P5", "axis": "space", "why": "With no regions the line under the scale prints the lowest and the highest value at its two ends." },
+    "end": { "p": "P2", "axis": "type", "why": "The end values are set in tabular figures at the smallest size step, the same printing as the fader numerals." }
+  },
+  "states": {
+    "@media forced-colors: active": { "p": "P4", "axis": "interaction", "why": "In forced colours the recess, the ticks, the needle and the glyphs are drawn in system colours so the reading survives." }
+  },
+  "motion": {}
+}

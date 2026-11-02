@@ -1,0 +1,58 @@
+{
+  "concept": "RangeSlider is Slider with two plastic caps in the same ruler groove, setting a low and a high end such as a heating schedule's band or a lamp's warm to cool range, and the ruler between the caps is printed in heavier ink while no part turns orange.",
+  "kind": ["range slider", "dual slider", "two thumb slider"],
+  "family": "Slider",
+  "family_difference": "Two caps ride the one groove instead of one, each cap is its own role slider that stops at the other so they never cross, and the ruler ticks between the caps print in full ink and twice the stroke to show the chosen span without filling the groove.",
+  "default_to_avoid": [
+    { "pattern": "two thumb Material range slider with a coloured filled segment between round thumbs", "why_not": "A coloured fill spends the unit's one orange on a secondary control, while P1 keeps it for the rotary and P4 says a lit level uses ink, never orange." }
+  ],
+  "references": [
+    { "source": "Braun HLD 4 / timer and thermostat dials (Dieter Rams era): two set pins on one scale marking a from and a to" },
+    { "source": "Braun audio 1 compact system (Dieter Rams, 1962): linear faders in a slot with a printed ruler scale" },
+    { "source": "packages/react/src/components/Slider (dial): the ruler fader this family follows" }
+  ],
+  "derivation": [
+    { "p": "P3", "axis": "shape", "consequence": "faders ride a groove with a ruler scale", "form": "Both caps ride Slider's narrow recessed groove under the same printed ruler, with an optional row of numerals below." },
+    { "p": "P3", "axis": "motion", "consequence": "rotaries and faders settle into the nearest detent", "form": "Each cap follows the pointer while dragged and settles into the nearest detent on its own spring of mass 1.4, stiffness 520 and damping 46." },
+    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "The span between the caps is shown by heavier ruler printing, so the groove, the caps and the span never use action.accent." },
+    { "p": "P3", "axis": "interaction", "consequence": "every mechanism has its keyboard map (arrows step a detent, Home and End reach the ends, Space and Enter press) and a visible value and label", "form": "Each cap is a role slider in the tab order: arrows step a detent, PageUp and PageDown a larger step, Home and End the ends it may reach." }
+  ],
+  "variants": {
+    "lab": "apps/lab/range-slider/index.html",
+    "options": [
+      { "id": "A", "name": "inked span: the ruler ticks between the caps print in full ink" },
+      { "id": "B", "name": "ink floor: the groove floor between the caps is lit in grille ink" },
+      { "id": "C", "name": "facing caps: each cap carries its index on the edge facing the other" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps Slider's cap and groove unchanged and tells the span by printing, as P5 asks of labels; B is the filled segment of the default in grey ink, and C adds two cap shapes that a person must learn for one control."
+  },
+  "mechanism": { "kind": "fader", "detents": 13, "travel": "full track length, each cap stopped by the other", "spring": { "mass": 1.4, "stiffness": 520, "damping": 46 } },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "The fader fills the inline size of its column and keeps at least five touch targets of length in every state." },
+    "header": { "p": "P5", "axis": "space", "why": "The label and the two values sit on one printed line above the track, aligned to its two ends." },
+    "label": { "p": "P5", "axis": "type", "why": "The printed name uses the label size in medium weight, like the word printed above a fader on a case." },
+    "value": { "p": "P5", "axis": "type", "why": "The low and high values are printed with tabular figures so the digits do not shift while a cap moves." },
+    "fader": { "p": "P3", "axis": "space", "why": "The whole track takes the pointer and stays at least 44px tall, so a press anywhere brings the nearer cap." },
+    "rule": { "p": "P3", "axis": "shape", "why": "The ruler band above the groove holds one printed tick per detent, spanning the travel of the caps' centres." },
+    "tick": { "p": "P5", "axis": "depth", "why": "Each tick is a hairline of printing, flat on the material with no shadow, so it never reads as a part." },
+    "major": { "p": "P5", "axis": "colour", "why": "The ends and the middle of the ruler are printed in the primary ink so the scale can be read at a glance." },
+    "inside": { "p": "P4", "axis": "colour", "why": "Ticks between the two caps print in full step ink at twice the stroke, so the span reads by printing and never by orange." },
+    "groove": { "p": "P3", "axis": "shape", "why": "Both caps ride the one narrow recessed slot drawn with inverse light; its hairline edge in line.ring holds 3:1 against the body." },
+    "thumb": { "p": "P3", "axis": "space", "why": "Each cap sits in a 44px square hit area that moves with it, so either cap can be grabbed and focused on its own." },
+    "cap": { "p": "P3", "axis": "depth", "why": "Each cap is a raised part of the same plastic, casting the short part shadow down and to the right of the single light." },
+    "scale": { "p": "P3", "axis": "type", "why": "The optional numeral row under the groove prints the scale values in the smallest type step, as on Slider." },
+    "numeral": { "p": "P5", "axis": "type", "why": "Each numeral is centred under its tick with tabular figures, in medium weight at the smallest size step." }
+  },
+  "states": {
+    "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens a cap's printed index one step and never lifts or grows the cap toward the pointer." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "The focused cap carries the same dark ring every part shows, so the person knows which end the keys will move." },
+    "aria-disabled=true": { "p": "P6", "axis": "depth", "why": "A disabled range loses both caps' height and fades to half, while the groove, ruler and values stay readable." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion each cap jumps to its detent at once and the index ink changes with no fade." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours both caps, their index lines, the groove and the ticks are drawn as real borders in system colours." }
+  },
+  "motion": {
+    "border-color": { "p": "P3", "axis": "motion", "why": "The index ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve, fast in and slow out." }
+  }
+}

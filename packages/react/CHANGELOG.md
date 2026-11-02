@@ -25,6 +25,16 @@ One line per change, `- Component: what changed`, under a heading of the version
 - Progress: First release of Progress, a recessed groove that fills with ink, with a still indeterminate form.
 - Card: First release. The plastic body of a unit, corner 0.16 of the short side capped at corner.panel, padding sm/md/lg/unit, header, footer, wordmark and model.
 - DeviceCard: First release. One appliance from anchor A, with Display, the orange Rotary or a primary key, keys, Grille meter, Slider fader and printing; layouts a, tall, compact.
+- RangeSlider: First release. Two plastic caps in one ruler groove that stop at each other, each its own slider with keys and the spring.
+- Scrubber: First release. The position of a track as a cap in the fader groove, with chapter marks, the buffered stretch and the times printed under it.
+- Meter: First release. A printed scale with one ink needle, regions told by a glyph and a word.
+- Sheet: First release. A modal panel with a device's full controls, docked to the bottom edge on a tall screen with a printed ink bar to drag it down, and a unit at the lower end on a wide screen; family of Dialog.
+- Banner: First release. A plastic strip in the flow that says a condition with the Toast glyph and a word, one plastic action key and an optional dismiss key; no stripe, no tint, no orange.
+- EmptyState: First release. A printed line, one sentence and one key, with an optional drawing of an unlit LCD or an empty grille.
+- List: First release. Rows of devices or tracks printed on one plastic body, kept apart by a gap, with link, button and plain rows and a selectable queue.
+- Menu: First release. A menu button that opens Select's plastic panel of actions on the page body, flipping and shifting to stay whole, with a destructive action marked by a lamp and a word.
+- Skeleton: First release. Skeleton holds the exact box of content still loading, drawn as the part with its power off (ghost segments, unlit holes, flat plastic). It never moves.
+- TimePicker: First release. TimePicker sets a time of day in a recessed well. Hour and minute are spinbuttons with set keys under them, on the 24 or 12 hour clock.
 
 ## 0.0.0 (2026-10-27)
 

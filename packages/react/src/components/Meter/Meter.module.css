@@ -1,0 +1,122 @@
+/* Meter — a static reading: a printed scale in a narrow recess with one ink needle (FORM.md display
+   class, P2, P4). Regions are a glyph shape and a word, never colour alone, and nothing is orange.
+   Nothing moves: a new reading puts the needle in its place at once. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  min-inline-size: var(--ds-control-menu-min);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--ds-gap-lg);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+}
+.label { font-weight: var(--ds-type-weight-regular); }
+.reading {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-sm);
+  white-space: nowrap;
+}
+.value {
+  color: var(--ds-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+.glyph {
+  inline-size: calc(var(--ds-control-mark) + var(--ds-space-0-5));
+  block-size: calc(var(--ds-control-mark) + var(--ds-space-0-5));
+  flex: none;
+  fill: var(--ds-text-primary);
+}
+.good { fill: var(--ds-status-positive-mark); }
+.poor { fill: var(--ds-status-critical-mark); }
+.word { font-weight: var(--ds-type-weight-medium); }
+.window {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  block-size: var(--ds-control-badge);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-mark);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  padding-inline: var(--ds-gap-sm);
+}
+.tick {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: calc(var(--ds-gap-sm) + var(--p) * (100% - var(--ds-gap-sm) * 2));
+  block-size: var(--ds-control-tick);
+  border-inline-start: var(--ds-width-hairline) solid var(--ds-text-secondary);
+}
+.major {
+  block-size: var(--ds-control-mark);
+  border-inline-start-color: var(--ds-text-primary);
+}
+.bound {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(var(--ds-gap-sm) + var(--p) * (100% - var(--ds-gap-sm) * 2));
+  border-inline-start: var(--ds-width-hairline) dashed var(--ds-text-secondary);
+}
+.needle {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(var(--ds-gap-sm) + var(--p) * (100% - var(--ds-gap-sm) * 2) - var(--ds-width-ring) / 2);
+  border-inline-start: var(--ds-width-ring) solid var(--ds-text-primary);
+}
+.regions {
+  position: relative;
+  display: block;
+  block-size: var(--ds-gap-2xl);
+  margin-inline: var(--ds-gap-sm);
+}
+.region {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: calc(var(--s) * 100%);
+  inline-size: calc(var(--w) * 100%);
+  box-sizing: border-box;
+  padding-block-start: var(--ds-space-0-5);
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--ds-type-micro);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+.current {
+  font-weight: var(--ds-type-weight-medium);
+  color: var(--ds-text-primary);
+}
+.preferred {
+  border-block-start: var(--ds-width-hairline) solid var(--ds-text-primary);
+  margin-inline: var(--ds-gap-xs);
+  inline-size: calc(var(--w) * 100% - var(--ds-gap-xs) * 2);
+}
+.ends {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--ds-gap-md);
+}
+.end {
+  font-size: var(--ds-type-micro);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-text-secondary);
+}
+
+@media (forced-colors: active) {
+  .window { border-color: CanvasText; }
+  .tick, .major, .bound, .needle { border-inline-start-color: CanvasText; }
+  .preferred { border-block-start-color: CanvasText; }
+  .glyph, .good, .poor { forced-color-adjust: none; fill: CanvasText; }
+}
