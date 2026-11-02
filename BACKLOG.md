@@ -49,3 +49,4 @@
   `[role=listbox]`, so a selectable List (a play queue, always on the page, role listbox) further down /components/list/code
   is reported "478px of it is off the screen" after a Menu opens. It should only measure a listbox that a trigger owns while
   open (`[aria-expanded=true][aria-controls]` → its id) or one inside `[popover]`/`[role=dialog]`. Found 2026-11-02 (wave 2, List/Menu).
+- **K-15 sweep.mjs counts a :modal dialog as cut by its ancestors.** "ActionSheet dialog: 211px of it is cut by … div.demo-box" while the dialog is in the top layer and shows whole (screenshot) and G-PC1 passes. Reported to kiln.
