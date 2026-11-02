@@ -4,6 +4,16 @@ One line per change, `- Component: what changed`, under a heading of the version
 
 ## 0.0.0 (2026-11-01)
 
+- Slider: The cap is frosted glass (D-007) and the groove is lit behind it up to the cap; new tint prop (warm, cool, neutral).
+- RangeSlider: Both caps are frosted glass and the groove between them is lit in their tint; new tint prop (warm, cool, neutral).
+- Scrubber: The cap is frosted glass and the played stretch is lit in its tint; new tint prop (warm, cool, neutral).
+- Chip: A latched chip is frosted ink grey glass with its lamp lit as a glass bead; matte with reduced transparency.
+- SegmentedControl: The latched key is frosted ink grey glass with its lamp lit as a glass bead; matte with reduced transparency.
+- Switch: The lit lamp is a glass bead; solid ink with reduced transparency.
+- Badge: A lit lamp is a glass bead in its status hue with a full edge.
+- Button: A plastic key with aria-pressed true latches down as frosted ink grey glass; the primary key never does.
+- IconButton: A plastic disc with aria-pressed true latches down as frosted ink grey glass; the primary disc never does.
+
 - Button: First release. A capsule key with kind key or primary and sizes md and lg.
 - Switch: First release. A slide switch with a cap in a recessed groove, printed position words and a lamp; role switch, Space and Enter throw it.
 - Text: First release. Printing on the case, five sizes, two inks, regular and medium, tabular figures.
@@ -42,6 +52,13 @@ One line per change, `- Component: what changed`, under a heading of the version
 - BottomNav: First release. the phone app's main sections printed along the bottom edge, glyph over word, the current one in medium weight with an ink mark, aria-current page links, safe-area padding, and a printed rail on wide screens.
 - ActionSheet: First release. a few actions for one object on the native modal dialog, docked to the bottom with a separate Cancel key on a phone and standing by its trigger like Menu on a wide screen; destructive actions last with the critical lamp and their word.
 - Snackbar: First release. Toast's strip, one at a time, centred above the bottom nav, with one Undo key, role status, at least 5 s and paused on hover and focus; SnackbarProvider and useSnackbar.
+- Legend: First release. Legend prints every choice a knob has beside or round it and lights the one in use; turning the knob walks the lit word and a press on a word picks it. Rotary gains printValue and describedBy.
+- SceneCard: First release. A scene printed on a card of light stock that is picked up and inserted into a Slot, by press, keys or drag.
+- Slot: First release. The slit a room unit has for scene cards; the inserted card stands half out and the lamp says Running.
+- Tray: First release. A recess that gathers a unit's small keys so its one orange part stands alone.
+- Icon: First release of Icon, dial's own icon set, 46 glyphs drawn as round dots on a 7 by 7 field on the Grille's ratio, in currentColor, hidden unless labelled; sizes sm, md and lg on the control icon tokens.
+- Wiring: First release. Relations printed between parts as ink lines on the module grid, with a group box, active ink and a sentence for each relation.
+- ExplainMode: First release. A how this works mode that prints each part's name and line beside it, with leaders, a key, the question mark key and Escape.
 
 ## 0.0.0 (2026-10-27)
 

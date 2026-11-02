@@ -15,9 +15,21 @@
     transform var(--ds-motion-release) var(--ds-motion-easing),
     box-shadow var(--ds-motion-release) var(--ds-motion-easing),
     color var(--ds-motion-hover) var(--ds-motion-easing),
-    background-color var(--ds-motion-hover) var(--ds-motion-easing);
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    border-color var(--ds-motion-release) var(--ds-motion-easing);
 }
 .key { background: var(--ds-surface-raised); color: var(--ds-text-secondary); }
+/* a toggle key latched down (aria-pressed) is frosted glass in the neutral range (P9, D-007); the orange key never is */
+.key[aria-pressed='true'] {
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+  border-color: var(--ds-glass-neutral-edge);
+  background: var(--ds-glass-neutral-body);
+  -webkit-backdrop-filter: blur(var(--ds-glass-blur)) saturate(var(--ds-glass-saturate)) brightness(var(--ds-glass-brightness));
+  backdrop-filter: blur(var(--ds-glass-blur)) saturate(var(--ds-glass-saturate)) brightness(var(--ds-glass-brightness));
+  /* the same three layers as elevation.part (cast, two inset), so the latch changes the shadow instead of swapping it (G-MO3) */
+  box-shadow: 0 0 0 0 transparent, inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-glass-lit), inset 0 0 var(--ds-space-1-5) var(--ds-glass-neutral-glow);
+  color: var(--ds-text-primary);
+}
 .primary { background: var(--ds-action-accent); color: var(--ds-text-on-accent); border-color: var(--ds-action-accent-rim); }
 .md { min-block-size: var(--ds-control-md); }
 .lg { min-block-size: var(--ds-control-lg); padding-inline: var(--ds-gap-2xl); }
@@ -51,6 +63,10 @@
   }
   .root:active { transform: none; }
 }
+@media (prefers-reduced-transparency: reduce) {
+  .key[aria-pressed='true'] { background: var(--ds-glass-neutral-matte); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
 @media (forced-colors: active) {
   .root { border-color: ButtonText; }
+  .key[aria-pressed='true'] { -webkit-backdrop-filter: none; backdrop-filter: none; }
 }

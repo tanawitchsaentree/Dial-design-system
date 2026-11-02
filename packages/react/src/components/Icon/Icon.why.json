@@ -1,0 +1,126 @@
+{
+  "concept": "Icon is printing on the case made of holes. Every glyph is a pattern of round dots on a seven by seven matrix, the Grille's own field at icon scale, so a symbol reads as part of the same perforated object.",
+  "kind": [
+    "icon",
+    "glyph",
+    "pictogram",
+    "symbol"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "generic line icon set: a two pixel rounded stroke icon pack such as Feather or Material outlined",
+      "why_not": "A stroke pack is the same drawing every app ships, and it shares nothing with the grille field that P4 makes the system's one dot language."
+    },
+    {
+      "pattern": "cute pixel face icon set with eyes, smiles and bouncing glyphs",
+      "why_not": "INTAKE rule 6 forbids a bloated round toy, and P6 keeps surfaces still, so a dot glyph stays an exact symbol with no face and no idle motion."
+    },
+    {
+      "pattern": "orange accent icon used to mark the active item",
+      "why_not": "P1 keeps orange for the one primary control body, and icons take the ink of the part they sit on instead of a hue of their own."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun L 2 loudspeaker: a square field of round holes on the module grid of the case"
+    },
+    {
+      "source": "Yoto Player dot-matrix face and the N200 dot numerals: figures drawn as round dots on a small matrix (user references, D-006)"
+    },
+    {
+      "source": "apps/lab/icon/index.html: four drawing systems measured at 16, 20 and 24px in light and dark"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P4",
+      "axis": "space",
+      "consequence": "grille pitch is one module step, so holes sit on the same grid as the body's inset",
+      "form": "Each glyph sits on a seven by seven matrix whose dot is two thirds of the pitch, the Grille's ratio of an 8px hole on a 12px pitch."
+    },
+    {
+      "p": "P4",
+      "axis": "shape",
+      "consequence": "holes are circles; their field is a rectangle or circle that nests in the body",
+      "form": "Every mark is a round dot in a square field, and status glyphs print their sign as missing dots inside Badge's lamp shapes."
+    },
+    {
+      "p": "P5",
+      "axis": "depth",
+      "consequence": "printing is flat on the material, with no shadow and no emboss",
+      "form": "Dots are flat ink in currentColor with no recess or shadow, because a glyph is printing and a 2px dot cannot hold a light model."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "The glyph has no fill of its own and inherits currentColor, so it is ink on plastic and text.on-accent on the orange key."
+    },
+    {
+      "p": "P5",
+      "axis": "colour",
+      "consequence": "ink on plastic at ≥4.5:1 in both themes; no tinted text",
+      "form": "At 16px the dots grow to four fifths of the pitch so every dot reaches 3:1 against the plastic on a 1x screen."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "A glyph never animates; when a state changes the key swaps its name and the new pattern prints at once."
+    },
+    {
+      "p": "P5",
+      "axis": "interaction",
+      "consequence": "labels name their control through aria-labelledby, and the model name is never the only identifier",
+      "form": "A glyph is hidden from assistive tech by default because its key carries the name; a label prop makes it role img with that name."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/icon/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "dot matrix 7 × 7, dot two thirds of the pitch at every size"
+      },
+      {
+        "id": "B",
+        "name": "dot matrix 9 × 9, dot two thirds of the pitch"
+      },
+      {
+        "id": "C",
+        "name": "hairline stroke on the module grid"
+      },
+      {
+        "id": "D",
+        "name": "dot matrix 7 × 7, dots grow to four fifths of the pitch at 16px"
+      }
+    ],
+    "picked": "D",
+    "by": "agent",
+    "reason": "Measured at 16px on a 1x screen, D brings every dot to 3:1 on the plastic in light and dark while A reaches 93% and B 58%; C is the generic line pack and leaves the grille field that P4 sets, so the dot form passes and no stroke variant is offered."
+  },
+  "parts": {
+    "root": {
+      "p": "P4",
+      "axis": "space",
+      "why": "The glyph is a square field of dots on one pitch, sized from the control icon tokens so it nests in a key."
+    },
+    "sm": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The small size draws its dots larger in the same field so each dot keeps 3:1 against the plastic on a 1x screen."
+    },
+    "md": {
+      "p": "P4",
+      "axis": "space",
+      "why": "The middle size matches control.icon-md, the glyph on a key, with dots at two thirds of the pitch."
+    },
+    "lg": {
+      "p": "P4",
+      "axis": "space",
+      "why": "The large size adds one module step to control.icon-md so the matrix pitch stays on the grille's ratio."
+    }
+  },
+  "states": {},
+  "motion": {}
+}

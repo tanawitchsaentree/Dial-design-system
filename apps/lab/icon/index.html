@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Icon · four ways to draw a glyph</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 80ch; font-size: 14px; line-height: 1.5; }
+  .themes { display: flex; flex-wrap: wrap; gap: 24px; }
+  .theme { padding: 24px; border-radius: 24px; background: var(--ds-surface-page); color: var(--ds-text-primary); display: grid; gap: 20px; }
+  .unit { padding: 20px 24px; border-radius: 40px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 10px; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); max-inline-size: 62ch; }
+  .strip { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+  .strip svg { flex: none; }
+  .size { font-size: 12px; color: var(--ds-text-secondary); inline-size: 36px; font-variant-numeric: tabular-nums; }
+  .s16 svg { inline-size: 16px; block-size: 16px; } .s20 svg { inline-size: 20px; block-size: 20px; } .s24 svg { inline-size: 24px; block-size: 24px; }
+  .stroke svg { fill: none; stroke: currentColor; stroke-width: 1px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+  .stroke svg * { vector-effect: non-scaling-stroke; }
+  .key { display: inline-grid; place-items: center; inline-size: 44px; block-size: 44px; border-radius: 50%; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-part); color: var(--ds-text-primary); }
+  .key.accent { background: var(--ds-action-accent); color: var(--ds-text-on-accent); }
+  .word { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+  .full { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 12px 8px; }
+  .full figure { margin: 0; display: grid; justify-items: center; gap: 4px; font-size: 11px; color: var(--ds-text-secondary); }
+  .full svg { inline-size: 24px; block-size: 24px; }
+  .full .s16x { inline-size: 16px; block-size: 16px; }
+</style>
+</head>
+<body>
+<h1>Icon — four ways to draw dial's glyphs</h1>
+<p>A and D draw each glyph as round dots on a 7 × 7 matrix whose dot is two thirds of its pitch, the Grille's own ratio (8px hole on a 12px pitch). B uses a 9 × 9 matrix with the same ratio. C draws a hairline stroke on the 2-unit step of a 24-unit grid. D keeps A's dots and lets them grow at 16px only, like optical sizing on type. Every glyph uses currentColor. Each system is shown at 16, 20 and 24px, on the plastic, on a key and beside a word, in light and dark.</p>
+<p>Legibility test (measured with a 1x and 2x screenshot of every glyph on surface.solid, light and dark): for each dot, the strongest pixel in its cell against the plastic. D passes at 16px, so no stroke variant is offered.</p>
+<div class="themes" id="themes"></div>
+<section class="unit" style="margin-block-start:24px"><h2>A · the whole 7 × 7 set at 24px and 16px</h2><div class="full" id="full"></div></section>
+<script src="glyphs.js"></script>
+<script>
+  const SHARED = ['play', 'pause', 'volume', 'power', 'lamp', 'settings', 'wifi', 'battery', 'warning', 'lock', 'search', 'check', 'close', 'chevron-right'];
+  const dots = (rows, r) => {
+    const n = rows.length; let s = `<svg viewBox="0 0 ${n * 3} ${n * 3}" fill="currentColor" aria-hidden="true">`;
+    rows.forEach((row, y) => [...row].forEach((ch, x) => { if (ch === '#') s += `<circle cx="${x * 3 + 1.5}" cy="${y * 3 + 1.5}" r="${r}"/>`; }));
+    return s + '</svg>';
+  };
+  const SYSTEMS = [
+    { id: 'A', name: 'A · dot matrix 7 × 7, dot two thirds of the pitch', draw: (g) => dots(DOT7[g], 1), cls: '' },
+    { id: 'B', name: 'B · dot matrix 9 × 9, dot two thirds of the pitch', draw: (g) => dots(DOT9[g], 1), cls: '' },
+    { id: 'C', name: 'C · hairline stroke on the module grid', draw: (g) => `<svg viewBox="0 0 24 24" aria-hidden="true">${STROKE[g]}</svg>`, cls: 'stroke' },
+    { id: 'D', name: 'D · dot matrix 7 × 7, dots grow at 16px', draw: (g, px) => dots(DOT7[g], px === 16 ? 1.2 : 1), cls: '' },
+  ];
+  const notes = {
+    A: 'Seven dots carry every shape in the list. At 16px on a 1x screen 93% of dots reach 3:1 on light plastic; minus 80%, more 67%, power and speaker 82%.',
+    B: 'Nine dots draw rounder curves, but at 16px a dot is 1.2px across: on a 1x screen only 58% of dots reach 3:1 in light (86% in dark). Fails.',
+    C: 'A 1px line stays sharp at every size, but it is the generic line icon of every app, and it shares nothing with the Grille (P4).',
+    D: 'Same drawing as A. At 16px the dots grow to 80% of the pitch so the glyph keeps its ink, and at 20 and 24px they are back to two thirds. 100% of dots reach 3:1 at 16px, 1x and 2x, light and dark. Picked.',
+  };
+  const sys = (S) => `<section class="unit ${S.cls}"><h2>${S.name}</h2>
+    ${[16, 20, 24].map((px) => `<div class="strip s${px}"><span class="size">${px}px</span>${SHARED.map((g) => S.draw(g, px)).join('')}</div>`).join('')}
+    <div class="strip s16"><span class="size">keys</span><span class="key">${S.draw('pause', 20)}</span><span class="key accent">${S.draw('play', 20)}</span><span class="key">${S.draw('settings', 20)}</span>
+      <span class="word">${S.draw('wifi', 16)}Kitchen hub</span><span class="word">${S.draw('warning', 16)}Filter due</span><span class="word">${S.draw('lock', 16)}Front door</span></div>
+    <p class="note">${notes[S.id]}</p></section>`;
+  const themes = document.getElementById('themes');
+  for (const t of ['light', 'dark']) themes.insertAdjacentHTML('beforeend', `<div class="theme" data-theme="${t}">${SYSTEMS.map(sys).join('')}</div>`);
+  document.getElementById('full').innerHTML = Object.keys(DOT7).map((g) => `<figure>${dots(DOT7[g], 1)}${dots(DOT7[g], 1.2).replace('<svg', '<svg class="s16x"')}<figcaption>${g}</figcaption></figure>`).join('');
+</script>
+</body>
+</html>

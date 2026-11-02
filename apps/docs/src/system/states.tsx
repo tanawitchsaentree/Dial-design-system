@@ -19,11 +19,14 @@ import { Meter, RangeSlider, Scrubber } from 'dial-react';
 import { Banner, EmptyState, Sheet } from 'dial-react';
 import { List, Menu } from 'dial-react';
 import { TimePicker } from 'dial-react';
+import { Legend } from 'dial-react';
 import { ActionSheet, BottomNav, Snackbar } from 'dial-react';
 
 const NAV = [{ value: 'home', label: 'หน้าหลัก', href: '#home' }, { value: 'rooms', label: 'ห้อง', href: '#rooms' }, { value: 'media', label: 'สื่อ', href: '#media' }, { value: 'settings', label: 'ตั้งค่า', href: '#settings' }];
 import { MediaPlayer, Queue } from 'dial-react';
 import { Environment, PullToRefresh } from 'dial-react';
+import { SceneCard, Slot, Tray } from 'dial-react';
+import { Card, Display, Explain, ExplainMode, Stack, Wiring } from 'dial-react';
 
 const LAMP_ACTIONS = [{ value: 'rename', label: 'เปลี่ยนชื่อ' }, { value: 'move', label: 'ย้ายห้อง' }, { value: 'remove', label: 'ลบออก', destructive: true }];
 
@@ -115,6 +118,11 @@ export const STATE_ROWS: StateRow[] = [
     ['default', <Rotary label="Temperature" min={16} max={26} defaultValue={21} />],
     ['disabled', <Rotary label="Temperature" min={16} max={26} defaultValue={21} disabled />],
   ] },
+  { component: 'Legend', family: 'Choices', cells: [
+    ['default', <Legend label="Fan" options={['off', 'low', 'mid', 'high']} defaultValue="off" />],
+    ['selected', <Legend label="Fan" options={['off', 'low', 'mid', 'high']} defaultValue="high" />],
+    ['disabled', <Legend label="Fan" options={['off', 'low', 'mid', 'high']} defaultValue="off" disabled />],
+  ] },
   { component: 'Button', family: 'Actions', cells: [
     ['default', <Button>Start</Button>],
     ['disabled', <Button disabled>Start</Button>],
@@ -183,5 +191,26 @@ export const STATE_ROWS: StateRow[] = [
     ['live', <Environment room="Bedroom" temperature={19.0} readAt="10:42" readings={[{ kind: 'humidity', value: 51 }]} />],
     ['stale', <Environment room="Bedroom" temperature={19.0} readAt="10:17" status="stale" readings={[{ kind: 'humidity', value: 51 }]} />],
     ['offline', <Environment room="Bedroom" temperature={19.0} readAt="09:58" status="offline" readings={[{ kind: 'humidity', value: 51 }]} />],
+  ] },
+  { component: 'SceneCard', family: 'Choices', cells: [
+    ['default', <SceneCard value="st-movie" name="ดูหนัง" steps={['ไฟ 20%']} words={{ kind: 'ฉาก' }} />],
+    ['disabled', <SceneCard value="st-garden" name="ปาร์ตี้ในสวน" steps={['ไฟทางเดิน']} words={{ kind: 'ฉาก' }} disabled />],
+  ] },
+  { component: 'Slot', family: 'Choices', cells: [
+    ['empty', <Slot label="ห้องนั่งเล่น" words={{ legend: 'การ์ดฉาก', empty: 'ว่าง', running: 'กำลังทำงาน' }} />],
+    ['inserted', <Slot label="ห้องนั่งเล่น" words={{ legend: 'การ์ดฉาก', empty: 'ว่าง', running: 'กำลังทำงาน' }} defaultScene={{ value: 'st-movie', name: 'ดูหนัง', steps: ['ไฟ 20%'] }} />],
+    ['disabled', <Slot label="โรงรถ" words={{ legend: 'การ์ดฉาก', empty: 'ว่าง', running: 'กำลังทำงาน' }} disabled />],
+  ] },
+  { component: 'Tray', family: 'Actions', cells: [
+    ['default', <Tray label="ปุ่มเครื่องทำความร้อน"><Button>ประหยัด</Button><Button>เร่ง</Button></Tray>],
+    ['disabled', <Tray label="ปุ่มเครื่องทำความร้อน"><Button disabled>ประหยัด</Button><Button disabled>เร่ง</Button></Tray>],
+  ] },
+  { component: 'Wiring', family: 'Messages', cells: [
+    ['waiting', <Wiring label="ความสัมพันธ์" activeWord="ทำงานอยู่" waitingWord="รออยู่" links={[{ from: 's', to: 'h', label: 'หลัง 23:00', text: 'โหมดกลางคืนลดฮีตเตอร์เป็น 18' }]}><Wiring.Node id="s"><Switch label="โหมดกลางคืน" /></Wiring.Node><Wiring.Node id="h"><Card padding="unit"><Display label="ฮีตเตอร์" value="21" digits={2} /></Card></Wiring.Node></Wiring>],
+    ['active', <Wiring label="ความสัมพันธ์" activeWord="ทำงานอยู่" waitingWord="รออยู่" links={[{ from: 's', to: 'h', label: 'หลัง 23:00', text: 'โหมดกลางคืนลดฮีตเตอร์เป็น 18', active: true }]}><Wiring.Node id="s"><Switch label="โหมดกลางคืน" defaultChecked /></Wiring.Node><Wiring.Node id="h"><Card padding="unit"><Display label="ฮีตเตอร์" value="18" digits={2} /></Card></Wiring.Node></Wiring>],
+  ] },
+  { component: 'ExplainMode', family: 'Messages', cells: [
+    ['closed', <ExplainMode toggleLabel="วิธีใช้"><Card padding="unit"><Stack direction="row" gap="xl"><Explain name="ระดับเสียง" does="ตั้งความดังของลำโพง"><Rotary kind="key" label="ระดับเสียง" min={0} max={10} defaultValue={5} /></Explain></Stack></Card></ExplainMode>],
+    ['open', <ExplainMode toggleLabel="วิธีใช้" defaultOpen><Card padding="unit"><Stack direction="row" gap="xl"><Explain name="ระดับเสียง" does="ตั้งความดังของลำโพง"><Rotary kind="key" label="ระดับเสียง" min={0} max={10} defaultValue={5} /></Explain></Stack></Card></ExplainMode>],
   ] },
 ];

@@ -11,6 +11,8 @@
 - **Wave ปัจจุบัน:** 4 · agents: Glass material (tokens + caps/lamps/chips), Legend, Wiring + ExplainMode, SceneCard + Slot + Tray, Icon (dot matrix)
 - **ค้าง/blocked:** ค่าสีและสัดส่วนยังเป็นค่าประมาณ (ref-01.png ไม่มี); ไม่ publish (Phase 8 เป็นของ user)
 ## Log ย่อ (ใหม่สุดบน ≤15 บรรทัด)
+- 2026-11-02 D-007 glass accent material (recipe A frosted tinted resin, lab apps/lab/glass): tokens color.glass/frost/glass.*, 9 components (Slider/RangeSlider/Scrubber tint prop, Chip, SegmentedControl, Switch, Badge, Button/IconButton aria-pressed); gates 7/7, conformance 386/386, tone 229/229
+- 2026-11-02 Icon (wave 4): ชุด dot 7×7 46 glyph, lab D (วัดที่ 16px 1x: ทุกจุด ≥3:1), /foundations/icons ใช้ชุดใหม่
 - 2026-11-02 user refs (OP-XY, superlunar, SK 4 manual, glass caps, Yoto, Sytren, N200) → D-006; wave 4 started; R-003 backdrop picker removed
 - 2026-11-02 wave 3 done (7 components); D-005 user logo as dial mark (favicon, PWA icons, top bar)
 - 2026-11-02 wave 2 done (10 components), G-MO3 Switch + G-TT1 picker fixed; wave 3 started; verify deferred to end of wave 3

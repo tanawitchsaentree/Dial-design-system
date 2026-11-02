@@ -1,0 +1,103 @@
+{
+  "concept": "Tray is a recess pressed into a dial unit that gathers its small secondary keys, such as previous, next, a mode key and a lamp, into one place. With the small keys sunk together in one tray, the unit's one big orange part stands alone on the plastic, the way a recessed key tray sits beside the main knob of a synthesiser.",
+  "kind": [
+    "tray",
+    "key tray",
+    "button group",
+    "toolbar",
+    "secondary controls"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "toolbar or ButtonGroup of outlined buttons joined edge to edge, used as a tray of secondary keys",
+      "why_not": "P1 makes the loud control the one largest part with smaller keys beside it, so the small keys sink into a recess instead of forming a second raised bank as wide as the knob."
+    },
+    {
+      "pattern": "tray drawn as a bordered box or a card inside the card",
+      "why_not": "P4 keeps every hole a recess with inverse light, so the tray is pressed into the plastic, never a raised panel or a hairline box."
+    }
+  ],
+  "references": [
+    {
+      "source": "Sytren synthesiser: a recessed tray groups the small keys so the main control stands alone"
+    },
+    {
+      "source": "Braun T 1000 world receiver and Braun audio units (Dieter Rams): small keys set together in one recessed field beside the large tuning knob"
+    },
+    {
+      "source": "packages/react/src/components/Display (dial): the recessed window whose corner nests in the body (inner = outer − inset)"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P1",
+      "axis": "shape",
+      "consequence": "the loud control is the one round or largest part; secondary controls are smaller keys",
+      "form": "The tray holds only the 44px keys, the small capsule keys and the lamps, so the knob or the big orange key beside it stays the largest part."
+    },
+    {
+      "p": "P1",
+      "axis": "space",
+      "consequence": "the loud control gets the largest clear area in the unit and sits where the hand expects it (lower or right of the display)",
+      "form": "Gathering the small keys into one tray clears the plastic around the loud part, which keeps its own clear area at the end of the row."
+    },
+    {
+      "p": "P4",
+      "axis": "depth",
+      "consequence": "each hole is a recess (inverse light), never a printed dot",
+      "form": "The tray is a recess with the well's inverse light, the same kind of hole as the display window, and the keys stand up from its floor."
+    },
+    {
+      "p": "P2",
+      "axis": "shape",
+      "consequence": "the window is a rounded rectangle whose radius nests in the body (inner = outer − inset)",
+      "form": "The tray takes the display window's nested corner, outer radius minus the body's inset, so the unit has one family of recesses."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The tray never shrinks its keys: each child keeps its own size, and the tray wraps to a second row instead."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/tray/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "recess on the inset line: one well with the display window's nested corner and even insets, wrapping to rows"
+      },
+      {
+        "id": "B",
+        "name": "capsule well: round ends wrapped on the round keys"
+      },
+      {
+        "id": "C",
+        "name": "seamed bank: the keys joined into one raised strip"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A shares the display window's nested corner and recess (P2, P4), so the unit has one family of holes, and it wraps without changing shape; B reads as a segmented pill and cannot wrap, and C is the ButtonGroup, a second raised part competing with the knob (P1)."
+  },
+  "parts": {
+    "root": {
+      "p": "P4",
+      "axis": "depth",
+      "why": "The tray is one recess with the well's inverse light and an even inset all round, holding the small keys on its floor."
+    }
+  },
+  "states": {
+    "data-component=Badge": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A lamp printed at the tray's end keeps the even inset from the tray's edge, so its word never touches the recess wall."
+    },
+    "@media forced-colors: active": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "In forced colours the tray keeps a hairline outline, because the recess shading that draws it fades there."
+    }
+  },
+  "motion": {}
+}

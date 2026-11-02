@@ -55,3 +55,13 @@ export * from './components/Queue';
 export * from './components/BottomNav';
 export * from './components/ActionSheet';
 export * from './components/Snackbar';
+
+// Wave 4: concept depth
+
+export * from './components/Legend';
+export * from './components/SceneCard';
+export * from './components/Slot';
+export * from './components/Tray';
+export * from './components/Icon';
+export * from './components/Wiring';
+export * from './components/ExplainMode';

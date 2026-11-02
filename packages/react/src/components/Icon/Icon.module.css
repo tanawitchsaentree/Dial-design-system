@@ -1,0 +1,15 @@
+/* Icon — printing made of holes: a 7 × 7 field of round dots in currentColor (P4 pitch, P5 flat ink).
+   The small size draws larger dots in Icon.tsx; the field and the pitch stay the same. */
+.root {
+  display: inline-block;
+  flex: none;
+  vertical-align: middle;
+  fill: currentColor;
+  overflow: visible;
+}
+.sm { inline-size: var(--ds-control-icon-sm); block-size: var(--ds-control-icon-sm); }
+.md { inline-size: var(--ds-control-icon-md); block-size: var(--ds-control-icon-md); }
+.lg {
+  inline-size: calc(var(--ds-control-icon-md) + var(--ds-space-1));
+  block-size: calc(var(--ds-control-icon-md) + var(--ds-space-1));
+}

@@ -1,0 +1,28 @@
+/* Tray — a recess that gathers a unit's small keys (lab apps/lab/tray, variant A). The same kind of hole as the
+   display window: elevation.well, surface.sunken, and the window's nested corner (inner = outer − inset; a Card
+   sets --display-outer and --display-inset, otherwise corner.inner). Even inset on every side (G-NC1). Keys keep
+   their own size; the tray wraps instead of shrinking them (P3). */
+.root {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  max-inline-size: 100%;
+  min-block-size: calc(var(--ds-control-md) + var(--ds-gap-md) * 2);
+  padding: var(--ds-gap-md);
+  border-radius: max(
+    var(--ds-corner-mark),
+    calc(var(--display-outer, calc(var(--ds-corner-inner) + var(--ds-gap-inset))) - var(--display-inset, var(--ds-gap-inset)))
+  );
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  vertical-align: middle;
+}
+.root > * { flex: none; }
+/* a lamp printed in the tray keeps the even inset from the tray's end */
+.root > [data-component='Badge'] { padding-inline: var(--ds-gap-xs) var(--ds-gap-md); }
+
+@media (forced-colors: active) {
+  .root { border: var(--ds-width-hairline) solid CanvasText; }
+}

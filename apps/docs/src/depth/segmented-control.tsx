@@ -10,7 +10,7 @@ export const SEGMENTED_CONTROL: Depth = {
   overview: (
     <>
       <p>SegmentedControl picks exactly one of a few modes on a device. It is a bank of keys that hold each other, like the FM, AM and AUX keys on a radio. Press a key and it latches down. The key that was down springs back up.</p>
-      <p>The chosen key is shown three ways at once. It sits down at height 0 with no shadow. Its small lamp is lit with ink. Its word turns medium weight. It is never orange, because orange belongs to the one main control of a unit.</p>
+      <p>The chosen key is shown three ways at once. It sits down at height 0 with no shadow, as a key of frosted ink grey glass. Its small lamp lights as a glass bead. Its word turns medium weight and holds 4.5:1 on the glass. It is never orange, because orange belongs to the one main control of a unit.</p>
     </>
   ),
   whenToUse: ['Picking one mode from two to five, such as a heater’s Heat, Eco and Frost.', 'A setting that takes effect at once and that people change often.', 'A choice where seeing every option at once helps.'],
@@ -26,7 +26,7 @@ export const SEGMENTED_CONTROL: Depth = {
       { part: 'Printed label', selector: '[data-component="SegmentedControl"] > span', what: 'The group name above the bank, in regular weight. It names the radio group.' },
       { part: 'Bank', selector: '[data-component="SegmentedControl"] [role="radiogroup"]', what: 'A recessed strip that holds the keys side by side.' },
       { part: 'Key', selector: '[data-component="SegmentedControl"] [role="radio"]', what: 'A plastic key, 44px tall, with a ring edge and a short shadow down and to the right.' },
-      { part: 'Lamp', selector: '[data-component="SegmentedControl"] [role="radio"] > span:first-child', what: 'A 6px recess on each key, filled with ink on the latched key.' },
+      { part: 'Lamp', selector: '[data-component="SegmentedControl"] [role="radio"] > span:first-child', what: 'A 6px recess on each key, lit as a glass bead on the latched key.' },
       { part: 'Word', selector: '[data-component="SegmentedControl"] [role="radio"] > span:last-child', what: 'The option name on the key, medium weight when latched.' },
     ],
   },
@@ -64,7 +64,7 @@ export const SEGMENTED_CONTROL: Depth = {
   behaviours: {
     states: [
       ['Released', 'A key raised by its height, lamp unlit, word in secondary ink.', 'The ring edge holds 3:1 against the bank.'],
-      ['Latched', 'Down at height 0, no shadow, lamp lit in ink, word in medium weight.', 'Only one key is latched at a time.'],
+      ['Latched', 'Down at height 0, no shadow, a frosted grey glass face, lamp lit, word in medium weight. Matte with reduced transparency.', 'Only one key is latched at a time.'],
       ['Hover', 'The word darkens one step.', 'The key never lifts.'],
       ['Pressed', 'Drops by 3px in 65ms and the shadow collapses.', 'It stays down; the key that was latched returns on the spring.'],
       ['Focus', 'A dark 2px ring around the focused key.', 'The bank is one tab stop.'],

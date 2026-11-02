@@ -9,7 +9,7 @@ const noop = () => {};
 export const CHIP: Depth = {
   overview: (
     <>
-      <p>Chip is a small capsule key for filters and quick presets, such as Eco, Night or Away. Press it and it latches down, like the band keys on an old radio. A latched chip stays pressed, its small lamp fills with ink and its word turns medium. Press it again and the spring brings it back up.</p>
+      <p>Chip is a small capsule key for filters and quick presets, such as Eco, Night or Away. Press it and it latches down, like the band keys on an old radio. A latched chip stays pressed and turns to frosted ink grey glass, its small lamp lights as a glass bead and its word turns medium. The word holds 4.5:1 on the glass in both themes. Press it again and the spring brings it back up.</p>
       <p>A removable chip shows a choice that has already been made, such as a room in a filter. It has its own small round key at the end that takes it away. Chips are never orange. The orange belongs to the one main control of the unit.</p>
     </>
   ),
@@ -24,7 +24,7 @@ export const CHIP: Depth = {
     render: <Chip defaultSelected>Eco</Chip>,
     parts: [
       { part: 'Key', selector: '[data-component="Chip"] > button', what: 'A capsule key of matte plastic with a short shadow down and to the right.' },
-      { part: 'Lamp', selector: '[data-component="Chip"] button > span:nth-of-type(1)', what: 'A 6px lamp. It is a small recess when off and fills with ink when latched.' },
+      { part: 'Lamp', selector: '[data-component="Chip"] button > span:nth-of-type(1)', what: 'A 6px lamp. It is a small recess when off and lights as a glass bead when latched.' },
       { part: 'Printed word', selector: '[data-component="Chip"] button > span:last-of-type', what: 'The label size, regular weight, medium when latched.' },
     ],
     perVariant: 'A removable chip has no lamp. It has a 24px round remove key at the end instead, with a 44px target.',
@@ -63,10 +63,10 @@ export const CHIP: Depth = {
   behaviours: {
     states: [
       ['Off', 'Raised by its height, lamp a small recess, word regular.', 'The key edge holds 3:1 against the body.'],
-      ['Latched', 'Stays down by 3px with no shadow. The lamp fills with ink and the word turns medium.', 'The medium width is kept free, so nothing moves sideways.'],
+      ['Latched', 'Stays down by 3px with no cast shadow, as frosted grey glass. The lamp lights and the word turns medium.', 'The medium width is kept free, so nothing moves sideways.'],
       ['Hover', 'The printed ink darkens one step.', 'The key never lifts.'],
       ['Pressed', 'Drops by 3px in 65ms and the shadow collapses under it.', 'Returns on the spring when released, unless it latched.'],
-      ['Reduce motion', 'No travel. A latched chip loses its shadow and keeps its sunken face, ring edge and lit lamp.', 'The state changes at once.'],
+      ['Reduce motion', 'No travel. A latched chip loses its shadow and keeps its glass face, edge and lit lamp. With reduced transparency the glass turns matte in the same grey.', 'The state changes at once.'],
       ['Focus', 'A dark 2px ring around the key.', 'The same ring on the remove key.'],
       ['Disabled', 'Flat, no shadow, at half opacity.', 'It cannot be pressed. A lit lamp stays lit.'],
     ],

@@ -88,9 +88,10 @@
 }
 
 .root[aria-checked='true'] .cap { inset-inline-start: calc(100% - var(--ds-control-cap-w)); }
-.root[aria-checked='true'] .lamp { background: var(--ds-text-primary); box-shadow: 0 0 0 0 transparent, inset 0 0 0 0 transparent, inset 0 0 0 0 transparent; }
+/* a lit lamp is a glass bead in the neutral range (P9, D-007), lit through and keeping the top-left light */
+.root[aria-checked='true'] .lamp { background: var(--ds-glass-neutral-lamp); box-shadow: 0 0 0 0 transparent, inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-glass-lit), inset 0 0 0 0 transparent; }
 /* a lit lamp is one of P2's emitters: its own light in the dark edition, nothing in light (emit.lamp) */
-.root .lamp[data-glow] { box-shadow: var(--ds-emit-lamp), inset 0 0 0 0 transparent, inset 0 0 0 0 transparent; }
+.root .lamp[data-glow] { box-shadow: var(--ds-emit-lamp), inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-glass-lit), inset 0 0 0 0 transparent; }
 .root[aria-checked='true'] .on,
 .root[aria-checked='false'] .off { color: var(--ds-text-primary); font-weight: var(--ds-type-weight-medium); }
 
@@ -105,6 +106,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .cap, .lamp, .word { transition: none; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .root[aria-checked='true'] .lamp { background: var(--ds-text-primary); }
 }
 @media (forced-colors: active) {
   .slot { border: var(--ds-width-hairline) solid ButtonText; }

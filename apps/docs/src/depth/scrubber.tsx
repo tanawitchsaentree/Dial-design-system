@@ -8,8 +8,8 @@ const CHAPTERS = [{ time: 0, label: 'Intro' }, { time: 41, label: 'Verse' }, { t
 export const SCRUBBER: Depth = {
   overview: (
     <>
-      <p>Scrubber shows where a track or a video is, and lets the person move there. It is the fader of a tape deck. A plastic cap rides the narrow groove, the elapsed time is printed under the start and the remaining time under the end. The arrow keys move five seconds, Page Up and Page Down thirty.</p>
-      <p>Chapter starts are printed as ink marks above the groove. The stretch that has loaded is a thin ink line along the groove floor. Nothing fills behind the cap and nothing is orange, because the play key is the loud part of a player.</p>
+      <p>Scrubber shows where a track or a video is, and lets the person move there. It is the fader of a tape deck. A frosted glass cap rides the narrow groove, the elapsed time is printed under the start and the remaining time under the end. The arrow keys move five seconds, Page Up and Page Down thirty.</p>
+      <p>Chapter starts are printed as ink marks above the groove. The stretch that has loaded is a thin ink line along the groove floor. The played stretch behind the cap is lit in the cap’s quiet tint, neutral grey unless <code>tint</code> says warm or cool. Nothing is orange, because the play key is the loud part of a player.</p>
     </>
   ),
   whenToUse: [
@@ -22,7 +22,7 @@ export const SCRUBBER: Depth = {
     { situation: 'An amount the person sets, such as volume', to: '/components/slider', label: 'Slider' },
     { situation: 'A level that is read and never set', to: '/components/meter', label: 'Meter' },
   ],
-  variants: { na: 'Scrubber has one look, a plastic cap in a recessed groove with the times under it. Buffered and chapters are options, covered under Modifiers.' },
+  variants: { na: 'Scrubber has one look, a glass cap in a recessed groove with the times under it. Buffered and chapters are options, covered under Modifiers.' },
   anatomy: {
     render: <Scrubber label="Ruhe, side A" duration={225} defaultValue={120} buffered={170} chapters={CHAPTERS} />,
     parts: [
@@ -30,7 +30,7 @@ export const SCRUBBER: Depth = {
       { part: 'Chapter marks', selector: '[data-component="Scrubber"] [role="slider"] > div:first-child', what: 'One ink mark above the groove where each chapter starts.' },
       { part: 'Groove', selector: '[data-component="Scrubber"] [role="slider"] > div:nth-child(2)', what: 'A narrow slot recessed into the body. The light falls into it from the top left.' },
       { part: 'Buffered', selector: '[data-component="Scrubber"] [role="slider"] > div:nth-child(2) > span', what: 'The loaded stretch, a thin ink line along the groove floor.' },
-      { part: 'Cap', selector: '[data-component="Scrubber"] [role="slider"] > div:last-child', what: 'A raised plastic cap with one ink line, at the current position.' },
+      { part: 'Cap', selector: '[data-component="Scrubber"] [role="slider"] > div:last-child', what: 'A raised cap of frosted glass with one ink line, at the current position. The played light shows through it.' },
       { part: 'Times', selector: '[data-component="Scrubber"] > div:last-child', what: 'Elapsed under the start and remaining under the end, with tabular figures.' },
     ],
   },

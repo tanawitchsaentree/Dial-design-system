@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Glass · the one accent material</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. Raw values are allowed here; the pick becomes tokens (glass.*). P9: glass only on
+     caps, lamps, latched keys and chips; bodies stay matte ABS. One light, top-left. */
+  body { margin: 0; padding: 28px; background: #FCFBF9; color: #2E2D2A; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lede { margin: 0 0 18px; max-width: 86ch; font-size: 14px; line-height: 1.5; }
+  .grid { display: grid; grid-template-columns: repeat(3, 380px); gap: 22px; }
+  .col h2 { font-size: 14px; font-weight: 500; margin: 0 0 8px; }
+  .col p { font-size: 12px; margin: 0 0 10px; line-height: 1.45; min-block-size: 52px; }
+  .theme { padding: 14px; border-radius: 18px; background: var(--ds-surface-page); margin-block-end: 14px; }
+  .unit { padding: 22px; border-radius: 40px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 14px; color: var(--ds-text-primary); }
+  .lbl { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; }
+  .lbl span:last-child { color: var(--ds-text-secondary); font-variant-numeric: tabular-nums; }
+
+  /* tint ranges, one hue per value range, quiet and near the plastic */
+  .theme { --warm: 217 165 91; --cool: 127 160 184; --neutral: 138 135 128; }
+  .theme[data-theme="dark"] { --warm: 210 164 101; --cool: 134 163 185; --neutral: 189 186 179; }
+  .warm { --t: var(--warm); } .cool { --t: var(--cool); } .neutral { --t: var(--neutral); }
+
+  /* fader */
+  .f { position: relative; block-size: 44px; }
+  .groove { position: absolute; inset-inline: 12px; inset-block-start: 18px; block-size: 8px; box-sizing: border-box; border: 1px solid var(--ds-line-ring); border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); overflow: hidden; }
+  .fill { position: absolute; inset-block: 0; inset-inline-start: 0; inline-size: calc(var(--x) * 100%); }
+  .cap { position: absolute; inset-block-start: 6px; inset-inline-start: calc(var(--x) * (100% - 24px)); inline-size: 24px; block-size: 32px; box-sizing: border-box; border-radius: 4px; }
+  .cap::after { content: ""; position: absolute; inset-block: 6px; inset-inline-start: 11px; border-inline-start: 2px solid var(--ds-text-secondary); }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; min-block-size: 36px; padding-inline: 14px; border-radius: 999px; font-size: 14px; box-sizing: border-box; border: 1px solid transparent; background: var(--ds-surface-raised); color: var(--ds-text-secondary); box-shadow: var(--ds-elevation-part); }
+  .chip .l { inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .bank { display: inline-grid; grid-auto-flow: column; gap: 2px; padding: 2px; border-radius: 999px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .seg { min-block-size: 40px; padding-inline: 14px; display: grid; place-items: center; font-size: 14px; border: 1px solid var(--ds-line-ring); border-radius: 6px; background: var(--ds-surface-raised); color: var(--ds-text-secondary); box-shadow: var(--ds-elevation-part); }
+  .seg:first-child { border-radius: 999px 6px 6px 999px; } .seg:last-child { border-radius: 6px 999px 999px 6px; }
+  .lamp { display: inline-block; inline-size: 10px; block-size: 10px; border-radius: 50%; }
+  .lampw { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; }
+  .on { color: var(--ds-text-primary); font-weight: 500; transform: translate(1px, 3px); box-shadow: none; }
+
+  /* A: frosted tinted resin, lit from behind by the value */
+  .A .cap { background: rgb(var(--t) / .42); border: 1px solid rgb(var(--t) / .7); backdrop-filter: blur(3px) saturate(1.4) brightness(1.05);
+            box-shadow: 2px 5px 15px #3C322833, inset 1px 1px 0 #FFFFFF8C, inset 0 0 6px rgb(var(--t) / .55); }
+  [data-theme="dark"] .A .cap { box-shadow: 2px 5px 15px #0000008C, inset 1px 1px 0 #FFFFFF26, inset 0 0 6px rgb(var(--t) / .45); backdrop-filter: blur(3px) saturate(1.3) brightness(.92); }
+  .A .fill { background: rgb(var(--t) / .62); }
+  .A .chip.on { background: rgb(var(--t) / .34); border-color: rgb(var(--t) / .75); backdrop-filter: blur(3px) saturate(1.4) brightness(1.05); box-shadow: inset 1px 1px 0 #FFFFFF8C, inset 0 0 6px rgb(var(--t) / .4); }
+  .A .chip.on .l, .A .lamp.lit { background: rgb(var(--t) / .9); box-shadow: inset 1px 1px 0 #FFFFFFA0, 0 0 0 1px rgb(var(--t)); }
+  .A .seg.on { background: rgb(var(--t) / .34); border-color: rgb(var(--t) / .75); box-shadow: inset 1px 1px 0 #FFFFFF8C, inset 0 0 6px rgb(var(--t) / .4); }
+  .A .lamp { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+
+  /* B: clear acrylic, tint only in its edge */
+  .B .cap { background: #FFFFFF2E; border: 1.5px solid rgb(var(--t)); backdrop-filter: blur(1px) saturate(1.2) brightness(1.02); box-shadow: 2px 5px 15px #3C322833, inset 1px 1px 0 #FFFFFFB0; }
+  [data-theme="dark"] .B .cap { background: #FFFFFF0F; box-shadow: 2px 5px 15px #0000008C, inset 1px 1px 0 #FFFFFF26; }
+  .B .fill { inset-block: 2px; border-block: 1.5px solid rgb(var(--t)); box-sizing: border-box; }
+  .B .chip.on { background: #FFFFFF26; border: 1.5px solid rgb(var(--t)); backdrop-filter: blur(1px) saturate(1.2) brightness(1.02); }
+  .B .chip.on .l, .B .lamp.lit { background: transparent; box-shadow: inset 0 0 0 2px rgb(var(--t)), inset 1px 1px 0 3px #FFFFFF60; }
+  .B .seg.on { background: #FFFFFF26; border: 1.5px solid rgb(var(--t)); }
+  .B .lamp { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+
+  /* C: milky opal; the tint arrives only when the part is on */
+  .C .cap { background: #FFFFFFB8; border: 1px solid #FFFFFF; backdrop-filter: blur(6px) saturate(1.1) brightness(1.06); box-shadow: 2px 5px 15px #3C322833, inset 1px 1px 0 #FFFFFF; }
+  [data-theme="dark"] .C .cap { background: #FFFFFF24; border-color: #FFFFFF33; box-shadow: 2px 5px 15px #0000008C, inset 1px 1px 0 #FFFFFF33; }
+  .C .cap.live { box-shadow: 2px 5px 15px #3C322833, inset 1px 1px 0 #FFFFFF, inset 0 0 0 12px rgb(var(--t) / .35); }
+  .C .fill { background: var(--ds-text-secondary); opacity: .35; }
+  .C .chip.on, .C .seg.on { background: #FFFFFF99; border-color: #FFFFFF; box-shadow: inset 0 0 0 20px rgb(var(--t) / .28); }
+  [data-theme="dark"] .C .chip.on, [data-theme="dark"] .C .seg.on { background: #FFFFFF1F; border-color: #FFFFFF33; }
+  .C .chip.on .l, .C .lamp.lit { background: #FFFFFFE0; box-shadow: inset 0 0 0 3px rgb(var(--t) / .8); }
+  .C .lamp { background: #FFFFFF8C; box-shadow: var(--ds-elevation-well); }
+</style>
+</head>
+<body>
+<h1>Glass, the one accent material (P9)</h1>
+<p class="lede">Same parts, same light, three ways to make the small moving parts glass. Tints come from the value's own range: warm amber for warmth, a cool steel for cool, ink grey for neutral. The bodies stay matte. Top of each column light, bottom dark.</p>
+<div class="grid" id="grid"></div>
+<template id="t">
+  <div class="theme"><div class="unit">
+    <div class="warm"><div class="lbl"><span>Heating</span><span>21</span></div><div class="f" style="--x:.62"><div class="groove"><div class="fill"></div></div><div class="cap live"></div></div></div>
+    <div class="cool"><div class="lbl"><span>Cooling</span><span>4</span></div><div class="f" style="--x:.35"><div class="groove"><div class="fill"></div></div><div class="cap"></div></div></div>
+    <div class="neutral"><div class="lbl"><span>Volume</span><span>7</span></div><div class="f" style="--x:.7"><div class="groove"><div class="fill"></div></div><div class="cap"></div></div></div>
+    <div class="row neutral"><span class="chip on"><i class="l"></i>Kitchen</span><span class="chip"><i class="l"></i>Hall</span>
+      <span class="lampw"><i class="lamp lit"></i>On</span><span class="lampw"><i class="lamp"></i>Off</span></div>
+    <div class="bank neutral"><span class="seg">Off</span><span class="seg on">Eco</span><span class="seg">Boost</span></div>
+  </div></div>
+</template>
+<script>
+const R = [['A', 'A · frosted tinted resin, lit from behind', 'A cap of tinted resin shows the groove blurred through it; the groove behind fills with the same tint. Latched chips and keys turn into the same resin.'],
+           ['B', 'B · clear acrylic, tinted edge', 'Near clear bodies carry the tint only in a hairline edge. The fill is two tinted lines inside the groove.'],
+           ['C', 'C · milky opal, tint only when on', 'Milky white parts take a tint inside only while they are on, dragged or latched.']];
+const g = document.getElementById('grid'), t = document.getElementById('t');
+for (const [k, h, p] of R) { const c = document.createElement('section'); c.className = `col ${k}`; c.innerHTML = `<h2>${h}</h2><p>${p}</p>`;
+  for (const th of ['light', 'dark']) { const n = t.content.firstElementChild.cloneNode(true); n.dataset.theme = th; c.append(n); } g.append(c); }
+</script>
+</body>
+</html>

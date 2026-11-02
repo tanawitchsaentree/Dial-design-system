@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Legend · three printed legends</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding (raw values allowed here only). P7: every choice printed, the one in use lit at
+     full ink + medium weight + one ink index mark; the rest text.secondary (>=4.5:1). No orange on a word. */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: start; }
+  .unit { inline-size: 300px; padding: 26px; border-radius: 48px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 14px; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  .lab { font-size: 13px; font-weight: 500; color: var(--ds-text-secondary); text-align: center; }
+  .dial { --d: 72px; position: relative; inline-size: calc(var(--d) + 18px); aspect-ratio: 1; display: grid; place-items: center; }
+  .tk { position: absolute; inset-block-start: 50%; inset-inline-start: 50%; block-size: 5px; inline-size: 0; margin-inline-start: -1px; border-inline-start: 2px solid var(--ds-text-primary);
+        transform-origin: 50% 0; transform: rotate(calc(var(--a) * 1deg)) translateY(calc(var(--d) / -2 - 9px)); }
+  .knob { position: relative; inline-size: var(--d); aspect-ratio: 1; border-radius: 50%; box-sizing: border-box; cursor: grab; touch-action: none;
+          background: var(--ds-action-accent); border: 2px solid var(--ds-action-accent-rim); box-shadow: var(--ds-elevation-part); }
+  .knob:focus-visible, .fader:focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .face { position: absolute; inset: 0; transform: rotate(calc(var(--deg) * 1deg)); }
+  .face::after { content: ""; position: absolute; inset-inline-start: 50%; inset-block-start: 7%; block-size: 22%; margin-inline-start: -2px; border-inline-start: 4px solid var(--ds-text-on-accent); border-radius: 2px; }
+  /* the printed words, shared */
+  .w { position: relative; display: inline-grid; align-items: center; min-block-size: 44px; min-inline-size: 44px; padding-inline: 6px; box-sizing: border-box;
+       font-size: 13px; line-height: 1.2; white-space: nowrap; color: var(--ds-text-secondary); cursor: pointer; }
+  .w > span { grid-area: 1 / 1; } .w > .g { font-weight: 500; visibility: hidden; }
+  .w[data-on] { color: var(--ds-text-primary); } .w[data-on] > span:first-child { font-weight: 500; }
+  .mark { position: absolute; background: var(--ds-text-primary); border-radius: 2px; pointer-events: none; }
+
+  /* A column beside the knob: the synth panel's printed column, the mark a short bar at the start of the lit word */
+  .a .body { display: grid; grid-template-columns: auto auto; gap: 18px; align-items: center; justify-content: start; }
+  .a .col { position: relative; display: grid; padding-inline-start: 10px; }
+  .a .mark { inset-inline-start: 0; inset-block-start: 0; inline-size: 4px; block-size: 14px; translate: 0 calc(var(--p) * 44px + 15px); }
+
+  /* B arc around the knob: each word at its detent's angle, the mark a dot between tick ring and word */
+  .b .arc { position: relative; justify-self: center; inline-size: 248px; block-size: 170px; }
+  .b .arc .dialwrap { position: absolute; inset-inline-start: 50%; inset-block-start: 112px; translate: -50% -50%; display: grid; justify-items: center; }
+  .b .w { position: absolute; inset-inline-start: calc(124px + var(--sx) * 62px); inset-block-start: calc(112px + var(--sy) * 62px);
+          translate: calc(-50% + var(--sx) * 50%) calc(-50% + var(--sy) * 50%); justify-items: center; }
+  .b .mark { inline-size: 6px; block-size: 6px; border-radius: 50%; inset-inline-start: 121px; inset-block-start: 109px; transform: rotate(calc(var(--deg) * 1deg)) translateY(-56px); transform-origin: 3px 3px; }
+  .b .lab { position: absolute; inset-inline: 0; inset-block-start: 160px; }
+
+  /* C row under a fader: the cap in Slider's groove, one word under each stop */
+  .c .fader { position: relative; block-size: 44px; margin-inline: calc(100% / 6 - 12px); cursor: pointer; touch-action: none; outline: none; }
+  .c .groove { position: absolute; inset-inline: 12px; inset-block-start: 18px; block-size: 8px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); border: 1px solid var(--ds-line-ring); box-sizing: border-box; }
+  .c .cap { position: absolute; inset-block-start: 6px; inline-size: 24px; block-size: 32px; border-radius: 8px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); border: 1px solid var(--ds-line-ring); box-sizing: border-box;
+            inset-inline-start: calc(var(--p) / 2 * (100% - 24px)); }
+  .c .words { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .c .w { justify-items: center; }
+  .c .mark { inline-size: 24px; block-size: 4px; inset-block-start: 0; inset-inline-start: calc((var(--p) + 0.5) * 100% / 3 - 12px); }
+  .c .lt { font-size: 13px; font-weight: 500; }
+  @media (prefers-reduced-motion: reduce) { .mark { transition: none; } }
+  @media (forced-colors: active) { .mark { forced-color-adjust: none; background: CanvasText; } .knob { border-color: ButtonText; } }
+</style>
+</head>
+<body>
+<h1>Legend: three ways to print every choice</h1>
+<p>P7 The legend is the state. Every choice is printed; the one in use is lit (full ink, medium weight, one ink index mark), the rest wait one step lighter. Turn the knob (drag, or Tab and arrows) and the lit word walks; click a word and the knob turns to it. One tab stop per value: the knob or fader is it, its aria-valuetext is the word.</p>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · column beside the knob (washer)</h2>
+    <div class="body">
+      <div><div class="dial"></div><div class="lab" id="la">Programme</div></div>
+      <div class="col"><span class="mark"></span></div>
+    </div>
+    <p class="note">The synth panel's printed column. The words keep one place; only the mark slides on the spring.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · arc around the knob (fan)</h2>
+    <div class="arc"><span class="mark"></span><div class="dialwrap"><div class="dial"></div></div><div class="lab" id="lb">Fan</div></div>
+    <p class="note">Each word sits at its detent's angle, so the knob's index points at it. Five words over 180°.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · row under a fader (speaker)</h2>
+    <span class="lt" id="lc">Source</span>
+    <div class="fader" role="slider" tabindex="0" aria-labelledby="lc" aria-valuemin="0" aria-valuemax="2"><div class="groove"></div><div class="cap"></div></div>
+    <div class="words"><span class="mark"></span></div>
+    <p class="note">A three-way slide switch. Each word sits under its stop; the fader is the one tab stop.</p></section>
+</div>
+<script>
+(() => {
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const spring = (apply, x0) => { let x = x0, v = 0, t = x0, raf = 0, last = 0;
+    const tick = (ts) => { const dt = Math.min(0.032, (ts - (last || ts)) / 1000 || 1 / 120); last = ts;
+      for (let i = 0; i < 8; i++) { const a = (-520 * (x - t) - 46 * v) / 1.4; v += a * dt / 8; x += v * dt / 8; }
+      apply(x); if (Math.abs(x - t) < 1e-3 && Math.abs(v) < 1e-2) { x = t; apply(x); raf = 0; last = 0; return; } raf = requestAnimationFrame(tick); };
+    return (n) => { t = n; if (REDUCED) { x = t; apply(x); return; } if (!raf) raf = requestAnimationFrame(tick); }; };
+  const word = (text) => { const w = document.createElement('span'); w.className = 'w'; w.setAttribute('aria-hidden', 'true'); w.innerHTML = `<span>${text}</span><span class="g">${text}</span>`; return w; };
+  const knob = (dial, n, sweep, labelId, onTurn) => {
+    for (let i = 0; i < n; i++) { const t = document.createElement('span'); t.className = 'tk'; t.style.setProperty('--a', -sweep / 2 + (i / (n - 1)) * sweep); dial.append(t); }
+    const k = document.createElement('div'); k.className = 'knob'; k.tabIndex = 0; k.setAttribute('role', 'slider'); k.setAttribute('aria-labelledby', labelId);
+    k.setAttribute('aria-valuemin', 0); k.setAttribute('aria-valuemax', n - 1); k.innerHTML = '<div class="face"></div>'; dial.append(k);
+    const face = k.firstChild; const turn = spring((d) => face.style.setProperty('--deg', d), -sweep / 2);
+    let cur = 0; const set = (i) => { cur = Math.max(0, Math.min(n - 1, i)); turn(-sweep / 2 + (cur / (n - 1)) * sweep); onTurn(cur); };
+    k.addEventListener('keydown', (e) => { const m = { ArrowUp: 1, ArrowRight: 1, ArrowDown: -1, ArrowLeft: -1 }; if (e.key in m) { e.preventDefault(); set(cur + m[e.key]); } if (e.key === 'Home') set(0); if (e.key === 'End') set(n - 1); });
+    k.addEventListener('pointerdown', (e) => { k.setPointerCapture(e.pointerId); k.focus(); const y0 = e.clientY, c0 = cur;
+      const mv = (ev) => set(Math.round(c0 + ((y0 - ev.clientY) / 120) * (n - 1))); const up = () => { k.removeEventListener('pointermove', mv); k.removeEventListener('pointerup', up); };
+      k.addEventListener('pointermove', mv); k.addEventListener('pointerup', up); });
+    return { set, el: k };
+  };
+  const light = (words, i, k, text) => { words.forEach((w, j) => w.toggleAttribute('data-on', j === i)); k.setAttribute('aria-valuenow', i); k.setAttribute('aria-valuetext', text[i]); };
+
+  // A
+  { const W = ['Cotton', 'Synthetics', 'Wool', 'Quick 30', 'Rinse', 'Spin']; const col = document.querySelector('.a .col'); const mark = col.querySelector('.mark');
+    const ws = W.map(word); ws.forEach((w) => col.append(w)); const mv = spring((p) => mark.style.setProperty('--p', p), 0);
+    const k = knob(document.querySelector('.a .dial'), W.length, 270, 'la', (i) => { light(ws, i, k.el, W); mv(i); });
+    ws.forEach((w, i) => w.addEventListener('click', () => { k.set(i); k.el.focus(); })); k.set(0); }
+  // B
+  { const W = ['Off', 'Low', 'Mid', 'High', 'Auto']; const sweep = 180; const arc = document.querySelector('.b .arc'); const mark = arc.querySelector('.mark');
+    const ws = W.map((t, i) => { const w = word(t); const a = ((-sweep / 2 + (i / (W.length - 1)) * sweep) * Math.PI) / 180; w.style.setProperty('--sx', Math.sin(a).toFixed(3)); w.style.setProperty('--sy', (-Math.cos(a)).toFixed(3)); arc.append(w); return w; });
+    const mv = spring((d) => mark.style.setProperty('--deg', d), -90);
+    const k = knob(document.querySelector('.b .dial'), W.length, sweep, 'lb', (i) => { light(ws, i, k.el, W); mv(-sweep / 2 + (i / (W.length - 1)) * sweep); });
+    ws.forEach((w, i) => w.addEventListener('click', () => { k.set(i); k.el.focus(); })); k.set(0); }
+  // C
+  { const W = ['Radio', 'Library', 'Line in']; const row = document.querySelector('.c .words'); const mark = row.querySelector('.mark'); const f = document.querySelector('.c .fader'); const cap = f.querySelector('.cap');
+    const ws = W.map(word); ws.forEach((w) => row.append(w)); const mv = spring((p) => { mark.style.setProperty('--p', p); cap.style.setProperty('--p', p); }, 0);
+    let cur = 0; const set = (i) => { cur = Math.max(0, Math.min(2, i)); light(ws, cur, f, W); mv(cur); };
+    f.addEventListener('keydown', (e) => { const m = { ArrowUp: 1, ArrowRight: 1, ArrowDown: -1, ArrowLeft: -1 }; if (e.key in m) { e.preventDefault(); set(cur + m[e.key]); } });
+    f.addEventListener('pointerdown', (e) => { const r = f.getBoundingClientRect(); set(Math.round(((e.clientX - r.left - 12) / (r.width - 24)) * 2)); });
+    ws.forEach((w, i) => w.addEventListener('click', () => { set(i); f.focus(); })); set(0); }
+})();
+</script>
+</body>
+</html>

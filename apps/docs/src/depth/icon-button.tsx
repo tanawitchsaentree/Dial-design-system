@@ -74,6 +74,7 @@ export const ICON_BUTTON: Depth = {
       ['Hover', 'The symbol darkens one step. On the primary key, the orange moves one step lighter.', 'The key never lifts or grows.'],
       ['Pressed', 'Drops by 3px in 65ms and the shadow collapses under it.', 'Returns on the spring in about 245ms when released.'],
       ['Focus', 'A dark 2px ring outside the disc.', 'The ring is the same on every part.'],
+      ['Latched', 'With aria-pressed true a plastic disc stays down by 3px as frosted grey glass, its symbol in primary ink.', 'Only toggle discs latch. The orange disc never turns to glass.'],
       ['Disabled', 'Flat, no shadow, at half opacity.', 'It cannot be pressed.'],
     ],
     interactions: [

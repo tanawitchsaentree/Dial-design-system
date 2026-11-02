@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Wiring · four ways to show that the thermostat drives the heater and the schedule</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lead { margin: 0 0 18px; max-width: 80ch; font-size: 14px; line-height: 1.5; }
+  .variant { margin-block-end: 44px; } .variant > h2 { font-size: 15px; font-weight: 500; margin: 0 0 4px; } .variant > .note { font-size: 13px; margin: 0 0 12px; color: var(--ds-text-secondary); max-width: 90ch; line-height: 1.45; }
+  .face { position: relative; inline-size: 760px; block-size: 360px; border-radius: 28px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit), inset 1px 1px 0 var(--ds-material-lit); }
+  .unit { position: absolute; border-radius: 20px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); display: grid; align-content: start; gap: 8px; padding: 14px; box-sizing: border-box; font-size: 13px; }
+  .unit b { font-weight: 500; font-size: 14px; }
+  .lcd { background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); border-radius: 10px; padding: 6px 10px; font-variant-numeric: tabular-nums; font-size: 22px; box-shadow: var(--ds-elevation-well); text-align: end; }
+  .knob { inline-size: 88px; block-size: 88px; border-radius: 50%; background: var(--ds-action-accent); box-shadow: var(--ds-elevation-part); justify-self: center; position: relative; }
+  .knob::after { content: ''; position: absolute; inset-block-start: 8px; inset-inline-start: 50%; inline-size: 3px; block-size: 14px; background: var(--ds-text-on-accent); border-radius: 2px; }
+  .well { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); border-radius: 12px; padding: 8px 12px; font-size: 22px; font-variant-numeric: tabular-nums; }
+  svg.wires { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; pointer-events: none; overflow: visible; }
+  svg.wires path { fill: none; stroke: var(--ds-text-secondary); stroke-width: 1; }
+  svg.wires path.on { stroke: var(--ds-text-primary); }
+  svg.wires circle { fill: var(--ds-surface-solid); stroke: var(--ds-text-secondary); stroke-width: 1; }
+  svg.wires circle.on { fill: var(--ds-text-primary); stroke: var(--ds-text-primary); }
+  .tag { position: absolute; font-size: 12px; line-height: 16px; padding-inline: 4px; background: var(--ds-surface-solid); color: var(--ds-text-secondary); white-space: nowrap; }
+  .tag.on { color: var(--ds-text-primary); font-weight: 500; }
+  .box { position: absolute; border: 1px solid var(--ds-text-secondary); border-radius: 24px; }
+  .box > span { position: absolute; inset-block-start: -9px; inset-inline-start: 18px; padding-inline: 6px; background: var(--ds-surface-solid); font-size: 12px; color: var(--ds-text-secondary); }
+  .num { display: inline-grid; place-items: center; inline-size: 20px; block-size: 20px; border: 1px solid var(--ds-text-secondary); border-radius: 50%; font-size: 12px; font-variant-numeric: tabular-nums; }
+  .key { position: absolute; inset-inline: 24px; inset-block-end: 18px; font-size: 13px; display: grid; gap: 6px; }
+  .key div { display: flex; gap: 8px; align-items: center; color: var(--ds-text-secondary); } .key div.on { color: var(--ds-text-primary); }
+  .theme { position: fixed; inset-block-start: 12px; inset-inline-end: 12px; }
+</style>
+</head>
+<body>
+<button class="theme" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">theme</button>
+<h1>Wiring · the relation between the thermostat, the heater and the night schedule</h1>
+<p class="lead">One room screen. The thermostat knob sets the heater; the schedule after 23:00 lowers it to 18. Night mode is active in every variant; the second relation waits. Four mechanisms of showing the relation, never decoration.</p>
+
+<section class="variant">
+  <h2>A · schematic face (printed box + one-bend ink lines on the module grid)</h2>
+  <p class="note">The heating group sits in one printed box. Lines run on 8px rows with right angles and at most one bend, end in a small node on each part, carry one lowercase label, and never cross a word. Active line full ink, waiting line secondary ink.</p>
+  <div class="face">
+    <div class="box" style="inset-inline-start:16px; inset-block-start:24px; inline-size:440px; block-size:312px"><span>heating</span></div>
+    <div class="unit" style="inset-inline-start:40px; inset-block-start:48px; inline-size:176px; block-size:264px"><b>Thermostat</b><div class="lcd">21.5 °C</div><div class="knob"></div></div>
+    <div class="unit" style="inset-inline-start:264px; inset-block-start:48px; inline-size:176px; block-size:144px"><b>Heater</b><div class="lcd">22</div><span>lounge 1</span></div>
+    <div class="unit" style="inset-inline-start:520px; inset-block-start:176px; inline-size:208px; block-size:136px"><b>Night schedule</b><div class="well">23:00</div></div>
+    <svg class="wires" aria-hidden="true">
+      <path class="on" d="M216 120 H264" /><circle class="on" cx="216" cy="120" r="3" /><circle class="on" cx="264" cy="120" r="3" />
+      <path d="M352 192 V248 H520" /><circle cx="352" cy="192" r="3" /><circle cx="520" cy="248" r="3" />
+    </svg>
+    <span class="tag" style="inset-inline-start:448px; inset-block-start:240px">after 23:00</span>
+    <span class="tag on" style="inset-inline-start:212px; inset-block-start:96px">sets</span>
+  </div>
+</section>
+
+<section class="variant">
+  <h2>B · bus rail (every relation taps one printed rail along the foot of the face)</h2>
+  <p class="note">Each part drops a line straight down to a shared rail; labels sit on the rail between taps. Fewer bends, but the rail reads as one circuit, so which part drives which is lost.</p>
+  <div class="face">
+    <div class="unit" style="inset-inline-start:40px; inset-block-start:32px; inline-size:176px; block-size:220px"><b>Thermostat</b><div class="lcd">21.5 °C</div><div class="knob"></div></div>
+    <div class="unit" style="inset-inline-start:264px; inset-block-start:32px; inline-size:176px; block-size:144px"><b>Heater</b><div class="lcd">22</div></div>
+    <div class="unit" style="inset-inline-start:504px; inset-block-start:32px; inline-size:208px; block-size:136px"><b>Night schedule</b><div class="well">23:00</div></div>
+    <svg class="wires" aria-hidden="true">
+      <path class="on" d="M40 312 H712" />
+      <path class="on" d="M128 252 V312" /><path class="on" d="M352 176 V312" /><path d="M608 168 V312" />
+    </svg>
+    <span class="tag on" style="inset-inline-start:208px; inset-block-start:304px">sets</span>
+    <span class="tag" style="inset-inline-start:440px; inset-block-start:304px">after 23:00</span>
+  </div>
+</section>
+
+<section class="variant">
+  <h2>C · numbered key (no lines; matching printed numerals and a relation key)</h2>
+  <p class="note">Each relation gets a numeral printed beside both of its ends, and the sentences are printed under the parts like a manual's legend. Quiet, but the eye has to travel twice to join the two ends.</p>
+  <div class="face">
+    <div class="unit" style="inset-inline-start:40px; inset-block-start:32px; inline-size:176px; block-size:220px"><b>Thermostat <span class="num">1</span></b><div class="lcd">21.5 °C</div><div class="knob"></div></div>
+    <div class="unit" style="inset-inline-start:264px; inset-block-start:32px; inline-size:176px; block-size:144px"><b>Heater <span class="num">1</span> <span class="num">2</span></b><div class="lcd">22</div></div>
+    <div class="unit" style="inset-inline-start:504px; inset-block-start:32px; inline-size:208px; block-size:136px"><b>Night schedule <span class="num">2</span></b><div class="well">23:00</div></div>
+    <div class="key"><div class="on"><span class="num">1</span>The thermostat sets the heater, on now</div><div><span class="num">2</span>Night mode lowers the heater to 18 after 23:00</div></div>
+  </div>
+</section>
+
+<section class="variant">
+  <h2>D · direct lines (centre to centre, the node-graph default, rendered to reject)</h2>
+  <p class="note">Straight diagonals from part centre to part centre. It is what a node editor draws; the lines cut across the parts' printing and change angle whenever the layout moves.</p>
+  <div class="face">
+    <div class="unit" style="inset-inline-start:40px; inset-block-start:48px; inline-size:176px; block-size:264px"><b>Thermostat</b><div class="lcd">21.5 °C</div><div class="knob"></div></div>
+    <div class="unit" style="inset-inline-start:264px; inset-block-start:48px; inline-size:176px; block-size:144px"><b>Heater</b><div class="lcd">22</div></div>
+    <div class="unit" style="inset-inline-start:520px; inset-block-start:176px; inline-size:208px; block-size:136px"><b>Night schedule</b><div class="well">23:00</div></div>
+    <svg class="wires" aria-hidden="true">
+      <path class="on" d="M128 180 L352 120" /><path d="M352 120 L624 244" />
+    </svg>
+    <span class="tag" style="inset-inline-start:470px; inset-block-start:170px">after 23:00</span>
+  </div>
+</section>
+</body>
+</html>

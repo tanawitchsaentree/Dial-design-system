@@ -44,6 +44,8 @@ export interface RangeSliderProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   formatValue?: (value: number) => string;
   /** The distance PageUp and PageDown move. It defaults to a tenth of the range, and at least two detents. */
   pageStep?: number;
+  /** The range the values belong to, which tints both glass caps and the light in the groove between them. Use warm for heat, cool for cooling and neutral for anything else. Default neutral. */
+  tint?: 'warm' | 'cool' | 'neutral';
   /** The fader cannot be moved; both caps lose their height. */
   disabled?: boolean;
   /** Spring mass of each cap. Default 1.4 (mechanism.mass). */
@@ -72,6 +74,7 @@ export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(function
     scale = false,
     formatValue = plain,
     pageStep,
+    tint = 'neutral',
     disabled = false,
     mass = MECHANISM.mass,
     stiffness = MECHANISM.stiffness,
@@ -102,7 +105,11 @@ export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(function
   const dragging = useRef<0 | 1 | null>(null);
   const mounted = useRef(false);
   const [x0] = useState(() => [frac(current[0]), frac(current[1])]);
-  const springOf = (k: 0 | 1) => (x: number) => thumbs[k].current?.style.setProperty('--x', x.toFixed(4));
+  // each cap's spring also writes its place on the fader (--x0, --x1), so the light between the caps moves with them
+  const springOf = (k: 0 | 1) => (x: number) => {
+    thumbs[k].current?.style.setProperty('--x', x.toFixed(4));
+    faderRef.current?.style.setProperty(`--x${k}`, x.toFixed(4));
+  };
   const low = useSpring(springOf(0), { mass, stiffness, damping }, x0[0]);
   const high = useSpring(springOf(1), { mass, stiffness, damping }, x0[1]);
   const springs = [low, high];
@@ -200,12 +207,12 @@ export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(function
   const names = [lowLabel, highLabel];
 
   return (
-    <div ref={ref} role="group" aria-labelledby={labelId} data-component="RangeSlider" className={cx(styles.root, className)} {...rest}>
+    <div ref={ref} role="group" aria-labelledby={labelId} data-component="RangeSlider" data-tint={tint} className={cx(styles.root, className)} {...rest}>
       <div className={styles.header}>
         <span id={labelId} className={styles.label}>{label}</span>
         <span className={styles.value} aria-hidden="true">{texts[0]}–{texts[1]}</span>
       </div>
-      <div ref={faderRef} aria-disabled={disabled || undefined} className={styles.fader} onPointerDown={onPointerDown}>
+      <div ref={faderRef} aria-disabled={disabled || undefined} className={styles.fader} style={{ '--x0': x0[0], '--x1': x0[1] } as CSSProperties} onPointerDown={onPointerDown}>
         <div className={styles.rule} aria-hidden="true">
           {ticks.map((p, i) => (
             <span
@@ -215,7 +222,9 @@ export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(function
             />
           ))}
         </div>
-        <div className={styles.groove} aria-hidden="true" />
+        <div className={styles.groove} aria-hidden="true">
+          <span className={styles.fill} />
+        </div>
         {([0, 1] as const).map((k) => (
           <div
             key={k}

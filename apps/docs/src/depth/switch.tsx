@@ -8,7 +8,7 @@ export const SWITCH: Depth = {
   overview: (
     <>
       <p>Switch turns one setting on or off, and the setting stays that way until someone changes it. It is a slide switch, a plastic cap that rides in a short groove. The cap sits at one end for off and at the other end for on.</p>
-      <p>You read the state in three ways at once. The cap is at the on end, the small lamp beside it is filled with ink, and the word for the current position is printed heavier. None of these is a colour, so the switch never uses orange. Orange belongs to the unit’s one main control.</p>
+      <p>You read the state in three ways at once. The cap is at the on end, the small lamp beside it is lit as a glass bead, and the word for the current position is printed heavier. None of these is a colour, so the switch never uses orange. Orange belongs to the unit’s one main control.</p>
     </>
   ),
   whenToUse: ['To turn a setting on or off that stays put, such as Keep warm or Child lock.', 'To pick between two named positions, such as Cook and Warm.', 'When the change takes effect at once, with no Save step.'],
@@ -26,7 +26,7 @@ export const SWITCH: Depth = {
       { part: 'Groove', selector: '[data-component="Switch"] > span:nth-child(2)', what: 'A slot recessed into the body, 52px long.' },
       { part: 'Cap', selector: '[data-component="Switch"] > span:nth-child(2) > span', what: 'A raised plastic cap with one printed index line. Its end of the groove is the state.' },
       { part: 'On word', selector: '[data-component="Switch"] > span:nth-child(3)', what: 'The word printed at the on end of the groove.' },
-      { part: 'Lamp', selector: '[data-component="Switch"] > span:last-child', what: 'A 6px hole that fills with ink while the switch is on.' },
+      { part: 'Lamp', selector: '[data-component="Switch"] > span:last-child', what: 'A 6px hole that lights as a small glass bead while the switch is on, solid ink with reduced transparency.' },
     ],
   },
   sizes: { na: 'Switch has one size. Its hit area is 44px tall, the smallest target every part in dial keeps.' },
@@ -60,7 +60,7 @@ export const SWITCH: Depth = {
   behaviours: {
     states: [
       ['Off', 'The cap rests at the start of the groove. The lamp is an empty hole.', 'The off word is printed in the medium weight.'],
-      ['On', 'The cap rests at the far end. The lamp is filled with ink.', 'The on word is printed in the medium weight.'],
+      ['On', 'The cap rests at the far end. The lamp is lit as a glass bead.', 'The on word is printed in the medium weight.'],
       ['Hover', 'The position words darken one step.', 'The cap never lifts or grows.'],
       ['Focus', 'A dark 2px ring outside the switch.', 'The ring is the same on every part.'],
       ['Disabled', 'The cap is flat with no shadow, at half opacity.', 'It cannot be thrown.'],

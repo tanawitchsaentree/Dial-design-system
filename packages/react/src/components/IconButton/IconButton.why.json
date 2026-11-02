@@ -43,12 +43,15 @@
     "focus-visible": { "p": "P3", "axis": "interaction", "why": "The same dark ring as every other part shows keyboard focus, so focus never depends on the orange." },
     "disabled": { "p": "P6", "axis": "depth", "why": "A disabled key loses its height and fades to half, while its outline stays readable against the body." },
     "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes state at once with no travel and no spring return; only the ink fade stays." },
-    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the disc keeps a real border so its edge survives without shadows or fills." }
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the disc keeps a real border so its edge survives without shadows or fills, and a latched disc turns matte." },
+    "aria-pressed=true": { "p": "P9", "axis": "space", "why": "A plastic toggle disc latched down stays down by its travel and becomes frosted glass in the neutral range, its symbol in primary ink; the orange disc never turns to glass." },
+    "@media prefers-reduced-transparency: reduce": { "p": "P9", "axis": "interaction", "why": "When the reader asks for less transparency a latched disc turns matte in the same grey tone and keeps its travel down." }
   },
   "motion": {
     "transform": { "p": "P3", "axis": "motion", "why": "The disc travels down in 65ms and returns on the spring so a press reads as a physical stroke." },
     "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses with the press and grows back with the return, following the single light." },
     "color": { "p": "P3", "axis": "motion", "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing." },
-    "background-color": { "p": "P1", "axis": "colour", "why": "The primary key's orange shifts one step on hover with the same fast in, slow out fade as the ink." }
+    "background-color": { "p": "P1", "axis": "colour", "why": "The primary key's orange shifts one step on hover with the same fast in, slow out fade as the ink." },
+    "border-color": { "p": "P3", "axis": "motion", "why": "The glass edge of a latched disc arrives and leaves on the release time with its travel, so the latch reads as one stroke." }
   }
 }

@@ -1,5 +1,6 @@
 {
-  "concept": "Scrubber is the position of a track or a video on a dial player, a plastic cap riding the fader groove like the tape position on a deck, with chapter marks printed above, the buffered stretch drawn as a thin ink line along the groove floor and the elapsed and remaining time printed in tabular figures under its ends, while the orange stays on the play key.",
+  "concept": "Scrubber is the position of a track or a video on a dial player, a frosted glass cap riding the fader groove like the tape position on a deck, the played stretch lit in its quiet tint, with chapter marks printed above, the buffered stretch drawn as a thin ink line along the groove floor and the elapsed and remaining time printed in tabular figures under its ends, while the orange stays on the play key.",
+  "material": { "accent": "glass", "decision": "D-007", "lab": "apps/lab/glass/index.html", "recipe": "A frosted tinted resin, lit from behind by the value" },
   "kind": ["scrubber", "seek bar", "media progress", "timeline"],
   "default_to_avoid": [
     { "pattern": "YouTube style scrubber: a red progress bar that fills as it plays with a round scrubber dot", "why_not": "A red fill spends the accent and the hue of a fault on a reading, while P1 keeps the one loud part for the play key and P3 asks for a cap in a groove." },
@@ -12,7 +13,9 @@
   ],
   "derivation": [
     { "p": "P3", "axis": "shape", "consequence": "faders ride a groove with a ruler scale", "form": "The cap rides Slider's narrow recessed groove, and the ruler above it prints only the chapter starts as ink marks." },
-    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "The groove, the cap and the buffered stretch are plastic and ink, so the transport's play key stays the one orange part." },
+    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "The groove and the buffered stretch are plastic and ink and the cap is quiet glass, so the transport's play key stays the one orange part." },
+    { "p": "P9", "axis": "depth", "consequence": "a glass part is lit through from behind by the value it holds, and keeps the one top-left light on its surface", "form": "The played stretch of the groove is lit in the cap's tint, the frosted cap shows that light through itself and keeps the lit hairline and short shadow." },
+    { "p": "P9", "axis": "space", "consequence": "glass appears on caps, lamps, latched keys and chips only, never on a body, panel or card", "form": "Only the cap is glass; the groove, the chapter marks, the times and the player card around it stay matte plastic and printing." },
     { "p": "P4", "axis": "colour", "consequence": "holes are ink at a lower step", "form": "The buffered stretch is a 2px line in line.ring along the middle of the groove floor, a lower ink step and never a played fill." },
     { "p": "P5", "axis": "type", "consequence": "tabular figures everywhere a number changes", "form": "Elapsed time prints under the start of the groove and remaining time under its end, in tabular figures so they never jitter." },
     { "p": "P3", "axis": "interaction", "consequence": "every mechanism has its keyboard map (arrows step a detent, Home and End reach the ends, Space and Enter press) and a visible value and label", "form": "The track is a role slider whose value text reads 1:23 of 3:45: arrows move 5 seconds, PageUp and PageDown 30, Home and End the ends." },
@@ -39,7 +42,8 @@
     "chapter": { "p": "P5", "axis": "depth", "why": "Each chapter mark is printing in the primary ink at the ring stroke, flat on the material with no shadow." },
     "groove": { "p": "P3", "axis": "shape", "why": "The cap rides the narrow recessed slot drawn with inverse light; its hairline edge in line.ring holds 3:1 against the body." },
     "buffer": { "p": "P4", "axis": "colour", "why": "The stretch that has loaded is a thin line of lower step ink along the groove floor, visible in both themes and never orange." },
-    "cap": { "p": "P3", "axis": "depth", "why": "The cap is a raised part of the same plastic, casting the short part shadow down and to the right of the single light." },
+    "cap": { "p": "P9", "axis": "depth", "why": "The cap is a raised part of frosted glass in the track's tint, showing the played light through itself and casting the short part shadow down and to the right of the single light." },
+    "fill": { "p": "P9", "axis": "colour", "why": "The played stretch is lit in the cap's quiet tint up to the cap's centre, so the position reads as light behind glass and never as the orange." },
     "times": { "p": "P5", "axis": "space", "why": "Elapsed and remaining time are printed under the two ends of the groove, on one line that never moves the track." },
     "time": { "p": "P2", "axis": "type", "why": "Each time is set in tabular figures at the smallest size step, so the digits keep their width as the track plays." }
   },
@@ -48,7 +52,10 @@
     "focus-visible": { "p": "P3", "axis": "interaction", "why": "The keyboard focus ring wraps the whole track with the same dark ring every part in dial shows." },
     "aria-disabled=true": { "p": "P6", "axis": "depth", "why": "A scrubber with nothing loaded loses the cap's height and fades to half, and it cannot be moved." },
     "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion a seek lands at once with no travel and the index ink changes with no fade." },
-    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the cap, its index, the groove, the buffered stretch and the chapter marks are drawn in system colours." }
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the cap turns matte with a real border, the played stretch becomes Highlight, and the index, groove, buffer and chapter marks use system colours." },
+    "data-tint=warm": { "p": "P9", "axis": "colour", "why": "A warm source, such as a fireplace recording or a sunrise light scene, takes the warm amber glass range for its cap and played light." },
+    "data-tint=cool": { "p": "P9", "axis": "colour", "why": "A cool source, such as a fan or a night scene, takes the cool steel glass range for its cap and played light." },
+    "@media prefers-reduced-transparency: reduce": { "p": "P9", "axis": "interaction", "why": "When the reader asks for less transparency the cap and the played light turn matte in the same tint, so the position still reads at once." }
   },
   "motion": {
     "border-color": { "p": "P3", "axis": "motion", "why": "The index ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve, fast in and slow out." }

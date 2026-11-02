@@ -36,7 +36,7 @@ export const CONTENT: {
     dimensions: { lede: "Every control keeps a 44px target even when it draws smaller, as a real knob does. Colours and proportions are estimated from the reference seen in chat and get measured again from the reference file." },
     shape: { lede: "Corners are about a sixth of a unit's short side, and anything inside nests. The inner radius equals the outer radius minus the inset. Colours and proportions are estimated from the reference seen in chat and get measured again from the reference file." },
     motion: { lede: "A press goes down at once and comes back on a spring. Knobs and faders settle into detents, and nothing moves while idle. Colours and proportions are estimated from the reference seen in chat and get measured again from the reference file." },
-    icons: { lede: "Icons appear only where a printed word will not fit, drawn with the same stroke as the printing. Colours and proportions are estimated from the reference seen in chat and get measured again from the reference file." },
+    icons: { lede: "Icons appear only where a printed word will not fit. Each one is printed in round dots on the same grid as the Grille, in the ink of the part it sits on." },
   },
   credits: 'dial ships no images and no font files. Type uses Helvetica Neue or the system sans already on the device. The packages have no runtime dependencies and need React 18 or later, which is MIT licensed. dial itself is MIT licensed. Its lineage is Braun and Ulm school design and Dieter Rams’ ten principles, and it uses none of Braun’s names or marks.',
 };

@@ -159,28 +159,29 @@ function IconsExtras() {
   return (
     <>
       <Section id="icon-principles" title="When to use an icon">
-        <p>A printed word comes first. An icon is used only where a word will not fit, as on a small key, and only for a meaning everyone knows, such as close, add or search. Every icon key also carries an accessible name.</p>
+        <p>A printed word comes first. An icon is used only where a word will not fit, as on a small key, and only for a meaning everyone knows, such as close, add or search. Every icon key also carries an accessible name. The glyphs come from the <code>Icon</code> component in <code>dial-react</code>.</p>
       </Section>
       <Section id="icon-sizing" title="Sizes">
-        <p>Icons come in two sizes, {tok('control.icon-sm')} and {tok('control.icon-md')}, drawn on a 24-unit grid. The larger size goes on keys and the smaller one inline with text.</p>
+        <p>Icons come in three sizes. Small is {tok('control.icon-sm')} and sits inline with text. Medium is {tok('control.icon-md')} and goes on a key or at the start of a list row. Large adds one module step, {tok('space.1')}, to medium for a large key. Each size draws the same 7 by 7 field of dots.</p>
       </Section>
       <Section id="icon-targets" title="Targets around icons">
-        <p>An icon is never the target. It sits on a key that keeps a {tok('layout.touch')} hit area, so a {tok('control.icon-sm')} icon is still easy to press with a thumb. IconButton requires a label, which becomes its accessible name.</p>
+        <p>An icon is never the target. It sits on a key that keeps a {tok('layout.touch')} hit area, so a {tok('control.icon-sm')} icon is still easy to press with a thumb. IconButton requires a label, which becomes its accessible name, and the glyph inside it stays hidden.</p>
       </Section>
       <Section id="icon-color" title="Icon colour">
         <p>Icons use <code>currentColor</code>, so they take the ink of the key they sit on. They are never orange on their own. On the orange control the icon is {tok('text.on-accent')}, the same as its printing.</p>
       </Section>
       <Section id="icon-alignment" title="Icons beside text">
-        <p>An icon next to a word is centred on the line box and set {tok('gap.sm')} from it. It takes the size of the text it sits with, so a label and its icon read as one piece of printing.</p>
+        <p>An icon next to a word is centred on the line box and set {tok('gap.sm')} from it. Use the small size beside body or caption text, so a label and its icon read as one piece of printing.</p>
       </Section>
       <Section id="icon-style" title="Style">
-        <p>Icons are drawn as {tok('width.ring')} strokes with round caps and round joins, the same weight as the printing on the case. They are flat, with no perspective, fill or shadow. The current set is a seed. A set drawn from the reference will replace it.</p>
+        <p>Every glyph is a pattern of round dots on a 7 by 7 field, the same holes the Grille uses for a level. A dot is two thirds of the pitch, the Grille’s ratio of an 8px hole on a 12px pitch. At the small size the dots grow to four fifths of the pitch, so every dot holds 3:1 against the plastic on a 1x screen. Glyphs are flat printing, with no recess, shadow or motion.</p>
+        <p>The status glyphs keep the lamp shapes of Badge. Warning is a triangle, critical a square, info a diamond and positive a dot, and each prints its sign as missing dots. Four drawing systems were measured in <code>apps/lab/icon</code>. The 9 by 9 field lost its dots at 16px, and a hairline stroke shared nothing with the Grille, so the set has one dot weight and no stroke version.</p>
       </Section>
       <Section id="icon-standard" title="The standard icons">
-        <p>The seed set covers the common actions. Search, close, check, plus, minus, arrow, chevron and edit are all there. Anything outside that list should be a word on a key until the new set is drawn.</p>
+        <p>The set covers transport (play, pause, previous, next, stop, volume, mute), devices (power, lamp, heat, cool, fan, washer, speaker, plug), the home (lock and the open lock, door, window, home, room), actions (plus, minus, close, check, edit, remove, share, refresh, search, more, drag, settings), the four chevrons, time (clock, schedule), signal (wifi, signal, battery) and status (warning, critical, info, positive). Anything outside the set is a word on a key until it is drawn.</p>
       </Section>
       <Section id="icon-contribute" title="Adding an icon">
-        <p>Draw it on the 24-unit grid with a {tok('width.ring')} stroke, round caps and <code>currentColor</code>. Add it to <code>apps/docs/src/icons.tsx</code> with <code>aria-hidden</code>, then show it on a key with a label. If a word fits, use the word instead.</p>
+        <p>Draw the glyph as seven rows of seven cells in <code>packages/react/src/components/Icon/glyphs.ts</code>, with a dot for each mark, and add its name to <code>IconName</code>. Check it at 16px in light and dark in the lab, then show it on a key with a label. If a word fits, use the word instead.</p>
       </Section>
     </>
   );

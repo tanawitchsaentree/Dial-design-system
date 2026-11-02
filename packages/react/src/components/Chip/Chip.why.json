@@ -1,5 +1,6 @@
 {
-  "concept": "Chip is a small capsule key on the case for filters and quick presets. A selectable chip latches down like an old radio key and lights its lamp, a removable chip carries its own round remove key, and none of them is ever orange.",
+  "concept": "Chip is a small capsule key on the case for filters and quick presets. A selectable chip latches down like an old radio key, turns to frosted glass in the neutral ink range and lights its lamp, a removable chip carries its own round remove key, and none of them is ever orange.",
+  "material": { "accent": "glass", "decision": "D-007", "lab": "apps/lab/glass/index.html", "recipe": "A frosted tinted resin, only while latched" },
   "kind": ["chip", "filter chip", "tag", "latching key"],
   "default_to_avoid": [
     { "pattern": "Material filter chip with a tinted fill and a check icon when selected", "why_not": "A tinted fill spends colour on a selection, which P1 forbids, and the check icon swaps the mechanism for a web convention." },
@@ -13,7 +14,9 @@
   "derivation": [
     { "p": "P3", "axis": "shape", "consequence": "keys are round or capsule", "form": "A chip is a small capsule key with corner.round, its word printed on it, 36px or 44px tall." },
     { "p": "P3", "axis": "depth", "consequence": "press drops height to 0 in 60–70ms, return runs on the material's spring", "form": "Pressing drops the chip by motion.press-travel; a selected chip stays down with no shadow, and deselecting returns it on the spring." },
-    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Selection is shown by latched depth, a lit ink lamp and a medium word on the sunken face, never by orange or a tinted fill." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Selection is shown by latched depth, a lit lamp and a medium word on a quiet ink grey glass face, never by orange." },
+    { "p": "P9", "axis": "space", "consequence": "glass appears on caps, lamps, latched keys and chips only, never on a body, panel or card", "form": "Only a latched chip turns to glass; a chip at rest and a removable chip's body stay matte plastic." },
+    { "p": "P9", "axis": "interaction", "consequence": "glass never replaces a state cue; every state still has its shape, word or mark", "form": "The latched chip keeps its travel down, its lit lamp and its medium word, so the glass is never the only sign of selection." },
     { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "The sm chip and the 24px remove key each extend an invisible hit area to control.md, 44px." },
     { "p": "P5", "axis": "type", "consequence": "one grotesk, regular and medium only", "form": "The word is type.label in regular weight, and medium when latched, with the medium width reserved so nothing reflows." }
   ],
@@ -35,7 +38,7 @@
     "body": { "p": "P3", "axis": "shape", "why": "A removable chip is a capsule of plastic holding its word and a separate round remove key at the end." },
     "sm": { "p": "P3", "axis": "space", "why": "The small chip draws 36px tall for dense filter rows and keeps a 44px hit area around it." },
     "md": { "p": "P3", "axis": "space", "why": "The default chip is 44px tall, the smallest target every part in dial keeps." },
-    "lamp": { "p": "P1", "axis": "colour", "why": "A 6px lamp sits recessed when off and fills with full ink when latched, so selection never needs orange." },
+    "lamp": { "p": "P9", "axis": "colour", "why": "A 6px lamp sits recessed when off and lights as a glass bead in the deep ink of the neutral range when latched, so selection never needs orange." },
     "icon": { "p": "P5", "axis": "type", "why": "An optional stroke icon is printed before the word in the same ink, never as the only identifier." },
     "word": { "p": "P5", "axis": "type", "why": "The printed word is the label size, regular weight, turning medium when latched within a reserved medium width." },
     "remove": { "p": "P3", "axis": "space", "why": "The remove key is a separate 24px round key whose hit area reaches 44px, so it cannot be hit by accident." },
@@ -44,18 +47,20 @@
   "states": {
     "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens the printed ink one step and never lifts the key, because real keys do not rise." },
     "active": { "p": "P3", "axis": "depth", "why": "Pressing drops the key by its travel and collapses its shadow underneath it, at once." },
-    "aria-pressed=true": { "p": "P3", "axis": "depth", "why": "A selected chip is latched, so it stays down by its travel with no shadow, its lamp lit and its word medium." },
+    "aria-pressed=true": { "p": "P9", "axis": "depth", "why": "A selected chip is latched, so it stays down by its travel with no cast shadow and becomes frosted glass lit from inside, its lamp lit and its word medium at 4.5:1 or more." },
     "focus-visible": { "p": "P3", "axis": "interaction", "why": "Every part shows the same dark ring with a gap, so focus never depends on a colour change." },
     "disabled": { "p": "P6", "axis": "depth", "why": "A disabled chip loses its height and fades to half, while its edge stays readable against the body." },
     "data-disabled": { "p": "P6", "axis": "interaction", "why": "The whole chip shows the not-allowed cursor when disabled, including the printed word around its keys." },
     "data-glow": { "p": "P6", "axis": "colour", "why": "A lit lamp is one of the emitters P2 allows, so in the dark edition it gives off a few pixels of its own light; in light, unlit or disabled it gives off none." },
     "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes position at once, with no travel on press and no spring return; only the ink fade stays." },
-    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the key keeps a real border and the lamp fills solid when latched, so selection survives." }
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the key turns matte with a real border and the lamp fills solid when latched, so selection survives." },
+    "@media prefers-reduced-transparency: reduce": { "p": "P9", "axis": "interaction", "why": "When the reader asks for less transparency a latched chip turns matte in the same grey tone, keeping its travel, lamp and word." }
   },
   "motion": {
     "transform": { "p": "P3", "axis": "motion", "why": "The key travels down in 65ms and returns on the spring so a press reads as a physical stroke." },
     "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses with the press or latch and grows back with the return, following the single light." },
     "color": { "p": "P3", "axis": "motion", "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing." },
-    "background-color": { "p": "P2", "axis": "motion", "why": "The lamp's on and off fades within the segment time, the same as a display segment switching." }
+    "background-color": { "p": "P2", "axis": "motion", "why": "The lamp's on and off fades within the segment time, the same as a display segment switching, and the key's glass face comes in with its travel." },
+    "border-color": { "p": "P3", "axis": "motion", "why": "The glass edge of a latched chip arrives and leaves on the release time with the key's travel, so the latch reads as one stroke." }
   }
 }

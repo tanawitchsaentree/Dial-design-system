@@ -120,4 +120,19 @@ export default async function rangeSlider({ check, expect, page, go, main, token
     expect(x1 > x0 && Math.abs(x2 - x1) < 0.5, `cap at ${x0}, then ${x1}, then ${x2}`);
     return 'no travel';
   });
+  // glass (P9, D-007): both caps are frosted, and the groove is lit from one cap's centre to the other's
+  await check('RangeSlider', 'both caps are frosted glass and the band light runs from cap to cap', async () => {
+    await go(ROUTE);
+    const r = main().locator('[data-component="RangeSlider"][data-tint="warm"]').first();
+    await r.locator('[data-thumb="high"]').focus(); await page.keyboard.press('ArrowLeft');
+    const st = await r.evaluate((e) => {
+      const g = e.querySelector('[class*="groove"]'), f = g.firstElementChild.getBoundingClientRect(), gb = g.getBoundingClientRect();
+      const mid = (k) => { const c = e.querySelector(`[data-thumb="${k}"] > div`).getBoundingClientRect(); return c.left + c.width / 2 - gb.left; };
+      const filt = [...e.querySelectorAll('[data-thumb] > div')].map((c) => getComputedStyle(c).backdropFilter || getComputedStyle(c).webkitBackdropFilter || 'none');
+      return { from: f.left - gb.left, to: f.right - gb.left, lo: mid('low'), hi: mid('high'), filt };
+    });
+    expect(st.filt.every((x) => /blur\(/.test(x)), `cap filters ${st.filt.join(' | ')}`);
+    expect(Math.abs(st.from - st.lo) <= 2 && Math.abs(st.to - st.hi) <= 2, `light ${st.from}–${st.to}px, caps at ${st.lo} and ${st.hi}px`);
+    return `light ${Math.round(st.from)}–${Math.round(st.to)}px`;
+  });
 }

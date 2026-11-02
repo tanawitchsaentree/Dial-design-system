@@ -1,0 +1,97 @@
+{
+  "concept": "SceneCard is a scene of the home, such as Movie night or Good night, printed on a small card of light stock that the person picks up and inserts into a room's Slot. The card is printing on a flat card one step lighter than the plastic, with the name on its top edge so it stays readable when the card stands half out of a slot, and it is never orange.",
+  "kind": ["scene card", "scene", "preset", "routine", "shortcut card"],
+  "default_to_avoid": [
+    {
+      "pattern": "scene card grid of rounded tiles with gradient backgrounds and a big emoji, as in Google Home and SmartThings scenes",
+      "why_not": "P6 forbids gradients and P1 keeps colour to one orange part per unit, so a scene is ink printed on plain light card stock and the room's own knob stays the only loud part."
+    },
+    {
+      "pattern": "scene card that runs the moment it is tapped, like a shortcut button",
+      "why_not": "P3 asks that parts behave like parts, so a card is picked up and then inserted into one named slot, and the person always sees where the scene runs."
+    }
+  ],
+  "references": [
+    { "source": "Yoto Player and its cards: content is chosen by inserting a printed card, which stands out of the slot with its picture readable" },
+    { "source": "Braun and Ulm school punched and printed programme cards for appliances: function printed on card stock beside the machine" },
+    { "source": "WCAG 2.2, 2.5.7 Dragging Movements: every drag has a single pointer and keyboard path that does the same" }
+  ],
+  "derivation": [
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The card is light card stock printed in dark ink in both themes, never orange, so the slot's unit keeps its own one orange part."
+    },
+    {
+      "p": "P5",
+      "axis": "depth",
+      "consequence": "printing is flat on the material, with no shadow and no emboss",
+      "form": "The name, the steps and the small word scene are flat ink on the card, and the card itself is a thin stock with the short unit shadow, never a raised key."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "one grotesk, regular and medium only; hierarchy by size and position",
+      "form": "The name is printed medium at body size on the top edge, the steps regular at caption size under it, so half the card out of a slot is still the name."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map (arrows step a detent, Home and End reach the ends, Space and Enter press) and a visible value and label",
+      "form": "Enter picks the card up, an arrow or Tab reaches a slot, Enter there inserts it and Escape puts it back; the printed handle drags it as the pointer shortcut."
+    },
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "shadows are short and soft; a unit never floats more than its material height",
+      "form": "A held card rises by one rise step with a key's short shadow and an ink mark under it, never a floating glowing tile."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The card is three keys wide and four keys tall, and its printed handle in the top corner keeps a full 44px square for a finger."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/scene-card/index.html",
+    "options": [
+      { "id": "A", "name": "top-loading slit: a portrait card with the name on its top edge stands half out of a slit in the unit" },
+      { "id": "B", "name": "side reader: a landscape ticket slides into a slot at the unit's side and sticks out past its end" },
+      { "id": "C", "name": "dock bed: the whole card lies flat in a recessed bed on the unit" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps the name readable when inserted because it is printed on the edge that stays out (P5 hierarchy by size and position), and keeps the unit's outline fixed (P6); B cuts the name and breaks the body on a phone, and C is a drop zone holding a tile, which slides back to the scene grid."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "The root holds the card and its hidden status, and keeps its place in the row while the card is held." },
+    "card": { "p": "P1", "axis": "colour", "why": "The card is light stock with dark ink in both themes and never orange, so the unit keeps one loud part." },
+    "name": { "p": "P5", "axis": "type", "why": "The scene's name is printed medium at body size on the top edge, the part that stays out of a slot." },
+    "steps": { "p": "P5", "axis": "space", "why": "What the scene does is printed under the name on the card's inset line, one short line per step." },
+    "step": { "p": "P5", "axis": "type", "why": "Each step is a regular caption line in the same dark ink, so the card holds one ink at two sizes." },
+    "foot": { "p": "P5", "axis": "space", "why": "The bottom row carries the small word scene at the start and the insert arrow at the end, on the inset line." },
+    "kind": { "p": "P5", "axis": "type", "why": "The word scene is printed small and lowercase like a model name on a case, so the card says what it is." },
+    "arrow": { "p": "P5", "axis": "depth", "why": "A printed arrow on the bottom edge shows which end goes into the slot, flat ink and no emboss." },
+    "handle": { "p": "P3", "axis": "space", "why": "The handle takes a 44px square in the top corner so a finger can drag the card while the keys do the same." },
+    "grip": { "p": "P5", "axis": "colour", "why": "The handle is six printed dots in the card's ink, flat on the stock like printing on a case." },
+    "announce": { "p": "P3", "axis": "interaction", "why": "A polite hidden status says the card is picked up or put back, so holding a card is heard as well as seen." }
+  },
+  "states": {
+    "hover": { "p": "P6", "axis": "interaction", "why": "Hover only darkens the handle's dots, because a card does not rise when a pointer comes near it." },
+    "active": { "p": "P3", "axis": "depth", "why": "A pressed card drops its shadow at once, as a pressed part loses its height under the finger." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "The focused card shows the same dark ring as every part in dial, offset so it clears the card's edge." },
+    "disabled": { "p": "P3", "axis": "depth", "why": "A scene that cannot run now lies flat with no shadow and cannot be picked up, keeping its words readable." },
+    "aria-pressed=true": { "p": "P6", "axis": "depth", "why": "A held card rises one rise step with a short key shadow and an ink mark under it, saying it is in the hand." },
+    "data-dragging=true": { "p": "P3", "axis": "interaction", "why": "While dragged the card follows the pointer and lets the slot under it take the pointer, so the drop lands there." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the card does not rise or travel; the held mark and the shadow change at once." },
+    "@media forced-colors: active": { "p": "P2", "axis": "colour", "why": "In forced colours the card keeps an outline and the held mark uses Highlight, because the stock and the shadow fade there." }
+  },
+  "motion": {
+    "transform": { "p": "P3", "axis": "motion", "why": "A picked card rises and settles back through the state motion tokens, fast in and slow out." },
+    "box-shadow": { "p": "P3", "axis": "motion", "why": "The shadow grows and shrinks with the rise on the same timing, so height and shadow move together." },
+    "opacity": { "p": "P3", "axis": "motion", "why": "The ink mark under a held card fades in on the state change instead of appearing in one frame." },
+    "color": { "p": "P6", "axis": "motion", "why": "The handle's dots darken on hover through the hover token and nothing else moves." }
+  }
+}

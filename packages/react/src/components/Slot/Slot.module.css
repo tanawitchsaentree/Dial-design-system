@@ -1,0 +1,141 @@
+/* Slot — the mouth a room or device unit has for a scene card (lab apps/lab/scene-card, variant A). A slit
+   cut into the plastic (P4: a recess with inverse light), a bay above it that always keeps half a card's height
+   (P6), and the room's name with a lamp printed under it (P5). The card standing out is SceneCard's stock. */
+.root {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-grid;
+  justify-items: stretch;
+  gap: var(--ds-gap-md);
+  inline-size: calc(var(--ds-control-key) * 3 + var(--ds-gap-lg) * 2);
+  max-inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+  vertical-align: top;
+}
+.mouth {
+  box-sizing: border-box;
+  display: grid;
+  justify-items: center;
+  inline-size: 100%;
+  margin: 0;
+  padding: var(--ds-gap-none);
+  border: 0;
+  border-radius: var(--ds-corner-mark);
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.bay {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  inline-size: calc(var(--ds-control-key) * 3);
+  max-inline-size: 100%;
+  block-size: calc(var(--ds-control-key) * 2);
+  overflow: hidden;
+}
+/* the half of the card that stands out: its top edge, square where it enters the slit */
+.face {
+  box-sizing: border-box;
+  display: grid;
+  align-content: start;
+  gap: var(--ds-space-0-5);
+  inline-size: 100%;
+  block-size: 100%;
+  padding: var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid var(--ds-line-divider);
+  border-block-end: 0;
+  border-start-start-radius: var(--ds-corner-media);
+  border-start-end-radius: var(--ds-corner-media);
+  background: var(--ds-surface-light);
+  color: var(--ds-text-on-light);
+  text-align: start;
+}
+.name {
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  overflow-wrap: anywhere;
+}
+.step {
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+  overflow-wrap: anywhere;
+}
+.legend {
+  display: grid;
+  justify-items: center;
+  gap: var(--ds-gap-xs);
+  padding-block-end: var(--ds-gap-md);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+  text-transform: lowercase;
+  color: var(--ds-text-secondary);
+  transition: color var(--ds-motion-release) var(--ds-motion-easing);
+}
+.arrow {
+  inline-size: var(--ds-control-mark);
+  block-size: var(--ds-control-mark);
+  fill: currentColor;
+}
+.slit {
+  display: block;
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: var(--ds-gap-md);
+  border-radius: var(--ds-corner-mark);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  outline: var(--ds-width-ring) solid transparent;
+  outline-offset: var(--ds-width-ring);
+  transition: outline-color var(--ds-motion-release) var(--ds-motion-easing);
+}
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-gap-xs) var(--ds-gap-md);
+  line-height: var(--ds-type-leading-tight);
+}
+.label {
+  font-size: var(--ds-type-label);
+  overflow-wrap: anywhere;
+}
+.announce {
+  position: absolute;
+  inline-size: var(--ds-space-px);
+  block-size: var(--ds-space-px);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.mouth:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-gap-xs);
+}
+.mouth[data-ready='true'] .slit { outline-color: var(--ds-line-ring); }
+.mouth[data-ready='true'] .legend { color: var(--ds-text-primary); }
+.mouth[data-over='true'] .slit { outline-color: var(--ds-text-primary); }
+.mouth:disabled { cursor: not-allowed; }
+.mouth:disabled .legend { color: var(--ds-text-secondary); }
+.face[data-fresh='true'] { animation: insert var(--ds-motion-release) var(--ds-motion-easing); }
+@keyframes insert {
+  from { transform: translateY(calc(var(--ds-motion-rise) * -1)); }
+  to { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .face[data-fresh='true'] { animation: none; }
+  .slit,
+  .legend { transition: none; }
+}
+@media (forced-colors: active) {
+  .slit { border: var(--ds-width-hairline) solid CanvasText; }
+  .face { border-color: CanvasText; }
+  .mouth[data-ready='true'] .slit,
+  .mouth[data-over='true'] .slit { outline-color: Highlight; }
+}

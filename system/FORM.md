@@ -1,7 +1,7 @@
 # FORM — dial
 
 Read from the reference (Braun / Ulm appliances, `system/refs/ref-01.png` when it lands; estimated from
-chat until then) for form only. One material: **matte ABS** (`material.height` 5px, `material.unit-height`
+chat until then) for form only. One accent material, **frosted glass** (D-007, `glass.*`), only on caps, lamps, latched keys and chips. One material: **matte ABS** (`material.height` 5px, `material.unit-height`
 3px, `material.rough` 3px, `material.gloss` 0.2), one light top-left. Mechanisms from
 `docs/style-recipes/tactile.md`; spring `mechanism.mass` 1.4 / `stiffness` 520 / `damping` 46
 (ζ ≈ 0.85, settle ≈ 245ms). Locked as D-003.

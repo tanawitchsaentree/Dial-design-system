@@ -1,5 +1,6 @@
 {
-  "concept": "SegmentedControl is the bank of band keys on the case of a radio (FM, AM, AUX). The keys interlock, pressing one latches it down with its printed lamp lit, and the key that was down springs back up.",
+  "concept": "SegmentedControl is the bank of band keys on the case of a radio (FM, AM, AUX). The keys interlock, pressing one latches it down as a frosted glass key in the neutral ink range with its lamp lit, and the key that was down springs back up in matte plastic.",
+  "material": { "accent": "glass", "decision": "D-007", "lab": "apps/lab/glass/index.html", "recipe": "A frosted tinted resin, only while latched" },
   "kind": ["segmented control", "radio group", "latching key bank", "mode selector"],
   "default_to_avoid": [
     { "pattern": "iOS segmented control: a grey pill track with a sliding white thumb", "why_not": "A thumb that glides between segments is a fader gesture on a key bank, and the white thumb lit brighter breaks the light model, where the chosen part is never lit brighter, only latched and lamped (P3)." },
@@ -13,7 +14,9 @@
   ],
   "derivation": [
     { "p": "P3", "axis": "depth", "consequence": "press drops height to 0 in 60–70ms, return runs on the material's spring", "form": "The pressed key drops by motion.press-travel and stays latched at height 0 with no shadow; the key it releases returns on motion.release." },
-    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Every key is body-coloured plastic in every state; the latched key is never orange and never filled with a hue." },
+    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Every key at rest is body-coloured plastic; the latched key is quiet ink grey glass, never orange and never a saturated hue." },
+    { "p": "P9", "axis": "space", "consequence": "glass appears on caps, lamps, latched keys and chips only, never on a body, panel or card", "form": "Only the latched key turns to glass; the bank's recess and the keys at rest stay matte plastic." },
+    { "p": "P9", "axis": "interaction", "consequence": "glass never replaces a state cue; every state still has its shape, word or mark", "form": "The latched key keeps its travel down, its lit lamp, its medium word and aria-checked, so the glass is never the only cue." },
     { "p": "P4", "axis": "colour", "consequence": "a lit level uses ink at full step, never orange", "form": "Each key carries a small recessed lamp; the latched key's lamp is filled with full-step ink, the others stay unlit recesses." },
     { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "Each key stands control.md tall (control.lg for size lg) and at least layout.touch wide, and the keys share the bank's width equally." },
     { "p": "P3", "axis": "interaction", "consequence": "every mechanism has its keyboard map (arrows step a detent, Home and End reach the ends, Space and Enter press) and a visible value and label", "form": "The bank is one tab stop; arrow keys move to the next key and latch it, Home and End latch the ends, and the printed label names the group." },
@@ -36,7 +39,7 @@
     "label": { "p": "P5", "axis": "type", "why": "The group name is printed in the label size and regular weight, in ink, like the word Band on a radio case." },
     "bank": { "p": "P3", "axis": "depth", "why": "The keys sit in one recessed strip lit inversely, so they read as a single bank that interlocks; every key takes the width of the widest word, so no word crowds its key." },
     "key": { "p": "P3", "axis": "depth", "why": "Each key is matte plastic with the part shadow and a ring edge, standing at full height until it latches." },
-    "lamp": { "p": "P4", "axis": "colour", "why": "A small recessed lamp on each key fills with full-step ink when its key is latched, and is never orange." },
+    "lamp": { "p": "P9", "axis": "colour", "why": "A small recessed lamp on each key lights as a glass bead in the deep ink of the neutral range when its key is latched, and is never orange." },
     "face": { "p": "P5", "axis": "space", "why": "The face lines the optional symbol and the word up on one row under the lamp, on the key's own centre line." },
     "icon": { "p": "P1", "axis": "colour", "why": "The optional symbol is drawn in the same ink as the word, because icons never use the orange." },
     "word": { "p": "P5", "axis": "type", "why": "The word on the key uses the label size; it turns medium weight on the latched key, a change of weight and not of hue." },
@@ -47,16 +50,17 @@
     "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens a released key's word one ink step and never lifts the key, because real keys do not rise." },
     "active": { "p": "P3", "axis": "depth", "why": "Pressing a released key drops it by its travel and collapses its shadow at once, before it latches." },
     "focus-visible": { "p": "P3", "axis": "interaction", "why": "Keyboard focus draws the dark ring around the focused key and lifts it above its neighbours so the ring is whole." },
-    "aria-checked=true": { "p": "P3", "axis": "depth", "why": "The latched key stays down at height 0 with no shadow, with its lamp lit and its word in medium weight." },
+    "aria-checked=true": { "p": "P9", "axis": "depth", "why": "The latched key stays down at height 0 with no cast shadow as frosted glass lit from inside, with its lamp lit and its word in medium weight at 4.5:1." },
     "disabled": { "p": "P6", "axis": "depth", "why": "Disabled keys lose their height and fade to half, while the lit lamp of the chosen key stays readable." },
     "data-glow": { "p": "P6", "axis": "colour", "why": "A lit lamp is one of the emitters P2 allows, so in the dark edition it gives off a few pixels of its own light; in light, unlit or disabled it gives off none." },
     "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion a key latches at once with no travel animation and no spring return of the others; only the ink fade stays." },
-    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the keys keep system borders and the lit lamp fills with the button text colour, so the choice survives." }
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the keys keep system borders and the lit lamp fills with the button text colour, so the choice survives; the latched key turns matte." },
+    "@media prefers-reduced-transparency: reduce": { "p": "P9", "axis": "interaction", "why": "When the reader asks for less transparency the latched key turns matte in the same grey tone, keeping its travel, lamp and word." }
   },
   "motion": {
     "transform": { "p": "P3", "axis": "motion", "why": "A key travels down in 65ms when pressed and the released key returns on the spring, so latching reads as a stroke." },
     "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses under the latching key and grows back under the released one, following the single light." },
     "color": { "p": "P3", "axis": "motion", "why": "The word's ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing." },
-    "background-color": { "p": "P2", "axis": "motion", "why": "The lamp lights within the segment fade of 80ms, the only fade a lit indicator is allowed." }
+    "background-color": { "p": "P2", "axis": "motion", "why": "The lamp lights within the segment fade of 80ms, and the latched key's glass face arrives with its travel on the release time." }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T08:34:38.580Z",
+  "generatedAt": "2026-11-02T10:48:26.210Z",
   "version": "0.0.0",
   "components": {
     "ActionSheet": {
@@ -123,8 +123,8 @@
       "demoFloor": 4,
       "bundle": {
         "jsMin": 5979,
-        "cssMin": 5417,
-        "gzip": 4108
+        "cssMin": 6343,
+        "gzip": 4272
       }
     },
     "Badge": {
@@ -186,8 +186,8 @@
       "demoFloor": 4,
       "bundle": {
         "jsMin": 865,
-        "cssMin": 944,
-        "gzip": 924
+        "cssMin": 1454,
+        "gzip": 996
       }
     },
     "Banner": {
@@ -274,8 +274,8 @@
       "demoFloor": 4,
       "bundle": {
         "jsMin": 2341,
-        "cssMin": 5162,
-        "gzip": 2046
+        "cssMin": 7014,
+        "gzip": 2242
       }
     },
     "BottomNav": {
@@ -418,8 +418,8 @@
       "demoFloor": 5,
       "bundle": {
         "jsMin": 482,
-        "cssMin": 1759,
-        "gzip": 923
+        "cssMin": 2685,
+        "gzip": 1101
       }
     },
     "Card": {
@@ -701,8 +701,8 @@
       "demoFloor": 5,
       "bundle": {
         "jsMin": 1419,
-        "cssMin": 4264,
-        "gzip": 1775
+        "cssMin": 5338,
+        "gzip": 1934
       }
     },
     "Container": {
@@ -859,9 +859,9 @@
       "variantCount": 1,
       "demoFloor": 4,
       "bundle": {
-        "jsMin": 14721,
-        "cssMin": 15179,
-        "gzip": 8754
+        "jsMin": 14862,
+        "cssMin": 18609,
+        "gzip": 9230
       }
     },
     "Dialog": {
@@ -1245,8 +1245,141 @@
       "demoFloor": 5,
       "bundle": {
         "jsMin": 9934,
-        "cssMin": 8775,
-        "gzip": 6078
+        "cssMin": 9285,
+        "gzip": 6142
+      }
+    },
+    "ExplainMode": {
+      "source": "packages/react/src/components/ExplainMode/ExplainMode.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Explain",
+          "props": [
+            {
+              "name": "name",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The part's name, as the manual prints it under the knob, such as \"Volume\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "does",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "One line of what the part does, such as \"Sets how loud the speaker plays\". Never its current value.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The part itself, one control or one window.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        },
+        {
+          "displayName": "ExplainMode",
+          "props": [
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The unit or screen whose parts are explained. Mark each part with `Explain` or a `data-explain=\"Name|What it does\"` attribute.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "open",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "Whether the printing is up, when the owner holds the state.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultOpen",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Whether the printing is up at first, when ExplainMode holds the state. Defaults to false.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onOpenChange",
+              "type": "((open: boolean) => void)",
+              "required": false,
+              "default": null,
+              "description": "Runs with the new state when the key, the shortcut or Escape turns the mode on or off.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "toggle",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "Prints the plastic key that turns the mode on and off at the end of the unit. Defaults to true.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "toggleLabel",
+              "type": "string",
+              "required": false,
+              "default": "How this works",
+              "description": "The word on the key. Defaults to \"How this works\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "shortcut",
+              "type": "string",
+              "required": false,
+              "default": "?",
+              "description": "The key that turns the mode on and off while focus is inside, outside a text field. Defaults to \"?\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "openText",
+              "type": "string",
+              "required": false,
+              "default": "How this works is on. Each part is named beside it. Escape closes it.",
+              "description": "What a screen reader hears when the mode turns on.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "closeText",
+              "type": "string",
+              "required": false,
+              "default": "How this works is off.",
+              "description": "What a screen reader hears when the mode turns off.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [],
+      "variantCount": 0,
+      "demoFloor": 3,
+      "bundle": {
+        "jsMin": 7112,
+        "cssMin": 4774,
+        "gzip": 4447
       }
     },
     "Grid": {
@@ -1445,6 +1578,115 @@
         "gzip": 440
       }
     },
+    "Icon": {
+      "source": "packages/react/src/components/Icon/Icon.tsx",
+      "kinds": {},
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "exports": [
+        {
+          "displayName": "iconPath",
+          "props": []
+        },
+        {
+          "displayName": "Icon",
+          "props": [
+            {
+              "name": "name",
+              "type": "\"play\" | \"pause\" | \"previous\" | \"next\" | \"stop\" | \"volume\" | \"mute\" | \"power\" | \"lamp\" | \"heat\" | \"cool\" | \"fan\" | \"washer\" | \"speaker\" | \"plug\" | \"lock\" | \"unlock\" | \"door\" | \"window\" | \"home\" | \"room\" | \"settings\" | \"plus\" | \"minus\" | \"close\" | \"check\" | \"chevron-up\" | \"chevron-down\" | \"chevron-left\" | \"chevron-right\" | \"more\" | \"search\" | \"clock\" | \"schedule\" | \"wifi\" | \"signal\" | \"battery\" | \"warning\" | \"critical\" | \"info\" | \"positive\" | \"refresh\" | \"drag\" | \"edit\" | \"remove\" | \"share\"",
+              "required": true,
+              "default": null,
+              "description": "Which glyph to print, from dial's set (see `IconName`).",
+              "enum": true,
+              "options": [
+                "play",
+                "pause",
+                "previous",
+                "next",
+                "stop",
+                "volume",
+                "mute",
+                "power",
+                "lamp",
+                "heat",
+                "cool",
+                "fan",
+                "washer",
+                "speaker",
+                "plug",
+                "lock",
+                "unlock",
+                "door",
+                "window",
+                "home",
+                "room",
+                "settings",
+                "plus",
+                "minus",
+                "close",
+                "check",
+                "chevron-up",
+                "chevron-down",
+                "chevron-left",
+                "chevron-right",
+                "more",
+                "search",
+                "clock",
+                "schedule",
+                "wifi",
+                "signal",
+                "battery",
+                "warning",
+                "critical",
+                "info",
+                "positive",
+                "refresh",
+                "drag",
+                "edit",
+                "remove",
+                "share"
+              ]
+            },
+            {
+              "name": "size",
+              "type": "\"sm\" | \"md\" | \"lg\"",
+              "required": false,
+              "default": "md",
+              "description": "`sm` is control.icon-sm (16px) and draws its dots larger so they keep their contrast; `md` (default) is control.icon-md (20px), the glyph on a key; `lg` is 24px.",
+              "enum": true,
+              "options": [
+                "sm",
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "A name for assistive tech. With a label the glyph is role img and named; without one it is hidden, because the key or the word beside it carries the meaning.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "name",
+        "size"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 4541,
+        "cssMin": 378,
+        "gzip": 1540
+      }
+    },
     "IconButton": {
       "source": "packages/react/src/components/IconButton/IconButton.tsx",
       "kinds": {
@@ -1514,8 +1756,8 @@
       "demoFloor": 5,
       "bundle": {
         "jsMin": 503,
-        "cssMin": 1785,
-        "gzip": 892
+        "cssMin": 2711,
+        "gzip": 1070
       }
     },
     "Input": {
@@ -1608,6 +1850,136 @@
         "jsMin": 1332,
         "cssMin": 2273,
         "gzip": 1436
+      }
+    },
+    "Legend": {
+      "source": "packages/react/src/components/Legend/Legend.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Legend",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The name of the setting, such as Fan or Programme. It is printed under the knob, or above the words when there is no knob, and it is the accessible name.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "options",
+              "type": "LegendOption[]",
+              "required": true,
+              "default": null,
+              "description": "Every choice the control has, in the order the knob walks them. Keep it to about ten; past that a Select fits better.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The chosen value when controlled. Pair it with `onValueChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The starting value when uncontrolled. Default the first option.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onValueChange",
+              "type": "((value: string) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the new value when the knob turns to another word or a word is pressed.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "layout",
+              "type": "\"column\" | \"row\" | \"arc\"",
+              "required": false,
+              "default": "column",
+              "description": "`column` (default) prints the words in one fixed column beside the knob, `row` in equal cells under it, `arc` round the dial at each detent's angle.",
+              "enum": true,
+              "options": [
+                "column",
+                "row",
+                "arc"
+              ]
+            },
+            {
+              "name": "control",
+              "type": "\"rotary\" | \"none\"",
+              "required": false,
+              "default": "rotary",
+              "description": "`rotary` (default) draws the knob that walks the legend, and the knob is the one tab stop. `none` prints the words alone as a radio group. `arc` always draws the knob.",
+              "enum": true,
+              "options": [
+                "rotary",
+                "none"
+              ]
+            },
+            {
+              "name": "knob",
+              "type": "\"primary\" | \"key\"",
+              "required": false,
+              "default": "primary",
+              "description": "The knob's kind. `primary` (default) is the unit's one orange part; `key` is a plastic knob for a second dial.",
+              "enum": true,
+              "options": [
+                "primary",
+                "key"
+              ]
+            },
+            {
+              "name": "knobSize",
+              "type": "\"sm\" | \"md\" | \"lg\"",
+              "required": false,
+              "default": "md",
+              "description": "The knob's size, 44, 72 (default) or 108px across.",
+              "enum": true,
+              "options": [
+                "sm",
+                "md",
+                "lg"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Nothing can be picked; the knob loses its height and the words fade with it.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "layout",
+        "control",
+        "knob",
+        "knobSize",
+        "disabled"
+      ],
+      "variantCount": 5,
+      "demoFloor": 8,
+      "bundle": {
+        "jsMin": 8069,
+        "cssMin": 6296,
+        "gzip": 5160
       }
     },
     "List": {
@@ -1935,9 +2307,9 @@
       "variantCount": 2,
       "demoFloor": 5,
       "bundle": {
-        "jsMin": 20751,
-        "cssMin": 14456,
-        "gzip": 10338
+        "jsMin": 20980,
+        "cssMin": 18522,
+        "gzip": 10823
       }
     },
     "Menu": {
@@ -2029,8 +2401,8 @@
       "demoFloor": 6,
       "bundle": {
         "jsMin": 6060,
-        "cssMin": 5552,
-        "gzip": 3734
+        "cssMin": 7404,
+        "gzip": 3932
       }
     },
     "Meter": {
@@ -2315,8 +2687,8 @@
       "demoFloor": 4,
       "bundle": {
         "jsMin": 6569,
-        "cssMin": 5347,
-        "gzip": 4275
+        "cssMin": 6273,
+        "gzip": 4442
       }
     },
     "Queue": {
@@ -2406,9 +2778,9 @@
       "variantCount": 0,
       "demoFloor": 3,
       "bundle": {
-        "jsMin": 14896,
-        "cssMin": 11951,
-        "gzip": 8017
+        "jsMin": 14971,
+        "cssMin": 15364,
+        "gzip": 8423
       }
     },
     "RangeSlider": {
@@ -2537,6 +2909,19 @@
               "options": null
             },
             {
+              "name": "tint",
+              "type": "\"warm\" | \"cool\" | \"neutral\"",
+              "required": false,
+              "default": "neutral",
+              "description": "The range the values belong to, which tints both glass caps and the light in the groove between them. Use warm for heat, cool for cooling and neutral for anything else. Default neutral.",
+              "enum": true,
+              "options": [
+                "warm",
+                "cool",
+                "neutral"
+              ]
+            },
+            {
               "name": "disabled",
               "type": "boolean",
               "required": false,
@@ -2576,14 +2961,15 @@
         }
       ],
       "variantDimensions": [
+        "tint",
         "disabled"
       ],
-      "variantCount": 1,
-      "demoFloor": 4,
+      "variantCount": 2,
+      "demoFloor": 5,
       "bundle": {
-        "jsMin": 5517,
-        "cssMin": 3519,
-        "gzip": 3555
+        "jsMin": 5685,
+        "cssMin": 5121,
+        "gzip": 3921
       }
     },
     "Rotary": {
@@ -2600,6 +2986,10 @@
         "lg"
       ],
       "exports": [
+        {
+          "displayName": "ROTARY_DIAMETER",
+          "props": []
+        },
         {
           "displayName": "Rotary",
           "props": [
@@ -2755,6 +3145,24 @@
               "options": null
             },
             {
+              "name": "printValue",
+              "type": "boolean",
+              "required": false,
+              "default": "true",
+              "description": "Prints the value under the knob. Default true. Turn it off when a Legend beside the knob already lights the value, so the unit says it once.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "describedBy",
+              "type": "string",
+              "required": false,
+              "default": null,
+              "description": "The id of an element that describes the knob, set as aria-describedby on the knob itself (a Legend passes its list of choices).",
+              "enum": false,
+              "options": null
+            },
+            {
               "name": "disabled",
               "type": "boolean",
               "required": false,
@@ -2801,9 +3209,85 @@
       "variantCount": 3,
       "demoFloor": 6,
       "bundle": {
-        "jsMin": 4315,
+        "jsMin": 4374,
         "cssMin": 2530,
-        "gzip": 2983
+        "gzip": 3013
+      }
+    },
+    "SceneCard": {
+      "source": "packages/react/src/components/SceneCard/SceneCard.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "SceneCard",
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "A stable id for the scene, such as \"movie-night\". A Slot reports it when the card goes in.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The scene's name, printed on the card's top edge so it stays readable in a slot.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "steps",
+              "type": "string[]",
+              "required": false,
+              "default": "[]",
+              "description": "What the scene does, one short line each, such as \"Lamps 20%\" and \"Blinds down\". Three lines read best.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": null,
+              "description": "The card cannot be picked up, for a scene that cannot run now. It stays readable.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onHoldChange",
+              "type": "((held: boolean) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called when the card is picked up (true) or put back (false).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "words",
+              "type": "Partial<SceneCardWords>",
+              "required": false,
+              "default": null,
+              "description": "Your own words for the card's foot and its announcements.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
+        "disabled"
+      ],
+      "variantCount": 1,
+      "demoFloor": 4,
+      "bundle": {
+        "jsMin": 4015,
+        "cssMin": 3133,
+        "gzip": 2842
       }
     },
     "Scrubber": {
@@ -2909,6 +3393,19 @@
               "options": null
             },
             {
+              "name": "tint",
+              "type": "\"warm\" | \"cool\" | \"neutral\"",
+              "required": false,
+              "default": "neutral",
+              "description": "The range the track belongs to, which tints the glass cap and the played stretch of the groove behind it. Default neutral.",
+              "enum": true,
+              "options": [
+                "warm",
+                "cool",
+                "neutral"
+              ]
+            },
+            {
               "name": "disabled",
               "type": "boolean",
               "required": false,
@@ -2948,14 +3445,15 @@
         }
       ],
       "variantDimensions": [
+        "tint",
         "disabled"
       ],
-      "variantCount": 1,
-      "demoFloor": 4,
+      "variantCount": 2,
+      "demoFloor": 5,
       "bundle": {
-        "jsMin": 4552,
-        "cssMin": 2959,
-        "gzip": 3026
+        "jsMin": 4625,
+        "cssMin": 4520,
+        "gzip": 3324
       }
     },
     "SegmentedControl": {
@@ -3046,8 +3544,8 @@
       "demoFloor": 5,
       "bundle": {
         "jsMin": 1722,
-        "cssMin": 3336,
-        "gzip": 1855
+        "cssMin": 4391,
+        "gzip": 2019
       }
     },
     "Select": {
@@ -3281,8 +3779,8 @@
       "demoFloor": 4,
       "bundle": {
         "jsMin": 4627,
-        "cssMin": 5443,
-        "gzip": 3543
+        "cssMin": 6369,
+        "gzip": 3708
       }
     },
     "Skeleton": {
@@ -3519,6 +4017,19 @@
               "options": null
             },
             {
+              "name": "tint",
+              "type": "\"warm\" | \"cool\" | \"neutral\"",
+              "required": false,
+              "default": "neutral",
+              "description": "The range the value belongs to, which tints the glass cap and the light in the groove behind it. Use warm for heat, cool for cooling and neutral for anything else. Default neutral.",
+              "enum": true,
+              "options": [
+                "warm",
+                "cool",
+                "neutral"
+              ]
+            },
+            {
               "name": "disabled",
               "type": "boolean",
               "required": false,
@@ -3558,14 +4069,109 @@
         }
       ],
       "variantDimensions": [
+        "tint",
+        "disabled"
+      ],
+      "variantCount": 2,
+      "demoFloor": 5,
+      "bundle": {
+        "jsMin": 4455,
+        "cssMin": 4672,
+        "gzip": 3299
+      }
+    },
+    "Slot": {
+      "source": "packages/react/src/components/Slot/Slot.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Slot",
+          "props": [
+            {
+              "name": "label",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The room or device the slot belongs to, such as \"Living room\". Printed under the slit and used in every announcement.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "scene",
+              "type": "SceneInfo | null",
+              "required": false,
+              "default": null,
+              "description": "The scene in the slot when controlled, or null when it is empty. Pair it with `onSceneChange`.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "defaultScene",
+              "type": "SceneInfo | null",
+              "required": false,
+              "default": "null",
+              "description": "The scene in the slot at the start when uncontrolled. It does not run again on load.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onSceneChange",
+              "type": "((scene: SceneInfo | null) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called with the new scene after a card goes in, or null after it is taken out.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onInsert",
+              "type": "((scene: SceneInfo) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called when a card is inserted, to run its scene.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "onRemove",
+              "type": "((scene: SceneInfo) => void)",
+              "required": false,
+              "default": null,
+              "description": "Called when the inserted card is taken out.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "The slot takes no card, for a unit that is offline.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "words",
+              "type": "Partial<SlotWords>",
+              "required": false,
+              "default": null,
+              "description": "Your own words for the legend, the lamp and the announcements.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [
         "disabled"
       ],
       "variantCount": 1,
       "demoFloor": 4,
       "bundle": {
-        "jsMin": 4375,
-        "cssMin": 3095,
-        "gzip": 2974
+        "jsMin": 3933,
+        "cssMin": 4642,
+        "gzip": 3099
       }
     },
     "Snackbar": {
@@ -3670,8 +4276,8 @@
       "demoFloor": 4,
       "bundle": {
         "jsMin": 3730,
-        "cssMin": 4128,
-        "gzip": 2935
+        "cssMin": 5054,
+        "gzip": 3104
       }
     },
     "Stack": {
@@ -3820,8 +4426,8 @@
       "demoFloor": 4,
       "bundle": {
         "jsMin": 1209,
-        "cssMin": 3245,
-        "gzip": 1542
+        "cssMin": 3459,
+        "gzip": 1576
       }
     },
     "Tabs": {
@@ -4205,8 +4811,8 @@
       "demoFloor": 8,
       "bundle": {
         "jsMin": 7880,
-        "cssMin": 5726,
-        "gzip": 4766
+        "cssMin": 6652,
+        "gzip": 4938
       }
     },
     "Toast": {
@@ -4329,8 +4935,157 @@
       "demoFloor": 4,
       "bundle": {
         "jsMin": 4451,
-        "cssMin": 5883,
-        "gzip": 3277
+        "cssMin": 7735,
+        "gzip": 3467
+      }
+    },
+    "Tray": {
+      "source": "packages/react/src/components/Tray/Tray.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "Tray",
+          "props": [
+            {
+              "name": "label",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The accessible name of the group of keys, such as \"Playback\" or \"Modes\". It is required, because a group with no name is just noise to a screen reader.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The small keys and lamps, such as IconButtons, Buttons and Badges. Each keeps its own size; the tray wraps to another row instead of shrinking them.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [],
+      "variantCount": 0,
+      "demoFloor": 3,
+      "bundle": {
+        "jsMin": 327,
+        "cssMin": 642,
+        "gzip": 599
+      }
+    },
+    "Wiring": {
+      "source": "packages/react/src/components/Wiring/Wiring.tsx",
+      "kinds": {},
+      "sizes": [],
+      "exports": [
+        {
+          "displayName": "WiringNode",
+          "props": [
+            {
+              "name": "id",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The id links use in `from` and `to`. Unique inside one Wiring.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The part, such as a Rotary, a DeviceCard or a TimePicker.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        },
+        {
+          "displayName": "WiringGroup",
+          "props": [
+            {
+              "name": "label",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "The group's lowercase name printed over its box, such as \"heating\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The related nodes inside the box.",
+              "enum": false,
+              "options": null
+            }
+          ]
+        },
+        {
+          "displayName": "Wiring",
+          "props": [
+            {
+              "name": "label",
+              "type": "string",
+              "required": true,
+              "default": null,
+              "description": "Names the list of relations for assistive technology, such as \"Heating relations\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "links",
+              "type": "WiringLink[]",
+              "required": true,
+              "default": null,
+              "description": "The relations to print. Each joins two `Wiring.Node` ids.",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "required": true,
+              "default": null,
+              "description": "The parts, each wrapped in `Wiring.Node` (and related ones in `Wiring.Group`).",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "activeWord",
+              "type": "string",
+              "required": false,
+              "default": "on now",
+              "description": "The word added to an active relation's sentence. Defaults to \"on now\".",
+              "enum": false,
+              "options": null
+            },
+            {
+              "name": "waitingWord",
+              "type": "string",
+              "required": false,
+              "default": "waiting",
+              "description": "The word added to a waiting relation's sentence. Defaults to \"waiting\".",
+              "enum": false,
+              "options": null
+            }
+          ]
+        }
+      ],
+      "variantDimensions": [],
+      "variantCount": 0,
+      "demoFloor": 3,
+      "bundle": {
+        "jsMin": 7278,
+        "cssMin": 2315,
+        "gzip": 4011
       }
     }
   }

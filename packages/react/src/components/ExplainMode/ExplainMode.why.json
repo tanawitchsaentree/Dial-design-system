@@ -1,0 +1,193 @@
+{
+  "concept": "ExplainMode is the SK 4 manual printed on the real screen. One key turns on a how this works mode that prints each part's name and one line of what it does in the free space under it, joined by a thin leader, while every control keeps working and the same key or Escape takes the printing away.",
+  "kind": [
+    "explain mode",
+    "how this works",
+    "product tour",
+    "coach marks",
+    "onboarding tour"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "product tour or explain mode in the Intro.js or Shepherd manner, a spotlight hole in a dark scrim with a popover and Next buttons",
+      "why_not": "A scrim blocks every control and shows one part at a time, and the white popover is a second material; P5 asks for printing flat on the case and P6 for nothing that takes over the screen."
+    },
+    {
+      "pattern": "coach marks as floating tooltip bubbles with arrows that pulse to get attention",
+      "why_not": "Bubbles float above the surface with their own shadow and pulse while idle, which P5 and P6 forbid, since printing is flat and nothing moves without a change of state."
+    }
+  ],
+  "references": [
+    {
+      "source": "The user's wave 4 reference: the Braun SK 4 manual naming parts on the photographed object, Lautstärke and Sender printed under the knobs"
+    },
+    {
+      "source": "WAI-ARIA aria-describedby: a description is read after the name when a control takes focus"
+    },
+    {
+      "source": "WCAG 2.2 success criterion 1.4.13 Content on Hover or Focus: added content can be dismissed with Escape and does not hide what it explains"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "Each name prints in the free space under its part, centred on it, and moves to above, the end or the start only when under is taken; it never sits over another part."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "one grotesk, regular and medium only; hierarchy by size and position",
+      "form": "The name is set at label size in the medium weight and the line of what it does at caption size in the regular weight below it."
+    },
+    {
+      "p": "P5",
+      "axis": "motion",
+      "consequence": "text does not animate",
+      "form": "The printing appears and leaves at once when the mode changes, with no fade, no slide and no pulse."
+    },
+    {
+      "p": "P8",
+      "axis": "shape",
+      "consequence": "a relation is a hairline of ink with a small node where it meets a part",
+      "form": "A thin straight leader of secondary ink runs from the part's edge to its name, the same hairline the relation lines use."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "Turning the mode on is said once in a polite status line, and the printed lines say what a part does, never its value, which the display already tells."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/explain-mode/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "printed under the part, the SK 4 manual's name and one line under each knob with a short vertical leader"
+      },
+      {
+        "id": "B",
+        "name": "margin callouts, the book home's leaders with names standing in two side lanes outside the unit"
+      },
+      {
+        "id": "C",
+        "name": "numbered legend, printed numerals beside each part and a key of names at the foot of the unit"
+      },
+      {
+        "id": "D",
+        "name": "spotlight tour, a scrim with one hole and a popover with Next, rendered to reject"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A puts the name where the hand already is and needs no margin beside the unit, so it fits a phone (P5 space); B needs empty lanes a phone screen does not have, C makes the eye read a numeral then look down and back, and D blocks the controls."
+  },
+  "parts": {
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The root keeps the layout the screen gives its parts, so turning the mode on moves nothing."
+    },
+    "layer": {
+      "p": "P5",
+      "axis": "depth",
+      "why": "The printing sits in one flat layer that never takes a pointer, so every control under it keeps working."
+    },
+    "leads": {
+      "p": "P5",
+      "axis": "depth",
+      "why": "All leaders sit in one flat drawing inside the printing layer, with no shadow and no emboss."
+    },
+    "lead": {
+      "p": "P8",
+      "axis": "shape",
+      "why": "A leader is one straight hairline of ink from the part's edge to the start of its name."
+    },
+    "note": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A note is placed in free space next to its part, never over another part or another note."
+    },
+    "name": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The part's name is set at label size in the medium weight, as printing names a knob."
+    },
+    "does": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The line of what the part does is secondary ink on plastic and still holds the contrast for text."
+    },
+    "bar": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The how this works key is a plastic key, never orange, so the unit's one loud control stays the loud one."
+    },
+    "part": {
+      "p": "P5",
+      "axis": "interaction",
+      "why": "A part wraps one control and hands it the printed name and line as its description while the mode is on."
+    },
+    "status": {
+      "p": "P2",
+      "axis": "interaction",
+      "why": "A visually hidden polite status says once that the mode is on and that Escape closes it."
+    },
+    "mark": {
+      "p": "P5",
+      "axis": "type",
+      "why": "Where no free space is left beside a part, a small printed numeral in tabular figures stands beside it instead."
+    },
+    "key": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The key under the unit lists the numbered notes, after the toggle key so the key you pressed stays put."
+    },
+    "keyItem": {
+      "p": "P5",
+      "axis": "type",
+      "why": "Each key entry sets the numeral, the name in medium and the line in regular on one baseline."
+    },
+    "keyNumber": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The numeral in the key is secondary ink on plastic, the same as the numeral printed beside the part."
+    },
+    "keyWrap": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The key opens its height on the change of state, so the content under the unit moves over a short time instead of jumping."
+    }
+  },
+  "states": {
+    "data-side=end": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A note printed after its part starts its lines at the edge nearest the part, so the leader meets the first word."
+    },
+    "data-side=start": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A note printed before its part ends its lines at the edge nearest the part, so the leader meets the last word."
+    },
+    "@media forced-colors: active": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "In forced colours the leaders and both lines of text take the system text colour so the printing survives."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Under reduced motion the key opens and closes at once, with no change of height over time."
+    }
+  },
+  "motion": {
+    "block-size": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Only the key's height moves, over motion.enter, when the mode turns on or off; the printing itself never animates."
+    }
+  }
+}

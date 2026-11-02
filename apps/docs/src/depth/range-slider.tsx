@@ -9,6 +9,7 @@ export const RANGE_SLIDER: Depth = {
   overview: (
     <>
       <p>RangeSlider sets a band between a low and a high end, such as the temperatures a heating schedule may run between, or the warmest and coolest light a lamp may take. It is Slider with a second cap. Both caps ride the same narrow groove under the same printed ruler, and each one settles into the nearest step on the spring.</p>
+      <p>Both caps are frosted glass, dial’s one accent material, and the groove between them is lit in their tint. Set <code>tint</code> to warm for a heating band and cool for a cooling band; leave it neutral for anything else. The tint stays close to the plastic, so the band reads without a second orange.</p>
       <p>The caps stop at each other, so the low end can never pass the high end. The ruler shows the band, because the ticks inside it print darker and thicker. The groove itself stays empty, and nothing is orange, because the orange belongs to the knob of the unit.</p>
     </>
   ),
@@ -22,7 +23,7 @@ export const RANGE_SLIDER: Depth = {
     { situation: 'The main setting of the unit, such as the target temperature', to: '/components/rotary', label: 'Rotary' },
     { situation: 'A level the person reads and does not set', to: '/components/meter', label: 'Meter' },
   ],
-  variants: { na: 'RangeSlider has one look, two plastic caps in a recessed groove. The numerals, the steps and the gap are options, covered under Modifiers.' },
+  variants: { na: 'RangeSlider has one look, two glass caps in a recessed groove. The tint, the numerals, the steps and the gap are options, covered under Modifiers.' },
   anatomy: {
     render: <RangeSlider label="Heating band" min={14} max={26} step={1} defaultValue={[18, 22]} scale formatValue={deg} />,
     parts: [
@@ -30,7 +31,7 @@ export const RANGE_SLIDER: Depth = {
       { part: 'Values', selector: '[data-component="RangeSlider"] > div:first-child > span:last-child', what: 'The low and the high value, above the end of the groove, with tabular figures.' },
       { part: 'Ruler', selector: '[data-component="RangeSlider"] > div:nth-child(2) > div:first-child', what: 'One printed tick per step. Ticks inside the band print darker and twice as thick.' },
       { part: 'Groove', selector: '[data-component="RangeSlider"] > div:nth-child(2) > div:nth-child(2)', what: 'One narrow slot recessed into the body, shared by both caps.' },
-      { part: 'Low cap', selector: '[data-component="RangeSlider"] [data-thumb="low"] > div', what: 'A raised plastic cap with one ink line. It stops at the high cap.' },
+      { part: 'Low cap', selector: '[data-component="RangeSlider"] [data-thumb="low"] > div', what: 'A raised cap of frosted glass in the band’s tint, with one ink line. It stops at the high cap.' },
       { part: 'High cap', selector: '[data-component="RangeSlider"] [data-thumb="high"] > div', what: 'The same cap for the high end. It stops at the low cap.' },
       { part: 'Numerals', selector: '[data-component="RangeSlider"] > div:last-child', what: 'With scale, the ruler values are printed under the groove in the smallest size.' },
     ],

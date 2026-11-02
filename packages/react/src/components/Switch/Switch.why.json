@@ -1,5 +1,6 @@
 {
-  "concept": "Switch is the slide switch on the side of an appliance. A plastic cap slides in a recessed groove between two printed positions, and a small lamp beside it is lit while it is on.",
+  "concept": "Switch is the slide switch on the side of an appliance. A plastic cap slides in a recessed groove between two printed positions, and a small lamp beside it is lit as a glass bead in the neutral ink range while it is on.",
+  "material": { "accent": "glass", "decision": "D-007", "lab": "apps/lab/glass/index.html", "recipe": "A frosted tinted resin, the lit lamp only" },
   "kind": ["switch", "slide switch", "toggle"],
   "default_to_avoid": [
     { "pattern": "iOS-clone pill switch with a sliding white knob and a green or blue track", "why_not": "It tells on by filling the track with colour, while P1 keeps colour for the one primary control and FORM.md forbids status told by colour alone." },
@@ -39,7 +40,7 @@
     "on": { "p": "P5", "axis": "space", "why": "The on position word is printed at the far end of the groove, where the cap rests while on." },
     "slot": { "p": "P3", "axis": "depth", "why": "The groove is recessed into the body with inverse light, so the cap reads as riding inside it; its hairline edge in line.ring holds 3:1 against the body in both themes." },
     "cap": { "p": "P3", "axis": "shape", "why": "A raised plastic cap with one printed index line, the same shape family as a fader cap." },
-    "lamp": { "p": "P4", "axis": "depth", "why": "The lamp is a small recessed hole while off and fills with ink while on, so on never depends on colour." }
+    "lamp": { "p": "P9", "axis": "depth", "why": "The lamp is a small recessed hole while off and lights as a glass bead lit through, with the top-left hairline, while on, so on never depends on colour alone." }
   },
   "states": {
     "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens the printed position words one step and never lifts or grows the cap." },
@@ -49,7 +50,8 @@
     "aria-checked=false": { "p": "P5", "axis": "type", "why": "When off, the off word is set in the medium weight so the current position reads in print as well as by place." },
     "data-glow": { "p": "P6", "axis": "colour", "why": "A lit lamp is one of the emitters P2 allows, so in the dark edition it gives off a few pixels of its own light; in light, unlit or disabled it gives off none." },
     "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the cap jumps to its end and the lamp changes at once, with no travel at all." },
-    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the cap and groove keep real borders and the lamp keeps a system ink fill, so the state survives." }
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the cap and groove keep real borders and the lamp keeps a system ink fill, so the state survives." },
+    "@media prefers-reduced-transparency: reduce": { "p": "P9", "axis": "interaction", "why": "When the reader asks for less transparency the lit lamp fills with solid ink, and the cap and the printed word still say on." }
   },
   "motion": {
     "inset-inline-start": { "p": "P3", "axis": "motion", "why": "The cap slides along the groove fast in and slow out, so the throw reads as one physical stroke." },

@@ -504,6 +504,76 @@
             "code",
             "accessibility"
           ]
+        },
+        {
+          "path": "/components/legend",
+          "title": "Legend",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/scene-card",
+          "title": "SceneCard",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/slot",
+          "title": "Slot",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/tray",
+          "title": "Tray",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/icon",
+          "title": "Icon",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/wiring",
+          "title": "Wiring",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
+        },
+        {
+          "path": "/components/explain-mode",
+          "title": "ExplainMode",
+          "tabs": [
+            "usage",
+            "style",
+            "code",
+            "accessibility"
+          ]
         }
       ]
     },

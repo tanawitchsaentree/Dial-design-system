@@ -1,0 +1,60 @@
+{
+  "concept": "Legend is the printing round a knob that names every position it has. Every choice stays in plain sight, the one in use is lit at full ink in medium weight with one ink index mark, and turning the knob walks the lit word, so nobody opens a menu to learn what the appliance can do.",
+  "kind": ["legend", "choice", "radio group", "knob scale"],
+  "default_to_avoid": [
+    { "pattern": "a dropdown select standing in for a legend, hiding the choices behind a trigger", "why_not": "P7 says a panel prints every choice it has, so a menu that must be opened to learn what a fan can do hides the device's range behind a click." },
+    { "pattern": "a segmented control pill used as a legend, with a sliding filled thumb", "why_not": "A legend is printing on the case, never a key (P7), and a filled thumb gives the choice a raised plastic part and a fill that the printed word does not need." }
+  ],
+  "references": [
+    { "source": "Teenage Engineering OP-XY and the synth panels the user sent: SOUND, PITCH, MONO-POLY, CHORD, PAN, VOLUME printed in a column with the active ones lit" },
+    { "source": "Braun HL 1 / HL 70 desk fans and the WK and KF appliance dials: off, 1, 2 printed round a single knob" },
+    { "source": "Washing machine programme dials: every programme printed round or beside the knob, the one in use under the pointer" }
+  ],
+  "derivation": [
+    { "p": "P7", "axis": "space", "consequence": "the legend sits beside or around the control that walks it, in one fixed column or arc, so the lit word moves and nothing reflows", "form": "layout column prints the words in one fixed column beside the knob, row prints them in equal cells under it, and arc sets each word at its detent's angle round the dial." },
+    { "p": "P7", "axis": "shape", "consequence": "a legend is printing, never a key; the chosen word carries one ink index mark beside it", "form": "Each word is bare printing with no box or fill; one short ink bar, or a dot on the arc, stands beside the lit word." },
+    { "p": "P7", "axis": "colour", "consequence": "the chosen word is printed at full ink and the waiting words one step lighter, and both hold 4.5:1; the orange never marks a legend", "form": "The lit word is text.primary and the waiting words text.secondary, both above 4.5:1 on the body; the orange stays on the knob alone." },
+    { "p": "P7", "axis": "type", "consequence": "legend words are small lowercase labels in the regular weight, and the chosen one turns medium", "form": "Words are type.label in the regular weight, and the lit word turns medium inside a reserved medium width, so its neighbours never shift." },
+    { "p": "P7", "axis": "motion", "consequence": "when the choice moves, the lit word changes at once and the index mark slides on the spring; under reduce motion it jumps", "form": "The lit word swaps weight at once, and the single index mark travels to it on the material spring of mass 1.4, stiffness 520 and damping 46." },
+    { "p": "P7", "axis": "interaction", "consequence": "the legend is the control's value made visible, so every word is also a target that picks itself, and the control's keys walk it word by word", "form": "With a knob, the knob is the one tab stop with the word as its value text and every word a press target that turns it; alone, the words form one radio group." },
+    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "Each printed word owns a press area of at least 44 by 44px, even when the word itself is three letters long." },
+    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material, with no shadow and no emboss", "form": "Words and the index mark are flat ink with no shadow, so only the knob beside them has height." }
+  ],
+  "variants": {
+    "lab": "apps/lab/legend/index.html",
+    "options": [
+      { "id": "A", "name": "column beside the knob: the words in one fixed column, a short ink bar at the lit word (washer programmes)" },
+      { "id": "B", "name": "arc around the knob: each word at its detent's angle, an ink dot between the tick ring and the lit word (fan)" },
+      { "id": "C", "name": "row under a fader: a three-way slide with one word under each stop (speaker sources)" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A is the default because a fixed column holds up to ten words of any length with nothing reflowing (P7 space) and reads like the synth panel; B ships as layout arc for a few short words round a knob; C was dropped as a mode, since a fader and its printed value repeat the lit word, and its row of words ships as layout row."
+  },
+  "mechanism": { "kind": "rotary", "travel": "one detent per word", "sweep": 270, "spring": { "mass": 1.4, "stiffness": 520, "damping": 46 } },
+  "parts": {
+    "root": { "p": "P7", "axis": "space", "why": "The root holds the knob and its printed words together, so the legend always sits beside the control that walks it." },
+    "paired": { "p": "P7", "axis": "space", "why": "A legend paired with a knob puts the knob first and the column of words beside it, at the same centre line." },
+    "column": { "p": "P7", "axis": "space", "why": "The column layout stacks the words in one fixed column, each on a row of the touch height, so the mark moves and the words stay." },
+    "row": { "p": "P7", "axis": "space", "why": "The row layout sets the words in equal cells side by side, so the index mark travels the same distance between any two words." },
+    "arc": { "p": "P7", "axis": "space", "why": "The arc layout prints each word round the dial at its own detent's angle, so the knob's index line points at the lit word." },
+    "name": { "p": "P5", "axis": "interaction", "why": "A legend without a knob prints its name above the words and names its radio group with it through aria-labelledby." },
+    "words": { "p": "P7", "axis": "space", "why": "The words sit in one positioned box that holds the single index mark, so the mark travels inside the legend's own area." },
+    "hub": { "p": "P7", "axis": "space", "why": "On the arc a zero-size hub sits at the dial's centre, and every word and the mark are placed from it by angle." },
+    "word": { "p": "P3", "axis": "space", "why": "Each word is a press target of at least 44 by 44px with flat printing inside it, and pressing it picks that choice." },
+    "text": { "p": "P7", "axis": "type", "why": "The printed word itself in type.label, regular while it waits and medium when it is the choice in use." },
+    "ghost": { "p": "P6", "axis": "space", "why": "A hidden copy in medium weight reserves the word's widest width, so lighting it never pushes its neighbours." },
+    "mark": { "p": "P7", "axis": "shape", "why": "The one ink index mark beside the lit word, a short bar in a column or row and a small dot on the arc." }
+  },
+  "states": {
+    "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens a waiting word one ink step and nothing rises, because printing on a case does not move." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "In a legend with no knob, keyboard focus draws the same dark ring round the word that every part in dial shows." },
+    "data-state=on": { "p": "P7", "axis": "colour", "why": "The word in use is printed at full ink in medium weight, a change of ink and weight that never uses the orange." },
+    "data-disabled=true": { "p": "P6", "axis": "depth", "why": "A disabled legend fades with its knob and stops taking presses, while every word stays printed in its place." },
+    "@media prefers-reduced-motion: reduce": { "p": "P7", "axis": "motion", "why": "Under reduce motion the mark jumps to the new word and the hover ink step changes at once, with no fade." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the index mark is painted in the system text colour, so the chosen word keeps its mark." }
+  },
+  "motion": {
+    "color": { "p": "P6", "axis": "interaction", "why": "A waiting word's ink step on hover fades in over motion.hover, since only a change of state may move anything at all." }
+  }
+}

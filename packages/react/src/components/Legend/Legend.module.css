@@ -1,0 +1,147 @@
+/* Legend — every choice a knob has, printed beside or round it (P7, D-006). The lit word is full ink
+   in medium weight with one ink index mark; the rest wait in text.secondary. Printing is flat: no
+   height, no fill, no orange. --p (the mark's position, in words) is written by the spring in
+   Legend.tsx; --n, --a0, --da, --d and the arc paddings come from Legend.tsx too. */
+.root {
+  display: inline-grid;
+  justify-items: start;
+  gap: var(--ds-gap-sm);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.name {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+.words {
+  position: relative;
+  display: grid;
+}
+.word {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-grid;
+  align-items: center;
+  justify-items: start;
+  min-block-size: var(--ds-layout-touch);
+  min-inline-size: var(--ds-layout-touch);
+  margin: var(--ds-gap-none);
+  padding-block: var(--ds-gap-none);
+  padding-inline: var(--ds-gap-md);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-mark);
+  background: transparent;
+  color: var(--ds-text-secondary);
+  font: inherit;
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-tight);
+  white-space: nowrap;
+  text-align: start;
+  cursor: pointer;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.text, .ghost { grid-area: 1 / 1; }
+.text { font-weight: var(--ds-type-weight-regular); }
+.ghost {
+  font-weight: var(--ds-type-weight-medium);
+  visibility: hidden;
+}
+.mark {
+  position: absolute;
+  background: var(--ds-text-primary);
+  border-radius: var(--ds-corner-mark);
+  pointer-events: none;
+}
+
+/* column: one fixed column, every word on a row of the touch height; the mark is a short bar at its start */
+.column.paired {
+  grid-template-columns: auto auto;
+  align-items: center;
+  column-gap: var(--ds-gap-lg);
+}
+.column .words { padding-inline-start: calc(var(--ds-width-bar) + var(--ds-gap-xs)); }
+.column .word { block-size: var(--ds-layout-touch); }
+.column .mark {
+  inset-inline-start: var(--ds-gap-none);
+  inset-block-start: calc((var(--ds-layout-touch) - var(--ds-type-label)) / 2);
+  inline-size: var(--ds-width-bar);
+  block-size: var(--ds-type-label);
+  transform: translateY(calc(var(--p, 0) * var(--ds-layout-touch)));
+}
+
+/* row: equal cells side by side under the knob; the mark is a bar under the lit word, as in Tabs */
+.row { justify-items: center; }
+.row .words {
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  padding-block-end: var(--ds-width-bar);
+}
+.row .word { justify-items: center; }
+.row .mark {
+  inset-block-end: var(--ds-gap-none);
+  inset-inline-start: calc((var(--p, 0) + 0.5) * 100% / var(--n) - var(--ds-control-thumb) / 2);
+  inline-size: var(--ds-control-thumb);
+  block-size: var(--ds-width-bar);
+}
+
+/* arc: each word at its detent's angle round the dial. A dial's sweep is physical (clockwise is
+   clockwise in every script), so the arc keeps a left-to-right frame and each word keeps its own. */
+.arc {
+  --dial: calc(var(--d) + (var(--ds-gap-xs) + var(--ds-control-tick)) * 2);
+  --r: calc(var(--dial) / 2 + var(--ds-gap-md));
+  position: relative;
+  direction: ltr;
+  justify-items: center;
+  padding-block-start: var(--pad-top, var(--ds-layout-touch));
+  padding-block-end: var(--pad-foot, var(--ds-gap-none));
+  padding-inline: var(--pad-side, calc(var(--ds-layout-touch) * 2));
+}
+.hub {
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: calc(var(--pad-top, var(--ds-layout-touch)) + var(--dial) / 2);
+  inline-size: var(--ds-gap-none);
+  block-size: var(--ds-gap-none);
+}
+.arc .word {
+  position: absolute;
+  inset-inline-start: var(--ds-gap-none);
+  inset-block-start: var(--ds-gap-none);
+  justify-items: center;
+  unicode-bidi: plaintext;
+  transform:
+    translate(calc(var(--sx) * var(--r)), calc(var(--sy) * var(--r)))
+    translate(calc(-50% + var(--sx) * 50%), calc(-50% + var(--sy) * 50%));
+}
+.arc .mark {
+  inset-inline-start: calc(var(--ds-control-dot) / -2);
+  inset-block-start: calc(var(--ds-control-dot) / -2);
+  inline-size: var(--ds-control-dot);
+  block-size: var(--ds-control-dot);
+  border-radius: var(--ds-corner-round);
+  transform: rotate(calc((var(--a0) + var(--p, 0) * var(--da)) * 1deg)) translateY(calc((var(--dial) / 2 + var(--ds-gap-xs)) * -1));
+}
+
+.word:hover { color: var(--ds-text-primary); }
+.word[data-state='on'] { color: var(--ds-text-primary); }
+.word[data-state='on'] .text { font-weight: var(--ds-type-weight-medium); }
+.word:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: calc(var(--ds-width-ring) * -1);
+}
+.root[data-disabled='true'] .words {
+  opacity: var(--ds-opacity-disabled);
+}
+.root[data-disabled='true'] .word { cursor: not-allowed; }
+.root[data-disabled='true'] .word:hover { color: var(--ds-text-secondary); }
+.root[data-disabled='true'] .word[data-state='on'] { color: var(--ds-text-primary); }
+
+@media (prefers-reduced-motion: reduce) {
+  .word { transition: none; }
+}
+@media (forced-colors: active) {
+  .mark { forced-color-adjust: none; background: CanvasText; }
+  .word:focus-visible { outline-color: Highlight; }
+}

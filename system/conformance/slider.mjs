@@ -73,4 +73,34 @@ export default async function slider({ check, expect, page, go, main, tokens }) 
     expect(x1 > x0 && Math.abs(x2 - x1) < 0.5, `cap at ${x0}, then ${x1}, then ${x2}`);
     return 'no travel';
   });
+  // glass (P9, D-007): the cap is frosted in the value's tint and the groove behind it is lit up to the cap
+  const glass = (s) => s.evaluate((e) => {
+    const cap = e.querySelector(':scope > div:last-child'), groove = e.querySelector('[class*="groove"]'), fill = groove?.firstElementChild;
+    const c = getComputedStyle(cap), g = groove.getBoundingClientRect(), k = cap.getBoundingClientRect(), f = fill.getBoundingClientRect();
+    return { tint: e.closest('[data-component]').dataset.tint, filter: c.backdropFilter || c.webkitBackdropFilter || 'none', bg: c.backgroundColor, fillEnd: f.right - g.left, capMid: k.left + k.width / 2 - g.left, fillBg: getComputedStyle(fill).backgroundColor };
+  });
+  await check('Slider', 'the cap is frosted glass in its tint and the groove light ends at the cap', async () => {
+    await go('/components/slider/code');
+    const s = main().locator('[data-component="Slider"][data-tint="warm"] [role="slider"]').first();
+    const cool = await glass(main().locator('[data-component="Slider"][data-tint="cool"] [role="slider"]').first());
+    await s.focus(); await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); await page.keyboard.press('ArrowRight');
+    const a = await glass(s);
+    expect(/blur\(/.test(a.filter) && /saturate\(/.test(a.filter) && /brightness\(/.test(a.filter), `cap filter ${a.filter}`);
+    expect(Math.abs(a.fillEnd - a.capMid) <= 2, `groove light ends at ${a.fillEnd}px, cap centre at ${a.capMid}px`);
+    expect(a.fillBg !== cool.fillBg && a.bg !== cool.bg, `warm and cool share a tint (${a.fillBg})`);
+    await page.keyboard.press('End'); const b = await glass(s);
+    expect(Math.abs(b.fillEnd - b.capMid) <= 2, `at End the light ends at ${b.fillEnd}px, cap centre at ${b.capMid}px`);
+    return `warm ${a.bg}, light follows the cap to ${Math.round(b.fillEnd)}px`;
+  });
+  await check('Slider', 'with reduced transparency the cap turns matte', async () => {
+    await go('/components/slider/code');
+    const cdp = await page.context().newCDPSession(page);
+    try {
+      await cdp.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-transparency', value: 'reduce' }] });
+      const a = await glass(main().locator('[data-component="Slider"][data-tint="warm"] [role="slider"]').first());
+      const alpha = Number((a.bg.match(/rgba?\(([^)]+)\)/)?.[1].split(/[ ,/]+/).filter(Boolean)[3]) ?? 1);
+      expect(a.filter === 'none' && alpha === 1, `filter ${a.filter}, background ${a.bg}`);
+      return `matte ${a.bg}`;
+    } finally { await cdp.send('Emulation.setEmulatedMedia', { features: [] }); await cdp.detach(); }
+  });
 }

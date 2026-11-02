@@ -209,6 +209,180 @@
       "14": {
         "$value": "#FFFFFF24"
       }
+    },
+    "glass": {
+      "$extensions": {
+        "kiln.why": {
+          "p": [
+            "P9"
+          ],
+          "why": "Glass tints in three value ranges, warm amber for warmth, a cool steel for cooling and ink grey for anything neutral, each quiet and near the plastic so none becomes a second orange."
+        }
+      },
+      "warm": {
+        "tint": {
+          "$value": "#D9A55B",
+          "$description": "warm range, the value's own hue"
+        },
+        "body": {
+          "$value": "#D9A55B6B",
+          "$description": "body, alpha 0.42"
+        },
+        "edge": {
+          "$value": "#D9A55BB3",
+          "$description": "edge, alpha 0.70"
+        },
+        "glow": {
+          "$value": "#D9A55B8C",
+          "$description": "glow, alpha 0.55"
+        },
+        "lamp": {
+          "$value": "#A8722AE6",
+          "$description": "a lit lamp of this range, alpha 0.90"
+        },
+        "matte": {
+          "$value": "#E2CBA9",
+          "$description": "the body flattened onto the plastic, for reduced transparency"
+        }
+      },
+      "cool": {
+        "tint": {
+          "$value": "#7FA0B8",
+          "$description": "cool range, the value's own hue"
+        },
+        "body": {
+          "$value": "#7FA0B86B",
+          "$description": "body, alpha 0.42"
+        },
+        "edge": {
+          "$value": "#7FA0B8B3",
+          "$description": "edge, alpha 0.70"
+        },
+        "glow": {
+          "$value": "#7FA0B88C",
+          "$description": "glow, alpha 0.55"
+        },
+        "lamp": {
+          "$value": "#4F7590E6",
+          "$description": "a lit lamp of this range, alpha 0.90"
+        },
+        "matte": {
+          "$value": "#BCC9D0",
+          "$description": "the body flattened onto the plastic, for reduced transparency"
+        }
+      },
+      "neutral": {
+        "tint": {
+          "$value": "#8A8780",
+          "$description": "neutral range, the value's own hue"
+        },
+        "body": {
+          "$value": "#8A87806B",
+          "$description": "body, alpha 0.42"
+        },
+        "edge": {
+          "$value": "#8A8780B3",
+          "$description": "edge, alpha 0.70"
+        },
+        "glow": {
+          "$value": "#8A87808C",
+          "$description": "glow, alpha 0.55"
+        },
+        "lamp": {
+          "$value": "#4A4844E6",
+          "$description": "a lit lamp of this range, alpha 0.90"
+        },
+        "matte": {
+          "$value": "#C1BEB8",
+          "$description": "the body flattened onto the plastic, for reduced transparency"
+        }
+      },
+      "warm-dark": {
+        "tint": {
+          "$value": "#D2A465",
+          "$description": "warm range, the value's own hue"
+        },
+        "body": {
+          "$value": "#D2A46557",
+          "$description": "body, alpha 0.34"
+        },
+        "edge": {
+          "$value": "#D2A465B3",
+          "$description": "edge, alpha 0.70"
+        },
+        "glow": {
+          "$value": "#D2A46573",
+          "$description": "glow, alpha 0.45"
+        },
+        "lamp": {
+          "$value": "#E8C48CE6",
+          "$description": "a lit lamp of this range, alpha 0.90"
+        },
+        "matte": {
+          "$value": "#675740",
+          "$description": "the body flattened onto the plastic, for reduced transparency"
+        }
+      },
+      "cool-dark": {
+        "tint": {
+          "$value": "#86A3B9",
+          "$description": "cool range, the value's own hue"
+        },
+        "body": {
+          "$value": "#86A3B957",
+          "$description": "body, alpha 0.34"
+        },
+        "edge": {
+          "$value": "#86A3B9B3",
+          "$description": "edge, alpha 0.70"
+        },
+        "glow": {
+          "$value": "#86A3B973",
+          "$description": "glow, alpha 0.45"
+        },
+        "lamp": {
+          "$value": "#B5CCDDE6",
+          "$description": "a lit lamp of this range, alpha 0.90"
+        },
+        "matte": {
+          "$value": "#4D575D",
+          "$description": "the body flattened onto the plastic, for reduced transparency"
+        }
+      },
+      "neutral-dark": {
+        "tint": {
+          "$value": "#BDBAB3",
+          "$description": "neutral range, the value's own hue"
+        },
+        "body": {
+          "$value": "#BDBAB357",
+          "$description": "body, alpha 0.34"
+        },
+        "edge": {
+          "$value": "#BDBAB3B3",
+          "$description": "edge, alpha 0.70"
+        },
+        "glow": {
+          "$value": "#BDBAB373",
+          "$description": "glow, alpha 0.45"
+        },
+        "lamp": {
+          "$value": "#EDEBE6E6",
+          "$description": "a lit lamp of this range, alpha 0.90"
+        },
+        "matte": {
+          "$value": "#5F5E5B",
+          "$description": "the body flattened onto the plastic, for reduced transparency"
+        }
+      },
+      "lit": {
+        "$value": "#FFFFFF8C",
+        "$description": "top-left lit hairline on glass, light"
+      },
+      "lit-dark": {
+        "$value": "#FFFFFF26",
+        "$description": "top-left lit hairline on glass, dark"
+      }
     }
   },
   "space": {
@@ -854,6 +1028,41 @@
     },
     "half": {
       "$value": 0.5
+    }
+  },
+  "frost": {
+    "$type": "number",
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P9"
+        ],
+        "why": "The frosted glass recipe for the small parts that move is a light blur, a lift in saturation and a small brightness step, so what is behind a cap reads through it softly and the top-left light stays on its surface."
+      }
+    },
+    "blur": {
+      "$type": "dimension",
+      "$value": "3px",
+      "$description": "a frost, not a pane: the groove and ticks still read through a cap"
+    },
+    "saturate": {
+      "$value": 1.4
+    },
+    "brightness": {
+      "$value": 1.05,
+      "$description": "light edition"
+    },
+    "brightness-dark": {
+      "$value": 0.92,
+      "$description": "dark edition: glass darkens a step so text on it keeps 4.5:1"
+    },
+    "fill-opacity": {
+      "$value": 0.62,
+      "$description": "the value's light in the groove behind a cap"
+    },
+    "solid": {
+      "$value": 1,
+      "$description": "fallback: no transparency"
     }
   }
 }

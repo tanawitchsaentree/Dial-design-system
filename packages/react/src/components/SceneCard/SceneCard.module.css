@@ -1,0 +1,144 @@
+/* SceneCard — a scene printed on a small card of light stock (lab apps/lab/scene-card, variant A). The stock is
+   surface.light with text.on-light in both themes, one step lighter than the plastic body; the printing is flat
+   (P5) and nothing on it is orange (P1). The name sits on the top edge, the part that stays out of a Slot. */
+.root {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  vertical-align: top;
+}
+.card {
+  --scene-dx: var(--ds-space-0);
+  --scene-dy: var(--ds-space-0);
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-content: start;
+  inline-size: calc(var(--ds-control-key) * 3);
+  block-size: calc(var(--ds-control-key) * 4);
+  margin: 0;
+  padding: var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid var(--ds-line-divider);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-light);
+  box-shadow: var(--ds-elevation-unit);
+  color: var(--ds-text-on-light);
+  font-family: var(--ds-type-family);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing);
+}
+/* the ink mark printed under a held card, on the ground it was lifted from */
+.card::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--ds-gap-inset);
+  inset-block-end: calc(var(--ds-gap-lg) * -1);
+  block-size: var(--ds-width-ring);
+  border-radius: var(--ds-corner-mark);
+  background: var(--ds-text-primary);
+  opacity: 0;
+  transition: opacity var(--ds-motion-release) var(--ds-motion-easing);
+}
+.handle {
+  position: absolute;
+  inset-block-start: var(--ds-gap-none);
+  inset-inline-end: var(--ds-gap-none);
+  display: grid;
+  place-items: center;
+  inline-size: var(--ds-layout-touch);
+  block-size: var(--ds-layout-touch);
+  color: var(--ds-text-on-light);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.grip {
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  fill: currentColor;
+}
+.name {
+  padding-inline-end: var(--ds-control-icon-md);
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  overflow-wrap: anywhere;
+}
+.steps {
+  display: grid;
+  align-content: start;
+  gap: var(--ds-space-0-5);
+  margin-block-start: var(--ds-gap-md);
+  min-block-size: 0;
+  overflow: hidden;
+}
+.step {
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  overflow-wrap: anywhere;
+}
+.foot {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--ds-gap-md);
+}
+.kind {
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+  text-transform: lowercase;
+}
+.arrow {
+  inline-size: var(--ds-control-mark);
+  block-size: var(--ds-control-mark);
+  fill: currentColor;
+}
+.announce {
+  position: absolute;
+  inline-size: var(--ds-space-px);
+  block-size: var(--ds-space-px);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.handle:hover { color: var(--ds-text-primary); }
+.card:active { box-shadow: none; }
+.card:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.card[aria-pressed='true'] {
+  transform: translateY(calc(var(--ds-motion-rise) * -1));
+  box-shadow: var(--ds-elevation-part);
+}
+.card[aria-pressed='true']::after { opacity: 1; }
+.card[data-dragging='true'] {
+  z-index: 1;
+  transform: translate(var(--scene-dx), var(--scene-dy));
+  box-shadow: var(--ds-elevation-part);
+  pointer-events: none;
+  transition: none;
+}
+.card:disabled {
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.card:disabled .handle { cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card::after,
+  .handle { transition: none; }
+  .card[aria-pressed='true'] { transform: none; }
+}
+@media (forced-colors: active) {
+  .card { border-color: CanvasText; }
+  .card::after { forced-color-adjust: none; background: Highlight; }
+}

@@ -1,0 +1,108 @@
+/* Wiring — relations printed on the face (P8): hairlines of ink on the module grid with one bend at most, a
+   small dot where a line meets a part, one lowercase word per line, a printed box around a group. Waiting
+   relations are secondary ink with hollow dots, active ones full ink with filled dots. Nothing moves. */
+.root {
+  position: relative;
+  box-sizing: border-box;
+  /* a lane on each side for a line that has to go round a column of parts */
+  padding-inline: var(--ds-gap-3xl);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.field {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  /* lanes wide enough for a line and its word between two parts */
+  row-gap: calc(var(--ds-gap-3xl) * 2);
+  column-gap: calc(var(--ds-gap-3xl) * 4);
+}
+.wires {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.line {
+  fill: none;
+  stroke: var(--ds-text-secondary);
+  stroke-width: var(--ds-width-hairline);
+  transition: stroke var(--ds-motion-segment) var(--ds-motion-easing);
+}
+.dot {
+  fill: none;
+  stroke: var(--ds-text-secondary);
+  stroke-width: var(--ds-width-hairline);
+  transition:
+    fill var(--ds-motion-segment) var(--ds-motion-easing),
+    stroke var(--ds-motion-segment) var(--ds-motion-easing);
+}
+.tag {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+  font-weight: var(--ds-type-weight-regular);
+  color: var(--ds-text-secondary);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: color var(--ds-motion-segment) var(--ds-motion-easing);
+}
+.line[data-state='on'] { stroke: var(--ds-text-primary); }
+.dot[data-state='on'] { fill: var(--ds-text-primary); stroke: var(--ds-text-primary); }
+.tag[data-state='on'] { color: var(--ds-text-primary); font-weight: var(--ds-type-weight-medium); }
+
+.node { position: relative; min-inline-size: 0; max-inline-size: 100%; }
+
+.group {
+  display: grid;
+  justify-items: start;
+  gap: var(--ds-gap-sm);
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+.groupLabel {
+  padding-inline-start: var(--ds-gap-xl);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+/* the frame's corner nests the cards inside it: outer = the card's capped corner + the frame's even inset */
+.box {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: calc(var(--ds-gap-3xl) * 2);
+  column-gap: calc(var(--ds-gap-3xl) * 4);
+  max-inline-size: 100%;
+  padding: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-text-secondary);
+  border-radius: calc(var(--wiring-inner, var(--ds-corner-panel)) + var(--ds-gap-xl) + var(--ds-width-hairline));
+}
+
+.relations {
+  position: absolute;
+  inline-size: var(--ds-space-px);
+  block-size: var(--ds-space-px);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line, .dot, .tag { transition: none; }
+}
+@media (forced-colors: active) {
+  .line, .dot { stroke: CanvasText; }
+  .dot[data-state='on'] { fill: CanvasText; }
+  .tag, .groupLabel { color: CanvasText; }
+  .box { border-color: CanvasText; }
+}

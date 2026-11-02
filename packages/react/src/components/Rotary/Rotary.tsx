@@ -18,7 +18,7 @@ export type RotaryKind = 'primary' | 'key';
 export type RotarySize = 'sm' | 'md' | 'lg';
 
 /** Knob diameters in px: sm is the 44px touch minimum, lg is corner.knob-ratio (0.36) of a 300px unit. */
-const DIAMETER: Record<RotarySize, number> = { sm: 44, md: 72, lg: 108 };
+export const ROTARY_DIAMETER: Record<RotarySize, number> = { sm: 44, md: 72, lg: 108 };
 /** The smallest knob dial draws (control.knob-min). */
 const MIN_DIAMETER = 44;
 
@@ -55,6 +55,10 @@ export interface RotaryProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   sweep?: number;
   /** How far, in px, a vertical drag goes to turn through the whole sweep. Default 180. */
   dragDistance?: number;
+  /** Prints the value under the knob. Default true. Turn it off when a Legend beside the knob already lights the value, so the unit says it once. */
+  printValue?: boolean;
+  /** The id of an element that describes the knob, set as aria-describedby on the knob itself (a Legend passes its list of choices). */
+  describedBy?: string;
   /** The knob cannot be turned; it loses its height. */
   disabled?: boolean;
   /** Spring mass of the knob. Default 1.4 (mechanism.mass). */
@@ -86,6 +90,8 @@ export const Rotary = forwardRef<HTMLDivElement, RotaryProps>(function Rotary(
     pageStep,
     sweep = 270,
     dragDistance = 180,
+    printValue = true,
+    describedBy,
     disabled = false,
     mass = MECHANISM.mass,
     stiffness = MECHANISM.stiffness,
@@ -183,7 +189,7 @@ export const Rotary = forwardRef<HTMLDivElement, RotaryProps>(function Rotary(
     commit(min + ((Math.max(-sweep / 2, Math.min(sweep / 2, a)) + sweep / 2) / sweep) * range);
   };
 
-  const d = Math.max(MIN_DIAMETER, Math.round(diameter ?? (unitSide ? unitSide * knobRatio : DIAMETER[size])));
+  const d = Math.max(MIN_DIAMETER, Math.round(diameter ?? (unitSide ? unitSide * knobRatio : ROTARY_DIAMETER[size])));
   const marks = count <= 40 ? count : 10;
   const ticks = Array.from({ length: marks + 1 }, (_, i) => -sweep / 2 + (i / marks) * sweep);
   const text = formatValue(current);
@@ -212,6 +218,7 @@ export const Rotary = forwardRef<HTMLDivElement, RotaryProps>(function Rotary(
           aria-valuemax={max}
           aria-valuenow={current}
           aria-valuetext={text}
+          aria-describedby={describedBy}
           aria-disabled={disabled || undefined}
           className={cx(styles.knob, styles[kind])}
           onKeyDown={onKeyDown}
@@ -222,7 +229,7 @@ export const Rotary = forwardRef<HTMLDivElement, RotaryProps>(function Rotary(
           </div>
         </div>
       </div>
-      <span className={styles.value} aria-hidden="true">{text}</span>
+      {printValue && <span className={styles.value} aria-hidden="true">{text}</span>}
       <span id={labelId} className={styles.label}>{label}</span>
     </div>
   );

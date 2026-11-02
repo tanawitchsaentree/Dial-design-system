@@ -5,7 +5,7 @@
 import { useState, type ReactElement } from 'react';
 import decisionsMd from '../../../../system/DECISIONS.md?raw';
 import exceptionsMd from '../../../../system/EXCEPTIONS.md?raw';
-import * as Icons from '../icons';
+import { Icon, ICON_NAMES } from 'dial-react';
 import { AgentOnboard } from './AgentOnboard';
 import { HomeHero } from './home';
 import { ThemePlayground, ContrastPlayground, TypePlayground, SpacingPlayground, ShapePlayground, MotionPlayground, IconBrowser, TouchTargetPlayground } from './playgrounds';
@@ -267,12 +267,11 @@ function Motion() {
 }
 
 function IconsPage() {
-  const list = Object.entries(Icons).filter(([n]) => n.startsWith('Icon'));
   return (
     <Page eyebrow="Foundations" title="Iconography" lede={<p>{CONTENT.foundations.icons.lede}</p>}>
       <Section id="browser" title="Find and copy an icon" wide><IconBrowser /></Section>
       <Section id="set" title="The set" wide>
-        <ul className="icon-grid flush">{list.map(([name, Icon]) => { const I = Icon as (p: { className?: string }) => ReactElement; return <li key={name}><I className="icon-cell" /><code>{name}</code></li>; })}</ul>
+        <ul className="icon-grid flush">{ICON_NAMES.map((name) => <li key={name}><Icon name={name} size="lg" /><code>{name}</code></li>)}</ul>
       </Section>
     </Page>
   );

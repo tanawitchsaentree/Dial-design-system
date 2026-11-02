@@ -104,6 +104,7 @@ export const BUTTON: Depth = {
       ['Hover', 'The ink darkens one step. On the primary key, the orange moves one step lighter.', 'The key never lifts or grows.'],
       ['Pressed', 'Drops by 3px in 65ms, shifts 1px along the shadow, and the shadow collapses under it.', 'Returns on the spring in about 245ms when released.'],
       ['Focus', 'A dark 2px ring outside the key, 2px away from its edge.', 'The ring is the same on every part.'],
+      ['Latched', 'With aria-pressed true a plastic key stays down by 3px as frosted grey glass, its word in primary ink at 4.5:1.', 'Only toggle keys latch. The orange key never turns to glass.'],
       ['Disabled', 'Flat, no shadow, at half opacity.', 'It cannot be pressed. A native disabled button also leaves the tab order, so say near the key why it is unavailable.'],
       ['Reduced motion', 'The key does not travel. Ink and colour still change on hover and press.', 'Someone who turned motion off still sees that the press landed.'],
       ['Forced colours', 'The key gets a border in the system button colour.', 'The shadow that shows the key’s edge is removed in that mode, so the border takes its place.'],

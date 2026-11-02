@@ -49,20 +49,23 @@ export default async function segmentedControl({ check, expect, page, go, main, 
     return `End → ${e}, Home → ${h}`;
   });
 
-  await check('SegmentedControl', 'the latched key is told by depth and a lit lamp, never orange', async () => {
+  await check('SegmentedControl', 'the latched key is told by depth, a lit lamp and a glass face, never orange', async () => {
     const g = await start();
     const st = await g.locator('[role="radio"]').evaluateAll((els) => els.map((el) => {
       const cs = getComputedStyle(el);
       const lamp = getComputedStyle(el.querySelector('span'));
-      return { on: el.getAttribute('aria-checked') === 'true', shadow: cs.boxShadow, bg: cs.backgroundColor, lamp: lamp.backgroundColor };
+      // a cast shadow is an outer layer with colour; the latched glass key keeps only inset light (P9, D-007)
+      const cast = cs.boxShadow !== 'none' && cs.boxShadow.split(/,(?![^(]*\))/).some((l) => !/inset/.test(l) && !/rgba\(0, 0, 0, 0\)/.test(l));
+      return { on: el.getAttribute('aria-checked') === 'true', cast, shadow: cs.boxShadow, glass: (cs.backdropFilter || cs.webkitBackdropFilter || 'none') !== 'none', bg: cs.backgroundColor, lamp: lamp.backgroundColor };
     }));
     const on = st.find((s) => s.on); const off = st.find((s) => !s.on);
     const accent = await page.evaluate(() => { const d = document.createElement('div'); d.style.color = 'var(--ds-action-accent)'; document.body.append(d); const c = getComputedStyle(d).color; d.remove(); return c; });
     expect(st.filter((s) => s.on).length === 1, `${st.filter((s) => s.on).length} keys latched`);
-    expect(on.shadow === 'none' && off.shadow !== 'none', `shadow latched ${on.shadow}, released ${off.shadow}`);
+    expect(!on.cast && off.cast, `shadow latched ${on.shadow}, released ${off.shadow}`);
+    expect(on.glass && !off.glass, `glass latched ${on.glass}, released ${off.glass}`);
     expect(on.lamp !== off.lamp, `lamp latched ${on.lamp}, released ${off.lamp}`);
     expect(on.bg !== accent && on.lamp !== accent, `latched key uses the accent ${accent}`);
-    return `latched flat, lamp ${on.lamp}`;
+    return `latched glass, lamp ${on.lamp}`;
   });
 
   await check('SegmentedControl', 'every key is at least the touch target', async () => {

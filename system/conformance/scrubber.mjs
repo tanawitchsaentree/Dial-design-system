@@ -98,4 +98,18 @@ export default async function scrubber({ check, expect, page, go, main, tokens }
     expect(x1 > x0 && Math.abs(x2 - x1) < 0.5, `cap at ${x0}, then ${x1}, then ${x2}`);
     return 'no travel';
   });
+  // glass (P9, D-007): the cap is frosted and the played stretch is lit up to its centre
+  await check('Scrubber', 'the cap is frosted glass and the played light ends at the cap', async () => {
+    await go(ROUTE);
+    const s = main().locator('[data-component="Scrubber"][data-tint="warm"] [role="slider"]').first();
+    await s.focus(); await page.keyboard.press('ArrowRight');
+    const st = await s.evaluate((e) => {
+      const g = e.querySelector('[class*="groove"]'), gb = g.getBoundingClientRect(), f = g.firstElementChild.getBoundingClientRect();
+      const cap = e.querySelector(':scope > div:last-child'), c = cap.getBoundingClientRect(), cs = getComputedStyle(cap);
+      return { end: f.right - gb.left, mid: c.left + c.width / 2 - gb.left, f: cs.backdropFilter || cs.webkitBackdropFilter || 'none' };
+    });
+    expect(/blur\(/.test(st.f), `cap filter ${st.f}`);
+    expect(Math.abs(st.end - st.mid) <= 2, `played light ends at ${st.end}px, cap centre at ${st.mid}px`);
+    return `light to ${Math.round(st.end)}px`;
+  });
 }

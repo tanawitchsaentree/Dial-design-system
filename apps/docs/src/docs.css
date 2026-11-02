@@ -178,6 +178,7 @@ main td p, main [data-example-live] p { max-inline-size: none; }
 .markdown p, .markdown ul { margin: 0; max-inline-size: 80ch; }
 .md-h3 { font-size: var(--ds-type-emphasis); margin: var(--ds-gap-2xl) 0 0; }
 .icon-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--ds-gap-lg); }
+.prose ul.icon-grid { display: grid; } /* the set on /foundations/icons is a grid, not a prose list */
 .icon-grid li { display: flex; flex-direction: column; align-items: center; gap: var(--ds-gap-md); padding: var(--ds-gap-xl); border-radius: var(--ds-corner-inner); box-shadow: inset 0 0 0 var(--ds-width-hairline) var(--ds-line-divider); font-size: var(--ds-type-caption); }
 .icon-cell { inline-size: 28px; block-size: 28px; }
 .pattern-narrow { inline-size: min(100%, 400px); }

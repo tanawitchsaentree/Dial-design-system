@@ -1,0 +1,55 @@
+{
+  "concept": "Wiring prints the relations between parts on the face itself, the way a schematic pedal face joins a knob to the circuit it shapes. It draws a printed box around a group of parts, hairlines of ink with one bend at most joining them, and one short lowercase word on a line, so a person sees that the thermostat sets the heater before touching anything.",
+  "kind": ["wiring", "relation lines", "connector diagram", "node graph"],
+  "default_to_avoid": [
+    { "pattern": "node graph editor in the React Flow manner, bezier curve wiring between coloured ports", "why_not": "Curves and coloured ports are an editing tool for a programmer; P8 asks for printing on the case with right angles, ink only and nothing that moves or is dragged." },
+    { "pattern": "wiring drawn as straight diagonal lines from the centre of one part to the centre of another", "why_not": "A diagonal cuts across the printing on the parts and changes angle whenever the layout moves, and P8 keeps lines on the module grid that never cross a label." }
+  ],
+  "references": [
+    { "source": "The user's wave 4 reference: a pedal whose face is a schematic, with boxes and lines joining the knobs" },
+    { "source": "IEC 60617 graphical symbols for diagrams: orthogonal conductors, junction dots and grouped functional units in a dashed or solid frame" },
+    { "source": "WAI-ARIA aria-describedby: a description is read after the name when a control takes focus" }
+  ],
+  "derivation": [
+    { "p": "P8", "axis": "space", "consequence": "lines run on the module grid between the parts they join, with right angles and one bend at most, and never cross a label", "form": "Lines are routed from measured node positions, snapped to the module, as one straight run or one L, and any route that crosses a part or a label is dropped for the other L." },
+    { "p": "P8", "axis": "shape", "consequence": "a relation is a hairline of ink with a small node where it meets a part; a group of related parts sits inside one printed box", "form": "Each link is a hairline path with a small dot at both ends on the part's edge, and Wiring.Group prints a hairline box with its lowercase name on the inset line." },
+    { "p": "P8", "axis": "colour", "consequence": "lines are secondary ink; a relation that is active right now prints at full ink", "form": "A waiting link uses text.secondary with hollow end dots, an active link text.primary with filled dots, so the state also has a shape." },
+    { "p": "P5", "axis": "type", "consequence": "one grotesk, regular and medium only; hierarchy by size and position", "form": "A line's label is set at caption size in the regular weight, and the label of an active link turns medium, never a second face." },
+    { "p": "P2", "axis": "motion", "consequence": "values change at once; only a segment's on/off fades, ≤80ms", "form": "Lines never travel; when a link turns active its ink steps over motion.segment, the same short fade a display segment uses." }
+  ],
+  "variants": {
+    "lab": "apps/lab/wiring/index.html",
+    "options": [
+      { "id": "A", "name": "schematic face, a printed box around the group and one bend ink lines on the module grid with end dots and a lowercase label" },
+      { "id": "B", "name": "bus rail, every part drops a line to one shared rail along the foot of the face" },
+      { "id": "C", "name": "numbered key, matching printed numerals at both ends and the sentences printed as a legend" },
+      { "id": "D", "name": "direct lines, straight diagonals from centre to centre like a node editor" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A joins each pair of parts directly with right angles, one bend and a word on the line, which is P8 as written; B loses which part drives which on a shared rail, C makes the eye travel twice to join two numerals, and D crosses the parts' printing."
+  },
+  "parts": {
+    "root": { "p": "P8", "axis": "depth", "why": "The root is printing on the body it sits on, paints no surface and adds no height of its own." },
+    "field": { "p": "P6", "axis": "space", "why": "The parts keep the layout the screen gives them, so drawing the lines never moves a part." },
+    "wires": { "p": "P8", "axis": "depth", "why": "The lines sit in one flat layer under the parts and never take a pointer, so they are printing and not a rail." },
+    "line": { "p": "P8", "axis": "shape", "why": "Each relation is one hairline path of ink with right angles and at most one bend." },
+    "dot": { "p": "P8", "axis": "shape", "why": "A small dot marks the place where a line meets the edge of a part it joins." },
+    "tag": { "p": "P8", "axis": "type", "why": "One short lowercase word sits beside its line, above a level run or beside an upright one." },
+    "group": { "p": "P8", "axis": "shape", "why": "A group is a named set of related parts, printed as a lowercase name over one box." },
+    "groupLabel": { "p": "P5", "axis": "space", "why": "The box's lowercase name sits just above the frame on its inset line, printed flat." },
+    "box": { "p": "P8", "axis": "shape", "why": "Related parts sit inside one hairline box whose corner nests the parts at an even inset." },
+    "node": { "p": "P8", "axis": "interaction", "why": "A node is a named group, and its controls carry the sentences of the lines that touch it as descriptions." },
+    "relations": { "p": "P8", "axis": "interaction", "why": "Every relation is also a sentence in a list that only assistive technology reads, so the lines are never the only telling." }
+  },
+  "states": {
+    "data-state=on": { "p": "P8", "axis": "colour", "why": "An active relation prints its line, its dots and its word at full ink, and the word turns medium." },
+    "@media prefers-reduced-motion: reduce": { "p": "P2", "axis": "motion", "why": "Under reduced motion the ink step happens at once with no fade, since nothing has to be followed." },
+    "@media forced-colors: active": { "p": "P5", "axis": "colour", "why": "In forced colours the lines, dots and words take the system text colour so every relation survives." }
+  },
+  "motion": {
+    "stroke": { "p": "P2", "axis": "motion", "why": "The line's ink steps over motion.segment when the relation turns active, the length of a display segment's fade." },
+    "fill": { "p": "P2", "axis": "motion", "why": "The end dots fill over the same motion.segment as the line, so line and dots change as one." },
+    "color": { "p": "P2", "axis": "motion", "why": "The word on the line steps its ink over motion.segment together with its line." }
+  }
+}

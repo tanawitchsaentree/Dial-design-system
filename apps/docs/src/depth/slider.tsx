@@ -7,7 +7,8 @@ const Unit = ({ children }: { children: React.ReactNode }) => <div className="de
 export const SLIDER: Depth = {
   overview: (
     <>
-      <p>Slider sets an amount along a range, such as volume, brightness or fan speed. It is a fader. A plastic cap rides in a narrow groove, with a ruler printed above it. You drag the cap, or use the arrow keys, and it settles into the nearest step on a spring.</p>
+      <p>Slider sets an amount along a range, such as volume, brightness or fan speed. It is a fader. A frosted glass cap rides in a narrow groove, with a ruler printed above it. You drag the cap, or use the arrow keys, and it settles into the nearest step on a spring.</p>
+      <p>The cap is the one part of the fader made of glass, dial’s only accent material. Its tint comes from what the value is. A heating setpoint takes the warm amber range, a cooling setpoint the cool steel range, and everything else the neutral ink grey. The groove behind the cap is lit in the same tint, from the start up to the cap, so the eye finds the cap and the amount at once. The tint stays close to the plastic and is never a second orange.</p>
       <p>The fader is never orange. On a dial unit, the orange part is the knob. The fader is the quiet control next to it, so the cap and the groove stay plastic and ink.</p>
     </>
   ),
@@ -17,7 +18,7 @@ export const SLIDER: Depth = {
     { situation: 'Turning something on or off', to: '/components/switch', label: 'Switch' },
     { situation: 'Picking one of two to five named modes', to: '/components/segmented-control', label: 'SegmentedControl' },
   ],
-  variants: { na: 'Slider has one look, a plastic cap in a recessed groove. The numerals and the steps are options, covered under Modifiers.' },
+  variants: { na: 'Slider has one look, a glass cap in a recessed groove. The tint, the numerals and the steps are options, covered under Modifiers.' },
   anatomy: {
     render: <Slider label="Volume" min={0} max={10} step={1} defaultValue={4} scale />,
     parts: [
@@ -25,7 +26,7 @@ export const SLIDER: Depth = {
       { part: 'Value', selector: '[data-component="Slider"] > div:first-child > span:last-child', what: 'The current value, above the end of the groove, with tabular figures.' },
       { part: 'Ruler', selector: '[data-component="Slider"] [role="slider"] > div:first-child', what: 'One printed tick per step. The ends and the middle are darker.' },
       { part: 'Groove', selector: '[data-component="Slider"] [role="slider"] > div:nth-child(2)', what: 'A narrow slot recessed into the body. The light falls into it from the top left.' },
-      { part: 'Cap', selector: '[data-component="Slider"] [role="slider"] > div:last-child', what: 'A raised plastic cap with one ink line. It casts a short shadow down and to the right.' },
+      { part: 'Cap', selector: '[data-component="Slider"] [role="slider"] > div:last-child', what: 'A raised cap of frosted glass in the value’s tint, with one ink line. The groove light shows through it, and it casts a short shadow down and to the right.' },
       { part: 'Numerals', selector: '[data-component="Slider"] > div:last-child', what: 'With scale, the ruler values are printed under the groove in the smallest size.' },
     ],
   },

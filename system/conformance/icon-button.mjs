@@ -58,4 +58,15 @@ export default async function iconButton({ check, expect, page, go, main, tokens
     expect(st.s === 'none' && st.t === 'none', `transform ${st.t}, shadow ${st.s}`);
     return 'flat, no travel';
   });
+  // glass (P9, D-007): only a toggle disc latched with aria-pressed turns to glass; a press toggles it back
+  await check('IconButton', 'a toggle disc with aria-pressed latches as frosted glass and releases on the next press', async () => {
+    await go('/components/icon-button/code');
+    // a handle, so the same disc is read again after it releases
+    const b = await main().locator(`${SEL}[aria-pressed="true"]`).first().elementHandle();
+    const read = () => b.evaluate((el) => { const c = getComputedStyle(el); return { p: el.getAttribute('aria-pressed'), f: c.backdropFilter || c.webkitBackdropFilter || 'none' }; });
+    const on = await read();
+    await b.focus(); await page.keyboard.press('Space'); const off = await read();
+    expect(/blur\(/.test(on.f) && off.p === 'false' && off.f === 'none', `latched ${on.f}, released ${off.p} ${off.f}`);
+    return `latched ${on.f}`;
+  });
 }

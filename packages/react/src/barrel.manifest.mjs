@@ -17,4 +17,8 @@ export const BARREL_MANIFEST = [
     header: `Wave 3: home and phone organisms. Pull to refresh, room environment and the units built from wave 1 and 2 parts.`,
     components: ['PullToRefresh', 'Environment', 'MediaPlayer', 'Queue', 'BottomNav', 'ActionSheet', 'Snackbar'],
   },
+  {
+    header: `Wave 4: concept depth`,
+    components: ['Legend', 'SceneCard', 'Slot', 'Tray', 'Icon', 'Wiring', 'ExplainMode'],
+  },
 ];

@@ -1144,5 +1144,259 @@
       "$value": "{alpha.half}",
       "$type": "number"
     }
+  },
+  "glass": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P9"
+        ],
+        "why": "The one accent material. Only caps, lamps, latched keys and chips are frosted glass, tinted in the range of the value they hold and lit through from behind by it; bodies, cards and panels stay matte ABS."
+      }
+    },
+    "body": {
+      "$value": "{color.glass.neutral.body}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.glass.neutral-dark.body}"
+        }
+      },
+      "$type": "color"
+    },
+    "edge": {
+      "$value": "{color.glass.neutral.edge}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.glass.neutral-dark.edge}"
+        }
+      },
+      "$type": "color"
+    },
+    "lit": {
+      "$value": "{color.glass.lit}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{color.glass.lit-dark}"
+        }
+      },
+      "$type": "color"
+    },
+    "blur": {
+      "$value": "{frost.blur}",
+      "$type": "dimension"
+    },
+    "saturate": {
+      "$value": "{frost.saturate}",
+      "$type": "number"
+    },
+    "brightness": {
+      "$value": "{frost.brightness}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{frost.brightness-dark}"
+        }
+      },
+      "$type": "number"
+    },
+    "fill-opacity": {
+      "$value": "{frost.fill-opacity}",
+      "$type": "number"
+    },
+    "solid": {
+      "$value": "{frost.solid}",
+      "$type": "number"
+    },
+    "warm": {
+      "$extensions": {
+        "kiln.why": {
+          "p": [
+            "P9"
+          ],
+          "why": "The warm range gives one hue to a cap's body, its edge, the light behind it and a lit lamp, so the part and the value it holds read as one tone."
+        }
+      },
+      "tint": {
+        "$value": "{color.glass.warm.tint}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.warm-dark.tint}"
+          }
+        },
+        "$type": "color"
+      },
+      "body": {
+        "$value": "{color.glass.warm.body}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.warm-dark.body}"
+          }
+        },
+        "$type": "color"
+      },
+      "edge": {
+        "$value": "{color.glass.warm.edge}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.warm-dark.edge}"
+          }
+        },
+        "$type": "color"
+      },
+      "glow": {
+        "$value": "{color.glass.warm.glow}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.warm-dark.glow}"
+          }
+        },
+        "$type": "color"
+      },
+      "lamp": {
+        "$value": "{color.glass.warm.lamp}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.warm-dark.lamp}"
+          }
+        },
+        "$type": "color"
+      },
+      "matte": {
+        "$value": "{color.glass.warm.matte}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.warm-dark.matte}"
+          }
+        },
+        "$type": "color"
+      }
+    },
+    "cool": {
+      "$extensions": {
+        "kiln.why": {
+          "p": [
+            "P9"
+          ],
+          "why": "The cool range gives one hue to a cap's body, its edge, the light behind it and a lit lamp, so the part and the value it holds read as one tone."
+        }
+      },
+      "tint": {
+        "$value": "{color.glass.cool.tint}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.cool-dark.tint}"
+          }
+        },
+        "$type": "color"
+      },
+      "body": {
+        "$value": "{color.glass.cool.body}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.cool-dark.body}"
+          }
+        },
+        "$type": "color"
+      },
+      "edge": {
+        "$value": "{color.glass.cool.edge}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.cool-dark.edge}"
+          }
+        },
+        "$type": "color"
+      },
+      "glow": {
+        "$value": "{color.glass.cool.glow}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.cool-dark.glow}"
+          }
+        },
+        "$type": "color"
+      },
+      "lamp": {
+        "$value": "{color.glass.cool.lamp}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.cool-dark.lamp}"
+          }
+        },
+        "$type": "color"
+      },
+      "matte": {
+        "$value": "{color.glass.cool.matte}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.cool-dark.matte}"
+          }
+        },
+        "$type": "color"
+      }
+    },
+    "neutral": {
+      "$extensions": {
+        "kiln.why": {
+          "p": [
+            "P9"
+          ],
+          "why": "The neutral range gives one hue to a cap's body, its edge, the light behind it and a lit lamp, so the part and the value it holds read as one tone."
+        }
+      },
+      "tint": {
+        "$value": "{color.glass.neutral.tint}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.neutral-dark.tint}"
+          }
+        },
+        "$type": "color"
+      },
+      "body": {
+        "$value": "{color.glass.neutral.body}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.neutral-dark.body}"
+          }
+        },
+        "$type": "color"
+      },
+      "edge": {
+        "$value": "{color.glass.neutral.edge}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.neutral-dark.edge}"
+          }
+        },
+        "$type": "color"
+      },
+      "glow": {
+        "$value": "{color.glass.neutral.glow}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.neutral-dark.glow}"
+          }
+        },
+        "$type": "color"
+      },
+      "lamp": {
+        "$value": "{color.glass.neutral.lamp}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.neutral-dark.lamp}"
+          }
+        },
+        "$type": "color"
+      },
+      "matte": {
+        "$value": "{color.glass.neutral.matte}",
+        "$extensions": {
+          "kiln.theme": {
+            "dark": "{color.glass.neutral-dark.matte}"
+          }
+        },
+        "$type": "color"
+      }
+    }
   }
 }

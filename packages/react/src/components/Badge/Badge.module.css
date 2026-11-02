@@ -23,12 +23,17 @@
 .word { font-weight: var(--ds-type-weight-regular); }
 
 .neutral .glyph { fill: none; stroke: var(--ds-text-secondary); stroke-width: var(--ds-width-ring); }
-.positive .glyph { fill: var(--ds-status-positive-mark); }
-.warning .glyph { fill: var(--ds-status-warning-mark); stroke: var(--ds-text-primary); stroke-width: var(--ds-width-hairline); stroke-linejoin: round; }
-.critical .glyph { fill: var(--ds-status-critical-mark); }
-.info .glyph { fill: var(--ds-status-info-mark); }
+/* a lit lamp is glass (P9, D-007): its body takes the status hue lit through at the glass fill strength,
+   its edge keeps the full mark so the shape still stands 3:1 off the plastic */
+.positive .glyph { fill: var(--ds-status-positive-mark); fill-opacity: var(--ds-glass-fill-opacity); stroke: var(--ds-status-positive-mark); stroke-width: var(--ds-width-hairline); }
+.warning .glyph { fill: var(--ds-status-warning-mark); fill-opacity: var(--ds-glass-fill-opacity); stroke: var(--ds-text-primary); stroke-width: var(--ds-width-hairline); stroke-linejoin: round; }
+.critical .glyph { fill: var(--ds-status-critical-mark); fill-opacity: var(--ds-glass-fill-opacity); stroke: var(--ds-status-critical-mark); stroke-width: var(--ds-width-hairline); }
+.info .glyph { fill: var(--ds-status-info-mark); fill-opacity: var(--ds-glass-fill-opacity); stroke: var(--ds-status-info-mark); stroke-width: var(--ds-width-hairline); }
 
+@media (prefers-reduced-transparency: reduce) {
+  .glyph { fill-opacity: var(--ds-glass-solid); }
+}
 @media (forced-colors: active) {
-  .glyph { forced-color-adjust: none; fill: CanvasText; stroke: CanvasText; }
+  .glyph { forced-color-adjust: none; fill: CanvasText; fill-opacity: var(--ds-glass-solid); stroke: CanvasText; }
   .neutral .glyph { fill: none; }
 }

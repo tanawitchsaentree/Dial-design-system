@@ -35,6 +35,8 @@ export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   formatValue?: (value: number) => string;
   /** The distance PageUp and PageDown move. It defaults to a tenth of the range, and at least two detents. */
   pageStep?: number;
+  /** The range the value belongs to, which tints the glass cap and the light in the groove behind it. Use warm for heat, cool for cooling and neutral for anything else. Default neutral. */
+  tint?: 'warm' | 'cool' | 'neutral';
   /** The fader cannot be moved; the cap loses its height. */
   disabled?: boolean;
   /** Spring mass of the cap. Default 1.4 (mechanism.mass). */
@@ -60,6 +62,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
     scale = false,
     formatValue = plain,
     pageStep,
+    tint = 'neutral',
     disabled = false,
     mass = MECHANISM.mass,
     stiffness = MECHANISM.stiffness,
@@ -83,7 +86,8 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   const dragging = useRef(false);
   const mounted = useRef(false);
   const [x0] = useState(() => frac(current));
-  const spring = useSpring((x) => capRef.current?.style.setProperty('--x', x.toFixed(4)), { mass, stiffness, damping }, x0);
+  // --x lives on the fader so the cap and the light in the groove behind it move as one
+  const spring = useSpring((x) => faderRef.current?.style.setProperty('--x', x.toFixed(4)), { mass, stiffness, damping }, x0);
 
   useIsoLayoutEffect(() => {
     if (dragging.current) return;
@@ -164,7 +168,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   const text = formatValue(current);
 
   return (
-    <div ref={ref} data-component="Slider" className={cx(styles.root, className)} {...rest}>
+    <div ref={ref} data-component="Slider" data-tint={tint} className={cx(styles.root, className)} {...rest}>
       <div className={styles.header}>
         <span id={labelId} className={styles.label}>{label}</span>
         <span className={styles.value} aria-hidden="true">{text}</span>
@@ -181,6 +185,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
         aria-orientation="horizontal"
         aria-disabled={disabled || undefined}
         className={styles.fader}
+        style={{ '--x': x0 } as CSSProperties}
         onKeyDown={onKeyDown}
         onPointerDown={onPointerDown}
       >
@@ -189,8 +194,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
             <span key={i} className={cx(styles.tick, (i === 0 || i === divisions || i * 2 === divisions) && styles.major)} style={{ '--p': p } as CSSProperties} />
           ))}
         </div>
-        <div className={styles.groove} aria-hidden="true" />
-        <div ref={capRef} className={styles.cap} aria-hidden="true" style={{ '--x': x0 } as CSSProperties} />
+        <div className={styles.groove} aria-hidden="true">
+          <span className={styles.fill} />
+        </div>
+        <div ref={capRef} className={styles.cap} aria-hidden="true" />
       </div>
       {scale && (
         <div className={styles.scale} aria-hidden="true">

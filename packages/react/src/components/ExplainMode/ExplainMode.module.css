@@ -1,0 +1,109 @@
+/* ExplainMode — the SK 4 manual printed on the real screen (P5, P8): each part's name and one line of what it
+   does, printed flat in free space next to it, joined by a hairline leader. The layer never takes a pointer,
+   so every control keeps working; nothing animates (P5: text does not animate). */
+.root {
+  position: relative;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.part { min-inline-size: 0; }
+.layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--ds-layer-raised);
+}
+.leads {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+.lead {
+  fill: none;
+  stroke: var(--ds-text-secondary);
+  stroke-width: var(--ds-width-hairline);
+}
+.note {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  display: grid;
+  gap: var(--ds-gap-xs);
+  inline-size: max-content;
+  max-inline-size: var(--ds-control-menu-min);
+  text-align: center;
+}
+.note[data-side='end'] { text-align: start; }
+.note[data-side='start'] { text-align: end; }
+.name {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.does {
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+/* where no free space is left beside a part: a printed numeral beside it, the note in the key under the unit */
+.mark {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: calc(var(--ds-gap-md) * 2);
+  block-size: calc(var(--ds-gap-md) * 2);
+  border: var(--ds-width-hairline) solid var(--ds-text-secondary);
+  border-radius: var(--ds-corner-round);
+  font-size: var(--ds-type-micro);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-text-primary);
+}
+.keyWrap {
+  overflow: hidden;
+  block-size: var(--explain-key);
+  transition: block-size var(--ds-motion-enter) var(--ds-motion-easing);
+}
+.key {
+  display: grid;
+  gap: var(--ds-gap-md);
+  margin: 0;
+  padding: 0;
+  padding-block-start: var(--ds-gap-xl);
+  list-style: none;
+}
+.keyItem { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ds-gap-sm); }
+.keyNumber {
+  font-size: var(--ds-type-caption);
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-text-secondary);
+}
+.bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-block-start: var(--ds-gap-xl);
+}
+.status {
+  position: absolute;
+  inline-size: var(--ds-space-px);
+  block-size: var(--ds-space-px);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keyWrap { transition: none; }
+}
+@media (forced-colors: active) {
+  .lead { stroke: CanvasText; }
+  .name, .does, .keyNumber { color: CanvasText; }
+  .mark { border-color: CanvasText; color: CanvasText; }
+}

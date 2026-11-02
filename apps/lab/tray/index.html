@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Tray · three recesses for the small keys</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. The tray gathers a unit's small keys so the one orange part stands alone (P1). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lede { margin: 0 0 18px; max-width: 76ch; font-size: 14px; line-height: 1.5; }
+  .theme { position: fixed; inset-block-start: 12px; inset-inline-end: 12px; font: inherit; font-size: 13px; padding: 8px 14px; border-radius: 20px; border: 1px solid var(--ds-line-ring); background: var(--ds-surface-raised); color: inherit; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .col { display: grid; gap: 12px; inline-size: 360px; max-inline-size: 100%; } .col h2 { font-size: 14px; font-weight: 500; margin: 0; }
+  .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); line-height: 1.45; }
+  .unit { border-radius: 28px; padding: 24px; background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); display: grid; gap: 18px; }
+  .labels { display: flex; justify-content: space-between; font-size: 12px; } .labels b { font-weight: 500; letter-spacing: .04em; } .labels span { color: var(--ds-text-secondary); }
+  .oled { border-radius: 4px; background: var(--ds-display-oled-bg); color: var(--ds-display-oled-ink); box-shadow: var(--ds-elevation-well); padding: 14px 16px; font-size: 15px; }
+  .oled small { display: block; font-size: 12px; opacity: .8; }
+  .key { flex: none; display: grid; place-items: center; inline-size: 44px; block-size: 44px; border-radius: 50%; background: var(--ds-surface-raised); color: var(--ds-text-secondary); box-shadow: var(--ds-elevation-part); border: 1px solid transparent; box-sizing: border-box; font-size: 15px; }
+  .cap { flex: none; display: grid; place-items: center; block-size: 44px; padding-inline: 18px; border-radius: 22px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); font-size: 14px; }
+  .big { inline-size: 64px; block-size: 64px; border-radius: 50%; background: var(--ds-action-accent); border: 1px solid var(--ds-action-accent-rim); box-shadow: var(--ds-elevation-part); display: grid; place-items: center; color: var(--ds-text-on-accent); font-size: 22px; }
+  .lamp { display: inline-flex; gap: 6px; align-items: center; font-size: 12px; padding-inline: 4px 8px; } .lamp i { inline-size: 7px; block-size: 7px; border-radius: 50%; background: var(--ds-status-positive-mark); }
+  .face { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  /* A: one recess on the unit's inset line, radius nested like the display window (inner = outer − inset) */
+  .trayA { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  /* B: a capsule well around the keys, its ends nested on the round keys */
+  .trayB { display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 30px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  /* C: a seamed strip, the keys joined into one bank */
+  .trayC { display: flex; border-radius: 22px; box-shadow: var(--ds-elevation-part); overflow: hidden; }
+  .trayC span { block-size: 44px; padding-inline: 16px; display: grid; place-items: center; background: var(--ds-surface-raised); border-inline-end: 1px solid var(--ds-line-divider); font-size: 14px; }
+  .avoid { display: flex; } .avoid span { block-size: 36px; padding-inline: 14px; display: grid; place-items: center; border: 1px solid #888; margin-inline-end: -1px; font-size: 13px; } .avoid span:first-child { border-radius: 8px 0 0 8px; } .avoid span:last-child { border-radius: 0 8px 8px 0; }
+</style>
+</head>
+<body>
+<button class="theme" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">Theme</button>
+<h1>Tray · the recess that holds a unit's small keys</h1>
+<p class="lede">From the Sytren reference: previous, next, a mode key and a lamp sit together in one recessed tray, so the one big orange part stands alone on the plastic. The tray is a recess (elevation.well, inverse light) and its corner nests in its unit. Default to avoid: a toolbar or ButtonGroup of outlined buttons.</p>
+<div class="row">
+  <div class="col"><h2>A · recess on the inset line, nested corner</h2>
+    <div class="unit">
+      <div class="oled">Kiln song<small>Ulm Quartet · 2 of 9</small></div>
+      <div class="face">
+        <div class="trayA"><span class="key">⏮</span><span class="key">⏭</span><span class="cap">Shuffle</span><span class="lamp"><i></i>Live</span></div>
+        <span class="big">▶</span>
+      </div>
+      <div class="labels"><b>dial</b><span>player 2</span></div>
+    </div>
+    <p class="note">The tray is the same kind of recess as the display window and takes the window's nested corner, so the unit has one family of recesses. Keys stand up from its floor with even 8px insets; the lamp sits at the end as printing. When the keys wrap, the tray grows to two rows and keeps its corner.</p></div>
+
+  <div class="col"><h2>B · capsule well</h2>
+    <div class="unit">
+      <div class="oled">Kiln song<small>Ulm Quartet · 2 of 9</small></div>
+      <div class="face">
+        <div class="trayB"><span class="key">⏮</span><span class="key">⏭</span><span class="key">⤨</span></div>
+        <span class="big">▶</span>
+      </div>
+      <div class="labels"><b>dial</b><span>player 2</span></div>
+    </div>
+    <p class="note">The well's ends wrap the round keys. It reads well on one row, but the capsule looks like a segmented pill next to the window's square-ish corner, and it cannot wrap without turning into a blob.</p></div>
+
+  <div class="col"><h2>C · seamed bank</h2>
+    <div class="unit">
+      <div class="oled">Kiln song<small>Ulm Quartet · 2 of 9</small></div>
+      <div class="face">
+        <div class="trayC"><span>⏮</span><span>⏭</span><span>Shuffle</span></div>
+        <span class="big">▶</span>
+      </div>
+      <div class="labels"><b>dial</b><span>player 2</span></div>
+    </div>
+    <p class="note">The keys are joined into one raised bank with seams. It is the ButtonGroup again, a second raised part as wide as the knob that competes with it, with no recess at all.</p>
+    <h2>The default to avoid</h2>
+    <div class="avoid"><span>Prev</span><span>Next</span><span>Mode</span></div>
+  </div>
+</div>
+</body>
+</html>

@@ -38,19 +38,23 @@ export default async function chip({ check, expect, page, go, main, tokens }) {
   });
 
   // under reduce motion the token build sets the travel to 0, so the latch depth is read with motion on
-  await check('Chip', 'a latched chip stays down by its travel with no shadow, its lamp lit', async () => {
+  // a latched chip is frosted glass (P9, D-007): down by its travel, no cast shadow (only inset light), lamp lit
+  await check('Chip', 'a latched chip stays down by its travel as frosted glass with no cast shadow, its lamp lit', async () => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await go('/components/chip/code');
     await page.waitForTimeout(300);
     const r = await main().locator(`${KEY}[aria-pressed="true"]`).first().evaluate((el) => {
       const lamp = el.querySelector('span');
       const probe = (c) => { const d = document.createElement('span'); d.style.color = `var(${c})`; document.body.append(d); const x = getComputedStyle(d).color; d.remove(); return x; };
-      return { t: getComputedStyle(el).transform, s: getComputedStyle(el).boxShadow, lamp: getComputedStyle(lamp).backgroundColor, ink: probe('--ds-text-primary') };
+      const cs = getComputedStyle(el);
+      const cast = cs.boxShadow !== 'none' && cs.boxShadow.split(/,(?![^(]*\))/).some((l) => !/inset/.test(l) && !/rgba\(0, 0, 0, 0\)/.test(l));
+      return { t: cs.transform, cast, s: cs.boxShadow, f: cs.backdropFilter || cs.webkitBackdropFilter || 'none', lamp: getComputedStyle(lamp).backgroundColor, lit: probe('--ds-glass-neutral-lamp') };
     });
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    expect(r.s === 'none' && dyOf(r.t) > 0, `transform ${r.t}, shadow ${r.s}`);
-    expect(r.lamp === r.ink, `lamp ${r.lamp}, ink ${r.ink}`);
-    return `dy ${dyOf(r.t)}px, lamp ${r.lamp}`;
+    expect(!r.cast && dyOf(r.t) > 0, `transform ${r.t}, shadow ${r.s}`);
+    expect(/blur\(/.test(r.f), `backdrop-filter ${r.f}`);
+    expect(r.lamp === r.lit, `lamp ${r.lamp}, lit ${r.lit}`);
+    return `dy ${dyOf(r.t)}px, glass ${r.f}, lamp ${r.lamp}`;
   });
 
   await check('Chip', 'no chip is orange, latched or not', async () => {

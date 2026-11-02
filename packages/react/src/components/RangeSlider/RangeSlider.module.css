@@ -1,7 +1,7 @@
-/* RangeSlider — Slider's family: two plastic caps riding one recessed groove under a printed ruler
-   (FORM.md control class, D-003). The span between the caps is told by heavier ruler printing, never
-   by a filled groove, and no part is orange. Each cap's position (--x, 0..1) is written by its own
-   spring in RangeSlider.tsx. */
+/* RangeSlider — Slider's family: two frosted glass caps riding one recessed groove under a printed ruler
+   (FORM.md control class, D-003; glass P9, D-007). The span between the caps is told by heavier ruler
+   printing and by the value's light in the groove, in the caps' own quiet tint; no part is orange. Each
+   cap's position (--x, 0..1) is written by its own spring in RangeSlider.tsx, mirrored as --x0 / --x1. */
 .root {
   display: grid;
   align-content: start;
@@ -10,6 +10,25 @@
   min-inline-size: calc(var(--ds-layout-touch) * 5);
   font-family: var(--ds-type-family);
   color: var(--ds-text-primary);
+  --glass-tint: var(--ds-glass-neutral-tint);
+  --glass-body: var(--ds-glass-neutral-body);
+  --glass-edge: var(--ds-glass-neutral-edge);
+  --glass-glow: var(--ds-glass-neutral-glow);
+  --glass-matte: var(--ds-glass-neutral-matte);
+}
+.root[data-tint='warm'] {
+  --glass-tint: var(--ds-glass-warm-tint);
+  --glass-body: var(--ds-glass-warm-body);
+  --glass-edge: var(--ds-glass-warm-edge);
+  --glass-glow: var(--ds-glass-warm-glow);
+  --glass-matte: var(--ds-glass-warm-matte);
+}
+.root[data-tint='cool'] {
+  --glass-tint: var(--ds-glass-cool-tint);
+  --glass-body: var(--ds-glass-cool-body);
+  --glass-edge: var(--ds-glass-cool-edge);
+  --glass-glow: var(--ds-glass-cool-glow);
+  --glass-matte: var(--ds-glass-cool-matte);
 }
 .header {
   display: flex;
@@ -67,6 +86,15 @@
   border-radius: var(--ds-corner-round);
   background: var(--ds-surface-sunken);
   box-shadow: var(--ds-elevation-well);
+  overflow: hidden;
+}
+.fill {
+  position: absolute;
+  inset-block: var(--ds-gap-none);
+  inset-inline-start: calc(var(--x0, 0) * 100%);
+  inline-size: calc((var(--x1, 0) - var(--x0, 0)) * 100%);
+  background: var(--glass-tint);
+  opacity: var(--ds-glass-fill-opacity);
 }
 .thumb {
   position: absolute;
@@ -82,10 +110,12 @@
   inset-inline-start: calc((var(--ds-layout-touch) - var(--ds-control-cap-w)) / 2);
   inline-size: var(--ds-control-cap-w);
   block-size: var(--ds-control-cap-h);
-  border: var(--ds-width-hairline) solid transparent;
+  border: var(--ds-width-hairline) solid var(--glass-edge);
   border-radius: var(--ds-corner-mark);
-  background: var(--ds-surface-raised);
-  box-shadow: var(--ds-elevation-part);
+  background: var(--glass-body);
+  -webkit-backdrop-filter: blur(var(--ds-glass-blur)) saturate(var(--ds-glass-saturate)) brightness(var(--ds-glass-brightness));
+  backdrop-filter: blur(var(--ds-glass-blur)) saturate(var(--ds-glass-saturate)) brightness(var(--ds-glass-brightness));
+  box-shadow: var(--ds-elevation-part), inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-glass-lit), inset 0 0 var(--ds-space-1-5) var(--glass-glow);
 }
 .cap::after {
   content: "";
@@ -126,8 +156,13 @@
 @media (prefers-reduced-motion: reduce) {
   .cap::after { transition: none; }
 }
+@media (prefers-reduced-transparency: reduce) {
+  .cap { background: var(--glass-matte); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .fill { background: var(--glass-matte); opacity: var(--ds-glass-solid); }
+}
 @media (forced-colors: active) {
-  .cap { border-color: ButtonText; }
+  .cap { border-color: ButtonText; background: ButtonFace; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .fill { forced-color-adjust: none; background: Highlight; opacity: var(--ds-glass-solid); }
   .cap::after, .thumb:hover .cap::after { border-inline-start-color: ButtonText; }
   .groove { border-color: CanvasText; }
   .tick, .major, .inside { border-inline-start-color: CanvasText; }

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · SceneCard + Slot · three ways to insert a scene</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. A scene is a printed card on light stock (surface.light, text.on-light in both themes),
+     one step lighter than the plastic body. The card is never orange; the unit keeps its own one orange part (P1). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lede { margin: 0 0 18px; max-width: 76ch; font-size: 14px; line-height: 1.5; }
+  .theme { position: fixed; inset-block-start: 12px; inset-inline-end: 12px; font: inherit; font-size: 13px; padding: 8px 14px; border-radius: 20px; border: 1px solid var(--ds-line-ring); background: var(--ds-surface-raised); color: inherit; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .col { display: grid; gap: 12px; inline-size: 400px; max-inline-size: 100%; } .col h2 { font-size: 14px; font-weight: 500; margin: 0; }
+  .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); line-height: 1.45; }
+  .unit { border-radius: 28px; padding: 24px; background: var(--ds-unit-bg); box-shadow: var(--ds-unit-shadow); display: grid; gap: 18px; }
+  .labels { display: flex; justify-content: space-between; font-size: 12px; } .labels b { font-weight: 500; letter-spacing: .04em; } .labels span { color: var(--ds-text-secondary); }
+  .deck { display: flex; gap: 12px; flex-wrap: wrap; }
+  /* the card: printing on light stock, a thin card so the unit shadow, never a key's height */
+  .card { position: relative; box-sizing: border-box; inline-size: 132px; block-size: 176px; padding: 12px; border-radius: 12px; background: var(--ds-surface-light); color: var(--ds-text-on-light); box-shadow: var(--ds-elevation-unit); display: grid; grid-template-rows: auto 1fr auto; font-size: 12px; }
+  .card .name { font-size: 15px; font-weight: 500; line-height: 1.2; padding-inline-end: 20px; }
+  .card ul { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 2px; align-content: start; }
+  .card .foot { display: flex; justify-content: space-between; align-items: end; font-size: 11px; }
+  .grip { position: absolute; inset-block-start: 12px; inset-inline-end: 10px; display: grid; grid-template-columns: repeat(2, 3px); gap: 3px; }
+  .grip i { inline-size: 3px; block-size: 3px; border-radius: 50%; background: currentColor; }
+  .arrow { inline-size: 0; block-size: 0; border-inline: 5px solid transparent; border-block-start: 6px solid currentColor; }
+  .card.held { transform: translateY(-8px); box-shadow: var(--ds-elevation-part); }
+  .card.held::after { content: ''; position: absolute; inset-inline: 24px; inset-block-end: -14px; block-size: 2px; border-radius: 1px; background: var(--ds-text-primary); }
+  /* A: top-loading slit. The bay keeps its height when empty (P6). */
+  .slotA { display: grid; justify-items: center; inline-size: 156px; }
+  .bay { block-size: 88px; inline-size: 132px; overflow: hidden; display: flex; align-items: end; justify-content: center; }
+  .bay .card { border-end-start-radius: 0; border-end-end-radius: 0; block-size: 88px; align-self: end; grid-template-rows: auto 1fr; box-shadow: none; }
+  .bay .print { font-size: 11px; color: var(--ds-text-secondary); display: grid; justify-items: center; gap: 4px; padding-block-end: 8px; }
+  .slit { inline-size: 156px; block-size: 8px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .slit.ready { outline: 2px solid var(--ds-line-ring); outline-offset: 2px; }
+  .slotA .lbl { display: flex; gap: 10px; align-items: center; justify-content: space-between; inline-size: 100%; margin-block-start: 10px; font-size: 13px; }
+  .lamp { display: inline-flex; gap: 6px; align-items: center; font-size: 12px; } .lamp i { inline-size: 7px; block-size: 7px; border-radius: 50%; border: 2px solid var(--ds-text-secondary); box-sizing: border-box; }
+  .lamp.on i { border: 0; background: var(--ds-status-positive-mark); }
+  .knob { inline-size: 64px; block-size: 64px; border-radius: 50%; background: var(--ds-action-accent); border: 1px solid var(--ds-action-accent-rim); box-shadow: var(--ds-elevation-part); }
+  .face { display: flex; justify-content: space-between; align-items: end; gap: 16px; }
+  /* B: side reader. A landscape card slides in from the side and sticks out at the end. */
+  .reader { display: flex; align-items: center; }
+  .mouthB { inline-size: 10px; block-size: 92px; border-radius: 4px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .cardB { box-sizing: border-box; inline-size: 96px; block-size: 84px; padding: 10px; border-start-end-radius: 12px; border-end-end-radius: 12px; background: var(--ds-surface-light); color: var(--ds-text-on-light); font-size: 13px; font-weight: 500; box-shadow: var(--ds-elevation-unit); }
+  .ticket { box-sizing: border-box; inline-size: 176px; block-size: 84px; padding: 10px; border-radius: 12px; background: var(--ds-surface-light); color: var(--ds-text-on-light); box-shadow: var(--ds-elevation-unit); font-size: 13px; font-weight: 500; }
+  /* C: dock bed. The card lies flat in a recess and is wholly visible. */
+  .bed { box-sizing: border-box; inline-size: 156px; block-size: 196px; padding: 10px; border-radius: 16px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); display: grid; place-items: center; font-size: 12px; color: var(--ds-text-secondary); }
+  .bed .card { box-shadow: none; }
+  .avoid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .avoid div { aspect-ratio: 1; border-radius: 20px; display: grid; place-items: center; font-size: 30px; color: white; }
+</style>
+</head>
+<body>
+<button class="theme" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">Theme</button>
+<h1>SceneCard + Slot · a scene is a card you insert</h1>
+<p class="lede">From the Yoto reference: content is chosen by putting a card in. A scene (Movie night, Away, Good night) is printed on a small card of light stock, one step lighter than the plastic. A room or a device has a slot; the inserted card stands half out with its name readable and the slot's lamp lights. Default to avoid: a grid of rounded gradient tiles with big emoji.</p>
+<div class="row">
+  <div class="col"><h2>A · top-loading slit (card stands half out)</h2>
+    <div class="deck">
+      <div class="card held"><span class="grip"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="name">Movie night</span><ul><li>Lamps 20%</li><li>Blinds down</li><li>TV on</li></ul><span class="foot"><span>scene</span><span class="arrow"></span></span></div>
+      <div class="card"><span class="grip"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="name">Good night</span><ul><li>All lamps off</li><li>Heating 18°</li></ul><span class="foot"><span>scene</span><span class="arrow"></span></span></div>
+    </div>
+    <div class="unit">
+      <div class="face">
+        <div class="slotA"><div class="bay"><div class="card"><span class="name">Away</span><ul><li>Lamps off</li></ul></div></div><div class="slit"></div><div class="lbl"><span>Living room</span><span class="lamp on"><i></i>Running</span></div></div>
+        <div class="knob"></div>
+      </div>
+      <div class="labels"><b>dial</b><span>scene 1</span></div>
+    </div>
+    <div class="unit">
+      <div class="face">
+        <div class="slotA"><div class="bay"><div class="print">scene card<span class="arrow"></span></div></div><div class="slit ready"></div><div class="lbl"><span>Kitchen</span><span class="lamp"><i></i>Empty</span></div></div>
+      </div>
+    </div>
+    <p class="note">The name is printed at the top edge, so half the card out of the slit is still the name. The empty bay keeps its height and prints where the card goes. A held card rises one step with an ink mark under it; the waiting slits show a ring. One mechanism, one card shape.</p></div>
+
+  <div class="col"><h2>B · side reader (landscape ticket)</h2>
+    <div class="deck"><div class="ticket">Movie night<br><span style="font-weight:400;font-size:12px">Lamps 20% · Blinds down</span></div></div>
+    <div class="unit">
+      <div class="reader"><div style="flex:1;font-size:13px">Living room</div><div class="mouthB"></div><div class="cardB">Movie ni…</div></div>
+      <div class="labels"><b>dial</b><span>scene 1</span></div>
+    </div>
+    <p class="note">The card enters sideways and sticks out past the unit's end. Only the start of the name stays out, so a longer name is cut; the stub also breaks the body's silhouette on a phone and pushes the knob aside.</p></div>
+
+  <div class="col"><h2>C · dock bed (card lies in a recess)</h2>
+    <div class="unit">
+      <div class="face">
+        <div class="bed"><div class="card"><span class="name">Movie night</span><ul><li>Lamps 20%</li><li>Blinds down</li></ul><span class="foot"><span>scene</span><span></span></span></div></div>
+        <div class="knob"></div>
+      </div>
+      <div class="labels"><b>dial</b><span>scene 1</span></div>
+    </div>
+    <p class="note">The whole card shows in a recessed bed. It reads as a drop zone holding a tile: the bed doubles the unit's footprint and the card is not in anything. It slides back toward the scene tile grid.</p>
+    <h2>The default to avoid</h2>
+    <div class="avoid"><div style="background:linear-gradient(135deg,#8a5cf6,#ec4899)">🎬</div><div style="background:linear-gradient(135deg,#0ea5e9,#22c55e)">🌙</div><div style="background:linear-gradient(135deg,#f97316,#facc15)">🏠</div></div>
+  </div>
+</div>
+</body>
+</html>

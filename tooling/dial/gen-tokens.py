@@ -89,7 +89,37 @@ P = {
    base=t(0), raised=t(10), sticky=t(100), overlay=t(1000), toast=t(1100)),
  "alpha": grp(["P6"], "Disabled parts flatten and fade to half, keeping their outline readable against the body.", "number", half=t(0.5)),
 }
-json.dump(P, open(os.path.join(src,'primitive.json'),'w'), indent=2); 
+# ---- glass, the one accent material (P9, D-007): recipe A, frosted tinted resin lit from behind by the value.
+# Tints come from the value's own range and stay quiet near the plastic; alphas are baked into the hex, the
+# matte fallback (reduced transparency, forced colours) is the same body flattened onto the plastic it sits on.
+GT = {"light": {"warm": "D9A55B", "cool": "7FA0B8", "neutral": "8A8780"},
+      "dark":  {"warm": "D2A465", "cool": "86A3B9", "neutral": "BDBAB3"}}
+GA = {"light": {"body": 0x6B, "edge": 0xB3, "glow": 0x8C},
+      "dark":  {"body": 0x57, "edge": 0xB3, "glow": 0x73}}
+# a lit lamp is the same hue pushed toward the ink (deeper in light, paler in dark), so lit against unlit reads at a glance
+GL = {"light": {"warm": "A8722A", "cool": "4F7590", "neutral": "4A4844"},
+      "dark":  {"warm": "E8C48C", "cool": "B5CCDD", "neutral": "EDEBE6"}}
+GROUND = {"light": "E8E6E1", "dark": "2F2F2D"}  # color.abs.100 / color.charcoal.850, the body a glass part sits on
+def over(fg, a, bg):
+    f = [int(fg[i:i+2], 16) for i in (0, 2, 4)]; b = [int(bg[i:i+2], 16) for i in (0, 2, 4)]
+    return "#" + "".join("%02X" % round(a/255*x + (1-a/255)*y) for x, y in zip(f, b))
+def glass_ed(ed):
+    out = {}
+    for tint, hx in GT[ed].items():
+        a = GA[ed]
+        out[tint] = {"tint": t("#"+hx, desc=f"{tint} range, the value's own hue"),
+                     **{k: t("#%s%02X" % (hx, a[k]), desc=f"{k}, alpha {a[k]/255:.2f}") for k in a},
+                     "lamp": t("#%sE6" % GL[ed][tint], desc="a lit lamp of this range, alpha 0.90"),
+                     "matte": t(over(hx, a["body"], GROUND[ed]), desc="the body flattened onto the plastic, for reduced transparency")}
+    return out
+P["color"]["glass"] = {"$extensions": why(["P9"], "Glass tints in three value ranges, warm amber for warmth, a cool steel for cooling and ink grey for anything neutral, each quiet and near the plastic so none becomes a second orange."),
+    **glass_ed("light"), **{f"{k}-dark": v for k, v in glass_ed("dark").items()},
+    "lit": t("#FFFFFF8C", desc="top-left lit hairline on glass, light"), "lit-dark": t("#FFFFFF26", desc="top-left lit hairline on glass, dark")}
+P["frost"] = grp(["P9"], "The frosted glass recipe for the small parts that move is a light blur, a lift in saturation and a small brightness step, so what is behind a cap reads through it softly and the top-left light stays on its surface.", "number",
+   blur={"$type":"dimension","$value":"3px","$description":"a frost, not a pane: the groove and ticks still read through a cap"},
+   saturate=t(1.4), brightness=t(1.05, desc="light edition"), **{"brightness-dark":t(0.92, desc="dark edition: glass darkens a step so text on it keeps 4.5:1"),
+   "fill-opacity":t(0.62, desc="the value's light in the groove behind a cap"), "solid":t(1, desc="fallback: no transparency")})
+json.dump(P, open(os.path.join(src,'primitive.json'),'w'), indent=2);
 
 # ---------------------------------------------------------------- semantic
 L = lambda a,b: t("{%s}"%a, "{%s}"%b)
@@ -169,6 +199,14 @@ S = {
    base=L("color.abs.50","color.charcoal.950"), glow=A("color.ink-a.06"), **{"glow-soft":A("color.ink-a.06"),"line-major":A("color.ink-a.14"),"on-column":L("color.abs.0","color.abs.900")},
    line=A("color.ink-a.06"), column=L("color.abs.700","color.charcoal.200"), margin=L("color.abs.700","color.charcoal.100")),
  "opacity": grp(["P6"], "Disabled parts lose height and fade to half, and their outline stays above 3:1.", disabled=A("alpha.half")),
+ "glass": grp(["P9"], "The one accent material. Only caps, lamps, latched keys and chips are frosted glass, tinted in the range of the value they hold and lit through from behind by it; bodies, cards and panels stay matte ABS.",
+   body=L("color.glass.neutral.body","color.glass.neutral-dark.body"), edge=L("color.glass.neutral.edge","color.glass.neutral-dark.edge"),
+   lit=L("color.glass.lit","color.glass.lit-dark"),
+   blur=A("frost.blur"), saturate=A("frost.saturate"), brightness=L("frost.brightness","frost.brightness-dark"),
+   **{"fill-opacity":A("frost.fill-opacity"), "solid":A("frost.solid")},
+   **{tint: {"$extensions": why(["P9"], f"The {tint} range gives one hue to a cap's body, its edge, the light behind it and a lit lamp, so the part and the value it holds read as one tone."),
+             **{role: L(f"color.glass.{tint}.{role}", f"color.glass.{tint}-dark.{role}") for role in ["tint","body","edge","glow","lamp","matte"]}}
+      for tint in ["warm","cool","neutral"]}),
 }
 json.dump(S, open(os.path.join(src,'semantic.json'),'w'), indent=2)
 C = json.load(open(os.path.join(src,'component.json')))

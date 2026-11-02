@@ -11,6 +11,7 @@ export const BADGE: Depth = {
   overview: (
     <>
       <p>Badge prints a status on the case as a small lamp and a word, such as Online or Door open. It is flat printing, with no box, no fill and no shadow. It sits on the text line next to the thing it describes.</p>
+      <p>A lit lamp is a small glass bead. Its body lets the plastic show through in the status hue and its edge carries the full mark, so the shape still stands out. The word next to it stays ink on plastic and never sits on the glass.</p>
       <p>Each tone has its own shape. Positive is a dot, warning a triangle, critical a square, info a diamond and neutral a ring. The word is always there too, so the status never depends on colour. No tone is orange.</p>
     </>
   ),
@@ -31,7 +32,7 @@ export const BADGE: Depth = {
     render: <Badge tone="critical" count={3}>offline</Badge>,
     parts: [
       { part: 'Line', selector: '[data-component="Badge"]', what: 'One inline line of printing on the text line.' },
-      { part: 'Lamp', selector: '[data-component="Badge"] svg', what: 'A 10px printed glyph, its shape set by the tone.' },
+      { part: 'Lamp', selector: '[data-component="Badge"] svg', what: 'A 10px glyph, its shape set by the tone. A lit tone is a glass bead with a full edge.' },
       { part: 'Count', selector: '[data-component="Badge"] > span:nth-of-type(1)', what: 'An optional number in tabular figures and medium weight.' },
       { part: 'Word', selector: '[data-component="Badge"] > span:last-of-type', what: 'The status word in ink, caption size, never tinted.' },
     ],

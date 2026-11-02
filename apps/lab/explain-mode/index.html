@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · ExplainMode · three ways to name the parts on the real screen</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p.lead { margin: 0 0 18px; max-width: 80ch; font-size: 14px; line-height: 1.5; }
+  .variant { margin-block-end: 44px; } .variant > h2 { font-size: 15px; font-weight: 500; margin: 0 0 4px; } .variant > .note { font-size: 13px; margin: 0 0 12px; color: var(--ds-text-secondary); max-width: 90ch; line-height: 1.45; }
+  .face { position: relative; inline-size: 640px; block-size: 400px; border-radius: 28px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit), inset 1px 1px 0 var(--ds-material-lit); }
+  .lcd { position: absolute; inset-inline-start: 32px; inset-block-start: 32px; inline-size: 576px; block-size: 72px; background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); border-radius: 14px; box-shadow: var(--ds-elevation-well); display: grid; place-items: center end; padding-inline: 20px; box-sizing: border-box; font-size: 34px; font-variant-numeric: tabular-nums; }
+  .knob { position: absolute; inline-size: 80px; block-size: 80px; border-radius: 50%; background: var(--ds-surface-knob); box-shadow: var(--ds-elevation-part); }
+  .knob.loud { background: var(--ds-action-accent); }
+  .knob::after { content: ''; position: absolute; inset-block-start: 8px; inset-inline-start: 50%; inline-size: 3px; block-size: 12px; background: currentColor; border-radius: 2px; }
+  .keys { position: absolute; display: flex; gap: 12px; } .keys i { inline-size: 44px; block-size: 44px; border-radius: 50%; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); display: block; }
+  .lab { position: absolute; font-size: 13px; line-height: 18px; } .lab b { display: block; font-weight: 500; } .lab span { color: var(--ds-text-secondary); font-size: 12px; }
+  .lab.c { text-align: center; transform: translateX(-50%); inline-size: 150px; }
+  svg.leads { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; pointer-events: none; overflow: visible; }
+  svg.leads path { fill: none; stroke: var(--ds-text-secondary); stroke-width: 1; }
+  .toggle { position: absolute; inset-inline-end: 24px; inset-block-end: 20px; min-block-size: 44px; padding-inline: 16px; border-radius: 22px; background: var(--ds-surface-raised); box-shadow: inset 1px 1px 2px var(--ds-material-shade); display: grid; place-items: center; font-size: 14px; font-weight: 500; }
+  .num { display: inline-grid; place-items: center; inline-size: 20px; block-size: 20px; border: 1px solid var(--ds-text-secondary); border-radius: 50%; font-size: 12px; position: absolute; font-variant-numeric: tabular-nums; }
+  .legend { position: absolute; inset-inline: 32px; inset-block-start: 280px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; font-size: 13px; } .legend div { display: flex; gap: 8px; } .legend em { font-style: normal; color: var(--ds-text-secondary); }
+  .scrim { position: absolute; inset: 0; border-radius: 28px; background: rgb(0 0 0 / .55); }
+  .spot { position: absolute; border-radius: 50%; box-shadow: 0 0 0 4px #fff; }
+  .pop { position: absolute; background: #fff; color: #111; border-radius: 10px; padding: 12px; font-size: 13px; inline-size: 220px; box-shadow: 0 8px 24px rgb(0 0 0 / .3); }
+  .theme { position: fixed; inset-block-start: 12px; inset-inline-end: 12px; }
+</style>
+</head>
+<body>
+<button class="theme" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">theme</button>
+<h1>ExplainMode · the radio's parts named on the real screen</h1>
+<p class="lead">The same tuner unit in "how this works" mode. The knobs keep working while the printing is up; Escape or the same key closes it.</p>
+
+<section class="variant">
+  <h2>A · printed under the part (SK 4 manual: name and one line under each knob, thin leaders)</h2>
+  <p class="note">Each name prints in the free space under its part, centred, with a short vertical leader from the part's edge; where under is taken it goes to the side. Nothing moves; the printing sits on the plastic between parts.</p>
+  <div class="face">
+    <div class="lcd">87.6 MHz</div>
+    <div class="knob loud" style="inset-inline-start:72px; inset-block-start:144px"></div>
+    <div class="knob" style="inset-inline-start:272px; inset-block-start:144px"></div>
+    <div class="keys" style="inset-inline-start:448px; inset-block-start:162px"><i></i><i></i><i></i></div>
+    <svg class="leads" aria-hidden="true"><path d="M112 224 V248" /><path d="M312 224 V248" /><path d="M514 206 V248" /><path d="M320 104 V120 H360" /></svg>
+    <div class="lab c" style="inset-inline-start:112px; inset-block-start:252px"><b>Station</b><span>Turns through the stations on the band.</span></div>
+    <div class="lab c" style="inset-inline-start:312px; inset-block-start:252px"><b>Volume</b><span>Sets how loud the speaker plays.</span></div>
+    <div class="lab c" style="inset-inline-start:514px; inset-block-start:252px"><b>Band</b><span>Picks FM, AM or long wave.</span></div>
+    <div class="lab" style="inset-inline-start:366px; inset-block-start:110px"><b>Window</b><span>Shows the station you are on.</span></div>
+    <div class="toggle">How this works</div>
+  </div>
+</section>
+
+<section class="variant">
+  <h2>B · margin callouts (the book home's leaders: names in two side lanes)</h2>
+  <p class="note">Names stand in lanes outside the unit on the module rows, joined by one-bend leaders. Clear and already in the book, but it needs empty margin beside the unit, which a phone screen does not have.</p>
+  <div style="position:relative; inline-size:960px">
+    <div class="face" style="margin-inline:160px">
+      <div class="lcd">87.6 MHz</div>
+      <div class="knob loud" style="inset-inline-start:72px; inset-block-start:144px"></div>
+      <div class="knob" style="inset-inline-start:272px; inset-block-start:144px"></div>
+      <div class="keys" style="inset-inline-start:448px; inset-block-start:162px"><i></i><i></i><i></i></div>
+      <div class="toggle">How this works</div>
+    </div>
+    <svg class="leads" aria-hidden="true"><path d="M232 184 H140 L128 176" /><path d="M592 184 H500" /><path d="M766 184 H820 L832 176" /><path d="M766 68 H820 L832 64" /></svg>
+    <div class="lab" style="inset-inline-start:0; inset-block-start:160px; inline-size:124px; text-align:end"><b>Station</b><span>Turns through the stations.</span></div>
+    <div class="lab" style="inset-inline-start:836px; inset-block-start:160px; inline-size:124px"><b>Band</b><span>Picks FM, AM or long wave.</span></div>
+    <div class="lab" style="inset-inline-start:836px; inset-block-start:48px; inline-size:124px"><b>Window</b><span>Shows the station.</span></div>
+  </div>
+</section>
+
+<section class="variant">
+  <h2>C · numbered legend (numerals beside each part, the words printed in a key below)</h2>
+  <p class="note">Small printed numerals sit beside each part and a two-column key explains them at the foot of the unit. Fits any width, but the eye reads a number, then looks down, then back.</p>
+  <div class="face">
+    <div class="lcd">87.6 MHz</div>
+    <div class="knob loud" style="inset-inline-start:72px; inset-block-start:144px"></div><span class="num" style="inset-inline-start:160px; inset-block-start:144px">1</span>
+    <div class="knob" style="inset-inline-start:272px; inset-block-start:144px"></div><span class="num" style="inset-inline-start:360px; inset-block-start:144px">2</span>
+    <div class="keys" style="inset-inline-start:448px; inset-block-start:162px"><i></i><i></i><i></i></div><span class="num" style="inset-inline-start:592px; inset-block-start:150px">3</span>
+    <div class="legend"><div>1 Station <em>turns through the stations</em></div><div>2 Volume <em>sets how loud it plays</em></div><div>3 Band <em>picks FM, AM or long wave</em></div><div>4 Window <em>shows the station</em></div></div>
+    <div class="toggle">How this works</div>
+  </div>
+</section>
+
+<section class="variant">
+  <h2>D · spotlight tour (the default to avoid: scrim, one hole, a popover with Next)</h2>
+  <p class="note">The Intro.js shape. Rendered so the rejection is seen: the scrim blocks every control, one part at a time, and the popover is a second white material.</p>
+  <div class="face">
+    <div class="lcd">87.6 MHz</div>
+    <div class="knob loud" style="inset-inline-start:72px; inset-block-start:144px"></div>
+    <div class="knob" style="inset-inline-start:272px; inset-block-start:144px"></div>
+    <div class="scrim"></div><div class="spot" style="inset-inline-start:68px; inset-block-start:140px; inline-size:88px; block-size:88px"></div>
+    <div class="pop" style="inset-inline-start:176px; inset-block-start:150px"><b>Step 1 of 4</b><br>This is the station knob. <br><u>Next</u></div>
+  </div>
+</section>
+</body>
+</html>

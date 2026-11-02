@@ -4,7 +4,7 @@
 // work before the system has components; controls come from system/controls.tsx, which must become the
 // system's own Select and Slider (G-N1) during wave 1.
 import { useMemo, useState, type ReactElement, type ReactNode } from 'react';
-import * as Icons from '../icons';
+import { Icon, ICON_NAMES, type IconName, type IconSize } from 'dial-react';
 import { Range, Choice } from '../system/controls';
 import { CodeBlock, Fact, Stage, TOKENS } from './kit';
 
@@ -183,26 +183,25 @@ export function MotionPlayground() {
 
 // ---------- Icons ----------
 export function IconBrowser() {
-  const all = Object.entries(Icons).filter(([n]) => n.startsWith('Icon'));
   const [q, setQ] = useState('');
-  const [size, setSize] = useState('control.icon-md');
-  const [picked, setPicked] = useState(Object.keys(Icons).find((n) => n.startsWith('Icon')) ?? '');
-  const list = useMemo(() => all.filter(([n]) => n.toLowerCase().includes(q.toLowerCase())), [q]);
-  const P = (Icons as Record<string, (p: { className?: string; style?: object }) => ReactElement>)[picked];
+  const [size, setSize] = useState<IconSize>('md');
+  const [picked, setPicked] = useState<IconName>(ICON_NAMES[0]);
+  const list = useMemo(() => ICON_NAMES.filter((n) => n.includes(q.trim().toLowerCase())), [q]);
+  const px = (s: IconSize) => (s === 'lg' ? '24px' : String(TOKENS[`control.icon-${s}`]?.value ?? ''));
   return (
     <Playground
       title="Icon browser"
       controls={<>
         <label className="pg-control"><span className="pg-label">Search</span><input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by name" /></label>
-        <Select label="Size" value={size} options={[['control.icon-sm', `small · ${TOKENS['control.icon-sm'].value}`], ['control.icon-md', `medium · ${TOKENS['control.icon-md'].value}`]]} onChange={setSize} />
+        <Select label="Size" value={size} options={[['sm', `small · ${px('sm')}`], ['md', `medium · ${px('md')}`], ['lg', `large · ${px('lg')}`]]} onChange={(v) => setSize(v as IconSize)} />
       </>}
       preview={
-        <ul className="pg-icons flush">
-          {list.map(([n, I]) => { const C = I as (p: { style?: object }) => ReactElement; return <li key={n}><button type="button" className={n === picked ? 'pg-icon on' : 'pg-icon'} aria-pressed={n === picked} aria-label={n} onClick={() => setPicked(n)}><C style={{ inlineSize: `var(${TOKENS[size].css})`, blockSize: `var(${TOKENS[size].css})` }} /></button></li>; })}
+        <ul className="pg-icons flush" style={{ inlineSize: '100%' }}>
+          {list.map((n) => <li key={n}><button type="button" className={n === picked ? 'pg-icon on' : 'pg-icon'} aria-pressed={n === picked} aria-label={n} onClick={() => setPicked(n)}><Icon name={n} size={size} /></button></li>)}
         </ul>
       }
-      note={<p className="flush">Selected {picked}. Click any icon to change the snippet below.</p>}
-      code={`import { ${picked} } from './icons';\n<${picked} style={{ inlineSize: 'var(${TOKENS[size].css})', blockSize: 'var(${TOKENS[size].css})' }} />`}
+      note={<p className="flush">Selected {picked}. Click any glyph to change the snippet below. {list.length} of {ICON_NAMES.length} glyphs shown.</p>}
+      code={`import { Icon } from 'dial-react';\n<Icon name="${picked}" size="${size}" />`}
     />
   );
 }

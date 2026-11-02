@@ -1,7 +1,7 @@
-/* Scrubber — the position of a track: Slider's plastic cap in a recessed groove (FORM.md control
-   class, D-003), chapter starts printed above, the buffered stretch one ink step darker in the groove,
-   elapsed and remaining time printed under the ends. Nothing is orange: the play key is the loud part.
-   The cap's position (--x, 0..1) is written by the spring in Scrubber.tsx. */
+/* Scrubber — the position of a track: Slider's frosted glass cap in a recessed groove (FORM.md control
+   class, D-003; glass P9, D-007), chapter starts printed above, the played stretch lit in the cap's tint,
+   the buffered stretch one ink step darker, elapsed and remaining time printed under the ends. Nothing is
+   orange: the play key is the loud part. The cap's position (--x, 0..1) is written by the spring. */
 .root {
   display: grid;
   align-content: start;
@@ -10,6 +10,25 @@
   min-inline-size: calc(var(--ds-layout-touch) * 5);
   font-family: var(--ds-type-family);
   color: var(--ds-text-primary);
+  --glass-tint: var(--ds-glass-neutral-tint);
+  --glass-body: var(--ds-glass-neutral-body);
+  --glass-edge: var(--ds-glass-neutral-edge);
+  --glass-glow: var(--ds-glass-neutral-glow);
+  --glass-matte: var(--ds-glass-neutral-matte);
+}
+.root[data-tint='warm'] {
+  --glass-tint: var(--ds-glass-warm-tint);
+  --glass-body: var(--ds-glass-warm-body);
+  --glass-edge: var(--ds-glass-warm-edge);
+  --glass-glow: var(--ds-glass-warm-glow);
+  --glass-matte: var(--ds-glass-warm-matte);
+}
+.root[data-tint='cool'] {
+  --glass-tint: var(--ds-glass-cool-tint);
+  --glass-body: var(--ds-glass-cool-body);
+  --glass-edge: var(--ds-glass-cool-edge);
+  --glass-glow: var(--ds-glass-cool-glow);
+  --glass-matte: var(--ds-glass-cool-matte);
 }
 .header {
   display: flex;
@@ -60,6 +79,15 @@
   inline-size: calc(var(--buffered, 0) * 100%);
   background: var(--ds-line-ring);
 }
+/* the played stretch: the value's light in the groove up to the cap's centre */
+.fill {
+  position: absolute;
+  inset-block: var(--ds-gap-none);
+  inset-inline-start: var(--ds-gap-none);
+  inline-size: calc(var(--x, 0) * 100%);
+  background: var(--glass-tint);
+  opacity: var(--ds-glass-fill-opacity);
+}
 .cap {
   position: absolute;
   box-sizing: border-box;
@@ -67,10 +95,12 @@
   inset-inline-start: calc(var(--x, 0) * (100% - var(--ds-control-cap-w)));
   inline-size: var(--ds-control-cap-w);
   block-size: var(--ds-control-cap-h);
-  border: var(--ds-width-hairline) solid transparent;
+  border: var(--ds-width-hairline) solid var(--glass-edge);
   border-radius: var(--ds-corner-mark);
-  background: var(--ds-surface-raised);
-  box-shadow: var(--ds-elevation-part);
+  background: var(--glass-body);
+  -webkit-backdrop-filter: blur(var(--ds-glass-blur)) saturate(var(--ds-glass-saturate)) brightness(var(--ds-glass-brightness));
+  backdrop-filter: blur(var(--ds-glass-blur)) saturate(var(--ds-glass-saturate)) brightness(var(--ds-glass-brightness));
+  box-shadow: var(--ds-elevation-part), inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-glass-lit), inset 0 0 var(--ds-space-1-5) var(--glass-glow);
 }
 .cap::after {
   content: "";
@@ -105,8 +135,13 @@
 @media (prefers-reduced-motion: reduce) {
   .cap::after { transition: none; }
 }
+@media (prefers-reduced-transparency: reduce) {
+  .cap { background: var(--glass-matte); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .fill { background: var(--glass-matte); opacity: var(--ds-glass-solid); }
+}
 @media (forced-colors: active) {
-  .cap { border-color: ButtonText; }
+  .cap { border-color: ButtonText; background: ButtonFace; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .fill { forced-color-adjust: none; background: Highlight; opacity: var(--ds-glass-solid); }
   .cap::after, .fader:hover .cap::after { border-inline-start-color: ButtonText; }
   .groove { border-color: CanvasText; }
   .buffer { forced-color-adjust: none; background: GrayText; }

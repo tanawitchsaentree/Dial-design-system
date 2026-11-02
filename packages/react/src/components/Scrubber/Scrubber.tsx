@@ -43,6 +43,8 @@ export interface ScrubberProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onC
   step?: number;
   /** How far PageUp and PageDown move, in seconds. Default 30. */
   pageStep?: number;
+  /** The range the track belongs to, which tints the glass cap and the played stretch of the groove behind it. Default neutral. */
+  tint?: 'warm' | 'cool' | 'neutral';
   /** Nothing is loaded yet; the cap loses its height and cannot be moved. */
   disabled?: boolean;
   /** Spring mass of the cap. Default 1.4 (mechanism.mass). */
@@ -76,6 +78,7 @@ export const Scrubber = forwardRef<HTMLDivElement, ScrubberProps>(function Scrub
     chapters,
     step = 5,
     pageStep = 30,
+    tint = 'neutral',
     disabled = false,
     mass = MECHANISM.mass,
     stiffness = MECHANISM.stiffness,
@@ -101,7 +104,8 @@ export const Scrubber = forwardRef<HTMLDivElement, ScrubberProps>(function Scrub
   const seeking = useRef(false);
   const mounted = useRef(false);
   const [x0] = useState(() => frac(current));
-  const spring = useSpring((x) => capRef.current?.style.setProperty('--x', x.toFixed(4)), { mass, stiffness, damping }, x0);
+  // --x lives on the fader so the cap and the played light in the groove behind it move as one
+  const spring = useSpring((x) => faderRef.current?.style.setProperty('--x', x.toFixed(4)), { mass, stiffness, damping }, x0);
 
   // playback steps the cap with the time; only a seek by key travels on the spring
   useIsoLayoutEffect(() => {
@@ -184,7 +188,7 @@ export const Scrubber = forwardRef<HTMLDivElement, ScrubberProps>(function Scrub
   const loaded = buffered === undefined ? 0 : Math.min(1, Math.max(0, frac(buffered)));
 
   return (
-    <div ref={ref} data-component="Scrubber" className={cx(styles.root, className)} {...rest}>
+    <div ref={ref} data-component="Scrubber" data-tint={tint} className={cx(styles.root, className)} {...rest}>
       <div className={styles.header}>
         <span id={labelId} className={styles.label}>{label}</span>
       </div>
@@ -200,6 +204,7 @@ export const Scrubber = forwardRef<HTMLDivElement, ScrubberProps>(function Scrub
         aria-orientation="horizontal"
         aria-disabled={disabled || undefined}
         className={styles.fader}
+        style={{ '--x': x0 } as CSSProperties}
         onKeyDown={onKeyDown}
         onPointerDown={onPointerDown}
       >
@@ -209,9 +214,10 @@ export const Scrubber = forwardRef<HTMLDivElement, ScrubberProps>(function Scrub
           ))}
         </div>
         <div className={styles.groove} aria-hidden="true">
+          <span className={styles.fill} />
           <span className={styles.buffer} style={{ '--buffered': loaded } as CSSProperties} />
         </div>
-        <div ref={capRef} className={styles.cap} aria-hidden="true" style={{ '--x': x0 } as CSSProperties} />
+        <div ref={capRef} className={styles.cap} aria-hidden="true" />
       </div>
       <div className={styles.times} aria-hidden="true">
         <span className={styles.time}>{formatTime(current, long)}</span>
