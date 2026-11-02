@@ -93,4 +93,31 @@ export default async function select({ check, expect, page, go, main, tokens }) 
     expect(r.glyph && r.weight >= 500 && !r.orange, `glyph ${r.glyph}, weight ${r.weight}, orange ${r.orange}`);
     return `well ${r.well}px, chosen weight ${r.weight}`;
   });
+  // R-002 (user, 2026-11-02): the panel was as narrow as a short trigger, so option words were cut at its edge.
+  await check('Select', 'every option word shows in full inside the open panel, on every select on the page', async () => {
+    const bad = [];
+    for (const route of ['/components/select/code', '/components/container/usage', '/components/display/usage']) {
+      await go(route);
+      const boxes = main().locator('[data-component="Select"] [role="combobox"]:not(:disabled)');
+      const n = Math.min(await boxes.count(), 4);
+      for (let i = 0; i < n; i++) {
+        const b = boxes.nth(i);
+        await b.scrollIntoViewIfNeeded(); await b.click();
+        const r = await page.evaluate(() => {
+          const lb = document.querySelector('[role="listbox"]:not([hidden])');
+          if (!lb) return null;
+          const p = lb.getBoundingClientRect();
+          return [...lb.querySelectorAll('[role="option"]')].map((o) => {
+            const t = o.lastElementChild ?? o; const tr = t.getBoundingClientRect();
+            return t.scrollWidth > t.clientWidth + 1 || tr.right > p.right - 1 ? o.textContent.trim() : null;
+          }).filter(Boolean);
+        });
+        await page.keyboard.press('Escape');
+        if (r === null) bad.push(`${route} #${i}: no open listbox`);
+        else if (r.length) bad.push(`${route} #${i}: cut ${r.join(', ')}`);
+      }
+    }
+    expect(!bad.length, bad.slice(0, 4).join(' | '));
+    return 'no option word is cut';
+  });
 }

@@ -57,7 +57,9 @@
 .panel {
   position: absolute;
   inset-block-start: calc(100% + var(--ds-gap-sm));
-  inset-inline: 0;
+  inset-inline-start: 0;
+  min-inline-size: max(100%, var(--ds-control-menu-min));
+  inline-size: max-content;
   z-index: var(--ds-layer-overlay);
   box-sizing: border-box;
   max-block-size: calc(var(--ds-control-md) * 6 + var(--ds-gap-sm) * 2);
@@ -91,7 +93,7 @@
   inline-size: var(--ds-control-icon-sm);
   block-size: var(--ds-control-icon-sm);
 }
-.text { flex: 1 1 auto; min-inline-size: 0; }
+.text { flex: 1 1 auto; min-inline-size: 0; white-space: nowrap; }
 .md .trigger { min-block-size: var(--ds-control-md); }
 .lg .trigger { min-block-size: var(--ds-control-lg); padding-inline: var(--ds-gap-2xl); font-size: var(--ds-type-emphasis); }
 

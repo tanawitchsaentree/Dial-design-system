@@ -10,3 +10,11 @@ concept, anchor round, tooling), not only a new check.
 - **Step that produced it:** Phase 2/docs: the shell was treated as infrastructure (kiln docs-engine content model) and never derived from CONCEPT.md like a component. No lab round for the book itself.
 - **What changed in that step:** the book shell is derived like an identity component: default_to_avoid (generic docs shell), Rams/Braun print references (Braun product leaflets and manuals, Vitsoe), ≥3 shell variants in apps/lab/book/, agent pick logged in REVIEW.md. The book opens in its base theme (light warm-white ABS); dark stays a choice. The page becomes a dial object: page grid from the unit inset, headings and labels set like printing on a case, nav as a printed index with an ink mark, the live demo on a plastic unit stage, code in a recessed window, one orange part per page at most (the demo's own primary control).
 - **Check that now catches it:** the book shell's own derivation file (apps/lab/book/derivation.json) and REVIEW row; screenshots of every shell variant in light and dark before the pick.
+
+### R-002: Select panel cut its option words
+- **Date:** 2026-11-02
+- **User said:** "แน่ใจนะว่าเสร็จ" with a screenshot of the Size select open: "sm", "md" cut at the panel's right edge.
+- **What was wrong:** the panel was pinned to the trigger's width (inset-inline: 0) while each option reserves a tick column, so short triggers (Size, Theme) clipped their words. M1 was reported done on gates alone; no gate opened a popup and looked at its words.
+- **Step that produced it:** the Select derivation/QA step checked keyboard, size and marks, not the open panel's content at small trigger widths; the milestone report trusted gates over eyes.
+- **What changed in that step:** the panel is at least the trigger's width and the menu minimum, and grows to its longest option (max-content, nowrap). Visual sweep of every component page is part of closing a milestone.
+- **Check that now catches it:** system/conformance/select.mjs "every option word shows in full inside the open panel" (proven red on the old CSS: "cut Dark, Light | cut md").
