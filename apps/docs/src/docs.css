@@ -675,3 +675,7 @@ thead th { font-weight: var(--ds-type-weight-medium); color: var(--ds-text-secon
 
 /* the verdict chips print in the swatch's own ink, so they read on any fill they describe */
 .pg-swatch .fact { color: inherit; background: transparent; box-shadow: none; }
+
+/* a demo dimension with a single option is printed, never offered as a choice with nothing to choose */
+.pg-fixed { display: grid; gap: var(--ds-gap-sm); }
+.pg-fixed-value { display: flex; align-items: center; min-block-size: var(--ds-control-md); font-size: var(--ds-type-body); color: var(--ds-text-secondary); }

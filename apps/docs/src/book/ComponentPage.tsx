@@ -98,12 +98,12 @@ function LiveDemo({ c, m }: { c: ComponentChapter; m: Meta }) {
   const variantDim = dims[0];
   return (
     <div className="live-demo" data-live-demo="" data-registry="U1">
-      <p className="flush muted small">Live demo. Pick a theme and {variantDim ? `a ${variantDim[0]}` : 'a variant'}{dims.length > 1 ? ` or ${dims.slice(1).map(([k]) => k).join(' and ')}` : ''} and the component and its code below update together.</p>
+      <p className="flush muted small">Live demo. Pick a theme{variantDim ? ` and a ${variantDim[0]}` : ''}{dims.length > 1 ? ` or ${dims.slice(1).map(([k]) => k).join(' and ')}` : ''} and the component and its code below update together.</p>
       <div className="live-demo-controls">
         <div data-selector="theme"><Choice label="Theme" value={theme} onChange={(v) => setTheme(v as 'dark' | 'light')} options={[['dark', 'Dark'], ['light', 'Light']]} /></div>
         <div data-selector="variant">{variantDim
           ? <Choice label={variantDim[0][0].toUpperCase() + variantDim[0].slice(1)} value={picked[variantDim[0]]} onChange={(v) => setPicked({ ...picked, [variantDim[0]]: v })} options={variantDim[1].map((o) => [o, o] as [string, string])} />
-          : <Choice label="Variant" value="default" onChange={() => {}} options={[['default', `${c.name} has one variant`]]} />}</div>
+          : <div className="pg-control pg-fixed"><span className="pg-label">Variant</span><span className="pg-fixed-value">one</span></div>}</div>
         {dims.slice(1).map(([k, opts]) => <div key={k} data-selector={k}><Choice label={k[0].toUpperCase() + k.slice(1)} value={picked[k]} onChange={(v) => setPicked({ ...picked, [k]: v })} options={opts.map((o) => [o, o] as [string, string])} /></div>)}
       </div>
       <div data-theme={theme} className="live-demo-stage"><Stage>{!subject ? <c.hero.Render /> : subject.bare ? <BareHost bare={subject.bare}>{subject.render(picked)}</BareHost> : <OnSurface>{subject.render(picked)}</OnSurface>}</Stage></div>
