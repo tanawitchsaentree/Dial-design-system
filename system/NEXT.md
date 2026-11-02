@@ -14,6 +14,7 @@ user's milestone review of `system/REVIEW.md` and the book (http://localhost:417
 2026-11-02 full verify 20/20 on the current source hash (system/reports/verify-latest.json).
 
 ## Next, in order
+0. Wave 2 starts with `node ~/Downloads/ds/kiln/tooling/engine/sync.mjs ~/Downloads/bauhouse-ds` (kiln 2.7.0), add `"verify:topup": "node tooling/kiln/verify.mjs --topup"` to package.json, ONE full verify (new hash format + manifest), fix G-MO3/G-MO4; afterwards fix → `pnpm run verify:topup` only (memory: verify-cost).
 1. Milestone review with the user (Thai): every REVIEW.md row; anything sent back → system/RETRO.md + a new round.
 2. When `system/refs/ref-01.png` lands: re-measure (D-002 กระทบ list), regenerate tokens via tooling/dial/gen-tokens.py, re-record anchor.
 3. Wave 2 (home-iot): RangeSlider, Meter, List, Sheet, Banner, EmptyState, Skeleton, TimePicker; then media (player, progress, list). Follow system/PLAYBOOK.md; fresh session per wave.

@@ -11,6 +11,7 @@
 - **Wave ปัจจุบัน:** 1 เสร็จ · 24 components ผ่าน QA
 - **ค้าง/blocked:** ค่าสีและสัดส่วนยังเป็นค่าประมาณ (ref-01.png ไม่มี); ไม่ publish (Phase 8 เป็นของ user)
 ## Log ย่อ (ใหม่สุดบน ≤15 บรรทัด)
+- 2026-11-02 R-002 Select clip + single-variant label fixed; visual sweep 21 pages ×2 themes; verify 20/20, milestone 44/44 (engine 2.5.4)
 - 2026-11-02 M1 done: verify 20/20, milestone 44/44; advisory ว่าง; REVIEW rows ครบ
 - 2026-11-01 R-001 book shell ใหม่ (leaflet A + home hero), D-004 page #FCFBF9
 - 2026-11-01 full verify 16/20 → triage; K-11 smoke-import แก้ในเครื่อง (27/27); แจ้ง kiln session เรื่อง K-8..K-11

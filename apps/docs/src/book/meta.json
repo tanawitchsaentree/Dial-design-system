@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T01:17:38.560Z",
+  "generatedAt": "2026-11-02T02:54:42.980Z",
   "version": "0.0.0",
   "components": {
     "Badge": {
@@ -1626,8 +1626,8 @@
       "demoFloor": 5,
       "bundle": {
         "jsMin": 3880,
-        "cssMin": 2832,
-        "gzip": 2714
+        "cssMin": 2934,
+        "gzip": 2742
       }
     },
     "Slider": {
