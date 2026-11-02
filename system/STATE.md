@@ -8,9 +8,10 @@
 - **Phase ปัจจุบัน:** waves 2–3 built · **wave 4 concept depth (D-006: P7 legend, P8 relations, P9 glass)** กำลังทำ · full verify ครั้งเดียวท้าย wave 4 → milestone M2, M3
 - **งานล่าสุดที่เสร็จ:** full verify 20/20 (recorded), milestone M1 44/44; book shell A (R-001), 24 components
 - **งานถัดไป:** user review ของ system/REVIEW.md + book → RETRO สำหรับสิ่งที่ส่งกลับ → wave 2 (home-iot: RangeSlider, Meter, List, Sheet, Banner, EmptyState, Skeleton, TimePicker + media: player, progress, list)
-- **Wave ปัจจุบัน:** 4 · agents: Glass material (tokens + caps/lamps/chips), Legend, Wiring + ExplainMode, SceneCard + Slot + Tray, Icon (dot matrix)
+- **Wave ปัจจุบัน:** 4 built (48 components) + home scene "Living room, 22:40" · full verify for M2/M3 running
 - **ค้าง/blocked:** ค่าสีและสัดส่วนยังเป็นค่าประมาณ (ref-01.png ไม่มี); ไม่ publish (Phase 8 เป็นของ user)
 ## Log ย่อ (ใหม่สุดบน ≤15 บรรทัด)
+- 2026-11-02 wave 4 done: D-007 glass, Legend, Wiring, ExplainMode, SceneCard, Slot, Tray, Icon; home concept scene
 - 2026-11-02 D-007 glass accent material (recipe A frosted tinted resin, lab apps/lab/glass): tokens color.glass/frost/glass.*, 9 components (Slider/RangeSlider/Scrubber tint prop, Chip, SegmentedControl, Switch, Badge, Button/IconButton aria-pressed); gates 7/7, conformance 386/386, tone 229/229
 - 2026-11-02 Icon (wave 4): ชุด dot 7×7 46 glyph, lab D (วัดที่ 16px 1x: ทุกจุด ≥3:1), /foundations/icons ใช้ชุดใหม่
 - 2026-11-02 user refs (OP-XY, superlunar, SK 4 manual, glass caps, Yoto, Sytren, N200) → D-006; wave 4 started; R-003 backdrop picker removed

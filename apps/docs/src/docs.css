@@ -690,3 +690,20 @@ thead th { font-weight: var(--ds-type-weight-medium); color: var(--ds-text-secon
 .brand-mark [data-mark="dark"] { display: none; }
 [data-theme="dark"] .brand-mark [data-mark="light"] { display: none; }
 [data-theme="dark"] .brand-mark [data-mark="dark"] { display: block; }
+
+/* ---- home scene (book/home.tsx LivingRoom): the units at work in one room, relations drawn between them ---- */
+.scene-lede { max-inline-size: calc(var(--m) * 80); }
+.scene-stage { padding: calc(var(--gutter) * 2); }
+.scene, .scene-room { display: grid; gap: calc(var(--gutter) * 2); inline-size: 100%; }
+.scene-node { inline-size: calc(var(--m) * 36); }
+.scene-units { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--m) * 36)), 1fr)); gap: var(--gutter); align-items: start; }
+.scene-transport { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-gap-lg); }
+.scene-cards { display: flex; flex-wrap: wrap; gap: var(--ds-gap-md); }
+@media (max-width: 860px) {
+  .scene-stage { padding: var(--gutter) var(--ds-gap-lg); }
+  .scene-node { inline-size: min(100%, calc(var(--m) * 48)); }
+}
+.scene-slot { grid-column: 1 / -1; }
+.scene-bay { display: flex; flex-wrap: wrap; align-items: flex-end; gap: calc(var(--gutter) * 2); }
+/* the slot's printed name stands above it while How this works is on, so the bay makes room inside the unit */
+.scene[data-state="open"] .scene-bay { padding-block-start: calc(var(--ds-gap-3xl) * 2); }
