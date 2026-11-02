@@ -23,7 +23,8 @@
     "tone": "nice -n 19 node tooling/kiln/tone-gate.mjs",
     "spec": "nice -n 19 node tooling/kiln/spec-capture.mjs",
     "smoke:import": "node tooling/smoke-import.mjs",
-    "release:pack": "node tooling/release-pack.mjs"
+    "release:pack": "node tooling/release-pack.mjs",
+    "verify:topup": "node tooling/kiln/verify.mjs --topup"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",

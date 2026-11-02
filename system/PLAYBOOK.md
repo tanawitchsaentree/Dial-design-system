@@ -46,3 +46,15 @@ Read first: `CLAUDE.md` (iron rules), `system/CONCEPT.md` (P1–P6), `system/FOR
 - Status = glyph + word, never colour alone. No Braun name or mark anywhere.
 - Never write component CSS/TSX through Bash (`cat >`, sed): the derivation guard blocks it. Use Write/Edit.
 - Book prose is English, plain, short sentences (tone gate). Replies to the user are Thai.
+
+## Since kiln 2.7 (wave 2 onward)
+- New gates to run on your routes: G-PC1 (an open popup is never cut by a clipping parent or the screen edge),
+  G-MO3/G-MO4 (toggle and overlay motion), plus G-IN1, G-NC1, G-RH1, G-TT1, G-NT2, G-K6, G-K8, G-SV1 (add your
+  component's state rows to apps/docs/src/system/states.tsx). Look with eyes: `node tooling/kiln/sweep.mjs` writes
+  system/reports/sweep/index.html (every demo, light and dark, popups open) — open your component's cells.
+- Book prose must pass the tone gate: `node tooling/kiln/tone-gate.mjs` (route filter in its header). No label
+  colons ("Default: …"), no "not X but Y", no dashes in prose, also in JSDoc and conformance check titles.
+- Chapters need ≥ (variant dimensions + 3) demos; depth files reach ≥0.5× Carbon words (G-K6, data in
+  tooling/kiln/data/carbon-depth.json); overflow renders carry data-overflow-demo; CHANGELOG entry under the version heading.
+- Never claim done from gates alone: screenshot your demos light + dark, open every popup, read the words.
+- Do not run full `pnpm run verify` (75 min). The orchestrator runs one full verify per wave.

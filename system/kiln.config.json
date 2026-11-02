@@ -12,8 +12,62 @@
     "$comment": "agent = after the intake and anchor pick, the agent makes every derivation pick itself and records it in system/REVIEW.md for the milestone review (user setting, 2026-10-27). user = ask for each pick."
   },
   "milestone": {
-    "current": "M1",
-    "$comment": "M1 = infrastructure + wave 1 at full depth; see the kiln skill references/milestones.md"
+    "current": "M2",
+    "$comment": "M1 = infrastructure + wave 1 at full depth; see the kiln skill references/milestones.md",
+    "definitions": {
+      "M2": {
+        "minComponents": 34,
+        "requires": [
+          "Container",
+          "Grid",
+          "Stack",
+          "RangeSlider",
+          "Scrubber",
+          "Meter",
+          "List",
+          "Menu",
+          "Sheet",
+          "Banner",
+          "EmptyState",
+          "Skeleton",
+          "TimePicker"
+        ],
+        "controls": [
+          "Select",
+          "Slider"
+        ]
+      },
+      "M3": {
+        "minComponents": 41,
+        "requires": [
+          "Container",
+          "Grid",
+          "Stack",
+          "RangeSlider",
+          "Scrubber",
+          "Meter",
+          "List",
+          "Menu",
+          "Sheet",
+          "Banner",
+          "EmptyState",
+          "Skeleton",
+          "TimePicker",
+          "BottomNav",
+          "ActionSheet",
+          "PullToRefresh",
+          "Snackbar",
+          "Environment",
+          "MediaPlayer",
+          "Queue"
+        ],
+        "controls": [
+          "Select",
+          "Slider"
+        ]
+      }
+    },
+    "$definitions": "dial (agent, 2026-11-02): M2 = home-iot wave 2 + media Menu/Scrubber; M3 = home-iot wave 3 + media MediaPlayer/Queue (INTAKE 3: waves 2–3 pull media player, progress, list)"
   },
   "tokens": {
     "baseTheme": "light",

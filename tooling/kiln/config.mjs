@@ -71,20 +71,36 @@ export function url(base, route, { theme, scene } = {}, c = docsConfig()) {
 // files the checks themselves write (meta.json, public/, reports/) are left out, so a run can tell
 // whether the source changed under it (verify.mjs) and whether a recorded run still describes the
 // code on disk (milestone.mjs).
-export function sourceHash(root = ROOT) {
-  const h = createHash('sha256');
+// What a run measured, file by file: { relative path: sha256/16 }. kiln.config.json is hashed without
+// docs.advisory, which says how a red is labelled, not what is measured, so emptying it before a milestone
+// does not invalidate the run (dial K-13). The handoff notes are written after a run and read by no check.
+export function sourceManifest(root = ROOT) {
+  const out = {};
   const walk = (d) => {
     if (!existsSync(d)) return;
     for (const n of readdirSync(d).sort()) {
       if (['node_modules', 'dist', 'build', 'public', 'reports', '.turbo'].includes(n) || n === 'meta.json') continue;
-      const f = path.join(d, n);
-      // the handoff notes are written after a run and describe it; they are not read by any check
-      if (/^system\/(STATE|NEXT|REVIEW|RETRO)\.md$/.test(path.relative(root, f))) continue;
-      if (statSync(f).isDirectory()) walk(f); else { h.update(path.relative(root, f)); h.update(readFileSync(f)); }
+      const f = path.join(d, n), rel = path.relative(root, f);
+      if (/^system\/(STATE|NEXT|REVIEW|RETRO)\.md$/.test(rel)) continue;
+      if (statSync(f).isDirectory()) { walk(f); continue; }
+      let body = readFileSync(f);
+      if (rel === 'system/kiln.config.json') {
+        try { const j = JSON.parse(body); if (j.docs) { delete j.docs.advisory; delete j.docs.$advisory; } body = Buffer.from(JSON.stringify(j)); } catch {}
+      }
+      out[rel] = createHash('sha256').update(body).digest('hex').slice(0, 16);
     }
   };
   for (const d of ['packages', 'apps', 'system', 'tooling']) walk(path.join(root, d));
+  return out;
+}
+export function sourceHash(root = ROOT, manifest = sourceManifest(root)) {
+  const h = createHash('sha256');
+  for (const [rel, sha] of Object.entries(manifest)) { h.update(rel); h.update(sha); }
   return h.digest('hex').slice(0, 16);
+}
+/** Files whose content differs between two manifests (added, removed or changed). */
+export function manifestDiff(a = {}, b = {}) {
+  return [...new Set([...Object.keys(a), ...Object.keys(b)])].filter((f) => a[f] !== b[f]).sort();
 }
 
 // Run fn over items with at most n in flight; results keep the input order.

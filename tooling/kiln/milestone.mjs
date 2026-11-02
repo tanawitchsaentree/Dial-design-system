@@ -35,18 +35,30 @@ const text = (f) => (existsSync(path.join(ROOT, f)) ? readFileSync(path.join(ROO
 const rows = [];
 const need = (ok, what, detail = '') => rows.push({ ok: !!ok, what, detail });
 
-// 1. The run that says "green" must describe the code on disk.
+// 1. The run that says "green" must describe the code on disk: a full run on it, or a full run plus a
+//    top-up (verify --topup) whose base is that run and whose hash is the disk's (K-13). A top-up diffs against
+//    the full run, never another top-up, so the latest one covers every change since the full run.
 const run = json(path.join(ROOT, 'system', 'reports', 'verify-latest.json'));
+const top = json(path.join(ROOT, 'system', 'reports', 'verify-topup.json'));
 need(run, 'a full verify has been recorded (pnpm run verify)', run ? `${run.kind}, ${run.finishedAt}` : 'system/reports/verify-latest.json missing');
+let viaTopup = false;
 if (run) {
-  need(run.kind === 'full', 'the recorded run is the full one, not --quick');
-  need(run.ok, 'every verify step passed', run.steps.filter((s) => s.status !== 'pass').map((s) => `${s.id} ${s.status}`).join(', '));
-  need(!run.sourceChanged, 'nothing was edited while it ran');
   const now = sourceHash();
-  need(run.sourceHash === now, 'the source has not changed since that run', run.sourceHash === now ? '' : `run ${run.sourceHash}, disk ${now}: run verify again`);
+  need(run.kind === 'full', 'the recorded run is the full one, not --quick');
+  need(!run.sourceChanged, 'nothing was edited while it ran');
+  viaTopup = run.sourceHash !== now && !!top && top.kind === 'topup' && top.base === run.sourceHash && top.sourceHash === now;
+  if (viaTopup) {
+    need(top.ok, 'every step of the top-up passed, merged with the full run', top.steps.filter((s) => s.status !== 'pass').map((s) => `${s.id} ${s.status}`).join(', '));
+    need(!top.sourceChanged, 'nothing was edited while the top-up ran');
+    need(true, 'the source on disk is the full run plus a recorded top-up', `full ${run.sourceHash} + top-up ${top.sourceHash}: ${top.files.length} files, ${top.reached} routes re-measured`);
+  } else {
+    need(run.ok, 'every verify step passed', run.steps.filter((s) => s.status !== 'pass').map((s) => `${s.id} ${s.status}`).join(', '));
+    need(run.sourceHash === now, 'the source has not changed since that run', run.sourceHash === now ? '' : `run ${run.sourceHash}, disk ${now}: pnpm run verify -- --topup re-measures only what changed${top?.base === run.sourceHash ? ` (the last top-up, ${top.sourceHash}, is older than the disk)` : ''}`);
+  }
 }
 const gates = json(path.join(C.abs(C.app), 'public', 'gates.json'));
 need(gates && !gates.partial, 'docs gates ran in full (no --only)', gates?.partial ? 'partial run' : '');
+if (viaTopup) need(gates?.topup?.base === run.sourceHash, 'the gates are the full run merged with this top-up', gates?.topup ? `merged on ${gates.topup.base}` : 'gates.json was not merged by the top-up');
 const advRed = (gates?.results ?? []).filter((r) => !r.ok && r.id in (gates.advisory ?? {}));
 need(gates && !advRed.length, 'no advisory gate is still red', advRed.map((r) => `${r.id} (${gates.advisory[r.id]})`).join('; '));
 need(!Object.keys(C.advisory ?? {}).length, 'docs.advisory is empty', Object.keys(C.advisory ?? {}).join(', '));
@@ -54,8 +66,12 @@ need(!Object.keys(C.advisory ?? {}).length, 'docs.advisory is empty', Object.key
 // only, and a conformance file merged from limited runs must hold no result older than its component
 const evidence = json(path.join(C.abs(C.app), 'public', 'evidence.json'));
 need(evidence && !evidence.partial, 'the published evidence is a full run (not KILN_ROUTES or KILN_SCENES)', evidence ? (evidence.partial ? 'partial run' : '') : 'public/evidence.json missing');
+const sweep = json(path.join(ROOT, 'system', 'reports', 'sweep', 'sweep.json'));
+need(sweep && sweep.shots > 0, 'a sweep of every live demo, closed and open, is ready for the review (system/reports/sweep/index.html)', sweep ? `${sweep.shots} shots of ${sweep.pages} pages${sweep.partial ? ', the last run limited' : ''}${sweep.cut ? `, ${sweep.cut} popups cut` : ''}` : 'no sweep yet: pnpm run verify runs it');
 const conf = json(path.join(C.abs(C.app), 'public', 'conformance.json'));
-need(conf && !conf.partial && !conf.stale, 'conformance is a full run with no stale result', conf ? [conf.partial && 'merged from a limited run', conf.stale && `${conf.stale} stale checks`].filter(Boolean).join(', ') : 'public/conformance.json missing');
+// a top-up's conformance is the full run's merged check by check with the chapters it reached; what it did
+// not re-run must not be stale (its component's source unchanged since the check ran)
+need(conf && (!conf.partial || viaTopup) && !conf.stale, viaTopup ? 'conformance: the full run merged with the top-up, no stale result' : 'conformance is a full run with no stale result', conf ? [conf.partial && !viaTopup && 'merged from a limited run', conf.stale && `${conf.stale} stale checks`].filter(Boolean).join(', ') : 'public/conformance.json missing');
 
 // 2. The system is its own: no starter seed or placeholder left.
 need(SYS.tokens?.allowSeed === false, 'tokens.allowSeed is false (every token has this system’s own reason)');

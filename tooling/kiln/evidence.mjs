@@ -60,6 +60,7 @@ const summarise = (ts) => {
 };
 const record = (where, t) => (isExcepted(t) ? result.excepted : result.failures).push(`${where}: "${t.label}" ${t.min}`);
 
+const REACH = {};
 try {
   for (const mode of modes) {
     result.harness[mode] = {};
@@ -83,6 +84,8 @@ try {
       if (docsScenes(mode).includes(scene)) await pool(onScene, PAR, async (route) => {
         const d = await open(mode, url(srv.base, route, { theme, scene }, C));
         const dr = await measurePageText(d.page, K.threshold);
+        // the reach map: which components render on this route, read once per route (K-13, verify --topup)
+        if (!(route in REACH)) REACH[route] = await d.page.evaluate(() => [...new Set([...document.querySelectorAll('[data-component]')].map((e) => e.dataset.component))].sort()).catch(() => []);
         await d.close();
         agg.textElements += dr.textElements;
         agg.pages += 1;
@@ -117,6 +120,8 @@ const outs = result.partial
   ? [path.join(C.root, 'system', 'reports', `evidence-partial-${day}.json`)]
   : [path.join(C.abs(C.app), 'public', 'evidence.json'), path.join(C.root, 'system', 'reports', `evidence-${day}.json`)];
 if (result.partial) console.log(`partial run (${[result.limitedTo.routes && 'KILN_ROUTES', result.limitedTo.scenes && 'KILN_SCENES'].filter(Boolean).join(' + ')}): written to system/reports/evidence-partial-${day}.json only; public/evidence.json is left as it was`);
+// a full run's reach map is what a top-up maps a changed component through; a partial run's is incomplete
+if (!result.partial) { mkdirSync(path.join(C.root, 'system', 'reports'), { recursive: true }); writeFileSync(path.join(C.root, 'system', 'reports', 'reach.json'), JSON.stringify({ generatedAt: result.generatedAt, routes: REACH }) + '\n'); }
 for (const out of outs) {
   mkdirSync(path.dirname(out), { recursive: true });
   writeFileSync(out, JSON.stringify(result, null, 2) + '\n');
