@@ -3,7 +3,8 @@ import { PAGES, PARTS, navigate, pageOf, useRoute } from './book/router';
 import { Link, SceneContext, VerifyContext, type Conformance, type Evidence } from './book/kit';
 import { PAGE_COMPONENTS } from './book/pages';
 import { plannedWaves } from './book/catalog';
-import { AppearanceMenu, AppearancePanel, useAppearance } from './book/appearance';
+// dial sits on plain surfaces only (INTAKE 8), so the book offers no backdrop choice (user, 2026-11-02)
+import { useAppearance } from './book/appearance';
 import { NAME } from './system/content';
 
 // Verification results ship inside the bundle (the verify run rebuilds the docs after writing them),
@@ -34,7 +35,6 @@ export function App() {
   const scene = look.scene;
   const [q, setQ] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [lookOpen, setLookOpen] = useState(false);
   // Theme: the book opens in its base theme, light (the warm-white ABS of the anchor), whatever the OS
   // says (R-001). Dark, the charcoal edition, is a choice: it alone is stored, and ?theme= overrides for
   // tests. Light is the default, so it is never written; a stored or linked "system" from the old book
@@ -97,11 +97,9 @@ export function App() {
                 <button key={t} type="button" className="seg-btn" aria-pressed={t === theme} data-theme-value={t} onClick={() => setTheme(t)}>{t}</button>
               ))}
             </div>
-            <AppearanceMenu look={look} open={lookOpen} onToggle={setLookOpen} />
           </div>
           <button ref={menuButton} type="button" className="menu-btn" data-menu-toggle="" aria-expanded={menuOpen} aria-controls="book-nav" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Close' : 'Menu'}</button>
         </header>
-        {lookOpen && <AppearancePanel look={look} onChange={setLook} />}
         {menuOpen && <div className="drawer-scrim" aria-hidden="true" onClick={() => setMenuOpen(false)} />}
 
         <aside className={`rail${menuOpen ? ' open' : ''}`} id="book-nav" aria-label="Book navigation">

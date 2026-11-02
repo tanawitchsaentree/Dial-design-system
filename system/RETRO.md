@@ -18,3 +18,11 @@ concept, anchor round, tooling), not only a new check.
 - **Step that produced it:** the Select derivation/QA step checked keyboard, size and marks, not the open panel's content at small trigger widths; the milestone report trusted gates over eyes.
 - **What changed in that step:** the panel is at least the trigger's width and the menu minimum, and grows to its longest option (max-content, nowrap). Visual sweep of every component page is part of closing a milestone.
 - **Check that now catches it:** system/conformance/select.mjs "every option word shows in full inside the open panel" (proven red on the old CSS: "cut Dark, Light | cut md").
+
+### R-003: A "Demo backdrop" choice nobody needs
+- **Date:** 2026-11-02
+- **User said:** "มีทำไมวะ" (screenshot of the Appearance panel: Demo backdrop Page / Raised / Field)
+- **What was wrong:** the starter's backdrop picker (made for systems on photographs) was kept, although INTAKE 8 says plain surfaces only; its three keys also stood at different heights.
+- **Step that produced it:** the R-001 shell redesign restyled the starter's Appearance panel instead of asking whether dial needs it.
+- **What changed in that step:** the Appearance menu and panel are removed from the top bar; the book shows every example on the plain page. A shell part the intake does not ask for is removed, not restyled.
+- **Check that now catches it:** G-ST1/G-T1 still pass with no backdrop control; the top bar holds only the mark, the wordmark and the theme words.

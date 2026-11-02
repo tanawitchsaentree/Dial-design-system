@@ -12,7 +12,7 @@ function Demo(p: Partial<MediaPlayerProps> & { count?: number }) {
 }
 
 /** Your own titles on the demo tones. */
-function Toned({ tracks, ...rest }: Partial<MediaPlayerProps> & { tracks: Array<Omit<MediaTrack, 'src'>> }) {
+function Toned({ tracks, ...rest }: Omit<Partial<MediaPlayerProps>, 'tracks'> & { tracks: Array<Omit<MediaTrack, 'src'>> }) {
   const toned = useToned(tracks);
   return <MediaPlayer tracks={toned ?? []} loading={!toned} {...rest} />;
 }

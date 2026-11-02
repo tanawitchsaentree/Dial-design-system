@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T07:02:57.108Z",
+  "generatedAt": "2026-11-02T07:57:25.229Z",
   "version": "0.0.0",
   "components": {
     "ActionSheet": {
@@ -353,9 +353,9 @@
       "variantCount": 1,
       "demoFloor": 4,
       "bundle": {
-        "jsMin": 1049,
+        "jsMin": 1061,
         "cssMin": 4310,
-        "gzip": 1648
+        "gzip": 1656
       }
     },
     "Button": {
@@ -1935,9 +1935,9 @@
       "variantCount": 2,
       "demoFloor": 5,
       "bundle": {
-        "jsMin": 20728,
+        "jsMin": 20751,
         "cssMin": 14456,
-        "gzip": 10330
+        "gzip": 10338
       }
     },
     "Menu": {
@@ -2256,7 +2256,7 @@
               "type": "Date",
               "required": false,
               "default": null,
-              "description": "When the readings were last taken. Printed as \"Updated 10:42\". Leave it out and the time is set when a refresh succeeds.",
+              "description": "When the readings were last taken. Printed as \"Updated 10:42\". A refresh that succeeds sets it to the time it ended; with `refreshing` the app passes the new time here.",
               "enum": false,
               "options": null
             },
@@ -2314,9 +2314,9 @@
       "variantCount": 1,
       "demoFloor": 4,
       "bundle": {
-        "jsMin": 6582,
-        "cssMin": 5314,
-        "gzip": 4270
+        "jsMin": 6569,
+        "cssMin": 5347,
+        "gzip": 4275
       }
     },
     "Queue": {
@@ -2407,8 +2407,8 @@
       "demoFloor": 3,
       "bundle": {
         "jsMin": 14896,
-        "cssMin": 11934,
-        "gzip": 8015
+        "cssMin": 11951,
+        "gzip": 8017
       }
     },
     "RangeSlider": {
