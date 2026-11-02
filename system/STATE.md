@@ -5,12 +5,13 @@
 > ตรวจ contrast lab: `node tooling/kiln/anchor-contrast.mjs`
 
 - **System:** dial (dial-tokens, dial-react) · kiln 2.5.1
-- **Phase ปัจจุบัน:** **M1 done** (pnpm run milestone 44/44, 2026-11-02) → milestone review กับ user
+- **Phase ปัจจุบัน:** M1 done → **wave 2 / M2** (kiln 2.7) กำลังทำ
 - **งานล่าสุดที่เสร็จ:** full verify 20/20 (recorded), milestone M1 44/44; book shell A (R-001), 24 components
 - **งานถัดไป:** user review ของ system/REVIEW.md + book → RETRO สำหรับสิ่งที่ส่งกลับ → wave 2 (home-iot: RangeSlider, Meter, List, Sheet, Banner, EmptyState, Skeleton, TimePicker + media: player, progress, list)
-- **Wave ปัจจุบัน:** 1 เสร็จ · 24 components ผ่าน QA
+- **Wave ปัจจุบัน:** 2 · agents 4 ตัว: RangeSlider/Scrubber/Meter, List/Menu, Sheet/Banner/EmptyState, Skeleton/TimePicker · ถัดไป wave 3: BottomNav, ActionSheet, PullToRefresh, Snackbar, Environment, MediaPlayer, Queue
 - **ค้าง/blocked:** ค่าสีและสัดส่วนยังเป็นค่าประมาณ (ref-01.png ไม่มี); ไม่ publish (Phase 8 เป็นของ user)
 ## Log ย่อ (ใหม่สุดบน ≤15 บรรทัด)
+- 2026-11-02 user: "ทำต่อไปเรื่อยให้ครบทุก wave"; kiln 2.7 synced, M2/M3 defined, wave 2 started
 - 2026-11-02 R-002 Select clip + single-variant label fixed; visual sweep 21 pages ×2 themes; verify 20/20, milestone 44/44 (engine 2.5.4)
 - 2026-11-02 M1 done: verify 20/20, milestone 44/44; advisory ว่าง; REVIEW rows ครบ
 - 2026-11-01 R-001 book shell ใหม่ (leaflet A + home hero), D-004 page #FCFBF9
