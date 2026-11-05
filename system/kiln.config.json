@@ -172,7 +172,28 @@
       "maxDeltaC": 0.03,
       "maxDeltaRim": 0.4,
       "$comment": "G-AN1: at the anchor lock run node tooling/kiln/anchor-likeness.mjs --record apps/lab/anchor/<picked>.html, then set route to the book page whose example carries data-anchor on the current card."
-    }
+    },
+    "iconExempt": [
+      "[data-component=\"Display\"] svg",
+      "[data-component=\"Meter\"] svg",
+      "[data-component=\"Skeleton\"] svg",
+      "[data-component=\"Wiring\"] svg",
+      "[data-component=\"Grille\"] svg",
+      "[data-component=\"Badge\"] svg",
+      "[data-component=\"Rotary\"] svg",
+      "[class*=\"module__lamp\"]",
+      "[class*=\"module__grip\"]",
+      "[class*=\"module__seg\"]",
+      "[class*=\"module__leads\"]",
+      ".anatomy-lead",
+      ".brand-mark"
+    ],
+    "$iconExempt": "dial (R-005): drawings that are not icons — segment windows, meters, skeleton cells, relation lines, grilles, Badge lamp shapes, rotary scales, key lamps, drag grips, ExplainMode leaders, the book anatomy leaders and the dial mark. Everything else small is the dot-matrix Icon (G-IC2).",
+    "history": [
+      "/reference/decisions",
+      "/reference/exceptions"
+    ],
+    "$history": "dial (R-008): the decision log and the exceptions register record values as they were when decided (D-002 quotes the first ink #2E2D2A, superseded by D-010); G-CL1 reads every other page"
   },
   "agentSetup": {
     "site": null,

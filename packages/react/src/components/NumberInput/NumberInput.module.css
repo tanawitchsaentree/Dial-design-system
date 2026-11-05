@@ -1,0 +1,111 @@
+/* NumberInput — a number read in a recessed window, a minus key and a plus key either side (lab apps/lab/number-input pick B).
+   Family look of Input (well, label on the inset line); the keys are IconButton. One light, top-left. No orange. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  inline-size: 100%;
+}
+.well {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  box-sizing: border-box;
+  min-inline-size: 0;
+  min-block-size: var(--ds-control-md);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  cursor: text;
+}
+.field {
+  flex: 1 1 auto;
+  align-self: stretch;
+  min-inline-size: 0;
+  inline-size: 100%;
+  /* the field runs over the well's hairline, so the whole well is its press area */
+  margin-block: calc(var(--ds-width-hairline) * -1);
+  margin-inline: 0;
+  padding-block: var(--ds-gap-md);
+  padding-inline: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  color: var(--ds-text-primary);
+  outline: none;
+}
+.field::placeholder { color: var(--ds-text-secondary); opacity: 1; }
+.unit {
+  flex: none;
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  white-space: nowrap;
+}
+.key {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.hint {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-sm);
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-status-critical-mark);
+}
+.glyph {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-block-start: var(--ds-space-0-5);
+}
+.md .well { min-block-size: var(--ds-control-md); }
+.lg .well { min-block-size: var(--ds-control-lg); padding-inline: var(--ds-gap-2xl); }
+.lg .field { font-size: var(--ds-type-emphasis); }
+.lg .unit { font-size: var(--ds-type-body); }
+
+.well:focus-within {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.root[data-invalid='true'] .well { border-color: var(--ds-status-critical-mark); }
+.root[data-disabled='true'] .well { box-shadow: none; cursor: not-allowed; }
+.root[data-disabled='true'] .field { opacity: var(--ds-opacity-disabled); }
+.root[data-readonly='true'] .well { cursor: default; }
+
+@media (forced-colors: active) {
+  .well { border-color: CanvasText; }
+  .root[data-invalid='true'] .well { border-color: Mark; }
+  .well:focus-within { outline-color: Highlight; }
+}

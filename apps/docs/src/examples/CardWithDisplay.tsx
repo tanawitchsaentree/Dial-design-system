@@ -3,7 +3,7 @@ import { Button, Card, Display } from 'dial-react';
 
 export default function CardWithDisplay() {
   return (
-    <div style={{ inlineSize: 300 }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }}>
       <Card padding="unit" footer={<Button kind="primary">Pause</Button>} wordmark="dial" model="wash 1">
         <Display label="Washer" value="38" unit="min" detail="Rinse" digits={3} />
       </Card>

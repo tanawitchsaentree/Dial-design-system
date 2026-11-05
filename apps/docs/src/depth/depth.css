@@ -16,7 +16,7 @@
 .live-demo-stage .example-live:not(.stage-field) { background-color: var(--ds-unit-bg); }
 .live-demo-stage .stage-env { justify-content: center; align-items: center; }
 .live-demo-stage .example-live { align-content: center; align-items: center; min-block-size: calc(var(--m) * 30); border-radius: var(--ds-corner-panel); box-shadow: var(--ds-unit-shadow); }
-@media (max-width: 860px) { .live-demo { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'intro' 'pick' 'stage' 'code'; } .live-demo-controls { flex-direction: row; flex-wrap: wrap; } }
+@media (width <= 768px) { .live-demo { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'intro' 'pick' 'stage' 'code'; } .live-demo-controls { flex-direction: row; flex-wrap: wrap; } }
 
 /* the tab names: printed, the chosen one in medium weight with one ink index mark under it (as dial's Tabs) */
 .tab-nav { display: flex; gap: calc(var(--ds-gap-inset) * 1.5); margin-block-start: calc(var(--ds-gap-inset) * 2); border-block-end: var(--ds-width-hairline) solid var(--ds-line-divider); overflow-x: auto; }
@@ -33,14 +33,14 @@ main a.tab-link:hover { color: var(--ds-text-primary); }
 .anatomy-mark { position: absolute; transform: translate(-50%, -50%); inline-size: var(--ds-gap-2xl); block-size: var(--ds-gap-2xl); border-radius: var(--ds-radius-pill); display: grid; place-items: center; font-size: var(--ds-type-label); font-weight: var(--ds-type-weight-semibold); background: var(--ds-surface-light); color: var(--ds-text-on-light); box-shadow: var(--ds-elevation-lift); text-shadow: none; pointer-events: none; }
 [dir='rtl'] .anatomy-mark { transform: translate(50%, -50%); }
 .anatomy-lead { position: absolute; overflow: visible; pointer-events: none; }
-.anatomy-lead path { fill: none; stroke: var(--ds-text-primary); stroke-width: var(--ds-width-hairline); opacity: 0.8; }
+.anatomy-lead path { fill: none; stroke: var(--ds-text-secondary); stroke-width: var(--ds-width-hairline); }
 .anatomy-legend { margin: 0; padding-inline-start: var(--ds-gap-2xl); display: grid; gap: var(--ds-gap-sm); }
 
-.in-context-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--ds-gap-2xl); margin-block: var(--ds-gap-xl); }
+.in-context-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--ds-layout-frame-md)), 1fr)); gap: var(--ds-gap-2xl); margin-block: var(--ds-gap-xl); }
 .in-context { margin: 0; display: flex; flex-direction: column; gap: var(--ds-gap-md); }
 .in-context figcaption { font-size: var(--ds-type-label); }
-.narrow-stage .example-live, .narrow-stage { max-inline-size: 360px; }
-.overflow-probe { max-inline-size: 260px; overflow: hidden; }
+.narrow-stage .example-live, .narrow-stage { max-inline-size: var(--ds-layout-frame-phone); }
+.overflow-probe { max-inline-size: var(--ds-layout-frame-xs); overflow: hidden; }
 
 .deep-dive, .modifier { margin-block-start: var(--ds-gap-section); }
 .deep-dive h4 { margin-block: var(--ds-gap-xl) var(--ds-gap-sm); }
@@ -73,4 +73,4 @@ main a.tab-link:hover { color: var(--ds-text-primary); }
 .anatomy-host:has(> span[aria-hidden='true']:nth-last-of-type(8)) { --marks: 8; }
 .anatomy-host:has(> span[aria-hidden='true']:nth-last-of-type(9)) { --marks: 9; }
 .anatomy-host:has(> span[aria-hidden='true']:nth-last-of-type(10)) { --marks: 10; }
-.anatomy-host { min-block-size: calc(var(--ds-gap-2xl) * 2 + 28px * var(--marks, 0)); }
+.anatomy-host { min-block-size: calc(var(--ds-gap-2xl) * 2 + var(--ds-space-7) * var(--marks, 0)); }

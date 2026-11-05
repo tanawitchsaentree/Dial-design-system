@@ -1,5 +1,6 @@
 import { forwardRef, useId, type CSSProperties, type InputHTMLAttributes, type ReactNode } from 'react';
 import { cx } from '../../cx';
+import { Icon } from '../Icon';
 import styles from './Input.module.css';
 
 export type InputSize = 'md' | 'lg';
@@ -59,10 +60,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       {hint != null && <p id={hintId} className={styles.hint}>{hint}</p>}
       {invalid && (
         <p id={errorId} className={styles.error}>
-          <svg className={styles.glyph} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden="true" focusable="false">
-            <circle cx="8" cy="8" r="6.5" />
-            <path d="M8 4.5v4M8 11.25v.01" />
-          </svg>
+          {/* dial's one icon language, the dot matrix (R-005) */}
+          <Icon name="critical" size="sm" className={styles.glyph} />
           <span>{error}</span>
         </p>
       )}

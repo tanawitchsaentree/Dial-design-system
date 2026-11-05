@@ -1,0 +1,250 @@
+{
+  "concept": "MultiSelect is the recessed window of Select that holds several settings at once. The well states how many are chosen, or stands the chosen ones in it as small keys, and the plastic panel below keeps its tick rows open while the person walks and toggles them, like a bank of switches read off one printed list.",
+  "kind": [
+    "multi-select",
+    "multiselect",
+    "multiple choice",
+    "tag picker"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "multi-select dropdown with blue tag pills and a native checkbox in every row",
+      "why_not": "Blue pills spend the hue that P1 keeps for one part per unit, and a checkbox in every row repeats the Checkbox mechanism inside a list that already marks a chosen row with a tick and weight."
+    },
+    {
+      "pattern": "a MultiSelect that closes after each pick",
+      "why_not": "Closing after every choice makes a person reopen the list once per item and hides the other choices, so several settings take several trips."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a bank of band keys read off one printed legend, several of which can be latched down together"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: select-only combobox with a multiselectable listbox (https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)"
+    },
+    {
+      "source": "Select and Listbox in this system: the well, the panel and the walking rules are reused, not redrawn"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The well is surface.sunken with elevation.well and a line.ring hairline, the same recess as Select and Input, and the chips stand inside it as raised keys."
+    },
+    {
+      "p": "P7",
+      "axis": "interaction",
+      "consequence": "the legend is the control's value made visible",
+      "form": "The well says the value in words: a count such as 3 chosen, or the chosen words as removable Chips, and each chip can be taken out with its own key."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "A chosen row is a printed tick and medium weight in primary ink, and nothing in the well or the panel is filled orange or blue."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The label is printed above the well at its start edge, and the placeholder is a grey prompt inside that never replaces it."
+    },
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "shadows are short and soft",
+      "form": "The open panel is surface.solid plastic with elevation.float and corner.inner on layer.overlay, one step above the page and no more."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Arrows, Home, End, Page keys and type-ahead walk the rows, Space and Enter toggle the reached row, Ctrl+A toggles all, and Escape closes and keeps focus on the well."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "The panel rises out of the well and sinks back faster as in Select; a pick changes only the tick and the weight, and the panel stays still while the person chooses (D-008)."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/multi-select/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "count in the well (3 chosen), tick rows in a plastic panel"
+      },
+      {
+        "id": "B",
+        "name": "chosen values stand in the well as removable chips, tick rows in the same panel"
+      },
+      {
+        "id": "C",
+        "name": "chosen words printed in the well with a +n tail, a box beside every row"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps the well one row tall so the layout does not reflow when choices change (P6) and reads in black and white as a number; B is kept as display chips for short lists because it names each choice and can remove it; C truncates the words behind a +n tail and repeats the Checkbox mechanism in every row."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The field stacks its label above the well in one column and anchors the panel to the edges of the well."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight, like the printing beside every other part of the unit."
+    },
+    "well": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The closed field is a recess with the inverse light, the same window that Select and Input use, and it holds the chips as well."
+    },
+    "trigger": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The key that opens the list fills the well and keeps a 44px target even when chips stand beside it."
+    },
+    "value": {
+      "p": "P7",
+      "axis": "colour",
+      "why": "The count is printed in primary ink on the sunken plastic at more than 4.5:1 in both themes, so the value is read in words."
+    },
+    "placeholder": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The prompt before any choice is secondary ink above 4.5:1, and it sits beside a printed label that stays."
+    },
+    "chevron": {
+      "p": "P5",
+      "axis": "depth",
+      "why": "The chevron is printed flat at the end of the well, a stroke of ink that tells the field opens a list."
+    },
+    "chips": {
+      "p": "P7",
+      "axis": "space",
+      "why": "The chosen values stand in a wrapping row inside the well, so each chosen word is visible and can be removed on its own."
+    },
+    "panel": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "The open list is a plastic panel with one short soft shadow, above the page on the overlay layer and no further."
+    },
+    "option": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Every option row is at least 44px tall so a finger can toggle it, with its text inset from the rounded ends."
+    },
+    "tick": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "A printed tick in ink marks every chosen row, so the selection is a shape that reads in black and white and never uses a tinted fill."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "type",
+      "why": "Option words use the body size of the one grotesk, with a line box tall enough for stacked Thai marks."
+    },
+    "md": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The default well is 44px tall, the smallest target that every part in dial keeps for a finger."
+    },
+    "lg": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A 52px well with larger text for the main choice of a phone sheet held in one hand."
+    }
+  },
+  "states": {
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The well shows the same dark ring as every part when its key has focus, and keeps it while the list is open under it."
+    },
+    "disabled": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled field loses its recess shadow and fades to half, so it reads as not taking a choice now."
+    },
+    "aria-expanded=true": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "The chevron turns over on motion.release while the list is open, so the open state is seen arriving."
+    },
+    "aria-selected=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "A chosen row is primary ink in medium weight with its tick, never a coloured fill behind the words."
+    },
+    "aria-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A row that cannot be chosen fades to half and the arrow keys skip it, so it is seen as not taking a choice."
+    },
+    "data-active=true": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The row under the keyboard or the pointer becomes a small recess, so the active row is shown by depth, not hue."
+    },
+    "data-on=true": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The tick of a chosen row fades in over motion.hover, so each toggle is seen arriving (D-008)."
+    },
+    "data-state=open": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Opening is a state change, so it moves. It rises in from @starting-style over motion.release on the decelerating curve (D-008)."
+    },
+    "data-state=closing": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "While it leaves, the panel fades and sinks back over motion.exit on the accelerating curve, and no key or reader reaches it (D-008)."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the well and the panel keep real borders and the active row uses the system highlight."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion nothing travels; only fades remain, on motion.hover, which the tokens keep (D-008)."
+    }
+  },
+  "motion": {
+    "transform": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The panel rises by motion.rise over motion.release on the decelerating curve and leaves over motion.exit on the accelerating one, and the chevron turns with it. Under Reduce motion only the fade stays."
+    },
+    "opacity": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The panel fades up over motion.release and leaves over motion.exit, and the tick fades on motion.hover. Under Reduce motion only the fade stays."
+    },
+    "background-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached row sinks into a well and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached row sinks into a well and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    },
+    "color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached row sinks into a well and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    }
+  }
+}

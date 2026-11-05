@@ -37,25 +37,24 @@
     box-shadow var(--ds-motion-release) var(--ds-motion-easing),
     border-color var(--ds-motion-hover) var(--ds-motion-easing);
 }
-.mark {
-  inline-size: var(--ds-control-icon-sm);
-  block-size: var(--ds-control-icon-sm);
-  fill: none;
-  stroke: currentColor;
-  stroke-width: var(--ds-width-ring);
-  stroke-linecap: round;
-  stroke-linejoin: round;
+/* the tick and the dash are dial's dot-matrix glyphs (R-005), standing in one cell; the one that holds
+   fades in on motion.release and fades out faster on motion.exit (D-008) */
+.tick, .dash {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity var(--ds-motion-exit) var(--ds-motion-easing-exit);
 }
-.tick, .dash { display: none; }
 .label {
   font-size: var(--ds-type-label);
   font-weight: var(--ds-type-weight-regular);
   line-height: var(--ds-type-leading-tight);
 }
 
-.input:checked + .key .tick { display: inline; }
-.input:indeterminate + .key .tick { display: none; }
-.input:indeterminate + .key .dash { display: inline; }
+.input:checked:not(:indeterminate) + .key .tick,
+.input:indeterminate + .key .dash {
+  opacity: 1;
+  transition: opacity var(--ds-motion-release) var(--ds-motion-easing);
+}
 
 .root:hover .key { border-color: var(--ds-text-secondary); transition-duration: var(--ds-motion-hover); }
 .root:active .key {
@@ -78,8 +77,9 @@
 @media (prefers-reduced-motion: reduce) {
   .key { transition: border-color var(--ds-motion-hover) var(--ds-motion-easing); }
   .root:active .key { transform: none; }
+  .tick, .dash { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
 }
 @media (forced-colors: active) {
   .key { border-color: ButtonText; }
-  .mark { stroke: CanvasText; }
+  .tick, .dash { fill: CanvasText; }
 }

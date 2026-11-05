@@ -1,7 +1,8 @@
 /* Select — a select-only combobox (system/FORM.md input class, D-003). The trigger is Input's recessed
    well with a printed chevron; the list is a plastic panel above the page (elevation.float,
    surface.solid, corner.inner, layer.overlay). The chosen option is a tick and weight, never orange.
-   Nothing animates: the panel appears and goes at once (P6). */
+   Every change moves (P6, D-008): the panel rises out of the well on motion.release and the decelerating
+   curve, and sinks back faster on motion.exit and the accelerating one; the chevron turns; a row inks in. */
 .root {
   position: relative;
   display: grid;
@@ -53,6 +54,7 @@
   inline-size: var(--ds-control-icon-sm);
   block-size: var(--ds-control-icon-sm);
   color: var(--ds-text-secondary);
+  transition: transform var(--ds-motion-release) var(--ds-motion-easing);
 }
 .panel {
   position: absolute;
@@ -72,6 +74,20 @@
   background: var(--ds-surface-solid);
   box-shadow: var(--ds-elevation-float);
   outline: none;
+  transform-origin: top center;
+  transition:
+    opacity var(--ds-motion-release) var(--ds-motion-easing),
+    transform var(--ds-motion-release) var(--ds-motion-easing);
+}
+@starting-style {
+  .panel[data-state='open'] { opacity: 0; transform: translateY(calc(var(--ds-motion-rise) * -1)); }
+}
+.panel[data-state='closing'] {
+  opacity: 0;
+  transform: translateY(calc(var(--ds-motion-rise) * -1));
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+  pointer-events: none;
 }
 .option {
   display: flex;
@@ -87,12 +103,20 @@
   line-height: var(--ds-type-leading-body);
   color: var(--ds-text-secondary);
   cursor: pointer;
+  /* the row the pointer or the arrows reach inks in, fast on and slower off (motion.hover) */
+  transition:
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-hover) var(--ds-motion-easing),
+    color var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .tick {
   flex: none;
   inline-size: var(--ds-control-icon-sm);
   block-size: var(--ds-control-icon-sm);
+  opacity: 0;
+  transition: opacity var(--ds-motion-hover) var(--ds-motion-easing);
 }
+.tick[data-on='true'] { opacity: 1; }
 .text { flex: 1 1 auto; min-inline-size: 0; white-space: nowrap; }
 .md .trigger { min-block-size: var(--ds-control-md); }
 .lg .trigger { min-block-size: var(--ds-control-lg); padding-inline: var(--ds-gap-2xl); font-size: var(--ds-type-emphasis); }
@@ -106,6 +130,11 @@
 .option[aria-selected='true'] { color: var(--ds-text-primary); font-weight: var(--ds-type-weight-medium); }
 .option[data-active='true'] { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
 
+/* under Reduce motion nothing travels (motion.rise is 0); the panel and the rows still fade on motion.hover */
+@media (prefers-reduced-motion: reduce) {
+  .panel, .panel[data-state='closing'] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+  .chevron { transition: none; }
+}
 @media (forced-colors: active) {
   .trigger { border-color: ButtonText; }
   .panel { border-color: CanvasText; }

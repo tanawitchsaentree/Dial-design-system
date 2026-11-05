@@ -1,0 +1,130 @@
+/* RadioCards — a column of wide key plates of matte ABS, one down at a time, each with its name and a line of
+   text printed on its face (system/FORM.md control class, D-003). The chosen plate sits down, shows an ink
+   index bar at its start and turns its title medium. Plates nest in a Card: radius = Card inner. */
+.group {
+  display: grid;
+  gap: var(--ds-gap-lg);
+  min-inline-size: var(--ds-gap-none);
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  border: var(--ds-gap-none);
+}
+.legend {
+  padding: var(--ds-gap-none);
+  margin-block-end: var(--ds-gap-xs);
+  font-family: var(--ds-type-family);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.card {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-lg);
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-lg);
+  padding-inline: var(--ds-gap-2xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--card-inner, var(--ds-corner-inner));
+  background: var(--ds-surface-raised);
+  box-shadow: var(--ds-elevation-part);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+  cursor: pointer;
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing),
+    border-color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+/* Visually hidden, still focusable and announced */
+.input {
+  position: absolute;
+  inset-block-start: var(--ds-gap-none);
+  inset-inline-start: var(--ds-gap-none);
+  inline-size: var(--ds-width-hairline);
+  block-size: var(--ds-width-hairline);
+  margin: var(--ds-gap-none);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* the index bar is printing ink on the plate; it fades in on motion.release and out faster on motion.exit (D-008) */
+.bar {
+  position: absolute;
+  inset-inline-start: var(--ds-gap-md);
+  inset-block: var(--ds-gap-lg);
+  inline-size: var(--ds-width-bar);
+  border-radius: var(--ds-corner-mark);
+  background: var(--ds-text-primary);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.leading {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  color: var(--ds-text-primary);
+}
+.body {
+  display: grid;
+  gap: var(--ds-gap-xs);
+  min-inline-size: var(--ds-gap-none);
+  flex: 1 1 auto;
+  text-align: start;
+}
+.title {
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  overflow-wrap: anywhere;
+}
+.description {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.card[data-checked] {
+  box-shadow: none;
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+}
+.card[data-checked] .bar {
+  opacity: 1;
+  transition: opacity var(--ds-motion-release) var(--ds-motion-easing);
+}
+.card[data-checked] .title { font-weight: var(--ds-type-weight-medium); }
+
+.card:hover { border-color: var(--ds-text-secondary); transition-duration: var(--ds-motion-hover); }
+.card:active {
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+  box-shadow: none;
+  transition-duration: var(--ds-motion-press);
+}
+.card:has(.input:focus-visible) {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.card:has(.input:disabled) {
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+}
+.card[data-disabled] { cursor: not-allowed; }
+.card[data-disabled]:hover { border-color: var(--ds-line-ring); }
+.card[data-disabled]:active { box-shadow: none; }
+.card[data-disabled]:active:not([data-checked]) { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: border-color var(--ds-motion-hover) var(--ds-motion-easing); }
+  .card:active:not([data-checked]) { transform: none; }
+  .bar { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .card { border-color: ButtonText; }
+  .bar { background: CanvasText; }
+}

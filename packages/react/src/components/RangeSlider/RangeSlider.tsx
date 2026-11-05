@@ -11,6 +11,7 @@ import {
   type ReactNode,
 } from 'react';
 import { cx } from '../../cx';
+import { messages } from '../../messages';
 import { MECHANISM, snapTo, useIsoLayoutEffect, useSpring } from '../../spring';
 import styles from './RangeSlider.module.css';
 
@@ -69,8 +70,8 @@ export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(function
     value,
     defaultValue,
     onValueChange,
-    lowLabel = 'Low',
-    highLabel = 'High',
+    lowLabel = messages.range.low,
+    highLabel = messages.range.high,
     scale = false,
     formatValue = plain,
     pageStep,

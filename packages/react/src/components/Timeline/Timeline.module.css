@@ -1,0 +1,88 @@
+/* Timeline — time column, hairline rail, a ring node where each event meets the line
+   (lab apps/lab/timeline pick A). Printing is flat: no height, no shadow. No orange. */
+.root {
+  --row: calc(var(--ds-type-body) * var(--ds-type-leading-body));
+  display: grid;
+  grid-template-columns: max-content var(--ds-gap-lg) minmax(var(--ds-gap-none), 1fr);
+  column-gap: var(--ds-gap-md);
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  list-style: none;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+/* every event shares the root's three columns, so times, nodes and titles line up for the whole log */
+.item {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+.time {
+  min-block-size: var(--row);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-text-secondary);
+  white-space: nowrap;
+}
+.rail {
+  position: relative;
+  display: grid;
+  grid-template-rows: var(--row) 1fr;
+  justify-items: center;
+}
+/* the hairline runs the full height of the event so it meets the next one; the node covers it */
+.rail::before {
+  content: '';
+  position: absolute;
+  inset-block: var(--ds-gap-none);
+  inset-inline-start: 50%;
+  inline-size: var(--ds-width-hairline);
+  background: var(--ds-line-ring);
+  transform: translateX(-50%);
+}
+.item:first-child .rail::before { inset-block-start: calc(var(--row) / 2); }
+.item:last-child .rail::before { inset-block-end: auto; block-size: calc(var(--row) / 2); }
+.item:only-child .rail::before { display: none; }
+.node {
+  position: relative;
+  box-sizing: border-box;
+  align-self: center;
+  inline-size: var(--ds-control-mark);
+  block-size: var(--ds-control-mark);
+  border: var(--ds-width-hairline) solid var(--ds-text-primary);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-solid);
+}
+.content {
+  min-inline-size: var(--ds-gap-none);
+  padding-block-end: var(--ds-gap-2xl);
+}
+.item:last-child .content { padding-block-end: var(--ds-gap-none); }
+.title {
+  margin: var(--ds-gap-none);
+  min-block-size: var(--row);
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  overflow-wrap: anywhere;
+}
+.detail {
+  padding-block-start: var(--ds-gap-xs);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  overflow-wrap: anywhere;
+}
+/* the lit event: filled node, medium title (a shape and a weight, never a colour) */
+.item[data-latest] .node { background: var(--ds-text-primary); }
+.item[data-latest] .title { font-weight: var(--ds-type-weight-medium); }
+@media (forced-colors: active) {
+  .rail::before { background: CanvasText; }
+  .node { border-color: CanvasText; background: Canvas; }
+  .item[data-latest] .node { background: CanvasText; }
+}

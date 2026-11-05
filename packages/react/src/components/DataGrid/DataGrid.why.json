@@ -1,0 +1,90 @@
+{
+  "concept": "DataGrid is Table made into a panel of readings you can walk with the arrow keys: the same flat printing and seams between rows, with one cell holding the focus ring at a time, so a person reads, sorts and marks rows without leaving the keyboard.",
+  "kind": [
+    "data grid",
+    "data table",
+    "spreadsheet",
+    "interactive table"
+  ],
+  "family": "Table",
+  "family_difference": "DataGrid keeps Table's flat printing and seams but adds one roving cell focus with arrow keys, a header that stays in view, sorting by column and row selection with checkboxes.",
+  "default_to_avoid": [
+    {
+      "pattern": "data grid with zebra stripes, a hover highlight on every row and a Tab stop on every sort button and checkbox",
+      "why_not": "Stripes and hover fills tint the plastic and make every row look pressable, and a Tab stop in each cell forces a person through dozens of stops to leave the grid."
+    }
+  ],
+  "references": [
+    {
+      "source": "WAI-ARIA Authoring Practices: data grid pattern, one tab stop and arrow, Home, End, Page keys between cells"
+    },
+    {
+      "source": "packages/react/src/components/Table: the picked look A, flat printing with a Divider seam between rows"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P5",
+      "axis": "depth",
+      "consequence": "printing is flat on the material, with no shadow and no emboss",
+      "form": "Cells, header and rows reuse Table's flat printing, so a selected row is told by a tick and a stronger seam and never by a fill."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "The grid has one Tab stop; arrows, Home, End and the Page keys walk the cells, Enter or Space on a header sorts and Space on a cell marks its row."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Focus ring, ticks, seams and sort chevrons are ink, so a grid never spends the unit's one orange."
+    }
+  ],
+  "parts": {
+    "scroller": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The body scrolls inside a fixed number of rows, so the grid keeps its height while the data changes and nothing below it reflows."
+    },
+    "headCell": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The column labels stay on the first line of the window while rows scroll under them, on the unit's own ground so no row shows through."
+    },
+    "cell": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Every cell is at least 44px tall so it is a target a finger can hit, and it is the one thing that takes focus in the grid."
+    },
+    "selectCell": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The checkbox column is exactly one touch target wide, so marking rows needs no aim and the data columns do not shift."
+    },
+    "empty": {
+      "p": "P2",
+      "axis": "type",
+      "why": "A grid with no rows says so in one line of secondary ink across the width, so the window never goes blank without a word."
+    }
+  },
+  "states": {
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The focused cell shows the ink ring drawn inside its edge, so the ring is never clipped by the scroll window and the position is always visible."
+    },
+    "aria-selected=true": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A marked row draws the tick in its checkbox and a stronger seam under it, so the choice is a shape and a line and not a colour."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the focused cell keeps a Highlight outline and the marked row's seam draws in the text colour."
+    }
+  },
+  "motion": {}
+}

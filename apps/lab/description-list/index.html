@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · DescriptionList · three ways to print terms and values</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:330px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ dl{margin:0;font-size:var(--ds-type-body);line-height:var(--ds-type-leading-body)}
+ dt{font-size:var(--ds-type-label);color:var(--ds-text-secondary)}
+ dd{margin:0;font-variant-numeric:tabular-nums}
+ .seam{border-block-start:1px solid var(--ds-line-divider);border-block-end:1px solid var(--ds-material-lit);block-size:0}
+
+ /* A: stacked, term on the inset line over its value, a seam cut between pairs */
+ .A dt{padding-block-start:12px}
+ .A dd{padding-block-start:2px;padding-block-end:12px}
+ .A dd:not(:last-child){position:relative}
+ .A dd:not(:last-child)::after{content:"";position:absolute;inset-inline:0;inset-block-end:0;border-block-start:1px solid var(--ds-line-divider);border-block-end:1px solid var(--ds-material-lit)}
+ .A dd:last-child{padding-block-end:0}
+ .A dt:first-child{padding-block-start:0}
+
+ /* B: side by side, term column and value column, numbers right-aligned, seam across */
+ .B dl{display:grid;grid-template-columns:auto 1fr;align-items:baseline}
+ .B dt,.B dd{padding-block:10px;position:relative}
+ .B dt{padding-inline-end:20px}
+ .B dd{text-align:end}
+ .B dt:not(:first-of-type)::before,.B dt:not(:first-of-type)+dd::before{content:"";position:absolute;inset-inline:0;inset-block-start:0;border-block-start:1px solid var(--ds-line-divider);border-block-end:1px solid var(--ds-material-lit)}
+
+ /* C: a data plate, terms right-aligned against one vertical seam, values start-aligned after it */
+ .C dl{display:grid;grid-template-columns:auto 1fr}
+ .C dt,.C dd{padding-block:6px}
+ .C dt{text-align:end;padding-inline-end:16px;border-inline-end:1px solid var(--ds-line-divider);box-shadow:1px 0 0 var(--ds-material-lit)}
+ .C dd{padding-inline-start:16px}
+</style></head><body>
+<h1>DescriptionList · terms and their values</h1>
+<div class="row">
+ <div class="unit A"><h2>A · stacked, a seam cut between pairs</h2>
+  <dl><dt>Model</dt><dd>ht 4 heater</dd><dt>Power draw</dt><dd>1 840 W</dd><dt>Last service</dt><dd>12 March 2026</dd><dt>Room</dt><dd>Living room, ground floor</dd></dl></div>
+ <div class="unit B"><h2>B · side by side, numbers on the right, seams across</h2>
+  <dl><dt>Model</dt><dd>ht 4 heater</dd><dt>Power draw</dt><dd>1 840 W</dd><dt>Last service</dt><dd>12 March 2026</dd><dt>Room</dt><dd>Living room, ground floor</dd></dl></div>
+ <div class="unit C"><h2>C · data plate, one vertical seam, no rows</h2>
+  <dl><dt>Model</dt><dd>ht 4 heater</dd><dt>Power draw</dt><dd>1 840 W</dd><dt>Last service</dt><dd>12 March 2026</dd><dt>Room</dt><dd>Living room, ground floor</dd></dl></div>
+</div></body></html>

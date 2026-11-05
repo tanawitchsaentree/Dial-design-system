@@ -47,7 +47,7 @@ export const INPUT: Depth = {
       do: <Input label="Delay start by" unit="min" defaultValue="30" />, doNote: 'The label names the setting and the unit is printed after the value.',
       dont: <Input label="Please type the delay in minutes here" defaultValue="30" />, dontNote: 'An instruction as the label, with the unit buried in it.',
     },
-    overflow: { text: 'A long label wraps above the well. A long value scrolls inside the well, and the well keeps its width while you type.', render: <div data-overflow-demo="" style={{ inlineSize: 240 }}><Input label="Name shown on the lamp above the dining table" defaultValue="Dining table pendant, left side" /></div> },
+    overflow: { text: 'A long label wraps above the well. A long value scrolls inside the well, and the well keeps its width while you type.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Input label="Name shown on the lamp above the dining table" defaultValue="Dining table pendant, left side" /></div> },
     rtl: { text: 'In right-to-left languages the label starts on the right and the unit sits on the left of the value.', render: <div dir="rtl"><Input label="درجة الحرارة" unit="°C" defaultValue="21" /></div> },
     expansion: { text: 'German and Finnish labels can run 30% longer. The label wraps and the well does not change.', render: <Input label="Zieltemperatur im Wohnzimmer" unit="°C" defaultValue="21" /> },
   },

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Label · three ways to print a required mark</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .f{display:grid;gap:8px;margin-block-end:22px}
+ .well{box-sizing:border-box;min-block-size:44px;padding-inline:16px;display:flex;align-items:center;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);font-size:16px}
+ .name{font-size:14px;font-weight:500;line-height:1.45}
+ .help{margin:0;font-size:12px;line-height:1.45;color:var(--ds-text-secondary)}
+ .m{font-size:12px;font-weight:400;color:var(--ds-text-secondary)}
+ /* A: word inline after the name */
+ .A .l{display:block}
+ .A .m{margin-inline-start:8px}
+ /* B: name at start, word at the end of the same line */
+ .B .l{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+ /* C: star after the name, rule under the line */
+ .C .l{display:block;padding-block-end:6px;border-block-end:1px solid var(--ds-line-ring)}
+ .C .m{color:var(--ds-text-primary);margin-inline-start:4px;font-size:14px}
+</style></head><body>
+<h1>Label · the printed name above a part, with a required mark</h1>
+<div class="row">
+ <div class="unit A"><h2>A · word inline after the name</h2>
+  <div class="f"><label class="l"><span class="name">Room name</span><span class="m">required</span></label><div class="well">Living room</div></div>
+  <div class="f"><label class="l"><span class="name">Description</span><span class="m">optional</span></label><p class="help">Up to 350 characters.</p><div class="well">&nbsp;</div></div>
+  <div class="f"><label class="l"><span class="name">Room name for the upstairs guest bedroom</span><span class="m">required</span></label><div class="well"></div></div></div>
+ <div class="unit B"><h2>B · name at the start, word at the end</h2>
+  <div class="f"><label class="l"><span class="name">Room name</span><span class="m">required</span></label><div class="well">Living room</div></div>
+  <div class="f"><label class="l"><span class="name">Description</span><span class="m">optional</span></label><p class="help">Up to 350 characters.</p><div class="well">&nbsp;</div></div>
+  <div class="f"><label class="l"><span class="name">Room name for the upstairs guest bedroom</span><span class="m">required</span></label><div class="well"></div></div></div>
+ <div class="unit C"><h2>C · star after the name, rule under</h2>
+  <div class="f"><label class="l"><span class="name">Room name</span><span class="m">*</span></label><div class="well">Living room</div></div>
+  <div class="f"><label class="l"><span class="name">Description</span></label><p class="help">Up to 350 characters.</p><div class="well">&nbsp;</div></div>
+  <div class="f"><label class="l"><span class="name">Room name for the upstairs guest bedroom</span><span class="m">*</span></label><div class="well"></div></div></div>
+</div>
+</body></html>

@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 import { cx } from '../../cx';
+import { Icon } from '../Icon';
 import styles from './Checkbox.module.css';
 
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'children' | 'checked' | 'defaultChecked' | 'onChange' | 'disabled'> {
@@ -47,10 +48,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
     <label data-component="Checkbox" data-hit="" data-disabled={disabled || undefined} className={cx(styles.root, className)}>
       <input ref={setRef} type="checkbox" className={styles.input} disabled={disabled} {...rest} />
       <span className={styles.key} aria-hidden="true">
-        <svg className={styles.mark} viewBox="0 0 24 24" focusable="false">
-          <path className={styles.tick} d="M5 12l5 5 9-10" />
-          <path className={styles.dash} d="M6 12h12" />
-        </svg>
+        <Icon name="check" size="sm" className={styles.tick} />
+        <Icon name="minus" size="sm" className={styles.dash} />
       </span>
       <span className={styles.label}>{label}</span>
     </label>

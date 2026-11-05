@@ -1,5 +1,5 @@
 // Usage tab for SegmentedControl (component-depth.md U1–U14). A bank of latching keys, like a radio's band keys.
-import { Button, SegmentedControl, Stack } from 'dial-react';
+import { Button, Icon, SegmentedControl, Stack } from 'dial-react';
 import type { Depth } from './types';
 
 const Unit = ({ children }: { children: React.ReactNode }) => <div className="demo-box demo-card">{children}</div>;
@@ -57,7 +57,7 @@ export const SEGMENTED_CONTROL: Depth = {
       do: <SegmentedControl label="Mode" options={MODES} defaultValue="eco" />, doNote: 'Short mode names, one setting.',
       dont: <SegmentedControl label="Mode" options={[{ value: 'a', label: 'Heat the room' }, { value: 'b', label: 'Save energy' }]} defaultValue="a" />, dontNote: 'Sentences on keys crowd the bank.',
     },
-    overflow: { text: 'Words do not wrap on a key. Keys share the width equally, so keep words short or use fewer keys.', render: <div data-overflow-demo="" style={{ inlineSize: 300 }}><SegmentedControl label="Program" options={[{ value: 'c', label: 'Cotton' }, { value: 's', label: 'Synthetic' }, { value: 'w', label: 'Wool' }]} defaultValue="s" /></div> },
+    overflow: { text: 'Words do not wrap on a key. Keys share the width equally, so keep words short or use fewer keys.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }}><SegmentedControl label="Program" options={[{ value: 'c', label: 'Cotton' }, { value: 's', label: 'Synthetic' }, { value: 'w', label: 'Wool' }]} defaultValue="s" /></div> },
     rtl: { text: 'In right-to-left languages the first key sits on the right, and the arrow keys follow the reading order.', render: <div dir="rtl"><SegmentedControl label="الموجة" options={[{ value: 'fm', label: 'FM' }, { value: 'am', label: 'AM' }, { value: 'aux', label: 'AUX' }]} defaultValue="fm" /></div> },
     expansion: { text: 'German words can run 30% longer. The bank grows sideways; check that it still fits the unit.', render: <SegmentedControl label="Modus" options={[{ value: 'h', label: 'Heizen' }, { value: 'e', label: 'Sparen' }, { value: 'f', label: 'Frostschutz' }]} defaultValue="h" /> },
   },
@@ -87,9 +87,9 @@ export const SEGMENTED_CONTROL: Depth = {
       name: 'icon',
       rules: <p>An option may carry a symbol printed before its word, in the same ink. Use symbols on every key or on none. The word stays; the symbol never replaces it.</p>,
       pair: {
-        do: <SegmentedControl label="Lamp colour" options={[{ value: 'w', label: 'Warm', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="4" /></svg> }, { value: 'n', label: 'Night', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10z" /></svg> }]} defaultValue="w" />,
+        do: <SegmentedControl label="Lamp colour" options={[{ value: 'w', label: 'Warm', icon: <Icon name="lamp" /> }, { value: 'n', label: 'Night', icon: <Icon name="schedule" /> }]} defaultValue="w" />,
         doNote: 'A symbol and a word on every key.',
-        dont: <SegmentedControl label="Lamp colour" options={[{ value: 'w', label: 'Warm', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="4" /></svg> }, { value: 'n', label: 'Night' }]} defaultValue="w" />,
+        dont: <SegmentedControl label="Lamp colour" options={[{ value: 'w', label: 'Warm', icon: <Icon name="lamp" /> }, { value: 'n', label: 'Night' }]} defaultValue="w" />,
         dontNote: 'A symbol on one key only makes the keys uneven.',
       },
     },

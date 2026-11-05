@@ -297,7 +297,7 @@ export const COMPONENTS: ComponentChapter[] = [
     status: 'beta',
     limitations: ['There is no printed word under the key yet. Use Button when a word is needed.', 'There is no toggle state. Use Switch for something that stays on.'],
     youMust: ['Give every key a label that says what it does, in words.', 'Use one primary key per unit at most, counting Buttons and knobs.'],
-    usage: '<IconButton label="Play" kind="primary"><PlayIcon /></IconButton>',
+    usage: '<IconButton label="Play" kind="primary"><Icon name="play" /></IconButton>',
     backdrops: 'In light the key is warm white plastic, in dark it is charcoal. The orange and its rim are the same in both themes, and the shadow always falls down and to the right.',
     purpose: 'Runs one action shown as a symbol, on a round key that drops when pressed and returns on a spring.',
     importLine: "import { IconButton } from 'dial-react';",
@@ -316,7 +316,7 @@ export const COMPONENTS: ComponentChapter[] = [
     ],
     whenToUse: ['Play, pause, skip, power and volume on a device.', 'A short row of keys whose symbols everyone knows.'],
     whenNotToUse: [['An action that needs a word', 'Button'], ['A setting that stays on or off', 'Switch']],
-    anatomy: [['Key body', 'A disc, elevation.part, corner.round, control.key across.'], ['Printed symbol', 'control.icon-md, 2px stroke in currentColor, aria-hidden.']],
+    anatomy: [['Key body', 'A disc, elevation.part, corner.round, control.key across.'], ['Printed symbol', 'An Icon at control.icon-md, dots in currentColor, aria-hidden.']],
     states: [['Hover', 'Symbol one step darker; orange one step lighter on primary. No lift.'], ['Pressed', 'Drops motion.press-travel in motion.press, shadow collapses.'], ['Latched', 'With aria-pressed true a plastic disc stays down by motion.press-travel as glass.neutral.body glass with its edge; the orange disc never turns to glass.'], ['Disabled', 'Flat, opacity.disabled.']],
     content: ['The label starts with a verb, as in Next track, Turn off or Volume up.', 'Name the action, not the picture.'],
     dodont: [
@@ -722,7 +722,7 @@ export const COMPONENTS: ComponentChapter[] = [
     ],
     whenToUse: ['Confirm that an action ran.', 'Report a failure with Try again.', 'Offer Undo after an easy action.'],
     whenNotToUse: [['Asking before an action', 'Dialog'], ['A state that stays', 'Display']],
-    anatomy: [['Strip', 'surface.solid, corner.panel, elevation.float with a lit top-left hairline.'], ['Glyph', 'control.icon-md, stroked at width.ring in the tone’s mark ink.'], ['Status word', 'type.label, type.weight-medium.'], ['Message', 'type.body, text.primary.'], ['Keys', 'A Button and a 44px IconButton, gap.sm apart.']],
+    anatomy: [['Strip', 'surface.solid, corner.panel, elevation.float with a lit top-left hairline.'], ['Glyph', 'The dot-matrix Icon at control.icon-md (info, positive, warning or critical) in the tone’s mark ink.'], ['Status word', 'type.label, type.weight-medium.'], ['Message', 'type.body, text.primary.'], ['Keys', 'A Button and a 44px IconButton, gap.sm apart.']],
     states: [['Arriving', 'Fades in and rises motion.rise over motion.enter.'], ['Leaving', 'Fades out over motion.exit.'], ['Reduced motion', 'No fade and no rise.']],
     content: ['Say what happened, as in Lamp turned off.', 'For a failure, say what failed and offer Try again.'],
     dodont: [
@@ -738,7 +738,7 @@ export const COMPONENTS: ComponentChapter[] = [
     name: 'Chip',
     slug: 'chip',
     status: 'beta',
-    limitations: ['A chip toggles or it removes. One chip does one of the two.', 'There is no chip group with arrow-key navigation yet; each chip is its own Tab stop.', 'There is no icon set yet. Pass your own stroke SVG to icon.'],
+    limitations: ['A chip toggles or it removes. One chip does one of the two.', 'There is no chip group with arrow-key navigation yet; each chip is its own Tab stop.', 'Pass an Icon at size sm to icon; the chip does not draw a glyph of its own.'],
     youMust: ['Keep the word short and name the filter or preset.', 'Move focus to the next chip after one is removed.', 'Use SegmentedControl when only one option may be on.'],
     usage: '<Chip defaultSelected>Eco</Chip>',
     backdrops: 'In light the chip is warm white plastic, in dark it is charcoal. A latched chip turns to frosted ink grey glass with its lamp lit as a glass bead in both themes, and its word holds 4.5:1 on the glass. No chip is ever orange.',
@@ -756,7 +756,7 @@ export const COMPONENTS: ComponentChapter[] = [
       ex('ChipStates', 'Off, latched and disabled. A disabled chip loses its height.'),
       ex('ChipRemovable', 'onRemove adds a round remove key with its own 44px target.'),
       ex('ChipControlled', 'Controlled filters with selected and onSelectedChange.'),
-      ex('ChipWithIcon', 'icon prints a small stroke symbol before the word.'),
+      ex('ChipWithIcon', 'icon prints a small dot-matrix Icon before the word.'),
       ex('ChipInUnit', 'Option chips sit between the display and the orange key.'),
     ],
     whenToUse: ['Filters where any number can be on.', 'Quick presets and options next to the control they change.', 'Choices already made that can be taken away.'],
@@ -817,7 +817,7 @@ export const COMPONENTS: ComponentChapter[] = [
     limitations: ['There is no circular form.', 'The groove has no steps or markers for the phases of a cycle.', 'The indeterminate form does not move, by design.'],
     youMust: ['Give every progress bar a label that names the task.', 'Pass valueText in the unit people wait for, such as minutes left.', 'Switch from indeterminate to a value as soon as the device reports one.'],
     usage: '<Progress label="Washer" value={55} valueText="38 min left" />',
-    backdrops: 'The groove is a recess one step darker than the body, and the fill is printing ink at full step, in both themes. The fill is never orange.',
+    backdrops: 'The groove is a recess one step darker than the body, and the fill is a resin rod in line.ring, lit along its upper edge, at 3:1 off the groove in both themes. The fill is never orange.',
     purpose: 'Shows how far a device task has run, as a groove in the body that fills with ink.',
     importLine: "import { Progress } from 'dial-react';",
     overview: (
@@ -835,7 +835,7 @@ export const COMPONENTS: ComponentChapter[] = [
     ],
     whenToUse: ['A task with a known end, such as a wash cycle or an update.', 'Under the display of a running unit.'],
     whenNotToUse: [['A level that goes up and down', 'Grille'], ['The person sets the amount', 'Slider'], ['Only the time left matters', 'Display']],
-    anatomy: [['Label line', 'type.caption, with the label in text.primary and the reading in text.secondary with tabular figures.'], ['Groove', 'surface.sunken, elevation.well, corner.round, control.track or width.bar tall.'], ['Fill', 'grille.hole-on from the start of the line.'], ['Ticks', 'Twelve control.tick capsules of grille.hole-on, still.']],
+    anatomy: [['Label line', 'type.caption, with the label in text.primary and the reading in text.secondary with tabular figures.'], ['Groove', 'surface.sunken, elevation.well, corner.round, control.track or width.bar tall.'], ['Fill', 'line.ring with a glass.lit upper edge, from the start of the line.'], ['Ticks', 'Twelve control.tick capsules of grille.hole-on, still.']],
     states: [['New value', 'The fill grows in motion.fill.'], ['Indeterminate', 'Still ticks, no aria-valuenow.'], ['Reduce motion', 'The fill jumps at once.']],
     content: ['The label names the task, such as Washer or Firmware update.', 'valueText says what people wait for, as in 38 min left or 12 of 48 MB.'],
     dodont: [
@@ -1094,7 +1094,7 @@ export const COMPONENTS: ComponentChapter[] = [
     ],
     whenToUse: ['Say a condition that holds, such as the hub being offline.', 'Say that something needs care soon.'],
     whenNotToUse: [['Saying an action worked', 'Toast'], ['The state of one device', 'Badge']],
-    anatomy: [['Strip', 'surface.solid, corner.media, elevation.unit with a lit top-left hairline.'], ['Glyph', 'control.icon-md, stroked at width.ring in the tone’s mark ink.'], ['Status word', 'type.label, type.weight-medium.'], ['Message', 'type.body, text.primary.'], ['Keys', 'A Button and a 44px IconButton, gap.sm apart.']],
+    anatomy: [['Strip', 'surface.solid, corner.media, elevation.unit with a lit top-left hairline.'], ['Glyph', 'The dot-matrix Icon at control.icon-md (info, positive, warning or critical) in the tone’s mark ink.'], ['Status word', 'type.label, type.weight-medium.'], ['Message', 'type.body, text.primary.'], ['Keys', 'A Button and a 44px IconButton, gap.sm apart.']],
     states: [['Shown', 'In the flow at once, announced politely.'], ['Critical', 'role alert, announced at once.'], ['Forced colours', 'A real border; the glyph in the text colour.']],
     content: ['The status word names the condition, such as Offline.', 'Say what holds and what happens next, in the present tense.'],
     dodont: [
@@ -1222,8 +1222,8 @@ export const COMPONENTS: ComponentChapter[] = [
     slug: 'skeleton',
     status: 'beta',
     limitations: ['It does not move, by design. There is no shimmer or pulse to turn on.', 'It does not know when the content arrives. The region around it sets aria-busy and swaps it out.', 'kind display draws digits only. A Display with the oled kind has no ghost form yet.'],
-    youMust: ['Put aria-busy="true" and a name on the region the skeleton stands in.', 'Match the part that replaces it with the same digits, size and lines.', 'Replace it with an error and a way to try again if the request fails.'],
-    usage: '<div aria-busy="true" aria-label="Thermostat, loading"><Skeleton kind="display" digits={3} unit="°C" /></div>',
+    youMust: ['Put role="group", aria-busy="true" and a name on the region the skeleton stands in.', 'Match the part that replaces it with the same digits, size and lines.', 'Replace it with an error and a way to try again if the request fails.'],
+    usage: '<div role="group" aria-busy="true" aria-label="Thermostat, loading"><Skeleton kind="display" digits={3} unit="°C" /></div>',
     backdrops: 'Text lines, discs and blocks are flat plastic one step off the body in both themes. The display kind is the grey-green LCD window with ghost segments, and the grille kind uses the unlit hole colour. None of it is orange.',
     purpose: 'Holds the exact place of content that is still loading, drawn as the part with its power off.',
     importLine: "import { Skeleton } from 'dial-react';",
@@ -1465,7 +1465,7 @@ export const COMPONENTS: ComponentChapter[] = [
     ],
     whenToUse: ['Move between the main sections of a phone app.', 'Show which section is on screen.'],
     whenNotToUse: [['Panels inside one page', 'Tabs'], ['Picking a mode', 'SegmentedControl']],
-    anatomy: [['Strip', 'surface.solid, elevation.unit, safe-area padding at the bottom.'], ['Link', 'A quarter of the strip, control.lg tall at least.'], ['Glyph', 'control.icon-md, stroked at width.ring.'], ['Word', 'type.label; the current one type.weight-medium in text.primary.'], ['Mark', 'control.thumb by width.bar in text.primary under the current word.']],
+    anatomy: [['Strip', 'surface.solid, elevation.unit, safe-area padding at the bottom.'], ['Link', 'A quarter of the strip, control.lg tall at least.'], ['Glyph', 'An Icon at control.icon-md, in the link’s ink.'], ['Word', 'type.label; the current one type.weight-medium in text.primary.'], ['Mark', 'control.thumb by width.bar in text.primary under the current word.']],
     states: [['Hover', 'The ink turns one step darker over motion.hover.'], ['Current', 'Medium weight and the ink mark.'], ['Focus', 'The focus ring inside the link.'], ['Rail', 'On a wide screen, glyph beside word, the mark beside the row.']],
     content: ['Each section is one noun, the same word as its page heading.', 'Every section has a glyph and a word.'],
     dodont: [
@@ -1540,7 +1540,7 @@ export const COMPONENTS: ComponentChapter[] = [
     ],
     whenToUse: ['Offer Undo after a removal on a phone.', 'Confirm a quick change without covering the page.'],
     whenNotToUse: [['Several notes at once', 'Toast'], ['A state that stays', 'Banner']],
-    anatomy: [['Strip', 'surface.solid, corner.panel, elevation.float with a lit top-left hairline.'], ['Glyph', 'control.icon-md, stroked at width.ring in the tone’s mark ink.'], ['Status word', 'type.label, type.weight-medium.'], ['Message', 'type.body, text.primary.'], ['Key', 'One Button.']],
+    anatomy: [['Strip', 'surface.solid, corner.panel, elevation.float with a lit top-left hairline.'], ['Glyph', 'The dot-matrix Icon at control.icon-md (info, positive, warning or critical) in the tone’s mark ink.'], ['Status word', 'type.label, type.weight-medium.'], ['Message', 'type.body, text.primary.'], ['Key', 'One Button.']],
     states: [['Arriving', 'Fades in and rises motion.rise over motion.enter.'], ['Leaving', 'Fades out over motion.exit.'], ['Reduced motion', 'No fade and no rise.']],
     content: ['Say what happened: Lamp removed.', 'The key is one verb, usually Undo.'],
     dodont: [
@@ -1660,7 +1660,7 @@ export const COMPONENTS: ComponentChapter[] = [
       { do: 'Cut the slot into the room’s unit, beside its orange key.', dont: 'Draw a dashed drop zone that says Drop here.' },
       { do: 'Let a held card go in with Enter or a press.', dont: 'Accept cards only by dragging.' },
     ],
-    a11y: ['The slot is one button named by its room and its scene, such as Living room slot, Movie night inserted.', 'Each insert and removal is announced by a polite status, such as Movie night inserted into Living room.', 'The legend and the half card are hidden from assistive tech, because the button’s name says the same.', 'A disabled slot is a disabled button.'],
+    a11y: ['The slot is one button named by its room, its scene and the first step its face prints, such as Living room slot, Movie night, Lamps 20%, inserted.', 'Each insert and removal is announced by a polite status, such as Movie night inserted into Living room.', 'The legend and the half card are hidden from assistive tech, because the button’s name says the same.', 'A disabled slot is a disabled button.'],
     keyboard: [['Enter / Space', 'Insert the held card, or take the card out', 'Slot: Enter on a card, an arrow to the slot and Enter again insert it, and the lamp says Running'], ['Arrows', 'Move between slots', 'Slot: with a card held every slot shows it is ready, and arrows walk between slots']],
     inherits: 'HTMLAttributes<HTMLDivElement>',
     related: [['/components/scene-card', 'SceneCard', 'The card that goes in.'], ['/components/device-card', 'DeviceCard', 'The unit a slot can sit on.'], ['/components/badge', 'Badge', 'The lamp and its word.']],
@@ -1812,5 +1812,2769 @@ export const COMPONENTS: ComponentChapter[] = [
     keyboard: [['Enter or Space', 'Toggles the mode from the key', 'ExplainMode: the key prints every name and line, and the same key takes them away'], ['?', 'Toggles the mode while focus is inside', 'ExplainMode: the question mark key opens it and Escape closes it'], ['Escape', 'Closes the mode', 'ExplainMode: the question mark key opens it and Escape closes it']],
     inherits: 'HTMLAttributes<HTMLDivElement>',
     related: [['/components/wiring', 'Wiring', 'Shows which part changes which.'], ['/components/device-card', 'DeviceCard', 'A unit whose parts it names.']],
+  },
+  {
+    name: 'Textarea',
+    slug: 'textarea',
+    status: 'beta',
+    limitations: ['The well does not grow with its text; it scrolls past the last row.', 'There is no clear button or icon slot.'],
+    youMust: ['Give every field a label that names the thing, and never use the placeholder as the label.', 'Write the error as the fix, in words, and show it after the person leaves the field or submits.', 'Use Input, not Textarea, for a one-line value.'],
+    usage: '<Textarea label="Note" defaultValue="Guests arrive on Friday." />',
+    backdrops: 'In light the well is a light grey recess in warm white plastic, in dark it is a near-black recess in charcoal. The shade always sits on the top-left inner edge, and nothing is orange in either theme.',
+    purpose: 'Takes a few lines of text in a recessed well, with its name printed above it.',
+    importLine: "import { Textarea } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Textarea</code> is the Input well made taller: recessed, the full width of its column, with corner.media and a hairline edge. The label is printed above it. <code>rows</code> sets the height (four by default), and the person can drag the lower edge to make it taller, never wider. <code>hint</code> prints a line below and <code>error</code> prints the problem with a glyph and sets <code>aria-invalid</code>.</p>
+      </>
+    ),
+    hero: ex('TextareaBasic', 'A label printed above a tall recessed well.'),
+    ladder: [
+      ex('TextareaCount', 'maxLength prints a live count under the well.'),
+      ex('TextareaHint', 'hint prints a short line under the well. Thai marks fit.'),
+      ex('TextareaError', 'error prints the problem with a glyph and marks the field invalid.'),
+      ex('TextareaStates', 'Read-only keeps the recess; disabled loses it.'),
+    ],
+    whenToUse: ['Enter a note or a description that runs over more than one line.', 'Collect free text of unknown length.'],
+    whenNotToUse: [['A short value', 'Input'], ['A choice from a known list', 'Select']],
+    anatomy: [['Label', 'type.label in type.weight-medium, printed above the well.'], ['Well', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, at least control.lg tall.'], ['Text', 'type.body on type.leading-body, text.primary.'], ['Hint and error', 'type.caption; the error in status.critical-mark with a glyph.']],
+    states: [['Focus', 'width.ring in focus.ring around the well.'], ['Invalid', 'The edge in status.critical-mark, the message with a glyph below.'], ['Disabled', 'No well shadow, opacity.disabled.']],
+    content: ['Name the thing, such as Note or Reason for the change.', 'Put the limit in hint.', 'Write the error as the fix.'],
+    dodont: [
+      { do: 'Print the label above the well.', dont: 'Use the placeholder as the label.' },
+      { do: 'Say how to fix an error, with the glyph.', dont: 'Show only a red edge.' },
+    ],
+    a11y: ['A native textarea, labelled by the printed label through for and id.', 'The hint and the error are tied to the field with aria-describedby.', 'An error sets aria-invalid and is shown with a glyph and words as well as colour.', 'In forced colours the well keeps a real border and the ring uses the highlight colour.'],
+    keyboard: [['Tab', 'Moves focus into the field and shows the ring', 'Textarea: Tab reaches the field and the focus ring shows on the well'], ['Typing', 'Enters text; the field keeps its width', 'Textarea: typing Thai text keeps the field at its width']],
+    inherits: 'TextareaHTMLAttributes<HTMLTextAreaElement>',
+    related: [['/components/input', 'Input', 'A short piece of text.'], ['/components/select', 'Select', 'A choice from a known list.']],
+  },
+  {
+    name: 'Stepper',
+    slug: 'stepper',
+    status: 'beta',
+    limitations: ['It is not interactive; steps cannot be pressed to jump between them.', 'The rail runs down only; there is no horizontal Stepper.', 'The numbers are counted by position and cannot be set.'],
+    youMust: ['Name each step with a noun and leave the number to the window.', 'Mark at most one step current.', 'Move focus to the first field of the next section yourself when a step finishes.'],
+    usage: '<Stepper>\n  <Step title="General" status="current">…</Step>\n  <Step title="Configuration">…</Step>\n</Stepper>',
+    backdrops: 'In light the windows are light grey recesses in warm white plastic, in dark near-black recesses in charcoal. The dots of the rail are ring ink in both, and nothing is orange.',
+    purpose: 'Numbers the sections of a long form in recessed windows joined by a dotted rail.',
+    importLine: "import { Stepper, Step } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Stepper</code> is an ordered list. Each <code>Step</code> prints its number, counted by position, in a 44px window cut into the body, and its title beside it. The section’s content stands under the title. <code>status</code> is <code>upcoming</code>, <code>current</code> (announced with aria-current) or <code>done</code> (a check in the window).</p>
+      </>
+    ),
+    hero: ex('StepperBasic', 'Three steps: one done, one current, one upcoming.'),
+    ladder: [ex('StepperStates', 'status is upcoming, current or done.'), ex('StepperForm', 'Fields stand under each title and the orange key comes last.')],
+    whenToUse: ['Split a long form into two to five named sections.', 'Show which section of a setup the person is in.'],
+    whenNotToUse: [['Switching between views', 'Tabs'], ['How far a task has got', 'Progress']],
+    anatomy: [['Number window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, control.md square.'], ['Title', 'type.emphasis in type.weight-medium.'], ['Rail', 'A column of dots in line.ring.'], ['Content', 'type.body under the title.']],
+    states: [['Current', 'Primary ink and aria-current="step".'], ['Done', 'A check in the window.'], ['Upcoming', 'Secondary ink.']],
+    content: ['Name each step with a noun.', 'Do not write the number in the title.', 'Keep it to five steps.'],
+    dodont: [
+      { do: 'Name the step with a noun and let the window count.', dont: 'Write “Step 1:” in the title.' },
+      { do: 'Tell done by a check.', dont: 'Tell done by colour alone.' },
+    ],
+    a11y: ['An ordered list, so the order is read out.', 'The current step carries aria-current="step".', 'A done step’s check is announced as Done.', 'In forced colours the window keeps a real border and the rail uses the text colour.'],
+    keyboard: [['Tab', 'Moves through the fields inside the steps', 'Stepper: the steps are a list in order and the current one is announced']],
+    inherits: 'HTMLAttributes<HTMLOListElement>',
+    related: [['/components/tabs', 'Tabs', 'Switching between views.'], ['/components/progress', 'Progress', 'How far a task has got.']],
+  },
+  {
+    name: 'Avatar',
+    slug: 'avatar',
+    status: 'beta',
+    limitations: ['It cannot be pressed; to make a person a target, wrap the row in a List item.', 'It has three fixed sizes (32, 44 and 80px); there is no custom size.', 'Initials come from the first and last word of the name, so a name with one word gives one letter.'],
+    youMust: ['Print the person’s name beside the window, or pass label.', 'Pass the full name and let the window pick the letters.', 'Keep it away from the orange key.'],
+    usage: '<Avatar name="Maren Solberg" />\n<Avatar src="/maren.jpg" name="Maren Solberg" size="lg" label="Maren Solberg" />',
+    backdrops: 'In light the window is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. The ring and the letters are ink in both, and nothing is orange.',
+    purpose: 'Shows a person or owner as a picture or initials in a small recessed window.',
+    importLine: "import { Avatar } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Avatar</code> is a window cut into the body, 32, 44 or 80px square. It holds the picture from <code>src</code>, or up to two letters taken from <code>name</code> when there is no picture or it fails to load. With no name either, it prints one dash. It is not a control.</p>
+      </>
+    ),
+    hero: ex('AvatarBasic', 'The three sizes, as initials and as a picture.'),
+    ladder: [
+      ex('AvatarSizes', 'Initials at each size, from a list row to a sheet header.'),ex('AvatarInList', 'Avatars lead the rows of a list; the name stands beside them.'), ex('AvatarStates', 'A broken picture, no name, custom letters and a Thai name.')],
+    whenToUse: ['Show the owner or a member at the start of a list row.', 'Head a profile or a device card with the person it belongs to.'],
+    whenNotToUse: [['A state that a row prints', 'Badge'], ['A glyph for a device or a room', 'Icon']],
+    anatomy: [['Window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, control.avatar-sm, -md or -lg square.'], ['Picture', 'Fills the window and is clipped by its ring.'], ['Initials', 'type.caption, type.label or type.title in type.weight-medium.']],
+    states: [['Picture', 'The image fills the window.'], ['Initials', 'Letters from name, or from the initials prop.'], ['Picture failed', 'Falls back to the initials.'], ['Empty', 'One printed dash.']],
+    content: ['Pass the full name.', 'Use initials only for a device or a room.', 'Keep initials to two letters.'],
+    dodont: [
+      { do: 'Print the name beside the window.', dont: 'Leave the picture as the only identifier.' },
+      { do: 'Use the rounded square.', dont: 'Round it into a disc that looks like a key.' },
+    ],
+    a11y: ['With label the window is an image with that name.', 'Without label it is hidden, because the name beside it is read instead.', 'It takes no focus.', 'In forced colours the ring uses the text colour and the inset shadow is dropped.'],
+    keyboard: [['Tab', 'Does not stop on an Avatar', 'Avatar: a window with a label is an image and takes no focus']],
+    inherits: 'HTMLAttributes<HTMLSpanElement>',
+    related: [['/components/list', 'List', 'The row an Avatar usually leads.'], ['/components/badge', 'Badge', 'A state printed as a lamp and a word.']],
+  },
+  {
+    name: 'Popover',
+    slug: 'popover',
+    status: 'beta',
+    limitations: ['It holds a few lines or one field; a task that must be finished or cancelled belongs in a Dialog.', 'It opens by press only, never by hover.', 'The panel is at most 300px wide and scrolls when it is taller than the room on the screen.'],
+    youMust: ['Name the key for what the panel explains, as in "About the water filter".', 'Keep the content to a few lines or one field.', 'Pass your own closeLabel when the product is not in English.'],
+    usage: '<Popover label="About the water filter" title="Water filter">\n  Change it every three months.\n</Popover>',
+    backdrops: 'In light the panel is warm-white plastic with a short soft shadow, in dark it is charcoal plastic. The title is primary ink and the content secondary ink, and nothing is orange.',
+    purpose: 'Opens a small plastic panel of printed content next to a key.',
+    importLine: "import { Popover } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Popover</code> is a key that opens a small panel next to it. The panel is the same plastic as Menu and Select, with a title on the inset line, a round close key and the content under the title. It flips above the key and shifts along it so no screen edge cuts it.</p>
+      </>
+    ),
+    hero: ex('PopoverBasic', 'A round info key opens a titled panel with two lines of text.'),
+    ladder: [
+      ex('PopoverInfo', 'A round info key opens a short explanation.'),
+      ex('PopoverShort', 'The panel stays one column wide, so a short line does not stretch it.'),ex('PopoverWord', 'A word key opens a panel with one field and a save key.'), ex('PopoverControlled', 'The page opens and closes the panel through open and onOpenChange.'), ex('PopoverThai', 'Thai text keeps its line height inside the panel.')],
+    whenToUse: ['Explain a reading or a setting in a few lines.', 'Ask for one short value, such as a name.'],
+    whenNotToUse: [['A list of actions to pick from', 'Menu'], ['A task that must be finished or cancelled', 'Dialog']],
+    anatomy: [['Key', 'A 44px round key, or a capsule key with a word and a chevron.'], ['Panel', 'surface.solid, elevation.float, corner.inner, layer.overlay, at most layout.frame-sm wide.'], ['Title', 'type.emphasis in type.weight-medium.'], ['Close key', 'A round 44px key at the end of the title row.'], ['Content', 'type.body in text.secondary.']],
+    states: [['Closed', 'Only the key shows, aria-expanded="false".'], ['Open', 'The panel rises off the key, aria-expanded="true".'], ['Closing', 'The panel fades and sinks back, hidden from assistive tech.'], ['Disabled', 'The key fades to half and does not open.']],
+    content: ['Name the key for what the panel explains.', 'Start the title with the thing it describes.', 'Keep the content to a few lines.'],
+    dodont: [
+      { do: 'Name the key "About the water filter".', dont: 'Name the key "More".' },
+      { do: 'Open it by press and let Escape close it.', dont: 'Open it by hover only.' },
+    ],
+    a11y: ['The key carries aria-haspopup="dialog" and aria-expanded.', 'The panel is a dialog named by its title or by the key label.', 'Focus moves into the panel on open and returns to the key on close.', 'In forced colours the panel keeps a real border in the text colour.', 'Under Reduce motion the panel only fades.'],
+    keyboard: [['Enter / Space', 'Opens the panel and moves focus into it', 'Popover: focus moves into the panel on open and Escape returns it to the key'], ['Escape', 'Closes the panel and returns focus to the key', 'Popover: focus moves into the panel on open and Escape returns it to the key'], ['Tab', 'Moves through the panel; past either end it closes onto the key', 'Popover: a press outside closes the panel and the close key is at least the touch target']],
+    inherits: 'HTMLAttributes<HTMLSpanElement>',
+    related: [['/components/menu', 'Menu', 'A list of actions to pick from.'], ['/components/dialog', 'Dialog', 'A task that must be finished or cancelled.']],
+  },
+  {
+    name: 'Radio',
+    slug: 'radio',
+    status: 'beta',
+    limitations: ['A group is a single column; there is no horizontal layout.', 'The options need a RadioGroup; a Radio outside one is a plain native radio with no shared state.', 'Home and End do not move the choice, because native radio groups do not map them.'],
+    youMust: ['Give every RadioGroup a label, because it is the name of the group.', 'Give each Radio a value that is unique inside its group.', 'Keep a group to two to five options.'],
+    usage: '<RadioGroup label="Heating mode" defaultValue="eco">\n  <Radio value="comfort" label="Comfort" />\n  <Radio value="eco" label="Eco" />\n</RadioGroup>',
+    backdrops: 'In light the key is warm white plastic with a grey ring edge and the dot is dark ink. In dark the key is charcoal with a light ring edge and a light dot. The ring holds at least 3:1 against the body in both, and nothing is orange.',
+    purpose: 'Picks one option out of a few, each a round key with its word printed beside it.',
+    importLine: "import { RadioGroup, Radio } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>RadioGroup</code> is a fieldset with a printed name, and each <code>Radio</code> inside it is a round key with its word beside it. The chosen key carries a dot of ink and its word turns medium. Control it with <code>value</code> and <code>onValueChange</code>, or let it keep its own state with <code>defaultValue</code>.</p>
+      </>
+    ),
+    hero: ex('RadioBasic', 'Three options under a printed name; one is chosen.'),
+    ladder: [ex('RadioControlled', 'The screen keeps the value and prints it in words.'), ex('RadioStates', 'One option disabled, and a whole group disabled.'), ex('RadioInUnit', 'A choice in a unit, before the one orange key.')],
+    whenToUse: ['Pick one of two to five options that all fit on screen.', 'Let the person compare the choices before picking.'],
+    whenNotToUse: [['Turning one option on or off', 'Checkbox'], ['Picking from a long list', 'Select']],
+    anatomy: [['Group name', 'type.label in text.secondary, as the legend of a fieldset.'], ['Key', 'control.check round, surface.raised, elevation.part, width.hairline in line.ring.'], ['Dot', 'control.dot ring in text.primary ink.'], ['Word', 'type.label, regular, medium when chosen.']],
+    states: [['Chosen', 'A dot on the key and a medium word.'], ['Waiting', 'An empty key.'], ['Hover', 'The ring edge darkens one step.'], ['Pressed', 'The key drops by motion.press-travel.'], ['Focus', 'A ring around the key.'], ['Disabled', 'No height, faded.']],
+    content: ['Name the group with a noun.', 'Keep option names short.', 'Do not repeat the group name in each option.'],
+    dodont: [
+      { do: 'Print a name above the group.', dont: 'Leave the options with no subject.' },
+      { do: 'Tell chosen by a dot and a weight.', dont: 'Tell chosen by colour alone.' },
+    ],
+    a11y: ['A fieldset with a legend, so the group is announced with its name.', 'Native radio inputs share one name, so the browser handles arrow keys and the tab stop.', 'The whole row is a label of at least 44px.', 'In forced colours the key keeps a real border and the dot uses the text colour.'],
+    keyboard: [['Tab', 'Moves into the group, to the chosen option', 'Radio: the group is a named radio group and exactly one option is chosen'], ['Arrow keys', 'Move to the next or previous option and choose it', 'Radio: an arrow key moves the choice to the next option and keeps one chosen'], ['Space', 'Chooses the focused option', 'Radio: pressing the printed word chooses the option and the row is at least the touch target']],
+    inherits: 'FieldsetHTMLAttributes<HTMLFieldSetElement> (RadioGroup), InputHTMLAttributes<HTMLInputElement> (Radio)',
+    related: [['/components/checkbox', 'Checkbox', 'Turning one option on or off.'], ['/components/select', 'Select', 'Picking from a long list.']],
+  },
+  {
+    name: 'Tooltip',
+    slug: 'tooltip',
+    status: 'beta',
+    limitations: ['It holds a name of a few words; there is no room for a link, a button or a second line of help.', 'A disabled button sends no events, so the part must be wrapped in a span that takes focus.', 'One tag shows at a time per part; there is no shared delay across a row of parts.'],
+    youMust: ['Keep the name to two to four words.', 'Never put anything the person needs only in the tag.', 'Give a wrapped, disabled part tabIndex 0 so the keyboard reaches the reason.'],
+    usage: '<Tooltip content="Next track">\n  <IconButton label="Next track">…</IconButton>\n</Tooltip>',
+    backdrops: 'In light the tag is warm plastic with a grey hairline and primary ink at 9.3:1. In dark it is charcoal plastic with the same hairline and ink at 10.9:1. Nothing is orange.',
+    purpose: 'Prints the name of a part in a small plastic tag on hover, keyboard focus and a resting finger.',
+    importLine: "import { Tooltip } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Tooltip</code> wraps one part and names it. The tag shows when the pointer rests on the part, when the keyboard focuses it and when a finger is held on it. Escape closes it, and the pointer can move onto the tag without losing it. The tag lives on the body, so no frame cuts it, and it flips below the part when there is no room above.</p>
+      </>
+    ),
+    hero: ex('TooltipBasic', 'Three transport keys, each named by a tag.'),
+    ladder: [
+      ex('TooltipTop', 'A tag names a key that has no printed word of its own.'),ex('TooltipSide', 'The tag stands below the part when asked.'), ex('TooltipDisabledKey', 'A disabled key is wrapped in a span so the tag can say why.'), ex('TooltipThai', 'A Thai name keeps its marks and the tag grows to hold it.')],
+    whenToUse: ['Name a key that shows only a symbol.', 'Give the reason a part is out of reach, in a few words.'],
+    whenNotToUse: [['Several actions behind a key', 'Menu'], ['Anything longer than a name', 'Dialog']],
+    anatomy: [['Tag', 'surface.solid, elevation.float, corner.media, width.hairline in line.ring, layer.overlay.'], ['Name', 'type.label in type.weight-regular, type.leading-body.']],
+    states: [['Showing', 'The tag stands above or below the part and the part is described by it.'], ['Leaving', 'The tag fades and sinks back on motion.exit; the pointer passes through it.'], ['Disabled', 'The tag never shows.']],
+    content: ['Name the part in two to four words.', 'Do not end with a full stop.', 'Do not repeat a visible label.'],
+    dodont: [
+      { do: 'Write the part’s name: “Next track”.', dont: 'Write a sentence that explains the part.' },
+      { do: 'Wrap a disabled button in a focusable span.', dont: 'Put the tag on a disabled button and expect it to show.' },
+    ],
+    a11y: ['The tag has role="tooltip" and the part gets aria-describedby while it shows.', 'A name equal to the part’s aria-label is not announced twice.', 'Escape closes the tag; it can be hovered and it stays until the part is left.', 'Under Reduce motion the tag only fades. In forced colours it keeps a border in the text colour.'],
+    keyboard: [
+      ['Tab', 'Moves focus to the part and shows the tag at once', 'Tooltip: keyboard focus shows the tag at once and Escape closes it with focus left on the part'],
+      ['Escape', 'Closes the tag and leaves focus where it was', 'Tooltip: keyboard focus shows the tag at once and Escape closes it with focus left on the part'],
+    ],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/menu', 'Menu', 'Several actions behind one key.'], ['/components/icon-button', 'IconButton', 'The key a Tooltip most often names.']],
+  },
+  {
+    name: 'Accordion',
+    slug: 'accordion',
+    status: 'beta',
+    limitations: ['The content of a closed section is not mounted, so it is not found by page search and holds no state.', 'Opening a section moves the sections below it.', 'Every title is a heading, so more than eight sections add many landmarks for a screen reader.'],
+    youMust: ['Name each section with a noun and let the plus and minus say open or closed.', 'Pass a headingLevel that fits the page outline.', 'Keep the unit’s one orange key outside the Accordion.'],
+    usage: '<Accordion defaultValue={[\'schedule\']}>\n  <AccordionItem value="schedule" title="Schedule">…</AccordionItem>\n  <AccordionItem value="away" title="Away mode">…</AccordionItem>\n</Accordion>',
+    backdrops: 'In light the titles are warm grey ink on warm-white plastic with 1px seams, in dark light ink on charcoal. The index bar is the title’s own ink in both, and nothing is orange.',
+    purpose: 'Folds the sections of a unit as a printed legend, the open ones lit with an ink bar and a minus.',
+    importLine: "import { Accordion, AccordionItem } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Accordion</code> prints every section’s title in one column. A closed title is secondary ink with a plus; an open one is primary ink in medium weight with a short ink bar and a minus, and its content stands under it. By default opening a section closes the others. Pass <code>multiple</code> to keep several open.</p>
+      </>
+    ),
+    hero: ex('AccordionBasic', 'Three sections, the first open.'),
+    ladder: [ex('AccordionMultiple', 'Several sections open, held in your own state.'), ex('AccordionStates', 'Open, closed and disabled headers.')],
+    whenToUse: ['Fold three to eight sections of settings or help.', 'Keep a long unit short when people read one section at a time.'],
+    whenNotToUse: [['Switching between views', 'Tabs'], ['Numbering the sections of a form', 'Stepper']],
+    anatomy: [['Index bar', 'A 4px bar in the title’s ink, shown only while open.'], ['Title', 'type.reading, medium weight while open.'], ['Plus or minus', 'The dot-matrix icon at the row’s end.'], ['Seam', 'width.hairline in line.divider between sections.'], ['Content', 'type.body under the title.']],
+    states: [['Closed', 'Secondary ink, plus, no bar.'], ['Open', 'Primary ink, medium weight, minus, bar.'], ['Hover', 'The closed title darkens a step.'], ['Disabled', 'Faded, out of the tab order.']],
+    content: ['Name each section with a noun.', 'Do not write “Show” or “Hide”.', 'Keep it to eight sections.'],
+    dodont: [
+      { do: 'Name the section with a noun.', dont: 'Write “Click to show the schedule”.' },
+      { do: 'Keep the orange key outside the Accordion.', dont: 'Fold the unit’s main action into a section.' },
+    ],
+    a11y: ['Each title is a heading that holds a button with aria-expanded.', 'An open section’s content is a region named by its title.', 'Open is told by a bar, a minus and weight, not by ink alone.', 'Under Reduce motion the panel keeps its height and only fades.', 'In forced colours the bar is drawn in the button text colour and the seams stay borders.'],
+    keyboard: [['Enter / Space', 'Open or close the focused section', 'Accordion: Enter and Space open a section and in single mode the open one closes'], ['Up / Down', 'Move to the previous or next header, the ends wrap', 'Accordion: Up, Down, Home and End move focus between headers and never open one'], ['Home / End', 'Move to the first or last header', 'Accordion: Up, Down, Home and End move focus between headers and never open one']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/tabs', 'Tabs', 'Switching between views.'], ['/components/stepper', 'Stepper', 'Numbering the sections of a form.']],
+  },
+  {
+    name: 'Breadcrumb',
+    slug: 'breadcrumb',
+    status: 'beta',
+    limitations: ['It does not build the path; you pass the levels in order.', 'It folds the middle levels only, never the first or the last.', 'The last level is always the current page and is never a link.'],
+    youMust: ['Pass the levels from the top down and put the current page last.', 'Use the same noun a page uses as its title.', 'Give the landmark and the folded key a name in your own language.'],
+    usage: '<Breadcrumb>\n  <Crumb href="/">Home</Crumb>\n  <Crumb href="/lamps">Lamps</Crumb>\n  <Crumb>Kitchen lamp</Crumb>\n</Breadcrumb>',
+    backdrops: 'In light the names are grey ink on warm white plastic and the page you are on is dark ink with a bar under it. In dark they are light ink on charcoal. The leaders are ring ink in both and nothing is orange.',
+    purpose: 'Prints the path to the current page as names joined by dotted leaders, and folds the middle on a narrow unit.',
+    importLine: "import { Breadcrumb, Crumb } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Breadcrumb</code> is a navigation landmark that holds an ordered list. Each <code>Crumb</code> above the page is a link, and the last one is the page you are on: plain text announced with aria-current=&quot;page&quot; and marked by a short ink bar. When the path does not fit its unit, the middle levels fold into one key; <code>fold</code> sets that to <code>auto</code>, <code>always</code> or <code>never</code>.</p>
+      </>
+    ),
+    hero: ex('BreadcrumbBasic', 'Four levels, the last one the page you are on.'),
+    ladder: [
+      ex('BreadcrumbLabelled', 'A path in another language: the landmark name and the folded key name are passed in.'),
+      ex('BreadcrumbFolded', 'The middle levels folded into one key.'),
+      ex('BreadcrumbInUnit', 'A path inside a unit.'),
+    ],
+    whenToUse: ['Show where a page sits in a tree of three or more levels.', 'Give a way back up the tree.'],
+    whenNotToUse: [['Switching between views', 'Tabs'], ['Naming the sections of one form', 'Stepper']],
+    anatomy: [['Link', 'type.label in text.secondary, control.md tall, layout.touch wide at least.'], ['Leader', 'A run of dots in line.ring.'], ['Current page', 'type.label in type.weight-medium and text.primary, with an ink bar under it.'], ['Folded key', 'A dot-matrix more glyph, control.md tall and layout.touch wide.']],
+    states: [['Hover', 'The link goes one ink step darker.'], ['Current', 'Primary ink, an ink bar and aria-current="page".'], ['Folded', 'The middle levels are out of the row and one key stands in their place.']],
+    content: ['Use the noun the page uses as its title.', 'Do not add an arrow; the leaders draw it.', 'Keep it to five levels.'],
+    dodont: [
+      { do: 'Name each level with the title of its page.', dont: 'Write “Go to home page”.' },
+      { do: 'Tell the current page by its bar and weight.', dont: 'Tell it by colour alone.' },
+    ],
+    a11y: ['A nav landmark with a name, holding an ordered list.', 'The current page carries aria-current="page" and is not a link.', 'The folded key is a button named “Show full path” and takes focus in order.', 'When the folded key is pressed, focus moves to the first level it printed back.', 'In forced colours the leader and the bar draw in the text colour.'],
+    keyboard: [['Tab', 'Moves through the links and the folded key in order', 'Breadcrumb: the current page is announced and the folded key prints the path back'], ['Enter or Space', 'On the folded key, prints every level back', 'Breadcrumb: the current page is announced and the folded key prints the path back']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/tabs', 'Tabs', 'Switching between views.'], ['/components/stepper', 'Stepper', 'Naming the sections of one form.']],
+  },
+  {
+    name: 'Divider',
+    slug: 'divider',
+    status: 'beta',
+    limitations: ['It is a seam only; it cannot be dragged to resize the regions beside it.', 'A label is printed on a horizontal seam only.', 'It has one weight, two pixels.'],
+    youMust: ['Give the gap first and add a divider only where the gap does not part two groups.', 'Put a vertical divider in a row that stretches, or it has no height.', 'Set decorative when headings already name the regions.'],
+    usage: '<Divider />\n<Divider label="schedule" />\n<Divider orientation="vertical" />',
+    backdrops: 'In light the seam is a warm grey edge over a white lit edge in warm white plastic, in dark a near-black edge over a faint lit edge in charcoal. Nothing is orange.',
+    purpose: 'Parts two regions of one unit with a seam cut in the body, with an optional word printed on it.',
+    importLine: "import { Divider } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Divider</code> is a separator. It draws a seam of two pixels, the divider tone above and the lit edge below, so it reads as a panel gap. It runs across its column, or down its row when <code>orientation</code> is <code>vertical</code>. <code>label</code> prints a short word on the seam. <code>decorative</code> hides it from assistive tech.</p>
+      </>
+    ),
+    hero: ex('DividerBasic', 'A seam between two groups of one unit.'),
+    ladder: [
+      ex('DividerLabel', 'A lowercase word printed on the seam.'),
+      ex('DividerVertical', 'A vertical seam between side-by-side regions.'),
+      ex('DividerDecorative', 'A decorative seam where headings name the regions.'),
+      ex('DividerGroups', 'Two printed groups with their fields under each word.'),
+    ],
+    whenToUse: ['Part two groups inside one unit when the gap alone is not enough.', 'Print the name of a group on the line that starts it.'],
+    whenNotToUse: [['Numbered sections of a long form', 'Stepper'], ['Switching between views', 'Tabs']],
+    anatomy: [['Seam', 'border.hairline in line.divider over border.hairline in material.lit, two pixels in all.'], ['Label', 'type.caption in text.secondary, with the seam on both sides.']],
+    states: [['Horizontal', 'A seam across the column, announced as a separator.'], ['Vertical', 'A seam down the row with aria-orientation="vertical".'], ['Labelled', 'A word on the seam, which names the separator.'], ['Decorative', 'role="none", hidden from assistive tech.']],
+    content: ['Print one or two lowercase words.', 'Name the group below the seam.', 'Do not write a sentence.'],
+    dodont: [
+      { do: 'Name the group with one lowercase word.', dont: 'Print OR or a sentence on the seam.' },
+      { do: 'Let the gap part rows and keep one seam for a real change of group.', dont: 'Put a divider between every row of a list.' },
+    ],
+    a11y: ['Announced as a separator, with aria-orientation when vertical.', 'A label becomes the separator’s name.', 'A decorative divider has role="none".', 'In forced colours the lit edge is dropped and the shade edge draws in the system grey.'],
+    keyboard: [['Tab', 'A divider takes no focus', 'Divider: the separator is announced with its orientation']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/stepper', 'Stepper', 'Numbered sections of a long form.'], ['/components/tabs', 'Tabs', 'Switching between views.']],
+  },
+  {
+    name: 'Timeline',
+    slug: 'timeline',
+    status: 'beta',
+    limitations: ['It is a log, not a control; events cannot be pressed, opened or removed.', 'The rail runs down only; there is no horizontal Timeline.', 'It does not sort or group; you pass the events in the order they are read.'],
+    youMust: ['Pass the events newest first and set latest on the newest only.', 'Name each event with what happened, in the past tense.', 'Give the lit node a word in your own language with latestLabel.'],
+    usage: '<Timeline>\n  <TimelineItem time="22:40" title="Night mode started" latest>Heater set to 18.</TimelineItem>\n  <TimelineItem time="21:05" title="Washer finished" />\n</Timeline>',
+    backdrops: 'In light the times are grey ink on warm white plastic and the titles are dark ink. In dark they are light ink on charcoal. The rail and nodes are ink in both, and nothing is orange.',
+    purpose: 'Prints a log of past events with the time in a column and a hairline rail with a node for each.',
+    importLine: "import { Timeline, TimelineItem } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Timeline</code> is an ordered list. Each <code>TimelineItem</code> prints its <code>time</code> in a column at the left, a ring node on a hairline rail, and its <code>title</code>, with optional detail under it. <code>latest</code> fills the node, sets the title in medium weight and names the node Latest for assistive tech.</p>
+      </>
+    ),
+    hero: ex('TimelineBasic', 'Three past events, newest first, the latest one lit.'),
+    ladder: [
+      ex('TimelineLatest', 'latest fills the node and the title turns medium.'),
+      ex('TimelineDays', 'Longer times stay in one column and dateTime gives the time element a machine value.'),
+      ex('TimelineInUnit', 'A history under the title of a unit.'),
+      ex('TimelineThai', 'Thai titles wrap in their column and latestLabel names the lit node.'),
+    ],
+    whenToUse: ['Show the last events of a device or a room, newest first.', 'Show a short history of one thing, such as a door or a cycle.'],
+    whenNotToUse: [['Numbered sections of a form still to come', 'Stepper'], ['How far a task has got', 'Progress']],
+    anatomy: [['Time', 'type.label in text.secondary with tabular figures, right-aligned.'], ['Rail', 'A hairline in line.ring, width.hairline.'], ['Node', 'A ring in text.primary, control.mark; filled on the latest event.'], ['Title', 'type.body, regular; medium on the latest event.'], ['Detail', 'type.body in text.secondary under the title.']],
+    states: [['Event', 'A ring node and a regular title.'], ['Latest', 'A filled node, a medium title and the name Latest on the node.']],
+    content: ['Name each event with what happened, in the past tense.', 'Keep the time short, as in 22:40.', 'Put the newest event first.'],
+    dodont: [
+      { do: 'Name the event with what happened: Washer finished.', dont: 'Name it Event 1.' },
+      { do: 'Light the newest event only.', dont: 'Set latest on several events.' },
+    ],
+    a11y: ['An ordered list, so the order is read out.', 'Each time is a time element, with dateTime when you pass it.', 'The lit node is announced as Latest, so the lit event is not told by sight alone.', 'In forced colours the rail and nodes draw in the text colour and the lit node stays filled.'],
+    keyboard: [['Tab', 'Moves to anything focusable inside an event', 'Timeline: the events are a list in order and the lit one is named Latest']],
+    inherits: 'HTMLAttributes<HTMLOListElement>',
+    related: [['/components/stepper', 'Stepper', 'Numbered sections still to come.'], ['/components/progress', 'Progress', 'How far a task has got.']],
+  },
+  {
+    name: 'Stat',
+    slug: 'stat',
+    status: 'beta',
+    limitations: ['It cannot be pressed; to make a figure a target, put a key beside it.', 'It shows one figure; two figures are two Stats.', 'The change is text you pass in; Stat does not work it out from the last reading.'],
+    youMust: ['Pass the unit in unit and not inside value.', 'Pass trend whenever you pass change, or the change reads as flat.', 'Keep it away from the orange key.'],
+    usage: '<Stat label="Energy today" value="12.4" unit="kWh" />\n<Stat label="Energy today" value="12.4" unit="kWh" change="0.8 kWh" trend="up" compare="since yesterday" size="lg" />',
+    backdrops: 'In light the window is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. The figure, the glyph and the words are ink in both, and nothing is orange.',
+    purpose: 'Shows one named figure with its unit in a recessed window, and an optional change printed under it.',
+    importLine: "import { Stat } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Stat</code> prints the name of a figure above a small window, with the number and its unit inside. With <code>change</code> it adds a line under the window: a glyph, a word (Up, Down or No change), the amount and, with <code>compare</code>, what it is measured against. With no value the window prints a dash. It is not a control.</p>
+      </>
+    ),
+    hero: ex('StatBasic', 'Energy today, with the change since yesterday.'),
+    ladder: [
+      ex('StatSizes', 'The figure at small, medium and large.'),
+      ex('StatTrends', 'Up, down and no change, each told by a glyph and a word.'),
+      ex('StatEmpty', 'A sensor with no reading keeps the window and prints a dash.'),
+      ex('StatInUnit', 'Three small Stats in a row, with the orange key apart from them.'),
+    ],
+    whenToUse: ['Show one named figure, such as energy today, with its unit.', 'Put two or three readings side by side in a unit.'],
+    whenNotToUse: [['The state the whole unit is about', 'Display'], ['A level in a range with regions', 'Meter']],
+    anatomy: [['Name', 'type.caption in type.weight-regular, with the print seat.'], ['Window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Figure', 'type.emphasis, type.title or type.display in type.weight-medium, tabular numerals.'], ['Unit', 'type.label in text.secondary.'], ['Change', 'type.caption, with a control.icon-sm glyph, a word and the amount.']],
+    states: [['Reading', 'The figure and the unit in the window.'], ['No reading', 'A dash in text.secondary, announced as No reading.'], ['With change', 'A glyph, a word and the amount under the window.'], ['Live', 'A polite status that reads the whole reading when it changes.']],
+    content: ['Name the figure with a noun and a time.', 'Pass the unit in its own prop.', 'Write the change in the same unit as the figure.'],
+    dodont: [
+      { do: 'Tell the direction with a glyph and a word.', dont: 'Tell it with a green or a red.' },
+      { do: 'Print a dash when there is no reading.', dont: 'Print a zero that looks like a real reading.' },
+    ],
+    a11y: ['A labelled group, so the name, the figure and the unit are read together.', 'The change is read as a word and an amount, for example Up 0.8 kWh.', 'It takes no focus.', 'With live it is a polite status.', 'In forced colours the window keeps a border in the text colour.'],
+    keyboard: [['Tab', 'Does not stop on a Stat', 'Stat: a labelled group that takes no focus and names its figure']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/display', 'Display', 'The window that says what the unit is doing now.'], ['/components/meter', 'Meter', 'A level on a printed scale with regions.']],
+  },
+  {
+    name: 'Pagination',
+    slug: 'pagination',
+    status: 'beta',
+    limitations: ['It does not slice your data; you pass the page count and show the page yourself.', 'The numbers fold into gaps and there is no input to type a page.', 'There is no vertical Pagination and no page-size picker.', 'Pages as links use plain anchors; a router link needs buttons and onPageChange.'],
+    youMust: ['Pass count, and page with onPageChange when you control it.', 'Hide it when the list fits on one page.', 'Name the landmark in your own language, and pageLabel when the word order differs.', 'Show the new page yourself; Pagination only reports the number.'],
+    usage: '<Pagination count={12} page={page} onPageChange={setPage} />',
+    backdrops: 'In light the numbers are grey ink on warm white plastic, the current one dark with a bar under it, and the two keys are raised plastic. In dark they are light ink on charcoal. Nothing is orange.',
+    purpose: 'Turns the pages of a long list with two keys and printed numbers, folding a long range into gaps.',
+    importLine: "import { Pagination } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Pagination</code> is a navigation landmark with a list in one row: a previous key, the page numbers, a next key. The current number is marked with <code>aria-current="page"</code> and an ink bar. When <code>count</code> is larger than the row can show, the middle folds into a gap of three dots, and the row keeps the same number of places on every page.</p>
+        <p>Pass <code>page</code> and <code>onPageChange</code> to control it, or <code>defaultPage</code> to let it keep the page. Pass <code>getHref</code> and the numbers become links.</p>
+      </>
+    ),
+    hero: ex('PaginationBasic', 'Twelve pages on the sixth: gaps at both ends.'),
+    ladder: [
+      ex('PaginationShort', 'Five pages fit, so no gap, and the previous key is flat on page one.'),
+      ex('PaginationControlled', 'Controlled: the slice on show follows the page.'),
+      ex('PaginationLinks', 'Each number is a link with its own address.'),
+      ex('PaginationWide', 'Two each side and two at the ends, with Thai names.'),
+    ],
+    whenToUse: ['Split a long list or table into numbered pages.', 'People need to jump to a page, not only step.'],
+    whenNotToUse: [['Moving between views', 'Tabs'], ['The path to this page', 'Breadcrumb'], ['Numbering form sections', 'Stepper']],
+    anatomy: [['Keys', 'Round, control.key, elevation.part, surface.raised, a chevron from Icon.'], ['Number', 'type.label with tabular figures, 44px tall, layout.touch wide at least.'], ['Index mark', 'width.bar in text.primary under the current number.'], ['Gap', 'The Icon more, three dots, hidden from assistive tech.']],
+    states: [['Current', 'Primary ink, medium weight, an ink bar and aria-current="page".'], ['Hover', 'The number darkens one ink step.'], ['Key at the end', 'Flat, no shadow, opacity.disabled and aria-disabled.']],
+    content: ['Name the landmark for what it pages when a screen has more than one.', 'Keep siblings and boundary small enough for a phone.', 'Hide it for one page.'],
+    dodont: [
+      { do: 'Print the count of items above the row.', dont: 'Print two paginations for one list.' },
+      { do: 'Tell the current page by the bar and aria-current.', dont: 'Tell it by colour alone.' },
+    ],
+    a11y: ['A nav landmark with a name.', 'The current number carries aria-current="page" and is not a link to itself.', 'Each number is named “Page 4”; pass pageLabel to change it.', 'A key at the end of the range is aria-disabled, and focus moves to the current number when it goes flat.', 'In forced colours the keys keep a border and the bar and gap use the text colour.'],
+    keyboard: [['Tab', 'Moves through the keys and numbers', 'Pagination: the current page is announced and the row keeps its places'], ['Enter or Space', 'Goes to the page', 'Pagination: pressing next to the end flattens the key and moves focus to the current page']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/tabs', 'Tabs', 'Switching between views.'], ['/components/breadcrumb', 'Breadcrumb', 'The path to this page.']],
+  },
+  {
+    name: 'Spinner',
+    slug: 'spinner',
+    status: 'beta',
+    limitations: ['It has no value, so it cannot show how far the work has got.', 'It has one look; the trail always walks a ring of eight holes.', 'Under reduced motion it stops, so a long wait needs its label shown.'],
+    youMust: ['Mount it when the work starts and remove it when the work ends.', 'Name the work in the label, such as Saving or Asking the hub.', 'Show the label with showLabel on any wait that can run past a few seconds.'],
+    usage: '<Spinner label="Asking the hub" showLabel />',
+    backdrops: 'In light the holes are grey recesses in warm white plastic and the trail is dark ink, in dark the holes are near-black recesses in charcoal and the trail is light ink. Nothing is orange.',
+    purpose: 'Says that the unit is busy and has no figure yet, with a short lit trail walking a ring of recessed holes.',
+    importLine: "import { Spinner } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Spinner</code> is a status region with nine recessed holes, the same holes as a <code>Grille</code>. Three lit holes walk the edge, one every 120ms. <code>label</code> names the wait and is always in the page for assistive tech; <code>showLabel</code> prints it beside the holes. <code>size</code> is <code>sm</code> or <code>md</code>.</p>
+      </>
+    ),
+    hero: ex('SpinnerBasic', 'A lit trail walks the edge of nine holes.'),
+    ladder: [
+      ex('SpinnerLabelled', 'The label printed beside the holes.'),
+      ex('SpinnerSizes', 'Small holes for a row, medium holes for a Spinner that stands alone.'),
+      ex('SpinnerInUnit', 'It holds the place of a reading in a unit.'),
+      ex('SpinnerSwap', 'It is mounted while the work runs and the reading replaces it.'),
+    ],
+    whenToUse: ['Wait for an answer of unknown length, such as asking the hub.', 'Hold the place of a reading before its shape is known.'],
+    whenNotToUse: [['A task with a known end', 'Progress'], ['A card or list that is still loading', 'Skeleton']],
+    anatomy: [['Hole', 'elevation.well, grille.hole in the lower ink step, 8px (sm) or 12px (md), corner.round.'], ['Lit trail', 'grille.hole-on, three holes, one step every motion.fill (120ms).'], ['Label', 'type.label, read as a status and drawn only with showLabel.']],
+    states: [['Running', 'The trail walks the ring.'], ['Reduced motion', 'The trail stops; three holes stay lit.'], ['Forced colours', 'Each hole has a border and lit holes fill with the text colour.']],
+    content: ['Name the work with a verb ending in ing.', 'Say what is waiting, not that something loads.', 'Keep the label to a few words.'],
+    dodont: [
+      { do: 'Name the work, as in Saving the schedule.', dont: 'Write Please wait.' },
+      { do: 'Use one Spinner for one wait.', dont: 'Put two in one unit.' },
+    ],
+    a11y: ['A status region, so the label is read out when it appears.', 'The holes are hidden from assistive tech; the label is real text.', 'Under reduced motion the trail stops and three holes stay lit.', 'In forced colours each hole keeps a real border and a lit hole uses the text colour.'],
+    keyboard: [['Tab', 'Passes over the Spinner; it takes no focus', 'Spinner: it is a status region and announces its label']],
+    inherits: 'HTMLAttributes<HTMLSpanElement>',
+    related: [['/components/progress', 'Progress', 'A task with a known end.'], ['/components/skeleton', 'Skeleton', 'The shape of a part that is still loading.']],
+  },
+  {
+    name: 'Link',
+    slug: 'link',
+    status: 'beta',
+    limitations: ['It has no disabled state; a link that cannot be followed should not be a link.', 'It does not do routing; pass your router link with asChild.', 'The visited rule is dotted only when you set the visited prop; CSS alone can step the ink but not the rule.'],
+    youMust: ['Name the destination in the link words and never write “click here”.', 'Set external on a link that leaves the app.', 'Use a Button for anything that does something instead of going somewhere.'],
+    usage: '<Text>\n  Read the <Link href="/manual">manual</Link>.\n</Text>\n<Link href="/lamps" variant="standalone">All lamps</Link>',
+    backdrops: 'In light the words are dark ink on warm white plastic with a hairline rule, and a read link is one ink step lighter. In dark the words are light ink on charcoal. The mark is ink in both and nothing is orange.',
+    purpose: 'Sends a person somewhere else in the ink and size of the sentence, with one thin rule under the words.',
+    importLine: "import { Link } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Link</code> is an anchor. Inside a sentence it takes the size and line height of the text around it and adds a hairline rule. <code>variant</code> is <code>inline</code> or <code>standalone</code>, a row 44px tall for a link on its own line. <code>external</code> prints a dot-matrix mark, opens a new tab and announces it. <code>visited</code> prints a link already read one ink step lighter with a dotted rule.</p>
+      </>
+    ),
+    hero: ex('LinkBasic', 'Two links inside a sentence, each with a thin rule under the words.'),
+    ladder: [
+      ex('LinkStandalone', 'Links on their own lines, each 44px tall.'),
+      ex('LinkExternal', 'The mark at the end of a link that leaves the app.'),
+      ex('LinkVisited', 'A link already read, one ink step lighter with a dotted rule.'),
+      ex('LinkAsChild', 'A router link given the link styles.'),
+    ],
+    whenToUse: ['Go to another page, a section or another site.', 'Name a place inside a sentence.'],
+    whenNotToUse: [['Doing something, such as saving', 'Button'], ['Showing the path to the current page', 'Breadcrumb']],
+    anatomy: [['Words', 'Inherit the size, weight and line height of the text around them, in text.primary.'], ['Rule', 'A hairline in the ink of the words, thickening to width.ring on hover.'], ['External mark', 'The dot-matrix share glyph, control.icon-sm, in the ink of the words.'], ['Standalone row', 'control.md tall and layout.touch wide at least.']],
+    states: [['Hover', 'The rule thickens one step.'], ['Visited', 'Secondary ink; with the visited prop the rule turns dotted.'], ['External', 'A dot-matrix mark at the end.']],
+    content: ['Name the destination.', 'Never write “click here” or “read more”.', 'Keep the link to a few words.'],
+    dodont: [
+      { do: 'Underline the words that name the place.', dont: 'Underline a whole sentence.' },
+      { do: 'Tell a link by its rule.', dont: 'Tell a link by colour alone.' },
+    ],
+    a11y: ['A real anchor, so open, copy and new tab work as the browser gives them.', 'The rule is a cue that is not colour.', 'The external mark is named “Opens in a new tab”.', 'A standalone link is 44px tall; a link inside a sentence is the height of its line, as WCAG allows.', 'In forced colours the link takes the system link and visited colours.'],
+    keyboard: [['Tab', 'Moves to the link', 'Link: keyboard focus draws a ring on the link'], ['Enter', 'Follows the link', 'Link: every link is a real anchor with an href, and the rule under it is drawn without colour']],
+    inherits: 'AnchorHTMLAttributes<HTMLAnchorElement>',
+    related: [['/components/button', 'Button', 'Doing something instead of going somewhere.'], ['/components/breadcrumb', 'Breadcrumb', 'The path to the current page.']],
+  },
+  {
+    name: 'Center',
+    slug: 'center',
+    status: 'beta',
+    limitations: ['It centres one group; it does not space siblings, so use Stack for that.', 'Centring from top to bottom needs a parent with a set height.', 'The cap uses the five container widths and no other value.'],
+    youMust: ['Give the parent a height before you centre on both axes.', 'Keep what you centre short, such as a line, a note or one key.', 'Leave the orange to the one primary key if one sits inside.'],
+    usage: '<Center>\n  <Text>No rooms yet</Text>\n</Center>',
+    backdrops: 'Center draws nothing, so it takes the surface behind it in both themes. Nothing is orange.',
+    purpose: 'Puts its children in the middle of a box, on one axis or both, with an optional width cap.',
+    importLine: "import { Center } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Center</code> is a flex column that centres its children. <code>axis</code> is <code>both</code> (the default), <code>inline</code> or <code>block</code>. <code>size</code> caps the inline size at a container token, <code>sm</code> to <code>2xl</code>.</p>
+      </>
+    ),
+    hero: ex('CenterBoth', 'One line centred on both axes in a box of fixed height.'),
+    ladder: [
+      ex('CenterInline', 'Centred along the line only; the top edge stays put.'),
+      ex('CenterBlock', 'Centred from top to bottom only.'),
+      ex('CenterMaxSize', 'A note held to the md container width.'),
+      ex('CenterKey', 'A lone primary key in an empty unit.'),
+    ],
+    whenToUse: ['Place one short part in the middle of a box.', 'Hold a note at a readable width on a wide page.'],
+    whenNotToUse: [['Space between siblings', 'Stack'], ['The width and margin of a page', 'Container']],
+    anatomy: [['Root', 'A flex column with margin-inline auto and, with size, a max-inline-size from container.max.']],
+    states: [['Default', 'The only state; it draws nothing.']],
+    content: ['Keep it to a line, a note or one key.', 'Do not centre a paragraph.', 'Give the parent a height for both axes.'],
+    dodont: [
+      { do: 'Centre a short line in a box with a height.', dont: 'Centre a paragraph line by line.' },
+      { do: 'Cap the width of a note with size.', dont: 'Cap it wider than the note itself.' },
+    ],
+    a11y: ['Center adds no role, label or focus stop.', 'The reading order is the source order.', 'Controls inside keep their own keyboard and 44px targets.', 'It draws nothing, so forced colours need no rule.'],
+    keyboard: [['Tab', 'Center takes no focus; controls inside keep their own keys', 'Center: both-axis centring puts the child in the middle of its parent']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/container', 'Container', 'The page width and margin.'], ['/components/stack', 'Stack', 'Space between siblings.']],
+  },
+  {
+    name: 'Box',
+    slug: 'box',
+    status: 'beta',
+    limitations: ['It has no look of its own beyond the inset, ground and corner you choose.', 'The three grounds sit close to each other and do not mark a boundary alone.', 'It cannot set a width, a gap or a margin; use Stack and Container for those.'],
+    youMust: ['Choose the inset from the named steps.', 'Pick the element with as when the content is a section, list or item.', 'Give a list a label when you render it as ul or ol.'],
+    usage: '<Box padding="lg" surface="raised" corner="panel">\n  …\n</Box>',
+    backdrops: 'In light the raised ground is warm grey and the sunken ground a step darker, in dark charcoal and near-black. Neither is orange.',
+    purpose: 'Sets the inset, ground and corner of a block from the token steps and adds nothing else.',
+    importLine: "import { Box } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Box</code> is a plain block. <code>padding</code> takes <code>none</code> to <code>xl</code>, <code>surface</code> takes <code>page</code>, <code>raised</code> or <code>sunken</code>, and <code>corner</code> takes <code>mark</code>, <code>media</code>, <code>inner</code> or <code>panel</code>. <code>as</code> picks the element.</p>
+      </>
+    ),
+    hero: ex('BoxBasic', 'A raised box with the lg inset and the panel corner.'),
+    ladder: [
+      ex('BoxList', 'as="ul" renders a list with no browser bullets.'),
+      ex('BoxNested', 'A raised box inside a sunken box keeps its own padding and corner.'),
+      ex('BoxPadding', 'The five insets from xs to xl.'),
+      ex('BoxSurface', 'The page, raised and sunken grounds.'),
+      ex('BoxCorner', 'The four corners from mark to panel.'),
+      ex('BoxAs', 'A list and its items rendered with as.'),
+    ],
+    whenToUse: ['Give content an inset from the token steps.', 'Put a ground and a corner behind a group of parts.'],
+    whenNotToUse: [['Spacing between siblings', 'Stack'], ['A page held to a width', 'Container']],
+    anatomy: [['Box', 'padding from gap.xs to gap.section, optional surface.page, surface.raised or surface.sunken, optional corner.mark to corner.panel.'], ['Content', 'Whatever is placed inside, at the inset.']],
+    states: [['Default', 'The chosen inset, ground and corner.']],
+    content: ['Put the heading first.', 'Do not nest two grounds.', 'Keep a list labelled.'],
+    dodont: [
+      { do: 'Choose the inset from a named step.', dont: 'Add a second box only to get more space.' },
+      { do: 'Use sunken for a recess and raised for a body.', dont: 'Mark a boundary by ground alone.' },
+    ],
+    a11y: ['Box has no role; the element you pick sets the semantics.', 'A ul or ol made with as needs a label.', 'Text on all three grounds holds at least 4.5:1 in both themes.', 'Box takes no focus.'],
+    keyboard: [['Tab', 'Moves through the children in their own order', 'Box: it takes no focus of its own']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/stack', 'Stack', 'Spacing between siblings.'], ['/components/container', 'Container', 'A page held to a width.']],
+  },
+  {
+    name: 'AspectRatio',
+    slug: 'aspect-ratio',
+    status: 'beta',
+    limitations: ['The ratio comes from a closed list of four. Other proportions are not available.', 'It holds one child. The child is cropped, not squeezed, when its own shape differs.'],
+    youMust: ['Give it exactly one child.', 'Name the child (alt text or a label), because the frame has no role.', 'Pick the ratio the content was made in.'],
+    usage: '<AspectRatio ratio="16/9">\n  <Display kind="oled" label="Doorbell camera" value="Front door" />\n</AspectRatio>',
+    backdrops: 'The frame draws nothing, so it looks the same in light and dark. The child brings its own colour.',
+    purpose: 'Keeps its child at a fixed ratio, so the space is held before the content loads.',
+    importLine: "import { AspectRatio } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>AspectRatio</code> is a frame as wide as its parent. Its height follows from <code>ratio</code>, which is <code>1/1</code>, <code>4/3</code>, <code>16/9</code> (the default) or <code>3/2</code>. The child fills it. <code>rounded</code> adds the media corner.</p>
+      </>
+    ),
+    hero: ex('AspectRatioBasic', 'A camera view held at sixteen to nine.'),
+    ladder: [
+      ex('AspectRatioRatios', 'The four ratios. Each frame is as wide as its column and the height follows.'),
+      ex('AspectRatioRounded', 'rounded adds the media corner. The default is square.'),
+      ex('AspectRatioInCard', 'A square tile above its name.'),
+      ex('AspectRatioSwap', 'The content changes and the frame keeps its height.'),
+    ],
+    whenToUse: ['Room for a picture or video before it loads.', 'A row of tiles that must be the same shape.'],
+    whenNotToUse: [['Space between siblings', 'Stack'], ['Columns of equal width', 'Grid']],
+    anatomy: [['Frame', 'inline-size 100%, aspect-ratio from the ratio, overflow hidden.'], ['Child', 'Absolutely filled, object-fit cover.'], ['Corner', 'corner.media, only when rounded is set.']],
+    content: ['Do not put text that must stay whole in a frame, because a mismatched child is cropped.'],
+    dodont: [
+      { do: 'Match the ratio to the content.', dont: 'Put a wide view in a square frame.' },
+      { do: 'Put one element in the frame.', dont: 'Stack two children in it.' },
+    ],
+    a11y: ['A plain div with no role. Name the child, not the frame.', 'The frame is not focusable.', 'It draws nothing, so forced colours leave it unchanged.'],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/stack', 'Stack', 'Space between a frame and its caption.'], ['/components/grid', 'Grid', 'A row of equal frames.']],
+  },
+  {
+    name: 'Spacer',
+    slug: 'spacer',
+    status: 'beta',
+    limitations: ['It leaves room on one axis only; set the axis to match the parent.', 'It has five sizes, the same as the Stack gaps, and no others.', 'A flexible spacer needs a flex parent to have anything to grow into.'],
+    youMust: ['Set axis to inline when the parent is a row.', 'Use a Stack gap first and add a Spacer only where the room differs.', 'Leave children out; a Spacer is hidden from assistive tech.'],
+    usage: '<Spacer size="lg" />\n<Spacer axis="inline" flexible />',
+    backdrops: 'A spacer draws nothing, so it looks the same on warm white plastic in light and charcoal in dark. Nothing is orange.',
+    purpose: 'Leaves empty room of a token size, or room that grows to push the parts beside it apart.',
+    importLine: "import { Spacer } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Spacer</code> is an empty box. <code>size</code> picks one of five steps, from 4px to 32px, the same steps as a Stack gap. <code>axis</code> says whether the room is in a column (<code>block</code>) or a row (<code>inline</code>). <code>flexible</code> makes it take the room that is left. It is always <code>aria-hidden</code>.</p>
+      </>
+    ),
+    hero: ex('SpacerFlexible', 'A label at the start of the row and the orange key at the end.'),
+    ladder: [
+      ex('SpacerBasic', 'Fixed room between two stacked parts.'),
+      ex('SpacerInline', 'Fixed room inside a row.'),
+      ex('SpacerSizes', 'The five sizes drawn as bars.'),
+      ex('SpacerColumn', 'A flexible spacer keeps the key at the foot of a tall column.'),
+    ],
+    whenToUse: ['Push one part to the far end of a row or column.', 'Add one extra step of room where the Stack gap is too small.'],
+    whenNotToUse: [['The same gap between every child', 'Stack'], ['Parting groups with a visible line', 'Divider']],
+    anatomy: [['Room', 'An empty box sized by the stack gap tokens (xs to xl), on the block or inline axis.']],
+    states: [['Fixed', 'Keeps its token size on one axis.'], ['Flexible', 'Grows to take the room that is left.']],
+    content: ['Give it a size and no children.', 'Pick the axis that matches the parent.', 'Prefer a Stack gap when every child needs the same room.'],
+    dodont: [
+      { do: 'Use a flexible spacer to put a key at the end of the row.', dont: 'Pad the label with blank characters.' },
+      { do: 'Set the Stack gap and add a Spacer only at the odd place.', dont: 'Put a Spacer between every child.' },
+    ],
+    a11y: ['Hidden from assistive tech with aria-hidden.', 'It takes no focus.', 'It draws nothing, so forced colours and contrast do not apply.'],
+    keyboard: [['Tab', 'A spacer takes no focus', 'Spacer: the box is hidden from assistive tech and takes no focus']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/stack', 'Stack', 'The same gap between every child.'], ['/components/divider', 'Divider', 'A visible seam between groups.']],
+  },
+  {
+    name: 'Flex',
+    slug: 'flex',
+    status: 'beta',
+    limitations: ['It lays out one line at a time; for rows and columns together use Grid.', 'Reversed directions are not offered, because they split the focus order from the visual order.', 'The gap is one of five steps; there is no free value.'],
+    youMust: ['Put the space in the gap and never as a margin on a child.', 'Wrap a child in FlexItem only when it needs grow, shrink or its own align.', 'Keep the DOM order the same as the order you want read.'],
+    usage: '<Flex justify="between" align="center">\n  <FlexItem grow>Living room</FlexItem>\n  <FlexItem shrink={false}><Button>Edit</Button></FlexItem>\n</Flex>',
+    backdrops: 'Flex paints nothing, so it looks the same on light and dark. It takes the surface it is placed on, and nothing in it is orange.',
+    purpose: 'Lays parts along one line with a token gap, alignment and distribution, and lets one part take the spare room.',
+    importLine: "import { Flex, FlexItem } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Flex</code> is a flex box with the gap taken from the spacing scale. <code>direction</code> is <code>row</code> or <code>column</code>, <code>wrap</code> lets a full line break, <code>align</code> and <code>justify</code> place the children, and <code>asChild</code> makes your own element the container. <code>FlexItem</code> gives one child <code>grow</code>, <code>shrink</code> or its own <code>align</code>.</p>
+        <p>Use <a href="/components/stack">Stack</a> when you only need the space between things. Use Flex when the line has to spread, push a part to the far end or let one part grow.</p>
+      </>
+    ),
+    hero: ex('FlexBasic', 'Three parts along one line with a medium gap.'),
+    ladder: [
+      ex('FlexGap', 'gap comes from the five steps of the token scale.'),
+      ex('FlexColumn', 'A column uses the same gap steps as a row.'),
+      ex('FlexGrow', 'The title grows between two keys that keep their size.'),
+      ex('FlexJustify', 'The four justify values, one per line.'),
+      ex('FlexWrap', 'A line that wraps when it runs out of room.'),
+      ex('FlexAlign', 'Cross-axis alignment of parts of different heights.'),
+    ],
+    whenToUse: ['Put a title between two keys.', 'Push one part to the far end of a line.', 'Wrap a group of tags or keys onto more lines.'],
+    whenNotToUse: [['Only the space between siblings', 'Stack'], ['Parts that line up in columns', 'Grid']],
+    anatomy: [['Container', 'display flex, with the direction, wrap, align and justify you set.'], ['Gap', 'stack.gap, from 4px to 32px in five steps.'], ['Item', 'FlexItem: grow, shrink and its own align.']],
+    states: [['Row', 'Children along the inline axis.'], ['Column', 'Children stacked.'], ['Wrap', 'A full line breaks to a new line.']],
+    content: ['Flex holds no words.', 'Let the longest child be the one that grows.', 'Set shrink to false on a key so its target holds.'],
+    dodont: [
+      { do: 'Let the long name grow and keep the key at full size.', dont: 'Leave both to shrink in a tight line.' },
+      { do: 'Use gap for the space between parts.', dont: 'Put a margin on one child.' },
+    ],
+    a11y: ['Flex adds no role and takes no focus.', 'Children are read and tabbed in DOM order, which is also the visual order.', 'A key in a FlexItem with shrink set to false keeps its 44px target.', 'In forced colours nothing changes, because Flex paints nothing.'],
+    keyboard: [['Tab', 'Moves through the focusable children in DOM order', 'Flex: the row is laid out with no role of its own']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/stack', 'Stack', 'Only the space between siblings.'], ['/components/grid', 'Grid', 'Parts that line up in columns on a page.']],
+  },
+  {
+    name: 'VisuallyHidden',
+    slug: 'visually-hidden',
+    status: 'beta',
+    limitations: ['It hides nothing from assistive tech, so it is the wrong tool for content that should be gone for everyone.', 'A focusable one shows only when something inside it can take focus.', 'The revealed key sits at the top start corner of the window and cannot be moved.'],
+    youMust: ['Keep a phrase short and say it as you would aloud.', 'Put a focusable skip link first in the page.', 'Give asChild exactly one element.'],
+    usage: '<VisuallyHidden>, opens the heating rules</VisuallyHidden>\n<VisuallyHidden focusable><Link href="#main">Skip to the content</Link></VisuallyHidden>',
+    backdrops: 'Hidden, it has no colour. Revealed, the key is raised plastic with primary ink in both themes, and nothing is orange.',
+    purpose: 'Holds words for a screen reader off the face, and shows a skip key while the keyboard is on it.',
+    importLine: "import { VisuallyHidden } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>VisuallyHidden</code> clips its content to one pixel and takes it out of the flow. The words are still read aloud and can name a control. <code>focusable</code> shows a raised 44px key at the top start corner while focus is inside. <code>asChild</code> hands the styles to your own element.</p>
+      </>
+    ),
+    hero: ex('VisuallyHiddenBasic', 'A link with its full destination read aloud and one word on the face.'),
+    ladder: [
+      ex('VisuallyHiddenSkipLink', 'A skip link that appears on the first Tab.'),
+      ex('VisuallyHiddenAsChild', 'An anchor that is hidden itself.'),
+      ex('VisuallyHiddenLabel', 'A hidden heading that names a region.'),
+      ex('VisuallyHiddenStatus', 'A unit read after a visible number.'),
+    ],
+    whenToUse: ['Add words for a screen reader that the face says with a symbol or a number.', 'Hold a skip link that shows only on keyboard focus.'],
+    whenNotToUse: [['Words everyone needs to read', 'Text'], ['Help on point or focus', 'Tooltip']],
+    anatomy: [['Hidden words', 'One pixel box from width.hairline, clipped, out of the flow.'], ['Revealed key', 'surface.raised, elevation.part, corner.media, control.md tall, focus ring.']],
+    states: [['Hidden', 'One pixel, read aloud in place.'], ['Focused', 'A raised key at the top start corner, with the focus ring.']],
+    content: ['Say it as you would aloud.', 'Do not repeat the visible word.', 'Keep it to a phrase.'],
+    dodont: [
+      { do: 'Add what the face leaves out, such as the destination.', dont: 'Repeat the visible word or name the role.' },
+      { do: 'Put a link inside a focusable wrapper.', dont: 'Make plain words focusable and expect a key.' },
+    ],
+    a11y: ['The words stay in the accessibility tree and are read in place.', 'A focusable key is 44px tall with the system focus ring.', 'It appears and goes at once, with no motion.', 'In forced colours the revealed key takes a real border in the text colour.'],
+    keyboard: [['Tab', 'Moves to the focusable content inside, which shows the key', 'VisuallyHidden: the words stay for assistive tech and a focused skip link shows']],
+    inherits: 'HTMLAttributes<HTMLSpanElement>',
+    related: [['/components/text', 'Text', 'Words everyone should read.'], ['/components/tooltip', 'Tooltip', 'Help on point or focus.']],
+  },
+  {
+    name: 'Fieldset',
+    slug: 'fieldset',
+    status: 'beta',
+    limitations: ['It has one look, a box on all four sides; there is no open or bracket form.', 'It does not scroll or collapse.', 'The name is required, and the hint is one line of text.'],
+    youMust: ['Give every Fieldset a legend, because it is the name of the group.', 'Put two or more controls in it.', 'Give each control inside its own label as well.'],
+    usage: '<Fieldset legend="Night mode" hint="Starts at 23:00.">\n  <Switch label="Lower the heater" />\n  <Switch label="Dim the lamps" />\n</Fieldset>',
+    backdrops: 'In light the box is a hairline in the grey ring ink on warm white plastic, in dark a light hairline on charcoal. The line holds at least 3:1 against the body in both, and nothing is orange.',
+    purpose: 'Boxes related controls under one printed name and switches them all off together.',
+    importLine: "import { Fieldset } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Fieldset</code> is a native fieldset drawn as a printed box. The <code>legend</code> is set into the top line, <code>hint</code> prints small at the foot, and <code>disabled</code> switches off every control inside. It has no fill and no shadow, so it reads as printing on the case.</p>
+      </>
+    ),
+    hero: ex('FieldsetBasic', 'Two switches in a box named Night mode.'),
+    ladder: [
+      ex('FieldsetHint', 'Small print at the foot of a box of checkboxes.'),
+      ex('FieldsetDisabled', 'A disabled box fades and switches off its fields.'),
+      ex('FieldsetFields', 'Two fields under one group name.'),
+      ex('FieldsetInUnit', 'Two boxes in a unit, then the orange key.'),
+    ],
+    whenToUse: ['Group two or more controls that set one thing.', 'Switch a set of controls off together.'],
+    whenNotToUse: [['Grouping only radio options', 'Radio'], ['Setting a section apart', 'Divider']],
+    anatomy: [['Box', 'width.hairline in line.ring, corner.media, no fill.'], ['Name', 'type.label in text.secondary, set into the top line.'], ['Small print', 'type.caption in text.secondary.']],
+    states: [['Default', 'A hairline box with the name on the line.'], ['Disabled', 'The line, name and hint fade; the controls inside are off.']],
+    content: ['Name the box with a noun.', 'Do not end the name with a colon.', 'Keep the hint to one sentence.'],
+    dodont: [
+      { do: 'Name the group with a noun.', dont: 'Write a sentence with a colon.' },
+      { do: 'Disable the box and say why in the hint.', dont: 'Disable each control one by one.' },
+    ],
+    a11y: ['A native fieldset with a legend, so the group is announced with its name.', 'The hint is the group’s description through aria-describedby.', 'A disabled fieldset disables every control inside it in the browser.', 'In forced colours the box keeps a real border in the text colour.'],
+    keyboard: [['Tab', 'Moves through the controls inside; the box takes no focus', 'Fieldset: the box is a named group with its legend as the first child and a described hint']],
+    inherits: 'FieldsetHTMLAttributes<HTMLFieldSetElement>',
+    related: [['/components/radio', 'Radio', 'One-of-many keys, which bring their own box.'], ['/components/divider', 'Divider', 'Setting a section apart.']],
+  },
+  {
+    name: 'HelperText',
+    slug: 'helper-text',
+    status: 'beta',
+    limitations: ['It is not announced when it appears; move focus to the part to have it read.', 'It prints a hint or an error only; there is no warning or success tone.', 'It does not link itself to a part, so you pass the id and set aria-describedby.'],
+    youMust: ['Give it an id and set the part’s aria-describedby to that id.', 'Set aria-invalid on the part when the tone is error.', 'Name the problem and the fix in an error.'],
+    usage: '<Input label="Temperature" aria-invalid aria-describedby="t-help" />\n<HelperText id="t-help" tone="error">Enter a value under 30.</HelperText>',
+    backdrops: 'In light the hint is dark grey and the error a deep red on warm white plastic, in dark a light grey and a soft red on charcoal. Both hold 4.5:1, and nothing is orange.',
+    purpose: 'Prints a hint or an error under a part, linked to it by id, with a glyph and words for an error.',
+    importLine: "import { HelperText } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>HelperText</code> is a paragraph in the caption size. <code>tone</code> is <code>neutral</code> (a hint in secondary ink) or <code>error</code> (critical red, medium weight, with a dot-matrix glyph read out as Error). Pass <code>id</code> and point the part’s <code>aria-describedby</code> at it.</p>
+      </>
+    ),
+    hero: ex('HelperTextBasic', 'A hint under a field, linked to it by id.'),
+    ladder: [
+      ex('HelperTextError', 'An error with the glyph and words, and aria-invalid on the field.'),
+      ex('HelperTextTones', 'The two tones, one above the other.'),
+      ex('HelperTextSwap', 'The line turns from hint to error as the value stops fitting.'),
+      ex('HelperTextLong', 'A long message wraps beside its glyph.'),
+    ],
+    whenToUse: ['Tell the person what a part expects before they use it.', 'Name the problem under a part that failed a check.'],
+    whenNotToUse: [['A message about the whole unit', 'Banner'], ['Grouping parts under one legend', 'Fieldset']],
+    anatomy: [['Glyph', 'Icon critical, control.icon-sm, only in the error tone.'], ['Words', 'type.caption, leading.body; medium weight in the error tone.']],
+    states: [['Neutral', 'Secondary ink, regular weight, no glyph.'], ['Error', 'status.critical-mark, medium weight, glyph first.']],
+    content: ['Say what to do in one short sentence.', 'In an error, name the problem and the fix.', 'Do not write “Error:” first; the glyph is read as Error.'],
+    dodont: [
+      { do: 'Write “Enter a value under 30.”', dont: 'Write “Invalid input.”' },
+      { do: 'Tell an error by a glyph, weight and words.', dont: 'Tell an error by red alone.' },
+    ],
+    a11y: ['The part points to the line with aria-describedby, so it is read after the part’s name.', 'The error glyph has the accessible name Error.', 'An error differs from a hint by a glyph and weight, not only colour.', 'In forced colours the line uses the system text colour.'],
+    keyboard: [['Tab', 'Takes no focus; the part it describes does', 'HelperText: the error carries a glyph and words and is linked by id']],
+    inherits: 'HTMLAttributes<HTMLParagraphElement>',
+    related: [['/components/input', 'Input', 'A field that prints its own hint and error.'], ['/components/banner', 'Banner', 'A message about the whole unit.']],
+  },
+  {
+    name: 'Label',
+    slug: 'label',
+    status: 'beta',
+    limitations: ['It prints one line of help; longer guidance belongs in a Text under the part.', 'It only prints the mark; the control still needs its own required attribute.', 'The help id is not read back; pass helpId if the part must point to it.'],
+    youMust: ['Tie the label to its part with htmlFor and the same id.', 'Set required on the control as well as on the label.', 'List helpId in the part’s aria-describedby when you set help.'],
+    usage: '<Label htmlFor="room" required help="Shown on the room card.">Room name</Label>\n<input id="room" required />',
+    backdrops: 'In light the name is dark brown ink on warm white plastic, in dark light cream on charcoal. The mark and help are one step lighter, and the contrast stays above 6.7:1 in both. Nothing is orange.',
+    purpose: 'Prints the name of a part in medium ink, with a required or optional word and one line of help.',
+    importLine: "import { Label } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Label</code> is a real label element on the inset line above a part. The name is in medium ink, <code>required</code> or <code>optional</code> prints as a word at the far end, and <code>help</code> adds one line under the name. Input, Textarea and Select print their own labels in this same look.</p>
+      </>
+    ),
+    hero: ex('LabelBasic', 'A required name tied to a field.'),
+    ladder: [
+      ex('LabelOptional', 'The optional word marks the exception.'),
+      ex('LabelGlyph', 'A star after the name, with the word kept for screen readers.'),
+      ex('LabelHelp', 'One line of help the field points to with aria-describedby.'),
+      ex('LabelThai', 'Thai text with its own words for the mark.'),
+    ],
+    whenToUse: ['Name a part you built yourself.', 'Mark a part required or optional in words.'],
+    whenNotToUse: [['A text field with a name', 'Input'], ['A running message after an action', 'Text']],
+    anatomy: [['Name', 'type.label in type.weight-medium, text.primary.'], ['Mark', 'type.caption in text.secondary, at the far end of the line.'], ['Help', 'type.caption in text.secondary under the name.']],
+    states: [['Required', 'The word required, or a star after the name.'], ['Optional', 'The word optional.'], ['Plain', 'The name alone.']],
+    content: ['Name the part with a noun.', 'Do not end with a colon.', 'Keep help to one short line.'],
+    dodont: [
+      { do: 'Name the part with a noun and let the mark say if it is needed.', dont: 'Write “Please enter the room name:”.' },
+      { do: 'Tell required with a word or a star.', dont: 'Tell required with a red tint.' },
+    ],
+    a11y: ['A native label tied by htmlFor, so pressing it focuses the part.', 'The mark is inside the label, so it is part of the accessible name.', 'The star is hidden from screen readers and the word is read instead.', 'In forced colours the text uses the system colours.'],
+    keyboard: [['Tab', 'Moves to the part the label names; the label itself takes no focus', 'Label: the label names its part and the mark is in words']],
+    inherits: 'LabelHTMLAttributes<HTMLLabelElement>',
+    related: [['/components/input', 'Input', 'A text field that prints this label itself.'], ['/components/textarea', 'Textarea', 'Several lines, same label.']],
+  },
+  {
+    name: 'InputGroup',
+    slug: 'input-group',
+    status: 'beta',
+    limitations: ['Each end takes one add-on; there is no stack of several words at one end.', 'It is a single-line field; use Textarea for several lines.', 'A key inside the group is not disabled by the group; disable it yourself.'],
+    youMust: ['Give every InputGroup a label, because it is the name of the field.', 'Put only fixed words or one plain IconButton in start and end.', 'Give a key in an add-on a name with the label prop of IconButton.'],
+    usage: '<InputGroup label="Monthly price" start="THB" end="/ month" defaultValue="1,250" />',
+    backdrops: 'In light the well is a light grey recess in warm white plastic with a grey ring edge and rules. In dark it is a near-black recess in charcoal with a light ring edge. The words are secondary ink in both and nothing is orange.',
+    purpose: 'Takes text with a fixed word or key at one or both ends, ruled off inside one recessed well.',
+    importLine: "import { InputGroup } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>InputGroup</code> is an Input with something fixed at its ends. <code>start</code> and <code>end</code> take a word such as THB or .local, or an IconButton such as Search. A hairline rule separates each add-on from the text you type. The group is one 44px window with one focus ring, and the label is printed above it. <code>size</code> is <code>md</code> or <code>lg</code> (52px).</p>
+      </>
+    ),
+    hero: ex('InputGroupBasic', 'THB before the value and / month after it, ruled off inside one well.'),
+    ladder: [
+      ex('InputGroupAddress', 'A web address: the scheme before, the domain after, only the middle typed.'),
+      ex('InputGroupKey', 'A key at the end of the well, with its own name and the same focus ring.'),
+      ex('InputGroupSizes', 'md is a 44px well and lg is a 52px well with a 52px key.'),
+      ex('InputGroupError', 'The well turns red and the problem is printed under it with a glyph.'),
+    ],
+    whenToUse: ['Enter the middle of a value that always has the same start or end.', 'Put one key beside a field when the key acts on that field alone.'],
+    whenNotToUse: [['A short unit after a number and nothing else', 'Input'], ['Several lines of text', 'Textarea'], ['The key that saves the whole form', 'Button']],
+    anatomy: [['Well', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, control.md tall.'], ['Add-on', 'type.label in type.weight-medium, text.secondary, a hairline rule in line.ring.'], ['Text', 'type.body in text.primary.'], ['Focus ring', 'width.ring in focus.ring around the whole well.']],
+    states: [['Focus', 'One ring around the whole well.'], ['Invalid', 'Critical red edge and a message with a glyph.'], ['Disabled', 'No shadow and the print fades to half.']],
+    content: ['Name the thing the field holds.', 'Keep each add-on to one short word.', 'Put the format in hint.'],
+    dodont: [
+      { do: 'Print the fixed THB in the well.', dont: 'Ask the person to type THB.' },
+      { do: 'Keep a plain key in the add-on.', dont: 'Put the orange key inside a field.' },
+    ],
+    a11y: ['The label is the accessible name of the field.', 'A plain word in an add-on is part of the field’s description.', 'A key in an add-on is announced by its own name.', 'The rules are real borders, so they stay in forced colours.'],
+    keyboard: [['Tab', 'Moves to the field, then to a key at the end', 'InputGroup: one focus ring surrounds the whole well when the text or a key inside it holds focus']],
+    inherits: 'InputHTMLAttributes<HTMLInputElement>',
+    related: [['/components/input', 'Input', 'A field with at most a unit.'], ['/components/textarea', 'Textarea', 'Several lines of text.']],
+  },
+  {
+    name: 'Kbd',
+    slug: 'kbd',
+    status: 'beta',
+    limitations: ['It is not interactive; a cap takes no click, hover or focus.', 'One cap holds one key; a chord is a KbdCombo.', 'It prints the key name you give it and does not read the person’s keyboard layout.'],
+    youMust: ['Write the key as it is printed on a keyboard.', 'Pass a label when a cap shows an icon or a symbol.', 'Use KbdCombo for keys pressed together and not a loose plus.'],
+    usage: '<p>Press <Kbd>Esc</Kbd> to close, or <KbdCombo keys={[\'Ctrl\', \'K\']} /> to search.</p>',
+    backdrops: 'In light the cap is warm white plastic with a ring-ink edge, in dark a charcoal cap with a lighter top edge. The ink is primary in both and nothing is orange.',
+    purpose: 'Prints a key name as a small keycap, in a sentence or at the end of a shortcuts row.',
+    importLine: "import { Kbd, KbdCombo } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Kbd</code> prints one key name, such as Esc or Enter, as a keycap at least 24px square. The cap is flat, with a lit top edge and a lower edge twice as thick, so it reads as a key and casts no blur. <code>KbdCombo</code> holds several caps for a chord and joins them with a printed plus, which a screen reader reads as the word plus.</p>
+      </>
+    ),
+    hero: ex('KbdBasic', 'Two key names inside a sentence.'),
+    ladder: [
+      ex('KbdChord', 'A chord of two or three keys, kept in one group.'),
+      ex('KbdShortcuts', 'A shortcuts list with the keys on the end side of each row.'),
+      ex('KbdSymbols', 'Caps that print an icon carry a spoken label.'),
+      ex('KbdWithKey', 'A hint under the orange key; the cap stays plastic and ink.'),
+    ],
+    whenToUse: ['Name a key in a sentence of instructions.', 'List the shortcuts of a screen.'],
+    whenNotToUse: [['A key the person presses on screen', 'Button'], ['A short status word or a count', 'Badge']],
+    anatomy: [['Cap', 'surface.knob, width.hairline in line.ring with a width.ring lower edge, corner.mark, control.check minimum square.'], ['Name', 'type.label in type.weight-medium, primary ink.'], ['Chord', 'A kbd that groups caps with gap.xs between them.'], ['Plus', 'A printed + in secondary ink, hidden from assistive tech.']],
+    states: [['Default', 'The only state; a Kbd has no hover, active or focus look.']],
+    content: ['Write the key as printed: Esc, Enter, Ctrl.', 'One key in each cap.', 'Use KbdCombo for a chord.'],
+    dodont: [
+      { do: 'Put one key in one cap and group a chord with KbdCombo.', dont: 'Write two keys in one cap.' },
+      { do: 'Give an icon cap a label.', dont: 'Leave a symbol cap silent.' },
+    ],
+    a11y: ['A kbd element, so the name is read as text.', 'A cap with an icon is read by its label and the printed cap is hidden.', 'The plus of a chord is read as the word plus.', 'The cap edge holds 3:1 against the body and the page in both themes.', 'In forced colours the cap keeps a real border in the text colour.'],
+    keyboard: [['Tab', 'Does not stop on a Kbd', 'Kbd: a chord is a group of caps with the plus hidden from assistive tech']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/button', 'Button', 'A key the person presses on screen.'], ['/components/badge', 'Badge', 'A printed word or count that is not a key.']],
+  },
+  {
+    name: 'Image',
+    slug: 'image',
+    status: 'beta',
+    limitations: ['It is not interactive; to make a picture pressable, wrap it in a link or button.', 'The ratio comes from a closed list of four (1/1, 4/3, 16/9, 3/2).', 'Text cannot be laid over the picture; the caption always sits below the window.'],
+    youMust: ['Write alt for every picture, or pass an empty alt on purpose for decoration.', 'Pick the ratio the picture was made in, or use contain.', 'Keep words about the picture in caption, below the window.'],
+    usage: '<Image src="/hall.jpg" alt="The hall, seen from the front door" ratio="4/3" caption="Hall, 08:10" />',
+    backdrops: 'In light the window is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. The ring and the dashes are ink in both, and nothing is orange.',
+    purpose: 'Shows a picture in a recessed window held at a fixed proportion, with a caption below.',
+    importLine: "import { Image } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Image</code> is a figure: a window cut into the body, and an optional caption under it. The window is as wide as its column and takes its height from <code>ratio</code>, which is <code>1/1</code>, <code>4/3</code>, <code>16/9</code> (the default) or <code>3/2</code>. <code>fit</code> is <code>cover</code> (crop to fill) or <code>contain</code> (show it all). While the picture loads the window prints one dash, and if it fails, two. <code>alt</code> is required.</p>
+      </>
+    ),
+    hero: ex('ImageBasic', 'A picture at four to three with its caption printed below.'),
+    ladder: [
+      ex('ImageDecorative', 'An empty alt marks a picture as decoration.'),
+      ex('ImageLoading', 'loading lazy holds the window at its ratio until the picture arrives.'),
+      ex('ImageRatios', 'The four ratios. Each window is as wide as its cell and the height follows.'),
+      ex('ImageFit', 'Cover crops a tall plan to fill the window; contain shows all of it.'),
+      ex('ImageStates', 'A picture that fails and a window with no address print two dashes and keep their size.'),
+      ex('ImageInCard', 'A picture heads a card; the title and text stand on the body below.'),
+    ],
+    whenToUse: ['Show a photo, a camera frame or a plan inside a card or a page.', 'Hold the space of a picture that loads late.'],
+    whenNotToUse: [['A person or an owner', 'Avatar'], ['A glyph for a device or a room', 'Icon'], ['Content that needs a fixed shape but is not a picture', 'AspectRatio']],
+    anatomy: [['Window', 'AspectRatio with surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Picture', 'Fills the window and is clipped by its ring.'], ['Dash', 'One dash in text.secondary while loading, two when failed.'], ['Caption', 'type.caption in text.secondary, on the body below the window.']],
+    states: [['Loading', 'One dash in the window; the height is held.'], ['Loaded', 'The picture fills the window.'], ['Failed', 'Two dashes; no broken-image icon.']],
+    content: ['Describe what the picture shows in one sentence.', 'Use caption for a place and a time.', 'Never use a file name as alt.'],
+    dodont: [
+      { do: 'Describe the picture in alt.', dont: 'Write “image” or a file name.' },
+      { do: 'Put words about the picture in the caption.', dont: 'Lay text over the photo.' },
+    ],
+    a11y: ['The picture is an img with its alt text.', 'A failed picture leaves the window as an image named by alt, so nothing is lost.', 'An empty alt hides the window from assistive tech.', 'It takes no focus.', 'In forced colours the ring and the dashes use the text colour and the inset shadow is dropped.'],
+    keyboard: [['Tab', 'Does not stop on an Image', 'Image: a failed window is an image named by alt and takes no focus']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/aspect-ratio', 'AspectRatio', 'The frame Image uses for its proportion.'], ['/components/avatar', 'Avatar', 'A person or owner as a picture or letters.'], ['/components/card', 'Card', 'The body an Image usually heads.']],
+  },
+  {
+    name: 'FormField',
+    slug: 'form-field',
+    status: 'beta',
+    limitations: ['It does not draw the control; a bare control is unstyled unless you bring a dial well.', 'Controls that print their own label, such as Input, do not need it.', 'It wires one control; use Fieldset for a group.'],
+    youMust: ['Give the control the id, or let the child element receive it.', 'Pass the problem as error and leave it undefined when the value is fine.', 'Keep the label a noun that names the control.'],
+    usage: '<FormField label="Room name" hint="Shown on the home screen.">\n  <input />\n</FormField>',
+    backdrops: 'It paints nothing, so it follows the body. Label ink is primary and the hint is secondary in both themes; an error is critical red with a glyph. Nothing is orange.',
+    purpose: 'Joins a printed name, a control and its small print on one inset line, and wires them for screen readers.',
+    importLine: "import { FormField } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>FormField</code> places a <code>Label</code>, one control and a <code>HelperText</code> in a column. It sets the control’s <code>id</code>, points the label at it and lists the hint and error in <code>aria-describedby</code>. An error also sets <code>aria-invalid</code>. Pass one element, or a function to place the props yourself.</p>
+      </>
+    ),
+    hero: ex('FormFieldBasic', 'A label above a bare control with a hint under it.'),
+    ladder: [
+      ex('FormFieldHint', 'required prints the word Required beside the name.'),
+      ex('FormFieldError', 'An error marks the control invalid and prints a glyph and words.'),
+      ex('FormFieldInline', 'The inline layout puts the label at the start.'),
+      ex('FormFieldRender', 'A render-prop child places the wired props on a Switch.'),
+      ex('FormFieldMarks', 'Required, optional and glyph marks.'),
+    ],
+    whenToUse: ['Label a bare or custom control that has no label of its own.', 'Show a hint and an error the same way across a form.'],
+    whenNotToUse: [['Naming a group of controls', 'Fieldset'], ['A text field', 'Input']],
+    anatomy: [['Label', 'The Label component, type.label in type.weight-medium.'], ['Control', 'Your element, given id, aria-describedby, aria-invalid and required.'], ['Messages', 'HelperText under the control, in a polite live region.']],
+    states: [['Invalid', 'aria-invalid on the control and an error line with a glyph.'], ['Inline', 'The label in a 128px column at the start.']],
+    content: ['Name the control with a noun.', 'Write the hint as the format, not an instruction.', 'Say what is wrong and how to fix it in the error.'],
+    dodont: [
+      { do: 'Let the field wire the label and the hint.', dont: 'Set htmlFor and aria-describedby by hand.' },
+      { do: 'Tell an error by words and a glyph.', dont: 'Tell an error by colour alone.' },
+    ],
+    a11y: ['The label’s htmlFor matches the control’s id, so the label is the name.', 'The hint and error are in aria-describedby.', 'The messages sit in an aria-live polite region that is always present.', 'In forced colours Label and HelperText use the system text colours.'],
+    keyboard: [['Tab', 'Moves to the control; the field takes no focus itself', 'FormField: the label names the control and the messages are linked to it']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/label', 'Label', 'The printed name on its own.'], ['/components/helper-text', 'HelperText', 'The line under a part.'], ['/components/fieldset', 'Fieldset', 'A named group of controls.']],
+  },
+  {
+    name: 'FAB',
+    slug: 'fab',
+    status: 'beta',
+    limitations: ['It is one key; there is no speed-dial that opens more keys.', 'It does not hide or move on scroll.', 'Use it once per unit. A second FAB means a second orange key.'],
+    youMust: ['Give the nearest parent position: relative, or set position to viewport.', 'Pad the end of the content so the last line is not lost under the seat.', 'Keep a primary Button out of the same unit.'],
+    usage: '<div style={{ position: \'relative\' }}>\n  <FAB label="Add room" />\n</div>',
+    backdrops: 'In light the seat is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. The key is the same orange in both, and its rim keeps 3:1 against the seat.',
+    purpose: 'The unit’s one orange key, fixed in the lower corner in an opaque seat.',
+    importLine: "import { FAB } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>FAB</code> is the main action of a unit. The orange key sits in a round seat cut into the body, one step in from the inline-end and block-end corner, and clear of the device’s safe area. The seat is opaque, so text beneath it is hidden. <code>extended</code> prints the label beside the glyph, <code>icon</code> picks the glyph and <code>position</code> chooses the container or the window.</p>
+      </>
+    ),
+    hero: ex('FABBasic', 'The orange key in its seat, in the corner of a unit.'),
+    ladder: [
+      ex('FABExtended', 'With room, the key prints its word and becomes a capsule.'),
+      ex('FABIcons', 'The glyph follows the action: edit for changing a scene.'),
+      ex('FABPositions', 'position viewport fixes the key to the window.'),
+      ex('FABOverText', 'Text runs under the seat and the seat hides it.'),
+      ex('FABThai', 'A Thai word keeps its marks inside the key.'),
+    ],
+    whenToUse: ['Use it for the one action a screen exists for.', 'Use it when the action must stay reachable as the content changes.'],
+    whenNotToUse: [['An action that belongs to one card or row', 'Button'], ['A round key for a secondary action', 'IconButton'], ['A choice between several actions', 'ActionSheet']],
+    anatomy: [['Seat', 'surface.sunken, elevation.well, width.hairline in line.ring, gap.md padding, corner.round.'], ['Key', 'action.accent with action.accent-rim, control.lg square, elevation.part.'], ['Glyph', 'Icon at control.icon-md in text.on-accent.'], ['Word', 'type.label in type.weight-medium, on an extended key only.']],
+    states: [['Hover', 'The orange moves to action.accent-hover.'], ['Active', 'The key drops by motion.press-travel and the shadow collapses.'], ['Focus', 'A ring outside the key in focus.ring.'], ['Disabled', 'Half-faded and flat.']],
+    content: ['Name the action with a verb and a noun.', 'Keep the label to two or three words.', 'Pick a glyph that matches the label.'],
+    dodont: [
+      { do: 'Keep one orange key in the unit.', dont: 'Put a primary Button beside the FAB.' },
+      { do: 'Pad the end of the content.', dont: 'Let the last line slide under the seat.' },
+    ],
+    a11y: ['It is a native button named by label; the glyph is hidden.', 'The key is 52px, above the 44px target.', 'Focus shows a ring that does not depend on orange.', 'The rim holds 3:1 against the seat in both themes.', 'In forced colours the key and the seat keep real borders.', 'Under reduce motion the key changes at once, with no travel.'],
+    keyboard: [['Tab', 'Moves focus to the key', 'FAB: the key is a named button fixed to the corner of its container'], ['Enter or Space', 'Presses the key', 'FAB: the key is a named button fixed to the corner of its container']],
+    inherits: 'ButtonHTMLAttributes<HTMLButtonElement>',
+    related: [['/components/button', 'Button', 'An action that belongs to one card or row.'], ['/components/icon-button', 'IconButton', 'A round key for a secondary action.'], ['/components/bottom-nav', 'BottomNav', 'The strip the FAB must clear.']],
+  },
+  {
+    name: 'Table',
+    slug: 'table',
+    status: 'beta',
+    limitations: ['It does not sort, filter or page your data; you order the rows and pass them in.', 'Rows cannot be selected, expanded or pressed.', 'There are no sticky headers or columns, and no virtual scrolling for very long tables.'],
+    youMust: ['Give every column a header cell with a clear name.', 'Set numeric on the header and on every cell of a number column.', 'Reorder the rows yourself when onSort fires and set sort on the one sorted column.'],
+    usage: '<Table caption="Energy by room">\n  <TableHead>\n    <TableRow><TableHeaderCell>Room</TableHeaderCell></TableRow>\n  </TableHead>\n  <TableBody>\n    <TableRow><TableCell>Kitchen</TableCell></TableRow>\n  </TableBody>\n</Table>',
+    backdrops: 'In light the text is dark ink on warm white plastic, in dark light ink on charcoal. The seam between rows is a divider line over a lit edge in both, and nothing is orange.',
+    purpose: 'Prints rows and columns of readings in flat ink with a seam between rows.',
+    importLine: "import { Table, TableHead, TableBody, TableRow, TableCell, TableHeaderCell } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Table</code> is a native table with a caption. <code>TableHeaderCell</code> carries <code>scope</code> and, with <code>onSort</code>, becomes a key that sorts; <code>sort</code> is announced with aria-sort and shown as a chevron. <code>numeric</code> aligns a cell to the end edge in tabular figures. When the columns are wider than the unit the table scrolls sideways and that region takes a Tab stop.</p>
+      </>
+    ),
+    hero: ex('TableBasic', 'Three rooms with a device and a state, a seam between rows.'),
+    ladder: [
+      ex('TableNumeric', 'Two number columns aligned to the end edge.'),
+      ex('TableSortable', 'Press a header to order the rows; the chevron shows the direction.'),
+      ex('TableNarrow', 'Six columns in a narrow unit scroll sideways and take a Tab stop.'),
+      ex('TableRowHeaders', 'A row header names each room, with a Thai name that wraps safely.'),
+    ],
+    whenToUse: ['Compare the same facts across several rows.', 'List readings the person reads across a row and down a column.'],
+    whenNotToUse: [['A short list of items', 'List'], ['One number with a trend', 'Stat']],
+    anatomy: [['Caption', 'type.caption in text.secondary above the header.'], ['Header cell', 'type.weight-medium in text.secondary, with a divider seam below.'], ['Cell', 'type.body, a divider seam below and a lit edge above, gap.md padding.'], ['Sort key', 'control.md tall, with a control.icon-sm chevron slot.']],
+    states: [['Sortable', 'The label is a key; aria-sort is none.'], ['Sorted', 'Primary ink, an up or down chevron and aria-sort.'], ['Overflowing', 'The region scrolls sideways and takes a Tab stop.']],
+    content: ['Name columns with nouns.', 'Put the unit in the header, not in every cell.', 'Give the table a caption.'],
+    dodont: [
+      { do: 'Put the unit in the header and keep bare numbers in the cells.', dont: 'Repeat “kilowatt hours” in every row.' },
+      { do: 'Set numeric on the whole column.', dont: 'Leave some number cells aligned to the start edge.' },
+    ],
+    a11y: ['A native table with a caption, column headers and scope.', 'A sorted column carries aria-sort and a chevron, so direction is a shape and not a colour.', 'A region that scrolls sideways is focusable and named by the caption.', 'In forced colours the seams draw as one system-colour line and the focus ring stays visible.'],
+    keyboard: [['Tab', 'Moves to each sort key and to a scroll region that overflows', 'Table: sort keys press with Enter or Space and the headers carry aria-sort'], ['Enter, Space', 'Presses the focused sort key', 'Table: sort keys press with Enter or Space and the headers carry aria-sort']],
+    inherits: 'HTMLAttributes<HTMLTableElement>',
+    related: [['/components/list', 'List', 'A short list of items.'], ['/components/pagination', 'Pagination', 'Moving between pages of rows.'], ['/components/stat', 'Stat', 'One number with a trend.']],
+  },
+  {
+    name: 'Rating',
+    slug: 'rating',
+    status: 'beta',
+    limitations: ['The scale starts at 1; a picked value cannot be cleared by pressing it again.', 'Halves are for display mode only; pick mode holds whole numbers.', 'The marks are round dot lattices; there is no star or custom icon.'],
+    youMust: ['Give every Rating a label that is the question it answers.', 'Use readOnly for a value the person cannot change.', 'Pair a picked Rating with a key that sends it; the Rating does not submit by itself.'],
+    usage: '<Rating label="Comfort" defaultValue={3} onValueChange={setScore} />\n<Rating label="Average" readOnly value={3.5} />',
+    backdrops: 'In light the marks are dark grey dots on warm white plastic, in dark they are pale dots on charcoal. A lit mark and an empty mark differ by shape in both, and nothing is orange.',
+    purpose: 'Picks or shows a score from 1 to 5 as dot lattices: a solid disc is lit, a hollow ring is empty.',
+    importLine: "import { Rating } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Rating</code> is a row of marks. A lit mark is a solid disc of round dots and an empty mark is a hollow ring, so the value reads without colour. In pick mode it is a radio group named by <code>label</code>; the arrow keys walk the marks and Home and End reach the ends. With <code>readOnly</code> it only shows a value, and halves such as 3.5 are allowed.</p>
+      </>
+    ),
+    hero: ex('RatingBasic', 'Five marks with three lit. The value is printed beside them.'),
+    ladder: [
+      ex('RatingControlled', 'Controlled with value and onValueChange.'),
+      ex('RatingReadOnly', 'Display mode with a half mark, a full row and the value hidden.'),
+      ex('RatingStates', 'Nothing chosen, a value chosen and disabled.'),
+      ex('RatingMax', 'A shorter scale with max.'),
+    ],
+    whenToUse: ['Ask for a score from 1 to 5.', 'Show an average score in a card or a list.'],
+    whenNotToUse: [['Choosing one of several named options', 'Radio'], ['Picking a number on a long range', 'Slider'], ['How far a task has got', 'Progress']],
+    anatomy: [['Mark', 'A control.check lattice of round dots in a control.md target.'], ['Lit mark', 'Core dots lit, text.primary.'], ['Empty mark', 'Ring dots only, text.secondary.'], ['Value', 'type.body in tabular figures, after the marks.']],
+    states: [['Lit', 'A solid disc of dots in primary ink.'], ['Empty', 'A hollow ring of dots in secondary ink.'], ['Half', 'A disc on the start side. Display mode only.'], ['Focus', 'The focus ring around the 44px target.'], ['Disabled', 'Half-strength ink and no press.']],
+    content: ['Name the Rating with the question it answers.', 'Do not write “out of 5” in the label.', 'Keep the scale to five marks or fewer.'],
+    dodont: [
+      { do: 'Ask a question as the label.', dont: 'Write “Rate from 1 to 5 stars”.' },
+      { do: 'Use readOnly for an average.', dont: 'Leave an average pressable.' },
+    ],
+    a11y: ['Pick mode is a radiogroup named by its label; each mark is a radio named “n of max”.', 'Display mode is one image named with the label and the value.', 'Lit and empty differ by shape, not only by ink.', 'Each mark is a 44px target.', 'In forced colours the dots draw in the text colour.'],
+    keyboard: [['Arrow keys', 'Walk to the next or previous mark and choose it', 'Rating: arrow keys walk the marks and Home and End reach the ends'], ['Home, End', 'Choose the first or the last mark', 'Rating: arrow keys walk the marks and Home and End reach the ends'], ['Tab', 'Moves into the group at the chosen mark', 'Rating: the marks are a labelled radio group with one chosen']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/radio', 'Radio', 'Choosing one named option.'], ['/components/slider', 'Slider', 'Picking a number on a range.']],
+  },
+  {
+    name: 'Drawer',
+    slug: 'drawer',
+    status: 'beta',
+    limitations: ['It is modal; the page behind is inert while it is open, so it cannot sit beside the page. Use modal false to show it in place.', 'It holds one list; it has no tabs and no second level.', 'It is at most as wide as layout.sidebar and it never takes the full width of a phone.'],
+    youMust: ['Name the drawer for what its list holds, as in "Rooms".', 'Keep at most one Button kind="primary" in actions.', 'Pass your own closeLabel when the product is not in English.'],
+    usage: '<Drawer trigger={<Button>Rooms</Button>} title="Rooms">\n  <List label="Rooms">…</List>\n</Drawer>',
+    backdrops: 'In light the drawer is warm-white plastic over a dimmed room, in dark it is charcoal plastic. Title and rows are primary ink, hairlines are divider grey, and nothing is orange except one optional key.',
+    purpose: 'Slides a full-height plastic panel in from the inline end to list rooms, programs or filters.',
+    importLine: "import { Drawer } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Drawer</code> is a side panel on the browser’s modal dialog. It stands inset from the window, with a title and a round close key on top, a list that scrolls in the middle and optional keys at the bottom. It slides in from the inline end, and it stays on screen while it slides back out. Focus moves in, Tab stays inside, and Escape or a click on the scrim closes it.</p>
+      </>
+    ),
+    hero: ex('DrawerBasic', 'A key opens a list of rooms from the inline end, with one key at the bottom.'),
+    ladder: [
+      ex('DrawerStart', 'side start slides the drawer in from the inline start.'),
+      ex('DrawerControlled', 'The page opens and closes the drawer through open and onOpenChange.'),
+      ex('DrawerInPlace', 'modal false shows the drawer in place, with no scrim.'),
+      ex('DrawerLongList', 'A long list scrolls inside while the title and the key stay put.'),
+    ],
+    whenToUse: ['List rooms, programs or devices to pick from.', 'Hold the filters of a long list behind one key.'],
+    whenNotToUse: [['Every control of one device', 'Sheet'], ['One question before an action', 'Dialog'], ['A short list of actions next to a key', 'Menu']],
+    anatomy: [['Body', 'surface.solid, elevation.float, corner.panel, gap.inset on all sides, at most layout.sidebar wide.'], ['Title', 'type.emphasis in type.weight-medium.'], ['Close key', 'A round 44px key at the end of the header.'], ['List', 'The rows, scrolling inside the body.'], ['Keys', 'Optional keys at the bottom under a hairline.']],
+    states: [['Closed', 'Nothing is drawn, aria-expanded="false" on the opener.'], ['Open', 'The drawer slides in over motion.release and the scrim fades in.'], ['Closing', 'The drawer slides out over motion.exit and no key reaches it.'], ['Reduced motion', 'The drawer fades and does not travel.']],
+    content: ['Name the drawer for what the list holds.', 'Name rows with what the person called them.', 'Write the key as a verb and a noun.'],
+    dodont: [
+      { do: 'Title it "Rooms" and end it with "Add room".', dont: 'Title it "Menu" and end it with "OK".' },
+      { do: 'Keep one orange key, the one that applies.', dont: 'Make two keys orange.' },
+    ],
+    a11y: ['A modal dialog named by its title through aria-labelledby.', 'The opener carries aria-haspopup="dialog" and aria-expanded.', 'Focus goes to the drawer on open and back to the opener once it has left.', 'The close key is 44px and has an accessible name.', 'In forced colours the drawer keeps a real border and the hairlines use the text colour.', 'Under Reduce motion the drawer fades and does not travel.'],
+    keyboard: [['Enter / Space', 'Opens the drawer on its opener and moves focus into it', 'Drawer: Enter on the opener opens a modal drawer named by its title'], ['Tab / Shift+Tab', 'Moves through the close key, the rows and the keys, and stays inside', 'Drawer: Tab and Shift+Tab stay inside the drawer'], ['Escape', 'Closes the drawer and returns focus to the opener', 'Drawer: Escape and a click on the scrim close the drawer and focus returns to the opener']],
+    inherits: 'HTMLAttributes<HTMLDialogElement>',
+    related: [['/components/sheet', 'Sheet', 'Every control of one device.'], ['/components/dialog', 'Dialog', 'One question before an action.']],
+  },
+  {
+    name: 'Listbox',
+    slug: 'listbox',
+    status: 'beta',
+    limitations: ['It is always open; for a long list that should fold away, use Select.', 'Rows are plain words with an optional mark; a row cannot hold a form control.', 'Shift with arrows toggles rows one by one; it does not select a range with Home and End.'],
+    youMust: ['Give every Listbox a label, because it is the name of the list.', 'Give each option a value that is unique inside the list.', 'Pass a label to every option, even when it also has an icon.'],
+    usage: '<Listbox label="Heating mode" defaultValue="eco" options={[\n  { value: "comfort", label: "Comfort" },\n  { value: "eco", label: "Eco" },\n]} />',
+    backdrops: 'In light the window is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. The rows and the tick are ink in both, and nothing is orange.',
+    purpose: 'Prints every option at once in one recessed window, with the chosen rows marked by a tick and weight.',
+    importLine: "import { Listbox } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Listbox</code> is an always-open list of options. It has one tab stop. The arrow keys, Home, End and the Page keys walk the rows, a letter jumps to the next row that starts with it, and Space or Enter chooses. With <code>multiple</code> Space toggles each row and the value is an array. An option takes <code>value</code>, <code>label</code>, an optional <code>leading</code> mark and <code>disabled</code>.</p>
+      </>
+    ),
+    hero: ex('ListboxBasic', 'Five programmes in one window, one chosen.'),
+    ladder: [
+      ex('ListboxMultiple', 'Any number of rows, with the value held in state.'),
+      ex('ListboxLeading', 'A dot-matrix icon before the words.'),
+      ex('ListboxSizes', 'Rows at 44px and 52px.'),
+      ex('ListboxStates', 'A disabled row, a disabled list and an empty list.'),
+    ],
+    whenToUse: ['Choose from three to ten options that fit on the screen.', 'Choose several rooms or devices at once.'],
+    whenNotToUse: [['A long list that should fold away', 'Select'], ['Two to four modes as keys', 'SegmentedControl']],
+    anatomy: [['Label', 'type.label in type.weight-medium, printed above the window.'], ['Window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Row', 'control.md tall, type.body, corner.media.'], ['Tick', 'The check glyph in control.icon-sm, empty on rows that are not chosen.']],
+    states: [['Chosen', 'A tick and medium weight in primary ink, with aria-selected.'], ['Reached', 'A plate of surface.solid with a line.ring hairline.'], ['Disabled row', 'Half-faded and skipped by the arrows.'], ['Disabled list', 'No shadow, half-faded, no tab stop.']],
+    content: ['Name the list with a noun.', 'Write each option as a short noun or phrase.', 'Keep it to ten rows or fewer.'],
+    dodont: [
+      { do: 'Name the list with a noun and each row with a noun.', dont: 'Write “Please select one of the following” and number the rows.' },
+      { do: 'Use multiple for choices that can run together.', dont: 'Use multiple for modes that exclude each other.' },
+    ],
+    a11y: ['The list has role listbox, named by its label.', 'Focus stays on the list and aria-activedescendant names the reached row.', 'With multiple the list carries aria-multiselectable.', 'A chosen row is told by a tick and weight as well as aria-selected.', 'In forced colours the window keeps a real border and the reached row uses the system highlight.'],
+    keyboard: [['Tab', 'Moves focus to the list as one stop', 'Listbox: one tab stop, focus lands on the first chosen row'], ['ArrowDown / ArrowUp', 'Moves the reached row, skipping disabled rows', 'Listbox: the reached row follows the arrows'], ['Space', 'Chooses the reached row, or toggles it in multiple', 'Listbox: Space chooses the reached row']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/select', 'Select', 'The same rows in a panel that opens.'], ['/components/segmented-control', 'SegmentedControl', 'Two to four modes as keys.']],
+  },
+  {
+    name: 'TagInput',
+    slug: 'tag-input',
+    status: 'beta',
+    limitations: ['It holds short text tags only; a tag cannot carry an icon or a value apart from its text.', 'Tags are kept in the order they were added and cannot be dragged.', 'There is no suggestion list; use a Combobox when the words come from a known set.'],
+    youMust: ['Give it a label that names the list, such as Rooms.', 'Say the keys and any limit in the hint.', 'Pass your own words for the remove keys and refusals on a page that is not in English.'],
+    usage: '<TagInput label="Rooms" max={3} defaultValue={["Kitchen"]} />',
+    backdrops: 'In light the well is a light grey recess in warm white plastic with raised grey chips, in dark a near-black recess with charcoal chips. A refusal is critical red with a glyph, and nothing is orange.',
+    purpose: 'Keeps typed words as removable chips inside a recessed well.',
+    importLine: "import { TagInput } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>TagInput</code> is an Input well that wraps onto more rows. Enter or a comma turns the text into a Chip, and Backspace on an empty field takes the last chip back. Each chip has a named remove key with a 44px target. Duplicates and a limit set with <code>max</code> are refused with a printed line that is also read out.</p>
+      </>
+    ),
+    hero: ex('TagInputBasic', 'Two rooms stand as chips and the caret follows them.'),
+    ladder: [
+      ex('TagInputMax', 'At three tags the next one is refused with a printed line.'),
+      ex('TagInputDuplicates', 'Repeats are refused unless allowDuplicates is set.'),
+      ex('TagInputMessages', 'Every built-in word is a prop, here in Thai.'),
+      ex('TagInputControlled', 'The list is held by the page, with its own error.'),
+    ],
+    whenToUse: ['Collect a free list of short words such as rooms or labels.', 'Let a person see and remove each word without leaving the field.'],
+    whenNotToUse: [['Choosing from a fixed set', 'MultiSelect'], ['Entering one value', 'Input']],
+    anatomy: [['Label', 'type.label in type.weight-medium, above the well.'], ['Well', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, control.md tall at least.'], ['Chip', 'The removable Chip, control.md tall, with its own remove key.'], ['Text field', 'type.body, control.md tall, in the rest of the row.'], ['Hint and error', 'type.caption; the error in status.critical with a glyph.']],
+    states: [['Focus', 'width.ring in focus.ring around the well.'], ['Refused', 'status.critical edge and a printed line with a glyph.'], ['Disabled', 'No recess shadow, flat chips, opacity.disabled on the text.']],
+    content: ['Label the field with a plural noun.', 'Keep each tag to one or two words.', 'Put the keys and the limit in the hint.'],
+    dodont: [
+      { do: 'Label the field with a plural noun and put the keys in the hint.', dont: 'Write the instruction as the label.' },
+      { do: 'Print the limit before the person reaches it.', dont: 'Refuse a tag with no word.' },
+    ],
+    a11y: ['The tags are a list named by the label.', 'Each remove key is named Remove and the tag, and reaches 44px.', 'Adding, removing and refusing are read out through a polite status.', 'An invalid field sets aria-invalid and its message carries a glyph and words.', 'Enter is ignored while an input method is composing, so Thai and other IME text is not cut.', 'In forced colours the well keeps a real border and the focus ring uses the system highlight colour.'],
+    keyboard: [['Enter, comma', 'Turns the text into a tag', 'TagInput: Enter and a comma turn typed text into chips and empty the field'], ['Backspace', 'On an empty field, removes the last tag', 'TagInput: Backspace on an empty field removes the last chip, and only then'], ['Tab', 'Reaches each remove key, then the field', 'TagInput: every chip and the text field are at least the touch target tall and each remove key is named']],
+    inherits: 'InputHTMLAttributes<HTMLInputElement>',
+    related: [['/components/input', 'Input', 'One value, one string.'], ['/components/chip', 'Chip', 'The removable key used for each tag.']],
+  },
+  {
+    name: 'RadioCards',
+    slug: 'radio-cards',
+    status: 'beta',
+    limitations: ['A group is a single column; there is no horizontal or grid layout.', 'The plates need a RadioCards group; a RadioCard outside one is a plain native radio with no shared state.', 'Home and End do not move the choice, because native radio groups do not map them.'],
+    youMust: ['Give the group a printed name through the label prop.', 'Give each plate a unique value and a title that is a noun.', 'Put a text line on every plate, or use Radio instead.'],
+    usage: '<RadioCards label="Heating mode" defaultValue="eco">\n  <RadioCard value="eco" title="Eco" description="Lowers the heat when nobody is home." />\n  <RadioCard value="comfort" title="Comfort" description="Holds 21 degrees all day." />\n</RadioCards>',
+    backdrops: 'In light the plates are warm white plastic with a ring edge and a short shadow, in dark charcoal plastic. The bar and the weight are ink in both, and nothing is orange.',
+    purpose: 'Chooses one of a few options that each need a sentence, on key plates where the chosen one sits down.',
+    importLine: "import { RadioCards, RadioCard } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>RadioCards</code> is a native radio group drawn as a column of wide key plates. Each <code>RadioCard</code> prints its <code>title</code>, an optional <code>description</code> and an optional <code>leading</code> node, such as an icon. The chosen plate sits down with no shadow, shows a bar of ink at its start and turns its title medium.</p>
+      </>
+    ),
+    hero: ex('RadioCardsBasic', 'Three plates with a name and a line each; Comfort is chosen.'),
+    ladder: [
+      ex('RadioCardsLeading', 'A dot-matrix icon leads each plate.'),
+      ex('RadioCardsControlled', 'The value is held by the page and printed under the group.'),
+      ex('RadioCardsStates', 'One plate disabled, and a whole group disabled.'),
+      ex('RadioCardsInUnit', 'Plates in a unit, before the one orange key.'),
+    ],
+    whenToUse: ['Pick one of two to five options that each need a line of explanation.', 'Compare modes or plans where the name alone does not say what changes.'],
+    whenNotToUse: [['Options that a word each can explain', 'Radio'], ['A choice told by words alone', 'Legend'], ['Picking from a long list', 'Select']],
+    anatomy: [['Plate', 'surface.raised, elevation.part, width.hairline in line.ring, corner.inner, at least control.md tall.'], ['Index bar', 'width.bar in text.primary, at the start of the chosen plate.'], ['Title', 'type.body, type.weight-medium when chosen.'], ['Description', 'type.label in text.secondary.'], ['Leading', 'An optional node before the words.']],
+    states: [['Chosen', 'The plate sits down with no shadow, the bar shows and the title is medium.'], ['Hover', 'The ring edge darkens one step.'], ['Pressed', 'The plate drops by motion.press-travel.'], ['Disabled', 'No height, half strength.']],
+    content: ['Write the title as a noun.', 'Write the description as one short sentence about what changes.', 'Keep it to five plates.'],
+    dodont: [
+      { do: 'Name the mode and say what it does.', dont: 'Write an instruction as the title.' },
+      { do: 'Tell chosen by a bar, a weight and a lowered face.', dont: 'Tell chosen by a coloured border.' },
+    ],
+    a11y: ['A fieldset with a legend, so the group is announced with its name.', 'Native radio inputs share one name, so the browser handles arrow keys and the tab stop.', 'Each radio is named by its title and described by its text.', 'The whole plate is a label of at least 44px.', 'In forced colours the plate keeps a real border and the bar uses the text colour.'],
+    keyboard: [['Tab', 'Moves into the group, to the chosen plate', 'RadioCards: the group is a named radio group and exactly one plate is chosen'], ['Arrow keys', 'Move to the next or previous plate and choose it', 'RadioCards: an arrow key moves the choice to the next plate and keeps one chosen'], ['Space', 'Chooses the focused plate', 'RadioCards: pressing a plate chooses it and the plate is at least the touch target']],
+    inherits: 'FieldsetHTMLAttributes<HTMLFieldSetElement>',
+    related: [['/components/radio', 'Radio', 'Round keys with one word each.'], ['/components/legend', 'Legend', 'A choice told by printed words alone.']],
+  },
+  {
+    name: 'ContextMenu',
+    slug: 'context-menu',
+    status: 'beta',
+    limitations: ['It never replaces a visible key: the right-click and the long press are hidden gestures.', 'It opens at one point and does not follow a page that scrolls; scrolling closes it.', 'It holds actions only; no checkboxes, radios or sub-menus.'],
+    youMust: ['Put every action on a visible key too, usually a Menu beside the object.', 'Give the object tabIndex={0}, or put a focusable part inside it, so the Context Menu key can reach it.', 'Name the panel for its object with label.'],
+    usage: '<ContextMenu items={actions} label="Actions for Kitchen lamp" onAction={run} tabIndex={0}>\n  Kitchen lamp\n</ContextMenu>',
+    backdrops: 'In light the panel is warm white plastic with a short soft shadow and the open object a light grey recess, in dark charcoal plastic and a near-black recess. Rows are ink in both and nothing is orange.',
+    purpose: 'Opens Menu’s panel of actions at the point you right-click, press and hold, or reach with the Context Menu key.',
+    importLine: "import { ContextMenu } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>ContextMenu</code> wraps one object and opens the same panel as <code>Menu</code> at the spot you pressed. A right-click opens it, a half-second press with a finger opens it, and so do the Context Menu key and Shift+F10. While it is open the object sinks into a well, so it is clear what the actions are for.</p>
+        <p>It is a shortcut and never the only way to an action. Repeat every action on a visible key.</p>
+      </>
+    ),
+    hero: ex('ContextMenuBasic', 'Right-click the card, or press and hold, and the panel opens at the point.'),
+    ladder: [
+      ex('ContextMenuWithKey', 'The same actions sit on a visible Menu key in the card.'),
+      ex('ContextMenuIcons', 'A glyph before each word and the destructive action last.'),
+      ex('ContextMenuStates', 'An action that cannot run fades; a disabled area leaves the browser menu alone.'),
+      ex('ContextMenuThai', 'Thai words keep their line height and the panel grows to the longest one.'),
+    ],
+    whenToUse: ['Give a device card, a row or a tile quick actions at the pointer.', 'Repeat the actions of a visible Menu as a shortcut for mouse users.'],
+    whenNotToUse: [['The only place an action can be reached', 'Menu'], ['A short list of choices on a phone sheet', 'ActionSheet']],
+    anatomy: [['Object', 'The wrapped area. While open: surface.sunken and elevation.well.'], ['Panel', 'Menu’s panel: surface.solid, elevation.float, corner.inner, layer.overlay.'], ['Row', 'control.md tall, type.body, the reached row a recess.']],
+    states: [['Closed', 'The object as it is.'], ['Open', 'The object sinks into a well and the panel stands at the point.'], ['Disabled', 'No menu, and the browser menu shows as usual.']],
+    content: ['Start each action with a verb.', 'Name the panel for its object.', 'Put the action that removes something last.'],
+    dodont: [
+      { do: 'Repeat every action on a visible Menu key.', dont: 'Make the right-click the only way to rename.' },
+      { do: 'Name the panel “Actions for Kitchen lamp”.', dont: 'Leave it as “Menu”.' },
+    ],
+    a11y: ['The panel is a menu named by label, with menuitem rows.', 'The Context Menu key and Shift+F10 open it on the first action; Escape and Tab close it and return focus.', 'A pointer opens it with no row chosen, so Enter does nothing until an arrow key moves.', 'The open object keeps a real outline in forced colours.', 'Under Reduce motion the panel only fades.'],
+    keyboard: [
+      ['Context Menu key, Shift+F10', 'Opens the panel on the first action', 'ContextMenu: the Context Menu key and Shift+F10 open it on the first action'],
+      ['Arrow Up and Down, Home, End', 'Moves between actions', 'ContextMenu: arrows and Home/End move between actions'],
+      ['Escape', 'Closes and returns focus to the object', 'ContextMenu: the Context Menu key and Shift+F10 open it on the first action'],
+    ],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/menu', 'Menu', 'The visible key with the same panel.'], ['/components/action-sheet', 'ActionSheet', 'A sheet of choices on a phone.']],
+  },
+  {
+    name: 'MultiSelect',
+    slug: 'multi-select',
+    status: 'beta',
+    limitations: ['It cannot take typed text; to search a long list, use Combobox.', 'In chips mode the well grows by rows as values are chosen, so the layout under it moves.', 'Rows are plain words; a row cannot hold a form control.'],
+    youMust: ['Give every MultiSelect a label, because it is the name of the field.', 'Give each option a value that is unique inside the list.', 'Pass an array to value and defaultValue, never a single string.'],
+    usage: '<MultiSelect label="Rooms" defaultValue={["kitchen"]} options={[\n  { value: "kitchen", label: "Kitchen" },\n  { value: "hall", label: "Hall" },\n]} />',
+    backdrops: 'In light the well is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. The count, the ticks and the chips are ink and plastic in both, and nothing is orange.',
+    purpose: 'Picks any number of options from a panel that stays open, and says the result in the well as a count or as removable chips.',
+    importLine: "import { MultiSelect } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>MultiSelect</code> is Select’s recessed well with a panel of tick rows under it. The panel stays open while you choose. Space or Enter toggles the reached row, Ctrl+A toggles every row that can be chosen, and Escape closes it. <code>display</code> is <code>count</code> (the default, as in 3 chosen) or <code>chips</code>, which stands each chosen value in the well as a removable Chip. <code>value</code> is an array in list order.</p>
+      </>
+    ),
+    hero: ex('MultiSelectBasic', 'Five rooms, two chosen, and the well says 2 chosen.'),
+    ladder: [
+      ex('MultiSelectChips', 'Each chosen room stands in the well as a chip with its own remove key.'),
+      ex('MultiSelectSizes', 'A 44px well and a 52px well.'),
+      ex('MultiSelectControlled', 'The values held in state and repeated below the field.'),
+      ex('MultiSelectStates', 'A locked row, an empty field with its prompt, and a disabled field.'),
+      ex('MultiSelectForm', 'One hidden value per chosen row, sent with the form.'),
+    ],
+    whenToUse: ['Choose any number of rooms, days or devices from a list.', 'Fold a long list of choices into one row of a sheet.'],
+    whenNotToUse: [['Exactly one option', 'Select'], ['A short list that fits on the screen', 'Listbox']],
+    anatomy: [['Label', 'type.label in type.weight-medium, printed above the well.'], ['Well', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Value', 'The count in type.body, or the placeholder in text.secondary.'], ['Chips', 'Chip keys, size sm, standing in the well in chips mode.'], ['Chevron', 'The chevron-down glyph in control.icon-sm, turned over while open.'], ['Panel', 'surface.solid, elevation.float, corner.inner on layer.overlay.'], ['Row', 'control.md tall with a tick before the words.']],
+    states: [['Chosen row', 'A tick and medium weight in primary ink, with aria-selected.'], ['Reached row', 'A small recess, set by data-active.'], ['Disabled row', 'Half-faded and skipped by the arrows.'], ['Disabled field', 'No shadow, half-faded, no tab stop.']],
+    content: ['Label the field with a plural noun.', 'Write each option as a short noun.', 'Start the placeholder with a verb.'],
+    dodont: [
+      { do: 'Label it with a plural noun such as Rooms.', dont: 'Write “Please tick all the rooms you want”.' },
+      { do: 'Use chips for a few short values.', dont: 'Use chips when every option may be chosen.' },
+    ],
+    a11y: ['The well is a combobox with aria-expanded and aria-controls, named by its label and its count.', 'The panel is a listbox with aria-multiselectable.', 'Focus stays on the well and aria-activedescendant names the reached row.', 'A chosen row is told by a tick and weight as well as aria-selected.', 'In forced colours the well and the panel keep real borders and the reached row uses the system highlight.'],
+    keyboard: [['ArrowDown / ArrowUp / Enter / Space', 'Opens the list on the first chosen row', 'MultiSelect: Down opens a multiselectable list on the first chosen row'], ['Space / Enter', 'Toggles the reached row and keeps the list open', 'MultiSelect: Space toggles the reached row'], ['Ctrl+A', 'Toggles every row that can be chosen', 'MultiSelect: arrow keys and Ctrl+A walk and toggle the rows'], ['Escape', 'Closes the list and keeps focus on the well', 'MultiSelect: Escape closes it with focus kept']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/select', 'Select', 'Exactly one option.'], ['/components/listbox', 'Listbox', 'The same rows, always open.'], ['/components/chip', 'Chip', 'The key that stands in the well.']],
+  },
+  {
+    name: 'Autocomplete',
+    slug: 'autocomplete',
+    status: 'beta',
+    limitations: ['It never forces a match; text that is not on the list is kept.', 'It takes one value as text; it does not return several choices like a multi-select.', 'It shows at most eight suggestions by default; raise limit or let the source narrow the list.'],
+    youMust: ['Name the field with a noun, as in "Room".', 'Pass filter={false} and set loading when the suggestions come from a request.', 'Say in a hint when any text is accepted.'],
+    usage: '<Autocomplete\n  label="Room"\n  options={[{ value: "kitchen", label: "Kitchen" }]}\n/>',
+    backdrops: 'In light the well is a light grey recess and the panel warm-white plastic with a short soft shadow, in dark a near-black recess and charcoal plastic. The typed part of a suggestion is medium weight, and nothing is orange.',
+    purpose: 'Offers suggestions in a plastic panel under a text well while the typed words stay valid.',
+    importLine: "import { Autocomplete } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Autocomplete</code> is Input’s recessed well with a short plastic panel under it. As you type, the panel lists the options that contain your text and prints the matching part in medium weight. The arrows reach a suggestion, Enter takes it, and Enter with none reached keeps what you typed. Focus never leaves the well.</p>
+        <p>For an async source set <code>loading</code> and <code>filter={'{false}'}</code>: the panel shows a Spinner row, and when nothing comes back it says so and says the text stays as typed.</p>
+      </>
+    ),
+    hero: ex('AutocompleteBasic', 'Type in the room field: suggestions rise under the well and any other name stays valid.'),
+    ladder: [
+      ex('AutocompleteHint', 'hint prints a short line under the field.'),
+      ex('AutocompleteAsync', 'A request to the hub: the Spinner and the word Searching stand in the panel until the answer arrives.'),
+      ex('AutocompleteLarge', 'The large size: a 52px well and rows with larger text.'),
+      ex('AutocompleteChosen', 'onChoose tells a taken suggestion apart from typed text.'),
+      ex('AutocompleteInForm', 'In a form with an error under the well, a typed value that is not on the list, and the orange key last.'),
+    ],
+    whenToUse: ['Fill a field with a name the product may already know, and still accept a new one.', 'Search a list that is too long to show at once.'],
+    whenNotToUse: [['An answer that must be one of a short, fixed set', 'Select'], ['A list that always stays open', 'Listbox'], ['A plain value with nothing to suggest', 'Input']],
+    anatomy: [['Label', 'type.label in type.weight-medium, printed above the well.'], ['Well', 'Input: surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Panel', 'surface.solid, elevation.float, corner.inner, layer.overlay.'], ['Suggestion', 'control.md row, type.body in text.secondary; the match in type.weight-medium.'], ['Busy row', 'A Spinner grille and the word Searching.'], ['Empty line', 'One plain line in text.secondary.']],
+    states: [['Closed', 'The well alone, aria-expanded="false".'], ['Open', 'The panel rises under the well, aria-expanded="true".'], ['Reached', 'The row sinks into a well with a hairline, aria-selected="true".'], ['Busy', 'A Spinner row and aria-busy on the field.'], ['Empty', 'A line says nothing matched and the text stays as typed.'], ['Disabled', 'The well fades to half and takes no text.']],
+    content: ['Name the field with a noun.', 'Write suggestions as the words a person would type.', 'Say in a hint when any text is accepted.'],
+    dodont: [
+      { do: 'Name the field "Room" and accept any text.', dont: 'Name it "Type to search" and wipe text that is not on the list.' },
+      { do: 'Set loading while a request runs.', dont: 'Show an empty panel while the request runs.' },
+    ],
+    a11y: ['The field is a combobox with aria-autocomplete="list", aria-expanded and aria-controls.', 'The reached row is named by aria-activedescendant; focus stays in the field.', 'A polite status line reads the count, the wait and the empty line.', 'Every row is at least 44px tall.', 'In forced colours the panel keeps a real border and the reached row a highlight border.', 'Under Reduce motion the panel only fades.'],
+    keyboard: [['Type', 'Opens the panel and narrows the suggestions', 'Autocomplete: typing opens a panel of suggestions that the combobox owns and announces'], ['Down / Up', 'Walks the suggestions; focus stays in the field', 'Autocomplete: the arrows walk the suggestions while focus stays in the field, Enter takes one and Escape closes'], ['Enter', 'Takes the reached suggestion, or keeps the typed text', 'Autocomplete: text that matches nothing stays valid and says so'], ['Escape', 'Closes the panel and keeps the text', 'Autocomplete: the arrows walk the suggestions while focus stays in the field, Enter takes one and Escape closes']],
+    inherits: 'InputHTMLAttributes<HTMLInputElement>',
+    related: [['/components/select', 'Select', 'A closed list with no typing.'], ['/components/listbox', 'Listbox', 'A list that stays open.'], ['/components/input', 'Input', 'The well Autocomplete is built on.']],
+  },
+  {
+    name: 'Combobox',
+    slug: 'combobox',
+    status: 'beta',
+    limitations: ['It takes one value; there is no multiple mode.', 'Free text is never kept: text that matches no option is dropped when the person leaves.', 'The list opens below the field and does not flip above it near the bottom of the screen.'],
+    youMust: ['Give every Combobox a label, because it is the name of the field.', 'Give each option a value that is unique inside the list.', 'Pass a label to every option, even when it also has an avatar or an icon.'],
+    usage: '<Combobox label="Room" placeholder="Type a room" defaultValue="kitchen" options={[\n  { value: "kitchen", label: "Kitchen" },\n  { value: "kids", label: "Kids room" },\n]} />',
+    backdrops: 'In light the well is a light grey recess in warm white plastic and the list is a plate of that plastic above the page. In dark the well is near-black in charcoal. Rows and ticks are ink in both, and nothing is orange.',
+    purpose: 'A recessed text field whose list of options opens under it and narrows as you type, accepting only a listed option.',
+    importLine: "import { Combobox } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Combobox</code> is a text field with a list. Focus stays in the field. Typing narrows the list to options whose label contains the text and sets the matched letters in medium weight. The arrow keys reach rows, Enter chooses, and Escape closes the list and puts back the chosen words. Leaving the field drops text that is not an option. An option takes <code>value</code>, <code>label</code>, an optional <code>leading</code> mark and <code>disabled</code>. <code>size</code> is <code>md</code> or <code>lg</code>.</p>
+      </>
+    ),
+    hero: ex('ComboboxBasic', 'Eight rooms; type a few letters to narrow them.'),
+    ladder: [
+      ex('ComboboxHint', 'hint prints a short line under the field.'),
+      ex('ComboboxLeading', 'An avatar before each name, shown in the well after a choice.'),
+      ex('ComboboxSizes', 'A well and rows at 44px and 52px.'),
+      ex('ComboboxStates', 'A disabled option, an error with its words, and a disabled field.'),
+      ex('ComboboxControlled', 'The value held in state and cleared when the text is emptied.'),
+    ],
+    whenToUse: ['Choose one option from a list of more than about eight.', 'Pick a person, room or programme by typing the first letters.'],
+    whenNotToUse: [['Three to seven options', 'Select'], ['Options that should all stay in view', 'Listbox'], ['Free text with no list', 'Input']],
+    anatomy: [['Label', 'type.label in type.weight-medium, printed above the well.'], ['Well', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Toggle', 'A control.md key with a chevron in control.icon-sm, not a tab stop.'], ['List', 'surface.solid, elevation.float, corner.inner on layer.overlay.'], ['Row', 'control.md tall, type.body, with a tick and an optional mark.']],
+    states: [['Open', 'The list floats under the well and the chevron turns over.'], ['Reached', 'A recessed plate behind the row, named by aria-activedescendant.'], ['Chosen', 'A tick and medium weight in primary ink, with aria-selected.'], ['No match', 'One line in the list that says so; the list stays open.'], ['Invalid', 'A critical red edge and a message with a glyph.'], ['Disabled', 'No shadow, half-faded, no typing.']],
+    content: ['Name the field with a noun.', 'Write each option as a short noun or a name.', 'Say what to do in the error, such as Choose a room from the list.'],
+    dodont: [
+      { do: 'Name the field with a noun and each row with a noun.', dont: 'Write “Type to search” as the label and number the rows.' },
+      { do: 'Use it for a long list people can name.', dont: 'Use it for three options, where a Select is quicker.' },
+    ],
+    a11y: ['The field has role combobox with aria-autocomplete="list", aria-expanded and aria-controls.', 'Focus stays in the field and aria-activedescendant names the reached row.', 'The number of matches, or No match, is announced through a polite status.', 'The chosen row is told by a tick and weight as well as aria-selected, and matched letters by weight as well as colour.', 'In forced colours the well and the list keep a real border and the reached row uses the system highlight.'],
+    keyboard: [['Arrow Down / Arrow Up', 'Opens the list, then moves the reached row and skips disabled rows', 'Combobox: the arrows reach rows and Enter chooses'], ['Enter', 'Chooses the reached row and closes the list', 'Combobox: the arrows reach rows and Enter chooses'], ['Escape', 'Closes the list and puts back the chosen words', 'Combobox: Escape and leaving drop text that is not an option']],
+    inherits: 'InputHTMLAttributes<HTMLInputElement>',
+    related: [['/components/select', 'Select', 'The same list without typing.'], ['/components/listbox', 'Listbox', 'The rows always open.'], ['/components/input', 'Input', 'Free text.']],
+  },
+  {
+    name: 'Sidebar',
+    slug: 'sidebar',
+    status: 'beta',
+    limitations: ['It does not turn into a Drawer on a narrow screen; the app decides when to show it.', 'There are no nested groups; a group holds a flat list of pages.', 'It does not work out the current page from the address; you mark it with current.'],
+    youMust: ['Give every item an icon if you offer the toggle.', 'Mark the page you are on with current, once.', 'Give the landmark a name when the page has more than one navigation.'],
+    usage: '<Sidebar label="Main">\n  <SidebarGroup title="Rooms">\n    <SidebarItem href="/kitchen" icon="heat" current>Kitchen</SidebarItem>\n  </SidebarGroup>\n  <SidebarToggle />\n</Sidebar>',
+    backdrops: 'In light the column is warm white plastic with grey ink, in dark charcoal with light ink. The index mark is primary ink in both, and nothing is orange.',
+    purpose: 'Lists the pages of an app in grouped rows down the side, with one ink bar on the page you are on.',
+    importLine: "import { Sidebar, SidebarGroup, SidebarItem, SidebarToggle } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Sidebar</code> is a navigation landmark. Each <code>SidebarGroup</code> prints a lowercase heading over a list of <code>SidebarItem</code> links. The page you are on has <code>current</code>: it gets medium weight, aria-current="page" and a short ink bar at the start of its row. <code>SidebarToggle</code> shrinks the column to icons and back.</p>
+      </>
+    ),
+    hero: ex('SidebarBasic', 'Two groups of pages with the kitchen marked as current.'),
+    ladder: [
+      ex('SidebarCollapsed', 'Icons only. The index mark stays on the current page.'),
+      ex('SidebarToggle', 'A key at the foot collapses and expands the column.'),
+      ex('SidebarControlled', 'The width lives in your state.'),
+      ex('SidebarRouterLinks', 'asChild hands the row styles to a router link.'),
+    ],
+    whenToUse: ['Move between the pages of an app.', 'Keep the pages in view while the person works in one of them.'],
+    whenNotToUse: [['Switching between views of one page', 'Tabs'], ['Showing the path to a page', 'Breadcrumb'], ['Stepping through result pages', 'Pagination']],
+    anatomy: [['Body', 'surface.solid, elevation.unit, corner.panel, width layout.sidebar open.'], ['Group heading', 'type.label in text.secondary.'], ['Link', 'control.md tall, corner.inner, gap.xl between icon and name.'], ['Index mark', 'width.bar wide, control.icon-md tall, text.primary.'], ['Toggle', 'control.md tall, icon chevron.']],
+    states: [['Current', 'Primary ink, medium weight and the index mark.'], ['Hover', 'The name steps to primary ink.'], ['Collapsed', 'Icons only in 44px cells; names kept for assistive tech.'], ['Focus', 'The system focus ring around the row.']],
+    content: ['Name each page with a noun.', 'Keep group headings to one lowercase word.', 'Pick icons that tell pages apart without words.'],
+    dodont: [
+      { do: 'Name the page with a noun and give it an icon.', dont: 'Write “Go to the kitchen page” with no icon.' },
+      { do: 'Tell the current page by weight and the bar.', dont: 'Tell it by a tinted fill alone.' },
+    ],
+    a11y: ['A nav landmark with its own name.', 'Each group is a list named by its heading.', 'The current page carries aria-current="page".', 'Collapsed links keep their names; the toggle reports aria-expanded.', 'In forced colours the index mark draws in the text colour.'],
+    keyboard: [['Tab', 'Moves through the links and the toggle', 'Sidebar: the landmark lists its groups and the current page'], ['Enter', 'Follows the focused link', 'Sidebar: native link'], ['Space or Enter', 'Collapses or expands from the toggle', 'Sidebar: aria-expanded changes']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/tabs', 'Tabs', 'Switching between views.'], ['/components/drawer', 'Drawer', 'Holds the sidebar on a narrow screen.'], ['/components/breadcrumb', 'Breadcrumb', 'The path inside an area.']],
+  },
+  {
+    name: 'Anchor',
+    slug: 'anchor',
+    status: 'beta',
+    limitations: ['It links to headings on the same page only; it does not route between pages.', 'The link is a plain anchor, so a client-side router must handle the hash itself.', 'The mark is placed by scrolling; a press on a short last section may not move it until the page reaches the end.'],
+    youMust: ['Give every item the id of a real heading on the page.', 'Pass offset when a header is fixed to the top, and set scroll-margin-block-start on the headings to match.', 'Pass root when the headings scroll inside a box instead of the page.'],
+    usage: '<Anchor items={[\n  { id: "wiring", label: "Wiring" },\n  { id: "schedules", label: "Schedules" },\n]} />',
+    backdrops: 'In light the words are warm grey ink on the plastic body, in dark pale ink on charcoal. The mark is primary ink in both, and nothing is orange.',
+    purpose: 'Lists the headings of a long page as links and marks the section in view.',
+    importLine: "import { Anchor } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Anchor</code> is a nav landmark with a list of links, one for each heading. The section in view carries one short ink mark in a fixed gutter and is announced with <code>aria-current="location"</code>. It follows the page with an IntersectionObserver. <code>items</code> may hold sub-headings, which print one module in. <code>value</code> and <code>onValueChange</code> let you set the current section yourself.</p>
+      </>
+    ),
+    hero: ex('AnchorBasic', 'Four headings beside a scrolling page: the mark follows the section in view.'),
+    ladder: [
+      ex('AnchorNested', 'Sub-headings step in by one module.'),
+      ex('AnchorControlled', 'value and onValueChange set and read the current section.'),
+      ex('AnchorOffset', 'offset clears a fixed header.'),
+      ex('AnchorLabelled', 'label names the landmark in your own language.'),
+    ],
+    whenToUse: ['Jump around a page with four or more headings.', 'Show which section of a long page is in view.'],
+    whenNotToUse: [['Switching between views', 'Tabs'], ['The path to this page', 'Breadcrumb']],
+    anatomy: [['Link', 'control.md tall, type.label in text.secondary, text.primary and type.weight-medium when current.'], ['Index mark', 'A bar of control.thumb in text.primary, width.bar thick, in a fixed gutter.'], ['Sub-list', 'Steps in by gap.xl for each level.']],
+    states: [['Current', 'Primary ink, medium weight, the index mark and aria-current="location".'], ['Hover', 'The word darkens one ink step.'], ['Focus', 'The dark ring around the row.']],
+    content: ['Use the heading’s own words.', 'Keep each to a noun or two.', 'Keep sub-headings to two levels.'],
+    dodont: [
+      { do: 'Use the heading’s noun.', dont: 'Write a sentence in the row.' },
+      { do: 'Tell the current section by a mark.', dont: 'Tell it by colour alone.' },
+    ],
+    a11y: ['A nav landmark with a name, so it is listed among the regions.', 'The current link carries aria-current="location".', 'Every row is 44px tall.', 'In forced colours the links use the link colour and the mark the text colour.'],
+    keyboard: [['Tab', 'Moves to the next link', 'Anchor: the links are a named list and one is current'], ['Enter', 'Goes to the heading', 'Anchor: pressing a link marks it current']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/breadcrumb', 'Breadcrumb', 'The path to this page.'], ['/components/tabs', 'Tabs', 'Switching between views.']],
+  },
+  {
+    name: 'DescriptionList',
+    slug: 'description-list',
+    status: 'beta',
+    limitations: ['It is not interactive; a value cannot be pressed unless you put a Link or a Button inside it.', 'It lists facts about one thing; rows that share columns belong in a Table.', 'Seams are cut between pairs only; there is no option to draw them off or around every row.'],
+    youMust: ['Put each DescriptionTerm before its DescriptionDetail, as direct children of DescriptionList.', 'Write terms as nouns with no colon.', 'Use one orientation in a unit.'],
+    usage: '<DescriptionList>\n  <DescriptionTerm>Model</DescriptionTerm>\n  <DescriptionDetail>ht 4 heater</DescriptionDetail>\n  <DescriptionTerm>Power draw</DescriptionTerm>\n  <DescriptionDetail numeric>1 840 W</DescriptionDetail>\n</DescriptionList>',
+    backdrops: 'In light the terms are warm grey ink on warm white plastic, in dark light grey ink on charcoal. Values are the primary ink in both. The seam is a divider-tone line over a lit edge and nothing is orange.',
+    purpose: 'Prints facts about one thing as terms and values on the inset line, stacked or side by side, with a seam between pairs.',
+    importLine: "import { DescriptionList, DescriptionTerm, DescriptionDetail } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>DescriptionList</code> is a <code>dl</code>. Each <code>DescriptionTerm</code> is printed at label size in secondary ink and each <code>DescriptionDetail</code> at body size in primary ink with tabular numerals. <code>orientation</code> is <code>stacked</code> (default) or <code>inline</code>. A seam separates one fact from the next. A term may have several values.</p>
+      </>
+    ),
+    hero: ex('DescriptionListBasic', 'Four facts about a heater, stacked, with a seam between pairs.'),
+    ladder: [
+      ex('DescriptionListInline', 'Terms in one column, values beside them, figures on the end edge.'),
+      ex('DescriptionListMultiple', 'One term with two values, and a long value that wraps.'),
+      ex('DescriptionListInUnit', 'Under a Heading, with the orange key apart from the printing.'),
+      ex('DescriptionListRtl', 'In right-to-left text the terms start on the reading edge.'),
+    ],
+    whenToUse: ['List the facts about one device, room or record.', 'Summarise settings before a person confirms them.'],
+    whenNotToUse: [['Rows that share columns', 'Table'], ['One figure with its unit', 'Stat']],
+    anatomy: [['Term', 'type.label in type.weight-regular, text.secondary.'], ['Detail', 'type.body in text.primary, tabular numerals.'], ['Seam', 'width.hairline in line.divider above, material.lit below.']],
+    states: [['Stacked', 'Each term over its values.'], ['Inline', 'A term column with the values beside it.'], ['Numeric', 'A figure lines up on the end edge in the inline layout.']],
+    content: ['Write terms as nouns with no colon.', 'Put the unit in the value.', 'Mark figures numeric.'],
+    dodont: [
+      { do: 'Keep terms quiet and values plain.', dont: 'Bold both sides.' },
+      { do: 'Use a Table for rows with the same columns.', dont: 'Repeat the same terms for every device.' },
+    ],
+    a11y: ['A native description list, so each term is announced before its value.', 'It takes no focus.', 'Terms and values hold at least 4.5:1 in both themes.', 'The seam is decoration; the pairs are separated by space and by type as well.', 'In forced colours the seam keeps one line in GrayText.'],
+    keyboard: [['Tab', 'Does not stop on a DescriptionList', 'DescriptionList: a native dl that takes no focus']],
+    inherits: 'HTMLAttributes<HTMLDListElement>',
+    related: [['/components/table', 'Table', 'Rows of readings that share columns.'], ['/components/stat', 'Stat', 'One figure in a recessed window.']],
+  },
+  {
+    name: 'NavigationMenu',
+    slug: 'navigation-menu',
+    status: 'beta',
+    limitations: ['It opens on a press only, never on hover, so there is no hover-intent delay to tune.', 'The panel is one level deep; a link cannot open another panel.', 'It does not collapse to a drawer on a narrow screen; the names wrap to a second row.', 'It does not track the route. You mark the current page with current.'],
+    youMust: ['Give every link an address or hand the link to your router with asChild.', 'Mark at most one link current.', 'Name the landmark in your own language when the page has more than one navigation.', 'Keep a name to one or two words so the row fits a phone.'],
+    usage: '<NavigationMenu label="Main">\n  <NavigationMenuLink href="/" current>Home</NavigationMenuLink>\n  <NavigationMenuItem label="Rooms">\n    <NavigationMenuGroup title="Upstairs">…</NavigationMenuGroup>\n  </NavigationMenuItem>\n</NavigationMenu>',
+    backdrops: 'In light the names are grey ink on warm white plastic and the panel is the same plastic one step raised. In dark they are light ink on charcoal. The open name sinks into a well and nothing is orange.',
+    purpose: 'Prints the sections of a site along a row, and drops a plastic panel of grouped links from the names that hold more than one page.',
+    importLine: "import { NavigationMenu, NavigationMenuItem, NavigationMenuGroup, NavigationMenuLink } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>NavigationMenu</code> is a navigation landmark with a row of names. A <code>NavigationMenuLink</code> in the row goes to a page. A <code>NavigationMenuItem</code> is a key: press it and a panel drops from it, holding one or more <code>NavigationMenuGroup</code>, each with a printed title and its links.</p>
+        <p>This is the disclosure navigation pattern: each key carries <code>aria-expanded</code>, and the panel follows it in the reading order. Mark the page you are on with <code>current</code>; it gets an ink bar and <code>aria-current="page"</code>. Pass <code>value</code> and <code>onValueChange</code> to hold the open panel yourself.</p>
+      </>
+    ),
+    hero: ex('NavigationMenuBasic', 'Home is current, Rooms and Devices open panels, Help is a plain link.'),
+    ladder: [
+      ex('NavigationMenuDescriptions', 'A short line under each link and a current page inside a panel.'),
+      ex('NavigationMenuControlled', 'The open panel is held in state and closed from a key outside.'),
+      ex('NavigationMenuRouter', 'asChild hands the styles to the links of a router.'),
+      ex('NavigationMenuThai', 'Thai names keep their line height and the panel grows to fit.'),
+    ],
+    whenToUse: ['Give a site or an app two to six sections along the top.', 'Several pages sit under one name and are worth grouping.'],
+    whenNotToUse: [['Actions on one object', 'Menu'], ['Switching views of the same page', 'Tabs'], ['The path to this page', 'Breadcrumb']],
+    anatomy: [['Name', 'type.label in text.secondary, control.md tall, layout.touch wide at least, corner.mark.'], ['Open key', 'surface.sunken and elevation.well, with the chevron pointing up.'], ['Index mark', 'width.bar in text.primary under the current name.'], ['Panel', 'surface.solid, elevation.float, corner.inner on layer.overlay.'], ['Group title', 'type.label in text.secondary.'], ['Link', 'type.body, control.md tall, corner.media.']],
+    states: [['Current', 'Primary ink, medium weight, an ink bar and aria-current="page".'], ['Open', 'The key sinks into a well and its chevron points up.'], ['Reached link', 'The row sinks into a well; the keyboard also draws the focus ring.']],
+    content: ['Name a key with a noun such as Rooms.', 'Title a group with one word.', 'Do not repeat the key name in its links.'],
+    dodont: [
+      { do: 'Open the panel with a press and close it with Escape.', dont: 'Open the panel on hover only.' },
+      { do: 'Tell the current page by the bar and aria-current.', dont: 'Tell it by colour alone.' },
+    ],
+    a11y: ['A nav landmark with a name.', 'Each key is a button with aria-expanded and aria-controls.', 'The panel follows its key in the reading order, so Tab walks into it.', 'Each group is a list named by its title.', 'In forced colours the panel keeps a real border and the current bar draws in the text colour.'],
+    keyboard: [['Left and Right', 'Move between the names (reversed in right-to-left)', 'NavigationMenu: Left, Right, Home and End walk the top names and only one panel is open at a time'], ['Down', 'Opens the panel on its first link, then moves down the links', 'NavigationMenu: Down opens a panel on its first link and Escape closes it with focus back on the name'], ['Escape', 'Closes the panel and returns focus to its key', 'NavigationMenu: Down opens a panel on its first link and Escape closes it with focus back on the name']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/menu', 'Menu', 'Actions on one object.'], ['/components/tabs', 'Tabs', 'Switching views of the same page.'], ['/components/breadcrumb', 'Breadcrumb', 'The path to this page.']],
+  },
+  {
+    name: 'Navbar',
+    slug: 'navbar',
+    status: 'beta',
+    limitations: ['It is a bar of links; it does not switch views on one page.', 'It never wraps: the links fold behind the Menu key or, with collapse never, overflow the bar.', 'The actions slot is not folded, so keep it to two short keys on a narrow screen.'],
+    youMust: ['Mark the page you are on with current on one NavbarLink.', 'Put at most one primary Button in the actions slot.', 'Pass your own label and menuLabel when the product is not in English.'],
+    usage: '<Navbar brand="dial" actions={<Button>Sign in</Button>}>\n  <NavbarLink href="/rooms" current>Rooms</NavbarLink>\n  <NavbarLink href="/devices">Devices</NavbarLink>\n</Navbar>',
+    backdrops: 'In light the bar is warm-white plastic with a short soft shadow, in dark it is charcoal plastic. Words are primary or secondary ink, the current dot is primary ink, and nothing is orange except your own primary Button.',
+    purpose: 'Prints the model name, the places of a product and its main keys along the top edge.',
+    importLine: "import { Navbar, NavbarLink } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Navbar</code> is a header with three parts: a model name at the inline start, a navigation of <code>NavbarLink</code> words, and an actions slot at the inline end. Every link has an empty ink dot before it, and the current page fills it and turns medium, so choosing a page moves nothing. When the links do not fit, a Menu key takes their place and opens them in a panel, or calls <code>onMenuPress</code> so you can open your own Drawer.</p>
+      </>
+    ),
+    hero: ex('NavbarBasic', 'A model name, four places with the current one marked, and a sign-in key.'),
+    ladder: [
+      ex('NavbarPrimary', 'The model name is a link and one orange key stands in the actions slot.'),
+      ex('NavbarFolded', 'The links fold behind a Menu key that opens them in a panel.'),
+      ex('NavbarSticky', 'A sticky bar holds the top edge of a scrolling box and keeps its shadow.'),
+      ex('NavbarDrawer', 'The Menu key opens your own Drawer through onMenuPress.'),
+    ],
+    whenToUse: ['Move between the top-level places of a product.', 'Keep the model name and the main keys on every screen.'],
+    whenNotToUse: [['Switching between views of one page', 'Tabs'], ['Showing where a page sits in a path', 'Breadcrumb']],
+    anatomy: [['Bar', 'surface.solid, elevation.unit, corner.panel, padding gap.sm.'], ['Model name', 'type.emphasis in type.weight-medium.'], ['Link', 'control.md tall, layout.touch wide, type.body.'], ['Ink dot', 'gap.sm round, text.primary when current.'], ['Keys', 'Your actions and the Menu key, gap.sm apart.']],
+    states: [['Current', 'Primary ink, medium weight, filled dot, aria-current="page".'], ['Hover', 'Ink steps to primary.'], ['Folded', 'Links leave the row and the Menu key appears.'], ['Sticky', 'Holds the top edge on layer.sticky.']],
+    content: ['Name each place with one noun.', 'Print the model name in lowercase.', 'Keep it to five places.'],
+    dodont: [
+      { do: 'Name a place with a noun such as Rooms.', dont: 'Write a sentence such as Go to your rooms.' },
+      { do: 'Tell the current page by the dot and weight.', dont: 'Tell it by colour alone.' },
+    ],
+    a11y: ['The links stand in a navigation landmark named Main.', 'The current page carries aria-current="page".', 'The Menu key carries aria-haspopup="dialog" and aria-expanded.', 'Every link and key is at least 44px tall.', 'In forced colours the bar keeps an outline and the dot draws in the text colour.'],
+    keyboard: [['Tab', 'Moves through the model name, the links and the keys', 'Navbar: the links stand in a list and the current one is announced'], ['Enter / Space', 'Presses the Menu key', 'Navbar: the Menu key opens the links in a panel and reports it'], ['Escape', 'Closes the Menu panel and returns focus to the key', 'Navbar: the Menu key opens the links in a panel and reports it']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/tabs', 'Tabs', 'Switching between views of one page.'], ['/components/breadcrumb', 'Breadcrumb', 'Where a page sits in a path.']],
+  },
+  {
+    name: 'NumberInput',
+    slug: 'number-input',
+    status: 'beta',
+    limitations: ['It sets one number; there is no range with two ends.', 'Typed text is clamped to the limits but not snapped to the step.', 'The value changes on blur, Enter and key presses, not on every keystroke.', 'Digits are read as 0 to 9 only; Thai and Arabic-Indic digits are not parsed.'],
+    youMust: ['Give it a label that names the quantity, and put the unit in the unit prop.', 'Set min and max when the number has limits.', 'Pass your own decreaseLabel and increaseLabel in another language.'],
+    usage: '<NumberInput\n  label="Target temperature"\n  unit="°C"\n  min={5}\n  max={30}\n  step={0.5}\n  defaultValue={21.5}\n/>',
+    backdrops: 'In light the window is a light grey recess and the keys are warm-white discs; in dark the window is near-black and the keys are charcoal. The ink is primary in both and nothing is orange.',
+    purpose: 'Sets one number in a recessed window, with a minus key and a plus key either side.',
+    importLine: "import { NumberInput } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>NumberInput</code> shows a number in tabular figures inside a recessed window, with an optional <code>unit</code> after it. A round key stands either side: minus lowers the value by <code>step</code> and plus raises it. You can also type, or use the arrow keys. It is the precise way to set a number; use a Slider for a rough setting along a range.</p>
+        <p>It is controlled with <code>value</code> and <code>onValueChange</code>, or uncontrolled with <code>defaultValue</code>. The value is a number, or <code>null</code> when the field is empty.</p>
+      </>
+    ),
+    hero: ex('NumberInputBasic', 'A temperature in half-degree steps and a delay in five-minute steps.'),
+    ladder: [
+      ex('NumberInputSizes', 'The two sizes, md and lg.'),
+      ex('NumberInputRange', 'Limits, a step and a page step; typed text clamps on blur.'),
+      ex('NumberInputStates', 'Empty, at the limit, invalid, read-only and disabled.'),
+      ex('NumberInputControlled', 'Controlled by your own state, with the key names in another language.'),
+    ],
+    whenToUse: ['Set a number with a known step and limits.', 'Set a quantity or a duration that people also want to type.'],
+    whenNotToUse: [['A level set by position along a range', 'Slider'], ['The one main setting of a unit', 'Rotary'], ['An ID or a code that only looks like a number', 'Input']],
+    anatomy: [['Window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Value', 'type.body with tabular figures, aligned to the end of the window.'], ['Unit', 'type.label in type.weight-medium, text.secondary.'], ['Keys', 'IconButton at control.key (control.lg at size lg) with the minus and plus glyphs.'], ['Label', 'type.label in type.weight-medium, printed above the row.']],
+    states: [['At the limit', 'The key that would pass it is flat and faded.'], ['Invalid', 'The window edge turns critical red and a glyph and words print under the row.'], ['Read-only', 'Recess and ink stay; the keys are flat.'], ['Disabled', 'The recess shadow goes and the figure fades.']],
+    content: ['Name the quantity with a noun.', 'Put the unit in the unit prop, not in the label.', 'Keep the unit short.'],
+    dodont: [
+      { do: 'Print the unit in the window.', dont: 'Write the unit into the label and leave the figure bare.' },
+      { do: 'Set min and max for a number with limits.', dont: 'Leave both open for a setting that has a real range.' },
+    ],
+    a11y: ['The window is a spin button with aria-valuenow, aria-valuemin, aria-valuemax and aria-valuetext.', 'Both keys have names (Decrease and Increase) and are 44px or larger.', 'A key at the limit is disabled, and is flat as well as faded.', 'Invalid is told by a glyph and words, not by colour alone.', 'In forced colours the window keeps a real border and the focus ring uses the system highlight colour.'],
+    keyboard: [['ArrowUp, ArrowDown', 'Raise or lower the value by one step', 'NumberInput: ArrowUp raises the value by one step and the window announces it'], ['PageUp, PageDown', 'Move the value by the page step', 'NumberInput: PageUp moves the value by the page step'], ['Home, End', 'Jump to the minimum or the maximum', 'NumberInput: End jumps to the maximum'], ['Enter, Tab', 'Commit typed text and clamp it into range', 'NumberInput: typed text above the maximum is clamped on blur']],
+    inherits: 'InputHTMLAttributes<HTMLInputElement>',
+    related: [['/components/slider', 'Slider', 'A level set by position along a range.'], ['/components/rotary', 'Rotary', 'The one main setting of a unit.'], ['/components/input', 'Input', 'Text, an ID or a code.']],
+  },
+  {
+    name: 'PasswordInput',
+    slug: 'password-input',
+    status: 'beta',
+    limitations: ['It does not judge a password; the strength word is the verdict you pass in.', 'It does not hide the characters again on blur or after a delay.', 'It has no confirm field; pair two of them and keep them in step with shown and onShownChange.', 'The state words are plain text and are not translated unless you pass shownWord and hiddenWord.'],
+    youMust: ['Set autoComplete to new-password on a sign-up or change form, and leave current-password on a sign-in form.', 'Give it a label that names the secret with a noun.', 'Pass your own toggleLabel, shownWord and hiddenWord in another language.'],
+    usage: '<PasswordInput\n  label="New password"\n  autoComplete="new-password"\n  hint="Use 12 characters or more."\n  strength="fair"\n/>',
+    backdrops: 'In light the well is a light grey recess and the key is a warm-white disc that turns frosted grey glass while latched; in dark the well is near-black and the key is charcoal. The ink is primary in both and nothing is orange.',
+    purpose: 'Takes a secret in a recessed well, with a latching key that shows or hides the characters and a printed word for the state.',
+    importLine: "import { PasswordInput } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>PasswordInput</code> is Input&apos;s well for a secret. The characters are dots until someone presses the round key beside the well; then they show, the lock glyph opens, the key latches down and the well prints <em>Shown</em>. The state is always told by a glyph and a word, never by colour.</p>
+        <p>It is controlled for the visible state with <code>shown</code> and <code>onShownChange</code>, or uncontrolled with <code>defaultShown</code>. The value works as on any input, with <code>value</code> and <code>onChange</code> or <code>defaultValue</code>. It can print a strength word under the row, which you compute.</p>
+      </>
+    ),
+    hero: ex('PasswordInputBasic', 'A sign-in password: dots, a closed lock and the word Hidden until the key is pressed.'),
+    ladder: [
+      ex('PasswordInputSizes', 'The two sizes, md and lg, with the key shown latched at lg.'),
+      ex('PasswordInputSignUp', 'A new password with a hint and a strength word that follows the typing.'),
+      ex('PasswordInputStrength', 'The three strength words: weak, fair and strong.'),
+      ex('PasswordInputStates', 'Hidden, shown, invalid, read-only and disabled.'),
+      ex('PasswordInputControlled', 'Controlled by your own state, with the words in Thai.'),
+      ex('PasswordInputInUnit', 'A Wi-Fi password in a settings card, shown on purpose, with the orange key last.'),
+    ],
+    whenToUse: ['Ask for a password, a passphrase or a Wi-Fi key.', 'Let people check what they typed before they submit it.'],
+    whenNotToUse: [['Text that is not a secret', 'Input'], ['A number with a step and limits', 'NumberInput'], ['A one-time code of fixed length', 'Input']],
+    anatomy: [['Window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Characters', 'type.body in text.primary; dots while hidden, text while shown.'], ['State word', 'type.label in type.weight-medium, text.secondary.'], ['Key', 'IconButton at control.key (control.lg at size lg) with the lock glyph; latched glass while shown.'], ['Label', 'type.label in type.weight-medium, printed above the row.'], ['Strength', 'HelperText in a polite live region under the row.']],
+    states: [['Shown', 'The lock glyph opens, the key latches and the well prints Shown.'], ['Invalid', 'The window edge turns critical red and a glyph and words print under the row.'], ['Read-only', 'Recess and ink stay; the key still works so the secret can be read.'], ['Disabled', 'The recess shadow goes, the characters fade and the key goes flat.']],
+    content: ['Name the secret with a noun.', 'Put the rules in the hint, not in the placeholder.', 'Name the problem and the way out in the error.'],
+    dodont: [
+      { do: 'Set autoComplete to match the form.', dont: 'Leave the default on a sign-up form.' },
+      { do: 'Print the rules in the hint before they can be broken.', dont: 'Put the rules in a placeholder that vanishes while typing.' },
+    ],
+    a11y: ['The key is a button with one name and aria-pressed for the state, and it is 44px or larger.', 'Shown is told by a glyph and a word as well as the latched key, not by colour.', 'The strength word sits in a polite live region, so a change is read out.', 'Invalid is told by a glyph and words, not by colour alone.', 'In forced colours the well keeps a real border and the focus ring uses the system highlight colour.'],
+    keyboard: [['Tab', 'Move from the characters to the key', 'PasswordInput: Tab moves from the characters to the key'], ['Space, Enter', 'Latch or release the key', 'PasswordInput: Space on the key shows the characters and sets aria-pressed'], ['Pointer press', 'Flip the state and keep the caret in the field', 'PasswordInput: pressing the key by pointer keeps the caret in the field']],
+    inherits: 'InputHTMLAttributes<HTMLInputElement>',
+    related: [['/components/input', 'Input', 'Text that is not a secret.'], ['/components/number-input', 'NumberInput', 'A number with a step and limits.'], ['/components/helper-text', 'HelperText', 'The line under a part.']],
+  },
+  {
+    name: 'Editable',
+    slug: 'editable',
+    status: 'beta',
+    limitations: ['It edits one line of text; for several lines use Textarea.', 'It is a text value only; there is no number, date or choice variant.', 'It does not check the value itself; set `error` from your own check in `onValueChange`.'],
+    youMust: ['Give it a label that names the value with a noun.', 'Set `error` yourself when the kept value is not acceptable.', 'Pass `editLabel`, `saveLabel`, `cancelLabel` and `placeholder` in the language of the page.'],
+    usage: '<Editable label="Room name" defaultValue="Kitchen heating" onValueChange={save} />',
+    backdrops: 'In light the value is dark grey printing on warm white plastic and the well is a light grey recess. In dark the printing is light on charcoal and the well is near-black. The keys are the plain body-coloured ones in both, and nothing is orange.',
+    purpose: 'Prints a value on the case and swaps in an Input well when it is pressed.',
+    importLine: "import { Editable } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Editable</code> prints a short value with a 44px round key beside it. Press the value or the key and an Input well takes its place with the text selected. Enter, the save key or leaving the field keeps the change, and Escape or the cancel key puts the old words back. Both outcomes are announced. The row keeps its height in both states, so nothing around it moves.</p>
+      </>
+    ),
+    hero: ex('EditableBasic', 'A name as printing with its edit key.'),
+    ladder: [
+      ex('EditableEmpty', 'An empty value prints a placeholder word.'),
+      ex('EditableControlled', 'The value is yours; it is called once per kept change.'),
+      ex('EditableStates', 'Empty, read-only, disabled and error.'),
+      ex('EditableInUnit', 'Two settings in one unit with a single orange key.'),
+      ex('EditableLongText', 'Long and Thai text wraps in the printed line.'),
+    ],
+    whenToUse: ['Rename something in place.', 'Show a setting as a reading that can be corrected.'],
+    whenNotToUse: [['A field that is always open', 'Input'], ['Several lines of text', 'Textarea'], ['A number stepped up and down', 'NumberInput']],
+    anatomy: [['Label', 'type.label in type.weight-medium, printed above the row.'], ['Reading', 'type.body, flat printing, 44px tall, secondary ink when empty.'], ['Edit key', 'An IconButton at control.key with the pencil glyph.'], ['Well', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Save and cancel keys', 'IconButton at control.key with a check and a cross.']],
+    states: [['Reading', 'Printing with an edit key.'], ['Editing', 'The well, a cancel key and a save key.'], ['Empty', 'The placeholder in secondary ink.'], ['Invalid', 'Critical red edge, a glyph and the message.'], ['Read-only', 'Full ink, no key.'], ['Disabled', 'Half ink, no key.']],
+    content: ['Name the value with a noun.', 'Keep the placeholder to a few words.', 'Say the limit in the hint.'],
+    dodont: [
+      { do: 'Label it with a noun such as Room name.', dont: 'Write “Click to edit” as the label.' },
+      { do: 'Say what is wrong in the error.', dont: 'Tell invalid by the red edge alone.' },
+    ],
+    a11y: ['The reading is a button named by the label and the value.', 'The field is named by the label and is described by the hint and the error.', 'A kept or cancelled edit is announced in a polite status.', 'The keys are named from the label, for example Edit Room name.', 'Enter and Escape do not end an edit while a Thai or other composition is open.', 'In forced colours the well keeps a real border and the focus rings use the highlight colour.'],
+    keyboard: [
+      ['Enter or Space', 'On the reading, opens the field with the text selected', 'Editable: Enter keeps the change and Escape puts the old value back'],
+      ['Enter', 'In the field, keeps the change and returns focus to the reading', 'Editable: Enter keeps the change and Escape puts the old value back'],
+      ['Escape', 'In the field, puts the old value back and returns focus to the reading', 'Editable: Enter keeps the change and Escape puts the old value back'],
+      ['Tab', 'Moves from the field to the cancel and save keys; leaving the row keeps the change', 'Editable: leaving the field keeps the change'],
+    ],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/input', 'Input', 'A field that is always open.'], ['/components/textarea', 'Textarea', 'Several lines of text.'], ['/components/number-input', 'NumberInput', 'A number stepped up and down.']],
+  },
+  {
+    name: 'Dropzone',
+    slug: 'dropzone',
+    status: 'beta',
+    limitations: ['It hands over files and nothing more; it does not upload them or show progress.', 'accept is matched by name and type in the browser, so check files again on the server.', 'It takes files only, not folders, links or dragged text.', 'With multiple off, only the first file is taken and the rest go to onFilesReject.'],
+    youMust: ['Say what is taken in the title and the limit in the hint.', 'Listen to onFilesDrop; it carries the files from a drop and from the picker.', 'Tell the person about rejected files with onFilesReject, and pass your own words in another language.'],
+    usage: '<Dropzone\n  accept="image/*"\n  multiple\n  onFilesDrop={(files) => upload(files)}\n/>',
+    backdrops: 'In light the tray is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. The key is a body-coloured key in both, and nothing is orange.',
+    purpose: 'Takes dragged files in a recessed tray, with a real key inside it that opens the file picker.',
+    importLine: "import { Dropzone } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Dropzone</code> is a recessed tray with a glyph, a title, a hint and a key. Drop files on it, or press the key to open the picker. Both ways hand the files to <code>onFilesDrop</code>. While a file is held over the tray its edge goes heavier, the glyph changes and the title reads <em>Release to add</em>, and the tray does not resize.</p>
+        <p><code>accept</code> limits the kinds of file and <code>multiple</code> allows more than one. Files that fail either go to <code>onFilesReject</code>. A polite status line tells assistive tech how many files were added.</p>
+      </>
+    ),
+    hero: ex('DropzoneBasic', 'A tray that lists the names of the files it takes.'),
+    ladder: [
+      ex('DropzoneImages', 'accept narrows the tray to images and rejected files are counted.'),
+      ex('DropzoneInForm', 'A PDF field under a name, with the orange key last.'),
+      ex('DropzoneDisabled', 'Switched off, with the reason in the hint.'),
+      ex('DropzoneThai', 'Every word passed as a prop, in Thai.'),
+    ],
+    whenToUse: ['Take one or more files a person already has on their device.', 'Offer drag and drop together with a visible way to choose.'],
+    whenNotToUse: [['A single typed value', 'Input'], ['Picking from a known list', 'Select']],
+    anatomy: [['Tray', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, three control.key tall.'], ['Glyph', 'Icon at control.icon-md, text.secondary, text.primary while held over.'], ['Title', 'type.emphasis in type.weight-medium.'], ['Hint', 'type.body in text.secondary.'], ['Key', 'Button at control.md, kind key.']],
+    states: [['Held over', 'width.ring edge in text.primary, glyph and title change.'], ['Disabled', 'The recess shadow goes and the tray fades to half.'], ['Taken', 'The tray returns to rest and a status line says how many files were added.']],
+    content: ['Say what is taken in the title.', 'Put the limit in the hint.', 'Name the key after the same thing.'],
+    dodont: [
+      { do: 'Name the file kind in the title, the hint and the key.', dont: 'Write a long instruction about clicking or dragging.' },
+      { do: 'Set accept and say the limit in the hint.', dont: 'Say files and then turn pictures away.' },
+    ],
+    a11y: ['A group named by its title and described by its hint.', 'The key is a real button in the tab order, 44px or larger, and Enter and Space open the picker.', 'Held over is told by the edge, the glyph and the title, not by colour.', 'Files taken and rejected are announced in a polite status.', 'In forced colours the tray keeps a real border and the held-over edge uses Highlight.'],
+    keyboard: [['Tab', 'Moves focus to the Choose key', 'Dropzone: the Choose key is reachable by Tab, is at least 44px, and Enter and Space open the file picker'], ['Enter, Space', 'Open the file picker from the key', 'Dropzone: the Choose key is reachable by Tab, is at least 44px, and Enter and Space open the file picker']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/input', 'Input', 'A short typed value.'], ['/components/button', 'Button', 'The key inside the tray.'], ['/components/progress', 'Progress', 'How far an upload has got.']],
+  },
+  {
+    name: 'FileUpload',
+    slug: 'file-upload',
+    status: 'beta',
+    limitations: ['It sends nothing. It reports the chosen files through onFilesChange and your code does the upload.', 'There is no drag and drop onto the component; the key opens the system picker.', 'It does not read file contents, so a file with the right extension but the wrong content passes accept.', 'Progress is yours to track: pass a function that returns how far each file has got.'],
+    youMust: ['Give it a label that names what the files are for.', 'Say the limits in the hint, because the picker does not enforce them; maxSize and accept refuse files after the choice.', 'Send the files yourself and feed the numbers back through progress.', 'Show a failed send with the error prop, not by removing the file.'],
+    usage: '<FileUpload multiple label="Floor plans" accept=".pdf" maxSize={2000000} onFilesChange={setFiles} />',
+    backdrops: 'In light each file stands in a light grey recess on warm white plastic, in dark in a near-black recess on charcoal. The keys are the usual raised keys, and the error lines are critical red with a glyph. Nothing is orange.',
+    purpose: 'A key that opens the file picker, with each chosen file read out in a window with its size and a remove key.',
+    importLine: "import { FileUpload } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>FileUpload</code> keeps a native file input out of sight behind a key. The files you choose stand under the key, each in its own window with the name on the left, the size on the right and a 44px remove key beside it. <code>accept</code>, <code>maxSize</code> and <code>maxFiles</code> refuse what does not fit, and each refusal is an error line under the list. Add <code>progress</code> and a groove shows in the window of every file that has a number.</p>
+        <p>The list is controlled with <code>files</code> and <code>onFilesChange</code>, or left alone with <code>defaultFiles</code>. The ref points to the native input.</p>
+      </>
+    ),
+    hero: ex('FileUploadMultiple', 'Two plans chosen. Pick a file that is not a PDF or is over 2 MB and a line says why.'),
+    ladder: [
+      ex('FileUploadBasic', 'One file: a new choice replaces it.'),
+      ex('FileUploadProgress', 'progress returns a number per file; files without one show no groove.'),
+      ex('FileUploadControlled', 'The list lives in your state and you send it.'),
+      ex('FileUploadStates', 'An error from outside, and the disabled form.'),
+    ],
+    whenToUse: ['Attach one or more files to a form.', 'Let a person send a firmware file, a photo or a backup to the hub.'],
+    whenNotToUse: [['Choosing from a short list of options', 'Select'], ['Showing how far a task has got', 'Progress']],
+    anatomy: [['Key', 'The Button key that opens the picker.'], ['Window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, control.md tall.'], ['Name', 'type.body, wraps instead of being cut.'], ['Size', 'type.caption in text.secondary, tabular figures.'], ['Remove key', 'An IconButton, 44px, named Remove and the file name.'], ['Progress', 'An optional Progress groove under the name.'], ['Error lines', 'HelperText in the error tone, in a polite live region.']],
+    states: [['Default', 'The key and any chosen files.'], ['Refused', 'An error line per refused file, and the list is unchanged.'], ['Sending', 'A groove in the window of each file that has a progress number.'], ['Disabled', 'The keys are off and the windows lose their shadow.']],
+    content: ['Label the group with what the files are for, such as Floor plans.', 'Put the limits in the hint: the type, the size and the count.', 'Keep error lines to one fact: the name and what is wrong.'],
+    dodont: [
+      { do: 'Say “PDF, up to 2 MB each” in the hint.', dont: 'Leave the limits to be found out by a refusal.' },
+      { do: 'Show a failed send with the error prop and keep the file.', dont: 'Remove the file silently when the send fails.' },
+    ],
+    a11y: ['The label names the group and the key is a real button.', 'The remove key is named “Remove” and the file name.', 'Error lines are in a polite live region and linked to the key with aria-describedby.', 'A removal is announced and focus moves to the next remove key, or back to the key.', 'In forced colours each window keeps a real border in the text colour.'],
+    keyboard: [['Tab', 'Moves to the key, then to each remove key', 'FileUpload: the remove key takes a file out and moves focus on'], ['Space or Enter', 'Opens the picker on the key; removes the file on a remove key', 'FileUpload: the key opens the picker and a refused file is named']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/progress', 'Progress', 'How far a task has got.'], ['/components/button', 'Button', 'The key it is built on.'], ['/components/helper-text', 'HelperText', 'The lines under the list.']],
+  },
+  {
+    name: 'PinInput',
+    slug: 'pin-input',
+    status: 'beta',
+    limitations: ['It takes digits only; letters are ignored, so a code with letters needs Input.', 'It is not a one-time-code flow: sending the code again and the countdown are yours to build.', 'The value has no gaps; deleting a middle digit pulls the later digits one cell left.', 'Thai and Arabic-Indic digits are not accepted.'],
+    youMust: ['Give it a label that names the code, and put where it came from in the hint.', 'Set length to the number of digits you send.', 'Pass your own cellLabel in another language.', 'Set error only after the code has been checked.'],
+    usage: '<PinInput\n  label="Verification code"\n  hint="We sent six digits to your phone."\n  onComplete={(code) => check(code)}\n/>',
+    backdrops: 'In light each cell is a light grey recess in warm white plastic; in dark each is a near-black recess in charcoal. The digits are primary ink in both and nothing is orange.',
+    purpose: 'Takes a short code, one digit in each of a row of recessed windows.',
+    importLine: "import { PinInput } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>PinInput</code> is a row of recessed windows, one for each digit of a short code. Each window is a real input in the same cut-in well as Input. A digit moves the cursor to the next window, Backspace goes back, and a paste or a phone's code suggestion fills every window at once. Digits are shown as dots with <code>mask</code>.</p>
+        <p>It is controlled with <code>value</code> and <code>onValueChange</code>, or uncontrolled with <code>defaultValue</code>. The value is a string of digits. <code>onComplete</code> runs once when the last window is filled, and <code>name</code> sends the whole code with a form.</p>
+      </>
+    ),
+    hero: ex('PinInputBasic', 'A six-digit code with a hint under the row.'),
+    ladder: [
+      ex('PinInputSizes', 'The two sizes, md and lg.'),
+      ex('PinInputMasked', 'A four-digit PIN with each digit shown as a dot.'),
+      ex('PinInputInvalid', 'A wrong code: red edges, a glyph and a message.'),
+      ex('PinInputReadOnly', 'A code to read and copy, and a disabled row.'),
+      ex('PinInputControlled', 'Controlled by your own state, with onComplete on the last digit.'),
+      ex('PinInputTranslated', 'The cell names passed in German.'),
+      ex('PinInputForm', 'A sign-in step: the code travels under its name and the orange key comes last.'),
+    ],
+    whenToUse: ['Enter a one-time code from a text message or an authenticator.', 'Enter a short numeric PIN of four to eight digits.'],
+    whenNotToUse: [['An ID or any code with letters', 'Input'], ['A quantity set with steps and limits', 'NumberInput'], ['A secret of any length', 'PasswordInput']],
+    anatomy: [['Cell', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring; control.md square (control.lg at size lg).'], ['Digit', 'type.emphasis in type.weight-medium with tabular figures.'], ['Label', 'type.label in type.weight-medium, printed above the row.'], ['Hint', 'type.caption in text.secondary under the row.'], ['Error', 'type.caption in status.critical-mark with a glyph.']],
+    states: [['Filled', 'The digit, and the cell edge in text.secondary.'], ['Invalid', 'Every edge turns critical red and a glyph and words print under the row.'], ['Read-only', 'Recess and ink stay; there is no text cursor.'], ['Disabled', 'The recess shadow goes and the cells fade.']],
+    content: ['Name the code with a noun.', 'Say where it came from in the hint.', 'Do not repeat the number of digits; the windows show it.'],
+    dodont: [
+      { do: 'Print where the code came from in the hint.', dont: 'Write “Enter the 6-digit code” in the label.' },
+      { do: 'Check the code when onComplete runs.', dont: 'Mark every digit right or wrong as it is typed.' },
+    ],
+    a11y: ['The cells are a group named by the label, and each cell is named Digit n of N.', 'Every cell is 44px or larger and takes inputMode numeric and autocomplete one-time-code.', 'Invalid is told by a glyph and words, and every cell is aria-invalid.', 'Filled and empty differ by the digit and by the cell edge, not by colour alone.', 'In forced colours each cell keeps a real border and the focus ring uses the system highlight colour.'],
+    keyboard: [['0 to 9', 'Fill the cell and move to the next one', 'PinInput: a digit fills its cell and focus moves to the next one; a letter is ignored'], ['Backspace', 'Clear the cell, or go back and clear the one before', 'PinInput: Backspace in an empty cell goes back and clears the cell before it'], ['Arrow keys, Home, End', 'Walk the cells', 'PinInput: ArrowLeft, Home and End walk the cells that hold a digit and the first empty one'], ['Ctrl+V', 'Fill every cell from the pasted digits', 'PinInput: a paste fills every cell and a whole code from autofill spreads over the cells']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/input', 'Input', 'Text, an ID or a code with letters.'], ['/components/number-input', 'NumberInput', 'A quantity set with steps and limits.'], ['/components/password-input', 'PasswordInput', 'A secret of any length.']],
+  },
+  {
+    name: 'SearchInput',
+    slug: 'search-input',
+    status: 'beta',
+    limitations: ['It has no suggestion list; use a Combobox or Autocomplete when the words come from a source.', 'It searches when Enter is pressed. Searching as the person types is up to your onChange.', 'The Clear key is a word; there is no icon-only version.'],
+    youMust: ['Give it a label that names what is searched, such as Search rooms.', 'Handle the search yourself in onSearch or onChange; the field only reports the text.', 'Pass your own words for the Clear key and the count on a page that is not in English.'],
+    usage: '<SearchInput label="Search rooms" onSearch={(value) => find(value)} />',
+    backdrops: 'In light the well is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. The search mark and Clear word are grey ink in both, and nothing is orange.',
+    purpose: 'Takes a query in a recessed well with a search mark, a Clear key, Enter to search and Escape to clear.',
+    importLine: "import { SearchInput } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>SearchInput</code> is an Input well with a dot-matrix search mark at its start. Once there is text, a Clear key fades in at the end: a printed word on a strip as tall as the well, so the target is 44px. Enter calls <code>onSearch</code> with the text, and Escape clears it. Set <code>resultsCount</code> and the number of matches is read out politely.</p>
+      </>
+    ),
+    hero: ex('SearchInputBasic', 'The Clear key shows with text; Enter reports the query.'),
+    ladder: [
+      ex('SearchInputLarge', 'The 52px well for the main field of a phone sheet.'),
+      ex('SearchInputFilter', 'A controlled field filters a list and announces the count.'),
+      ex('SearchInputLandmark', 'The search landmark with a hint and an error.'),
+      ex('SearchInputMessages', 'The Clear word and the count in Thai.'),
+    ],
+    whenToUse: ['Find one item in a list that is too long to scan.', 'Filter a page of rooms, devices or schedules as the person types.'],
+    whenNotToUse: [['A value that is not a query', 'Input'], ['Choosing from suggestions while typing', 'Combobox']],
+    anatomy: [['Label', 'type.label in type.weight-medium, above the well.'], ['Well', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, control.md tall at least.'], ['Search mark', 'The dot-matrix search glyph, control.icon-md, in text.secondary.'], ['Text field', 'type.body, control.md tall, in the rest of the row.'], ['Clear key', 'A word in type.label, control.md tall, divided by a width.hairline line.ring edge.'], ['Hint and error', 'type.caption; the error in status.critical with a glyph.']],
+    states: [['Focus', 'width.ring in focus.ring around the well; the Clear key has its own ring.'], ['With text', 'The Clear key fades in over motion.release.'], ['Invalid', 'status.critical edge and a printed line with a glyph.'], ['Disabled', 'No recess shadow, opacity.disabled on the text, no Clear key.']],
+    content: ['Label the field with what is searched.', 'Put the kinds of thing it finds in the hint.', 'Keep the Clear word to one or two words.'],
+    dodont: [
+      { do: 'Name what is searched in the label and put the scope in the hint.', dont: 'Use the placeholder as the name.' },
+      { do: 'Use the landmark option once per page.', dont: 'Give two search fields the same landmark name.' },
+    ],
+    a11y: ['The field is type search and named by its label.', 'The Clear key is named by its printed word and reaches 44px.', 'Escape clears only when there is text, so a Dialog around the field still closes on the second press.', 'Enter is ignored while an input method is composing, so Thai and other IME text is not cut.', 'resultsCount is read out through a polite status without moving focus.', 'In forced colours the well keeps a real border and the focus ring uses the system highlight colour.'],
+    keyboard: [['Enter', 'Calls onSearch with the text', 'SearchInput: Enter calls onSearch with the text and Escape clears it'], ['Escape', 'Clears the text and keeps focus in the field', 'SearchInput: Enter calls onSearch with the text and Escape clears it'], ['Tab', 'Reaches the field, then the Clear key', 'SearchInput: the Clear key shows with text, clears it on press and puts focus back in the field']],
+    inherits: 'InputHTMLAttributes<HTMLInputElement>',
+    related: [['/components/input', 'Input', 'A value that is not a query.'], ['/components/combobox', 'Combobox', 'Choosing from suggestions while typing.']],
+  },
+  {
+    name: 'VirtualList',
+    slug: 'virtual-list',
+    status: 'beta',
+    limitations: ['Every row has one fixed height; a name that is too long is cut, not wrapped.', 'A row cannot hold a control, because it is an option; its end part is printing only.', 'There is no grouping, no sticky headers and no variable row height.', 'It windows rows on the vertical axis only; there is no horizontal or grid form.', 'Native scrolling is used, so very fast flings can show a blank row for a frame in slow browsers.'],
+    youMust: ['Pass count and a cheap getItem that gives the same row for the same index.', 'Give the list a label, because it is a listbox.', 'Use scrollToIndex on the ref to jump; do not set scrollTop yourself.', 'Keep names on one line.'],
+    usage: '<VirtualList label="All devices" count={5000} getItem={(i) => ({ index: i + 1, label: names[i] })} />',
+    backdrops: 'In light the rows are grey ink on warm white plastic with an ink mark on the chosen one. In dark they are light ink on charcoal. The ring is dark ink in both and nothing is orange.',
+    purpose: 'Holds thousands of List rows in one short plastic body and puts only the rows in view in the page.',
+    importLine: "import { VirtualList } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>VirtualList</code> is a listbox in a scrolling window on a List body. You pass <code>count</code> and <code>getItem</code>; it puts the rows in view, plus <code>overscan</code> rows each side, into the page and moves them as you scroll. Each row keeps its place, so the scroll length is true.</p>
+        <p>The window takes focus. Arrow Up and Arrow Down, Page Up and Page Down, Home and End move the active row, and Enter or Space chooses it. Call <code>scrollToIndex</code> on the ref to jump to a row.</p>
+      </>
+    ),
+    hero: ex('VirtualListBasic', 'Five thousand devices in a window of six rows.'),
+    ladder: [
+      ex('VirtualListChosen', 'Controlled: the chosen row is named under the list.'),
+      ex('VirtualListScrollTo', 'A key outside the list jumps to a row with scrollToIndex.'),
+      ex('VirtualListStatus', 'A Badge at the end of each row, with a shorter window.'),
+      ex('VirtualListDisabled', 'Every third row cannot be chosen and the keys step over it.'),
+    ],
+    whenToUse: ['Show hundreds or thousands of rows that all look alike.', 'Let people jump to a place in a long list by key or from code.'],
+    whenNotToUse: [['A short list with a state in words under each name', 'List'], ['Rows with columns', 'Table'], ['Choosing one value from a menu', 'Select']],
+    anatomy: [['Body', 'surface.solid, elevation.unit, corner.panel, gap.md inset.'], ['Window', 'The scrolling listbox, corner.inner, height of visibleRows steps.'], ['Row', 'A List row, control.lg tall, an even gap.xs apart.'], ['Index mark', 'width.ring in text.primary at the start of the chosen row.']],
+    states: [['Chosen', 'An ink mark and medium weight, with aria-selected.'], ['Active', 'A dark ring on the row the keys point to.'], ['Pressed', 'The row sinks into a small recess.'], ['Disabled', 'opacity.disabled and aria-disabled.']],
+    content: ['Name each row with a short noun phrase on one line.', 'Print a number only when it means something, such as a track.', 'Put the state at the end as a Badge.'],
+    dodont: [
+      { do: 'Use it for hundreds of like rows.', dont: 'Use it for five rows.' },
+      { do: 'Tell the chosen row by the mark and weight.', dont: 'Tell it by colour alone.' },
+    ],
+    a11y: ['A listbox with a name; each row is an option with aria-posinset and aria-setsize, so its place is read out even though most rows are not in the page.', 'Focus stays on the window and aria-activedescendant names the active row.', 'Rows are at least control.lg tall.', 'In forced colours the body keeps a real border and the ring and mark use the highlight colour.'],
+    keyboard: [['Arrow Up, Arrow Down', 'Moves the active row and scrolls it into view', 'VirtualList: the arrow keys, Page and Home and End move the active row through a long list'], ['Enter or Space', 'Chooses the active row', 'VirtualList: Enter chooses the active row and reports its index']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/list', 'List', 'A short list whose rows may grow.'], ['/components/table', 'Table', 'Rows with columns.']],
+  },
+  {
+    name: 'Carousel',
+    slug: 'carousel',
+    status: 'beta',
+    limitations: ['It never advances by itself; there is no autoplay and no pause key.', 'Every slide is one window wide; there is no peek of the next slide and no several-at-once view.', 'The track does not loop: the previous key is flat at the first slide and the next key at the last.', 'The holes show the position but cannot be pressed to jump to a slide.', 'The window takes the height of the tallest slide, so keep slides about the same height.'],
+    youMust: ['Give the Carousel a label that names the set, such as Rooms.', 'Keep the slides about the same height.', 'Do not put a second orange key inside a slide.'],
+    usage: '<Carousel label="Rooms">\n  <Text>Living room</Text>\n  <Text>Kitchen</Text>\n</Carousel>',
+    backdrops: 'In light the window is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. The lit hole is full ink in both and the waiting holes are ring ink; nothing is orange.',
+    purpose: 'Pages through a few slides in a recessed window, with a previous and a next key and a row of holes for the position.',
+    importLine: "import { Carousel, CarouselSlide } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Carousel</code> is a region named a carousel. Each child becomes one slide, a group named “n of N”, one window wide on a native scroll-snap track. A round key each side steps back and forward, and the arrow keys do the same when the window has focus. A row of holes under the window shows the slide on show, and the same position is read out as text.</p>
+        <p>Nothing advances by itself. Under reduce motion the track jumps to the slide instead of gliding. <code>index</code> and <code>onIndexChange</code> control it, or <code>defaultIndex</code> sets where it starts.</p>
+      </>
+    ),
+    hero: ex('CarouselBasic', 'Five room slides, a dotted position and a key each side.'),
+    ladder: [
+      ex('CarouselControlled', 'index and onIndexChange hold the slide, and a key outside can move it.'),
+      ex('CarouselStartsLater', 'defaultIndex starts on the third slide.'),
+      ex('CarouselOtherLanguage', 'Every built-in word is a prop; here the words are Thai.'),
+      ex('CarouselRightToLeft', 'The track runs from the right and the chevrons mirror.'),
+      ex('CarouselWithSlides', 'CarouselSlide passes a slide its own attributes.'),
+    ],
+    whenToUse: ['Show three to eight slides of the same shape, one at a time.', 'Let a person page through a gallery or a short manual by swipe or by key.'],
+    whenNotToUse: [['Switching between views of the page', 'Tabs'], ['Turning the pages of a long list', 'Pagination'], ['Numbering the sections of a form', 'Stepper']],
+    anatomy: [['Window', 'surface.sunken, elevation.well, corner.media; clips the track.'], ['Slide', 'A group one window wide, padding gap.xl, snapping at its start edge.'], ['Keys', 'IconButton, control.key (44px), a dotted chevron.'], ['Holes', 'control.dot in line.ring with elevation.well; the lit one is control.mark in text.primary, with no recess.']],
+    states: [['First slide', 'The previous key is flat.'], ['Last slide', 'The next key is flat.'], ['On show', 'The hole is larger and solid.'], ['Focus', 'The window takes the dark ring.']],
+    content: ['Label the set with a plural noun.', 'Keep slides about the same height.', 'Do not number the slides in their own text.'],
+    dodont: [
+      { do: 'Name the set, as in Rooms.', dont: 'Leave the default name Carousel.' },
+      { do: 'Let the person move it with a key or a swipe.', dont: 'Advance the slides on a timer.' },
+    ],
+    a11y: ['The region has aria-roledescription="carousel" and a name.', 'Each slide is a group with aria-roledescription="slide", named “n of N”.', 'The position is read in a polite status when it changes.', 'The keys are 44px and a flat key hands focus to the other one.', 'Under reduce motion the track jumps; in forced colours the window has a border and the holes draw in the text colour.'],
+    keyboard: [['Left and Right arrow', 'Step one slide with the window focused; reversed in right-to-left', 'Carousel: the arrow keys step the slide and the end keys go flat'], ['Home and End', 'First and last slide', 'Carousel: the arrow keys step the slide and the end keys go flat']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/tabs', 'Tabs', 'Switching between views.'], ['/components/pagination', 'Pagination', 'Turning the pages of a long list.']],
+  },
+  {
+    name: 'ColorPicker',
+    slug: 'color-picker',
+    status: 'beta',
+    limitations: ['It has no saturation and lightness plane; the hue fader holds both fixed.', 'The colours are hex strings only; names such as red and rgb() values are not read.', 'It does not open a popup; it stands in the column like any field.'],
+    youMust: ['Give every swatch a plain name, because the name is the key’s accessible name.', 'Keep the list to eight swatches or fewer.', 'Pass swatch colours as data; the picker never reads a token for them.'],
+    usage: '<ColorPicker\n  label="Lamp colour"\n  swatches={[{ value: \'ffd9a0\', name: \'Warm white\' }, { value: \'ffb347\', name: \'Amber\' }]}\n  defaultValue="ffb347"\n/>',
+    backdrops: 'In light the keys sit on warm white plastic with a grey hairline edge, in dark on charcoal with a lighter one. The ink ring and the tick are primary ink in both, and the only colour is the data on the keys.',
+    purpose: 'Chooses a lamp colour from named round keys, with an optional hue fader and hex well.',
+    importLine: "import { ColorPicker } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>ColorPicker</code> is a radio group of round lens keys. Each key’s face is the colour it sets, passed in as <code>swatches</code>. The chosen key sits down, wears an ink ring and shows a tick, and a line under the keys prints its name. <code>value</code> is a hex string. Add <code>hue</code> for a fader and <code>hex</code> for a well.</p>
+      </>
+    ),
+    hero: ex('ColorPickerBasic', 'Eight named lamp colours, one chosen.'),
+    ladder: [
+      ex('ColorPickerHue', 'The hue fader reaches colours that no key holds.'),
+      ex('ColorPickerHex', 'The hex well takes three or six digits.'),
+      ex('ColorPickerControlled', 'Controlled, with the hex string shown beside it.'),
+      ex('ColorPickerInForm', 'name submits the colour with the rest of the form.'),
+      ex('ColorPickerDisabled', 'Disabled keys lose their height but keep the ring and tick.'),
+    ],
+    whenToUse: ['Choose a lamp or light colour from a short list of named colours.', 'Let a person fine-tune the colour with a fader or a hex value.'],
+    whenNotToUse: [['One option that is a word, not a colour', 'RadioCards'], ['A single number such as brightness', 'Slider']],
+    anatomy: [['Legend', 'type.label in text.secondary, the name of the group.'], ['Lens key', 'control.md round, line.ring edge, elevation.part; down when chosen.'], ['Tick plate', 'surface.raised, line.ring edge, control.icon-md, ink check.'], ['Readout', 'type.body in text.primary, a polite live region.']],
+    states: [['Chosen', 'Down, an ink ring and a tick.'], ['Focus', 'A dark ring outside the choice ring.'], ['Disabled', 'No height, faded to half.']],
+    content: ['Name each colour as a person would say it.', 'Never use a hex value as the name.', 'Keep to eight swatches or fewer.'],
+    dodont: [
+      { do: 'Name the key Warm white or Amber.', dont: 'Name the key with its hex digits.' },
+      { do: 'Tell the choice by a ring and a tick.', dont: 'Tell it by a thicker coloured border.' },
+    ],
+    a11y: ['A radio group named by its legend, each key a radio named by the colour.', 'The arrow keys move to the next key and choose it.', 'The readout is a polite live region.', 'The chosen key has a ring and a tick that do not depend on its colour.', 'In forced colours the keys keep their colour and the ring and tick use the text colour.'],
+    keyboard: [['Tab', 'Enters the group on the chosen key, or the first', 'ColorPicker: the keys are a named radio group and one is chosen'], ['Arrow keys', 'Move to the next or previous key and choose it', 'ColorPicker: an arrow key moves the choice']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/radio-cards', 'RadioCards', 'One option that is a word.'], ['/components/slider', 'Slider', 'A single number such as brightness.']],
+  },
+  {
+    name: 'TransferList',
+    slug: 'transfer-list',
+    status: 'beta',
+    limitations: ['Rows keep the order of the options; they cannot be reordered inside a window.', 'Each window scrolls past six rows and has no search; filter the options before you pass them.', 'Marks are not kept across a move; the rows that arrive in the other window are not marked.'],
+    youMust: ['Give the control a label, because it is the name of the group.', 'Give each option a value that is unique across both windows.', 'Name the two windows by what they hold, not by left and right.'],
+    usage: '<TransferList label="Rooms on the night schedule" defaultValue={["kitchen"]} options={[\n  { value: "kitchen", label: "Kitchen" },\n  { value: "bedroom", label: "Bedroom" },\n]} />',
+    backdrops: 'In light the windows are light grey recesses in warm white plastic, in dark near-black recesses in charcoal. The keys are body-coloured and nothing is orange.',
+    purpose: 'Moves rows between an available window and a chosen window with named keys, with no dragging.',
+    importLine: "import { TransferList } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>TransferList</code> is two Listbox windows with a column of round keys between them. Mark rows with Space in either window, then press the key that points toward the other window, or press Alt with the arrow that points that way. <code>value</code> holds the chosen values and <code>onValueChange</code> reports them. A polite status reads out each move and the new totals.</p>
+      </>
+    ),
+    hero: ex('TransferListBasic', 'Five rooms in two windows, two of them chosen.'),
+    ladder: [
+      ex('TransferListControlled', 'The chosen values held in state, with a count and the orange key that saves.'),
+      ex('TransferListMoveAll', 'Two more keys that move every row at once.'),
+      ex('TransferListSizes', 'Rows at 44px and 52px.'),
+      ex('TransferListStates', 'A disabled row, a disabled control and an empty chosen window.'),
+      ex('TransferListInForm', 'The chosen values submitted with a form, and the orange key last.'),
+    ],
+    whenToUse: ['Build a subset from a list that is too long to tick one row at a time.', 'Choose the rooms or devices that belong to a schedule.'],
+    whenNotToUse: [['A short list where a few rows are marked', 'Listbox'], ['Several choices from a list that folds away', 'MultiSelect']],
+    anatomy: [['Window', 'A Listbox: surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Key', 'IconButton at control.key, one dot-matrix arrow, named in words.'], ['Count', 'type.caption in text.secondary, tabular figures, under each window.'], ['Status', 'A visually hidden polite live region.']],
+    states: [['Marked', 'A tick and medium weight in primary ink, with aria-selected.'], ['Key with nothing to carry', 'Half-faded and disabled.'], ['Row disabled', 'Half-faded, skipped by the arrows, never moved.'], ['Stacked', 'Under about 550px the windows stack and the keys lie in a row between them.']],
+    content: ['Name the control with a noun for what is being built.', 'Name the windows by what they hold.', 'Write each option as a short noun or phrase.'],
+    dodont: [
+      { do: 'Name the windows Rooms and On the schedule.', dont: 'Name them Left and Right.' },
+      { do: 'Use a Listbox with multiple for a short list.', dont: 'Use a TransferList for three rows.' },
+    ],
+    a11y: ['The control is a group named by its label; each window is a listbox named by its printed label.', 'The keys are buttons named in words, such as Add marked rows.', 'A polite status reads each move and the totals.', 'Moving rows never needs a drag, so it works by keyboard, switch and voice.', 'In forced colours the keys keep a real border in the text colour.'],
+    keyboard: [['Tab', 'Moves between the available window, the keys and the chosen window', 'TransferList: Tab reaches both windows and the keys'], ['Space', 'Marks the reached row in a window', 'TransferList: Space marks a row and a key carries it across'], ['Alt + arrow toward the other window', 'Carries the marked rows across without leaving the list', 'TransferList: Alt with the arrow carries the marked rows across']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/listbox', 'Listbox', 'One always-open list; each window is one.'], ['/components/multi-select', 'MultiSelect', 'Several choices from a list that folds away.']],
+  },
+  {
+    name: 'Calendar',
+    slug: 'calendar',
+    status: 'beta',
+    limitations: ['It chooses one day only; there is no range and no multi-select.', 'The grid always prints six weeks and shows no days of the neighbouring months.', 'Days are yyyy-mm-dd strings in the Gregorian calendar; month and weekday words follow the locale, but a Buddhist or Hijri year count is shown only where Intl uses it for the locale.', 'The default week start is Monday and is not read from the locale.'],
+    youMust: ['Pass days as yyyy-mm-dd strings and never as Date objects.', 'Pass previousLabel and nextLabel in the same language as locale.', 'Pair a chosen day with a key that saves it; the Calendar does not submit by itself.'],
+    usage: '<Calendar defaultValue="2026-11-12" min="2026-11-04" onValueChange={setDay} />\n<Calendar value={day} onValueChange={setDay} month={month} onMonthChange={setMonth} />',
+    backdrops: 'In light the days are dark grey numbers on warm white plastic and the chosen day sits in a light grey recess, in dark the numbers are pale on charcoal and the recess is near-black. Today and the chosen day differ by shape and weight in both, and nothing is orange.',
+    purpose: 'A month grid for choosing one day: printed numbers, an index bar under today, the chosen day cut into a recessed window.',
+    importLine: "import { Calendar } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Calendar</code> is a grid of days with a roving tab stop. Arrow keys move one day or one week, Home and End reach the ends of the week, Page Up and Page Down turn the month, and Enter or Space chooses. <code>min</code>, <code>max</code> and <code>isDateDisabled</code> block days, <code>weekStart</code> sets the first column and <code>locale</code> sets the words through Intl. It works with <code>value</code> and <code>onValueChange</code> or on its own, and <code>month</code> can be controlled the same way. There is no date library; days go in and out as <code>yyyy-mm-dd</code> strings, and the date helpers are exported for a DatePicker built on top.</p>
+      </>
+    ),
+    hero: ex('CalendarBasic', 'November 2026 with the 12th chosen and the 4th marked as today.'),
+    ladder: [
+      ex('CalendarControlled', 'Controlled day and month, with the values printed under the grid.'),
+      ex('CalendarLimits', 'Days before min and after max are dimmed, and weekends are blocked with isDateDisabled.'),
+      ex('CalendarLocale', 'Thai with the week starting on Sunday, and German.'),
+      ex('CalendarWeekStart', 'The same month starting on Monday and on Sunday.'),
+      ex('CalendarStates', 'readOnly keeps the keyboard, disabled turns the month off.'),
+    ],
+    whenToUse: ['Choose one day from a month, such as a start date.', 'Show a booked day with readOnly.'],
+    whenNotToUse: [['Choosing a time of day', 'TimePicker'], ['Turning through pages', 'Pagination'], ['Picking a number on a range', 'Slider']],
+    anatomy: [['Month keys', 'control.key discs, elevation.part, chevron icons.'], ['Month name', 'type.emphasis in type.weight-medium, a polite live region.'], ['Weekday names', 'type.caption in text.secondary.'], ['Day', 'control.md square, type.body in tabular figures, text.secondary.'], ['Chosen day', 'surface.sunken, elevation.well, width.hairline in line.ring, type.weight-medium.'], ['Today bar', 'width.bar in text.primary, control.thumb wide.']],
+    states: [['Default', 'The number in secondary ink.'], ['Hover', 'The ink one step darker.'], ['Today', 'A short bar under the number.'], ['Chosen', 'A recessed window and medium weight.'], ['Focus', 'The focus ring around the 44px cell.'], ['Unavailable', 'Half-strength ink and a not-allowed cursor.'], ['Read-only', 'A default cursor and no press recess.']],
+    content: ['Pass days as yyyy-mm-dd.', 'Name the month keys in the same language as locale.', 'Block days with isDateDisabled and do not hide them.'],
+    dodont: [
+      { do: 'Pass the key names in the language of the locale.', dont: 'Show a Thai month with English key names.' },
+      { do: 'Leave blocked days in their columns.', dont: 'Remove days so the weeks shift.' },
+    ],
+    a11y: ['A grid named by the month and year; the name is a polite live region, so turning the month is read out.', 'Each day is a button with its full date as its name, inside a gridcell that carries aria-selected.', 'Today carries aria-current="date" and a bar; the chosen day carries a recess and weight.', 'One day is in the tab order and the arrow keys walk the rest.', 'Each day and key is a 44px target.', 'In forced colours the chosen day takes the Highlight pair and unavailable days use GrayText.'],
+    keyboard: [['Arrow keys', 'Move the focus one day or one week', 'Calendar: arrows, Home, End and Page keys move the focus over days and months'], ['Home, End', 'Go to the first or the last day of the week', 'Calendar: arrows, Home, End and Page keys move the focus over days and months'], ['Page Up, Page Down', 'Turn the month; with Shift, the year', 'Calendar: arrows, Home, End and Page keys move the focus over days and months'], ['Enter, Space', 'Choose the focused day', 'Calendar: Enter chooses the focused day and an unavailable day cannot be chosen'], ['Tab', 'Moves into the grid at one day', 'Calendar: a labelled grid of six weeks with one day in the tab order, today announced and the chosen day selected']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/time-picker', 'TimePicker', 'Choosing a time of day.'], ['/components/pagination', 'Pagination', 'Turning through pages.']],
+  },
+  {
+    name: 'TreeView',
+    slug: 'tree-view',
+    status: 'beta',
+    limitations: ['Children of a closed branch are not mounted, so page search does not find them and they hold no state.', 'There is one choice at a time; multiple selection and checkboxes are left out.', 'There is no drag to reorder and no lazy loading; mount the children when you have them.', 'Keep it to four levels. Each level steps in by 22px and a narrow column runs out of width.'],
+    youMust: ['Give the tree a name with aria-label or aria-labelledby.', 'Give every TreeItem a value that is unique inside the tree.', 'Name each item with a noun and let the chevron say it opens.', 'Keep the unit’s one orange key outside the tree.'],
+    usage: '<TreeView aria-label="Rooms" defaultExpanded={[\'rooms\']}>\n  <TreeItem value="rooms" label="Rooms">\n    <TreeItem value="kitchen" label="Kitchen" />\n    <TreeItem value="hall" label="Hall" />\n  </TreeItem>\n</TreeView>',
+    backdrops: 'In light the labels are warm grey ink on warm-white plastic with hairlines in ring ink, in dark light ink on charcoal. The chosen box is the label’s own ink in both, and nothing is orange.',
+    purpose: 'Shows nested items that open and close, drawn as a schematic with hairlines and nodes.',
+    importLine: "import { TreeView, TreeItem } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>TreeView</code> prints a hierarchy as a schematic. A branch has a chevron and opens to show its children, each joined to its parent by a hairline with one right-angle bend. A leaf ends its line in a small ring node. One item is chosen at a time and prints in medium weight inside a hairline box.</p>
+        <p>It is a WAI-ARIA tree. Every item carries its level, its position and its size, and the arrow keys walk it. Pass <code>value</code> and <code>expanded</code> to control it, or <code>defaultValue</code> and <code>defaultExpanded</code> to let it keep its own state.</p>
+      </>
+    ),
+    hero: ex('TreeViewBasic', 'Rooms and devices, with Kitchen chosen.'),
+    ladder: [
+      ex('TreeViewControlled', 'The choice and the open branches held in your own state.'),
+      ex('TreeViewLeading', 'A dot-matrix Icon before each name.'),
+      ex('TreeViewDisabled', 'Disabled items fade and the arrow keys skip them.'),
+      ex('TreeViewExpandAll', 'Two Buttons open and close every branch, and a long name wraps.'),
+    ],
+    whenToUse: ['Browse a hierarchy of three or four levels, such as rooms and the devices in them.', 'Pick one item out of nested groups.'],
+    whenNotToUse: [['Folding sections of text', 'Accordion'], ['Showing the path to the current page', 'Breadcrumb'], ['A flat list of items', 'List']],
+    anatomy: [['Toggle cell', 'A control.md square with a 16px chevron on a branch or a control.dot ring node on a leaf.'], ['Label', 'type.body; the chosen one in type.weight-medium inside a width.hairline box in text.primary, radius corner.media.'], ['Join line', 'width.hairline in line.ring, down the parent’s chevron centre with a stub into each child.'], ['Leading node', 'An optional dot-matrix Icon before the name.'], ['Row', 'At least control.md tall, the full width of the item.']],
+    states: [['Closed', 'Right chevron, secondary ink, aria-expanded="false".'], ['Open', 'Down chevron, the children drawn under it.'], ['Chosen', 'Primary ink, medium weight, a hairline box; a leaf’s node fills.'], ['Hover', 'The ink darkens a step.'], ['Disabled', 'Faded, skipped by the arrow keys.']],
+    content: ['Name each item with a noun.', 'Do not write “Open” or “Folder” in the name.', 'Keep it to four levels.'],
+    dodont: [
+      { do: 'Name the item with a noun.', dont: 'Write “Click here for the kitchen”.' },
+      { do: 'Keep the orange key outside the tree.', dont: 'Tint the chosen item orange.' },
+    ],
+    a11y: ['The list is role tree and each item is a treeitem with aria-level, aria-setsize, aria-posinset and, on a branch, aria-expanded.', 'Children stand in a role group.', 'Each item is named by its label text, so the leading glyph is hidden.', 'Choosing is told by a box and weight as well as ink, and the open state by the chevron.', 'Only one item is in the tab order.', 'Under Reduce motion a branch keeps its height and only fades.', 'In forced colours the lines and the box stay borders in the text colour.'],
+    keyboard: [['Up / Down', 'Move to the previous or next visible item', 'TreeView: Up, Down, Right, Left, Home and End walk the visible items and skip a disabled one'], ['Right / Left', 'Open a branch, then enter it; close it, then go to the parent', 'TreeView: Up, Down, Right, Left, Home and End walk the visible items and skip a disabled one'], ['Home / End', 'Move to the first or last visible item', 'TreeView: Up, Down, Right, Left, Home and End walk the visible items and skip a disabled one'], ['Enter / Space', 'Choose the focused item', 'TreeView: Enter and Space choose the focused item and typing a letter jumps to a matching label'], ['A letter', 'Jump to the next item whose name starts with it', 'TreeView: Enter and Space choose the focused item and typing a letter jumps to a matching label']],
+    inherits: 'HTMLAttributes<HTMLUListElement>',
+    related: [['/components/accordion', 'Accordion', 'Folding sections.'], ['/components/breadcrumb', 'Breadcrumb', 'The path to here.']],
+  },
+  {
+    name: 'Wizard',
+    slug: 'wizard',
+    status: 'beta',
+    limitations: ['canAdvance is synchronous; it cannot wait for a server answer.', 'Steps cannot be pressed to jump; only Back and Next move, or your own state through current.', 'The rail runs down only; there is no horizontal Wizard.', 'The fields of closed steps stay mounted but hidden, so a very large step costs memory.'],
+    youMust: ['Name each step with a noun and leave the number to the window.', 'Hold the values of every step in your own state or in the fields, and submit them in onFinish.', 'Pass your own words for the keys and the heading when the product is not in English.'],
+    usage: '<Wizard canAdvance={(i) => i !== 0 || name !== \'\'} onFinish={save}>\n  <WizardStep title="General">…</WizardStep>\n  <WizardStep title="Review">…</WizardStep>\n</Wizard>',
+    backdrops: 'In light the number windows are light grey recesses in warm white plastic, in dark near-black recesses in charcoal. The keys are body-coloured and only Finish on the last step is orange.',
+    purpose: 'Walks a setup one step at a time on the Stepper rail, with Back, Next and Finish keys and a check before each step is left.',
+    importLine: "import { Wizard, WizardStep } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Wizard</code> shows the Stepper rail and opens one <code>WizardStep</code> at a time. The steps before it are <code>done</code> and show a check, the open one is <code>current</code>, and the rest are <code>upcoming</code>. Back and Next sit under the rail, and Next becomes the orange Finish on the last step.</p>
+        <p><code>canAdvance(index)</code> can refuse to leave a step. The step then stays open and a status line prints the reason. When the step changes, focus moves to its title.</p>
+      </>
+    ),
+    hero: ex('WizardBasic', 'Three steps: only the open one shows its fields.'),
+    ladder: [
+      ex('WizardValidated', 'canAdvance holds the person on a step until its field is filled.'),
+      ex('WizardControlled', 'The open step held in your own state.'),
+      ex('WizardFinish', 'Finish on the last step calls onFinish.'),
+      ex('WizardLabels', 'Your own words on the keys, in Thai, with a level-3 heading.'),
+    ],
+    whenToUse: ['Split a setup into two to five ordered steps.', 'Check one step before the person goes on to the next.'],
+    whenNotToUse: [['A form that fits one screen', 'Stepper'], ['Views with no order', 'Tabs'], ['Events in order', 'Timeline']],
+    anatomy: [['Number window', 'The Stepper window: surface.sunken, elevation.well, control.md square.'], ['Step title', 'The open step name, a heading that takes focus on a change.'], ['Status line', 'type.label with a warning glyph, role status.'], ['Key row', 'Back and Next or Finish, control.md tall, gap.lg apart.']],
+    states: [['Current', 'The open step: primary ink and aria-current="step".'], ['Done', 'A check in the window.'], ['Blocked', 'A warning glyph and the blocked words in medium weight.'], ['Last step', 'Finish in the accent key replaces Next.']],
+    content: ['Name each step with a noun.', 'Do not write the number in the title.', 'Keep Back, Next and Finish to one word each.'],
+    dodont: [
+      { do: 'Say what is missing when a step cannot be left.', dont: 'Disable Next with no word.' },
+      { do: 'Name the step with a noun and let the window count.', dont: 'Write “Step 1:” in the title.' },
+    ],
+    a11y: ['Focus moves to the open step title, a heading, when the step changes.', 'The title is read with “Step 2 of 3”.', 'The status line is a polite live region.', 'Next stays focusable when blocked, so the reason can be heard.', 'In forced colours the title ring uses the system highlight colour.'],
+    keyboard: [['Tab', 'Moves through the fields of the open step, then Back and Next', 'Wizard: Next moves focus to the new step title'], ['Enter or Space', 'Presses the focused key', 'Wizard: Next moves focus to the new step title']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/stepper', 'Stepper', 'Numbered sections shown all at once.'], ['/components/tabs', 'Tabs', 'Views with no order.']],
+  },
+  {
+    name: 'OTPFlow',
+    slug: 'otp-flow',
+    status: 'beta',
+    limitations: ['It does no network work: you send the code, check it and set status.', 'It has no verify key; the code is passed to onVerify when the last digit is filled.', 'The countdown restarts from resendIn; it cannot keep a limit across a page reload.', 'It takes digits only, as PinInput does.'],
+    youMust: ['Send the code yourself in onResend and check it in onVerify.', 'Set status to verifying, then to success or error, when your check returns.', 'Set status back to idle when the person edits a rejected code.', 'Pass every word in labels when you translate.'],
+    usage: '<OTPFlow\n  destination="+66 81 234 5678"\n  resendIn={30}\n  status={status}\n  onVerify={(code) => check(code)}\n  onResend={() => sendCode()}\n/>',
+    backdrops: 'In light the window and the digit cells are light grey recesses in warm white plastic, in dark near-black recesses in charcoal. All ink is grey and nothing is orange.',
+    purpose: 'Runs the whole code step of a sign-in: where the code went, the digits, a countdown and a send-again key.',
+    importLine: "import { OTPFlow } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>OTPFlow</code> is a heading, a recessed window, a <code>PinInput</code> and a key in one column. The window prints where the code went on one side and the time to the next code on the other. The key is flat until the countdown ends, then it asks for a new code and clears the digits.</p>
+        <p>The flow calls <code>onVerify</code> with the full code when the last digit is filled. You check it and set <code>status</code> to <code>verifying</code>, <code>success</code> or <code>error</code>. A polite status line speaks each verdict and the end of the countdown, but not each second.</p>
+      </>
+    ),
+    hero: ex('OTPFlowBasic', 'A six-digit step with a thirty-second countdown.'),
+    ladder: [
+      ex('OTPFlowChecked', 'The host checks the code and sets status; try 123456 and any other code.'),
+      ex('OTPFlowResend', 'A ten-second countdown and a count of the codes sent.'),
+      ex('OTPFlowControlled', 'Four digits controlled by your own state, with a smaller heading.'),
+      ex('OTPFlowTranslated', 'Every built-in word passed in German.'),
+    ],
+    whenToUse: ['A sign-in or sign-up step that asks for a code sent by text message or email.', 'A step that confirms a phone number or address before a change is saved.'],
+    whenNotToUse: [['A code field inside a form that has other fields', 'PinInput'], ['A secret the person chose', 'PasswordInput']],
+    anatomy: [['Title', 'Heading, level 3 by default.'], ['Window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Destination', 'type.emphasis in type.weight-medium with tabular figures.'], ['Countdown', 'type.title in tabular figures, text.secondary until it ends.'], ['Digit row', 'PinInput with its own label and 44px cells.'], ['Message', 'HelperText, one line of height kept at all times.'], ['Send-again key', 'Button, kind key.']],
+    states: [['Waiting', 'The countdown in secondary ink and the key flat.'], ['Ready', 'The countdown in primary ink and the key at full height.'], ['Verifying', 'The digits are read-only and a line says the code is being checked.'], ['Error', 'Red edges on every digit and the message under the row.'], ['Success', 'A check and the word Verified under the row.']],
+    content: ['Give the title a verb and a noun.', 'Write the destination as the person knows it.', 'Say what is wrong and what to do in the error.'],
+    dodont: [
+      { do: 'Check the code in onVerify and set status.', dont: 'Add a second primary key to send the code.' },
+      { do: 'Name the problem and the way out in the error.', dont: 'Write “Error” and nothing else.' },
+    ],
+    a11y: ['The step is a group named by its title.', 'A polite status line speaks the verdicts, a new code and the end of the countdown; the ticking seconds are hidden from assistive tech.', 'The disabled key is described by the seconds left.', 'Success and error are told by a glyph and words, not by colour alone.', 'In forced colours the window keeps a real border and the text uses the system colour.'],
+    keyboard: [['0 to 9', 'Fill the digits; the last one sends the code to onVerify', 'OTPFlow: a full code calls onVerify once with every digit'], ['Tab, Enter or Space', 'Reach the send-again key once it is ready and press it', 'OTPFlow: the send-again key waits for the countdown, then clears the digits and returns focus to the first one']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/pin-input', 'PinInput', 'The digit row on its own.'], ['/components/dialog', 'Dialog', 'A sheet to hold the step.'], ['/components/banner', 'Banner', 'A problem that is not about the code.']],
+  },
+  {
+    name: 'DataGrid',
+    slug: 'data-grid',
+    status: 'beta',
+    limitations: ['It renders every row, so it suits a few hundred rows; there is no virtual scrolling (VirtualList is a listbox of one column and cannot hold cells).', 'It has no filtering, paging, column resizing, reordering, pinned columns, cell editing or row expansion.', 'Sorting is by one column at a time, and a cell cannot hold a control that needs its own Tab stop.'],
+    youMust: ['Give every column a unique key and a clear header.', 'Give rows a stable id, or pass getRowKey, when rows can be marked or reordered.', 'Set numeric on every column of numbers.', 'Pass the name of the grid with caption or label.'],
+    usage: '<DataGrid\n  caption="Energy by room"\n  columns={[{ key: \'room\', header: \'Room\', accessor: (r) => r.room, sortable: true }]}\n  rows={rooms}\n  selectionMode="multiple"\n/>',
+    backdrops: 'In light the text is dark ink on warm white plastic, in dark light ink on charcoal. The focus ring and the seams are ink in both, the header fills with the unit ground, and nothing is orange.',
+    purpose: 'A Table you walk by cell, with sorting by column, a header that stays in view and optional row selection.',
+    importLine: "import { DataGrid } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>DataGrid</code> is a WAI-ARIA grid. Columns come from a <code>columns</code> array with an <code>accessor</code> or a <code>render</code>. The grid has one Tab stop and the arrow keys, Home, End and the Page keys move between cells. A sortable header carries aria-sort. <code>selectionMode</code> adds a checkbox column. It reuses Table’s flat printing.</p>
+      </>
+    ),
+    hero: ex('DataGridBasic', 'Four rooms; press Room or kWh to sort, or walk the cells with the arrow keys.'),
+    ladder: [
+      ex('DataGridMultiple', 'Checkboxes mark rows and the header key marks all of them.'),
+      ex('DataGridSingle', 'Marking a row clears the one marked before.'),
+      ex('DataGridScroll', 'Twenty-four rows in a window of five; the header stays in view.'),
+      ex('DataGridControlled', 'Sort and selection controlled, with your own ordering and a Thai row that wraps.'),
+    ],
+    whenToUse: ['Sort, scan and mark rows of the same facts.', 'Show a few hundred rows that a person reads across and down.'],
+    whenNotToUse: [['Rows that are only read', 'Table'], ['Thousands of items in one column', 'VirtualList'], ['A short list of items to choose from', 'List']],
+    anatomy: [['Header cell', 'type.weight-medium in text.secondary, sticky on unit-bg, with a divider seam below.'], ['Cell', 'type.body, at least control.md tall, a divider seam below.'], ['Select key', 'A Checkbox in a control.md wide column.'], ['Focus ring', 'width.ring in focus.ring, drawn inside the cell edge.']],
+    states: [['Focused cell', 'An ink ring inside the cell edge.'], ['Sorted', 'Primary ink, a chevron and aria-sort.'], ['Marked row', 'A tick in the checkbox, a stronger seam and aria-selected.'], ['Empty', 'One line of secondary ink across the grid.']],
+    content: ['Name columns with nouns.', 'Put the unit in the header, not in every cell.', 'Give the grid a caption.'],
+    dodont: [
+      { do: 'Give rows a stable id so a marked row stays marked after a sort.', dont: 'Key rows by position when the order can change.' },
+      { do: 'Act on the marked rows from one key below the grid.', dont: 'Put a button in every cell; it cannot be reached by keyboard.' },
+    ],
+    a11y: ['A role grid with a name from the caption, and aria-multiselectable when several rows can be marked.', 'One Tab stop; the arrow keys, Home, End and the Page keys move between cells, and left and right swap in right-to-left.', 'A sorted column carries aria-sort and a chevron, so direction is a shape and not a colour.', 'A marked row has aria-selected, a tick and a stronger seam; the number of marked rows is announced.', 'In forced colours the focused cell keeps a Highlight outline.'],
+    keyboard: [['Tab', 'Enters the grid on one cell and leaves on the next Tab', 'DataGrid: the grid has a single Tab stop'], ['Arrow keys, Home, End, Page Up, Page Down', 'Move between cells', 'DataGrid: arrows, Home, End and Page keys move the focused cell'], ['Enter, Space', 'Sorts a sortable header, marks the row of a cell', 'DataGrid: Enter sorts a header and Space marks a row']],
+    inherits: 'HTMLAttributes<HTMLTableElement>',
+    related: [['/components/table', 'Table', 'Rows that are only read.'], ['/components/virtual-list', 'VirtualList', 'Very long lists of one column.'], ['/components/pagination', 'Pagination', 'Moving between pages of rows.']],
+  },
+  {
+    name: 'DatePicker',
+    slug: 'date-picker',
+    status: 'beta',
+    limitations: ['It chooses one day only; a start and an end need two pickers, or a RangePicker.', 'Dates are yyyy-mm-dd strings in the Gregorian calendar, and a typed date is read as Gregorian with Latin digits, so a Buddhist year such as 2569 is refused.', 'A typed year must have four digits; two-digit years are refused, not guessed.', 'The Calendar panel is as wide as the month and does not become a bottom sheet on a phone.'],
+    youMust: ['Give the picker a label that names the day, such as "Start date".', 'Pass chooseLabel and formatWords in the same language as locale.', 'Pass days as yyyy-mm-dd strings and never as Date objects.', 'Say in the hint why a day is blocked when you pass min, max or isDateDisabled.'],
+    usage: '<DatePicker label="Start date" value={day} onValueChange={setDay} />\n<DatePicker label="Delivery day" min="2026-11-04" isDateDisabled={isWeekend} />',
+    backdrops: 'In light the window is a light grey recess in warm white plastic and the key is a raised round part, in dark the window is near-black and the key is charcoal. The panel holds the Calendar and nothing is orange.',
+    purpose: 'Asks for one day in a recessed window that takes a typed date, with a round key that opens the Calendar.',
+    importLine: "import { DatePicker } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>DatePicker</code> is an <code>Input</code>-style window with a round key beside it. Type a date as <code>yyyy-mm-dd</code> or in the order of the locale, and press Enter or leave the field to commit it. Press the key, or Alt and Down arrow, to open the <code>Calendar</code> on a small panel and pick the day instead. <code>value</code> and <code>onValueChange</code> pass the day as a <code>yyyy-mm-dd</code> string, or null when the field is cleared, and the picker works on its own with <code>defaultValue</code>. Text that is not a real day, or a day blocked by <code>min</code>, <code>max</code> or <code>isDateDisabled</code>, prints a message and keeps what was typed.</p>
+      </>
+    ),
+    hero: ex('DatePickerBasic', 'A date window with 12 November typed in and the calendar key beside it.'),
+    ladder: [
+      ex('DatePickerControlled', 'Controlled day, with the committed value printed under the field.'),
+      ex('DatePickerLimits', 'min, max and weekends blocked; a typed date on a blocked day is refused.'),
+      ex('DatePickerLocale', 'Thai and German: the typed order, the panel words and the format words follow the locale.'),
+      ex('DatePickerStates', 'An error from the page, a read-only date and a disabled picker.'),
+      ex('DatePickerInForm', 'Inside a form, where name carries the day as yyyy-mm-dd.'),
+    ],
+    whenToUse: ['Ask for one day in a form, such as a start or a delivery.', 'Let people type a date they know or pick one they do not.'],
+    whenNotToUse: [['Showing a month with no field', 'Calendar'], ['Choosing a time of day', 'TimePicker'], ['A short list of fixed dates', 'Select']],
+    anatomy: [['Label', 'type.label in type.weight-medium, printed above the window.'], ['Date window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, control.md tall.'], ['Calendar key', 'A round IconButton, control.key, with the schedule glyph.'], ['Panel', 'Popover: surface.solid, elevation.float, holding a Calendar.'], ['Hint', 'type.caption in text.secondary.'], ['Error', 'type.caption in status.critical-mark with a printed glyph.']],
+    states: [['Default', 'A recessed window and a raised key.'], ['Focus', 'The dark ring around the window.'], ['Open', 'The key reports aria-expanded and the Calendar stands on the panel.'], ['Invalid', 'A red edge, a mark and a message.'], ['Read-only', 'The recess stays and the key is off.'], ['Disabled', 'No recess shadow, text at half strength and the key off.']],
+    content: ['Name the day by its job, such as "Delivery day".', 'Let the hint print the format.', 'Say why a day is blocked.'],
+    dodont: [
+      { do: 'Label it "Delivery day" and let the hint print the format.', dont: 'Write the format in the label.' },
+      { do: 'Print the reason in the hint when days are blocked.', dont: 'Block days with no word about it.' },
+    ],
+    a11y: ['The text field is named by its visible label.', 'The key is named "Choose date" and reports aria-expanded; the panel is a dialog.', 'An invalid date sets aria-invalid and its message is linked with aria-describedby.', 'The message carries a printed mark as well as the red edge.', 'In forced colours the window keeps a real border and the focus ring uses the system highlight colour.'],
+    keyboard: [['Enter / Tab', 'Commits a typed date', 'DatePicker: a typed date in ISO or locale order commits on Tab and Enter and is shown in the locale order'], ['Alt + Down arrow', 'Opens the Calendar from the field', 'DatePicker: Alt and Down arrow opens the Calendar from the field, and the month sits inside the panel without scrolling sideways'], ['Enter / Space on the key', 'Opens the Calendar with focus on the chosen day', 'DatePicker: the key opens the Calendar with focus on the chosen day, choosing a day fills the field and Escape returns to the key'], ['Escape', 'Closes the panel and returns focus to the key', 'DatePicker: the key opens the Calendar with focus on the chosen day, choosing a day fills the field and Escape returns to the key']],
+    inherits: 'InputHTMLAttributes<HTMLInputElement>',
+    related: [['/components/calendar', 'Calendar', 'The month on its own, with no field.'], ['/components/input', 'Input', 'A plain text field.'], ['/components/popover', 'Popover', 'The panel that holds the Calendar.']],
+  },
+  {
+    name: 'Form',
+    slug: 'form',
+    status: 'beta',
+    limitations: ['It reads native controls. A control that keeps its value in a hidden input, such as Select, is sent but not checked by the browser.', 'It checks on submit and then on change. It does not check on blur or on every key from the start.', 'It has no field arrays, no nested objects and no schema; the values are the flat FormData of the form.', 'The summary lists one problem per name, the first one the browser finds.'],
+    youMust: ['Give every control a name; a control with no name is not sent and not checked.', 'Use one FormSubmit per form, as the unit’s one orange key.', 'Do the work of a successful send in onSubmit and move focus yourself afterwards.', 'Wrap a control that prints its own label in a FormItem with no label, and a bare control in a FormItem with one.'],
+    usage: '<Form onSubmit={save}>\n  <FormItem name="room">\n    <Input label="Room name" required />\n  </FormItem>\n  <FormSubmit>Save room</FormSubmit>\n</Form>',
+    backdrops: 'The summary is a recessed window in primary and secondary ink on the sunken plastic, 8.4:1 and 6.0:1 in light and 12.8:1 and 10.2:1 in dark. Its rim is ring ink, above 3:1 in both. Nothing in the form but the submit key is orange.',
+    purpose: 'Collects named fields, words the problems in one window that links to each field, and holds the submit key while a send runs.',
+    importLine: "import { Form, FormItem, FormSubmit } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Form</code> is a native form with the browser’s bubbles switched off. On submit it checks every named control, words each failed constraint, and either calls <code>onSubmit</code> with the values or shows a summary window above the fields. The window holds a count and one link per problem, and it takes focus. After the first submit a field is checked again as it changes.</p>
+        <p><code>FormItem</code> carries the problem for one name down to its control. <code>FormSubmit</code> is the orange key that goes flat and says Sending while a promise from <code>onSubmit</code> is pending.</p>
+      </>
+    ),
+    hero: ex('FormBasic', 'Press Save with the name empty: the window counts the problem and links to the field.'),
+    ladder: [
+      ex('FormConstraints', 'Required, type, pattern, length and range, each worded by the form.'),
+      ex('FormAsync', 'The key goes flat and says Sending until the promise settles.'),
+      ex('FormValidate', 'A rule across two fields, and a problem handed back by the server.'),
+      ex('FormMessages', 'Your own words, here in Thai, for the sentences and the heading.'),
+      ex('FormLabelled', 'A label on FormItem wraps a bare control in a FormField.'),
+    ],
+    whenToUse: ['Collect several named fields and send them together.', 'Tell every problem of a failed send in one place.', 'Hold the submit key while a send runs.'],
+    whenNotToUse: [['One field that saves as you leave it', 'Editable'], ['Naming a group of controls', 'Fieldset'], ['Numbered sections of a long form', 'Stepper']],
+    anatomy: [['Form', 'A native form, noValidate, a grid with gap.xl.'], ['Summary window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Count', 'type.title in tabular figures.'], ['Link', 'A 44px row, ink, one rule under the words.'], ['Message', 'type.caption in secondary ink.'], ['Submit key', 'Button of kind primary, the unit’s one orange part.']],
+    states: [['Failed send', 'The summary window appears and takes focus.'], ['Sending', 'The key is aria-disabled, flat, and says Sending; the form is aria-busy.'], ['Fixed', 'A row leaves the window as its field becomes right.']],
+    content: ['Write each message as what to do.', 'Keep labels to a noun, because the summary repeats them.', 'Send the values only when every field is right.'],
+    dodont: [
+      { do: 'Let the form word the browser’s constraints.', dont: 'Check each field by hand in onChange.' },
+      { do: 'Tell a problem by words and a glyph.', dont: 'Tell a problem by red alone.' },
+    ],
+    a11y: ['The summary is a group named by its heading, and the heading starts with the count.', 'Focus moves to the summary after a failed send, and a link moves it to the field.', 'Each field is aria-invalid with its message in aria-describedby through FormField or Input.', 'Sending is announced by a polite status and aria-busy; the key keeps focus because it is aria-disabled, not disabled.', 'In forced colours the summary keeps a real border and its links use the system link colour.'],
+    keyboard: [['Enter', 'In a field, sends the form; on a summary link, puts focus in its field', 'Form: a failed send puts focus on the summary and its links reach each field'], ['Tab', 'Moves from the summary through its links to the fields', 'Form: a failed send puts focus on the summary and its links reach each field']],
+    inherits: 'FormHTMLAttributes<HTMLFormElement>',
+    related: [['/components/form-field', 'FormField', 'A label, a control and its messages.'], ['/components/fieldset', 'Fieldset', 'A named group of controls.'], ['/components/stepper', 'Stepper', 'Numbered sections of a long form.']],
+  },
+  {
+    name: 'RangePicker',
+    slug: 'range-picker',
+    status: 'beta',
+    limitations: ['The Calendar shows one month at a time; a long range is chosen by turning the month between the two presses.', 'Dates are typed as yyyy-mm-dd in every locale; only the Calendar words follow locale.', 'A range may run across a day that isDateDisabled blocks; check that in your own code.', 'It chooses days only, with no time of day.'],
+    youMust: ['Pass days as yyyy-mm-dd strings and never as Date objects.', 'Pass startLabel, endLabel, openLabel, closeLabel, previousLabel, nextLabel and the two messages in the same language as locale.', 'Treat a range with end null as unfinished and ask for the last day before you save.'],
+    usage: '<RangePicker label="Stay" defaultValue={{ start: "2026-11-09", end: "2026-11-17" }} onValueChange={setStay} />\n<RangePicker label="Stay" value={stay} onValueChange={setStay} min="2026-11-04" startName="from" endName="to" />',
+    backdrops: 'In light the wells are light grey recesses in warm white plastic and the ruled strip is a ring-ink hairline, in dark the wells are near-black recesses and the strip is the lighter ring ink. The span differs from the other days by line and window in both, and nothing is orange.',
+    purpose: 'Two recessed wells and a calendar key for choosing a start day and an end day, with the span ruled in the Calendar by shape.',
+    importLine: "import { RangePicker } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>RangePicker</code> is a group of two typed wells and a round key. Type <code>yyyy-mm-dd</code> into either well, or press the key to open the Calendar. The first day you press becomes the start and the end well empties. Hover or arrow to preview the span, then press the last day: both wells fill, the panel closes and focus returns to the key. The ends always arrive in order, and typing a start after the end swaps the pair.</p>
+        <p>In the Calendar the two end days are windows and the days between are ruled above and below. While you are still choosing the end, that rule is dotted. <code>min</code>, <code>max</code> and <code>isDateDisabled</code> apply to both the Calendar and the wells. The Calendar gained <code>range</code> and <code>onDayHover</code> props for this, and they work on their own.</p>
+      </>
+    ),
+    hero: ex('RangePickerBasic', 'A stay from the 9th to the 17th of November, with the key closed.'),
+    ladder: [
+      ex('RangePickerControlled', 'Controlled value, with the number of nights printed under the wells.'),
+      ex('RangePickerLimits', 'Days before min and after max, and weekends, are blocked, with a hint.'),
+      ex('RangePickerLocale', 'Thai words for the Calendar and every built-in word passed in Thai.'),
+      ex('RangePickerForm', 'In a form with hidden fields, an error for a missing end, and the orange key last.'),
+      ex('RangePickerStates', 'readOnly shows a booked range, disabled switches the pair off.'),
+    ],
+    whenToUse: ['Choose the first and the last day of a stay or a booking.', 'Filter a list to a span of days.'],
+    whenNotToUse: [['Choosing one day', 'Calendar'], ['Choosing a time of day', 'TimePicker'], ['Choosing two numbers on a scale', 'RangeSlider']],
+    anatomy: [['Group name', 'type.label in type.weight-medium.'], ['Wells', 'Input: surface.sunken, elevation.well, corner.media, width.hairline in line.ring, control.md high.'], ['Ink bar', 'width.bar in text.primary, control.thumb wide.'], ['Calendar key', 'IconButton with the schedule glyph, control.md round.'], ['End days', 'Calendar window: surface.sunken, elevation.well, line.ring.'], ['Days between', 'width.hairline above and below in line.ring; dotted while previewing.'], ['Status line', 'type.caption in text.secondary, a polite live region.']],
+    states: [['Default', 'Two wells, the bar and the key.'], ['Open', 'The Calendar in a panel under the key.'], ['Choosing the end', 'The start is a window and the preview strip is dotted.'], ['Chosen', 'Windows at both ends and a solid strip.'], ['Invalid text', 'A message with a glyph under the row.'], ['Read-only', 'Readable dates; the key does not open.'], ['Disabled', 'Wells, bar and key at the disabled step.']],
+    content: ['Name the group for what the span is, such as Stay.', 'Keep the well names short: Start and End, or Arrive and Leave.', 'Say the longest or shortest span in a hint.'],
+    dodont: [
+      { do: 'Name the group for what the span is.', dont: 'Name it Select a date range.' },
+      { do: 'Finish the pair before you save.', dont: 'Save a range whose end is null.' },
+    ],
+    a11y: ['A group named by its label, with two named fields and a key that opens a dialog.', 'The key reports aria-expanded; focus moves to one day on open and returns to the key on close.', 'Days inside the range are aria-selected and their names end in in range, start of range or end of range.', 'A bad typed date marks its well aria-invalid and points to a message with a glyph.', 'The span is told by windows and a ruled strip, never by colour alone.', 'In forced colours the strip and the ink bar draw in the text colour and the end days take the Highlight pair.'],
+    keyboard: [['Enter, Space on the key', 'Open the Calendar with focus on one day', 'RangePicker: the keyboard picks a range with arrows and Enter, and Escape closes and returns focus to the key'], ['Arrow keys, Home, End, Page keys', 'Walk the days; the span previews as you move', 'RangePicker: the keyboard picks a range with arrows and Enter, and Escape closes and returns focus to the key'], ['Enter, Space on a day', 'First press sets the start, second sets the end and closes', 'RangePicker: the first press sets the start, a hover previews the end with a dotted strip, and the second press sets the end and closes'], ['Escape', 'Close the Calendar and return focus to the key', 'RangePicker: the keyboard picks a range with arrows and Enter, and Escape closes and returns focus to the key'], ['Type, then Tab or Enter', 'Accept a yyyy-mm-dd date', 'RangePicker: a typed date is accepted on blur, a bad one is reported, and a start after the end swaps the pair']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/calendar', 'Calendar', 'Choosing one day.'], ['/components/time-picker', 'TimePicker', 'Choosing a time of day.'], ['/components/range-slider', 'RangeSlider', 'Two numbers on a scale.']],
+  },
+  {
+    name: 'AppShell',
+    slug: 'app-shell',
+    status: 'beta',
+    limitations: ['It folds only the side column; the header folds itself through Navbar.', 'Focus is moved only when focusKey changes; it does not read the address itself.', 'The column is a slot, so a Sidebar collapsed to icons loses its collapsed state when the shell folds and unfolds.'],
+    youMust: ['Use one AppShell per page.', 'Pass the router pathname as focusKey if your router does not move focus.', 'Give the Navbar and the Sidebar different label values so the two navigation landmarks are told apart.'],
+    usage: '<AppShell header={<Navbar brand="dial" />} sidebar={<Sidebar>…</Sidebar>} focusKey={pathname}>\n  <Heading level={2}>Kitchen</Heading>\n</AppShell>',
+    backdrops: 'The shell is the page ground: warm grey in light, near-black in dark. The units on it keep their own plastic, and nothing in the shell is orange.',
+    purpose: 'Frames a screen with a header, a side column, main and a footer, folds the column into a Drawer when narrow, and moves focus to main.',
+    importLine: "import { AppShell } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>AppShell</code> places <code>header</code>, <code>sidebar</code>, the page (its children) and <code>footer</code> as separate units with an inset gap. The page sits in a <code>main</code> landmark; a <code>Navbar</code> is the banner, a <code>Sidebar</code> is a navigation landmark and the footer is the footer landmark. A skip link is the first stop for the keyboard.</p>
+        <p>The shell measures its own width. Under <code>breakpoint</code> the sidebar leaves the page and opens in a <code>Drawer</code>. Pass a function as <code>header</code> to wire the Navbar&rsquo;s Menu key to it, and a <code>focusKey</code> to move focus to main on a route change.</p>
+      </>
+    ),
+    hero: ex('AppShellBasic', 'Header, Sidebar, main and footer on the page ground.'),
+    ladder: [
+      ex('AppShellCompact', 'Narrow: the Navbar Menu key opens the Sidebar in a Drawer.'),
+      ex('AppShellOwnMenu', 'Narrow with no header: the shell prints its own Menu key.'),
+      ex('AppShellSticky', 'The header holds the top edge while main scrolls.'),
+      ex('AppShellBreakpoint', 'A later breakpoint folds the column in a wider frame.'),
+      ex('AppShellFocusKey', 'Choosing a page moves focus to main.'),
+    ],
+    whenToUse: ['Frame every page of an app in the same header, column and footer.', 'Get the landmarks and a skip link without wiring them each time.'],
+    whenNotToUse: [['Centring content at a reading width', 'Container'], ['A side column on its own', 'Sidebar'], ['A panel over the page', 'Drawer']],
+    anatomy: [['Shell', 'surface.page, gap.inset between units and on all four sides.'], ['Header', 'A full-width slot; a Navbar fills it.'], ['Side column', 'A slot as wide as its Sidebar, at the inline start.'], ['Main', 'The page, in a main landmark with tabindex -1.'], ['Footer', 'An optional full-width slot in a footer landmark.'], ['Skip link', 'A VisuallyHidden focusable link, first in the tab order.']],
+    states: [['Split', 'The column stands beside main.'], ['Folded', 'The column lives in a Drawer opened from Menu.'], ['Main focused', 'The system focus ring when the keyboard put focus there.']],
+    content: ['Keep the skip link to a short imperative.', 'Name the Drawer and the Menu key with the same word.', 'Give each navigation landmark its own name.'],
+    dodont: [
+      { do: 'Use one shell per page and pass the pathname as focusKey.', dont: 'Nest shells, which doubles the skip links and main landmarks.' },
+      { do: 'Let the shell measure its own width.', dont: 'Hide the column with a window media query of your own.' },
+    ],
+    a11y: ['The first stop is a skip link that shows as a key while focused.', 'Main is a landmark with tabindex -1 so it can take focus from code.', 'A route change moves focus to main and closes the Drawer.', 'The Drawer is a modal dialog: Tab stays inside, Escape closes, focus returns to Menu.', 'In forced colours the focus ring on main uses the system highlight colour.'],
+    keyboard: [['Tab', 'Moves from the skip link through the header, column, main and footer', 'AppShell: the skip link is the first stop'], ['Enter', 'On the skip link, moves focus to main', 'AppShell: the skip link sends focus to main'], ['Escape', 'Closes the Drawer and returns focus to Menu', 'AppShell: the Menu key opens the Drawer that Escape closes']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/navbar', 'Navbar', 'The header unit.'], ['/components/sidebar', 'Sidebar', 'The side column.'], ['/components/drawer', 'Drawer', 'Holds the column when narrow.']],
+  },
+  {
+    name: 'CommandPalette',
+    slug: 'command-palette',
+    status: 'beta',
+    limitations: ['It filters by plain text: every typed word must appear in the label, section or keywords. There is no fuzzy match or ranking.', 'The shortcuts printed on the rows are hints. The palette does not listen for them; only its own chord opens it.', 'It has no nested pages and no recent-commands list; pass the commands you want shown.', 'The list is not virtualised, so keep it to a few hundred commands.'],
+    youMust: ['Mount one palette near the root of the app, with one chord.', 'Start each command with a verb and give it a section.', 'Pass your own label, placeholder, emptyText and resultsText when the product is not in English.'],
+    usage: '<CommandPalette\n  commands={[\n    { id: \'lamps-off\', label: \'Turn off all lamps\', section: \'Rooms\', onRun: () => lamps.off() },\n  ]}\n/>',
+    backdrops: 'In light the sheet is warm-white plastic over a dark scrim with a recessed grey query window, in dark it is charcoal plastic. The lit row has a hairline plate and an ink dot, and nothing is orange.',
+    purpose: 'Finds and runs a command by typing, from a sheet with a recessed query window and a printed list of commands.',
+    importLine: "import { CommandPalette } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>CommandPalette</code> is a modal sheet on the native <code>dialog</code>. A recessed window takes the text, and the commands are printed under it in sections. Typing filters them, the arrow keys light one while focus stays in the field, and Enter runs it. The shortcut of each command is printed on keycaps at the end of its row.</p>
+        <p>It opens with Ctrl or Cmd plus K (<code>hotkey</code>), from a <code>trigger</code> key, or from your own state with <code>open</code>. Escape closes it and focus returns to where it was.</p>
+      </>
+    ),
+    hero: ex('CommandPaletteBasic', 'An open palette with five commands in two sections, shown in place.'),
+    ladder: [
+      ex('CommandPaletteTrigger', 'A key opens the sheet and gets focus back; the page also hears Ctrl or Cmd plus J.'),
+      ex('CommandPaletteControlled', 'The page owns the open state and the text, and opens the palette with a query typed.'),
+      ex('CommandPaletteStates', 'A row that cannot run, a command with no section, and a text that matches nothing.'),
+      ex('CommandPaletteWords', 'Every built-in word passed in Thai, so the placeholder, the empty line and the announcement change.'),
+    ],
+    whenToUse: ['Give an app with many actions one place to find any of them by name.', 'Teach shortcuts by printing them beside the commands.'],
+    whenNotToUse: [['Choosing one value for a field', 'Combobox'], ['A short list of actions on one element', 'Menu'], ['Asking one question about a device', 'Dialog']],
+    anatomy: [['Sheet', 'A native dialog on elevation.float over surface.scrim, corner.panel.'], ['Query window', 'surface.sunken, elevation.well, corner.media, control.md tall.'], ['Section name', 'type.label in text.secondary.'], ['Command row', 'control.md tall, an ink dot, the name and a KbdCombo.']],
+    states: [['Lit', 'A hairline plate, medium weight and the ink dot; aria-selected.'], ['Waiting', 'Secondary ink.'], ['Cannot run', 'Half opacity and skipped by the arrows; aria-disabled.'], ['No match', 'One line, also announced.']],
+    content: ['Start with a verb and name the thing.', 'Print the section as a noun.', 'Add keywords for the words people might type instead.'],
+    dodont: [
+      { do: 'Write “Turn off all lamps” and add the keyword “light”.', dont: 'Write “Lamps” alone.' },
+      { do: 'Keep one palette and one chord per page.', dont: 'Mount two palettes on Ctrl or Cmd plus K.' },
+    ],
+    a11y: ['The sheet is a native modal dialog: focus moves to the field, Tab stays there and the page behind is inert.', 'The field is a combobox that points at the list; the lit row is named by aria-activedescendant.', 'The number of matches is announced politely as the text changes.', 'Every row is at least 44px tall; the lit row is told by a plate, weight and a dot, not by colour.', 'In forced colours the sheet, window and lit row keep real borders.'],
+    keyboard: [['Ctrl or Cmd + K', 'Opens and closes the palette', 'CommandPalette: opens from the chord and returns focus on close'], ['Arrow Down, Arrow Up', 'Lights the next or previous command and skips rows that cannot run', 'CommandPalette: the arrows move the lit row and skip rows that cannot run'], ['Enter', 'Runs the lit command and closes', 'CommandPalette: Enter runs the lit command and closes'], ['Escape', 'Closes the palette', 'CommandPalette: Escape closes and focus returns']],
+    inherits: 'HTMLAttributes<HTMLDialogElement>',
+    related: [['/components/dialog', 'Dialog', 'Asking one question about a device.'], ['/components/menu', 'Menu', 'A short list of actions on one element.'], ['/components/kbd', 'Kbd', 'The keycaps for the shortcuts.']],
+  },
+  {
+    name: 'AuthForms',
+    slug: 'auth-forms',
+    status: 'beta',
+    limitations: ['The forms do no network work: you sign in, create the account and send the mail yourself.', 'There are no social-login buttons and no one-time-code step; OTPFlow covers the code.', 'Fields are uncontrolled; read them in onSubmit.', 'ResetPasswordForm does not know a link has expired; show that with a Banner.'],
+    youMust: ['Do the sign-in, the account creation or the mail in onSubmit, and return a promise so the key shows Sending.', 'Return { name: message } from onSubmit when your server says no.', 'Set sent on ResetPasswordForm once the link is out.', 'Pass every word in labels, messages, summaryTitle and sendingLabel when you translate.'],
+    usage: '<SignInForm\n  remember\n  forgotHref="/reset"\n  alternateHref="/sign-up"\n  onSubmit={({ email, password }) => signIn(email, password)}\n/>',
+    backdrops: 'In light the wells are light grey recesses in warm white plastic, in dark near-black recesses in charcoal. Text and links are ink in both, and the submit key is the one orange part.',
+    purpose: 'Gives you the sign-in, sign-up and reset-password screens, with the right autocomplete words and one primary key.',
+    importLine: "import { SignInForm, SignUpForm, ResetPasswordForm } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>SignInForm</code>, <code>SignUpForm</code> and <code>ResetPasswordForm</code> are built on Form, Input, PasswordInput, Button and Link. Each prints a heading, a line, the fields, and one foot row with a plain link at the start and the primary key at the end.</p>
+        <p>Each calls <code>onSubmit(values)</code> once every field is right. A failed send shows Form’s summary window. The email and password fields carry the autocomplete words a password manager needs, and there are no social-login buttons.</p>
+      </>
+    ),
+    hero: ex('AuthFormsSignIn', 'The sign-in form in a card, with remember-me and both links.'),
+    ladder: [
+      ex('AuthFormsSignUp', 'A name, an email and a new password typed twice.'),
+      ex('AuthFormsReset', 'Ask for the email, then set sent when the link has gone out.'),
+      ex('AuthFormsResetChoose', 'The page the reset link opens, with a ten character minimum.'),
+      ex('AuthFormsServerError', 'Your check says no; the problem joins the summary. Only mika2026 passes.'),
+      ex('AuthFormsTranslated', 'Every built-in word passed in German.'),
+    ],
+    whenToUse: ['A page or sheet where a person signs in, creates an account or asks for a new password.', 'A start screen where a password manager should fill the right fields.'],
+    whenNotToUse: [['Your own set of fields', 'Form'], ['The code step after sign-in', 'OTPFlow']],
+    anatomy: [['Title', 'Heading, level 3 by default.'], ['Description', 'type.caption in text.secondary.'], ['Fields', 'Input and PasswordInput wells, surface.sunken with elevation.well.'], ['Foot row', 'A standalone Link at the start and FormSubmit at the end.'], ['Alternate link', 'type.caption words and a standalone Link, 44px tall.'], ['Confirmation', 'A check glyph and a sentence that takes focus.']],
+    states: [['Default', 'Empty fields and the key at full height.'], ['Problems', 'The summary window counts them and links to each field.'], ['Sending', 'The key says Sending and goes flat.'], ['Sent', 'A check and a sentence replace the reset fields.']],
+    content: ['Name the screen with a verb and a noun.', 'Use the same verb on the key.', 'Keep the description to one sentence.'],
+    dodont: [
+      { do: 'Use one verb on the title and the key.', dont: 'Title it “Welcome!” and label the key “Go”.' },
+      { do: 'Return the server’s problem from onSubmit.', dont: 'Show it in a toast that disappears.' },
+    ],
+    a11y: ['Each form is labelled by its title.', 'Fields keep their printed labels; no placeholder stands in for one.', 'A failed send moves focus to the summary and each name links to its field.', 'The confirmation takes focus so it is read out.', 'In forced colours text and the confirmation use the system colour.'],
+    keyboard: [['Enter', 'Sends the form from any field', 'AuthForms: pressing Enter in a field sends the form to onSubmit'], ['Tab', 'Fields, then the link, then the key', 'AuthForms: autocomplete words are set on every field']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/form', 'Form', 'Your own fields with the same summary.'], ['/components/otp-flow', 'OTPFlow', 'The code step after sign-in.'], ['/components/password-input', 'PasswordInput', 'The password field alone.']],
+  },
+  {
+    name: 'RichTextEditor',
+    slug: 'rich-text-editor',
+    status: 'beta',
+    limitations: [
+      'It has six formats only: bold, italic, link, bulleted list, numbered list and one heading level. There are no quotes, code, images, tables, colours or alignment.',
+      'Bold and italic need a selection. A bare caret toggles nothing, so there is no typing-mode bold. Turning a format off removes the whole bold or italic run the selection touches.',
+      'A list changes as a whole, nested lists are flattened into their item, and the heading key skips lists.',
+      'Changes made with the keys are not on the browser undo stack, so Ctrl+Z cannot take back a bold or a list and may undo typing in an odd order.',
+      'Empty paragraphs are dropped from the output, so blank lines do not survive. Several pasted paragraphs land after the current one, and dragging content in is refused.',
+      'The sanitiser runs in the browser. Sanitise again on the server before you store or print the HTML.',
+      'It was exercised in Chromium only. Thai or other IME composition, screen-reader output and Safari and Firefox selection behaviour were not tested.',
+    ],
+    youMust: [
+      'Give it a label that names the note with a noun.',
+      'Sanitise the HTML again on your server; the browser copy is not a security boundary.',
+      'Pass `words` and `placeholder` in the language of the page.',
+      'Set `error` yourself when the note is not acceptable.',
+    ],
+    usage: '<RichTextEditor label="Handover note" defaultValue="<p>Keep the <strong>hall</strong> at 18.</p>" onChange={save} />',
+    backdrops: 'In light the well is a light grey recess in warm white plastic and the keys are body-coloured discs. In dark the well is near-black on charcoal. A latched key is frosted glass in the neutral range in both, and nothing is orange.',
+    purpose: 'Writes a short formatted note in a recessed well, with round keys above it, and reports clean HTML.',
+    importLine: "import { RichTextEditor } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>RichTextEditor</code> is a label, a row of six 44px round keys, and a writing well. The keys are bold, italic, link, bulleted list, numbered list and heading. The row is a toolbar with one Tab stop, and Ctrl or Command with B, I and K work inside the text. A key whose format is on at the caret drops and turns to glass.</p>
+        <p><code>onChange</code> receives a string of HTML cleaned by a built-in whitelist: <code>p</code>, <code>h2</code>, <code>strong</code>, <code>em</code>, <code>a</code> with a safe address, <code>ul</code>, <code>ol</code>, <code>li</code> and <code>br</code>. Pasted text goes through the same list. Formatting is done with the Selection and Range APIs, with no editing library.</p>
+      </>
+    ),
+    hero: ex('RichTextEditorBasic', 'A note with a heading, a bold word, an italic word and a list.'),
+    ladder: [
+      ex('RichTextEditorEmpty', 'An empty editor keeps its height.'),
+      ex('RichTextEditorControlled', 'The value is yours; onChange gets the clean HTML string.'),
+      ex('RichTextEditorStates', 'Empty, invalid, read-only and disabled.'),
+      ex('RichTextEditorInForm', 'Inside a native form, with the one orange key.'),
+      ex('RichTextEditorThai', 'Thai text and Thai words for the keys.'),
+    ],
+    whenToUse: ['Write a note or description that needs bold, links or a short list.', 'Store the result as a small HTML string.'],
+    whenNotToUse: [['Plain text of several lines', 'Textarea'], ['One short value corrected in place', 'Editable'], ['Separate short tags', 'TagInput']],
+    anatomy: [['Label', 'type.label in type.weight-medium, printed above the keys.'], ['Toolbar', 'Six IconButtons at control.key, one Tab stop.'], ['Latched key', 'IconButton with aria-pressed, in the neutral glass range.'], ['Well', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Link field', 'An Input and three Buttons under the keys, shown while a link is set.']],
+    states: [['Empty', 'The prompt in secondary ink.'], ['Latched key', 'A key whose format is on at the caret.'], ['Invalid', 'Critical red edge, a glyph and the message.'], ['Read-only', 'Full ink, no keys.'], ['Disabled', 'Half ink, keys off.']],
+    content: ['Name the note with a noun.', 'Use the hint for what to write.', 'Keep the key words short; the marks are one or two letters.'],
+    dodont: [
+      { do: 'Label it with a noun such as Handover note.', dont: 'Label it “Type here”.' },
+      { do: 'Sanitise the HTML on the server too.', dont: 'Print the stored string without checking it.' },
+    ],
+    a11y: ['The writing area is a multi-line textbox named by the label and described by the hint and the error.', 'The toolbar is named, has one Tab stop, and each key is named in words, not by its mark.', 'A key that is on is announced as pressed and drawn as a latched glass key, so colour is not the only cue.', 'The keys announce their shortcuts with aria-keyshortcuts.', 'In forced colours the well keeps a real border, links keep an underline and the focus rings use the highlight colour.'],
+    keyboard: [
+      ['Tab', 'Reaches the toolbar as one stop, then the writing area', 'RichTextEditor: the toolbar is one tab stop and the arrow keys, Home and End move along its keys'],
+      ['Arrow keys, Home, End', 'Move along the keys; the arrows follow the reading direction', 'RichTextEditor: the toolbar is one tab stop and the arrow keys, Home and End move along its keys'],
+      ['Ctrl or Command + B, I', 'Bold or italic on the selected text', 'RichTextEditor: Ctrl+B and the bold key wrap and unwrap the selection in strong'],
+      ['Ctrl or Command + K', 'Opens the address field; Enter applies, Escape returns to the text', 'RichTextEditor: Ctrl+K opens the address field, a bad address is refused and Escape returns to the text'],
+    ],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/textarea', 'Textarea', 'Plain text of several lines.'], ['/components/editable', 'Editable', 'One short value corrected in place.'], ['/components/tag-input', 'TagInput', 'Separate short tags.']],
+  },
+  {
+    name: 'LineChart',
+    slug: 'line-chart',
+    status: 'beta',
+    limitations: ['Points are evenly spaced names, not a time scale; a gap in time shows as an even step.', 'Every series needs a value for every point; missing points are not drawn.', 'One to three lines. A fourth is ignored, because patterns and marks run out before the reader does.', 'No zoom, no brush and no animation of the lines.'],
+    youMust: ['Pass the same number of values in every series as there are categories.', 'Name the chart and every line with a short noun.', 'Pass the unit in unit and not in the names.', 'Keep it away from the orange key.'],
+    usage: '<LineChart\n  label="Temperature this week"\n  unit="°C"\n  categories={["Mon", "Tue", "Wed"]}\n  series={[\n    { label: "Indoor", values: [20.5, 21, 21.5] },\n    { label: "Outdoor", values: [8, 6, 9] },\n  ]}\n/>',
+    backdrops: 'In light the window is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. The lines, marks and numerals are ink in both, the grid is the ring line, and nothing is orange.',
+    purpose: 'Draws one to three lines in a recessed window with round ticks, a keyboard cursor with a readout, and a data table for assistive tech.',
+    importLine: "import { LineChart } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>LineChart</code> draws each series as a two pixel ink line with a hollow mark on every point. Series are told apart by stroke (solid, dashed, dotted) and by mark (circle, square, diamond), and a legend prints both. The value axis uses round numbers. The window is one Tab stop: the arrow keys walk a cursor from point to point and the line under the window says what it is on. A data table with the same numbers sits after it for screen readers. Size, <code>zero</code>, <code>min</code>, <code>max</code> and <code>index</code> are props.</p>
+      </>
+    ),
+    hero: ex('LineChartBasic', 'Indoor temperature over a week.'),
+    ladder: [
+      ex('LineChartSeries', 'Three lines told apart by stroke and mark.'),
+      ex('LineChartSizes', 'The window at small, medium and large.'),
+      ex('LineChartAxis', 'The axis fitted, started at zero and fixed to a range.'),
+      ex('LineChartControlled', 'The cursor held by your state and printed beside the chart.'),
+      ex('LineChartInUnit', 'A small chart under a Stat, with the orange key apart.'),
+    ],
+    whenToUse: ['Show how a reading changed across evenly spaced points.', 'Compare two or three readings in the same unit.', 'Let a person find the value at one point with the keyboard.'],
+    whenNotToUse: [['A trend inside a row or a sentence', 'Sparkline'], ['One figure and its change', 'Stat'], ['A level in a range with regions', 'Meter']],
+    anatomy: [['Name', 'type.caption in type.weight-regular, with the print seat.'], ['Window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Grid and ticks', 'line.ring hairlines and type.caption numerals in text.secondary, tabular.'], ['Line and marks', 'width.ring in text.primary; a hollow mark per point.'], ['Cursor', 'A width.hairline rule in text.primary and marks drawn larger.'], ['Readout', 'type.caption, tabular, polite status.'], ['Legend', 'A drawn sample and a name per line.']],
+    states: [['Idle', 'No cursor and the key hint in text.secondary.'], ['Cursor on a point', 'A rule through the point, larger marks and the readout of every value.'], ['Focus', 'A width.ring ring around the window.']],
+    content: ['Name the chart with a noun and a period.', 'Give every point a short name.', 'Name each line with one word.'],
+    dodont: [
+      { do: 'Tell lines apart by stroke and mark.', dont: 'Tell them apart by hue.' },
+      { do: 'Start the axis at zero when the distance from nothing matters.', dont: 'Fit the axis to a rise from six to twelve and call it a climb.' },
+    ],
+    a11y: ['The window is a group with a role description, a name and a summary of every line.', 'It is one Tab stop; Left and Right arrows, Home, End and Escape move the cursor.', 'The readout is a polite status that speaks only when the keys moved the cursor.', 'The drawing is hidden from assistive tech and a real table carries the numbers.', 'Series differ by stroke and mark, so the chart works in greyscale.', 'In forced colours the window, lines and numerals take the text colour.'],
+    keyboard: [['Tab', 'Moves focus onto the window; the cursor goes to the last point', 'LineChart: a group named by the chart, with its summary and the key hint'], ['Arrow Left, Arrow Right', 'Moves the cursor to the previous or next point', 'LineChart: the readout speaks the point and every value'], ['Home, End', 'Moves the cursor to the first or last point', 'LineChart: the readout speaks the point and every value'], ['Escape', 'Lets go of the cursor', 'LineChart: the readout returns to the key hint']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/sparkline', 'Sparkline', 'A tiny trend without axes.'], ['/components/stat', 'Stat', 'One figure with its change.'], ['/components/meter', 'Meter', 'A level on a printed scale.']],
+  },
+  {
+    name: 'Sparkline',
+    slug: 'sparkline',
+    status: 'beta',
+    limitations: ['It has no axes, no ticks and no way to read a single point; use LineChart for that.', 'It draws one line. Two readings are two Sparklines.', 'Readings are evenly spaced; a gap in time shows as an even step.', 'The dot marks the last reading only; there is no min or max marker.'],
+    youMust: ['Pass the readings oldest first.', 'Write a label that names the reading and the period.', 'Pass the same min and max to every Sparkline in a column you want to compare.', 'Keep it away from the orange key.'],
+    usage: '<Sparkline label="Power, last 7 days" unit="kW" values={[0.4, 0.5, 2.2, 2, 0.9, 1.2, 1.8]} />\n<Sparkline showValue size="lg" label="Solar, last 7 days" unit="kWh" values={[6.5, 6, 4.1, 3.2, 2, 0.6, 0.2]} />',
+    backdrops: 'The line and the dot are ink on the plastic in both themes, with no fill under the line, and nothing is orange.',
+    purpose: 'Draws a trend small enough for a line of text: one ink line with a solid dot on the last reading.',
+    importLine: "import { Sparkline } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Sparkline</code> draws its <code>values</code>, oldest first, as a two pixel ink line scaled to its block, with a solid dot on the last one. It is an image with a text name: the label, then the number of readings, whether the run rose or fell, the first and last values, and the low and high. <code>showValue</code> prints the last value after the line. With no values it prints a flat rule in the same block. It is not a control.</p>
+      </>
+    ),
+    hero: ex('SparklineBasic', 'A week of power use.'),
+    ladder: [
+      ex('SparklineSizes', 'The line at small, medium and large.'),
+      ex('SparklineValue', 'The last value printed after the line.'),
+      ex('SparklineScale', 'Three rows on one scale, from 0 to 100.'),
+      ex('SparklineEmpty', 'A sensor with no readings keeps its block.'),
+      ex('SparklineInText', 'A small line in a sentence, beside a Stat.'),
+    ],
+    whenToUse: ['Show the shape of a reading inside a row, a list or a cell.', 'Put a trend next to a figure in a Stat.', 'Compare the shape of several readings on one scale.'],
+    whenNotToUse: [['A trend that needs axes or single points', 'LineChart'], ['One figure and its change', 'Stat'], ['A level in a range with regions', 'Meter']],
+    anatomy: [['Line', 'width.ring in text.primary, round joins, no fill.'], ['Dot', 'size.mark, solid text.primary, placed on the last reading.'], ['Value', 'type.label in type.weight-medium, tabular numerals.']],
+    states: [['Readings', 'A line and a solid dot on the last reading.'], ['No readings', 'A flat rule in line.ring, announced as No readings.'], ['With value', 'The last value after the line.']],
+    content: ['Name the reading and the period.', 'Do not write trend or chart in the label.', 'Pass the unit in its own prop.'],
+    dodont: [
+      { do: 'Tell rising and falling in the label text and by where the line ends.', dont: 'Tell them with a green line and a red line.' },
+      { do: 'Pass one min and max to a column of rows.', dont: 'Let each row fill its own block and compare their heights.' },
+    ],
+    a11y: ['The root is an image whose name is the label and a sentence built from the readings.', 'It takes no focus and has no tooltip.', 'The printed value is hidden from assistive tech because the name already carries it.', 'The dot is a shape, so the end of the line shows in greyscale.', 'In forced colours the line and the dot take the text colour.'],
+    keyboard: [['Tab', 'Does not stop on a Sparkline', 'Sparkline: an image named by its label and the readings, with no focusable part']],
+    inherits: 'HTMLAttributes<HTMLSpanElement>',
+    related: [['/components/line-chart', 'LineChart', 'A trend with axes and a cursor.'], ['/components/stat', 'Stat', 'One figure with its change.'], ['/components/meter', 'Meter', 'A level on a printed scale.']],
+  },
+  {
+    name: 'BarChart',
+    slug: 'bar-chart',
+    status: 'beta',
+    limitations: ['It draws bars from zero; negative values draw as zero.', 'It has no stacked bars, no lines and no zoom.', 'Values that do not fit the width of a bar are left to the readout and the table.', 'The axis ticks are round numbers up to the largest value, and cannot be set one by one.'],
+    youMust: ['Pass one value for each category in every series, in the same order.', 'Name the chart in label, because the label is its accessible name.', 'Keep the chart in a column wide enough to print its values, about 300px.'],
+    usage: '<BarChart\n  label="Energy by day"\n  categories={[\'Mon\', \'Tue\']}\n  series={[{ name: \'Heating\', values: [12, 18] }]}\n/>',
+    backdrops: 'In light the window is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. Bars, scale and numbers are ink in both, and nothing is orange.',
+    purpose: 'Compares values across named categories as patterned bars on a ruled scale, with every value printed and a table behind it.',
+    importLine: "import { BarChart } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>BarChart</code> draws bars in a recessed window with a ruled scale. Each series has its own pattern, so the series are told apart without colour, and each bar prints its number when it fits. <code>orientation</code> is <code>vertical</code> or <code>horizontal</code>. A line under the window reads out the bar the arrow keys are on, and a hidden table lists every value.</p>
+      </>
+    ),
+    hero: ex('BarChartBasic', 'Two series over four days, each in its own pattern.'),
+    ladder: [
+      ex('BarChartHorizontal', 'Rows with long names and the value at the end of each bar.'),
+      ex('BarChartSingle', 'One series over a week, so there is no legend.'),
+      ex('BarChartInUnit', 'A chart on a unit body with the orange key apart from it.'),
+      ex('BarChartMonths', 'Twelve categories in a narrow column, where the numbers move to the readout.'),
+    ],
+    whenToUse: ['Compare a number across two to twelve named categories.', 'Compare two or three series over the same categories.'],
+    whenNotToUse: [['One level in a range', 'Meter'], ['The parts of one whole', 'PieChart']],
+    anatomy: [['Window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Scale', 'type.caption in text.secondary, with dashed gridlines in line.ring.'], ['Bar', 'A rectangle outlined in text.primary and filled with an ink pattern.'], ['Value', 'type.caption in type.weight-medium, tabular numerals.'], ['Legend', 'A pattern swatch and the series name, type.caption.'], ['Readout', 'type.caption, a polite live region.']],
+    states: [['Idle', 'The key hint in text.secondary.'], ['Active bar', 'A width.ring outline, and a focus ring round the bar when the keyboard is on it.'], ['Zero value', 'No bar height; the value prints as 0.']],
+    content: ['Name the chart for what it measures and the span.', 'Keep category names to one short word.', 'Pass the unit in formatValue.'],
+    dodont: [
+      { do: 'Tell the series apart by pattern and a legend.', dont: 'Tell them apart by colour alone.' },
+      { do: 'Print the value on the bar.', dont: 'Make the reader find it on the scale.' },
+    ],
+    a11y: ['The chart is one tab stop, named by its title, with a role description of Bar chart.', 'The arrow keys move between bars, and Home and End go to the first and last category.', 'The readout is a polite live region that says the category, the series and the value.', 'A visually hidden table holds every value for screen readers.', 'In forced colours the window, bars and patterns use system colours.'],
+    keyboard: [
+      ['Tab', 'Enters the chart as one stop', 'BarChart: the chart is one tab stop and the first bar becomes active'],
+      ['Arrow keys', 'Move between bars', 'BarChart: the arrow keys move the active bar and the readout names it'],
+      ['Home, End', 'First and last category', 'BarChart: Home and End reach the first and the last category'],
+    ],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/pie-chart', 'PieChart', 'The parts of one whole.'], ['/components/meter', 'Meter', 'One level on a printed scale.']],
+  },
+  {
+    name: 'PieChart',
+    slug: 'pie-chart',
+    status: 'beta',
+    limitations: ['It shows one whole; two wholes are two charts.', 'Six patterns exist, so a chart of more than six parts repeats them.', 'Parts of zero or less get no slice, but keep a legend row and a table row.', 'It does not group small parts into Other; do that before you pass the data.', 'In a window narrower than about 440px the labels beside the ring shrink to the share, and the legend carries the names.'],
+    youMust: ['Pass the parts in the order they should run clockwise from the top, largest first.', 'Name the chart in label, because the label is its accessible name.', 'Keep the chart in a column wide enough for the names on both sides, about 300px.'],
+    usage: '<PieChart\n  label="Heating by room"\n  slices={[{ name: \'Living room\', value: 380 }, { name: \'Bedrooms\', value: 240 }]}\n/>',
+    backdrops: 'In light the window is a light grey recess in warm white plastic, in dark a near-black recess in charcoal. Slices, lines and words are ink in both, and nothing is orange.',
+    purpose: 'Shows how one whole divides into parts as patterned slices of a ring or a disc, each with its name and share printed, a legend of names and a table behind it.',
+    importLine: "import { PieChart } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>PieChart</code> draws the parts clockwise from the top in a recessed window. <code>variant</code> is <code>donut</code>, which prints the total in the hole, or <code>pie</code>. Each part has its own pattern, a name and share on a leader line, and a 44px row in the legend. A line under the window reads out the slice the arrow keys are on, and a hidden table lists every value and share.</p>
+      </>
+    ),
+    hero: ex('PieChartBasic', 'Five rooms in a donut, each on its own pattern.'),
+    ladder: [
+      ex('PieChartWhole', 'A whole disc of three parts, with no hole.'),
+      ex('PieChartTwoParts', 'A share, with the figure and caption in the hole set by hand.'),
+      ex('PieChartInUnit', 'A donut on a unit body with the orange key apart from it.'),
+      ex('PieChartWords', 'The built-in words and the share format replaced, in German.'),
+    ],
+    whenToUse: ['Show how one whole splits into two to six named parts.', 'Show a share, such as how much of a battery is charged.'],
+    whenNotToUse: [['Values across categories', 'BarChart'], ['One level in a range', 'Meter']],
+    anatomy: [['Window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring.'], ['Slice', 'A ring segment outlined in text.primary and filled with an ink pattern.'], ['Leader', 'A hairline in text.secondary with one bend.'], ['Name', 'type.caption in type.weight-regular, tabular numerals.'], ['Total', 'type.label in type.weight-medium, with a type.micro caption.'], ['Legend', 'A pattern swatch, the name, and the value and share; each row control.md tall.'], ['Readout', 'type.caption, a polite live region.']],
+    states: [['Idle', 'The key hint in text.secondary.'], ['Active slice', 'A width.ring outline, a ring round it with the keyboard, and its legend row in medium weight.'], ['Zero part', 'No slice and no label; the legend and table rows stay.']],
+    content: ['Name the chart for the whole and the split.', 'Name each part with a short noun.', 'Pass the unit in formatValue.'],
+    dodont: [
+      { do: 'Keep to six parts and order them largest first.', dont: 'Pour twelve months into one ring.' },
+      { do: 'Tell the parts apart by pattern and a printed name.', dont: 'Tell them apart by colour alone.' },
+    ],
+    a11y: ['The chart is one tab stop, named by its title, with a role description of Pie chart.', 'The arrow keys move between slices, and Home and End go to the first and last.', 'The readout is a polite live region that says the name, the value and the share.', 'A visually hidden table holds every value and share for screen readers.', 'In forced colours the window, slices and patterns use system colours.'],
+    keyboard: [
+      ['Tab', 'Enters the chart as one stop', 'PieChart: the chart is one tab stop and the first slice becomes active'],
+      ['Arrow keys', 'Move between slices', 'PieChart: the arrow keys move the active slice and the readout names it'],
+      ['Home, End', 'First and last slice', 'PieChart: Home and End reach the first and the last slice'],
+    ],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/bar-chart', 'BarChart', 'Values across categories.'], ['/components/meter', 'Meter', 'One level on a printed scale.']],
+  },
+  {
+    name: 'SettingsLayout',
+    slug: 'settings-layout',
+    status: 'beta',
+    limitations: ['It lays out rows and does not save them; keep the values and the Save key in your own code.', 'A row holds one name and one part; there is no row with two parts.', 'The part drops under its name by width alone, so there is no prop to force a stacked row.'],
+    youMust: ['Give every part its row name through aria-labelledby, using the ids the row passes to a function child.', 'Disable the part yourself when you set disabled on a row.', 'Set titleLevel to 2 when the page already has an h1.'],
+    usage: '<SettingsLayout title="Fan">\n  <SettingsSection heading="Speed">\n    <SettingsRow label="Oscillate" description="Turns side to side.">\n      {({ labelId }) => <Switch aria-labelledby={labelId} />}\n    </SettingsRow>\n  </SettingsSection>\n</SettingsLayout>',
+    backdrops: 'In light the boxes are hairlines in ring ink on warm white plastic, in dark the same hairlines on charcoal. There is no fill and nothing is orange.',
+    purpose: 'Frames a settings page as a titled column of sections, each a printed box of rows with a name and its part.',
+    importLine: "import { SettingsLayout, SettingsSection, SettingsRow } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>SettingsLayout</code> prints the page title and holds the sections. Each <code>SettingsSection</code> is a region named by its heading, with a hairline box of rows under it. Each <code>SettingsRow</code> prints a name and small print on the start side and the part that sets the value on the end side. A seam parts one row from the next.</p>
+        <p>A row wraps. On a narrow unit the part drops under its name and keeps its size. A function child receives <code>labelId</code> and <code>descriptionId</code>, so the part can name itself from the row.</p>
+      </>
+    ),
+    hero: ex('SettingsLayoutBasic', 'Two sections of rows, a select and switches on the end side.'),
+    ladder: [
+      ex('SettingsLayoutNarrow', 'In a narrow unit the select drops under its name.'),
+      ex('SettingsLayoutFields', 'A text field named by its row and tied to its small print.'),
+      ex('SettingsLayoutDisabled', 'A disabled row fades its name while its switch is switched off.'),
+      ex('SettingsLayoutIntro', 'Small print under the title and the section heading, and the orange key last.'),
+    ],
+    whenToUse: ['Lay out a page of settings that each have a name and one part.', 'Keep a long list of settings in named sections.', 'Pair a switch or a select with a line of small print.'],
+    whenNotToUse: [['A few related controls in one form', 'Fieldset'], ['Facts that cannot be changed', 'DescriptionList'], ['Numbered sections of a form', 'Stepper']],
+    anatomy: [['Title', 'Heading at titleLevel, type.title or larger in primary ink.'], ['Section heading', 'Heading one level below the title, above the box.'], ['Box', 'width.hairline in line.ring, corner.media, no fill, no shadow.'], ['Row', 'A wrapping flex row at least layout.touch tall.'], ['Seam', 'A decorative Divider above every row after the first.'], ['Name and small print', 'type.body and type.caption in secondary ink.']],
+    states: [['Default', 'A name, small print and a part.'], ['Disabled', 'The name and small print fade; disable the part yourself.'], ['Narrow', 'The part drops under its name.']],
+    content: ['Name a section with a noun.', 'Name a row with the thing it sets.', 'Keep small print to one sentence.'],
+    dodont: [
+      { do: 'Name the row Night mode and put the rule in the small print.', dont: 'Name the row Click to turn night mode on.' },
+      { do: 'Tie the part to its row with aria-labelledby.', dont: 'Leave a switch with no name beside a visible label.' },
+    ],
+    a11y: ['The layout and each section are regions named by their headings.', 'Rows are list items, so the count is read out.', 'A row hands label and description ids to the part for aria-labelledby and aria-describedby.', 'In forced colours each box keeps a real border in the text colour.'],
+    keyboard: [['Tab', 'Moves through the parts in the rows', 'SettingsLayout: the layout takes no focus and each part keeps its own keys']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/fieldset', 'Fieldset', 'A printed box round a few controls.'], ['/components/divider', 'Divider', 'The seam between two rows.'], ['/components/switch', 'Switch', 'The usual part at the end of a row.']],
+  },
+  {
+    name: 'Feed',
+    slug: 'feed',
+    status: 'beta',
+    limitations: ['Posts hold text and inline content only; there is no built-in media, reactions or comment thread.', 'FeedItem elements must be direct children of Feed, not wrapped in a fragment or another component, or they get no position.', 'Ctrl+Home and Ctrl+End from the APG pattern are not added; Tab leaves the feed.', 'The end watcher needs IntersectionObserver; where it is missing, only the load more key and Page Down load more.', 'Posts are not windowed, so a feed of thousands of posts should drop old ones or use VirtualList.', 'The notice covers the top post while it shows, because it must not push the list down.'],
+    youMust: ['Give the Feed a label, because it is a landmark of articles.', 'Set busy while a page loads, and keep hasMore true until the last page is in.', 'Add new posts to the list only in onShowNew, so the reader’s place does not move.', 'Pass total when you know the size of the set, so the position is read as 3 of 40.'],
+    usage: '<Feed label="Activity" hasMore={more} busy={busy} onNearEnd={loadNext}>\n  <FeedItem name="Mali Kaew" time="22:40">The washer is done.</FeedItem>\n</Feed>',
+    backdrops: 'In light the posts are grey ink on warm white plastic with a seam between them and the avatars in light grey recesses. In dark they are light ink on charcoal. The ring is dark ink in both and nothing is orange.',
+    purpose: 'Prints a growing run of posts that loads more at the end, follows the WAI-ARIA feed pattern and never moves what is being read.',
+    importLine: "import { Feed, FeedItem } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Feed</code> is a list of articles. Each <code>FeedItem</code> prints an avatar window, the author’s <code>name</code> and <code>time</code> on one line, and its text under them. Feed gives each post its <code>aria-posinset</code> and <code>aria-setsize</code> from the order of its children.</p>
+        <p>Page Down and Page Up move focus from post to post. <code>onNearEnd</code> fires when the end of the list scrolls into view, and the load more key does the same job for people who do not scroll. While <code>busy</code> is true the feed is <code>aria-busy</code>. <code>newCount</code> hangs a notice from the top edge without moving any post.</p>
+      </>
+    ),
+    hero: ex('FeedBasic', 'Three posts, then the printed end line.'),
+    ladder: [
+      ex('FeedLoadMore', 'The load more key adds a page; the footer shows the loading mark while it waits.'),
+      ex('FeedNewPosts', 'Two posts wait above; the notice puts them in front of the list when pressed.'),
+      ex('FeedBusy', 'busy marks the feed aria-busy and swaps the key for a loading mark.'),
+      ex('FeedNearEnd', 'Inside a short scrolling box, reaching the end asks for the next page.'),
+    ],
+    whenToUse: ['Show a log or stream of posts that grows at the end.', 'Let keyboard users move through a long run post by post.'],
+    whenNotToUse: [['A fixed list of rows to choose from', 'List'], ['Thousands of equal rows', 'VirtualList'], ['Events along a rail', 'Timeline']],
+    anatomy: [['Avatar window', 'Avatar md, control.md square, surface.sunken, elevation.well.'], ['Name', 'type.label in type.weight-medium, text.primary.'], ['Time', 'type.caption in text.secondary with tabular figures.'], ['Text', 'type.body with type.leading-body.'], ['Seam', 'A Divider, line.divider over the lit edge.'], ['Footer', 'control.md tall, holds the key, the Spinner or the end line.'], ['Notice', 'A Button key on a zero-height sticky line, layer.sticky.']],
+    states: [['Focused post', 'A ring outline, width.ring in focus.ring.'], ['Busy', 'aria-busy on the feed and a Spinner in the footer.'], ['Has more', 'The load more key in the footer.'], ['New posts', 'The notice key, announced politely.'], ['End', 'A printed end line.']],
+    content: ['Put the author in name and the time in time, not in the text.', 'Write each post so it reads alone.', 'Keep the notice words short, such as 3 new posts.'],
+    dodont: [
+      { do: 'Add new posts when the person presses the notice.', dont: 'Insert posts above the reader as they arrive.' },
+      { do: 'Offer the load more key beside the scroll trigger.', dont: 'Load only on scroll.' },
+    ],
+    a11y: ['The list has role feed and a label, and is aria-busy while loading.', 'Each post is an article with aria-posinset and aria-setsize, named by its author and time and described by its text.', 'Page Down and Page Up move between posts; Tab reaches each post and the keys.', 'The notice is a polite live region, and the load more key and notice key are 44px.', 'Under Reduce motion the notice appears and leaves at once; in forced colours the focus outline uses the system highlight.'],
+    keyboard: [['Page Down', 'Moves focus to the next post, or loads more from the last', 'Feed: Page Down and Page Up move between posts'], ['Page Up', 'Moves focus to the previous post', 'Feed: Page Down and Page Up move between posts'], ['Tab', 'Reaches each post, then the load more key', 'Feed: every post is a labelled article with its position']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/list', 'List', 'A fixed list of rows to choose from.'], ['/components/virtual-list', 'VirtualList', 'Thousands of equal rows in a window.'], ['/components/timeline', 'Timeline', 'Events along a rail.']],
+  },
+  {
+    name: 'Onboarding',
+    slug: 'onboarding',
+    status: 'beta',
+    limitations: ['It never scrolls the page; a part that is off screen leaves the panel at the nearest screen edge.', 'It points at one part per step, by id, element or ref; it cannot mark a group of parts.', 'A step whose part is not on the page is passed over, but it still counts in the "n of N" count.', 'It does not remember that a tour was seen; save that in onDone.'],
+    youMust: ['Start the tour only when the parts it points at are on the page.', 'Save the answer in onDone so the tour is not offered on every visit.', 'Pass your own words (backLabel, nextLabel, doneLabel, skipLabel, formatCount) when the product is not in English.', 'Keep a tour to three to six steps.'],
+    usage: '<Onboarding\n  open={open}\n  onOpenChange={setOpen}\n  onDone={({ reason }) => save(reason)}\n  steps={[\n    { target: "heat", title: "Heating", text: "Turns the radiator on or off." },\n    { target: "lamp", title: "Lamp", text: "Dims the lamp." },\n  ]}\n/>',
+    backdrops: 'In light the callout is warm-white plastic with a short soft shadow, in dark it is charcoal plastic. The ring is full ink in both and the page is not dimmed. Nothing is orange.',
+    purpose: 'Walks a person through the parts of a screen with a ring round each part and a small callout beside it.',
+    importLine: "import { Onboarding, CoachMark } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>Onboarding</code> runs a tour. For each step it draws a full-ink ring round one part and opens a plastic callout beside it with the step count, a title, a line of text and Skip, Back and Next keys. <code>CoachMark</code> is a single ring and callout, for a hint that is not part of a tour.</p>
+        <p>The page is not dimmed or scrolled. Focus moves to each callout, Escape ends the tour, and focus goes back to the part that was marked. <code>onDone</code> tells your code how it ended.</p>
+      </>
+    ),
+    hero: ex('OnboardingBasic', 'A three-step tour of a row of keys, started by a key.'),
+    ladder: [
+      ex('OnboardingDone', 'onDone saves how the tour ended and the page prints it.'),
+      ex('OnboardingControlled', 'The page opens the tour on one part through stepIndex.'),
+      ex('OnboardingCoachMark', 'A single CoachMark above a key, outside a tour.'),
+      ex('OnboardingThai', 'Thai text and your own words for the keys and the count.'),
+    ],
+    whenToUse: ['Show a first-time visitor what three to six parts of a screen do.', 'Announce one new part with a single CoachMark.'],
+    whenNotToUse: [['One note on a reading the person asked about', 'Popover'], ['Steps the person must finish to reach a result', 'Wizard'], ['A short label on hover or focus', 'Tooltip']],
+    anatomy: [['Ring', 'A full-ink stroke, width.ring, round the part. It takes no press.'], ['Panel', 'surface.solid, elevation.float, corner.inner, layer.overlay, at most layout.frame-sm wide.'], ['Count', 'type.caption in tabular figures, as in 2 of 5.'], ['Title and text', 'type.emphasis in type.weight-medium, then type.body in secondary ink.'], ['Keys', 'Skip at the start, Back and Next at the end, each 44px.']],
+    states: [['Closed', 'Nothing is drawn.'], ['Open', 'The ring and panel fade in and the panel rises off the part.'], ['First step', 'Back is drawn and disabled.'], ['Last step', 'Next reads Done and Skip is left out.'], ['Closing', 'The ring and panel fade, the panel sinks back, hidden from assistive tech.']],
+    content: ['Title each step with the name of the part.', 'Write one or two short sentences.', 'Leave the count to the panel.'],
+    dodont: [
+      { do: 'Title the step "Heating" and say what the key does.', dont: 'Title it "Click here".' },
+      { do: 'Save the answer in onDone and offer the tour once.', dont: 'Start the tour on every visit.' },
+    ],
+    a11y: ['The callout is a dialog named by its title and described by the count and the text.', 'Focus moves to the callout when a step opens and returns to the marked part when the tour ends.', 'Escape ends the tour.', 'The ring is hidden from assistive tech; the count is read from the callout.', 'In forced colours the panel keeps a real border and the ring uses the text colour.', 'Under Reduce motion only a fade remains.'],
+    keyboard: [['Tab', 'Moves through Skip, Back and Next; past either end it hands focus to the marked part', 'Onboarding: Tab past either end of the panel hands focus to the part, and every key is at least the touch target'], ['Enter / Space', 'Presses the focused key', 'Onboarding: Next walks the steps, the last step reads Done, and Done hands focus back to the part without scrolling'], ['Escape', 'Ends the tour and returns focus to the marked part', 'Onboarding: Escape ends the tour and returns focus to the marked part']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/popover', 'Popover', 'One note on a reading the person asked about.'], ['/components/wizard', 'Wizard', 'Steps the person must finish.'], ['/components/tooltip', 'Tooltip', 'A short label on hover or focus.']],
+  },
+  {
+    name: 'NotificationCenter',
+    slug: 'notification-center',
+    status: 'beta',
+    limitations: ['It is the list only; it has no button that opens it. Open it in a Popover or a Drawer and put the count badge on your own key.', 'It groups by the day you give each line and does not sort; pass the lines newest first.', 'Mark as read and dismiss are keys; there is no swipe.', 'A wrapper component around NotificationItem hides its day from the center, so write the items directly.'],
+    youMust: ['Give every NotificationItem a stable id and a plain-text title.', 'Pass the lines newest first, with the same day on lines that belong together.', 'Pass onReadChange or onDismiss only when you keep that state yourself.', 'Translate the built-in words with the words prop.'],
+    usage: '<NotificationCenter>\n  <NotificationItem id="washer" day="Today" title="Washer finished" time="22:40" unread>Laundry room</NotificationItem>\n  <NotificationItem id="door" day="Yesterday" title="Front door locked" time="23:10">Hall</NotificationItem>\n</NotificationCenter>',
+    backdrops: 'In light the unread lines are dark ink with a filled lamp and the read lines are grey ink with a ring, on warm white plastic. In dark the same shapes are light ink on charcoal. Nothing is orange.',
+    purpose: 'Lists notifications by day with a lamp for unread, mark-as-read and dismiss keys, Mark all read and a polite announcement of new lines.',
+    importLine: "import { NotificationCenter, NotificationItem } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>NotificationCenter</code> is a log of what the home has said. Each <code>NotificationItem</code> prints a title, a line of detail and a time under a day heading. An unread line has a filled lamp and a medium title. A read line has an empty ring and a regular title. Colour is a third cue and never the only one.</p>
+        <p>Each line has a mark-as-read key and a dismiss key, both 44px. The header holds a count of unread lines and a Mark all read key. When nothing is left the center shows an <code>EmptyState</code>. A hidden region announces a new line when it arrives. The center is built from List, Badge, IconButton, Button and EmptyState.</p>
+      </>
+    ),
+    hero: ex('NotificationCenterBasic', 'Four lines in two days, three unread, each with a mark-as-read key and a dismiss key.'),
+    ladder: [
+      ex('NotificationCenterControlled', 'onReadChange and onDismiss make read state and removal yours.'),
+      ex('NotificationCenterArrivals', 'A new line at the top is announced once and counted in the header.'),
+      ex('NotificationCenterEmpty', 'With no lines the center shows an EmptyState.'),
+      ex('NotificationCenterTranslated', 'words rewrites every built-in phrase and headingLevel sets the heading level.'),
+    ],
+    whenToUse: ['List what a home or an account has reported, with the unread ones easy to find.', 'Offer a place to clear a run of messages with the keyboard.'],
+    whenNotToUse: [['A short message that disappears by itself', 'Toast'], ['A notice that stays at the top of a screen', 'Banner'], ['A log with no actions on it', 'Timeline']],
+    anatomy: [['Title', 'type.emphasis in type.weight-medium; takes focus when the last line is gone.'], ['Count', 'A Badge with the number of unread lines.'], ['Mark all read', 'A Button, control.md; dimmed with aria-disabled when nothing is unread.'], ['Day heading', 'type.label in text.secondary.'], ['Lamp', 'control.mark, a ring in text.primary; filled while unread.'], ['Line', 'A List row: title, detail and a tabular time.'], ['Keys', 'Two IconButtons at control.key, 44px.']],
+    states: [['Unread', 'A filled lamp, a medium title and primary ink.'], ['Read', 'An empty ring, a regular title and secondary ink; the mark-as-read key is latched.'], ['Leaving', 'The line fades on motion.exit, then is removed.'], ['Empty', 'An EmptyState; Mark all read is dimmed.']],
+    content: ['Write a title as what happened, in the past tense: Washer finished.', 'Put the place or the cause in the detail line and keep it to one line.', 'Name the day in words, as in Today and Yesterday.'],
+    dodont: [
+      { do: 'Tell unread by shape and weight, and add colour only as a third cue.', dont: 'Tell unread by a coloured dot alone.' },
+      { do: 'Keep each title different so each key has its own name.', dont: 'Give ten lines the title Update.' },
+    ],
+    a11y: ['The center is a labelled section with a heading; each day is a heading above its own list.', 'An unread line is read out with the word Unread before its title; the lamp itself is hidden.', 'The mark-as-read key is a toggle with aria-pressed and a name that includes the title.', 'A hidden status region (polite) announces new lines once; the list itself is not a live region.', 'On dismiss, focus moves to the next line dismiss key, or to the heading when nothing is left.', 'In forced colours the lamp is drawn in the text colour, filled or empty.'],
+    keyboard: [['Tab', 'Moves through Mark all read and then the two keys of each line', 'NotificationCenter: every line has a mark-as-read key and a dismiss key that are real buttons'], ['Space or Enter', 'Presses the focused key', 'NotificationCenter: dismiss moves focus to the next line']],
+    inherits: 'HTMLAttributes<HTMLElement>',
+    related: [['/components/list', 'List', 'The rows the center is built from.'], ['/components/toast', 'Toast', 'A short message that goes away by itself.'], ['/components/timeline', 'Timeline', 'A log with no actions on it.']],
+  },
+  {
+    name: 'KanbanBoard',
+    slug: 'kanban-board',
+    status: 'beta',
+    limitations: ['Cards keep the order you give them; there is no sorting or filtering.', 'A drag does not scroll the board; on a wide board use the Move key or Alt with the arrow keys to reach a far column.', 'A limit warns and never blocks a move.', 'Cards hold a title and a detail line; there are no labels, avatars or editing inside the card.'],
+    youMust: ['Give the board a label, because it is the name of the group.', 'Give each column and each card an id that is unique among its kind.', 'Write card titles as short phrases, because the title is read in the Move key and in the status.', 'Keep the Move key: do not hide it, because a drag cannot be reached from a keyboard.'],
+    usage: '<KanbanBoard label="Chores for the week" defaultValue={{ todo: ["kettle"] }}\n  columns={[{ id: "todo", title: "To do" }, { id: "doing", title: "Doing", limit: 2 }]}\n  cards={[{ id: "kettle", title: "Descale the kettle" }]} />',
+    backdrops: 'In light the cards are raised warm white plastic with a lit lip and the count windows are light grey recesses; in dark the cards are charcoal and the windows near-black. A seam of divider ink splits the columns and nothing is orange.',
+    purpose: 'Holds named columns of cards that move between columns by a Move key, by Alt with the arrow keys or by dragging a grip.',
+    importLine: "import { KanbanBoard } from 'dial-react';",
+    overview: (
+      <>
+        <p><code>KanbanBoard</code> is a row of columns, each a named list of cards. A small recessed window beside each title counts its cards and shows the limit when there is one. <code>value</code> maps each column id to its card ids and <code>onValueChange</code> reports the new arrangement; <code>defaultValue</code> starts an uncontrolled board.</p>
+        <p>A card moves three ways. Its Move key opens a choice of the other columns. A focused card takes Alt with the arrow keys: left and right change column, up and down change position. A pointer can also drag its grip, and <code>drag</code> switches that off. A polite status reads out every move.</p>
+      </>
+    ),
+    hero: ex('KanbanBoardBasic', 'Chores in three columns, with a Move key and a grip on every card.'),
+    ladder: [
+      ex('KanbanBoardLimits', 'A limit on Doing: the window reads 3/2 with a warning mark.'),
+      ex('KanbanBoardControlled', 'The arrangement held in state, a line that reports the last move and the orange key that saves.'),
+      ex('KanbanBoardKeysOnly', 'Dragging switched off, with level 4 column headings.'),
+      ex('KanbanBoardStates', 'A card that stays put, an empty column, and German and Thai titles.'),
+    ],
+    whenToUse: ['Follow tasks through two to five stages that each hold a few cards.', 'Limit how much work is open at once with a count and a limit per column.'],
+    whenNotToUse: [['Choosing rows to put in or leave out of a set', 'TransferList'], ['A plain list of rows with no stages', 'List']],
+    anatomy: [['Column', 'A section with a heading, a seam on its inline start (line.divider) and a fixed width of layout.frame-xs.'], ['Count window', 'surface.sunken, elevation.well, corner.media, width.hairline in line.ring, tabular figures.'], ['Card', 'A Card at small padding with a title, a detail line, a grip and a Move key.'], ['Grip and Move key', 'Two 44px squares at the inline end of the card header; the grip is a dot-matrix drag glyph, the key a Menu.'], ['Status', 'A visually hidden polite live region.']],
+    states: [['Focus', 'A dark ring around the card that holds the keyboard focus.'], ['Carried', 'The card follows the pointer with the lift shadow and a line marks where it will land.'], ['Over the limit', 'The figures in medium weight with a warning mark, and the words “over the limit” for assistive tech.'], ['Card disabled', 'Half-faded, no grip, no Move key.'], ['Empty column', 'A recessed slot with a line of words.']],
+    content: ['Name each column with a noun for the stage.', 'Start each card title with a verb.', 'Keep the detail line to one short fact.'],
+    dodont: [
+      { do: 'Name the stage with a noun such as Doing.', dont: 'Write a sentence as a column title.' },
+      { do: 'Put a limit on the one stage that should stay small.', dont: 'Put a limit on every column.' },
+    ],
+    a11y: ['The board is a group named by its label; each column is a section named by its heading.', 'Each card is a list item named by its title and described by a hint that names the keys.', 'Every move has a keyboard route and a menu route, so a drag is never needed (WCAG 2.5.7).', 'A polite status reads the card, the column and the position after each move.', 'A column past its limit is told by figures, a warning mark and words, not by colour.', 'In forced colours the cards keep a real border in the text colour and the drop line uses the system highlight.'],
+    keyboard: [['Tab', 'Reaches each card, then its Move key', 'KanbanBoard: the board is a group of named columns, and every card has a name, a hint and a Move key'], ['Alt + left or right arrow', 'Moves the focused card to the next or previous column', 'KanbanBoard: Alt with the arrow keys moves a focused card, announces it politely and keeps the focus on it'], ['Alt + up or down arrow', 'Moves the card one place in its column; the plain arrows walk the cards', 'KanbanBoard: Alt with up or down changes position, the plain arrows walk the cards, and the end of the column is announced'], ['Enter on the Move key', 'Opens the columns; a choice moves the card to the end of that column', 'KanbanBoard: the Move key opens a choice of the other columns and moves the card to the end of the one chosen']],
+    inherits: 'HTMLAttributes<HTMLDivElement>',
+    related: [['/components/transfer-list', 'TransferList', 'Choosing rows to put in or leave out of a set.'], ['/components/card', 'Card', 'The body each task is drawn on.'], ['/components/menu', 'Menu', 'The choice of columns the Move key opens.']],
   },
 ];

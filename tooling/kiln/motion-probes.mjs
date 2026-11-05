@@ -272,7 +272,9 @@ export function judgeOverlay(enter, exit, { exitRatio = 0.6 } = {}) {
   const out = [];
   const main = (list) => list.slice().sort((a, b) => b.duration + b.delay - (a.duration + a.delay))[0];
   const e = main(enter), x = main(exit);
-  if (!e) return out; // arrives with no motion: G-MO1/G-MO2 own the quiet case
+  // an overlay that arrives in one frame is red too (dial R-004: a Select panel that appeared and went at once
+  // passed every gate); the opener's own chevron or press does not count as the overlay moving
+  if (!e) { out.push(`arrives in one frame: give it an entrance on the decelerating curve${x ? '' : ' and an exit on the accelerating one'}`); return out; }
   const curve = (s) => parseTimings(s)[0]?.bezier ?? null;
   const ec = curve(e.easing);
   if (ec && !decelerates(ec)) out.push(`arrives on "${e.easing}" (${e.on}), which does not decelerate`);
@@ -289,6 +291,8 @@ export async function overlayChoreography(page, { scope = 'main [data-example-li
   const handles = (await page.$$(`${scope} ${OVERLAY_TRIGGER}`)).slice(0, limit * 3);
   for (const h of handles) {
     if (seen >= limit) break;
+    // a trigger below the fold is brought into view first, or the press lands on nothing (dial R-005)
+    await h.scrollIntoViewIfNeeded().catch(() => {});
     const box = await h.boundingBox().catch(() => null);
     if (!box || box.width < 8 || box.height < 8) continue;
     const id = `kiln-mo4-${tag++}`;
@@ -298,7 +302,8 @@ export async function overlayChoreography(page, { scope = 'main [data-example-li
     const inP = page.evaluate(ANIMS, [sel, ms]);
     await page.waitForTimeout(30); await page.mouse.down(); await page.mouse.up();
     const enter = await inP.catch(() => []);
-    const opened = await h.evaluate((el) => el.getAttribute('aria-expanded') === 'true' || el.dataset.state === 'open' || !!document.querySelector('[role=dialog],[role=alertdialog],[role=menu],[role=listbox],[popover]:popover-open'));
+    // opened = this trigger says so, or a popup is actually drawn (a hidden listbox elsewhere on the page is not)
+    const opened = await h.evaluate((el) => el.getAttribute('aria-expanded') === 'true' || el.dataset.state === 'open' || [...document.querySelectorAll('[role=dialog],[role=alertdialog],[role=menu],[role=listbox],[popover]:popover-open')].some((p) => p.getClientRects().length && getComputedStyle(p).visibility !== 'hidden' && !p.closest('[hidden]')));
     if (!opened) continue;
     seen++;
     const outP = page.evaluate(ANIMS, [sel, ms]);
@@ -323,4 +328,119 @@ export function springProblems(spring, name = 'spring') {
   if (zeta > 1.05) out.push(`${name}: ζ ${zeta.toFixed(2)} creeps (needs ≤ 1)`);
   if (settle > 600) out.push(`${name}: settles in ${Math.round(settle)}ms (needs ≤ 600ms)`);
   return out;
+}
+
+// ---------------------------------------------------------------- G-MO5 every change moves (dial R-004)
+// "ทุก interaction ที่มีการเปลี่ยนแปลง" must be smooth. Every rendered frame for ~700ms after an interaction is
+// sampled, so a CSS transition, a CSS animation, an inherited transition and a JS spring all count as movement;
+// what is judged is the result: a visible property that goes from A to B with no frame in between snapped, and a
+// part that starts or stops being drawn with no fade, rise or clip on it or an ancestor appeared or vanished at once.
+// Focus outlines, the caret and text that is replaced are not motion and are not judged.
+export const MO5_PROPS = ['background-color', 'color', 'border-top-color', 'box-shadow', 'opacity', 'transform', 'fill', 'stroke', 'filter', 'clip-path', 'translate', 'scale', 'rotate'];
+export const MO5_CONTROL = ':is(button, [role=button], [role=switch], [role=checkbox], [role=radio], [role=tab], [role=menuitem], [role=option], [role=combobox], [role=slider], [aria-haspopup]:not([aria-haspopup=false]), input[type=checkbox], input[type=radio], summary):not([disabled]):not([aria-disabled=true]):not([data-copy])';
+
+/** In-page: samples every frame for `ms` after the first, returns per element the values seen. */
+const SAMPLE = ([rootSel, ms, props]) => new Promise((done) => {
+  const roots = () => [...document.querySelectorAll(rootSel), ...document.querySelectorAll('[role=listbox], [role=menu], [role=dialog], [role=alertdialog], [role=tooltip], [popover], [data-overlay]')];
+  const ids = new Map(); let next = 0; const rec = {};
+  // drawn = laid out, visible, and not clipped to nothing by a frame around it (a word inside a closed 0px band is not seen)
+  const drawn = (el) => {
+    if (!el.isConnected || !el.getClientRects().length) return false;
+    const cs = getComputedStyle(el); if (cs.visibility === 'hidden' || cs.display === 'none') return false;
+    for (let e = el.parentElement; e && e !== document.body; e = e.parentElement) {
+      const c = getComputedStyle(e); if (c.overflow === 'visible' && c.overflowX === 'visible' && c.overflowY === 'visible') continue;
+      const r = e.getBoundingClientRect(); if (r.width < 1 || r.height < 1) return false;
+    }
+    return true;
+  };
+  const look = (el) => { let o = 1, moved = ''; for (let e = el; e && e !== document.body; e = e.parentElement) { const cs = getComputedStyle(e); o *= Number(cs.opacity); moved += `${cs.transform}|${cs.translate}|${cs.scale}|${cs.clipPath}|${e === el ? '' : cs.blockSize}|`; } return `${o.toFixed(3)}~${moved}`; };
+  const name = (el) => `${el.closest('[data-component]')?.getAttribute('data-component') ?? ''} ${el.tagName.toLowerCase()}${el.getAttribute('role') ? `[role=${el.getAttribute('role')}]` : ''}.${String(el.className?.baseVal ?? el.className ?? '').split(' ')[0].replace(/^.*module__/, '')}`;
+  const frame = () => {
+    const seen = new Set();
+    for (const r of roots()) for (const el of [r, ...r.querySelectorAll('*')].slice(0, 700)) {
+      if (seen.has(el)) continue; seen.add(el);
+      if (!ids.has(el)) ids.set(el, next++);
+      const id = ids.get(el); const on = drawn(el);
+      const e = (rec[id] ??= { name: name(el), frames: [], text: !!Array.from(el.childNodes).some((c) => c.nodeType === 3 && c.textContent.trim()) || el.tagName === 'svg' });
+      if (!on) { e.frames.push(null); continue; }
+      const cs = getComputedStyle(el); const v = {};
+      for (const p of props) v[p] = cs.getPropertyValue(p);
+      v.__look = look(el);
+      // a drawing's shape (dial R-008: a play glyph that became pause in one frame): the geometry of its own
+      // shapes, so swapping one glyph for another counts as a change that must move like any other
+      if (el.tagName === 'svg') v.__shape = [...el.querySelectorAll('path, circle, rect, polygon, polyline, line, ellipse')].map((g) => ['d', 'points', 'cx', 'cy', 'r', 'x', 'y', 'width', 'height'].map((a) => g.getAttribute(a) ?? '').join(',')).join('|').slice(0, 4000);
+      e.frames.push(v);
+    }
+    for (const [el, id] of ids) if (!seen.has(el)) rec[id].frames.push(null);
+  };
+  const start = performance.now(); frame();
+  const tick = () => { frame(); if (performance.now() - start > ms) return done(Object.values(rec)); requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+});
+
+/** Pure judgement over sampled frames. */
+export function judgeChanges(recs, { props = MO5_PROPS, max = 4 } = {}) {
+  const out = [];
+  for (const r of recs) {
+    const f = r.frames; if (f.length < 3) continue;
+    const a = f[0], z = f[f.length - 1];
+    if (a && z) {
+      for (const p of [...props, '__shape']) {
+        const seq = f.filter(Boolean).map((v) => v[p]);
+        if (seq[0] === undefined) continue;
+        if (seq[0] === seq[seq.length - 1]) continue;
+        const mid = seq.filter((v) => v !== seq[0] && v !== seq[seq.length - 1]);
+        if (!mid.length) out.push(p === '__shape' ? `${r.name} swaps its drawing in one frame` : `${r.name} ${p} snaps ${short(seq[0])} → ${short(seq[seq.length - 1])}`);
+      }
+    } else if (!a && z && r.text) {
+      // it starts being drawn: its first drawn frame must not already look like its last
+      const first = f.find(Boolean);
+      if (first.__look === z.__look) out.push(`${r.name} appears in one frame`);
+    } else if (a && !z && r.text) {
+      const drawnFrames = f.filter(Boolean);
+      if (drawnFrames.length && drawnFrames[drawnFrames.length - 1].__look === a.__look) out.push(`${r.name} vanishes in one frame`);
+    }
+    if (out.length >= max * 4) break;
+  }
+  return [...new Set(out)];
+}
+const short = (v) => String(v).replace(/\s+/g, ' ').slice(0, 40);
+
+/** Presses each control in the demos (pointer, or ArrowRight on a slider), samples, then undoes it (Escape, or a
+ *  second press on a toggle) and samples again. Returns the parts that snapped, per control. */
+export async function interactionMotion(page, { scope = 'main [data-example-live]', limit = 6, window: ms = 700, props = MO5_PROPS } = {}) {
+  const out = []; let checked = 0, tag = 0;
+  const handles = (await page.$$(`${scope} ${MO5_CONTROL}`)).slice(0, limit * 4);
+  for (const h of handles) {
+    if (checked >= limit) break;
+    const box = await h.boundingBox().catch(() => null);
+    if (!box || box.width < 8 || box.height < 8 || !(await h.isVisible().catch(() => false))) continue;
+    const id = `kiln-mo5-${tag++}`;
+    const info = await h.evaluate((el, id) => { el.setAttribute('data-kiln-mo5', id); const ex = el.closest('[data-example-live]'); ex?.setAttribute('data-kiln-mo5-root', id); return { name: `${el.closest('[data-component]')?.dataset.component ?? el.tagName.toLowerCase()} "${(el.getAttribute('aria-label') ?? el.textContent ?? '').trim().slice(0, 24)}"`, slider: el.getAttribute('role') === 'slider', toggle: el.hasAttribute('aria-pressed') || ['switch', 'checkbox'].includes(el.getAttribute('role') ?? '') || el.type === 'checkbox' }; }, id);
+    const root = `[data-kiln-mo5-root="${id}"]`;
+    const act = async () => {
+      if (info.slider) { await h.focus(); await page.keyboard.press('ArrowRight'); }
+      else { await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await page.mouse.down(); await page.mouse.up(); }
+    };
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await page.waitForTimeout(450);
+    // the hover is the settled start: only what the press changes is judged here (G-MO1 owns hover)
+    const p1 = page.evaluate(SAMPLE, [root, ms, props]); await page.waitForTimeout(40); await act();
+    const r1 = await p1.catch(() => []);
+    const opened = await h.evaluate((el) => el.getAttribute('aria-expanded') === 'true');
+    const undo = async () => {
+      if (opened) await page.keyboard.press('Escape');
+      else if (info.slider) await page.keyboard.press('ArrowLeft');
+      else if (info.toggle) await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+      else return false;
+      return true;
+    };
+    const p2 = page.evaluate(SAMPLE, [root, ms, props]); await page.waitForTimeout(40);
+    const undone = await undo();
+    const r2 = undone ? await p2.catch(() => []) : (await p2.catch(() => []), []);
+    checked++;
+    for (const x of judgeChanges(r1, { props })) out.push(`${info.name}: ${x}`);
+    for (const x of judgeChanges(r2, { props })) out.push(`${info.name} (undo): ${x}`);
+    await page.keyboard.press('Escape').catch(() => {}); await page.mouse.move(1, 1); await page.waitForTimeout(150);
+  }
+  return { checked, problems: [...new Set(out)] };
 }

@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import { cx } from '../../cx';
+import { messages } from '../../messages';
 import { Badge } from '../Badge';
 import { Card, type CardProps } from '../Card';
 import { Display, type DisplayKind } from '../Display';
@@ -42,7 +43,7 @@ export interface EnvironmentProps extends Omit<CardProps, 'as' | 'padding' | 'he
 type Preset = Pick<MeterProps, 'label' | 'min' | 'max' | 'low' | 'high' | 'optimum' | 'regionLabels' | 'formatValue'>;
 const PRESETS: Record<EnvironmentReadingKind, Preset> = {
   humidity: { label: 'Humidity', min: 0, max: 100, low: 30, high: 60, optimum: 45, regionLabels: { low: 'Dry', mid: 'Comfort', high: 'Damp' }, formatValue: (v) => `${Math.round(v)} %` },
-  air: { label: 'Air quality', min: 0, max: 150, low: 50, high: 100, optimum: 0, regionLabels: { low: 'Clean', mid: 'Fair', high: 'Poor' }, formatValue: (v) => `${Math.round(v)} AQI` },
+  air: { label: messages.env.air, min: 0, max: 150, low: 50, high: 100, optimum: 0, regionLabels: { low: messages.env.clean, mid: messages.env.fair, high: messages.env.poor }, formatValue: (v) => `${Math.round(v)} AQI` },
   co2: { label: 'CO₂', min: 400, max: 2000, low: 800, high: 1200, optimum: 400, regionLabels: { low: 'Fresh', mid: 'Stale', high: 'Stuffy' }, formatValue: (v) => `${Math.round(v)} ppm` },
   noise: { label: 'Noise', min: 20, max: 90, low: 40, high: 65, optimum: 30, regionLabels: { low: 'Quiet', mid: 'Normal', high: 'Loud' }, formatValue: (v) => `${Math.round(v)} dB` },
 };
@@ -54,7 +55,7 @@ export const Environment = forwardRef<HTMLElement, EnvironmentProps>(function En
   ref,
 ) {
   const time = clock(readAt);
-  const words = statusText ?? (status === 'stale' ? `No new reading since ${time}` : status === 'offline' ? `Not answering since ${time}` : 'Up to date');
+  const words = statusText ?? (status === 'stale' ? messages.env.staleSince(time) : status === 'offline' ? messages.env.offlineSince(time) : messages.env.upToDate);
   const tone = status === 'stale' ? 'warning' : status === 'offline' ? 'critical' : 'positive';
   return (
     <Card
@@ -72,10 +73,10 @@ export const Environment = forwardRef<HTMLElement, EnvironmentProps>(function En
       <div className={styles.face}>
         <Display
           kind={displayKind}
-          label={`${room} temperature`}
+          label={messages.env.temperature(room)}
           value={Number.isFinite(temperature) ? temperature.toFixed(1) : '--'}
           unit={unit}
-          detail={status === 'offline' ? 'Not answering' : detail}
+          detail={status === 'offline' ? messages.env.notAnswering : detail}
           digits={3}
         />
         <p className={styles.notice} role="status" aria-live="polite">

@@ -15,6 +15,17 @@
   inline-size: calc(var(--ds-control-mark) + var(--ds-space-0-5));
   block-size: calc(var(--ds-control-mark) + var(--ds-space-0-5));
   overflow: visible;
+  /* a lamp that changes its state lights in its new colour like a bulb, never in one frame (D-008) */
+  transition:
+    fill var(--ds-motion-release) var(--ds-motion-easing),
+    fill-opacity var(--ds-motion-release) var(--ds-motion-easing),
+    stroke var(--ds-motion-release) var(--ds-motion-easing);
+}
+/* the tone's own shape is lit; the shape it leaves fades out faster than the new one fades in (D-008) */
+.shape { opacity: 0; transition: opacity var(--ds-motion-exit) var(--ds-motion-easing-exit); }
+.shape[data-on] { opacity: 1; transition: opacity var(--ds-motion-release) var(--ds-motion-easing); }
+@media (prefers-reduced-motion: reduce) {
+  .shape, .shape[data-on] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
 }
 .count {
   font-variant-numeric: tabular-nums;
@@ -22,7 +33,7 @@
 }
 .word { font-weight: var(--ds-type-weight-regular); }
 
-.neutral .glyph { fill: none; stroke: var(--ds-text-secondary); stroke-width: var(--ds-width-ring); }
+.neutral .glyph { fill: transparent; stroke: var(--ds-text-secondary); stroke-width: var(--ds-width-ring); }
 /* a lit lamp is glass (P9, D-007): its body takes the status hue lit through at the glass fill strength,
    its edge keeps the full mark so the shape still stands 3:1 off the plastic */
 .positive .glyph { fill: var(--ds-status-positive-mark); fill-opacity: var(--ds-glass-fill-opacity); stroke: var(--ds-status-positive-mark); stroke-width: var(--ds-width-hairline); }

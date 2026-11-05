@@ -18,6 +18,7 @@ import {
 } from 'react';
 import { cx } from '../../cx';
 import { messages } from '../../messages';
+import { Icon } from '../Icon';
 import { Heading } from '../Heading';
 import { IconButton } from '../IconButton';
 import styles from './Sheet.module.css';
@@ -210,7 +211,7 @@ export const Sheet = forwardRef<HTMLDialogElement, SheetProps>(function Sheet(
           <Heading level={3} id={titleId} className={styles.title}>{title}</Heading>
           {model ? <span className={styles.model}>{model}</span> : null}
           <IconButton label={closeLabel} onClick={() => setOpen(false)}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" focusable="false"><path d="M6 6l12 12M18 6L6 18" /></svg>
+            <Icon name="close" />
           </IconButton>
         </div>
         {children ? <div data-part="content" className={styles.content}>{children}</div> : null}

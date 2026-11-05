@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Stat · three ways to read one figure</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:300px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .l{font-size:13px;margin:0 0 8px;text-shadow:var(--ds-print-seat)}
+ .v{font-variant-numeric:tabular-nums;margin:0}
+ .u{font-size:14px;font-weight:500;color:var(--ds-text-secondary)}
+ .c{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ds-text-secondary);margin:10px 0 0}
+ .g{inline-size:10px;block-size:10px;fill:var(--ds-text-primary)}
+ /* A: label on the inset line, figure alone in a recessed window, change printed under it */
+ .A .w{box-sizing:border-box;padding:12px 16px;border-radius:var(--ds-corner-media);border:1px solid var(--ds-line-ring);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .A .v{font-size:var(--ds-type-title);font-weight:500}
+ /* B: all printed on the body, no window, big figure and a hairline rule */
+ .B .v{font-size:var(--ds-type-display);font-weight:500;padding-block-end:8px;border-block-end:1px solid var(--ds-line-ring)}
+ /* C: one OLED-style window holds label, figure and change */
+ .C .w{padding:14px 16px;border-radius:var(--ds-corner-media);background:var(--ds-display-oled-bg);color:var(--ds-display-oled-ink);box-shadow:var(--ds-elevation-well)}
+ .C .l{color:var(--ds-display-oled-ink);text-shadow:none;opacity:1}
+ .C .v{font-size:var(--ds-type-title);font-weight:500}
+ .C .c{color:var(--ds-display-oled-ink)}
+ .C .g{fill:var(--ds-display-oled-ink)}
+ .C .u{color:var(--ds-display-oled-ink)}
+</style></head><body>
+<h1>Stat · one named figure with a unit and an optional change</h1>
+<div class="row">
+ <div class="unit A"><h2>A · printed label, figure in a window, change under</h2>
+  <p class="l">Energy today</p><div class="w"><p class="v">12.4 <span class="u">kWh</span></p></div>
+  <p class="c"><svg class="g" viewBox="0 0 10 10"><path d="M5 .6 9.4 9H.6z"/></svg><b>Up</b> 0.8 kWh since yesterday</p></div>
+ <div class="unit B"><h2>B · all printed on the body, hairline rule</h2>
+  <p class="l">Energy today</p><p class="v">12.4 <span class="u">kWh</span></p>
+  <p class="c"><svg class="g" viewBox="0 0 10 10"><path d="M5 .6 9.4 9H.6z"/></svg><b>Up</b> 0.8 kWh since yesterday</p></div>
+ <div class="unit C"><h2>C · one dark window holds all three</h2>
+  <div class="w"><p class="l">Energy today</p><p class="v">12.4 <span class="u">kWh</span></p>
+  <p class="c"><svg class="g" viewBox="0 0 10 10"><path d="M5 .6 9.4 9H.6z"/></svg><b>Up</b> 0.8 kWh since yesterday</p></div></div>
+</div></body></html>

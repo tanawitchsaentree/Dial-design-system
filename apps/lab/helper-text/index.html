@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · HelperText · three ways to print the line under a part</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .well{block-size:44px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);margin-block-end:8px}
+ p{margin:0 0 20px;font-size:13px;line-height:1.5}
+ .h{color:var(--ds-text-secondary)}
+ /* A: caption line, glyph before the words */
+ .A .e{display:flex;gap:8px;font-weight:500;color:var(--ds-status-critical-mark)}
+ .A .e svg{flex:none;inline-size:16px;block-size:16px;margin-block-start:2px}
+ /* B: ink index rule down the inline-start edge, heavier on error */
+ .B p{border-inline-start:2px solid var(--ds-line-ring);padding-inline-start:10px}
+ .B .e{border-inline-start:4px solid var(--ds-status-critical-mark);color:var(--ds-text-primary);font-weight:500}
+ /* C: lowercase tone word printed first, then the message */
+ .C .tag{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:lowercase;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);padding:0 6px;margin-inline-end:8px;color:var(--ds-text-secondary)}
+ .C .e .tag{color:var(--ds-status-critical-mark);border-color:var(--ds-status-critical-mark)}
+ .C .e{color:var(--ds-text-primary)}
+</style></head><body>
+<h1>HelperText · the line printed under a part</h1>
+<svg width="0" height="0" style="position:absolute"><symbol id="c" viewBox="0 0 21 21"><g fill="currentColor"><circle cx="1.5" cy="1.5" r="1.2"/><circle cx="4.5" cy="1.5" r="1.2"/><circle cx="7.5" cy="1.5" r="1.2"/><circle cx="10.5" cy="1.5" r="1.2"/><circle cx="13.5" cy="1.5" r="1.2"/><circle cx="16.5" cy="1.5" r="1.2"/><circle cx="19.5" cy="1.5" r="1.2"/><circle cx="1.5" cy="10.5" r="1.2"/><circle cx="10.5" cy="10.5" r="1.2"/><circle cx="19.5" cy="10.5" r="1.2"/><circle cx="1.5" cy="19.5" r="1.2"/><circle cx="4.5" cy="19.5" r="1.2"/><circle cx="7.5" cy="19.5" r="1.2"/><circle cx="10.5" cy="19.5" r="1.2"/><circle cx="13.5" cy="19.5" r="1.2"/><circle cx="16.5" cy="19.5" r="1.2"/><circle cx="19.5" cy="19.5" r="1.2"/></g></symbol></svg>
+<div class="row">
+ <div class="unit A"><h2>A · caption, glyph before the words</h2><div class="well"></div><p class="h">Between 5 and 30 degrees.</p><div class="well"></div><p class="e"><svg><use href="#c"/></svg><span>Enter a value under 30.</span></p></div>
+ <div class="unit B"><h2>B · index rule at the edge</h2><div class="well"></div><p class="h">Between 5 and 30 degrees.</p><div class="well"></div><p class="e">Enter a value under 30.</p></div>
+ <div class="unit C"><h2>C · tone word printed first</h2><div class="well"></div><p class="h"><span class="tag">hint</span>Between 5 and 30 degrees.</p><div class="well"></div><p class="e"><span class="tag">error</span>Enter a value under 30.</p></div>
+</div></body></html>

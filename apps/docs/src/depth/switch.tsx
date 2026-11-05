@@ -53,7 +53,7 @@ export const SWITCH: Depth = {
       do: <Switch label="Child lock" offLabel="Off" onLabel="On" />, doNote: 'The label names the setting.',
       dont: <Switch label="Turn on child lock?" offLabel="No" onLabel="Yes" />, dontNote: 'A question with Yes and No reads like a form instead of a setting.',
     },
-    overflow: { text: 'A long label wraps onto more lines. The switch stays the same size and stays centred on the label.', render: <div data-overflow-demo="" style={{ inlineSize: 240 }}><Switch label="Keep the rice warm for twelve hours after cooking" offLabel="Off" onLabel="On" /></div> },
+    overflow: { text: 'A long label wraps onto more lines. The switch stays the same size and stays centred on the label.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Switch label="Keep the rice warm for twelve hours after cooking" offLabel="Off" onLabel="On" /></div> },
     rtl: { text: 'In right-to-left languages the off word moves to the right and the cap slides to the left for on.', render: <div dir="rtl"><Switch label="إبقاء دافئ" offLabel="إيقاف" onLabel="تشغيل" defaultChecked /></div> },
     expansion: { text: 'German position words can run 30% longer. The groove keeps its length and the words take the room they need.', render: <Switch label="Warmhalten" offLabel="Aus" onLabel="Kochen" /> },
   },

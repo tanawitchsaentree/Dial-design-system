@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · InputGroup · three ways to join an add-on to a field</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);display:grid;gap:22px}
+ .unit>h2{font-size:13px;font-weight:500;margin:0;color:var(--ds-text-secondary)}
+ label{display:block;font-size:14px;font-weight:500;margin-block-end:8px}
+ input{border:0;background:transparent;font:inherit;font-size:16px;color:inherit;outline:none;min-inline-size:0;flex:1;padding:12px 0}
+ .well{display:flex;align-items:center;box-sizing:border-box;min-block-size:44px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .w{font-size:14px;font-weight:500;color:var(--ds-text-secondary);white-space:nowrap}
+ .key{inline-size:44px;block-size:44px;border-radius:50%;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);display:grid;place-items:center;flex:none;font-size:14px;color:var(--ds-text-secondary)}
+ /* A: one well, add-ons are cells ruled off by a hairline */
+ .A .well{padding-inline:16px;gap:12px}
+ .A .cell{align-self:stretch;display:flex;align-items:center}
+ .A .cell.pre{border-inline-end:1px solid var(--ds-line-divider);padding-inline-end:12px}
+ .A .cell.post{border-inline-start:1px solid var(--ds-line-divider);padding-inline-start:12px}
+ .A .key{margin-block:-1px;margin-inline-end:-8px}
+ /* B: words printed inside the well, no rule, like Input's unit */
+ .B .well{padding-inline:16px;gap:8px}
+ /* C: the add-on is a raised plate butted onto the well */
+ .C .both{display:flex}
+ .C .well{flex:1;border-start-end-radius:0;border-end-end-radius:0;padding-inline:16px}
+ .C .plate{display:grid;place-items:center;padding-inline:16px;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);border-start-end-radius:var(--ds-corner-media);border-end-end-radius:var(--ds-corner-media)}
+ .C .plate.pre{border-radius:var(--ds-corner-media) 0 0 var(--ds-corner-media)}
+ .focus{outline:2px solid var(--ds-focus-ring);outline-offset:2px}
+</style></head><body>
+<h1>InputGroup — joining an add-on to a field</h1>
+<div class="row">
+ <div class="unit A"><h2>A · ruled cells in one well</h2>
+  <div><label>Price</label><div class="well"><span class="cell pre"><span class="w">THB</span></span><input value="1,250"><span class="cell post"><span class="w">/ month</span></span></div></div>
+  <div><label>Website</label><div class="well focus"><span class="cell pre"><span class="w">https://</span></span><input value="kitchen"><span class="cell post"><span class="w">.local</span></span></div></div>
+  <div><label>Code</label><div class="well"><input value="48213"><span class="cell post"><span class="key">⎘</span></span></div></div>
+ </div>
+ <div class="unit B"><h2>B · printed words, no rule</h2>
+  <div><label>Price</label><div class="well"><span class="w">THB</span><input value="1,250"><span class="w">/ month</span></div></div>
+  <div><label>Website</label><div class="well focus"><span class="w">https://</span><input value="kitchen"><span class="w">.local</span></div></div>
+  <div><label>Code</label><div class="well"><input value="48213"><span class="key" style="margin-block:-1px;margin-inline-end:-8px">⎘</span></div></div>
+ </div>
+ <div class="unit C"><h2>C · raised plate butted on</h2>
+  <div><label>Price</label><div class="both"><span class="plate pre w">THB</span><div class="well" style="border-radius:0"><input value="1,250"></div><span class="plate w">/ month</span></div></div>
+  <div><label>Website</label><div class="both"><span class="plate pre w">https://</span><div class="well focus" style="border-radius:0"><input value="kitchen"></div><span class="plate w">.local</span></div></div>
+  <div><label>Code</label><div class="both"><div class="well"><input value="48213"></div><span class="plate w">Copy</span></div></div>
+ </div>
+</div>
+</body></html>

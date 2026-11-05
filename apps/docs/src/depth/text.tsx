@@ -59,7 +59,7 @@ export const TEXT: Depth = {
       do: <Text size="label">Target 22.0°</Text>, doNote: 'Sentence case, the unit next to the number.',
       dont: <Text size="label">TARGET TEMPERATURE SETTING</Text>, dontNote: 'Capitals shout, and the words repeat what the reading already says.',
     },
-    overflow: { text: 'Text wraps onto the next line within its column. A long word breaks so it never runs out of the unit.', render: <div data-overflow-demo style={{ inlineSize: 180, overflowWrap: 'anywhere' }}><Text size="label">Kitchen extractor hood boost schedule</Text></div> },
+    overflow: { text: 'Text wraps onto the next line within its column. A long word breaks so it never runs out of the unit.', render: <div data-overflow-demo style={{ inlineSize: 'min(100%, var(--ds-layout-frame-narrow))', overflowWrap: 'anywhere' }}><Text size="label">Kitchen extractor hood boost schedule</Text></div> },
     rtl: { text: 'In right-to-left languages text starts on the right and the measure applies the same way.', render: <div dir="rtl"><Text size="body">المدفأة تحافظ على درجة حرارة الغرفة</Text></div> },
     expansion: { text: 'German and Finnish run about 30% longer. Lines wrap, so keep labels short enough for one line in a unit.', render: <Text size="label">Zieltemperatur 22,0° · Sparbetrieb ab 23:00</Text> },
   },

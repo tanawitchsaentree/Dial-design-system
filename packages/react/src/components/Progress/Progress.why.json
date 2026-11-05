@@ -1,51 +1,158 @@
 {
   "concept": "Progress shows how far a device task has run, like a washer's cycle or a firmware update, as a recessed groove in the body that fills with printing ink, with its name and reading printed above, and it never moves while idle.",
-  "kind": ["progress", "progress bar", "linear progress"],
+  "kind": [
+    "progress",
+    "progress bar",
+    "linear progress"
+  ],
   "default_to_avoid": [
-    { "pattern": "thin Material linear progress bar in the brand colour with a looping indeterminate stripe", "why_not": "The brand colour spends the unit's one orange on a reading, and a stripe that loops for ever is idle motion that P6 forbids." },
-    { "pattern": "progress bar with a percentage floating inside the fill", "why_not": "Text over a moving fill changes contrast as it passes, and P5 wants labels printed on the inset line instead." }
+    {
+      "pattern": "thin Material linear progress bar in the brand colour with a looping indeterminate stripe",
+      "why_not": "The brand colour spends the unit's one orange on a reading, and a stripe that loops for ever is idle motion that P6 forbids."
+    },
+    {
+      "pattern": "progress bar with a percentage floating inside the fill",
+      "why_not": "Text over a moving fill changes contrast as it passes, and P5 wants labels printed on the inset line instead."
+    }
   ],
   "references": [
-    { "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): a long recessed tuning scale along the front of the case" },
-    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a linear scale window read from left to right" },
-    { "source": "system/refs/ref-01.png: fader groove with a ruler scale beside the display (estimated from chat)" }
+    {
+      "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): a long recessed tuning scale along the front of the case"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a linear scale window read from left to right"
+    },
+    {
+      "source": "system/refs/ref-01.png: fader groove with a ruler scale beside the display (estimated from chat)"
+    }
   ],
   "derivation": [
-    { "p": "P4", "axis": "colour", "consequence": "a lit level uses ink at full step, never orange", "form": "The fill is grille.hole-on, the same full-step ink as a lit grille hole, in both themes, never the accent." },
-    { "p": "P4", "axis": "depth", "consequence": "each hole is a recess (inverse light), never a printed dot", "form": "The groove is one long recess with elevation.well and surface.sunken, shade on its top-left inner edge." },
-    { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "The indeterminate form is a static row of printed ink ticks in the groove; nothing loops, sweeps or pulses." },
-    { "p": "P4", "axis": "motion", "consequence": "a level change fills holes in reading order, ≤120ms, none under Reduce motion", "form": "A new value grows the fill from the start of the line in motion.fill; under reduce motion it jumps at once." },
-    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "The label is printed above the groove at the start, the reading at the end of the same line, never inside the fill." },
-    { "p": "P2", "axis": "type", "consequence": "tabular numerals, a 7-segment face for LCD values", "form": "The printed reading such as 38 min left or 64% uses tabular figures, so it keeps its width as it counts." }
+    {
+      "p": "P4",
+      "axis": "colour",
+      "consequence": "a level that fills a groove is a part, the ring tone lit along its upper edge, never screen ink",
+      "form": "The fill is line.ring, the resin tone that keeps 3:1 off the groove in both themes, with the single top-left light on its upper edge, so a level reads as a part of the unit, not a digital bar (R-005, apps/lab/progress pick B; A full ink rejected as too digital, C lit glass still heavy, D frosted glass under 3:1)."
+    },
+    {
+      "p": "P4",
+      "axis": "depth",
+      "consequence": "each hole is a recess (inverse light), never a printed dot",
+      "form": "The groove is one long recess with elevation.well and surface.sunken, shade on its top-left inner edge."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "The indeterminate form is a static row of printed ink ticks in the groove; nothing loops, sweeps or pulses."
+    },
+    {
+      "p": "P4",
+      "axis": "motion",
+      "consequence": "a level change fills holes in reading order, ≤120ms, none under Reduce motion",
+      "form": "A new value grows the fill from the start of the line in motion.fill; under reduce motion it jumps at once."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The label is printed above the groove at the start, the reading at the end of the same line, never inside the fill."
+    },
+    {
+      "p": "P2",
+      "axis": "type",
+      "consequence": "tabular numerals, a 7-segment face for LCD values",
+      "form": "The printed reading such as 38 min left or 64% uses tabular figures, so it keeps its width as it counts."
+    }
   ],
   "variants": {
     "lab": "apps/lab/progress/index.html",
     "options": [
-      { "id": "A", "name": "recessed groove filling with ink" },
-      { "id": "B", "name": "row of grille holes lighting in order" },
-      { "id": "C", "name": "LCD bar segments in a window" }
+      {
+        "id": "A",
+        "name": "recessed groove filling with ink"
+      },
+      {
+        "id": "B",
+        "name": "row of grille holes lighting in order"
+      },
+      {
+        "id": "C",
+        "name": "LCD bar segments in a window"
+      }
     ],
     "picked": "A",
     "by": "agent",
     "reason": "A is one continuous recess that fills with ink (P4 colour and depth) and works for fine steps like 64%; B reads as a Grille level meter with a coarse 4% step, and C adds a second display window to a unit, which P2 keeps to one."
   },
   "parts": {
-    "root": { "p": "P6", "axis": "space", "why": "The label line and the groove stack at fixed positions, so the unit does not reflow when the task starts or ends." },
-    "head": { "p": "P5", "axis": "space", "why": "One printed line above the groove holds the name at the start and the reading at the end." },
-    "label": { "p": "P5", "axis": "type", "why": "The task name is the caption size in regular weight, printed in ink like a label on the case." },
-    "value": { "p": "P2", "axis": "type", "why": "The reading uses tabular numerals in secondary ink so minutes and percent keep their width while counting." },
-    "groove": { "p": "P4", "axis": "depth", "why": "One long recess takes the inverse light, with shade on its top-left inner edge, sunk into the body like a grille hole." },
-    "fill": { "p": "P4", "axis": "colour", "why": "The fill is full-step ink from the start of the line, the same as a lit hole, and never orange." },
-    "ticks": { "p": "P6", "axis": "motion", "why": "The indeterminate pattern spreads its ticks along the groove and holds them still, because nothing moves while idle." },
-    "tick": { "p": "P4", "axis": "colour", "why": "Each tick is a short capsule of full-step ink in the groove, so working reads as ink, not as a colour." },
-    "sm": { "p": "P6", "axis": "space", "why": "The small groove is 4px tall for lists of many devices where each row needs less height." },
-    "md": { "p": "P6", "axis": "space", "why": "The default groove is 8px tall, the same as the fader track, the main reading of a unit." }
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The label line and the groove stack at fixed positions, so the unit does not reflow when the task starts or ends."
+    },
+    "head": {
+      "p": "P5",
+      "axis": "space",
+      "why": "One printed line above the groove holds the name at the start and the reading at the end."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The task name is the caption size in regular weight, printed in ink like a label on the case."
+    },
+    "value": {
+      "p": "P2",
+      "axis": "type",
+      "why": "The reading uses tabular numerals in secondary ink so minutes and percent keep their width while counting."
+    },
+    "groove": {
+      "p": "P4",
+      "axis": "depth",
+      "why": "One long recess takes the inverse light, with shade on its top-left inner edge, sunk into the body like a grille hole."
+    },
+    "fill": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "The fill is full-step ink from the start of the line, the same as a lit hole, and never orange."
+    },
+    "ticks": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The indeterminate pattern spreads its ticks along the groove and holds them still, because nothing moves while idle."
+    },
+    "tick": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "Each tick is a short capsule of full-step ink in the groove, so working reads as ink, not as a colour."
+    },
+    "sm": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The small groove is 4px tall for lists of many devices where each row needs less height."
+    },
+    "md": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The default groove is 8px tall, the same as the fader track, the main reading of a unit."
+    }
   },
   "states": {
-    "@media prefers-reduced-motion: reduce": { "p": "P4", "axis": "motion", "why": "Under reduce motion the fill jumps to the new value at once, with no growth along the groove." },
-    "@media forced-colors: active": { "p": "P4", "axis": "colour", "why": "In forced colours the groove gets a real edge and the fill and ticks use the text colour, so the level survives." }
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P4",
+      "axis": "motion",
+      "why": "Under reduce motion the fill jumps to the new value at once, with no growth along the groove."
+    },
+    "@media forced-colors: active": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "In forced colours the groove gets a real edge and the fill and ticks use the text colour, so the level survives."
+    }
   },
   "motion": {
-    "inline-size": { "p": "P4", "axis": "motion", "why": "The fill grows along the reading direction in the fill time when the device reports a new value." }
+    "inline-size": {
+      "p": "P4",
+      "axis": "motion",
+      "why": "The fill grows along the reading direction in the fill time when the device reports a new value."
+    }
   }
 }

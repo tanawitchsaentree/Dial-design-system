@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Listbox · three ways to show a list that is always open</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:320px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .lab{font-size:14px;font-weight:500;margin:0 0 8px}
+ .opt{display:flex;align-items:center;gap:12px;box-sizing:border-box;min-block-size:44px;padding-inline:16px;font-size:16px;color:var(--ds-text-secondary)}
+ .opt[aria-selected=true]{color:var(--ds-text-primary);font-weight:500}
+ .ic{inline-size:16px;block-size:16px;flex:none}
+ /* A: one recessed well holds the rows; the chosen row is a tick and weight; the reached row has a raised plate */
+ .A .box{padding:4px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .A .opt{border:1px solid transparent;border-radius:var(--ds-corner-media)}
+ .A .opt.act{background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);border-color:var(--ds-line-ring)}
+ .A .tick{opacity:0}.A [aria-selected=true] .tick{opacity:1}
+ /* B: legend printed straight on the body, no container; the chosen word has an ink index bar */
+ .B .opt{position:relative;padding-inline-start:20px}
+ .B .opt::before{content:"";position:absolute;inset-inline-start:4px;inset-block:12px;inline-size:3px;border-radius:2px;background:transparent}
+ .B .opt[aria-selected=true]::before{background:var(--ds-text-primary)}
+ .B .opt.act{outline:2px solid var(--ds-focus-ring);outline-offset:-2px;border-radius:var(--ds-corner-media)}
+ /* C: the list stands in a plastic panel, rows divided by seams; chosen row has the tick at the end */
+ .C .box{border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-inner);background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-float);overflow:hidden}
+ .C .opt+.opt{border-block-start:1px solid var(--ds-line-divider)}
+ .C .opt{justify-content:space-between}
+ .C .tick{opacity:0}.C [aria-selected=true] .tick{opacity:1}
+ .C .opt.act{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+</style></head><body>
+<h1>Listbox · a list that stays open</h1>
+<div class="row">
+ <div class="unit A"><h2>A · rows inside one recessed well, reached row is a plate</h2><p class="lab">Heating programme</p>
+  <div class="box" role="listbox"><div class="opt" role="option"><span class="ic tick">✓</span>Eco</div><div class="opt act" role="option" aria-selected="false"><span class="ic tick">✓</span>Comfort</div><div class="opt" role="option" aria-selected="true"><span class="ic tick">✓</span>Away</div><div class="opt" role="option"><span class="ic tick">✓</span>Boost</div></div></div>
+ <div class="unit B"><h2>B · legend printed on the body, ink index bar</h2><p class="lab">Heating programme</p>
+  <div role="listbox"><div class="opt" role="option">Eco</div><div class="opt act" role="option">Comfort</div><div class="opt" role="option" aria-selected="true">Away</div><div class="opt" role="option">Boost</div></div></div>
+ <div class="unit C"><h2>C · raised panel, seams between rows, tick at the end</h2><p class="lab">Heating programme</p>
+  <div class="box" role="listbox"><div class="opt" role="option">Eco<span class="ic tick">✓</span></div><div class="opt act" role="option">Comfort<span class="ic tick">✓</span></div><div class="opt" role="option" aria-selected="true">Away<span class="ic tick">✓</span></div><div class="opt" role="option">Boost<span class="ic tick">✓</span></div></div></div>
+</div>
+</body></html>

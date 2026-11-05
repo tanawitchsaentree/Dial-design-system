@@ -1,0 +1,141 @@
+{
+  "concept": "Dropzone is a tray window cut into the body where a file can be let go, the way a device has a recess where a card or a tape drops in. The same window carries a real key that opens the file picker, so letting go is a shortcut and never the only way in.",
+  "kind": [
+    "dropzone",
+    "file drop area",
+    "upload area",
+    "drag and drop target"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "dashed-border dropzone box with a cloud icon that turns blue and tinted when a file is dragged over it",
+      "why_not": "A dashed outline is a generic web frame with no place in the body, and a blue tint tells drag-over by colour alone and spends a second accent."
+    },
+    {
+      "pattern": "dropzone that is a drag target only, with the picker hidden behind a click on the empty area",
+      "why_not": "People who cannot drag, and everyone on a keyboard, have no visible part to reach; the picker needs a real key inside the window."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the entry window is a recess in the body"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a printed legend beside each window says what the part is for"
+    },
+    {
+      "source": "system/FORM.md input class: recessed well, full width of its column, never a bordered rectangle floating on the page"
+    },
+    {
+      "source": "WCAG 2.2 2.5.7 Dragging Movements: a single-pointer alternative to every drag"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The tray takes surface.sunken and elevation.well like Input, so it reads as a place cut into the case that takes something in."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The Choose key inside the window is the 44px Button, and the window itself is three key-heights tall, so there is a large target for a pointer."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "A press, Enter or Space on the real key opens the picker, so the keyboard has the same way in as a drop."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "A file held over the window changes the words, the glyph and the weight of the rim, and nothing moves or resizes."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The Choose key is a plain key in body colour and the held-over rim is ink, so the window never takes the unit's one orange."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/dropzone/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "tray window with a heavier rim on drag-over"
+      },
+      {
+        "id": "B",
+        "name": "card slot that opens wider on drag-over"
+      },
+      {
+        "id": "C",
+        "name": "printed crop marks that close in on drag-over"
+      }
+    ],
+    "reason": "A reuses the recessed window of Input and Display, so it reads as a place that takes something in, and its held-over state shows in three ways (rim, words, glyph) with no reflow. B changes height and so moves what stands below it (against P6), and C is flat printing with no recess, which looks like a viewfinder and not a tray."
+  },
+  "parts": {
+    "root": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The tray is a sunken window with the inverse light and a ring rim, three key-heights tall, so a dragged file has a wide place to land."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "A dot-matrix mark sits above the words and changes shape when a file is held over, so the state does not rest on colour."
+    },
+    "title": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The title says what the window does now, in the emphasis size and medium weight, with a line box tall enough for Thai marks."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The second line is secondary ink on the sunken plastic at more than 4.5:1 and tells the person the other way in."
+    },
+    "key": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The Choose key is a real 44px Button in the tab order, so opening the picker never depends on dragging or on a click in empty space."
+    }
+  },
+  "states": {
+    "data-over=true": {
+      "p": "P6",
+      "axis": "space",
+      "why": "While a file is held over, the rim goes heavier, the words change to Release to add and the glyph changes, all inside the same box so nothing reflows."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled tray loses its recess shadow and fades to half, takes no drop, and its key is disabled too."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the window keeps a real border and the held-over rim draws in the Highlight colour."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion the rim changes at once, with no fade."
+    }
+  },
+  "motion": {
+    "outline-color": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Only the rim changes when a file is held over, on motion.hover, because a state change is the only thing that may move; the words and glyph swap at once."
+    }
+  }
+}

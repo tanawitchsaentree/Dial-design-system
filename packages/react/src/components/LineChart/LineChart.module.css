@@ -1,0 +1,135 @@
+/* LineChart — a trend drawn in ink in a recessed window (lab apps/lab/line-chart pick A; FORM.md display class, P1, P2, P5).
+   The window holds the plot alone; the name, the readout and the legend are printed on the body.
+   Series are told apart by dash pattern and mark shape. No orange, no hue, nothing animates. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  min-inline-size: 0;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+  /* the name, the readout and the legend are ink pressed into the body, like the Meter's scale (D-010) */
+  text-shadow: var(--ds-print-seat);
+}
+.label {
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+}
+.label[data-hidden] {
+  position: absolute;
+  inline-size: var(--ds-space-px);
+  block-size: var(--ds-space-px);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.window {
+  box-sizing: border-box;
+  /* the numbers on an axis run like a ruler, left to right, in every writing direction */
+  direction: ltr;
+  padding: var(--ds-gap-md);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  text-shadow: none;
+  touch-action: pan-y;
+}
+.window:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.sm .window { block-size: var(--ds-space-32); }
+.md .window { block-size: var(--ds-layout-frame-xs); }
+.lg .window { block-size: var(--ds-layout-frame-md); }
+
+.plot {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+  font-size: var(--ds-type-caption);
+  font-variant-numeric: tabular-nums;
+}
+.grid {
+  stroke: var(--ds-line-ring);
+  stroke-width: var(--ds-width-hairline);
+}
+.tick {
+  fill: var(--ds-text-secondary);
+  font-size: var(--ds-type-caption);
+  font-variant-numeric: tabular-nums;
+}
+.cursor {
+  stroke: var(--ds-text-primary);
+  stroke-width: var(--ds-width-hairline);
+}
+.line {
+  fill: none;
+  stroke: var(--ds-text-primary);
+  stroke-width: var(--ds-width-ring);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+[data-series='2'] .line { stroke-dasharray: var(--ds-gap-lg) var(--ds-gap-md); }
+[data-series='3'] .line { stroke-dasharray: var(--ds-width-ring) var(--ds-gap-md); }
+.marker {
+  fill: var(--ds-surface-sunken);
+  stroke: var(--ds-text-primary);
+  stroke-width: var(--ds-width-ring);
+}
+
+.readout {
+  margin: 0;
+  min-block-size: 2lh;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  font-variant-numeric: tabular-nums;
+}
+.readout strong { font-weight: var(--ds-type-weight-medium); }
+.readout[data-idle] { color: var(--ds-text-secondary); }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-gap-sm) var(--ds-gap-2xl);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+}
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-sm);
+}
+.swatch {
+  flex: none;
+  overflow: visible;
+}
+.swatch .line,
+.swatch .marker { vector-effect: non-scaling-stroke; }
+.swatch .marker { fill: var(--ds-surface-solid); }
+.name { font-weight: var(--ds-type-weight-regular); }
+
+.table {
+  position: absolute;
+  inline-size: var(--ds-space-px);
+  block-size: var(--ds-space-px);
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (forced-colors: active) {
+  .window { border-color: CanvasText; }
+  .window:focus-visible { outline-color: Highlight; }
+  .grid { stroke: GrayText; }
+  .tick { fill: CanvasText; }
+  .line, .cursor { stroke: CanvasText; }
+  .marker { fill: Canvas; stroke: CanvasText; }
+  .swatch .marker { fill: Canvas; }
+}

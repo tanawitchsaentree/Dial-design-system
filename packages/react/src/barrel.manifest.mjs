@@ -19,6 +19,6 @@ export const BARREL_MANIFEST = [
   },
   {
     header: `Wave 4: concept depth`,
-    components: ['Legend', 'SceneCard', 'Slot', 'Tray', 'Icon', 'Wiring', 'ExplainMode'],
+    components: ['Legend', 'SceneCard', 'Slot', 'Tray', 'Icon', 'Wiring', 'ExplainMode', 'Textarea', 'Stepper', 'Avatar', 'Popover', 'Radio', 'Tooltip', 'Accordion', 'Breadcrumb', 'Divider', 'Timeline', 'Stat', 'Pagination', 'Spinner', 'Link', 'Center', 'Box', 'AspectRatio', 'Spacer', 'Flex', 'VisuallyHidden', 'Fieldset', 'HelperText', 'Label', 'InputGroup', 'Kbd', 'Image', 'FormField', 'FAB', 'Table', 'Rating', 'Drawer', 'Listbox', 'TagInput', 'RadioCards', 'ContextMenu', 'MultiSelect', 'Autocomplete', 'Combobox', 'Sidebar', 'Anchor', 'DescriptionList', 'NavigationMenu', 'Navbar', 'NumberInput', 'PasswordInput', 'Editable', 'Dropzone', 'FileUpload', 'PinInput', 'SearchInput', 'VirtualList', 'Carousel', 'ColorPicker', 'TransferList', 'Calendar', 'TreeView', 'Wizard', 'OTPFlow', 'DataGrid', 'DatePicker', 'Form', 'RangePicker', 'AppShell', 'CommandPalette', 'AuthForms', 'RichTextEditor', 'LineChart', 'Sparkline', 'BarChart', 'PieChart', 'SettingsLayout', 'Feed', 'Onboarding', 'NotificationCenter', 'KanbanBoard'],
   },
 ];

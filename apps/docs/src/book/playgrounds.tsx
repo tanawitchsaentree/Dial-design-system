@@ -17,7 +17,9 @@ function Playground({ title, controls, preview, code, note, bare, backdrop }: { 
     <div className="playground" data-playground="">
       <p className="flush pg-title">{title}</p>
       <div className="pg-body">
-        <div className="pg-controls" data-controls="">{controls}</div>
+        {/* the controls are the system's own Select and Slider, so they are a live example too (G-N1): every
+            gate that checks a live component checks them, and their glass is the system's look, not chrome */}
+        <div className="pg-controls" data-controls="" data-example-live="">{controls}</div>
         <div className="pg-preview" data-preview="">{bare ? preview : <Stage className="pg-stage" backdrop={backdrop}>{preview}</Stage>}</div>
       </div>
       {note && <div className="pg-note">{note}</div>}
@@ -38,7 +40,7 @@ export function ContrastPlayground() {
   const solids = Object.entries(TOKENS).filter(([p, t]) => t.type === 'color' && t.tier === 'primitive' && alphaOf(String(t.value)) === 1);
   const [fg, setFg] = useState(solids[0]?.[0] ?? '');
   // start on the strongest pair, so the page opens on a passing example and the reader explores down from it
-  const [bg, setBg] = useState(() => solids.reduce((best, [p, t]) => (solids[0] && ratio(hex(String(t.value)), hex(String(solids[0][1].value))) > ratio(hex(String(TOKENS[best]?.value ?? '#000000')), hex(String(solids[0][1].value))) ? p : best), solids[solids.length - 1]?.[0] ?? ''));
+  const [bg, setBg] = useState(() => solids.reduce((best, [p, t]) => (solids[0] && ratio(hex(String(t.value)), hex(String(solids[0][1].value))) > ratio(hex(String(TOKENS[best]?.value ?? '#000000')), hex(String(solids[0][1].value))) ? p : best), solids[solids.length - 1]?.[0] ?? '')); // no-hardcode-ok: comparison sentinel, not a style
   if (!fg || !bg) return <p className="fail">No solid primitive colours to compare.</p>;
   const r = Math.round(ratio(hex(String(TOKENS[fg].value)), hex(String(TOKENS[bg].value))) * 100) / 100;
   return (

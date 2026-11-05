@@ -1,0 +1,105 @@
+/* Radio — a column of round keys of matte ABS, one chosen, each word printed beside its key (system/FORM.md control class, D-003). */
+.group {
+  display: grid;
+  min-inline-size: var(--ds-gap-none);
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  border: var(--ds-gap-none);
+}
+.legend {
+  padding: var(--ds-gap-none);
+  margin-block-end: var(--ds-gap-xs);
+  font-family: var(--ds-type-family);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-lg);
+  min-block-size: var(--ds-control-md);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+  cursor: pointer;
+}
+/* Visually hidden, still focusable and announced */
+.input {
+  position: absolute;
+  inset-block-start: var(--ds-gap-none);
+  inset-inline-start: var(--ds-gap-none);
+  inline-size: var(--ds-width-hairline);
+  block-size: var(--ds-width-hairline);
+  margin: var(--ds-gap-none);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.key {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  box-sizing: border-box;
+  inline-size: var(--ds-control-check);
+  block-size: var(--ds-control-check);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-raised);
+  color: var(--ds-text-primary);
+  box-shadow: var(--ds-elevation-part);
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing),
+    border-color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+/* the dot is printing ink standing on the key face; it fades in on motion.release and out faster on motion.exit (D-008) */
+.dot {
+  box-sizing: content-box;
+  inline-size: var(--ds-gap-none);
+  block-size: var(--ds-gap-none);
+  border: var(--ds-control-dot) solid currentColor;
+  border-radius: var(--ds-corner-round);
+  opacity: 0;
+  transition: opacity var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.text {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+}
+
+.input:checked + .key .dot {
+  opacity: 1;
+  transition: opacity var(--ds-motion-release) var(--ds-motion-easing);
+}
+.input:checked ~ .text { font-weight: var(--ds-type-weight-medium); }
+
+.item:hover .key { border-color: var(--ds-text-secondary); transition-duration: var(--ds-motion-hover); }
+.item:active .key {
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+  box-shadow: none;
+  transition-duration: var(--ds-motion-press);
+}
+.input:focus-visible + .key {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.input:disabled + .key {
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+}
+.item[data-disabled] { cursor: not-allowed; }
+.item[data-disabled]:hover .key { border-color: var(--ds-line-ring); }
+.item[data-disabled]:active .key { transform: none; box-shadow: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .key { transition: border-color var(--ds-motion-hover) var(--ds-motion-easing); }
+  .item:active .key { transform: none; }
+  .dot { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .key { border-color: ButtonText; }
+  .dot { border-color: CanvasText; }
+}

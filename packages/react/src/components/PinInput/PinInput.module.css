@@ -1,0 +1,82 @@
+/* PinInput — one recessed window per digit (system/FORM.md input class, D-003). Each cell is the Input well
+   made square. The label is printed above on the inset line. One light, top-left: the well takes the inverse
+   light. No orange. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-gap-md);
+}
+.cell {
+  box-sizing: border-box;
+  flex: none;
+  inline-size: var(--pin-cell);
+  block-size: var(--pin-cell);
+  margin: 0;
+  padding: 0;
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  font: inherit;
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--ds-type-leading-body);
+  text-align: center;
+  color: var(--ds-text-primary);
+  caret-color: var(--ds-text-primary);
+  outline: none;
+}
+.hint {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-sm);
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-status-critical-mark);
+}
+.glyph {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-block-start: var(--ds-space-0-5);
+}
+.md { --pin-cell: var(--ds-control-md); }
+.lg { --pin-cell: var(--ds-control-lg); }
+.lg .cell { font-size: var(--ds-type-title); }
+
+.cell[data-filled='true'] { border-color: var(--ds-text-secondary); }
+.cell:focus {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.root[data-invalid='true'] .cell { border-color: var(--ds-status-critical-mark); }
+.root[data-disabled='true'] .cell { box-shadow: none; cursor: not-allowed; opacity: var(--ds-opacity-disabled); }
+.root[data-readonly='true'] .cell { caret-color: transparent; cursor: default; }
+
+@media (forced-colors: active) {
+  .cell { border-color: CanvasText; }
+  .root[data-invalid='true'] .cell { border-color: Mark; }
+  .cell:focus { outline-color: Highlight; }
+}

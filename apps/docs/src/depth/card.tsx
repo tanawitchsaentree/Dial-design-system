@@ -48,7 +48,7 @@ export const CARD: Depth = {
     rows: [['A grid of rooms or devices', 'One card per unit, all the same width in a column.'], ['A list', 'Small cards with padding sm, one per row.'], ['A page section', 'A large card with padding lg around a few lines of text.']],
     examples: [
       { title: 'A grid of two cards', render: <Stack direction="row" gap="lg"><W w={220}><Card><Text>Kitchen · 20 °C</Text></Card></W><W w={220}><Card><Text>Hallway · 18 °C</Text></Card></W></Stack> },
-      { title: 'A list of small cards', render: <Stack gap="md" style={{ inlineSize: 300 }}><Card padding="sm"><Text>Living room · on</Text></Card><Card padding="sm"><Text>Bedroom · off</Text></Card></Stack> },
+      { title: 'A list of small cards', render: <Stack gap="md" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }}><Card padding="sm"><Text>Living room · on</Text></Card><Card padding="sm"><Text>Bedroom · off</Text></Card></Stack> },
     ],
   },
   combinations: {

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · SettingsLayout · three ways to frame a settings page</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1.lab{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+ .unit{inline-size:400px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .cap{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .unit h2,.unit h3{margin:0;font-weight:500}
+ .unit h2{font-size:26px;margin-block-end:4px}
+ .unit h3{font-size:18px}
+ .sub{margin:0 0 24px;font-size:14px;color:var(--ds-text-secondary)}
+ .lbl{font-size:15px}.dsc{margin:2px 0 0;font-size:13px;color:var(--ds-text-secondary)}
+ .seam{block-size:0;border-block-start:1px solid var(--ds-line-divider);border-block-end:1px solid var(--ds-material-lit)}
+ .r{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding-block:12px;min-block-size:44px}
+ .r>.t{flex:1 1 150px}.r>.c{flex:0 0 auto}
+ .sw{inline-size:56px;block-size:32px;border-radius:var(--ds-corner-round,16px);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);position:relative;display:block}
+ .sw::after{content:"";position:absolute;inset-block:3px;inset-inline-start:3px;inline-size:24px;border-radius:50%;background:var(--ds-surface-raised);border:1px solid var(--ds-line-ring)}
+ .sw.on::after{inset-inline-start:27px}
+ .sel{min-inline-size:132px;padding:10px 14px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);font-size:14px}
+ section+section{margin-block-start:28px}
+ /* A: each section a printed box, heading above the box */
+ .A section>h3{margin-block-end:8px}
+ .A .box{border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);padding:0 16px}
+ .A .box>.seam:first-child{display:none}
+ /* B: no box; heading and small print in the margin column, rows separated only by seams */
+ .B section{display:flex;flex-wrap:wrap;gap:8px 24px}
+ .B section>header{flex:1 1 130px}.B section>.rows{flex:3 1 220px}
+ .B section>header p{margin:4px 0 0;font-size:13px;color:var(--ds-text-secondary)}
+ /* C: each section its own plastic panel */
+ .C section{padding:4px 16px 4px;border-radius:var(--ds-corner-media);background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-unit)}
+ .C section>h3{padding-block:12px 0}
+</style></head><body>
+<h1 class="lab">SettingsLayout · a titled column of sections, each row a label and its control</h1>
+<div class="row">
+ <div class="unit A"><p class="cap">A · printed box per section</p>
+  <h2>Repository</h2><p class="sub">Choose how this repository starts.</p>
+  <section><h3>General</h3><div class="box">
+   <div class="r"><div class="t"><div class="lbl">Visibility</div><p class="dsc">Who can see it.</p></div><div class="c sel">Private ▾</div></div><div class="seam"></div>
+   <div class="r"><div class="t"><div class="lbl">Template</div><p class="dsc">Others can copy it.</p></div><div class="c"><i class="sw"></i></div></div></div></section>
+  <section><h3>Features</h3><div class="box">
+   <div class="r"><div class="t"><div class="lbl">Issues</div><p class="dsc">Track work here.</p></div><div class="c"><i class="sw on"></i></div></div><div class="seam"></div>
+   <div class="r"><div class="t"><div class="lbl">Wiki</div><p class="dsc">Keep notes with the code.</p></div><div class="c"><i class="sw"></i></div></div></div></section>
+ </div>
+ <div class="unit B"><p class="cap">B · margin heading, seams only</p>
+  <h2>Repository</h2><p class="sub">Choose how this repository starts.</p>
+  <section><header><h3>General</h3><p>Name and access.</p></header><div class="rows">
+   <div class="r"><div class="t"><div class="lbl">Visibility</div><p class="dsc">Who can see it.</p></div><div class="c sel">Private ▾</div></div><div class="seam"></div>
+   <div class="r"><div class="t"><div class="lbl">Template</div><p class="dsc">Others can copy it.</p></div><div class="c"><i class="sw"></i></div></div></div></section>
+  <section><header><h3>Features</h3><p>What it offers.</p></header><div class="rows">
+   <div class="r"><div class="t"><div class="lbl">Issues</div><p class="dsc">Track work here.</p></div><div class="c"><i class="sw on"></i></div></div><div class="seam"></div>
+   <div class="r"><div class="t"><div class="lbl">Wiki</div><p class="dsc">Keep notes with the code.</p></div><div class="c"><i class="sw"></i></div></div></div></section>
+ </div>
+ <div class="unit C"><p class="cap">C · a raised panel per section</p>
+  <h2>Repository</h2><p class="sub">Choose how this repository starts.</p>
+  <section><h3>General</h3>
+   <div class="r"><div class="t"><div class="lbl">Visibility</div><p class="dsc">Who can see it.</p></div><div class="c sel">Private ▾</div></div><div class="seam"></div>
+   <div class="r"><div class="t"><div class="lbl">Template</div><p class="dsc">Others can copy it.</p></div><div class="c"><i class="sw"></i></div></div></section>
+  <section><h3>Features</h3>
+   <div class="r"><div class="t"><div class="lbl">Issues</div><p class="dsc">Track work here.</p></div><div class="c"><i class="sw on"></i></div></div><div class="seam"></div>
+   <div class="r"><div class="t"><div class="lbl">Wiki</div><p class="dsc">Keep notes with the code.</p></div><div class="c"><i class="sw"></i></div></div></section>
+ </div>
+</div></body></html>

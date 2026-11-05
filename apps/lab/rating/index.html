@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Rating · three ways to print 1 to 5</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .lab{font-size:13px;color:var(--ds-text-secondary);margin:18px 0 6px}
+ .r{display:flex;align-items:center}
+ .m{inline-size:44px;block-size:44px;display:grid;place-items:center}
+ .m svg{overflow:visible}
+ .on{color:var(--ds-text-primary)} .off{color:var(--ds-text-secondary)}
+ .v{margin-inline-start:12px;font-size:14px;font-variant-numeric:tabular-nums;color:var(--ds-text-secondary)}
+ /* C: marks sit in one recessed window */
+ .C .win{display:inline-flex;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);padding-inline:4px}
+</style></head><body>
+<h1>Rating · pick or show 1 to 5</h1>
+<div class="row">
+ <div class="unit A"><h2>A · round lattice: lit disc vs hollow ring</h2><div class="lab">Interactive, 3</div><div class="r" id="a1"></div><div class="lab">Display, 3.5</div><div class="r" id="a2"></div></div>
+ <div class="unit B"><h2>B · square block: lit block vs four corner marks</h2><div class="lab">Interactive, 3</div><div class="r" id="b1"></div><div class="lab">Display, 3.5</div><div class="r" id="b2"></div></div>
+ <div class="unit C"><h2>C · diamonds in one window: lit vs outline</h2><div class="lab">Interactive, 3</div><div class="r" id="c1"></div><div class="lab">Display, 3.5</div><div class="r" id="c2"></div></div>
+</div>
+<script>
+const NS='http://www.w3.org/2000/svg';
+function svg(rows,litFn,n,r=1){const p=3,b=n*p;let s=`<svg viewBox="0 0 ${b} ${b}" width="24" height="24" fill="currentColor">`;
+ for(let y=0;y<n;y++)for(let x=0;x<n;x++){const lit=litFn(x,y);if(lit)s+=`<circle cx="${x*p+1.5}" cy="${y*p+1.5}" r="${r}" ${lit==2?'opacity="1"':''}/>`}
+ return s+'</svg>'}
+const disc=['.###.','#####','#####','#####','.###.'], ring=['.###.','#...#','#...#','#...#','.###.'];
+const dia=['..#..','.###.','#####','.###.','..#..'], diaO=['..#..','.#.#.','#...#','.#.#.','..#..'];
+function A(f){return svg(0,(x,y)=>f==1?disc[y][x]=='#':f==.5?(x<2.5&&disc[y][x]=='#')||ring[y][x]=='#':ring[y][x]=='#',5)}
+function B(f,i){const h=i+1;return svg(0,(x,y)=>{ if(x%2) return false; const col=x/2; return false},5)}
+// B: 5 columns of dots, the mark i is a stack of height i+1; lit = full stack, empty = only its base dot
+const sq=['.....','.###.','.###.','.###.','.....'], cor=['#...#','.....','.....','.....','#...#'];
+function Bm(f){return svg(0,(x,y)=>f==1?sq[y][x]=='#':f==.5?(x<2.5&&sq[y][x]=='#')||cor[y][x]=='#':cor[y][x]=='#',5)}
+function C(f){return svg(0,(x,y)=>f==1?dia[y][x]=='#':f==.5?(x<2.5&&dia[y][x]=='#')||diaO[y][x]=='#':diaO[y][x]=='#',5)}
+function build(id,fn,val,win){const el=document.getElementById(id);let h='';for(let i=0;i<5;i++){const f=Math.max(0,Math.min(1,val-i));h+=`<span class="m ${f>0?'on':'off'}">${fn(f,i)}</span>`}
+ el.innerHTML=(win?`<span class="win">${h}</span>`:h)+`<span class="v">${val} / 5</span>`}
+build('a1',A,3);build('a2',A,3.5);build('b1',Bm,3);build('b2',Bm,3.5);build('c1',C,3,1);build('c2',C,3.5,1);
+</script></body></html>

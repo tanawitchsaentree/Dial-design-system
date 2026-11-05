@@ -1,0 +1,171 @@
+{
+  "concept": "OTPFlow is the whole one-time-code step of a sign-in, drawn as one small appliance: a title, one display window that says where the code went and how long until a new one may be asked for, the row of digit windows, and a plain key to send again. The window reads out the state and the key only acts.",
+  "kind": [
+    "otp flow",
+    "one-time code step",
+    "verification step",
+    "code entry with resend"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "otp flow as a centred card with a resend link that carries its countdown in brackets and a big accent verify button",
+      "why_not": "The countdown is repeated in the link and the accent is spent on a button the finished code does not need; here the window holds the countdown once and the code verifies itself when the last digit lands."
+    },
+    {
+      "pattern": "otp flow that shakes the boxes and turns them green or red on a verdict",
+      "why_not": "It tells the verdict by colour and motion alone; here the verdict is a glyph and words, read out through the status line."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): one window carries the reading and the keys below only act"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the dial scale is read at the top of the case, the controls sit under it"
+    },
+    {
+      "source": "system/FORM.md display and input classes: recessed window, printing on the inset line"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: status role for a polite live region that does not take focus"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "space",
+      "consequence": "the display window sits at the top of the unit",
+      "form": "The window with the destination and the countdown comes straight after the title, above the digit row."
+    },
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The window takes surface.sunken and elevation.well, the same cut-in as the digit cells, so the reading never looks like a key."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "A status line is a polite live region that speaks the verdicts and the moment a new code may be asked for, and the ticking seconds stay silent."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "tabular figures everywhere a number changes",
+      "form": "The countdown and the destination use tabular figures, so the seconds change without the window width moving."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The message line keeps one line of height whether it holds a hint, the success words or nothing."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The send-again key is a plain key and every part of the flow is ink; the one orange part is left to the host unit."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/otp-flow/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "plain stack with the countdown in the key"
+      },
+      {
+        "id": "B",
+        "name": "display window with destination and countdown"
+      },
+      {
+        "id": "C",
+        "name": "legend of sent, enter, verified"
+      }
+    ],
+    "reason": "B puts the destination and the countdown in one recessed window so the state is read once at the top, and the key only acts; A repeats the countdown in a disabled key and spends the sentence on the destination, and C prints a three-word legend for a path that has no choices, which breaks the legend rule that a legend lists options."
+  },
+  "parts": {
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The step stacks title, window, digit row, message and key in one column on the body's inset line, and its blocks keep their places between states."
+    },
+    "title": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The step's name is the unit's heading in medium weight, sentence case, printed on the inset line above the window."
+    },
+    "window": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "One recessed window says where the code went on its start side and how long until a new one on its end side, in the inverse light of the digit cells."
+    },
+    "sent": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The small word that names the destination is caption size in secondary ink, so the number below it is read first."
+    },
+    "destination": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The phone number or address is printed in medium weight with tabular figures and wraps anywhere, so a long address never pushes the countdown out of the window."
+    },
+    "reading": {
+      "p": "P2",
+      "axis": "type",
+      "why": "The countdown is a minutes-and-seconds reading in tabular figures, hidden from assistive tech because the status line speaks it only when it ends."
+    },
+    "field": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The digit row is the PinInput as it is, with its own label and 44px cells; the flow adds nothing around it but the same gap as the other blocks."
+    },
+    "line": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The message line under the digits holds a hint or the success words and keeps one line of height so nothing below it jumps."
+    },
+    "mark": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A check glyph stands before the success words, so the verdict is a mark and words and never a colour."
+    },
+    "actions": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The send-again key stands on its own row on the inset line, a 44px key as large as every key in dial."
+    },
+    "resend": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The resend key is a plain body-coloured key with no orange, because the orange belongs to the host unit's one primary control."
+    }
+  },
+  "states": {
+    "data-ready": {
+      "p": "P2",
+      "axis": "type",
+      "why": "When the countdown ends the reading goes from secondary to primary ink and the key rises from its flat, disabled height, so the change is a height as well as a tone."
+    },
+    "data-status=success": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "After a good code the digits stop taking input, a check and the words print under them in primary ink, and the key goes flat."
+    },
+    "data-status=verifying": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "While the host checks the code the digits are read-only, the key is flat and the words go to primary ink, so a second press or a changed digit cannot cross a check in flight."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the window keeps a real border and its text and the success glyph draw in the system text colour."
+    }
+  },
+  "motion": {}
+}

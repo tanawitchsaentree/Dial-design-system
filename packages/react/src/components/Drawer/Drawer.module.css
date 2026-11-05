@@ -1,0 +1,129 @@
+/* Drawer — the side flap of an appliance slid open over the room (FORM.md surface class, elevation.float, D-003).
+   Same body and light as Sheet and Dialog; it holds a list to pick from and stands full height, inset from every edge.
+   Every change of state moves (P6, D-008): in on motion.release and the decelerating curve, out on motion.exit and the accelerating one. */
+.root {
+  --drawer-dir: 1;
+  --drawer-travel: calc(100% + var(--ds-gap-inset));
+  box-sizing: border-box;
+  position: fixed;
+  inset-block-start: var(--ds-gap-inset);
+  inset-block-end: auto;
+  inset-inline: auto var(--ds-gap-inset);
+  inline-size: calc(100% - var(--ds-gap-inset) * 2);
+  max-inline-size: var(--ds-layout-sidebar);
+  block-size: calc(100% - var(--ds-gap-inset) * 2);
+  max-block-size: none;
+  margin: 0;
+  padding: var(--ds-gap-inset);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-panel);
+  background: var(--ds-surface-solid);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  box-shadow: var(--ds-elevation-float), inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-material-lit);
+  z-index: var(--ds-layer-overlay);
+  overflow: hidden;
+  outline: none;
+  transform: none;
+  opacity: 1;
+  transition:
+    opacity var(--ds-motion-release) var(--ds-motion-easing),
+    transform var(--ds-motion-release) var(--ds-motion-easing);
+}
+.root:dir(rtl) { --drawer-dir: -1; }
+.root[open] { display: flex; flex-direction: column; gap: var(--ds-gap-xl); }
+
+/* side="start": the drawer stands at the inline start and slides in from that side */
+.start { --drawer-dir: -1; inset-inline: var(--ds-gap-inset) auto; }
+.start:dir(rtl) { --drawer-dir: 1; }
+
+.root::backdrop {
+  background: var(--ds-surface-scrim);
+  opacity: 1;
+  transition: opacity var(--ds-motion-release) var(--ds-motion-easing);
+}
+@starting-style {
+  .root[data-state='open'] { opacity: 0; transform: translateX(calc(var(--drawer-travel) * var(--drawer-dir))); }
+  .root[data-state='open']::backdrop { opacity: 0; }
+}
+.root[data-state='closing'] {
+  opacity: 0;
+  transform: translateX(calc(var(--drawer-travel) * var(--drawer-dir)));
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+  pointer-events: none;
+}
+.root[data-state='closing']::backdrop {
+  opacity: 0;
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+}
+
+/* modal={false}: the drawer shown in place, in the flow of the page, with no scrim. */
+.root.inline {
+  position: relative;
+  inset: auto;
+  inline-size: 100%;
+  block-size: auto;
+  margin: 0;
+  z-index: auto;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-lg);
+  flex: none;
+  min-block-size: var(--ds-control-md);
+  padding-block-end: var(--ds-gap-md);
+  border-block-end: var(--ds-width-hairline) solid var(--ds-line-divider);
+}
+.title {
+  margin: 0;
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  overflow-wrap: anywhere;
+}
+.close { flex: none; }
+/* the scroll region keeps a little room so a focus ring on a row at its edge is not cut off */
+.content {
+  flex: 1 1 auto;
+  min-block-size: 0;
+  min-inline-size: 0;
+  padding: var(--ds-gap-xs);
+  margin: calc(var(--ds-gap-xs) * -1);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+}
+.actions {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ds-gap-md);
+  padding-block-start: var(--ds-gap-md);
+  border-block-start: var(--ds-width-hairline) solid var(--ds-line-divider);
+}
+
+/* under Reduce motion nothing travels; the drawer still fades on motion.hover */
+@media (prefers-reduced-motion: reduce) {
+  .root { --drawer-travel: var(--ds-gap-none); }
+  .root,
+  .root::backdrop,
+  .root[data-state='closing'],
+  .root[data-state='closing']::backdrop {
+    transition-duration: var(--ds-motion-hover);
+    transition-timing-function: var(--ds-motion-easing);
+  }
+}
+@media (forced-colors: active) {
+  .root { border-color: CanvasText; }
+  .head,
+  .actions { border-color: CanvasText; }
+}

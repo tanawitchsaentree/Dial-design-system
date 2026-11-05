@@ -4,7 +4,7 @@ import type { Depth } from './types';
 
 const Unit = ({ children }: { children: React.ReactNode }) => <div className="demo-box demo-card">{children}</div>;
 const Line = ({ name, children }: { name: string; children: React.ReactNode }) => (
-  <Stack direction="row" align="center" gap="md" style={{ justifyContent: 'space-between', maxInlineSize: 300 }}><span>{name}</span>{children}</Stack>
+  <Stack direction="row" align="center" gap="md" style={{ justifyContent: 'space-between', maxInlineSize: 'var(--ds-layout-frame-sm)' }}><span>{name}</span>{children}</Stack>
 );
 
 export const BADGE: Depth = {
@@ -61,7 +61,7 @@ export const BADGE: Depth = {
       do: <Badge tone="critical">Door open</Badge>, doNote: 'Says what is wrong.',
       dont: <Badge tone="critical">Error</Badge>, dontNote: 'Something is wrong, and the reader has to guess what.',
     },
-    overflow: { text: 'A long word wraps under itself, and the lamp stays on the first line. Keep the word short.', render: <div data-overflow-demo="" style={{ inlineSize: 160 }}><Badge tone="warning">Water tank almost empty, fill it soon</Badge></div> },
+    overflow: { text: 'A long word wraps under itself, and the lamp stays on the first line. Keep the word short.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-narrow))' }}><Badge tone="warning">Water tank almost empty, fill it soon</Badge></div> },
     rtl: { text: 'In right-to-left languages the lamp sits to the right of the word.', render: <div dir="rtl"><Badge tone="positive">متصل</Badge></div> },
     expansion: { text: 'German and Finnish words can run 30% longer. The line grows sideways.', render: <Badge tone="warning">Filterwechsel fällig</Badge> },
   },

@@ -29,6 +29,8 @@
 //   shape        G-CH1 a card is never a pill · G-RW1 controls in one row share their edges
 //   motion       G-MO2 the motion tokens keep the rhythm (fast on, slow off; decelerate in, accelerate out)
 //                G-MO1 every control on a component page answers its hover and press in that rhythm
+//                G-MO5 every change an interaction makes moves (nothing snaps, appears or vanishes in one frame)
+//   spacing      G-SP2 a control and the stage it drives stand 24px apart
 //                G-MO3 a toggle changes state without a swap: no neighbour jumps, no fill already at its end at 60ms
 //                G-MO4 an overlay decelerates in, accelerates out, and leaves in at most 0.6 × its entrance
 //   popups       G-PC1 every popup a demo opens is whole (no clipping parent, no screen edge)
@@ -52,9 +54,9 @@ import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 import { docsConfig, routes, componentPages, url, routeFilter } from './config.mjs';
 import { serveDist } from './serve-dist.mjs';
-import { motionTokenProblems, stateRhythm, toggleChange, overlayChoreography, OVERLAY_TRIGGER } from './motion-probes.mjs';
+import { motionTokenProblems, stateRhythm, toggleChange, overlayChoreography, interactionMotion, OVERLAY_TRIGGER } from './motion-probes.mjs';
 import { duplicateOptionsProbe, barJobsProbe, focusClipProbe, splitAlignProbe, showcaseProbe, playgroundProbe, popupClipProbe } from './ui-probes.mjs';
-import { glassCssProblems, glassRecipeProbe, bareSurfaceProbe, meshShareProbe, cardStats, anchorDrift, pillCardProbe, rowEdgeProbe } from './surface-probes.mjs';
+import { glassCssProblems, glassRecipeProbe, bareSurfaceProbe, meshShareProbe, cardStats, anchorDrift, pillCardProbe, rowEdgeProbe, controlStageProbe, iconLanguageProbe, focusRingProbe } from './surface-probes.mjs';
 
 const C = docsConfig();
 const ROUTES = routeFilter(routes(C));
@@ -195,10 +197,24 @@ try {
         const res = await page.evaluate(() => {
           const s = [...document.querySelectorAll('main [data-surface]')].filter((c) => c.getBoundingClientRect().width > 0);
           const out = [];
+          // a surface inside a scroller or a clipping frame only occupies what the frame shows (dial K-16:
+          // a long List in a 150px PullToRefresh frame was measured at its full, hidden length)
+          const shown = (el) => {
+            const r = el.getBoundingClientRect(); let { left, top, right, bottom } = r;
+            for (let e = el.parentElement; e && e !== document.body; e = e.parentElement) {
+              const cs = getComputedStyle(e);
+              if (cs.overflowX === 'visible' && cs.overflowY === 'visible') continue;
+              const c = e.getBoundingClientRect();
+              if (cs.overflowX !== 'visible') { left = Math.max(left, c.left); right = Math.min(right, c.right); }
+              if (cs.overflowY !== 'visible') { top = Math.max(top, c.top); bottom = Math.min(bottom, c.bottom); }
+            }
+            return { left, top, right, bottom };
+          };
           for (let i = 0; i < s.length; i++) for (let j = i + 1; j < s.length; j++) {
             const a = s[i], b = s[j];
             if (a.contains(b) || b.contains(a)) continue;
-            const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+            const ra = shown(a), rb = shown(b);
+            if (ra.right <= ra.left || ra.bottom <= ra.top || rb.right <= rb.left || rb.bottom <= rb.top) continue;
             const gap = Math.max(Math.max(rb.left - ra.right, ra.left - rb.right), Math.max(rb.top - ra.bottom, ra.top - rb.bottom));
             if (gap < 8) out.push(`${(a.textContent || '').trim().slice(0, 16)} ↔ ${(b.textContent || '').trim().slice(0, 16)} (${Math.round(gap)}px)`);
           }
@@ -970,7 +986,9 @@ try {
           if (el.matches('[role="slider"]')) {
             const bar = el.closest('[data-component]'); const bg = bar && parse(getComputedStyle(bar).backgroundColor);
             if (bar && bg && bg.a > 0 && bar.getBoundingClientRect().height >= 32) el = bar;
-            else if (bar) { const drawn = [...bar.querySelectorAll('*')].filter((d) => !d.matches('[role="slider"]') && !el.contains(d) && (() => { const c = parse(getComputedStyle(d).backgroundColor); return (c && c.a > 0) || getComputedStyle(d).boxShadow !== 'none'; })()).sort((a, b) => b.getBoundingClientRect().width - a.getBoundingClientRect().width)[0]; if (drawn) { el = drawn; el.setAttribute('data-nt2-channel', ''); } }
+            // a channel is a track: wider than twice its height and at least a thumb long (dial R-008: a Rotary's 2px
+            // printed tick with a print seat was taken for its channel and read 1.3:1)
+            else if (bar) { const drawn = [...bar.querySelectorAll('*')].filter((d) => !d.matches('[role="slider"]') && !el.contains(d) && (() => { const r = d.getBoundingClientRect(); return r.width >= 24 && r.width > r.height * 2; })() && (() => { const c = parse(getComputedStyle(d).backgroundColor); return (c && c.a > 0) || getComputedStyle(d).boxShadow !== 'none'; })()).sort((a, b) => b.getBoundingClientRect().width - a.getBoundingClientRect().width)[0]; if (drawn) { el = drawn; el.setAttribute('data-nt2-channel', ''); } }
           }
           const root = el.closest('[data-component]') ?? el;
           let best = 0;
@@ -1023,6 +1041,15 @@ try {
               box = well; const ground = groundOf(well.parentElement ?? well);
               for (const m of ws.boxShadow.matchAll(/rgba?\([^)]+\)/g)) { const c = parse(m[0]); if (c && c.a > 0) best = Math.max(best, ratio(over(c, ground), ground)); }
             }
+          }
+          // a radio printed as a word in a radiogroup (dial K-17: Legend, a printed scale whose words are the
+          // positions) draws no box at all; the word is the control, so it is found by its ink, the way a text
+          // link is (WCAG 1.4.11 Understanding: text that identifies a component is covered by 1.4.3)
+          // only when it paints nothing at all: a radio that draws a faint ring is judged by the ring, never its label
+          const paints = (d) => { const cs = getComputedStyle(d); const f = parse(cs.backgroundColor); return (f && f.a > 0) || cs.boxShadow !== 'none' || ((parseFloat(cs.borderTopWidth) || 0) >= 1 && cs.borderTopStyle !== 'none' && (parse(cs.borderTopColor)?.a ?? 0) > 0); };
+          if (best < 3 && box === el && el.matches('[role="radio"]') && el.closest('[role="radiogroup"]') && el.textContent.trim() && !paints(el) && !drawn.some(paints)) {
+            const ink = parse(getComputedStyle(el).color); const ground = groundOf(el.parentElement ?? el);
+            if (ink && ink.a > 0) best = Math.max(best, ratio(over(ink, ground), ground));
           }
           // several controls can share one drawn box (Pane's SegmentedControl, 2026-10-29: every segment is drawn
           // by its track); a box keeps the first index it was given, or the earlier locator finds nothing
@@ -1345,6 +1372,38 @@ try {
     return `${glass} glass elements on ${routes.length} pages carry ${R.functions.join(' + ')}`;
   });
 
+  await gate('G-IC2', 'one icon language: every small glyph in the book is the system icon, never a glyph a component or an example draws itself', async () => {
+    // dial R-005, 2026-11-02: "icon ควรจะ digital เท่าๆกัน" — dot-matrix keys beside stroked − and + on one unit
+    const bad = []; let pages = 0;
+    for (const r of ROUTES) { await go(r); pages++; for (const x of await page.evaluate(iconLanguageProbe, { icon: C.iconSelector ?? '[data-component="Icon"]', exempt: (C.iconExempt ?? []).join(', '), max: C.iconMax ?? 32 })) bad.push(`${r}: ${x}`); }
+    fail([...new Set(bad)], 'glyphs outside the icon set');
+    return `${pages} pages`;
+  });
+
+  await gate('G-FR2', 'a focus ring sits on the part that moves: a slider or switch is never ringed as a whole row', async () => {
+    // dial R-005, 2026-11-02: "ไม่ชอบ focus ring" — a heavy box round the whole fader and its ticks
+    const bad = []; let n = 0;
+    for (const r of ROUTES.filter((x) => x.startsWith(`${C.componentsBase}/`) && x.endsWith('/code'))) {
+      await go(r);
+      n += await page.evaluate(() => document.querySelectorAll('main [data-example-live] :is([role="slider"], [role="switch"])').length);
+      for (const x of await page.evaluate(focusRingProbe, {})) bad.push(`${r}: ${x}`);
+    }
+    expect(n > 0, 'NO SLIDERS OR SWITCHES in any live example');
+    fail([...new Set(bad)], 'rings round a row');
+    return `${n} sliders and switches`;
+  });
+
+  await gate('G-SP2', 'a control and the stage it drives stand at least one section step apart (24px)', async () => {
+    // dial R-004, 2026-11-02: "spacing เหี้ยมาก" — the grid Anatomy's Breakpoint select stood flush on its stage
+    const bad = []; const min = C.controlStageGap ?? 24;
+    for (const w of [375, 1280]) {
+      await page.setViewportSize({ width: w, height: 900 });
+      for (const r of ROUTES) { await go(r); for (const x of await page.evaluate(controlStageProbe, { min })) bad.push(`${w}px ${r}: ${x}`); }
+    }
+    await page.setViewportSize({ width: 1440, height: 900 });
+    fail([...new Set(bad)], 'controls on their stage');
+  });
+
   await gate('G-BR1', 'a subject shown as its own surface paints one, and no live example puts text straight on the photo', async () => {
     // Pane: chart, chat and agent subjects were shown bare and drew their words on the scene with no pane
     const arg = { minAlpha: C.bareMinAlpha ?? 0.9, paneAlpha: C.paneAlpha ?? 0.35, stages: 'main [data-example-live]' };
@@ -1563,6 +1622,25 @@ try {
     await mc.close();
     fail(bad, 'overlays off rhythm');
     return `${n} overlays on ${routes.length} pages`;
+  });
+
+  await gate('G-MO5', 'every change an interaction makes moves: no visible property jumps from one value to the next in a frame, and nothing appears or vanishes at once', async () => {
+    // dial R-004, 2026-11-02: "dropdown ก็แข็งๆ … ทุก interaction ที่มีการเปลี่ยนแปลง". Every rendered frame is sampled,
+    // so CSS transitions, animations, inherited transitions and JS springs all count; only the result is judged.
+    const routes = ROUTES.filter((r) => (r.startsWith(`${C.componentsBase}/`) ? r.endsWith('/code') : true));
+    if (!routes.length) throw new Error('NO pages to check');
+    const bad = []; let n = 0;
+    const mc = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'no-preference' });
+    const mp = await mc.newPage();
+    for (const r of routes) {
+      await mp.goto(url(srv.base, r, {}, C), { waitUntil: 'networkidle' });
+      const res = await interactionMotion(mp, { limit: C.motion?.changesPerPage ?? 6 });
+      n += res.checked; for (const x of res.problems) bad.push(`${r}: ${x}`);
+    }
+    await mc.close();
+    expect(n > 0, 'NO CONTROLS PRESSED in any live example');
+    fail([...new Set(bad)], 'changes that snap');
+    return `${n} interactions on ${routes.length} pages`;
   });
 
   await gate('G-PC1', 'every popup a demo opens is whole: no clipping parent and no screen edge cuts it', async () => {

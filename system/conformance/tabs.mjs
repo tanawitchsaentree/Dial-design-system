@@ -7,7 +7,7 @@ export default async function tabs({ check, expect, page, go, main, tokens }) {
   const manual = () => main().locator('[data-component="Tabs"][data-activation="manual"]').first();
   const selected = (t) => t.locator(':scope > [role="tablist"] > [role="tab"]').evaluateAll((els) => els.findIndex((e) => e.getAttribute('aria-selected') === 'true'));
   const focused = (t) => t.locator(':scope > [role="tablist"] > [role="tab"]').evaluateAll((els) => els.indexOf(document.activeElement));
-  const visiblePanel = (t) => t.locator(':scope > [role="tabpanel"]:not([hidden])').evaluateAll((els) => els.map((e) => e.getAttribute('aria-labelledby')));
+  const visiblePanel = (t) => t.locator(':scope > [role="tabpanel"]:not([hidden]), :scope > * > [role="tabpanel"]:not([hidden])').evaluateAll((els) => els.map((e) => e.getAttribute('aria-labelledby')));
   const start = async (pick) => {
     await go(ROUTE);
     const t = pick();
@@ -87,12 +87,14 @@ export default async function tabs({ check, expect, page, go, main, tokens }) {
     return `mark ${on.mark}, weight ${on.weight}`;
   });
 
-  await check('Tabs', 'the index mark appears at once and never slides', async () => {
+  await check('Tabs', 'the index mark inks in where it stands and never slides', async () => {
+    // D-008 / R-004: every change moves, but the mark fades in place; nothing travels along the row
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     const t = await start(auto);
-    const tr = await t.locator(':scope > [role="tablist"] > [role="tab"] > span:last-child').first().evaluate((el) => getComputedStyle(el).transitionDuration);
+    const tr = await t.locator(':scope > [role="tablist"] > [role="tab"] > span:last-child').first().evaluate((el) => { const cs = getComputedStyle(el); return { prop: cs.transitionProperty, dur: cs.transitionDuration }; });
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    expect(tr.split(',').every((d) => parseFloat(d) === 0), `mark transition ${tr}`);
-    return `mark transition ${tr}`;
+    const moves = tr.prop.split(',').map((x) => x.trim()).filter((x) => /transform|translate|left|right|inset|margin|all/.test(x));
+    expect(!moves.length && tr.dur.split(',').some((d) => parseFloat(d) > 0), `mark transition ${tr.prop} ${tr.dur}`);
+    return `mark transition ${tr.prop} ${tr.dur}`;
   });
 }

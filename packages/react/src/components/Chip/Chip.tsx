@@ -1,5 +1,6 @@
 import { forwardRef, useState, type HTMLAttributes, type MouseEvent, type ReactNode } from 'react';
 import { cx } from '../../cx';
+import { Icon } from '../Icon';
 import styles from './Chip.module.css';
 
 export type ChipSize = 'sm' | 'md';
@@ -77,9 +78,8 @@ export const Chip = forwardRef<HTMLSpanElement, ChipProps>(function Chip(props, 
           disabled={disabled}
           onClick={() => onRemove()}
         >
-          <svg className={styles.cross} viewBox="0 0 12 12" aria-hidden="true" focusable="false">
-            <path d="M3 3l6 6M9 3l-6 6" />
-          </svg>
+          {/* dial's one icon language, the dot matrix (R-005) */}
+          <Icon name="close" size="sm" />
         </button>
       </span>
     );

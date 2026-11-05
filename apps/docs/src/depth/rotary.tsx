@@ -61,7 +61,7 @@ export const ROTARY: Depth = {
       do: <Rotary size="sm" label="Timer" max={60} step={5} defaultValue={20} formatValue={(v) => `${v} min`} />, doNote: 'The label names it and the value has its unit.',
       dont: <Rotary size="sm" label="Turn" max={60} step={5} defaultValue={20} />, dontNote: 'Turn says nothing, and 20 has no unit.',
     },
-    overflow: { text: 'A long label wraps under the knob. The knob keeps its size and its place.', render: <div data-overflow-demo="" style={{ inlineSize: 120 }}><Rotary size="md" label="Temperature in the guest room" min={16} max={26} defaultValue={20} formatValue={temp} /></div> },
+    overflow: { text: 'A long label wraps under the knob. The knob keeps its size and its place.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-narrow))' }}><Rotary size="md" label="Temperature in the guest room" min={16} max={26} defaultValue={20} formatValue={temp} /></div> },
     rtl: { text: 'In right-to-left languages the knob still turns clockwise to go up, like a knob on any device. Only the text around it follows the direction.', render: <div dir="rtl"><Rotary size="md" label="درجة الحرارة" min={16} max={26} defaultValue={20} formatValue={temp} /></div> },
     expansion: { text: 'German and Finnish labels can run 30% longer. The label wraps under the knob and the disc does not move.', render: <Rotary size="md" label="Raumtemperatur" min={16} max={26} defaultValue={20} formatValue={temp} /> },
   },

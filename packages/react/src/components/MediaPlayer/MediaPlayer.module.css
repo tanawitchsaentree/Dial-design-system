@@ -26,6 +26,9 @@
   );
   background: var(--ds-display-oled-bg);
   color: var(--ds-display-oled-ink);
+  /* the window shows light, not ink: no print seat on its words or glyphs (D-010) */
+  text-shadow: none;
+  --ds-print-seat: none;
   box-shadow: var(--ds-elevation-well), var(--ds-emit-display);
   font-family: var(--ds-type-family);
   line-height: var(--ds-type-leading-tight);

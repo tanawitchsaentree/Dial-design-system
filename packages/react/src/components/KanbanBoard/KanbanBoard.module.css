@@ -1,0 +1,180 @@
+/* KanbanBoard — open columns split by a seam, each task a Card, the count in a small recessed window
+   (system/FORM.md surface and display classes, D-003; lab apps/lab/kanban-board, picked B). The cards are the only
+   raised parts and nothing here is orange (P1). Cards are moved by keys, the Move menu or the grip; no state animates,
+   so nothing here transitions (P6) and the carried card follows the pointer directly. */
+.root {
+  --kb-column: var(--ds-layout-frame-xs);
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-none);
+  inline-size: 100%;
+  min-inline-size: 0;
+  padding: var(--ds-gap-sm);
+  overflow-x: auto;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+
+.column {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: var(--ds-gap-lg);
+  flex: 1 0 var(--kb-column);
+  min-inline-size: var(--kb-column);
+  box-sizing: border-box;
+  padding-inline: var(--ds-gap-lg);
+}
+.column + .column { border-inline-start: var(--ds-width-hairline) solid var(--ds-line-divider); }
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-gap-md);
+  min-block-size: var(--ds-control-sm);
+}
+.title {
+  margin: 0;
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  overflow-wrap: anywhere;
+}
+
+/* the count is a window cut into the body: inverse light, ring hairline (P2) */
+.count {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--ds-gap-xs);
+  box-sizing: border-box;
+  padding-block: var(--ds-gap-xs);
+  padding-inline: var(--ds-gap-md);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-text-secondary);
+}
+.count[data-over-limit='true'] {
+  font-weight: var(--ds-type-weight-medium);
+  color: var(--ds-text-primary);
+}
+.flag { display: inline-flex; align-items: center; }
+
+/* three cards of height, so a column that empties keeps its place */
+.body {
+  min-block-size: calc(var(--ds-control-md) * 3);
+  min-inline-size: 0;
+}
+.body[data-over='true'] { outline: var(--ds-width-ring) solid var(--ds-line-ring); outline-offset: calc(var(--ds-width-ring) * -1); }
+
+.list {
+  display: grid;
+  gap: var(--ds-gap-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list > .card {
+  position: relative;
+  gap: var(--ds-gap-sm);
+  min-inline-size: 0;
+  outline: none;
+}
+.card:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.card[data-disabled='true'] { opacity: var(--ds-opacity-disabled); }
+.card[data-dragging='true'] {
+  z-index: var(--ds-layer-raised);
+  transform: translate(var(--kb-dx), var(--kb-dy));
+  box-shadow: var(--ds-elevation-lift);
+  pointer-events: none;
+}
+/* the drop mark is a line on a card's edge, so no card moves while one is carried (P6) */
+.card[data-drop='before']::before,
+.card[data-drop='after']::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  block-size: var(--ds-width-ring);
+  border-radius: var(--ds-corner-mark);
+  background: var(--ds-text-primary);
+}
+.card[data-drop='before']::before { inset-block-start: calc(var(--ds-gap-md) / -2 - var(--ds-width-ring) / 2); }
+.card[data-drop='after']::after { inset-block-end: calc(var(--ds-gap-md) / -2 - var(--ds-width-ring) / 2); }
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-gap-sm);
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+.cardTitle {
+  min-inline-size: 0;
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  overflow-wrap: anywhere;
+}
+.detail {
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+/* both keys are 44px squares and the dots they print are smaller (P3) */
+.tools {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  margin-block: calc((var(--ds-control-md) - var(--ds-control-icon-md)) / -2);
+}
+.grip {
+  display: inline-grid;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: var(--ds-control-md);
+  block-size: var(--ds-control-md);
+  color: var(--ds-text-secondary);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.grip:hover { color: var(--ds-text-primary); }
+
+.empty {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  min-block-size: calc(var(--ds-control-md) * 3);
+  margin: 0;
+  padding: var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  text-align: center;
+}
+
+@media (forced-colors: active) {
+  .card { border: var(--ds-width-hairline) solid CanvasText; }
+  .card:focus-visible { outline-color: Highlight; }
+  .card[data-drop='before']::before,
+  .card[data-drop='after']::after { background: Highlight; }
+  .count, .empty { border-color: CanvasText; }
+}

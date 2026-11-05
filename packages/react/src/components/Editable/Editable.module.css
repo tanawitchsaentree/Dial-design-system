@@ -1,0 +1,122 @@
+/* Editable — a value printed on the case that swaps in an Input well when pressed (system/FORM.md, D-003).
+   At rest it is flat printing with a body-coloured key; while editing it is the recessed well. One light,
+   top-left. No orange: the keys are the plain ones. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+/* the reading and the editing state share this row, so the unit does not reflow between them */
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  min-block-size: var(--ds-control-key);
+}
+.reading {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  min-block-size: var(--ds-control-key);
+  margin: 0;
+  padding-block: var(--ds-gap-md);
+  padding-inline: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  text-align: start;
+  color: var(--ds-text-primary);
+  overflow-wrap: anywhere;
+  cursor: text;
+}
+.reading[data-empty='true'] { color: var(--ds-text-secondary); }
+.reading:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.well {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  min-block-size: var(--ds-control-md);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  cursor: text;
+}
+.field {
+  flex: 1 1 auto;
+  align-self: stretch;
+  min-inline-size: 0;
+  inline-size: 100%;
+  /* the field runs over the well's hairline, so the whole 44px well is its press area */
+  margin-block: calc(var(--ds-width-hairline) * -1);
+  margin-inline: 0;
+  padding-block: var(--ds-gap-md);
+  padding-inline: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  outline: none;
+}
+.keys {
+  display: flex;
+  flex: none;
+  gap: var(--ds-gap-sm);
+}
+.hint {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-sm);
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-status-critical-mark);
+}
+.glyph {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-block-start: var(--ds-space-0-5);
+}
+
+.well:focus-within {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.root[data-invalid='true'] .well { border-color: var(--ds-status-critical-mark); }
+.root[data-disabled='true'] .reading { opacity: var(--ds-opacity-disabled); cursor: not-allowed; }
+.root[data-readonly='true'] .reading { cursor: default; }
+
+@media (forced-colors: active) {
+  .well { border-color: CanvasText; }
+  .root[data-invalid='true'] .well { border-color: Mark; }
+  .well:focus-within { outline-color: Highlight; }
+  .reading:focus-visible { outline-color: Highlight; }
+}

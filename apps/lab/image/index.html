@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Image · three ways to show a picture</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ figure{margin:0 0 18px}
+ figcaption{margin-block-start:8px;font-size:var(--ds-type-caption);line-height:var(--ds-type-leading-body);color:var(--ds-text-secondary)}
+ .win{position:relative;overflow:hidden;box-sizing:border-box;inline-size:100%}
+ .win img,.win .ph{position:absolute;inset:0;inline-size:100%;block-size:100%;object-fit:cover}
+ .ph{display:grid;place-items:center}
+ .dash{display:block;inline-size:var(--ds-control-mark);border-block-start:var(--ds-width-ring) solid var(--ds-text-secondary)}
+ .dash.two{block-size:6px;border-block:var(--ds-width-ring) solid var(--ds-text-secondary)}
+ .r43{aspect-ratio:4/3} .r169{aspect-ratio:16/9} .r11{aspect-ratio:1/1}
+ /* A: flat print on the body, hairline only */
+ .A .win{border:var(--ds-width-hairline) solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-solid)}
+ /* B: recessed window, inverse light over the picture, picture runs to the ring */
+ .B .win{border:var(--ds-width-hairline) solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken)}
+ .B .win::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--ds-elevation-well);pointer-events:none}
+ /* C: slide mount, a sunken mat with the picture nested inside at inner radius */
+ .C .win{--m:var(--ds-space-2);padding:var(--m);border:var(--ds-width-hairline) solid var(--ds-line-ring);border-radius:var(--ds-corner-inner);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .C .win .in{position:relative;inline-size:100%;block-size:100%;overflow:hidden;border-radius:calc(var(--ds-corner-inner) - var(--m))}
+ .C .win .in img,.C .win .in .ph{position:absolute;inset:0;inline-size:100%;block-size:100%;object-fit:cover}
+ .C .win img,.C .win .ph{position:static}
+</style></head><body>
+<h1>Image · a picture in a window</h1>
+<div class="row" id="row"></div>
+<script>
+const img='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 30"><rect width="40" height="30" fill="#c9b99c"/><circle cx="29" cy="9" r="4" fill="#efe6d2"/><path d="M0 30L12 12l9 11 6-7 13 14z" fill="#6b5a45"/></svg>');
+const names={A:'flat print, hairline only',B:'recessed window, picture to the ring',C:'slide mount, sunken mat'};
+for(const k of 'ABC'){
+ const win=(r,inner)=>k==='C'?`<div class="win r${r}"><div class="in">${inner}</div></div>`:`<div class="win r${r}">${inner}</div>`;
+ const pic=`<img src="${img}" alt="">`;
+ const one=`<span class="ph"><span class="dash"></span></span>`;
+ const two=`<span class="ph"><span class="dash two"></span></span>`;
+ document.getElementById('row').insertAdjacentHTML('beforeend',`<div class="unit ${k}"><h2>${k} · ${names[k]}</h2>
+ <figure>${win('43',pic)}<figcaption>Hall, north wall, 08:10</figcaption></figure>
+ <figure>${win('169',one)}<figcaption>Loading: one dash</figcaption></figure>
+ <figure>${win('169',two)}<figcaption>Failed: two dashes</figcaption></figure>
+ <figure style="inline-size:120px;margin:0">${win('11',pic)}</figure></div>`);
+}
+</script></body></html>

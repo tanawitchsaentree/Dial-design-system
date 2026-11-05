@@ -5,7 +5,7 @@ const ask = () => new Promise((done) => setTimeout(done, 1500));
 
 export default function PullToRefreshInUnit() {
   return (
-    <Card style={{ inlineSize: 360, maxInlineSize: '100%' }}>
+    <Card style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))', maxInlineSize: '100%' }}>
       <PullToRefresh label="Living room" onRefresh={ask} updated={new Date(2026, 10, 2, 10, 38)}>
         <List label="Devices in the living room">
           <List.Item label="Floor lamp" description="On · 60%" />

@@ -13,7 +13,7 @@ export const TABS: Depth = {
   overview: (
     <>
       <p>Tabs move between sections of one screen, such as the rooms of a home. The names are printed in a row, like the words on the case of an appliance. The chosen name is set in medium weight with one short ink mark under it, and the screen below shows that section.</p>
-      <p>Tabs are printing on the case. They have no height, no shadow and no travel, because choosing a room does not change any device. That is the difference from SegmentedControl, whose keys latch and change a mode. The mark appears at once under the new name. It does not slide.</p>
+      <p>Tabs are printing on the case. They have no height, no shadow and no travel, because choosing a room does not change any device. That is the difference from SegmentedControl, whose keys latch and change a mode. The mark inks in under the new name where it stands; it never slides across. It does not slide.</p>
       <p>Every panel is rendered on the page from the start, and only the chosen one is shown. Switching is instant, and what someone typed or set in a panel is still there when they come back to it. Each name is a native button with role tab, and each panel is linked to its name, so a screen reader announces which section it is in.</p>
       <p>Tabs can be controlled with value and onValueChange, or keep their own choice with defaultValue. When nothing is given, the first section is shown. Keep the chosen section in the address of the screen if people return to it often, so a reload opens the same room.</p>
     </>
@@ -59,14 +59,14 @@ export const TABS: Depth = {
       do: <Tabs label="Rooms" items={ROOMS} />, doNote: 'Short nouns for places.',
       dont: <Tabs label="Rooms" items={[{ value: 'a', label: 'See the living room', content: p('…') }, { value: 'b', label: 'Go to kitchen', content: p('…') }]} />, dontNote: 'Verbs make the names read as actions.',
     },
-    overflow: { text: 'When the names do not fit, the row wraps onto a second line. The chosen name keeps its mark and no name shifts.', render: <div data-overflow-demo="" style={{ inlineSize: 260 }}><Tabs label="Rooms" items={['Living room', 'Kitchen', 'Bedroom', 'Bathroom', 'Study'].map((n) => ({ value: n, label: n, content: p(n) }))} /></div> },
+    overflow: { text: 'When the names do not fit, the row wraps onto a second line. The chosen name keeps its mark and no name shifts.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Tabs label="Rooms" items={['Living room', 'Kitchen', 'Bedroom', 'Bathroom', 'Study'].map((n) => ({ value: n, label: n, content: p(n) }))} /></div> },
     rtl: { text: 'In right-to-left languages the first name sits on the right, and the arrow keys follow the reading order.', render: <div dir="rtl"><Tabs label="الغرف" items={[{ value: 'l', label: 'غرفة المعيشة', content: p('٢١٫٥ °C') }, { value: 'k', label: 'المطبخ', content: p('—') }]} /></div> },
     expansion: { text: 'German names can run 30% longer. The row grows sideways and wraps when it must.', render: <Tabs label="Räume" items={[{ value: 'w', label: 'Wohnzimmer', content: p('21,5 °C') }, { value: 'k', label: 'Küche', content: p('—') }, { value: 's', label: 'Schlafzimmer', content: p('18,0 °C') }]} /> },
   },
   behaviours: {
     states: [
       ['Not chosen', 'Name in regular weight, secondary ink, no mark.', 'The name is still a 44px target.'],
-      ['Chosen', 'Name in medium weight, primary ink, ink mark under it.', 'The mark appears at once; it never slides.'],
+      ['Chosen', 'Name in medium weight, primary ink, ink mark under it.', 'The mark inks in where it stands over motion.hover; it never slides.'],
       ['Forced colours', 'The mark is drawn in the system button text colour.', 'The weight and the mark still tell the chosen name apart.'],
       ['Hover', 'The name darkens one step.', 'Nothing rises.'],
       ['Focus', 'A dark 2px ring around the name, or around the panel.', 'The row is one tab stop.'],

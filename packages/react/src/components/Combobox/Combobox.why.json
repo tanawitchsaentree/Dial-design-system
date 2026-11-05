@@ -1,0 +1,281 @@
+{
+  "concept": "Combobox is Input's recessed well with a list that opens under it and narrows as you type, so a person who knows the word can write it and a person who does not can read the choices; it takes only a listed option and never leaves free text behind.",
+  "kind": [
+    "combobox",
+    "autocomplete",
+    "typeahead field",
+    "searchable select"
+  ],
+  "family": "Select",
+  "family_difference": "Combobox lets the person type into the well to filter the options, shows a count and a no-match line, and drops free text on leaving, where Select only opens a list.",
+  "default_to_avoid": [
+    {
+      "pattern": "Combobox as an autocomplete search box with a magnifier, free text accepted and suggestions in a white card with a blue highlighted row",
+      "why_not": "Free text breaks a choice that must be one of the listed options, the blue row tells the reached state by hue alone and spends a colour P1 keeps for one part, and a search glyph makes it look like a different part."
+    },
+    {
+      "pattern": "native input with a datalist element, drawn by the operating system",
+      "why_not": "The system draws its own popup and type, which ignore the material and the light, cannot show a leading mark, and announce differently in every browser."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a station name printed on the case and a dial that lets you find it by the first letters"
+    },
+    {
+      "source": "system/FORM.md input class: recessed well, full width of its column, label printed above on the inset line; the open list reuses Select and Popover plastic (surface.solid, elevation.float, corner.inner)"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: combobox with list autocomplete (https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The text well is the same recess as Input and Select: surface.sunken with elevation.well and a line.ring hairline, full width of its column."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The label is printed above the well at its start edge and names the field through its for attribute; the placeholder is a separate grey prompt and never the name."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "The chosen option carries a printed tick and medium weight in primary ink, and the letters that match the typed text turn medium; no row is ever filled orange or blue."
+    },
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "shadows are short and soft",
+      "form": "The open list is surface.solid plastic with elevation.float and corner.inner on layer.overlay, the same panel as Select and Popover, and nothing deeper."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Focus stays in the well; the arrows reach rows through aria-activedescendant, Page keys jump ten, Enter chooses, Escape closes and restores the text, and Alt with Down opens."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "The list rises out of the well when it opens and sinks back faster when it closes, a row inks in when it is reached, and nothing moves while the list sits open (D-008)."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/combobox/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "Input well, Select's plastic panel floating under it, matched letters in medium weight"
+      },
+      {
+        "id": "B",
+        "name": "one recess that grows downward from the well, options inside the same window"
+      },
+      {
+        "id": "C",
+        "name": "printed legend under the well with no container, ink index bar at the reached word"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A floats on layer.overlay so it covers the fields below without moving them and its edge says it is a separate layer (P6 depth); B has no shadow, so over the next field it reads as part of the page, and C has no edge, so it either pushes the form down or sits on the next label."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The field stacks its label, well and messages in one column and is the anchor the open list hangs from, so the list lines up with the well."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight, like the printing beside every other part of the unit."
+    },
+    "anchor": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The well and the open list share one box that the list hangs from, so the list lines up with the well and does not shift when a hint or error is printed under it."
+    },
+    "well": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The recess takes the inverse light, shade on its top-left inner edge, so the person sees where the typed words go."
+    },
+    "mark": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The leading mark of the chosen option, such as an avatar, stands at the start of the well on the same inset line as the marks in the rows."
+    },
+    "field": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "Typed text is primary ink on the sunken plastic at more than 4.5:1, with a line box tall enough for stacked Thai marks."
+    },
+    "toggle": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A 44px key at the end of the well opens and closes the list for a finger, and stays out of the tab order because the field already has the keyboard."
+    },
+    "chevron": {
+      "p": "P5",
+      "axis": "depth",
+      "why": "A printed chevron in secondary ink says a list is behind the well, and it turns over while the list is open."
+    },
+    "panel": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "The list is plastic above the page with the float shadow, at least as wide as the well, so it reads as a separate layer and not as part of the form."
+    },
+    "option": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Every row is at least 44px tall so a finger can pick it, with its text inset from the rounded ends."
+    },
+    "tick": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "A printed tick in ink marks the chosen row, so a choice never uses the orange or a tinted fill; an empty tick keeps the column so words do not shift."
+    },
+    "leading": {
+      "p": "P5",
+      "axis": "space",
+      "why": "An optional mark such as an icon or an avatar stands between the tick and the words, so rows with and without one still align."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "type",
+      "why": "Option words use the body size of the one grotesk, with a line box tall enough for stacked Thai marks, and long words wrap instead of being cut."
+    },
+    "match": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The letters that match what was typed turn medium weight in primary ink, a cue that survives a black and white screen and never needs a highlight colour."
+    },
+    "empty": {
+      "p": "P2",
+      "axis": "colour",
+      "why": "When nothing matches, one plain line in secondary ink sits in the list, so the person learns the typed text has no option and the list does not close."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The hint is secondary ink in the caption size under the well."
+    },
+    "error": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The error is critical red with a glyph and words, never orange and never colour alone."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A printed mark beside the words means invalid is never told by colour alone, for people who cannot see the red."
+    },
+    "md": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The default well and rows are 44px tall, the smallest target that every part in dial keeps for a finger."
+    },
+    "lg": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A 52px well and rows with larger text for the main choice of a phone sheet held in one hand."
+    }
+  },
+  "states": {
+    "focus-within": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The well shows the same dark ring as every part when its field holds the keyboard focus, and the reached row inside the list carries its own plate."
+    },
+    "data-invalid=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "An invalid well draws its edge in the critical red, which is never orange, and the message below names the problem."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled field loses its recess shadow and fades to half, so it reads as not taking input right now."
+    },
+    "aria-expanded=true": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "While the list is open the chevron turns over, a cue of shape that works without colour."
+    },
+    "aria-selected=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The chosen row is primary ink in medium weight with its tick, never a coloured fill behind the words."
+    },
+    "aria-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A row that cannot be chosen fades to half and the arrows skip it, so it stays readable but is plainly not part of the walk."
+    },
+    "data-active=true": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The row under the keyboard or the pointer sinks into a well, so the reached row is shown by depth and an edge, not hue."
+    },
+    "data-state=open": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The list is mounted in the same render that opens it, so the input and aria-controls always point at a list that exists."
+    },
+    "data-state=closing": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A leaving list is inert and hidden from assistive tech, because it is only a picture of the list while it fades out."
+    },
+    "data-on=true": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The tick of the chosen row fades in over motion.hover, so the choice is told by a printed mark that appears and not by a fill."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the well keeps a real border, the list gets a border, and the focus ring and the reached row use the system highlight colour."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion nothing travels (motion.rise is 0) and the list still fades on motion.hover, which the tokens keep (D-008)."
+    }
+  },
+  "motion": {
+    "transform": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The list rises a step (motion.rise) over motion.release on the decelerating curve, the chevron turns with it, and the list leaves over motion.exit on the accelerating one (D-008). Under Reduce motion only the fade stays."
+    },
+    "opacity": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The list fades in over motion.release and out over motion.exit, and the tick of the chosen row fades with the choice on motion.hover, so a change is seen arriving (D-008)."
+    },
+    "background-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached row sinks into a well and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached row sinks into a well and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    },
+    "color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached row sinks into a well and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    }
+  }
+}

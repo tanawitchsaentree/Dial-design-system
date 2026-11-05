@@ -3,7 +3,7 @@ import { Card, EmptyState, Heading } from 'dial-react';
 
 export default function EmptyStateWordsOnly() {
   return (
-    <Card header={<Heading level={3}>Alerts</Heading>} style={{ inlineSize: 'min(100%, 380px)' }}>
+    <Card header={<Heading level={3}>Alerts</Heading>} style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))' }}>
       <EmptyState title="Nothing needs you">Alerts from the hub show here when they happen.</EmptyState>
     </Card>
   );

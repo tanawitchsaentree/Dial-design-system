@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Avatar · three ways to show a person</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .sizes{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px;margin-block-end:22px}
+ .li{display:flex;align-items:center;gap:12px;padding-block:8px;border-block-start:1px solid var(--ds-line-divider);font-size:15px}
+ .li small{display:block;color:var(--ds-text-secondary);font-size:13px}
+ .av{display:inline-grid;place-items:center;overflow:hidden;position:relative;flex:none;font-weight:500;color:var(--ds-text-primary);inline-size:var(--s);block-size:var(--s);font-size:calc(var(--s) * .36);line-height:1.5}
+ .av.sm{--s:var(--ds-control-avatar-sm)} .av.md{--s:var(--ds-control-avatar-md)} .av.lg{--s:var(--ds-control-avatar-lg)}
+ .av img{position:absolute;inset:0;inline-size:100%;block-size:100%;object-fit:cover}
+ /* A: raised resin cap, round */
+ .A .av{border-radius:50%;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);border:1px solid var(--ds-line-ring)}
+ /* B: flat printed monogram, ring only */
+ .B .av{border-radius:50%;border:2px solid var(--ds-line-ring);background:transparent}
+ /* C: recessed window, rounded square, photo nested inside the border */
+ .C .av{border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);border:1px solid var(--ds-line-ring);box-sizing:border-box}
+ .C .av::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--ds-elevation-well);pointer-events:none}
+</style></head><body>
+<h1>Avatar · a person as a picture or initials</h1>
+<div class="row" id="row"></div>
+<script>
+const img='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect width="10" height="10" fill="#b9a58a"/><circle cx="5" cy="4" r="2" fill="#6b5a45"/><path d="M1 10c0-3 2-4 4-4s4 1 4 4z" fill="#6b5a45"/></svg>');
+const names={A:'resin cap, round',B:'printed monogram, ring only',C:'recessed window, rounded square'};
+for(const k of 'ABC'){
+ const av=(s,c)=>`<span class="av ${s}">${c}</span>`;
+ document.getElementById('row').insertAdjacentHTML('beforeend',`<div class="unit ${k}"><h2>${k} · ${names[k]}</h2>
+ <div class="sizes">${av('sm','MS')}${av('md','MS')}${av('lg','MS')}${av('sm',`<img src="${img}" alt="">`)}${av('md',`<img src="${img}" alt="">`)}${av('lg',`<img src="${img}" alt="">`)}</div>
+ <div class="li">${av('md','ธน')}<div>ธนวิชญ์ แสนตรี<small>Owner</small></div></div>
+ <div class="li">${av('md',`<img src="${img}" alt="">`)}<div>Maren Solberg<small>Guest</small></div></div>
+ <div class="li">${av('sm','KJ')}<div>Kitchen Jens</div></div></div>`)}
+</script></body></html>

@@ -64,7 +64,7 @@ export const BANNER: Depth = {
       do: <Banner tone="critical" status="Offline">{offline}</Banner>, doNote: 'What holds and what happens next.',
       dont: <Banner tone="critical">Error 503.</Banner>, dontNote: 'A code with no word for the person and no next step.',
     },
-    overflow: { text: 'A long message wraps onto more lines. When the strip is narrow the keys move under the message and line up at the end.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, 340px)' }}><Banner tone="critical" status="Offline" action={{ label: 'Check the hub', onAction: none }}>{offline}</Banner></div> },
+    overflow: { text: 'A long message wraps onto more lines. When the strip is narrow the keys move under the message and line up at the end.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))' }}><Banner tone="critical" status="Offline" action={{ label: 'Check the hub', onAction: none }}>{offline}</Banner></div> },
     rtl: { text: 'In right-to-left languages the glyph and word start on the right and the keys line up on the left.', render: <div dir="rtl"><Banner tone="critical" status="غير متصل" onDismiss={none}>المحور غير متصل. ستعمل عناصر التحكم مرة أخرى عند إعادة الاتصال.</Banner></div> },
     expansion: { text: 'German runs about 30% longer. The message wraps before the keys shrink.', render: <Banner tone="critical" status="Offline" action={{ label: 'Hub prüfen', onAction: none }}>Der Hub ist offline. Die Steuerung funktioniert wieder, sobald er sich verbindet.</Banner> },
   },

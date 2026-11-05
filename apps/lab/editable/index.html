@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Editable · three ways to make printed text editable</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .unit h3{font-size:12px;font-weight:400;margin:22px 0 8px;color:var(--ds-text-secondary)}
+ .lab{font-size:14px;font-weight:500;margin:0 0 6px}
+ .r{display:flex;align-items:center;gap:8px;min-block-size:44px}
+ .txt{flex:1;font-size:16px;line-height:1.45}
+ .key{flex:none;inline-size:44px;block-size:44px;border-radius:50%;border:1px solid transparent;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);display:grid;place-items:center;color:var(--ds-text-secondary);font-size:16px}
+ .well{flex:1;display:flex;align-items:center;min-block-size:44px;box-sizing:border-box;padding-inline:14px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);font-size:16px;outline:2px solid var(--ds-focus-ring);outline-offset:2px}
+ .keys{display:flex;gap:6px}
+ .note{font-size:12px;color:var(--ds-text-secondary);margin:6px 0 0}
+ /* A: printing with a raised key at the end; edit swaps in a well and two keys */
+ /* B: printing on a dotted rail, a bare printed pencil, no key surface */
+ .B .txt{background:radial-gradient(circle,var(--ds-line-ring) 1px,transparent 1.5px) 0 100%/8px 3px repeat-x;padding-block-end:3px}
+ .B .pen{flex:none;inline-size:44px;text-align:center;color:var(--ds-text-secondary)}
+ /* C: the reading already sits in a window; edit turns the window into the well */
+ .C .win{flex:1;display:flex;align-items:center;justify-content:space-between;min-block-size:44px;box-sizing:border-box;padding-inline:14px 4px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);font-size:16px}
+ .C .win .k{inline-size:36px;block-size:36px;border-radius:50%;display:grid;place-items:center;color:var(--ds-text-secondary);border:1px solid var(--ds-line-ring)}
+</style></head><body>
+<h1>Editable · text that is printing until you press it</h1>
+<div class="row">
+ <div class="unit A"><h2>A · printing + key; well and two keys</h2>
+  <h3>reading</h3><p class="lab">Room name</p><div class="r"><span class="txt">Kitchen heating</span><span class="key">✎</span></div>
+  <h3>editing</h3><p class="lab">Room name</p><div class="r"><span class="well">Kitchen heating|</span><span class="keys"><span class="key">✕</span><span class="key">✓</span></span></div></div>
+ <div class="unit B"><h2>B · dotted rail, bare pencil</h2>
+  <h3>reading</h3><p class="lab">Room name</p><div class="r"><span class="txt">Kitchen heating</span><span class="pen">✎</span></div>
+  <h3>editing</h3><p class="lab">Room name</p><div class="r"><span class="well">Kitchen heating|</span></div><p class="note">Enter saves. Escape keeps the old name.</p></div>
+ <div class="unit C"><h2>C · reading already in a window</h2>
+  <h3>reading</h3><p class="lab">Room name</p><div class="r"><span class="win">Kitchen heating<span class="k">✎</span></span></div>
+  <h3>editing</h3><p class="lab">Room name</p><div class="r"><span class="well">Kitchen heating|</span></div><p class="note">Enter saves. Escape keeps the old name.</p></div>
+</div></body></html>

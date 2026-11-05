@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Drawer · three ways to hold a side panel</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .cap{font-size:13px;color:var(--ds-text-secondary);margin:0 0 12px}
+ /* a small screen with the room behind and the scrim over it */
+ .screen{position:relative;inline-size:420px;block-size:440px;overflow:hidden;border-radius:var(--ds-corner-panel);background:var(--ds-surface-page);box-shadow:var(--ds-elevation-well)}
+ .room{position:absolute;inset:24px;display:grid;gap:12px;align-content:start}
+ .room i{display:block;block-size:56px;border-radius:var(--ds-corner-inner);background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-part)}
+ .scrim{position:absolute;inset:0;background:var(--ds-surface-scrim)}
+ .panel{position:absolute;box-sizing:border-box;background:var(--ds-surface-solid);color:var(--ds-text-primary);border-radius:var(--ds-corner-panel);box-shadow:var(--ds-elevation-float),inset 1px 1px 0 var(--ds-material-lit);padding:24px;display:flex;flex-direction:column;gap:14px}
+ .head{display:flex;align-items:center;gap:12px;min-block-size:44px}
+ .head h2{margin:0;flex:1;font-size:var(--ds-type-emphasis);font-weight:500}
+ .x{inline-size:44px;block-size:44px;border-radius:50%;border:0;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);display:grid;place-items:center;font-size:18px;color:var(--ds-text-primary)}
+ .row2{min-block-size:44px;display:flex;align-items:center;justify-content:space-between;font-size:15px}
+ .row2 small{color:var(--ds-text-secondary);font-size:13px}
+ .grow{flex:1;min-block-size:0;display:flex;flex-direction:column}
+ .keys{display:flex;justify-content:flex-end;gap:8px}
+ .k{min-block-size:44px;padding-inline:20px;border-radius:999px;border:0;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);color:var(--ds-text-primary);font:inherit;font-size:14px}
+ /* A: inset unit, full height, header / scroll / keys on one inset line */
+ .A .panel{inset:12px 12px 12px auto;inline-size:260px}
+ .A .head{border-block-end:1px solid var(--ds-line-divider);padding-block-end:12px}
+ .A .row2{border-block-end:1px solid var(--ds-line-divider)}
+ .A .keys{border-block-start:1px solid var(--ds-line-divider);padding-block-start:12px}
+ /* B: content in a recessed window */
+ .B .panel{inset:12px 12px 12px auto;inline-size:260px}
+ .B .win{flex:1;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border-radius:var(--ds-corner-media);padding:6px 14px}
+ .B .row2{border-block-end:1px solid var(--ds-line-ring)}
+ /* C: content-height unit hanging from the top inline end */
+ .C .panel{inset:12px 12px auto auto;inline-size:260px}
+ .C .row2{border-block-end:1px solid var(--ds-line-divider)}
+</style></head><body>
+<h1>Drawer · a side panel that slides in from the inline end</h1>
+<div class="row">
+ <div><p class="cap">A · full-height unit, three zones split by hairlines</p>
+ <div class="screen A"><div class="room"><i></i><i></i><i></i><i></i></div><div class="scrim"></div>
+  <div class="panel"><div class="head"><h2>Rooms</h2><button class="x" aria-label="Close">×</button></div>
+   <div class="grow"><div class="row2">Living room <small>3 devices</small></div><div class="row2">Kitchen <small>5 devices</small></div><div class="row2">Bedroom <small>2 devices</small></div><div class="row2">Hall <small>1 device</small></div><div class="row2">Garden <small>4 devices</small></div></div>
+   <div class="keys"><button class="k">Add room</button></div></div></div></div>
+ <div><p class="cap">B · full-height unit, list cut into a recessed window</p>
+ <div class="screen B"><div class="room"><i></i><i></i><i></i><i></i></div><div class="scrim"></div>
+  <div class="panel"><div class="head"><h2>Rooms</h2><button class="x" aria-label="Close">×</button></div>
+   <div class="win"><div class="row2">Living room <small>3 devices</small></div><div class="row2">Kitchen <small>5 devices</small></div><div class="row2">Bedroom <small>2 devices</small></div><div class="row2">Hall <small>1 device</small></div><div class="row2">Garden <small>4 devices</small></div></div>
+   <div class="keys"><button class="k">Add room</button></div></div></div></div>
+ <div><p class="cap">C · content-height unit hanging at the top end</p>
+ <div class="screen C"><div class="room"><i></i><i></i><i></i><i></i></div><div class="scrim"></div>
+  <div class="panel"><div class="head"><h2>Rooms</h2><button class="x" aria-label="Close">×</button></div>
+   <div class="row2">Living room <small>3 devices</small></div><div class="row2">Kitchen <small>5 devices</small></div><div class="row2">Bedroom <small>2 devices</small></div>
+   <div class="keys"><button class="k">Add room</button></div></div></div></div>
+</div>
+</body></html>

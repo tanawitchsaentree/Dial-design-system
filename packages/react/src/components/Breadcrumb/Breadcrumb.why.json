@@ -1,0 +1,174 @@
+{
+  "concept": "Breadcrumb prints the path to this page the way a device prints its menu trail on the case: names in a row, joined by a short run of dots, with the page you are on carrying one ink index mark. On a narrow unit the middle names fold into one key that prints them back when pressed.",
+  "kind": [
+    "breadcrumb",
+    "breadcrumbs",
+    "path",
+    "trail",
+    "location"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "a breadcrumb of grey links split by a greater-than sign or a slash, the last name in bold",
+      "why_not": "The separator is a typed character that a screen reader may read out, and the current page is told by weight alone, which is the default every web breadcrumb has."
+    },
+    {
+      "pattern": "a row of pills or tags, one per level, the last filled with the accent colour",
+      "why_not": "Pills read as keys that set a filter, and an accent fill spends the unit's one orange on a path."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): band names printed in a row on the case, the scale joined by printed marks"
+    },
+    {
+      "source": "system/FORM.md display class: text is flat printing on the material, no height, no shadow"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices, Breadcrumb pattern: a nav landmark, an ordered list, aria-current=page on the last item"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "the chosen word carries one ink index mark beside it",
+      "form": "The current page is plain text, not a link, and carries the same short ink index mark as the chosen name in Tabs, so it is told by a shape and not by weight alone."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The first name starts at the inset line of the unit and the row never leaves it: names, leaders and the folded key share one baseline."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Each link and the folded key are 44px tall and at least the touch width, though the printed name is small."
+    },
+    {
+      "p": "P6",
+      "axis": "interaction",
+      "consequence": "hover only darkens a key's ink a step",
+      "form": "A link darkens one ink step on hover and nothing else moves, because printing on a case does not rise."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Links, leaders, the index mark and the folded key are all ink, never orange."
+    }
+  ],
+  "variants": {
+    "picked": "C",
+    "by": "agent",
+    "lab": "apps/lab/breadcrumb/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "slash between underlined links"
+      },
+      {
+        "id": "B",
+        "name": "chevron between plain names"
+      },
+      {
+        "id": "C",
+        "name": "dotted leader with an index mark under the current page"
+      }
+    ],
+    "reason": "C reuses the dotted rail of Stepper and the index mark of Tabs, so the path looks printed on the same case; A and B are the slash and the chevron every web breadcrumb already has, and both tell the current page by weight alone."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A nav landmark with a name, so assistive tech lists it among the page's regions and the path sits on one inset line."
+    },
+    "list": {
+      "p": "P5",
+      "axis": "space",
+      "why": "An ordered list in one row that never wraps while folded, so the path keeps one baseline and its length can be measured."
+    },
+    "item": {
+      "p": "P3",
+      "axis": "space",
+      "why": "One level of the path, 44px tall so a link or the folded key inside it keeps the full hit area."
+    },
+    "link": {
+      "p": "P5",
+      "axis": "type",
+      "why": "An ancestor is a real link printed in secondary ink in the label size, a plain anchor so the browser keeps its own open and copy behaviour."
+    },
+    "current": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "The page you are on is text in primary ink and medium weight, announced with aria-current=page, and it is not a link to itself."
+    },
+    "mark": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "One short ink bar under the current name, the same shape Tabs uses for its chosen name, so the current page is told by a mark you can see in grey."
+    },
+    "leader": {
+      "p": "P4",
+      "axis": "shape",
+      "why": "A short run of printed dots between two names, the way Stepper joins its windows; it is hidden from assistive tech because the list already carries the order."
+    },
+    "more": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The folded middle names are one key with three dots. It announces that it is collapsed, and pressing it prints every name back in the row."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover darkens a link one ink step and nothing rises, because printing on a case does not move."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Keyboard focus draws the same dark ring around a link or the folded key as on every part of the system."
+    },
+    "data-collapsed": {
+      "p": "P6",
+      "axis": "space",
+      "why": "When the full path does not fit the unit's width, the middle names fold into the folded key, so the row stays on one line and nothing reflows between states."
+    },
+    "data-hidden": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A middle name is only taken out of the row while the path is folded; it stays in the document order once the key prints it back."
+    },
+    "data-more": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The level that holds the folded key exists only while the path is folded, and it is the one place a key stands in a row of names."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion nothing on the row moves, and the hover ink step keeps its short fade because a fade of colour moves nothing."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the leader dots and the index mark draw in the system text colour, so the path and the current page keep their marks."
+    },
+    "data-open": {
+      "p": "P6",
+      "axis": "space",
+      "why": "Once the folded key has been pressed, or when folding is turned off, the row may wrap onto more lines so every name stays visible instead of hiding again."
+    }
+  },
+  "motion": {
+    "color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out; only the colour changes and no part travels."
+    }
+  }
+}

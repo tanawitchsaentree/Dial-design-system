@@ -1,0 +1,194 @@
+{
+  "concept": "Accordion prints every section of a unit as a line of the case, like a legend: the sections that are open are lit with an ink index bar and a minus, the ones that wait stay in plain sight with a plus, and nobody has to open a menu to learn what the unit holds.",
+  "kind": [
+    "accordion",
+    "collapsible sections",
+    "disclosure list",
+    "expandable panels"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "accordion of bordered cards, each header a full-width bar with a rotating chevron and a tinted fill on the open one",
+      "why_not": "Boxed bars read as a stack of buttons or input fields, and a tint tells open from closed by colour alone; dial prints a legend instead."
+    },
+    {
+      "pattern": "accordion that jumps open with a spring bounce on every header press",
+      "why_not": "Only the loud control may carry a settle, and a section is plain printing, so it opens on the state motion tokens and nothing overshoots."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): band names printed in a column on the case, the tuned one marked beside its name"
+    },
+    {
+      "source": "system/CONCEPT.md P7 The legend is the state: every choice printed, the one in use lit"
+    },
+    {
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/accordion/",
+      "source": "WAI-ARIA Authoring Practices: Accordion pattern"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "a legend is printing, never a key",
+      "form": "The header is a printed word with no fill, no border and no raised edge, so only the open one carries a short ink index bar beside it."
+    },
+    {
+      "p": "P7",
+      "axis": "type",
+      "consequence": "and the chosen one turns medium",
+      "form": "A closed title prints in regular weight and secondary ink and an open one turns medium in primary ink, so state shows in the type itself."
+    },
+    {
+      "p": "P7",
+      "axis": "space",
+      "consequence": "in one fixed column or arc, so the lit word moves and nothing reflows",
+      "form": "Every title sits on one left edge, and an open section's content stands under its title on the same edge with a seam between sections."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "Home and End reach the ends, Space and Enter press",
+      "form": "Up and Down step between headers, Home and End reach the first and last, and Space or Enter opens or closes the focused one."
+    },
+    {
+      "p": "P3",
+      "axis": "motion",
+      "consequence": "fast in, slow out, through the state motion tokens",
+      "form": "A section opens on motion.enter and closes on motion.exit, and the panel stays mounted until its leave has finished."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/accordion/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "legend lines with an index bar"
+      },
+      {
+        "id": "B",
+        "name": "recessed drawers"
+      },
+      {
+        "id": "C",
+        "name": "capsule keys"
+      }
+    ],
+    "reason": "A follows P7: the sections are printing and the open one is lit by an index bar, a minus and weight. B cuts each section as a window, which is the Input well, so a header looks editable. C makes every header a raised key, which turns a list of sections into a row of loud parts."
+  },
+  "parts": {
+    "root": {
+      "p": "P7",
+      "axis": "space",
+      "why": "One column of sections that fills its container, so every title sits on the same edge and the list does not shift sideways when a section opens."
+    },
+    "item": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "One section holds its header and panel and is parted from the next by a seam, a 1px divider line, never a box, so the legend stays printing."
+    },
+    "heading": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The heading element gives screen reader users the list of sections, and it carries no style of its own so the type sizes come from the trigger."
+    },
+    "trigger": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The whole header row is one 44px target with the title, the index bar and the glyph in three columns, so a finger can hit it anywhere along its length."
+    },
+    "mark": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "The index bar is the one ink mark that sits beside an open title; it is empty while the section is closed so the titles never move."
+    },
+    "label": {
+      "p": "P7",
+      "axis": "type",
+      "why": "The title prints at the reading size with a body-height line box, so wrapped lines and Thai marks keep room."
+    },
+    "glyph": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "A dot-matrix plus while closed and minus while open is a second cue that does not rely on ink, at the end of the row where the thumb rests."
+    },
+    "panel": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The panel is a one-row grid whose row grows from zero to its content, so it opens to the exact height without a measured pixel value."
+    },
+    "panelInner": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The inner box clips the content while the row is shorter than the content, and without it the text would spill over the next section mid-travel."
+    },
+    "body": {
+      "p": "P7",
+      "axis": "space",
+      "why": "The content stands under the title on the title's edge, indented past the index bar, so the section reads down one column."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover only darkens a closed title's ink one step, because a real legend line does not rise when a hand comes near."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The focused header gets the 2px focus ring with an offset, so keyboard users always see which section the arrow keys will move from."
+    },
+    "disabled": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A header that cannot be pressed fades to the disabled opacity and shows the not-allowed cursor, and the native button leaves the tab order."
+    },
+    "aria-expanded=true": {
+      "p": "P7",
+      "axis": "colour",
+      "why": "An open title steps to primary ink and medium weight and its index bar fills, so the lit section is told by shape and weight as well as ink."
+    },
+    "data-state=closing": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A closing panel shrinks its row to zero and fades on motion.exit before it unmounts, so the content leaves instead of vanishing in one frame."
+    },
+    "data-fresh=true": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A section opened after the first render starts from a closed row and grows; one that was open at the start appears at once, so a page load stays still."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Nothing travels under Reduce motion: the row keeps its full height and the content only fades on the short hover timing."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the index bar is drawn in the button text colour and the seam stays a real border, so the lit section and the sections apart stay visible."
+    }
+  },
+  "motion": {
+    "grid-template-rows": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The row grows from zero on motion.enter and shrinks on motion.exit, fast in and slow out, with the content clipped while it travels."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The content fades in and out with the row on the same timing, so a closing panel does not show cut text at its shrinking edge."
+    },
+    "color": {
+      "p": "P7",
+      "axis": "motion",
+      "why": "The title's ink steps between secondary and primary on motion.hover, so the lit word changes without a jump."
+    }
+  }
+}

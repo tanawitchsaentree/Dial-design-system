@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Radio · three ways to show the one chosen</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 70ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; }
+  .unit { inline-size: 340px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 4px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0 0 6px; } .unit .note { font-size: 13px; margin: 10px 0 0; color: var(--ds-text-secondary); }
+  fieldset { border: 0; margin: 0; padding: 0; min-inline-size: 0; display: grid; }
+  legend { font-size: 13px; color: var(--ds-text-secondary); padding: 0; margin-block-end: 4px; }
+  label.r { position: relative; display: inline-flex; align-items: center; gap: 12px; min-block-size: 44px; cursor: pointer; font-size: 15px; }
+  .r input { position: absolute; opacity: 0; inline-size: 1px; block-size: 1px; margin: 0; }
+  .r input:focus-visible + .key { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  .key { position: relative; display: inline-grid; place-items: center; inline-size: 24px; block-size: 24px; border-radius: 50%; flex: none; box-sizing: border-box;
+         background: var(--ds-surface-raised); border: 1px solid var(--ds-line-ring); box-shadow: var(--ds-elevation-part); }
+  /* A: ink dot printed on the key face */
+  .a .key::after { content: ""; inline-size: 10px; block-size: 10px; border-radius: 50%; background: var(--ds-text-primary); opacity: 0; }
+  .a input:checked + .key::after { opacity: 1; }
+  .a .r:active .key { transform: translate(1px, 3px); box-shadow: none; }
+  /* B: legend, no key; the chosen word is full ink and medium with an index bar */
+  .b .key { display: none; }
+  .b label.r { padding-inline-start: 18px; color: var(--ds-text-secondary); }
+  .b label.r::before { content: ""; position: absolute; inset-inline-start: 0; inline-size: 10px; block-size: 2px; background: var(--ds-text-primary); opacity: 0; }
+  .b label.r:has(input:checked) { color: var(--ds-text-primary); font-weight: 500; }
+  .b label.r:has(input:checked)::before { opacity: 1; }
+  .b label.r:has(input:focus-visible) { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px; }
+  /* C: a recessed round well with an ink ball seated in it */
+  .c .key { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .c .key::after { content: ""; inline-size: 14px; block-size: 14px; border-radius: 50%; background: var(--ds-text-primary); box-shadow: var(--ds-elevation-part); transform: scale(0); }
+  .c input:checked + .key::after { transform: scale(1); }
+</style>
+</head>
+<body>
+<h1>Radio — three ways to show the one chosen out of a few</h1>
+<p>Same ink, same light. The chosen option must differ from the others by shape or position, not only by tone. Never orange. Every option is a 44px target.</p>
+<div class="row">
+  <section class="unit a" aria-labelledby="ha"><h2 id="ha">A · round key with an ink dot</h2>
+    <fieldset><legend>Heating mode</legend>
+    <label class="r"><input type="radio" name="a" checked><span class="key"></span>Comfort</label>
+    <label class="r"><input type="radio" name="a"><span class="key"></span>Eco</label>
+    <label class="r"><input type="radio" name="a"><span class="key"></span>Away</label></fieldset>
+    <p class="note">Sibling of Checkbox: a round key at height, a dot of printing ink on its face when chosen.</p></section>
+  <section class="unit b" aria-labelledby="hb"><h2 id="hb">B · legend with an index bar</h2>
+    <fieldset><legend>Heating mode</legend>
+    <label class="r"><input type="radio" name="b" checked><span class="key" hidden></span>Comfort</label>
+    <label class="r"><input type="radio" name="b"><span class="key" hidden></span>Eco</label>
+    <label class="r"><input type="radio" name="b"><span class="key" hidden></span>Away</label></fieldset>
+    <p class="note">P7 taken literally: all the words stand printed, the chosen one in full ink and medium with a bar. No part to press, so nothing says the words are targets.</p></section>
+  <section class="unit c" aria-labelledby="hc"><h2 id="hc">C · ball seated in a well</h2>
+    <fieldset><legend>Heating mode</legend>
+    <label class="r"><input type="radio" name="c" checked><span class="key"></span>Comfort</label>
+    <label class="r"><input type="radio" name="c"><span class="key"></span>Eco</label>
+    <label class="r"><input type="radio" name="c"><span class="key"></span>Away</label></fieldset>
+    <p class="note">A recess holds a raised ball when chosen. It reads as a detent, but the empty well looks like an input field and the part cannot be pressed like a key.</p></section>
+</div>
+</body>
+</html>

@@ -1,0 +1,223 @@
+{
+  "concept": "RadioCards is a bank of wide plastic key plates on the case of an appliance, one per mode, each with its name and a line of explanation printed on its face. Only one plate is down at a time: the chosen plate sits flat in the body, carries an ink index bar at its start and prints its name in the medium weight. It is for choices that need a sentence, which a plain Radio cannot hold.",
+  "kind": [
+    "radio cards",
+    "card radio group",
+    "option plates",
+    "choice of one with description"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "radio cards where the chosen card gets a thick coloured border and a tinted fill (Radix RadioCards, Shopify plan pickers)",
+      "why_not": "The coloured border and tint spend a hue on a selection, which P1 forbids, and the state disappears for anyone who cannot tell the two hues apart; here the chosen card is told by a bar, a weight and a lower plate."
+    },
+    {
+      "pattern": "radio cards that hides the native radio and leaves the card with no key at all",
+      "why_not": "Without a visible mark of the mechanism the plates look like links; the plate here moves like a key and the native radio stays underneath for the arrow keys."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): a bank of wide keys, one down at a time, each with its function printed on its face"
+    },
+    {
+      "source": "Braun TG 1000 tape recorder control row (1970s): mode keys where the one in use stays pressed in"
+    },
+    {
+      "source": "system/FORM.md control class: raised key, press drops the height to 0"
+    },
+    {
+      "source": "packages/react/src/components/Radio and Legend: the native radio group and the ink index mark this component reuses"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "A plate is a whole native label at least control.md tall and the full width of its column, so any part of it, the name, the line of text or the empty face, chooses the option."
+    },
+    {
+      "p": "P3",
+      "axis": "depth",
+      "consequence": "press drops height to 0 in 60–70ms, return runs on the material's spring",
+      "form": "Pressing a plate removes its elevation.part and moves it by motion.press-travel. The chosen plate stays in that lowered position, so a latched key reads as down."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "arrows step a detent",
+      "form": "Each plate holds a native radio input sharing one name, so the arrow keys walk from plate to plate and choose as they go, and only the chosen plate is a tab stop."
+    },
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "the chosen word carries one ink index mark beside it",
+      "form": "The chosen plate shows one bar of text.primary ink at its inline start, the same mark Legend prints beside its lit word."
+    },
+    {
+      "p": "P7",
+      "axis": "type",
+      "consequence": "the chosen one turns medium",
+      "form": "The chosen plate's title changes from the regular to the medium weight, a second cue that needs no colour."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "The choice is told by the bar, the weight and the lowered plate, all in ink and plastic, so no orange and no tint appears in the set."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The group's name is printed above the plates on the inset line, and the title and its text share one column that starts a fixed distance after the bar."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The bar sits in padding the plate always has, and the plate keeps its box when chosen, so choosing moves no other plate."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/radio-cards/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "raised key plates, chosen sits down with an index bar"
+      },
+      {
+        "id": "B",
+        "name": "one ruled box of printed rows, bar at the start of the chosen row"
+      },
+      {
+        "id": "C",
+        "name": "recessed wells, chosen rises with a bar under its word"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A gives every option its own plate, so the set reads as cards, and the chosen one is told by a bar, a weight and a lowered plate that all survive in black and white. B is one ruled box, which repeats List and Listbox and has no separate cards. C uses recessed wells that look like Input fields and makes the chosen plate rise, the opposite of a latched key, while its bar under the word shifts the text."
+  },
+  "mechanism": {
+    "kind": "key",
+    "travel": "3px",
+    "spring": {
+      "mass": 1.4,
+      "stiffness": 520,
+      "damping": 46
+    }
+  },
+  "parts": {
+    "group": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A native fieldset holds the plates in one fixed column, so the group is announced as a radio group and the layout does not reflow when the choice moves."
+    },
+    "legend": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The group's printed name in the label size and secondary ink on the inset line, and the accessible name of the group."
+    },
+    "card": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A whole plate is one native label at least 44px tall and marked as the hit area (data-hit), so any part of it chooses the option."
+    },
+    "input": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A native radio sits under the plate, hidden from sight but focusable, so the arrow keys walk the group and the state is announced."
+    },
+    "bar": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "One short bar of ink at the start of the plate marks the chosen option, a shape that reads with no colour and in forced colours."
+    },
+    "leading": {
+      "p": "P5",
+      "axis": "space",
+      "why": "An optional icon or lamp before the words, kept in its own column so the title and text line up whether or not a plate has one."
+    },
+    "body": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The title and its text stack in one column on the inset line, left aligned in the reading direction."
+    },
+    "title": {
+      "p": "P7",
+      "axis": "type",
+      "why": "The option's name in the body size and ink, regular when waiting and medium when chosen, and the accessible name of the radio."
+    },
+    "description": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The line that explains the option, in the label size and secondary ink at 4.5:1, read out as the radio's description."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover darkens the plate's printed edge one step and never lifts it, because real keys do not rise."
+    },
+    "active": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "Pressing a plate drops it by its travel and collapses its shadow underneath it, at once."
+    },
+    "data-checked": {
+      "p": "P7",
+      "axis": "motion",
+      "why": "The chosen plate lowers, shows its bar and turns its title medium together; the previous choice loses all three at the same time."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Keyboard focus on the hidden input draws the same dark ring around the whole plate as on every part."
+    },
+    "disabled": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled plate loses its height and fades to half, while its edge and text stay readable."
+    },
+    "data-disabled": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "A disabled plate shows the not-allowed cursor and no longer travels when pressed by a pointer."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion the plate changes state at once with no travel and no spring return; only the edge fade stays."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the plate keeps a system border and the bar uses the text colour, so both survive."
+    }
+  },
+  "motion": {
+    "transform": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The plate travels down in 65ms and returns on the spring so a press reads as a physical stroke."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "The cast shadow collapses with the press and grows back with the return, following the single light."
+    },
+    "border-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The edge step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The bar fades in on motion.release and out faster on motion.exit, through the state motion tokens (D-008)."
+    }
+  }
+}

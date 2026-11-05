@@ -1,0 +1,161 @@
+{
+  "concept": "Form is the case that holds a unit's fields and sends them. When a send fails it does what a device does when a setting is out of range: one window at the top counts the problems and names each one, and every name takes you to the field. Nothing is sent until every field is right.",
+  "kind": [
+    "form",
+    "submit form",
+    "error summary",
+    "validation"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "form that validates on every keystroke from the first character and shows red inline errors with no summary, or a toast that says there are errors",
+      "why_not": "The person is scolded before they finish typing, and a toast leaves no way to find which field is wrong, so the form must count the problems in one window and link each to its field."
+    },
+    {
+      "pattern": "form built on a form library with a controller around every field",
+      "why_not": "It forces every control through a wrapper and a store, while a native form already holds the values and the validity of each field, so Form reads them from the DOM."
+    }
+  ],
+  "references": [
+    {
+      "source": "system/FORM.md display class: a window recessed into the body that says the state, in numbers or a few words"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the window shows the figure and a printed key names what to press next"
+    },
+    {
+      "source": "GOV.UK Design System error summary: a titled list at the top of the page that links to each field and takes focus"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The error summary is a window with surface.sunken and elevation.well, so it reads as the unit's reading of what is wrong and never as a raised card."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "tabular figures everywhere a number changes",
+      "form": "The count of problems prints in tabular figures at the emphasis size, before the words, so the number is the first thing read and does not shift as it falls."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Enter in a field sends, a failed send puts focus on the window, Tab walks the links, and Enter on a link puts focus in the field it names."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The submit key is the unit's one Button of kind primary, and the summary, the links and the busy state use ink only."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation",
+      "form": "The summary appears and its rows leave at once with no slide or fade, and the sending state changes a word and the key's height, not a spinner."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "options": [
+      {
+        "id": "A",
+        "name": "printed box with numbered links"
+      },
+      {
+        "id": "B",
+        "name": "recessed window with the count first"
+      },
+      {
+        "id": "C",
+        "name": "raised strip with a bullet list"
+      }
+    ],
+    "reason": "B uses the recessed window that Input and Stepper already use for a reading, and the count leads like a figure on a display; A is a hairline box that has no body of its own and reads as a Fieldset, and C is a raised part that looks like a button or the Banner."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A native form with one column and a fixed gap, so the summary, the fields and the keys stand on the same inset line."
+    },
+    "summary": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The window that reports the failed send is recessed with the inverse light and takes focus when the send fails, so it is read before anything else."
+    },
+    "summaryTitle": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The window's heading names the group of problems in the emphasis size and medium weight, and aria-labelledby makes it the group's accessible name."
+    },
+    "count": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The count is a number that changes as problems are fixed, so it prints in tabular figures and does not move the words beside it."
+    },
+    "list": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The problems are a list in field order, so the screen reader reads how many there are and the Tab key walks them in the order of the form."
+    },
+    "item": {
+      "p": "P5",
+      "axis": "space",
+      "why": "Each row holds the link and its message in one column with a hairline above it, like a printed table of readings."
+    },
+    "link": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The field's name is a link, a row at least as tall as a key, and pressing it puts the focus in the field so the person can fix it at once."
+    },
+    "message": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The message says what is wrong in secondary ink under the link, at more than 4.5:1 on the recessed plastic."
+    },
+    "submit": {
+      "p": "P1",
+      "axis": "interaction",
+      "why": "The submit key wraps the unit's one primary Button and stops sending while a send runs, so a second press cannot send twice."
+    }
+  },
+  "states": {
+    "aria-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "While a send runs the submit key loses its height and fades, flat on the body, and the word changes to Sending, so the state is not told by colour."
+    },
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "A summary link thickens its rule under the pointer and nothing lifts, because a printed word does not rise when you approach it."
+    },
+    "active": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A press on the submit key while it is sending moves nothing, so the held key reads as flat and not as pressed."
+    },
+    "focus": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The window shows the dark ring whenever the form puts focus on it after a failed send, whether the key or a pointer sent it."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The window and each link show the same dark ring as every part when they hold the keyboard focus."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the summary keeps a real border and its links use the system link colour."
+    }
+  },
+  "motion": {}
+}

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · RangePicker · three ways to choose a start and an end</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+ .unit{inline-size:372px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);box-sizing:border-box}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .lab{font-size:14px;font-weight:500;margin:0 0 6px}
+ .fields{display:flex;align-items:flex-end;gap:10px}
+ .f{flex:1;min-inline-size:0}
+ .f small{display:block;font-size:12px;color:var(--ds-text-secondary);margin-block-end:4px}
+ .well{box-sizing:border-box;block-size:44px;padding-inline:14px;display:flex;align-items:center;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);font-size:14px;font-variant-numeric:tabular-nums}
+ .key{flex:none;inline-size:44px;block-size:44px;border-radius:999px;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);display:grid;place-items:center;color:var(--ds-text-secondary);font-size:13px}
+ .join{flex:none;inline-size:12px;block-size:44px;display:grid;align-items:center}
+ .join i{display:block;border-block-end:3px solid var(--ds-text-primary);border-radius:99px}
+ /* C: one shared window split by a hairline */
+ .C .shared{display:flex;align-items:stretch;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);block-size:44px;box-sizing:border-box}
+ .C .shared span{flex:1;display:flex;align-items:center;padding-inline:14px;font-size:14px;font-variant-numeric:tabular-nums}
+ .C .shared span+span{border-inline-start:1px solid var(--ds-line-ring)}
+ .cal{margin-block-start:18px;display:grid}
+ table{border-collapse:collapse}
+ th{font-size:12px;font-weight:400;color:var(--ds-text-secondary);min-inline-size:44px;block-size:30px;padding:0}
+ td{padding:0;inline-size:44px;block-size:44px;text-align:center;font-size:14px;font-variant-numeric:tabular-nums;color:var(--ds-text-secondary)}
+ td span{display:grid;place-items:center;inline-size:100%;block-size:100%;box-sizing:border-box;border:1px solid transparent;position:relative}
+ td.e span{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border-color:var(--ds-line-ring);font-weight:500;color:var(--ds-text-primary);border-radius:var(--ds-corner-media)}
+ td.i span{color:var(--ds-text-primary)}
+ /* A: a continuous recessed trough joins the two windows */
+ .A td.i span{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .A td.e span{border-radius:999px}
+ /* B: ruled lines above and below each day run through the range; row ends close with a tick */
+ .B td.i span{border-block-color:var(--ds-line-ring)}
+ .B td.i:first-child span{border-inline-start-color:var(--ds-line-ring)}
+ .B td.i:last-child span{border-inline-end-color:var(--ds-line-ring)}
+ .B td.p span{border-style:dotted}
+ /* C: a full-width ink bar under each number, the Pagination index mark stretched along the range */
+ .C td.i span::after{content:"";position:absolute;inset-inline:0;inset-block-end:6px;border-block-end:3px solid var(--ds-text-primary)}
+</style></head><body>
+<h1>RangePicker · start and end wells, a calendar key, range told by shape (chosen 9 to 17 Nov 2026; 12 is the hover end)</h1>
+<div class="row" id="row"></div>
+<script>
+const names = {A:'A · two wells, recessed trough in the month', B:'B · two wells joined by an ink bar, ruled strip in the month', C:'C · one shared window, underline bar along the range'};
+const wd = ['M','T','W','T','F','S','S'];
+function month(k){
+  let rows='', d=1; const lead=6;
+  for(let r=0;r<6;r++){ let tds='';
+    for(let c=0;c<7;c++){ const n=r*7+c-lead+1;
+      if(n<1||n>30){ tds+='<td></td>'; continue; }
+      let cls=''; if(n===9||n===17) cls='e'; else if(n>9&&n<17) cls='i';
+      if(k==='B'&&n>=14&&n<=16) cls+=' p';
+      tds+=`<td class="${cls}"><span>${n}</span></td>`; }
+    rows+=`<tr>${tds}</tr>`; }
+  return `<table><thead><tr>${wd.map(w=>`<th>${w}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+function fields(k){
+  if(k==='C') return `<p class="lab">Stay</p><div class="fields"><div class="shared" style="flex:1;display:flex"><span>2026-11-09</span><span>2026-11-17</span></div><div class="key">cal</div></div>`;
+  return `<p class="lab">Stay</p><div class="fields"><div class="f"><small>Start</small><div class="well">2026-11-09</div></div>${k==='B'?'<div class="join"><i></i></div>':''}<div class="f"><small>End</small><div class="well">2026-11-17</div></div><div class="key">cal</div></div>`;
+}
+document.getElementById('row').innerHTML = ['A','B','C'].map(k=>`<div class="unit ${k}"><h2>${names[k]}</h2>${fields(k)}<div class="cal">${month(k)}</div></div>`).join('');
+</script></body></html>

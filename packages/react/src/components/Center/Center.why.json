@@ -1,0 +1,18 @@
+{
+  "identity": false,
+  "identity_reason": "a layout primitive only places other components and has no look of its own to derive",
+  "concept": "Center puts one part in the middle of the room it is given, on one axis or both, so a lone display or key sits in a fixed place like a lamp in the middle of a panel.",
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "A centred part keeps one fixed position inside its box, so the layout does not reflow between states." },
+    "a-both": { "p": "P6", "axis": "space", "why": "Centring on both axes puts a lone part, such as an empty-state mark, at the middle of its box and holds it there." },
+    "a-inline": { "p": "P6", "axis": "space", "why": "Centring along the line only keeps the top edge fixed, so a part never jumps vertically when its neighbours change." },
+    "a-block": { "p": "P6", "axis": "space", "why": "Centring from top to bottom only keeps the start edge on the inset line while the part sits at mid height." },
+    "s-sm": { "p": "P6", "axis": "space", "why": "The narrowest cap holds one short line or a single key in the middle of a phone-wide column." },
+    "s-md": { "p": "P6", "axis": "space", "why": "The tablet cap keeps a centred note or form at a width the eye scans without hunting for the next line." },
+    "s-lg": { "p": "P6", "axis": "space", "why": "The laptop cap holds a centred unit with room either side so it reads as the only thing on the panel." },
+    "s-xl": { "p": "P6", "axis": "space", "why": "The wide cap matches the page width, so a centred part lines up with the Container above it." },
+    "s-2xl": { "p": "P6", "axis": "space", "why": "The widest cap stops a centred part from drifting far from its neighbours on large screens." }
+  },
+  "states": {},
+  "motion": {}
+}

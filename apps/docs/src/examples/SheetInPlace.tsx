@@ -3,7 +3,7 @@ import { Display, Sheet, Slider, Switch } from 'dial-react';
 
 export default function SheetInPlace() {
   return (
-    <div style={{ inlineSize: 'min(100%, 420px)' }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-lg))' }}>
       <Sheet modal={false} open placement="bottom" title="Living room lamp" model="lamp 02">
         <Display value="60" unit="%" detail="Warm white" label="Living room lamp" />
         <Slider label="Brightness" max={100} step={10} defaultValue={60} />

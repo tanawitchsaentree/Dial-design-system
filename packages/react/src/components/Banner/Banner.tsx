@@ -1,6 +1,8 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { cx } from '../../cx';
+import { messages } from '../../messages';
 import { Button } from '../Button';
+import { Icon, type IconName } from '../Icon';
 import { IconButton } from '../IconButton';
 import styles from './Banner.module.css';
 
@@ -32,12 +34,8 @@ export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'child
 const WORD: Record<BannerTone, string> = { neutral: 'Note', positive: 'Done', warning: 'Check', critical: 'Failed' };
 
 /** The same glyphs as Toast, one shape per tone, so the tone is told by shape and word, never by colour alone. */
-const GLYPH: Record<BannerTone, ReactNode> = {
-  neutral: <><circle cx="12" cy="12" r="8.5" /><path d="M12 11v5.5M12 7.5v.01" /></>,
-  positive: <path d="M5 12.5l4.5 4.5L19 7.5" />,
-  warning: <><path d="M12 3.5L21.5 20h-19z" /><path d="M12 10v4.5M12 17.5v.01" /></>,
-  critical: <><path d="M8 3.5h8l4.5 4.5v8L16 20.5H8L3.5 16V8z" /><path d="M12 8v5M12 16.5v.01" /></>,
-};
+// printed in dial's one icon language, the dot matrix (R-005)
+const GLYPH: Record<BannerTone, IconName> = { neutral: 'info', positive: 'positive', warning: 'warning', critical: 'critical' };
 
 /**
  * An inline message that stays on a screen for as long as a condition holds: a printed glyph and a
@@ -45,7 +43,7 @@ const GLYPH: Record<BannerTone, ReactNode> = {
  * role="alert" when critical, so it is announced when it appears.
  */
 export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
-  { tone = 'neutral', status, children, action, onDismiss, dismissLabel = 'Dismiss', className, ...rest },
+  { tone = 'neutral', status, children, action, onDismiss, dismissLabel = messages.dismiss, className, ...rest },
   ref,
 ) {
   return (
@@ -58,7 +56,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
       {...rest}
     >
       <span className={styles.head}>
-        <svg className={styles.glyph} viewBox="0 0 24 24" aria-hidden="true" focusable="false">{GLYPH[tone]}</svg>
+        <Icon name={GLYPH[tone]} className={styles.glyph} />
         <span className={styles.status}>{status ?? WORD[tone]}</span>
       </span>
       <span className={styles.message}>{children}</span>
@@ -67,7 +65,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
           {action ? <Button onClick={action.onAction}>{action.label}</Button> : null}
           {onDismiss ? (
             <IconButton label={dismissLabel} onClick={onDismiss}>
-              <svg className={styles.mark} viewBox="0 0 24 24" focusable="false"><path d="M6 6l12 12M18 6L6 18" /></svg>
+              <Icon name="close" />
             </IconButton>
           ) : null}
         </span>

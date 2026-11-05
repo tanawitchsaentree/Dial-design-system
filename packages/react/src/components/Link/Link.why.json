@@ -1,0 +1,145 @@
+{
+  "concept": "Link prints a reference the way a manual does: the words stay in the sentence's own ink and size, and one thin rule runs under them so nobody has to guess what can be pressed. A link already read steps one ink lighter, and a link that leaves the app carries one small dot-matrix mark at its end.",
+  "kind": [
+    "link",
+    "anchor",
+    "hyperlink",
+    "reference",
+    "navigation"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "a link in the brand accent colour with no rule under it, an underline appearing only on hover",
+      "why_not": "Colour alone tells it from the text around it, which fails for anyone who cannot see the hue, and the accent colour would spend the unit's one orange on a reference."
+    },
+    {
+      "pattern": "a link styled as a button: a filled pill or a bordered box with an arrow",
+      "why_not": "A pill reads as a key that does something here. A link goes somewhere, and dial keeps keys for things you turn or press."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun instruction manuals (Ulm school, 1960s): cross-references printed in the running text with a plain rule under the page number, no colour"
+    },
+    {
+      "source": "WCAG 2.2 1.4.1 Use of Color: a link inside text needs a cue that is not colour"
+    },
+    {
+      "source": "WCAG 2.2 2.5.8 Target Size (Minimum): a link inside a sentence is exempt, a link on its own line is not"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "A link is ink on plastic in every state, and its mark and rule are ink too. The unit's one orange stays on its primary control."
+    },
+    {
+      "p": "P5",
+      "axis": "colour",
+      "consequence": "ink on plastic at ≥4.5:1 in both themes",
+      "form": "Rest is primary ink and a link already read is secondary ink, both measured above 4.5:1 on the page and the body in light and dark."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "hierarchy by size and position",
+      "form": "A link has no size or weight of its own. It takes the size and line height of the sentence it stands in, so a Thai line keeps its room."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "A link on its own line is 44px tall and at least the touch width. A link inside a sentence stays the height of the line, because WCAG exempts it and 44px boxes would break the paragraph."
+    },
+    {
+      "p": "P6",
+      "axis": "interaction",
+      "consequence": "no hover lift; hover only darkens a key's ink a step",
+      "form": "A link is already in the darkest ink, so there is no step to darken. The rule under it thickens one step and nothing lifts, moves or changes size."
+    },
+    {
+      "p": "P3",
+      "axis": "motion",
+      "consequence": "fast in, slow out, through the state motion tokens",
+      "form": "The rule thickens over the hover token and settles back on the same easing; under Reduce motion it changes at once."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/link/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "solid rule under ink text, thickens on hover"
+      },
+      {
+        "id": "B",
+        "name": "dotted leader as the rule, solid on hover"
+      },
+      {
+        "id": "C",
+        "name": "no rule at rest, ink bar on hover only"
+      }
+    ],
+    "reason": "A tells a link at rest by a shape that survives a grey screen, and keeps the text in the sentence's own ink. B breaks on wrapped lines and its ring-ink dots are too faint under small type. C shows nothing until hover, which touch screens never get and WCAG 1.4.1 does not accept."
+  },
+  "parts": {
+    "link": {
+      "p": "P5",
+      "axis": "type",
+      "why": "A plain anchor, so the browser keeps its own open, copy and new-tab behaviour. It inherits the sentence's size, weight and line height and adds one rule under the words."
+    },
+    "standalone": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A link on its own line, such as All lamps. It is a row 44px tall and at least the touch width, with the rule under the words only."
+    },
+    "mark": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "The dot-matrix share glyph at the end of an external link. It is named for assistive tech, so the new tab is announced, and it is ink like the words."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover thickens the rule from a hairline to the ring width. The words stay in place and the rule is the only part that answers."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Keyboard focus draws the same dark ring around the link as on every part of the system, offset so it clears the descenders."
+    },
+    "data-visited": {
+      "p": "P7",
+      "axis": "colour",
+      "why": "A link already read prints one ink step lighter and its rule turns dotted. Browsers only let CSS change colour on a visited link, so the dotted rule comes from the visited prop, which a router can set."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion the rule changes thickness at once, with no transition."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the link takes the system link and visited colours, and the rule stays because it is a text decoration."
+    }
+  },
+  "motion": {
+    "text-decoration-thickness": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The rule thickens over 120ms and settles back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out; nothing travels."
+    },
+    "color": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The ink step between a link and a visited link fades over the same hover token, because a colour fade moves nothing."
+    }
+  }
+}

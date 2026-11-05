@@ -148,9 +148,14 @@ const WiringRoot = forwardRef<HTMLDivElement, WiringProps>(function Wiring(
     const o = h.getBoundingClientRect();
     const rtl = getComputedStyle(h).direction === 'rtl';
     const span = o.right - o.left;
-    const m =parseFloat(getComputedStyle(h).getPropertyValue('--ds-gap-md')) || 8;
+    // the routing module is gap.md, read from the token (no number of its own here)
+    const m = parseFloat(getComputedStyle(h).getPropertyValue('--ds-gap-md')) || 0;
+    if (!m) return;
     const box = (el: Element): Box => { const r = el.getBoundingClientRect(); return { l: r.left - o.left, t: r.top - o.top, r: r.right - o.left, b: r.bottom - o.top }; };
-    const boxes = new Map([...nodes.current].map(([id, el]) => [id, box(el)]));
+    // a line ends half a module off its part, so the end dot sits outside it and never on a printed word
+    const off = m / 2;
+    const grow = (k: Box): Box => ({ l: k.l - off, t: k.t - off, r: k.r + off, b: k.b + off });
+    const boxes = new Map([...nodes.current].map(([id, el]) => [id, grow(box(el))]));
     const frames = Array.from(h.querySelectorAll('[data-wiring-group] > div')).map(box);
     // the group names are printing too, so no line or word may cross them
     const placed: Box[] = Array.from(h.querySelectorAll('[data-wiring-group] > span')).map(box);

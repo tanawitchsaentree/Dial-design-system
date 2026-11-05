@@ -220,13 +220,24 @@ const spanCss = `
 /* GridItem spans, generated from the breakpoint tokens */
 ${tokens.has('grid.columns') ? `[data-ds-span] { --ds-span: var(--ds-span-base, var(${cssName('grid.columns')})); grid-column: span min(var(--ds-span), var(${cssName('grid.columns')})); }\n${BPS.map((bp) => `@media (min-width: ${resolve(`breakpoint.${bp}`)}) { [data-ds-span-${bp}] { --ds-span: var(--ds-span-${bp}); } }`).join('\n')}` : ''}
 `;
+// Printing (dial D-010): every component prints in pad ink pressed into its body, so print.seat — the lit lip of
+// a shallow print recess — is set on every component root and inherited by all of its words; the dot-matrix
+// icons take the same lip as a drop shadow. Zero specificity, so a screen window (light, not ink) or an accent
+// key turns it off in its own CSS. Emitted only when the system has the token.
+const printCss = tokens.has('print.seat') ? `
+/* printing: pad ink pressed into the body (print.seat), generated from the token */
+:where([data-component]) { text-shadow: var(${cssName('print.seat')}); }
+:where([data-component]) :where(button, input, select, textarea) { text-shadow: inherit; }
+:where([data-component="Icon"]) { filter: drop-shadow(var(${cssName('print.seat')})); }
+@media (forced-colors: active) { :where([data-component]) { text-shadow: none; } :where([data-component="Icon"]) { filter: none; } }
+` : '';
 const json = Object.fromEntries(
   [...tokens].map(([p, t]) => [p, { tier: t.tier, type: t.type, value: format(t.type, resolve(p)), ref: typeof t.raw === 'string' && REF.test(t.raw) ? t.raw.slice(1, -1) : null, css: cssName(p), description: t.description ?? null, why: t.why ?? null, ...(t.state ? { state: t.state } : {}), ...(t.bp ? { breakpoints: Object.fromEntries(Object.entries(t.bp).map(([bp, r]) => [bp, { ref: r.slice(1, -1), value: format(t.type, resolve(r.slice(1, -1))) }])) } : {}), ...(t.theme ? { themes: Object.fromEntries(Object.entries(t.theme).map(([th, r]) => [th, { ref: r.slice(1, -1), value: format(t.type, resolve(r.slice(1, -1))) }])) } : {}) }]),
 );
 
 mkdirSync(path.join(ROOT, 'build', 'css'), { recursive: true });
 mkdirSync(path.join(ROOT, 'build', 'json'), { recursive: true });
-writeFileSync(path.join(ROOT, 'build', 'css', 'tokens.css'), css.replace('/* Translucent surfaces', `/* Themes: ${BASE} is the base ($value); others via [data-theme] or prefers-color-scheme */\n${themeCss}\n\n/* Translucent surfaces`) + motionCss + stateCss + '\n/* responsive layout */\n' + bpBlocks + '\n' + spanCss);
+writeFileSync(path.join(ROOT, 'build', 'css', 'tokens.css'), css.replace('/* Translucent surfaces', `/* Themes: ${BASE} is the base ($value); others via [data-theme] or prefers-color-scheme */\n${themeCss}\n\n/* Translucent surfaces`) + motionCss + stateCss + '\n/* responsive layout */\n' + bpBlocks + '\n' + spanCss + printCss);
 
 // ---- other formats for consuming projects: ESM + types, SCSS ----
 mkdirSync(path.join(ROOT, 'build', 'js'), { recursive: true });

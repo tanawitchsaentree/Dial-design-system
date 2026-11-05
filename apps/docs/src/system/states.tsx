@@ -26,7 +26,7 @@ const NAV = [{ value: 'home', label: 'หน้าหลัก', href: '#home' }
 import { MediaPlayer, Queue } from 'dial-react';
 import { Environment, PullToRefresh } from 'dial-react';
 import { SceneCard, Slot, Tray } from 'dial-react';
-import { Card, Display, Explain, ExplainMode, Stack, Wiring } from 'dial-react';
+import { Card, Display, Explain, ExplainMode, Icon, Stack, Wiring } from 'dial-react';
 
 const LAMP_ACTIONS = [{ value: 'rename', label: 'เปลี่ยนชื่อ' }, { value: 'move', label: 'ย้ายห้อง' }, { value: 'remove', label: 'ลบออก', destructive: true }];
 
@@ -49,8 +49,7 @@ export const FAMILY_TEXT: Record<string, string> = {
   Panels: 'A panel is a body of its own. On a tall screen it docks to the bottom edge with a printed bar, and on a wide one it stands as a unit at the lower end.',
 };
 
-const icon = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
-const power = <svg {...icon}><path d="M12 3v8M7 6.5a7 7 0 1 0 10 0" /></svg>;
+const power = <Icon name="power" />;
 const PROGRAMS = [{ value: 'cotton', label: 'Cotton' }, { value: 'synth', label: 'Synthetic' }, { value: 'wool', label: 'Wool' }];
 const ROOMS = [{ value: 'kitchen', label: 'ห้องครัว' }, { value: 'living', label: 'ห้องนั่งเล่น' }, { value: 'bed', label: 'ห้องนอนใหญ่' }];
 
@@ -136,19 +135,19 @@ export const STATE_ROWS: StateRow[] = [
     ['disabled', <Menu label="ตัวเลือกของโคมไฟ" items={LAMP_ACTIONS} disabled />],
   ] },
   { component: 'List', family: 'Choices', cells: [
-    ['default', <List label="คิวเพลง" selectable style={{ inlineSize: 240 }}><List.Item value="a" index={1} label="เพลงกล่อมเตา" description="3:42" /></List>],
-    ['selected', <List label="คิวเพลง" selectable defaultValue="a" style={{ inlineSize: 240 }}><List.Item value="a" index={1} label="เพลงกล่อมเตา" description="3:42" /></List>],
-    ['disabled', <List label="คิวเพลง" selectable style={{ inlineSize: 240 }}><List.Item value="a" index={1} label="เพลงกล่อมเตา" description="ไม่มีในภูมิภาคนี้" disabled /></List>],
+    ['default', <List label="คิวเพลง" selectable style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><List.Item value="a" index={1} label="เพลงกล่อมเตา" description="3:42" /></List>],
+    ['selected', <List label="คิวเพลง" selectable defaultValue="a" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><List.Item value="a" index={1} label="เพลงกล่อมเตา" description="3:42" /></List>],
+    ['disabled', <List label="คิวเพลง" selectable style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><List.Item value="a" index={1} label="เพลงกล่อมเตา" description="ไม่มีในภูมิภาคนี้" disabled /></List>],
   ] },
   { component: 'Queue', family: 'Choices', cells: [
-    ['default', <div style={{ inlineSize: 280 }}><Queue label="คิวถัดไป" defaultTracks={QUEUE_TRACKS} /></div>],
-    ['selected', <div style={{ inlineSize: 280 }}><Queue label="คิวถัดไป" defaultTracks={QUEUE_TRACKS} playing="q1" words={{ playing: 'กำลังเล่น' }} /></div>],
+    ['default', <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }}><Queue label="คิวถัดไป" defaultTracks={QUEUE_TRACKS} /></div>],
+    ['selected', <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }}><Queue label="คิวถัดไป" defaultTracks={QUEUE_TRACKS} playing="q1" words={{ playing: 'กำลังเล่น' }} /></div>],
   ] },
   { component: 'MediaPlayer', family: 'Actions', cells: [
-    ['paused', <MediaPlayer tracks={PLAYER_TRACK} style={{ inlineSize: 300 }} />],
-    ['loading', <MediaPlayer tracks={[]} loading style={{ inlineSize: 300 }} />],
-    ['offline', <MediaPlayer tracks={PLAYER_TRACK} offline style={{ inlineSize: 300 }} />],
-    ['error', <MediaPlayer tracks={PLAYER_BROKEN} style={{ inlineSize: 300 }} />],
+    ['paused', <MediaPlayer tracks={PLAYER_TRACK} style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }} />],
+    ['loading', <MediaPlayer tracks={[]} loading style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }} />],
+    ['offline', <MediaPlayer tracks={PLAYER_TRACK} offline style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }} />],
+    ['error', <MediaPlayer tracks={PLAYER_BROKEN} style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }} />],
   ] },
   { component: 'Banner', family: 'Messages', cells: [
     ['neutral', <Banner status="Away">Holiday mode is on.</Banner>],
@@ -168,13 +167,13 @@ export const STATE_ROWS: StateRow[] = [
     ['docked', <Sheet modal={false} open placement="bottom" title="Desk lamp"><Slider label="Brightness" max={100} step={10} defaultValue={40} /></Sheet>],
   ] },
   { component: 'BottomNav', family: 'Choices', cells: [
-    ['default', <BottomNav layout="bar" label="ส่วนหลัก" items={NAV} style={{ inlineSize: 320 }} />],
-    ['current', <BottomNav layout="bar" label="ส่วนหลัก" items={NAV} current="rooms" style={{ inlineSize: 320 }} />],
+    ['default', <BottomNav layout="bar" label="ส่วนหลัก" items={NAV} style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))' }} />],
+    ['current', <BottomNav layout="bar" label="ส่วนหลัก" items={NAV} current="rooms" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))' }} />],
     ['rail', <BottomNav layout="rail" label="ส่วนหลัก" items={NAV} current="rooms" />],
   ] },
   { component: 'ActionSheet', family: 'Panels', cells: [
-    ['default', <ActionSheet modal={false} open title="โคมไฟในครัว" items={LAMP_ACTIONS} cancelLabel="ยกเลิก" style={{ inlineSize: 300 }} />],
-    ['disabled action', <ActionSheet modal={false} open title="โคมไฟในครัว" items={LAMP_ACTIONS.map((a) => (a.value === 'move' ? { ...a, disabled: true } : a))} cancelLabel="ยกเลิก" style={{ inlineSize: 300 }} />],
+    ['default', <ActionSheet modal={false} open title="โคมไฟในครัว" items={LAMP_ACTIONS} cancelLabel="ยกเลิก" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }} />],
+    ['disabled action', <ActionSheet modal={false} open title="โคมไฟในครัว" items={LAMP_ACTIONS.map((a) => (a.value === 'move' ? { ...a, disabled: true } : a))} cancelLabel="ยกเลิก" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }} />],
   ] },
   { component: 'Snackbar', family: 'Messages', cells: [
     ['positive', <Snackbar action={{ label: 'Undo', onAction: () => {} }}>Lamp removed</Snackbar>],
@@ -183,9 +182,9 @@ export const STATE_ROWS: StateRow[] = [
     ['critical', <Snackbar tone="critical">Washer didn’t answer</Snackbar>],
   ] },
   { component: 'PullToRefresh', family: 'Messages', cells: [
-    ['default', <PullToRefresh label="Readings" onRefresh={() => undefined} updated={new Date(2026, 10, 2, 10, 41)} style={{ inlineSize: 260 }}><List label="Readings"><List.Item label="Kitchen" description="21.5 °C" /></List></PullToRefresh>],
-    ['loading', <PullToRefresh label="Readings" onRefresh={() => undefined} refreshing updated={new Date(2026, 10, 2, 10, 41)} style={{ inlineSize: 260 }}><List label="Readings"><List.Item label="Kitchen" description="21.5 °C" /></List></PullToRefresh>],
-    ['disabled', <PullToRefresh label="Readings" onRefresh={() => undefined} disabled updated={new Date(2026, 10, 2, 10, 41)} style={{ inlineSize: 260 }}><List label="Readings"><List.Item label="Kitchen" description="21.5 °C" /></List></PullToRefresh>],
+    ['default', <PullToRefresh label="Readings" onRefresh={() => undefined} updated={new Date(2026, 10, 2, 10, 41)} style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><List label="Readings"><List.Item label="Kitchen" description="21.5 °C" /></List></PullToRefresh>],
+    ['loading', <PullToRefresh label="Readings" onRefresh={() => undefined} refreshing updated={new Date(2026, 10, 2, 10, 41)} style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><List label="Readings"><List.Item label="Kitchen" description="21.5 °C" /></List></PullToRefresh>],
+    ['disabled', <PullToRefresh label="Readings" onRefresh={() => undefined} disabled updated={new Date(2026, 10, 2, 10, 41)} style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><List label="Readings"><List.Item label="Kitchen" description="21.5 °C" /></List></PullToRefresh>],
   ] },
   { component: 'Environment', family: 'Messages', cells: [
     ['live', <Environment room="Bedroom" temperature={19.0} readAt="10:42" readings={[{ kind: 'humidity', value: 51 }]} />],

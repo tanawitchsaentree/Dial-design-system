@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// Gate proof for G-MO1 to G-MO4 (Gate Proof Rule: plant the violation, expect red; repair it, expect green).
+// Gate proof for G-MO1 to G-MO5 (Gate Proof Rule: plant the violation, expect red; repair it, expect green).
 // Usage: node tooling/engine/motion-probes.proof.mjs   (exit 1 when any case is wrong)
 import { chromium } from 'playwright';
-import { motionTokenProblems, stateRhythm, toggleChange, overlayChoreography, decelerates, accelerates, springProblems } from './motion-probes.mjs';
+import { motionTokenProblems, stateRhythm, toggleChange, overlayChoreography, interactionMotion, decelerates, accelerates, springProblems } from './motion-probes.mjs';
 
 const tok = (over) => ({
   'motion.hover': { tier: 'semantic', type: 'duration', value: '360ms', state: { ':hover': '{duration.brisk}' } },
@@ -35,6 +35,8 @@ const chips = (css, mode = '') => {
 // overlays: a trigger opens a [role=dialog]; Escape closes it with an exit animation (or none)
 const overlay = (inA, outA) => `<style>@keyframes kin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}@keyframes kout{from{opacity:1;transform:none}to{opacity:0;transform:translateY(8px)}}.d{position:fixed;inset:40px auto auto 40px;width:240px;height:120px;background:#333;color:#fff}.d.in{animation:${inA}}.d.out{animation:${outA ?? 'none'}}</style>
 <div data-example-live=""><div data-component="Dialog"><button aria-haspopup="dialog" aria-expanded="false" onclick="const d=document.createElement('div');d.className='d in';d.setAttribute('role','dialog');d.textContent='Hi';document.body.append(d);this.setAttribute('aria-expanded','true');const b=this;document.addEventListener('keydown',function k(e){if(e.key!=='Escape')return;document.removeEventListener('keydown',k);b.setAttribute('aria-expanded','false');${outA ? "d.className='d out';d.addEventListener('animationend',()=>d.remove())" : 'd.remove()'}})">Open</button></div></div>`;
+const mo5 = (css, body) => `<style>${css}</style><div data-example-live=""><div data-component="X" style="position:relative;height:160px">${body}</div></div>`;
+const PANEL = (js) => `<button aria-expanded="false" aria-haspopup="false" onclick="const p=this.nextElementSibling;${js};this.setAttribute('aria-expanded',String(!p.hidden))" style="padding:8px">Open</button><div class="p" hidden>Panel words</div>`;
 const IN = 'kin 320ms cubic-bezier(.22,1,.36,1) both', OUT = 'kout 180ms cubic-bezier(.4,0,1,1) both';
 
 const cases = [
@@ -84,6 +86,19 @@ const cases = [
   { gate: 'G-MO4 exit as long as entrance', want: 'red', overlay: overlay(IN, 'kout 320ms cubic-bezier(.4,0,1,1) both') },
   { gate: 'G-MO4 arrives on ease-in', want: 'red', overlay: overlay('kin 320ms cubic-bezier(.42,0,1,1) both', OUT) },
   { gate: 'G-MO4 exit decelerates', want: 'red', overlay: overlay(IN, 'kout 180ms cubic-bezier(.22,1,.36,1) both') },
+  // G-MO4 (dial R-004): an overlay that arrives in one frame is red, not "the quiet case"
+  { gate: 'G-MO4 appears in one frame', want: 'red', overlay: overlay('none', null) },
+  // G-MO5 (dial R-004): every change an interaction makes moves
+  { gate: 'G-MO5 toggle fill snaps', want: 'red', change: mo5('.t{background:#444;color:#fff;border:0;padding:8px}.t[aria-pressed=true]{background:#36c}', '<button class="t" aria-pressed="false" onclick="this.setAttribute(\'aria-pressed\',this.getAttribute(\'aria-pressed\')!==\'true\')">Eco</button>') },
+  { gate: 'G-MO5 toggle fill moves', want: 'green', change: mo5('.t{background:#444;color:#fff;border:0;padding:8px;transition:background-color 240ms cubic-bezier(.2,.8,.2,1)}.t[aria-pressed=true]{background:#36c}', '<button class="t" aria-pressed="false" onclick="this.setAttribute(\'aria-pressed\',this.getAttribute(\'aria-pressed\')!==\'true\')">Eco</button>') },
+  { gate: 'G-MO5 panel appears at once', want: 'red', change: mo5('.p{position:absolute;top:60px;background:#333;color:#fff;padding:8px}', PANEL('p.hidden=!p.hidden')) },
+  { gate: 'G-MO5 panel fades in', want: 'green', change: mo5('.p{position:absolute;top:60px;background:#333;color:#fff;padding:8px;opacity:0;transition:opacity 200ms cubic-bezier(.2,.8,.2,1)}.p.on{opacity:1}', PANEL("p.hidden=false;requestAnimationFrame(()=>requestAnimationFrame(()=>p.classList.toggle('on')))")) },
+  { gate: 'G-MO5 word in a closed band is not seen', want: 'green', change: mo5('.band{height:0;overflow:hidden}', '<button aria-pressed="false" onclick="this.nextElementSibling.firstElementChild?.remove();this.setAttribute(\'aria-pressed\',\'true\')" style="padding:8px">Go</button><div class="band"><span>Pull to refresh</span></div>') },
+  // dial R-005: a trigger that opens nothing beside a hidden listbox is not judged as an overlay
+  { gate: 'G-MO4 hidden listbox is not an open overlay', want: 'green', overlay: '<button aria-haspopup="listbox" aria-expanded="false" aria-controls="x">Pick</button><div id="x" role="listbox" hidden><div role="option">A</div></div>' },
+  // G-MO5 (dial R-008): a glyph swapped for another in one frame is red; one whose dots fade is green
+  { gate: 'G-MO5 glyph swaps in one frame', want: 'red', change: mo5('', '<button aria-pressed="false" onclick="const on=this.getAttribute(\'aria-pressed\')!==\'true\';this.setAttribute(\'aria-pressed\',on);this.querySelector(\'path\').setAttribute(\'d\',on?\'M2 2h4v12H2zM10 2h4v12h-4z\':\'M3 2l10 6-10 6z\')" style="padding:8px"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></button>') },
+  { gate: 'G-MO5 glyph whose dots fade', want: 'green', change: mo5('circle{transition:opacity 240ms cubic-bezier(.2,.8,.2,1)}circle[data-off]{opacity:0}', '<button aria-pressed="false" onclick="const on=this.getAttribute(\'aria-pressed\')!==\'true\';this.setAttribute(\'aria-pressed\',on);this.querySelectorAll(\'circle\').forEach((c,i)=>c.toggleAttribute(\'data-off\',(i%2===0)===on))" style="padding:8px"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="2"/><circle cx="8" cy="8" r="2" data-off=""/><circle cx="12" cy="8" r="2"/></svg></button>') },
 ];
 
 const browser = await chromium.launch();
@@ -93,8 +108,8 @@ for (const c of cases) {
   let problems;
   if (c.run) problems = c.run();
   else {
-    await page.setContent(`<!doctype html><html><body style="margin:0;font:16px system-ui"><main style="padding:40px">${c.html ?? c.toggle ?? c.overlay}</main></body></html>`);
-    problems = c.overlay ? (await overlayChoreography(page, { limit: 1 })).problems : c.toggle ? (await toggleChange(page, { limit: 2 })).problems : (await stateRhythm(page, { limit: 2 })).problems;
+    await page.setContent(`<!doctype html><html><body style="margin:0;font:16px system-ui"><main style="padding:40px">${c.html ?? c.toggle ?? c.overlay ?? c.change}</main></body></html>`);
+    problems = c.change ? (await interactionMotion(page, { limit: 1 })).problems : c.overlay ? (await overlayChoreography(page, { limit: 1 })).problems : c.toggle ? (await toggleChange(page, { limit: 2 })).problems : (await stateRhythm(page, { limit: 2 })).problems;
   }
   const got = problems.length ? 'red' : 'green';
   if (got !== c.want) wrong++;

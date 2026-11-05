@@ -1,5 +1,5 @@
 // Usage tab for Slot (component-depth.md U1–U14). The slit a room or device unit has for scene cards.
-import { Card, IconButton, Slot, Stack } from 'dial-react';
+import { Card, Icon, IconButton, Slot, Stack } from 'dial-react';
 import type { Depth } from './types';
 
 const Unit = ({ children }: { children: React.ReactNode }) => <Card padding="unit" wordmark="dial" model="scene 1" style={{ inlineSize: 'max-content', maxInlineSize: '100%' }}>{children}</Card>;
@@ -38,7 +38,7 @@ export const SLOT: Depth = {
   emphasis: {
     text: <p>A slot is not the loud part of its unit. The unit’s one orange part, a knob or a key, stays beside it. The slot and the card in it are never orange, and the lamp tells the state with a shape and a word.</p>,
     pair: {
-      do: <Unit><Stack direction="row" gap="lg" align="center"><Slot label="Living room" defaultScene={MOVIE} /><IconButton label="Lamps off" kind="primary" size="lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v9M6.3 7.3a8 8 0 1 0 11.4 0" /></svg></IconButton></Stack></Unit>,
+      do: <Unit><Stack direction="row" gap="lg" align="center"><Slot label="Living room" defaultScene={MOVIE} /><IconButton label="Lamps off" kind="primary" size="lg"><Icon name="power" /></IconButton></Stack></Unit>,
       doNote: 'The slot beside the unit’s one orange key.',
       dont: <Unit><Stack direction="row" gap="lg"><Slot label="Living room" /><Slot label="Living room" /></Stack></Unit>,
       dontNote: 'Two slots for one room, so it is unclear which scene runs.',
@@ -66,7 +66,7 @@ export const SLOT: Depth = {
   },
   behaviours: {
     states: [
-      ['Empty', 'The bay prints scene card and an arrow; the lamp is a ring with the word Empty.', 'The button is named Living room slot, empty.'],
+      ['Empty', 'The bay prints scene card and an arrow; the lamp is a ring with the word Empty.', 'The button is named Living room slot, empty, scene card, which holds the words its bay prints.'],
       ['Ready', 'While a card is held, the slit has a ring and the legend prints at full ink.', 'Every slot that can take the card shows it.'],
       ['Over', 'The slot under a dragged card has a full ink ring.', 'Releasing inserts the card here.'],
       ['Inserted', 'The card stands half out with its name; the lamp is a dot with the word Running.', 'A polite status says Movie night inserted into Living room.'],

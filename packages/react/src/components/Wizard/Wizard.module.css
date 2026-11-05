@@ -1,0 +1,40 @@
+/* Wizard — the Stepper opens the current step in place, two keys under the rail (lab apps/lab/wizard pick A).
+   Only the last step's key is orange (P1). A step opens and closes at once (P6), so there is no transition here. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-2xl);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+/* a closed step keeps its fields mounted but hidden; the Stepper's gap under its title goes with them */
+.step > div:has(> .panel[hidden]) { display: none; }
+.panel[hidden] { display: none; }
+.heading {
+  border-radius: var(--ds-corner-mark);
+}
+.heading:focus { outline: none; }
+.heading:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.message {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  margin: 0;
+  padding-block-start: var(--ds-gap-md);
+  min-block-size: var(--ds-control-sm);
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+}
+.message[data-blocked] { font-weight: var(--ds-type-weight-medium); }
+.keys {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-gap-lg);
+}
+@media (forced-colors: active) {
+  .heading:focus-visible { outline-color: Highlight; }
+}

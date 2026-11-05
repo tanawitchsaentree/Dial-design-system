@@ -1,0 +1,174 @@
+{
+  "concept": "Carousel pages through a few slides the way a device pages through its memory slots: one slide shows at a time in a window cut into the body, a row of holes under it says which slot is showing, and two round keys step back and forward. It does not move by itself.",
+  "kind": [
+    "carousel",
+    "slider of slides",
+    "slideshow",
+    "gallery strip"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "a carousel that autoplays, with arrow buttons floating over the slide and small dots that are the only way to jump",
+      "why_not": "Moving content nobody asked for breaks the quiet of the unit, floating keys hide the slide they sit on, and a six pixel dot is far below the 44px hit area."
+    },
+    {
+      "pattern": "a full-bleed hero slideshow with a translucent bar of arrows and a filled accent dot for the current slide",
+      "why_not": "The accent colour is spent on a position marker, and the current slide is told by colour alone."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): one window shows the chosen band while a row of printed marks beside it says how many there are"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): two round keys beside a recessed window, nothing printed over the window"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices, Carousel pattern: a region named a carousel, slides as groups named n of N, no rotation unless asked"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The slides scroll inside a window that takes surface.sunken and elevation.well, so the slide reads as a reading and the keys, which are raised, stay outside it."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The previous and next keys are 44px discs in a strip under the window, never laid over the slide, so no key covers content and none is smaller than the target."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "arrows step a detent, Home and End reach the ends",
+      "form": "With the window focused the arrow keys step one slide, Home and End go to the first and last, and every slide is a detent the scroll snaps to."
+    },
+    {
+      "p": "P4",
+      "axis": "interaction",
+      "consequence": "a grille that shows a value exposes it as text to assistive tech",
+      "form": "The holes under the window are the position, and the same position is also printed as hidden text, such as 2 of 5, in a polite live region."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "Nothing advances on a timer. The track moves only after a key, a swipe or an arrow, and under reduce motion it jumps to the slide at once."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The two keys are plain body-coloured keys and the lit hole is ink, so the Carousel never takes the unit's one orange."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/carousel/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "keys riding the window edges"
+      },
+      {
+        "id": "B",
+        "name": "window with one control strip of key, holes, key"
+      },
+      {
+        "id": "C",
+        "name": "dotted rail down the side with the keys at its ends"
+      }
+    ],
+    "reason": "B keeps every raised part outside the recessed window, so the slide is a reading and nothing covers it, and key, holes, key sit on one row 44px high like the other control rows; A lays keys over the slide's edge, which hides content and makes the window look pressable, and C turns the position down a column while the slides move sideways, and costs the slide a quarter of its width."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A region that holds the window and the strip in one column, so the printing sits on the same inset line and the strip does not move between slides."
+    },
+    "window": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The recessed frame that clips the track, with the inverse light drawn over the slides so a full-width image still reads as lying inside the body."
+    },
+    "scroller": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The track is a native scroll container with snap points, so a swipe, a wheel and the keys all land on a slide and never between two."
+    },
+    "slide": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Each slide is one full window wide and is a detent the track snaps to, with an inset so its content does not touch the frame."
+    },
+    "strip": {
+      "p": "P3",
+      "axis": "space",
+      "why": "One row, 44px tall, holding previous, the holes and next, so the two keys stay at the same place for every slide."
+    },
+    "key": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "The previous and next keys are the system's round key, with a dotted chevron, because they are the two parts that step."
+    },
+    "flip": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "In a right-to-left page the chevrons mirror, so previous still points the way the reader came from."
+    },
+    "dots": {
+      "p": "P4",
+      "axis": "space",
+      "why": "A row of holes, one per slide, on cells of the same width so the row keeps its length and its pitch on the module grid."
+    },
+    "dot": {
+      "p": "P4",
+      "axis": "depth",
+      "why": "Each slide is one hole cut into the body; the hole of the slide on show is lit, which shows the position and is never a control."
+    }
+  },
+  "states": {
+    "data-on": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "The lit hole is filled with full ink, drawn larger than the waiting holes and with no recess, so the position shows in black and white as well as in colour."
+    },
+    "disabled": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "At the first slide the previous key, and at the last the next key, lose their height and fade, so a key that cannot step looks flat; focus passes to the other key when the one it was on goes flat."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "When the window itself holds keyboard focus the whole frame takes the system's dark ring, so the person sees the arrow keys are live."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The holes change at once, and the track jumps to the slide instead of gliding, because the scroll is set instant in the code."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the window keeps a real border, the waiting holes draw as outlines and the lit hole as a solid text-colour disc."
+    }
+  },
+  "motion": {
+    "background-color": {
+      "p": "P4",
+      "axis": "motion",
+      "why": "A hole lights over the fill duration (motion.fill) and goes out the same way, so the position steps on the grille and nothing slides."
+    },
+    "box-shadow": {
+      "p": "P4",
+      "axis": "motion",
+      "why": "The recess of a waiting hole fades out as the hole lights, over the same fill duration, so the two changes read as one."
+    }
+  }
+}

@@ -1,0 +1,40 @@
+/* Fieldset — a printed box round related controls, the name set into its top line (lab apps/lab/fieldset pick A).
+   Flat printing: no fill, no shadow, no orange. */
+.group {
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--ds-gap-sm);
+  min-inline-size: var(--ds-gap-none);
+  margin: var(--ds-gap-none);
+  padding-block: var(--ds-gap-md) var(--ds-gap-lg);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.legend {
+  padding-inline: var(--ds-gap-md);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+.hint {
+  margin: var(--ds-gap-none);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.group:disabled {
+  border-color: var(--ds-line-divider);
+}
+.group:disabled > .legend,
+.group:disabled > .hint {
+  opacity: var(--ds-opacity-disabled);
+}
+
+@media (forced-colors: active) {
+  .group { border-color: CanvasText; }
+  .group:disabled { border-color: GrayText; }
+}

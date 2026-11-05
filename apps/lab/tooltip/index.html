@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Tooltip · three ways to print a part's name</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:300px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .stage{position:relative;block-size:150px;display:flex;align-items:flex-end;gap:16px}
+ .key{inline-size:44px;block-size:44px;border-radius:50%;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);border:1px solid var(--ds-line-ring);display:block;position:relative}
+ .tip{position:absolute;inset-block-end:56px;font-size:13px;line-height:1.4;white-space:nowrap;color:var(--ds-text-primary)}
+ /* A: plastic tag over the part, same panel as Menu */
+ .A .tip{padding:6px 12px;border-radius:var(--ds-corner-media);background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-float);border:1px solid var(--ds-line-ring)}
+ /* B: recessed window with the name inside */
+ .B .tip{padding:6px 12px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring)}
+ /* C: flat printing with a hairline leader down to the part */
+ .C .tip{padding-block:0 8px;padding-inline:0;border-block-end:0;margin-inline-start:21px}
+ .C .tip::before{content:"";position:absolute;inset-inline-start:-1px;inset-block-end:-8px;block-size:12px;inline-size:1px;background:var(--ds-line-ring)}
+ .C .tip span{display:block;padding:4px 8px;background:var(--ds-surface-solid);border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);margin-inline-start:-1px}
+</style></head><body>
+<h1>Tooltip · the printed name of a part</h1>
+<div class="row">
+ <div class="unit A"><h2>A · plastic tag, floated</h2><div class="stage"><span class="key"><span class="tip">Skip track</span></span><span class="key"></span></div></div>
+ <div class="unit B"><h2>B · name in a recessed window</h2><div class="stage"><span class="key"><span class="tip">Skip track</span></span><span class="key"></span></div></div>
+ <div class="unit C"><h2>C · flat label with a leader</h2><div class="stage"><span class="key"><span class="tip"><span>Skip track</span></span></span><span class="key"></span></div></div>
+</div></body></html>

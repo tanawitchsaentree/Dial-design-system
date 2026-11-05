@@ -44,7 +44,7 @@ function Anatomy({ render, parts }: { render: ReactNode; parts: Depth['anatomy']
   }, [parts]);
   return (
     <figure className="anatomy-figure" data-example="">
-      <Stage className="anatomy-stage"><div ref={box} className="anatomy-host">{render}{marks.map((m) => m && <span key={m.n} aria-hidden="true"><svg className="anatomy-lead" style={{ insetInlineStart: 0, insetBlockStart: 0 }} width="100%" height="100%"><path d={`M${m.from} ${m.fromY} H${m.x - 20} L${m.x - 12} ${m.y}`} /></svg><span className="anatomy-mark" style={{ insetInlineStart: m.x, insetBlockStart: m.y }}>{m.n}</span></span>)}</div></Stage>
+      <Stage className="anatomy-stage"><div ref={box} className="anatomy-host">{render}{marks.map((m) => m && <span key={m.n} aria-hidden="true"><svg className="anatomy-lead" style={{ insetInlineStart: 'var(--ds-gap-none)', insetBlockStart: 'var(--ds-gap-none)' }} width="100%" height="100%"><path d={`M${m.from} ${m.fromY} H${m.x - 20} L${m.x - 12} ${m.y}`} /></svg><span className="anatomy-mark" style={{ insetInlineStart: m.x, insetBlockStart: m.y }}>{m.n}</span></span>)}</div></Stage>
       <ol className="anatomy-legend">{parts.map((p) => <li key={p.part}><b>{p.part}.</b> {p.what}</li>)}</ol>
     </figure>
   );

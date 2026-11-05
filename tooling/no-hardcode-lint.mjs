@@ -20,7 +20,11 @@
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, extname } from 'node:path';
 
-const TARGETS = ['packages/react/src', 'packages/styles', 'packages/tokens/preview'];
+// v5 (dial R-007, 2026-11-03): the book is part of the web the system ships, so apps/docs/src is scanned too —
+// before this, 105 raw values and 143 raw demo frames in the book passed as "clean" for a whole milestone.
+const TARGETS = ['packages/react/src', 'packages/styles', 'packages/tokens/preview', 'apps/docs/src'];
+// a media query cannot hold var(), so its widths must be the breakpoint tokens' own values (read from the build)
+const BREAKPOINTS = (() => { try { const t = JSON.parse(readFileSync('packages/tokens/build/json/tokens.json', 'utf8')); return new Set(Object.entries(t).filter(([k]) => k.startsWith('breakpoint.')).map(([, v]) => String(v.value).replace(/px$/, ''))); } catch { return new Set(); } })();
 const EXT = new Set(['.tsx', '.ts', '.css', '.scss']);
 
 const SIZING = 'width|height|min-width|max-width|min-height|max-height|block-size|inline-size|min-inline-size|max-inline-size|min-block-size|max-block-size';
@@ -55,11 +59,17 @@ const RULES = [
   // Pane: opacity: 0.5 on disabled and scale(1.08) on a slider thumb slipped through, because only lengths were checked
   { re: /(?<![-\w])opacity\s*:\s*(?!var\()(0?\.\d+|0\.\d*|[1-9]\d*%)/g, msg: 'opacity ดิบ → var(--ds-opacity-*)' },
   { re: /\bscale[XYZ3d]*\(\s*(?!var\()\d*\.?\d+(?!\s*\))?/g, msg: 'scale() ดิบ → var(--ds-scale-*)' },
+  // v5 (dial R-007): the families the length rule cannot see
+  { re: /(?<![-\w])line-height\s*:\s*(?!var\()\d*\.?\d+\s*[;}!]/g, msg: 'line-height ดิบ → var(--ds-type-leading-*)' },
+  { re: /(?<![-\w])z-index\s*:\s*(?!var\()-?\d+/g, msg: 'z-index ดิบ → var(--ds-layer-*)' },
+  { re: /(?<![-\w])font-weight\s*:\s*(?!var\()\d{3}/g, msg: 'font-weight ดิบ → var(--ds-type-weight-*)' },
+  { re: /(?<![-\w])(transition|animation)(-duration|-delay)?\s*:[^;{}]*?(?<![\w-])(?!0s\b|0ms\b)\d*\.?\d+m?s\b/g, msg: 'duration ดิบ → var(--ds-motion-*)' },
   { re: /\b(margin|padding|border)-(left|right)\b/g, msg: 'physical property → logical (-inline-start/-inline-end)' },
   { re: /(?<![-\w])(width|min-width|max-width|height|min-height|max-height)\s*:/g, msg: 'physical sizing → logical (inline-size/block-size)' },
   { re: /(?<![-\w])(left|right)\s*:/g, msg: 'physical inset → inset-inline-start/end' },
   { re: /\btext-align\s*:\s*(left|right)\b/g, msg: 'text-align physical → start/end' },
-  { re: /style=\{\{[^}]*(background|color|padding|margin|width|height|boxShadow|borderRadius)/g, msg: 'inline style ที่มีค่าดีไซน์ → CSS Module' },
+  // an inline style may carry a token (var(--ds-*)) or a computed value, never a raw number, length or colour
+  { re: /style=\{\{[^}]*?\b(?!flex\b|zIndex\b|opacity\b|order\b|['"`]?--)[a-zA-Z]+\s*:\s*(-?\d+(\.\d+)?\s*[,}]|['"`][^'"`]*?\b\d+(\.\d+)?(px|rem|em|vw|vh)\b|['"`]#[0-9a-fA-F]{3,8}|['"`](rgb|hsl)a?\()/g, msg: 'inline style with a raw value → a token' },
 ];
 const SKIP_FILE = /(stories\.|test\.|spec\.|\.d\.ts|node_modules)/;
 
@@ -227,6 +237,12 @@ for (const file of files) {
     // เช็ค no-hardcode-ok marker จากบรรทัดดิบเสมอ (ไม่ใช่บรรทัดที่ strip comment แล้ว)
     // เพราะ marker เองอยู่ใน comment — ถ้าเช็คจาก `line` (stripped) จะหา marker ไม่เจอ
     if (/no-hardcode-ok/.test(rawLines[i] ?? '')) return;
+    const media = /@media|matchMedia\(/.test(line);
+    if (media) {
+      for (const m of line.matchAll(/(\d+(?:\.\d+)?)px/g)) if (!BREAKPOINTS.has(m[1])) { console.error(`${file}:${i + 1}  breakpoint ${m[1]}px is not a breakpoint token (${[...BREAKPOINTS].map((b) => b + 'px').join(', ')})\n    ${(rawLines[i] ?? line).trim()}`); n++; }
+      if (/\((max|min)-width\s*:/.test(line)) { console.error(`${file}:${i + 1}  media query in min/max-width form → range syntax (width < Npx)\n    ${(rawLines[i] ?? line).trim()}`); n++; }
+      line = line.replace(/@media[^{]*\{/, '{');
+    }
     for (const { re, msg } of RULES) {
       re.lastIndex = 0;
       if (re.test(line)) { console.error(`${file}:${i + 1}  ${msg}\n    ${(rawLines[i] ?? line).trim()}`); n++; }

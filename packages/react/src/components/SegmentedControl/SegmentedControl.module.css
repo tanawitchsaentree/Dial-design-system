@@ -129,7 +129,10 @@
   .key:active:not([aria-checked='true']) { transform: none; }
 }
 @media (prefers-reduced-transparency: reduce) {
-  .key[aria-checked='true'] { background: var(--ds-glass-neutral-matte); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  /* matte is not lit from behind, so the inner glow goes with the frost and the word keeps 4.5:1 to the edge */
+  .key[aria-checked='true'] { background: var(--ds-glass-neutral-matte); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 0 0 0 transparent, inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-glass-lit), inset 0 0 0 0 transparent; }
+  /* the lit lamp stays solid but casts no halo on the matte face, which would wash the top of the word */
+  .key[aria-checked='true'] .lamp { box-shadow: 0 0 0 0 transparent, inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-glass-lit), inset 0 0 0 0 transparent; }
 }
 @media (forced-colors: active) {
   .key { border-color: ButtonText; }

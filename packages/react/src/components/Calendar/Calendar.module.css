@@ -1,0 +1,169 @@
+/* Calendar — a month printed flat on the body; today carries an index bar, the chosen day is cut into a recessed window
+   (lab apps/lab/calendar pick B). Shape and weight carry today and the chosen day; ink steps carry them a second time. No orange. */
+.root {
+  display: inline-grid;
+  row-gap: var(--ds-gap-md);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: var(--ds-gap-md);
+}
+.heading {
+  flex: 1;
+  text-align: center;
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+}
+.key {
+  box-sizing: border-box;
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  inline-size: var(--ds-control-key);
+  block-size: var(--ds-control-key);
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-raised);
+  box-shadow: var(--ds-elevation-part);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing),
+    color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.key:hover { color: var(--ds-text-primary); }
+.key:active {
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+  box-shadow: none;
+  transition-duration: var(--ds-motion-press);
+}
+.key[aria-disabled='true'] {
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+  transform: none;
+}
+:dir(rtl) .key > * { transform: scaleX(-1); }
+.grid {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.weekday {
+  min-inline-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-sm);
+  padding-inline: var(--ds-gap-none);
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  text-align: center;
+  color: var(--ds-text-secondary);
+}
+.week { block-size: var(--ds-control-md); }
+.cell {
+  inline-size: var(--ds-control-md);
+  block-size: var(--ds-control-md);
+  padding: var(--ds-gap-none);
+  text-align: center;
+}
+.day {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  min-inline-size: var(--ds-control-md);
+  block-size: var(--ds-control-md);
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-media);
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-regular);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.day:hover { color: var(--ds-text-primary); }
+.day:active {
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.day[data-selected] {
+  border-color: var(--ds-line-ring);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  font-weight: var(--ds-type-weight-medium);
+  color: var(--ds-text-primary);
+}
+.day[data-today] { color: var(--ds-text-primary); }
+/* a marked range (RangePicker): the two end days are windows already; the days between are ruled above and
+   below with the ring hairline and square-cornered, and a row's first and last day close the strip. A preview is dotted. */
+.day[data-range='inside'] {
+  border-block-color: var(--ds-line-ring);
+  border-radius: var(--ds-gap-none);
+  color: var(--ds-text-primary);
+}
+.cell:first-child .day[data-range='inside'] { border-inline-start-color: var(--ds-line-ring); }
+.cell:last-child .day[data-range='inside'] { border-inline-end-color: var(--ds-line-ring); }
+.day[data-range='inside'][data-preview] { border-style: dotted; }
+.mark {
+  position: absolute;
+  inset-block-end: var(--ds-gap-sm);
+  inset-inline: var(--ds-gap-none);
+  margin-inline: auto;
+  inline-size: var(--ds-control-thumb);
+  block-size: var(--ds-gap-none);
+  border-block-end: var(--ds-width-bar) solid var(--ds-text-primary);
+  border-radius: var(--ds-corner-round);
+}
+.day:focus-visible,
+.key:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+[data-readonly] .day { cursor: default; }
+[data-readonly] .day:active:not([data-selected]) {
+  background: transparent;
+  box-shadow: none;
+}
+.day[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: var(--ds-opacity-disabled);
+}
+.day[aria-disabled='true']:hover { color: var(--ds-text-secondary); }
+.day[aria-disabled='true']:active:not([data-selected]) {
+  background: transparent;
+  box-shadow: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .key {
+    transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+  }
+  .key:active { transform: none; }
+}
+@media (forced-colors: active) {
+  .key { border-color: ButtonText; color: ButtonText; }
+  .key[aria-disabled='true'] { border-color: GrayText; color: GrayText; }
+  .day { color: CanvasText; }
+  .day[data-selected] { background: Highlight; border-color: Highlight; color: HighlightText; }
+  .mark { forced-color-adjust: none; border-block-end-color: CanvasText; }
+  .day[data-selected] .mark { border-block-end-color: HighlightText; }
+  .day[data-range='inside'] { border-color: CanvasText; border-inline-color: transparent; }
+  .cell:first-child .day[data-range='inside'] { border-inline-start-color: CanvasText; }
+  .cell:last-child .day[data-range='inside'] { border-inline-end-color: CanvasText; }
+  .day[aria-disabled='true'] { color: GrayText; opacity: 1; }
+  .weekday { color: CanvasText; }
+}

@@ -1,0 +1,201 @@
+{
+  "concept": "FAB is the unit's one main action as a key fixed in its corner. It is the orange key of the case, sunk into an opaque seat cut in the body, so it keeps one place and never floats over the printing around it. Beside a word it stretches into a capsule.",
+  "kind": [
+    "fab",
+    "floating action button",
+    "main action key",
+    "floating key"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "floating action button: a coloured circle with a large drop shadow hovering over the content at the bottom corner (Material FAB)",
+      "why_not": "A shadow from straight above lifts the circle off the page, so text scrolls under it unmasked and the key claims more height than every other part; P6 caps a unit's float at its material height."
+    },
+    {
+      "pattern": "FAB that grows, hides or wiggles on scroll to draw the eye",
+      "why_not": "P6 allows no idle animation and no entry choreography; a main key stays where the hand expects it and moves only when pressed."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a single coloured key at the lower corner, set in the case among printed bands"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the one coloured key sits in its own square of the key field, apart from the body-coloured keys"
+    },
+    {
+      "source": "system/FORM.md control class and input class: raised round key, recessed well"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The key is always action.accent with an action.accent-rim edge and has no other kind; the seat around it is surface.sunken, never orange."
+    },
+    {
+      "p": "P1",
+      "axis": "space",
+      "consequence": "sits where the hand expects it (lower or right of the display)",
+      "form": "The seat is anchored to the inline-end and block-end of its container, one gap.lg in from the edges and never closer than the device's safe area."
+    },
+    {
+      "p": "P1",
+      "axis": "shape",
+      "consequence": "the loud control is the one round or largest part",
+      "form": "The key is a disc at control.lg, the largest key in the unit; with a word it becomes a capsule at the same height."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The seat is taken out of the flow and positioned from the corner, so the content beside it never moves when it appears or its word changes."
+    },
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The seat is a well cut into the body: opaque surface.sunken with elevation.well, so any text beneath it is hidden and the key stands in a hole, not over the page."
+    },
+    {
+      "p": "P3",
+      "axis": "depth",
+      "consequence": "press drops height to 0 in 60–70ms",
+      "form": "Active state removes elevation.part and moves the key by motion.press-travel in motion.press, then it returns on the spring."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The key is control.lg (52px) high and wide, so the target is above 44px with or without a word."
+    },
+    {
+      "p": "P6",
+      "axis": "interaction",
+      "consequence": "no hover lift; hover only darkens a key's ink a step",
+      "form": "Hover moves the orange one step to action.accent-hover and never lifts, scales or translates the key."
+    },
+    {
+      "p": "P1",
+      "axis": "motion",
+      "consequence": "the loud control is the only part whose response may carry the spring's settle",
+      "form": "The key returns from a press on the release spring; the seat itself never moves."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/fab/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "bare round disc with a shadow"
+      },
+      {
+        "id": "B",
+        "name": "extended capsule with the word"
+      },
+      {
+        "id": "C",
+        "name": "round key sunk in an opaque seat"
+      }
+    ],
+    "picked": "C",
+    "by": "agent",
+    "reason": "C is the only one that answers the floating-over-text problem: the opaque seat is its own pane and gives the key a fixed place cut into the body, while A is a floating disc that lets text run under its shadow and B is just a Button with a longer reach; the word from B stays available as the extended option of C."
+  },
+  "mechanism": {
+    "kind": "key",
+    "travel": "3px",
+    "spring": {
+      "mass": 1.4,
+      "stiffness": 520,
+      "damping": 46
+    }
+  },
+  "parts": {
+    "root": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The seat: an opaque recessed well fixed to the corner of its container that holds the key and hides any text beneath it."
+    },
+    "key": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The orange key itself, 52px high, with a darker rim that holds 3:1 against the seat and its glyph in the on-accent ink."
+    },
+    "extended": {
+      "p": "P1",
+      "axis": "shape",
+      "why": "With a printed word the disc stretches into a capsule at the same height, and the seat follows it, so the action is named when there is room."
+    },
+    "viewport": {
+      "p": "P6",
+      "axis": "space",
+      "why": "Fixed to the window instead of the nearest positioned container, for a screen whose whole page is the unit."
+    },
+    "icon": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "The dot-matrix glyph printed on the key in the on-accent ink, at the medium icon size."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The word on an extended key uses the label size in medium weight with a line box tall enough for Thai marks."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover moves the orange one step lighter and never lifts the key, because real keys do not rise."
+    },
+    "active": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "Pressing drops the key by its travel and collapses its shadow underneath it, at once."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The key shows the same dark ring as every part, drawn outside the seat's edge so focus never depends on orange."
+    },
+    "disabled": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled key loses its height and fades to half while its rim stays readable against the seat."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion the key changes state at once with no travel and no spring return; only the colour fade stays."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the key and the seat keep real borders, so the corner position and the edge survive without shadows or fills."
+    }
+  },
+  "motion": {
+    "transform": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The key drops by motion.press-travel in motion.press and returns on motion.release, the same as every key; the seat never moves."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The cast shadow collapses under the key at press speed and comes back with its travel, so depth and position change as one stroke."
+    },
+    "background-color": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The orange shifts one step on hover with the same fast in, slow out fade as every key."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A key that becomes pressable, or stops being, fades over motion.release instead of switching in one frame (D-008); under Reduce motion the fade stays on motion.hover."
+    }
+  }
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Feed · three ways to print a stream of posts</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+ .unit{inline-size:360px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .av{inline-size:44px;block-size:44px;border-radius:var(--ds-corner-media);display:grid;place-items:center;font-size:14px;font-weight:500;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);color:var(--ds-text-secondary)}
+ .nm{font-size:14px;font-weight:500}.tm{font-size:13px;color:var(--ds-text-secondary);margin-inline-start:8px}
+ .bd{font-size:15px;line-height:1.5;color:var(--ds-text-primary);margin:4px 0 0}
+ .seam{block-size:0;margin:0;border-block-start:1px solid var(--ds-line-divider);border-block-end:1px solid var(--ds-material-lit)}
+ .key{margin-block-start:16px;min-block-size:44px;padding-inline:20px;border-radius:999px;border:1px solid var(--ds-line-ring);background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);font:inherit;font-size:14px;color:var(--ds-text-primary)}
+ /* A: rows on the body, avatar window at the start, seams between */
+ .A article{display:grid;grid-template-columns:44px 1fr;column-gap:16px;padding-block:16px}
+ .A article>div{min-inline-size:0}
+ /* B: log tape: position number in a margin, ruler line, small avatar inline */
+ .B article{display:grid;grid-template-columns:32px 1fr;column-gap:14px;padding-block:14px;border-inline-start:1px solid var(--ds-line-ring);padding-inline-start:0}
+ .B .pos{font-size:11px;font-variant-numeric:tabular-nums;color:var(--ds-text-secondary);text-align:end;padding-inline-end:6px}
+ .B .av{inline-size:28px;block-size:28px;font-size:11px;display:inline-grid;vertical-align:middle;margin-inline-end:8px}
+ /* C: each post a raised slip */
+ .C article{padding:16px;margin-block-end:14px;border-radius:var(--ds-corner-inner);background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);border:1px solid var(--ds-line-divider)}
+ .C .head{display:flex;align-items:center;gap:12px}
+ .note{display:flex;align-items:center;justify-content:space-between;min-block-size:44px;padding-inline:14px;margin-block-end:12px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);font-size:14px}
+</style></head><body>
+<h1>Feed · a stream of posts that loads more as you read</h1>
+<div class="row">
+ <div class="unit A"><h2>A · rows on the body, seams between</h2>
+  <div class="note"><span>3 new posts</span></div>
+  <article><span class="av">MK</span><div><span class="nm">Mali K.</span><span class="tm">22:40</span><p class="bd">Washer finished. Moved the load to the dryer.</p></div></article><hr class="seam">
+  <article><span class="av">TS</span><div><span class="nm">Tan S.</span><span class="tm">21:15</span><p class="bd">Heating is down to 18 for the night.</p></div></article><hr class="seam">
+  <article><span class="av">PN</span><div><span class="nm">Pim N.</span><span class="tm">19:02</span><p class="bd">Hall lamp set to warm, 40%.</p></div></article>
+  <button class="key">Load more</button></div>
+ <div class="unit B"><h2>B · log tape, position in the margin</h2>
+  <div class="note"><span>3 new posts</span></div>
+  <article><span class="pos">1</span><div><span class="av">MK</span><span class="nm">Mali K.</span><span class="tm">22:40</span><p class="bd">Washer finished. Moved the load to the dryer.</p></div></article>
+  <article><span class="pos">2</span><div><span class="av">TS</span><span class="nm">Tan S.</span><span class="tm">21:15</span><p class="bd">Heating is down to 18 for the night.</p></div></article>
+  <article><span class="pos">3</span><div><span class="av">PN</span><span class="nm">Pim N.</span><span class="tm">19:02</span><p class="bd">Hall lamp set to warm, 40%.</p></div></article>
+  <button class="key">Load more</button></div>
+ <div class="unit C"><h2>C · a raised slip per post</h2>
+  <div class="note"><span>3 new posts</span></div>
+  <article><div class="head"><span class="av">MK</span><div><span class="nm">Mali K.</span><span class="tm">22:40</span></div></div><p class="bd">Washer finished. Moved the load to the dryer.</p></article>
+  <article><div class="head"><span class="av">TS</span><div><span class="nm">Tan S.</span><span class="tm">21:15</span></div></div><p class="bd">Heating is down to 18 for the night.</p></article>
+  <button class="key">Load more</button></div>
+</div></body></html>

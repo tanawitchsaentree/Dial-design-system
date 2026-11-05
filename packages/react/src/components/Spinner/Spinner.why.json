@@ -1,0 +1,149 @@
+{
+  "concept": "Spinner says a device is busy and has no figure to show yet, such as a hub answering or a firmware file loading. It is a small field of recessed holes with a short lit trail that walks round the edge, and it exists only while the work runs.",
+  "kind": [
+    "spinner",
+    "busy indicator",
+    "loading indicator",
+    "activity indicator"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "circular spinner, a ring with a coloured arc that turns for ever",
+      "why_not": "The coloured arc spends the unit's one orange on a wait, and a smooth endless turn is the idle motion P6 forbids, so the busy motion steps hole by hole and exists only while the work runs."
+    },
+    {
+      "pattern": "three bouncing dots in the brand colour",
+      "why_not": "Bouncing dots have no recess and no state beyond moving, so a person who asks for reduced motion is left with nothing that says busy."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun LE 1 loudspeaker (Dieter Rams, 1959): a field of round holes in the case that is read as one pattern"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): a segment turns on and off in its window and nothing else moves"
+    },
+    {
+      "source": "system/FORM.md display class: grille is a field of recessed holes whose lit holes are the reading"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P4",
+      "axis": "depth",
+      "consequence": "each hole is a recess (inverse light), never a printed dot",
+      "form": "The nine holes take the same recess and well shadow as Grille, so a Spinner reads as a grille that is working, not as a new drawing."
+    },
+    {
+      "p": "P4",
+      "axis": "space",
+      "consequence": "grille pitch is one module step, so holes sit on the same grid as the body's inset",
+      "form": "Holes are three by three on Grille's pitch, so the Spinner stands on the same grid as the controls beside it and the larger size is a whole step bigger."
+    },
+    {
+      "p": "P4",
+      "axis": "colour",
+      "consequence": "holes are ink at a lower step; a lit level uses ink at full step, never orange",
+      "form": "Unlit holes use the lower step and the lit trail uses full ink, so the trail keeps 3:1 against the unlit holes in both themes and nothing is orange."
+    },
+    {
+      "p": "P4",
+      "axis": "motion",
+      "consequence": "a level change fills holes in reading order, ≤120ms, none under Reduce motion",
+      "form": "The trail moves one hole per motion.fill step (120ms) in reading order round the edge; under reduce motion it stops on a fixed trail of three lit holes."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "transitions only on state",
+      "form": "Busy is a state, so the Spinner is mounted only while the work runs and has no motion before or after; nothing else in the unit moves with it."
+    },
+    {
+      "p": "P4",
+      "axis": "interaction",
+      "consequence": "a grille that shows a value exposes it as text to assistive tech",
+      "form": "The Spinner is a status region that holds its label as text, so the busy state is announced in words and the holes are hidden from assistive tech."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/spinner/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "lit trail walking the edge of a three by three field"
+      },
+      {
+        "id": "B",
+        "name": "one lit hole scanning along a row of five"
+      },
+      {
+        "id": "C",
+        "name": "round field filling from the bottom row up"
+      }
+    ],
+    "reason": "A is still a readable pattern when reduce motion stops it, because three lit holes in a ring show a direction, and it stays small enough to stand beside a key. B freezes to one lit hole that says nothing, and C is a 21-hole field as tall as a Display, too heavy for a wait."
+  },
+  "parts": {
+    "root": {
+      "p": "P4",
+      "axis": "interaction",
+      "why": "The root is a status region that holds the label as text and the field of holes, so a wait is announced in words."
+    },
+    "field": {
+      "p": "P4",
+      "axis": "space",
+      "why": "The field lays nine holes in three columns on Grille's one module pitch, and mirrors in right-to-left layouts."
+    },
+    "hole": {
+      "p": "P4",
+      "axis": "depth",
+      "why": "Each hole is a recess in the lower ink step with the well shadow, and the eight on the edge take the trail in turn."
+    },
+    "still": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "Under reduce motion the first three holes of the ring stay in full ink, so a stopped Spinner still shows a short trail."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "interaction",
+      "why": "The label is real text inside the status region, hidden from sight unless asked for, so announcement never depends on the holes."
+    },
+    "shown": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A shown label is printed beside the field on the inset line, in the label size with a line box tall enough for Thai marks."
+    },
+    "sm": {
+      "p": "P4",
+      "axis": "space",
+      "why": "The small size uses Grille's 8px holes, the same size as a Grille beside it in a list row."
+    },
+    "md": {
+      "p": "P4",
+      "axis": "space",
+      "why": "The medium size uses holes one module step larger, for a Spinner that stands alone in a sheet or a card."
+    }
+  },
+  "states": {
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P4",
+      "axis": "motion",
+      "why": "Under reduce motion the trail does not move and three holes stay lit in a ring, so busy is a pattern and not a movement."
+    },
+    "@media forced-colors: active": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "In forced colours each hole keeps a real border and a lit hole fills with the text colour, so the trail and the still pattern both survive."
+    }
+  },
+  "motion": {
+    "@walk": {
+      "p": "P4",
+      "axis": "motion",
+      "why": "Each hole lights for three steps of 120ms in turn round the ring, a stepped change with no easing, and the loop runs only while the Spinner is mounted."
+    }
+  }
+}

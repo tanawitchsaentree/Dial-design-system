@@ -3,7 +3,7 @@ import { Card, Stack, Text } from 'dial-react';
 
 export default function CardPadding() {
   return (
-    <Stack gap="lg" style={{ inlineSize: 320 }}>
+    <Stack gap="lg" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))' }}>
       <Card padding="sm"><Text>sm · 16px inset</Text></Card>
       <Card padding="md"><Text>md · 24px inset</Text></Card>
       <Card padding="lg"><Text>lg · 32px inset</Text></Card>

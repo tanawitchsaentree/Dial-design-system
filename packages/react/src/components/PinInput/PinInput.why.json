@@ -1,0 +1,165 @@
+{
+  "concept": "PinInput is a row of small recessed windows, one for each digit of a short code. Each window is the same cut-in well as Input, so a code reads as several readings side by side, and the cursor moves from one window to the next as digits arrive.",
+  "kind": [
+    "pin input",
+    "code field",
+    "one-time code",
+    "digit cells"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "pin input as a row of bordered boxes with a blinking caret and a hidden single input behind them",
+      "why_not": "The boxes only imitate a field, so selection, paste and screen readers fight the fake; each digit here is a real input in a real window."
+    },
+    {
+      "pattern": "pin input cells that turn green or red on every digit as the code is typed",
+      "why_not": "It tells right and wrong by colour alone and spends colour on a label; invalid is a glyph with words under the row."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): each figure is read in its own window cut into the body"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the dial scale is read one mark at a time on the inset line"
+    },
+    {
+      "source": "system/FORM.md input class: recessed well, label printed above on the inset line"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: group with one labelled text input per item"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "Each cell takes surface.sunken and elevation.well, the same as Input, so a digit reads as cut into the body and never as a key."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The label, the row of cells and the message stack in one column, so the label sits on the inset line above the first cell."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Every cell is at least 44px wide and 44px tall, and the row wraps instead of squeezing a cell narrower."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "A digit moves to the next cell, Backspace goes back, the arrows, Home and End walk the cells, and a paste fills them all."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Digits, edges and the focus ring are ink, and the invalid state is a red glyph with words, never orange."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/pin-input/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "separate recessed windows"
+      },
+      {
+        "id": "B",
+        "name": "one window cut by seams"
+      },
+      {
+        "id": "C",
+        "name": "display window with ghost segments"
+      }
+    ],
+    "reason": "A reuses the Input window, gives each digit its own 44px target and wraps on a narrow screen; B hides the focused cell inside a joined bar and cannot wrap, and C borrows the LCD face that belongs to displays and prints fake ghost digits that are not in the code."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The field stacks its label, row of cells and message in one column so the label sits on the inset line above the first cell."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight and also names the group of cells for assistive tech."
+    },
+    "group": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The row keeps the cells on one grid step apart and wraps a long code to a second line before it would shrink a cell below 44px."
+    },
+    "cell": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "One digit sits in one recessed window with the inverse light, in tabular figures, with a line box tall enough that Thai marks are never cut."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The hint is secondary ink on plastic above 4.5:1, printed under the row so it never covers a digit."
+    },
+    "error": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The error message is a red mark with words, never the orange, which stays reserved for the unit's primary control."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A printed mark beside the words means invalid is never told by colour alone, for people who cannot see the red."
+    },
+    "md": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The default cell is 44px square, the smallest target that every part in dial keeps for a finger."
+    },
+    "lg": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A 52px cell with larger figures for the main code of a phone sheet held in one hand."
+    }
+  },
+  "states": {
+    "focus": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The focused cell shows the same dark ring as every part, and the digit in it is selected so the next key replaces it."
+    },
+    "data-filled=true": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "A cell that holds a digit draws its edge in secondary ink, a step darker than the empty cell, so filled and empty differ by outline and not only by the digit."
+    },
+    "data-invalid=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "An invalid cell draws its edge in the critical red, which is never orange, and the message below names the problem."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled row loses its recess shadow and fades, so it reads as not taking input right now."
+    },
+    "data-readonly=true": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A read-only row keeps its recess and ink but loses the text cursor, so the code can be read and copied and not changed."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours each cell keeps a real border and the focus ring uses the system highlight colour."
+    }
+  },
+  "motion": {}
+}

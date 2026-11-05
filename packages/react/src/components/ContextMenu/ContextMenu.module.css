@@ -1,0 +1,24 @@
+/* ContextMenu — the object a menu belongs to (lab apps/lab/context-menu pick B). The panel and its rows are
+   Menu's own (imported from ../Menu/Menu.module.css, same recess for the reached row, same lamp for a
+   destructive action). The only look added here is the object itself: while the panel is open the object sinks
+   into elevation.well, so depth says which object the actions are for. Nothing is orange. */
+.root {
+  display: block;
+  /* a long press must open the menu, not the browser's own callout or text selection */
+  -webkit-touch-callout: none;
+  border-radius: var(--ds-corner-inner);
+  transition:
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.root[data-open] {
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.root:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-gap-none);
+}
+@media (forced-colors: active) {
+  .root[data-open] { outline: var(--ds-width-ring) solid Highlight; }
+}

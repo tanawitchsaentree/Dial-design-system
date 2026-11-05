@@ -15,7 +15,9 @@
     box-shadow var(--ds-motion-release) var(--ds-motion-easing),
     color var(--ds-motion-hover) var(--ds-motion-easing),
     background-color var(--ds-motion-hover) var(--ds-motion-easing),
-    border-color var(--ds-motion-release) var(--ds-motion-easing);
+    border-color var(--ds-motion-release) var(--ds-motion-easing),
+    /* a key that becomes pressable (or stops being) fades its print up or down, never in one frame (D-008) */
+    opacity var(--ds-motion-release) var(--ds-motion-easing);
 }
 .key { background: var(--ds-surface-raised); color: var(--ds-text-secondary); }
 /* a toggle key latched down (aria-pressed) is frosted glass in the neutral range (P9, D-007); the orange key never is */
@@ -29,7 +31,8 @@
   box-shadow: 0 0 0 0 transparent, inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-glass-lit), inset 0 0 var(--ds-space-1-5) var(--ds-glass-neutral-glow);
   color: var(--ds-text-primary);
 }
-.primary { background: var(--ds-action-accent); color: var(--ds-text-on-accent); border-color: var(--ds-action-accent-rim); }
+/* the orange key's glyph is light printed on the colour: no warm-paper lip under it (D-010) */
+.primary { background: var(--ds-action-accent); color: var(--ds-text-on-accent); border-color: var(--ds-action-accent-rim); --ds-print-seat: none; }
 .md { inline-size: var(--ds-control-key); block-size: var(--ds-control-key); }
 .lg { inline-size: var(--ds-control-lg); block-size: var(--ds-control-lg); }
 .icon {
@@ -64,7 +67,8 @@
   .root {
     transition:
       color var(--ds-motion-hover) var(--ds-motion-easing),
-      background-color var(--ds-motion-hover) var(--ds-motion-easing);
+      background-color var(--ds-motion-hover) var(--ds-motion-easing),
+      opacity var(--ds-motion-hover) var(--ds-motion-easing);
   }
   .root:active { transform: none; }
 }

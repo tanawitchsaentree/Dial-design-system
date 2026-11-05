@@ -1,0 +1,197 @@
+{
+  "concept": "Sidebar is the legend printed down the side of a device: the names of its rooms and settings in one fixed column, grouped under small lowercase headings. The page you are on is set in medium weight with one ink index mark beside it, the same mark Tabs puts under a name, turned to the side. The column can shrink to the icons alone.",
+  "kind": [
+    "sidebar",
+    "side navigation",
+    "nav column",
+    "page legend"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "sidebar with an accent-tinted pill behind the active item and a hamburger that slides the panel over the page",
+      "why_not": "A tinted pill spends a hue on a selection, which P1 forbids, and a panel that slides over the page is movement no state of the device asked for."
+    },
+    {
+      "pattern": "dark admin sidebar with a hard rule between every group and a glowing active row",
+      "why_not": "A hard dark rule splits one unit into regions and a glow is reserved for the display, so the column would read as a second device."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): band names printed in one column beside the dial, the chosen one marked by a single tick"
+    },
+    {
+      "source": "Braun regie receiver tuning scale: printed names with one index mark at the chosen station"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices, Disclosure Navigation Menu: a nav landmark of link lists, aria-current=page, a button with aria-expanded"
+    },
+    {
+      "source": "apps/lab/sidebar/index.html: ink bar at the edge of the row, dotted scale with a tick, recessed current row"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P7",
+      "axis": "space",
+      "consequence": "in one fixed column or arc",
+      "form": "Every page name stands in one fixed column on the body's inset line, and groups are told apart by a gap and a lowercase heading, so nothing reflows when the page changes."
+    },
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "the chosen word carries one ink index mark beside it",
+      "form": "The current page gets one short ink bar with round ends at the inline start of its row, the Tabs mark turned to the side, so it is a shape and still shows when the words are hidden."
+    },
+    {
+      "p": "P5",
+      "axis": "depth",
+      "consequence": "printing is flat on the material, with no shadow and no emboss",
+      "form": "Rows have no height, shadow or recess. A link is printing on the body, so it never reads as a key that changes the device."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "Words, icons and the index mark are ink on plastic. The current page is told by weight and the mark, never by orange or a tinted fill."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "A row is at least 44px tall and in the collapsed column an icon row is 44px wide, so the target does not shrink with the words."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "transitions only on state",
+      "form": "Collapsing is a state change, so the column narrows once on the release motion; it never moves on load or on hover, and under Reduce motion it changes width at once."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/sidebar/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "ink bar at the edge of the row"
+      },
+      {
+        "id": "B",
+        "name": "dotted scale with a tick on the rail"
+      },
+      {
+        "id": "C",
+        "name": "current row recessed into the body"
+      }
+    ],
+    "reason": "A reuses the index mark of Tabs and List, so the current page is one shape that survives collapsing to icons; B puts a second drawing (the rail) beside every row and its tick is only 6px wide when collapsed; C recesses the row, which is the Input well, so the current page would read as a field you can type in."
+  },
+  "parts": {
+    "root": {
+      "p": "P7",
+      "axis": "space",
+      "why": "The nav landmark is a plastic body in one fixed column; its width is the sidebar size open and a single 44px row plus the inset when collapsed."
+    },
+    "group": {
+      "p": "P7",
+      "axis": "space",
+      "why": "A group is a heading and its list, set apart from the next by a gap and never by a rule, so the unit stays one piece."
+    },
+    "heading": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The group name is a small label in secondary ink, regular weight, printed on the inset line above its list; it also names the list for assistive tech when hidden."
+    },
+    "list": {
+      "p": "P7",
+      "axis": "space",
+      "why": "Pages are an unordered list with an even gap, so a screen reader announces how many there are and each row keeps the same pitch."
+    },
+    "item": {
+      "p": "P7",
+      "axis": "space",
+      "why": "The list item holds one link and carries the corner radius, so the row nests inside the body."
+    },
+    "link": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The link is the whole row and the target, at least 44px tall, with the icon and the words inside it so one click area covers both."
+    },
+    "icon": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "The dot-matrix glyph sits in a fixed 20px cell at the start of the row, so the words align down one edge and the glyph stays put when the column collapses."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The page name is body size and wraps instead of clipping, with a generous line box so Thai marks are not cut; collapsed, it stays in the page as the link's name but is not drawn."
+    },
+    "mark": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "One short ink bar with round ends at the row's inline start shows the current page, the same single mark Tabs and List use."
+    },
+    "toggle": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A 44px key at the foot of the column collapses and expands it, with aria-expanded, so the state is a button state and not a hover trick."
+    },
+    "toggleLabel": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The key prints its word beside the chevron while open, and drops it when collapsed, where the chevron and the accessible name remain."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover darkens a page name one ink step and nothing rises, because printing on a case does not move."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Keyboard focus draws the same dark ring around the row or the key as on every part of the system."
+    },
+    "aria-current=page": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "The current page turns to primary ink and medium weight and shows its index mark, a change of weight and shape and not of hue."
+    },
+    "data-collapsed": {
+      "p": "P7",
+      "axis": "space",
+      "why": "Collapsed, the words and group headings leave the picture, rows centre their icon in a 44px cell, and the index mark stays so the current page is still told."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion the column changes width at once, and the ink step keeps its short fade because a fade of colour moves nothing."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the index mark is drawn in the system text colour, so the current page keeps its mark."
+    }
+  },
+  "motion": {
+    "color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The ink step on hover comes in on motion.hover, fast in and slow out on the decelerating curve, while the mark itself never moves."
+    },
+    "background-color": {
+      "p": "P7",
+      "axis": "motion",
+      "why": "The index mark is ink like the word beside it, so it inks in on motion.hover when a page becomes current instead of snapping on; it fades in place and never slides."
+    },
+    "inline-size": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Collapsing is a state change, so the column narrows once on motion.release on the decelerating curve; under Reduce motion it changes at once."
+    }
+  }
+}

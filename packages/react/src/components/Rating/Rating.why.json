@@ -1,0 +1,193 @@
+{
+  "concept": "Rating is a short row of five marks printed as round dot lattices, the way a panel prints a scale of levels. A lit mark is a solid disc of dots and an empty mark is a hollow ring of dots, so the number is read from the shape alone. In display mode it only shows a value, half marks included; in pick mode it is a radio group that the arrow keys walk.",
+  "kind": [
+    "rating",
+    "score",
+    "stars",
+    "one to five scale"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "row of five yellow stars, filled yellow against outlined grey, with a hover preview",
+      "why_not": "A star spends a hue on a score, which P1 forbids, and the empty star is told from the filled one by colour first. Rating tells them by shape, a solid lattice against a hollow ring, in ink only."
+    },
+    {
+      "pattern": "rating built from clickable icons with no group, no value and no keyboard map",
+      "why_not": "Five unrelated buttons name no group and expose no value. Rating is one radio group with a printed name, a visible value and arrow, Home and End keys."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun LE 1 loudspeaker grille (Dieter Rams, 1959): a field of round holes where the lit and the unlit are told by pattern"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a printed scale of marks beside the dial, read by position"
+    },
+    {
+      "source": "apps/lab/rating/index.html: round lattice, square block, diamonds in a window"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P4",
+      "axis": "colour",
+      "consequence": "a lit level uses ink at full step",
+      "form": "A lit mark prints its dots in text.primary and an empty mark prints in text.secondary, never orange, and the shape (disc against ring) carries the difference as well."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "A mark draws its lattice at control.check, 24px, inside a control.md square that is the whole target, so five marks stand 220px wide."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "arrows step a detent, Home and End reach the ends",
+      "form": "The marks are native radios sharing one name, so the arrows walk and choose, Home picks 1 and End picks the last, and only one mark is a tab stop."
+    },
+    {
+      "p": "P4",
+      "axis": "interaction",
+      "consequence": "a grille that shows a value exposes it as text to assistive tech",
+      "form": "Display mode is role img named with the value as words, and pick mode prints the value beside the marks as tabular text."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "The chosen value is marked by the lattice shape and ink, so the selection never uses the orange."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/rating/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "round lattice, lit disc against hollow ring"
+      },
+      {
+        "id": "B",
+        "name": "square block against four corner marks"
+      },
+      {
+        "id": "C",
+        "name": "diamonds inside one recessed window"
+      }
+    ],
+    "reason": "A reads at once as lit against empty with no colour, and its half mark is a disc on one side and a ring on the other; B has too few dots left in its empty mark to read as a mark at all, and C puts a control inside a recessed window, which is the form of a display, so it reads as read-only."
+  },
+  "parts": {
+    "root": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A column holding the printed name above the row of marks, so the label and the marks share one left edge."
+    },
+    "legend": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The group's printed name in the label size and secondary ink, set on the inset line above the marks like the legend of Radio."
+    },
+    "row": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The marks and the value sit on one line with no gap between targets, so the row is a continuous 44px band to hit."
+    },
+    "mark": {
+      "p": "P3",
+      "axis": "space",
+      "why": "One choice, a 44px square target that centres a 24px lattice, so a small drawing never makes a small target."
+    },
+    "input": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The native radio is visually hidden and stays focusable and announced, so the arrow keys and the form value come from the browser."
+    },
+    "glyph": {
+      "p": "P4",
+      "axis": "shape",
+      "why": "A 5 by 5 field of round holes at the Grille pitch; the ring holes are always printed and the core holes are lit by the value."
+    },
+    "dot": {
+      "p": "P4",
+      "axis": "shape",
+      "why": "One round hole of the lattice; a core hole fades in when its mark is lit and sinks back when it is not, as the Icon dots do."
+    },
+    "value": {
+      "p": "P2",
+      "axis": "type",
+      "why": "The value printed after the marks in tabular figures, so the number can be read as well as the shape and does not shift as it changes."
+    }
+  },
+  "states": {
+    "data-fill=full": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "A fully lit mark prints its core dots and uses primary ink, so lit differs from empty by shape and by ink step."
+    },
+    "data-fill=half": {
+      "p": "P4",
+      "axis": "shape",
+      "why": "A half mark lights the core dots of the inline-start half only, for display values like 3.5, and mirrors in right-to-left."
+    },
+    "data-fill=empty": {
+      "p": "P4",
+      "axis": "shape",
+      "why": "An empty mark keeps only its ring of dots in secondary ink, a hollow shape that is measurably different from the solid lattice."
+    },
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover only darkens an empty mark's ink one step, because a real key does not rise when a hand approaches it."
+    },
+    "active": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "Pressing moves the lattice down by the press travel on motion.press, the same small drop every key makes, and returns on release."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The focused mark draws the shared focus ring around its 44px target so the keyboard position is always visible."
+    },
+    "data-disabled": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "A disabled rating drops to the disabled opacity, loses its press travel and shows a not-allowed cursor."
+    },
+    "data-readonly": {
+      "p": "P4",
+      "axis": "interaction",
+      "why": "Display mode draws the lattice at the small icon size with no target, no hover and no cursor, since nothing in it can be pressed."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion the dots only fade, with no size change and no press travel."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the lattice draws in the text colour and the unlit core dots stay hidden, so the shapes survive."
+    },
+    "data-on": {
+      "p": "P4",
+      "axis": "shape",
+      "why": "A lit dot is drawn at full size and full ink; an unlit core dot stays in its hole at the dot scale and invisible, so each hole is lit or not."
+    }
+  },
+  "motion": {
+    "opacity": {
+      "p": "P4",
+      "axis": "motion",
+      "why": "Core dots fade in on motion.release and out on motion.exit, the way a grille fills hole by hole, with none of it under Reduce motion."
+    },
+    "transform": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Core dots scale up on motion.release and sink on motion.exit, and the whole lattice drops by the press travel on motion.press, as any key does."
+    }
+  }
+}

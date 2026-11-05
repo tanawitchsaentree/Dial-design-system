@@ -1,0 +1,58 @@
+/* Dropzone — a tray window cut into the body (lab apps/lab/dropzone pick A). Recessed with the inverse light like
+   Input. A file held over it heavier-rims the window with an inset outline, so nothing resizes (P6). No orange. */
+.root {
+  box-sizing: border-box;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: var(--ds-gap-md);
+  inline-size: 100%;
+  min-block-size: calc(var(--ds-control-key) * 3);
+  padding: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+  text-align: center;
+  cursor: pointer;
+  outline: var(--ds-width-ring) solid transparent;
+  outline-offset: calc(var(--ds-width-ring) * -1);
+  transition: outline-color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.glyph {
+  inline-size: var(--ds-control-icon-md);
+  block-size: var(--ds-control-icon-md);
+  color: var(--ds-text-secondary);
+}
+.title {
+  margin: 0;
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+}
+.hint {
+  margin: 0;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.key { margin-block-start: var(--ds-gap-sm); }
+.root[data-over='true'] {
+  outline-color: var(--ds-text-primary);
+  border-color: var(--ds-text-primary);
+}
+.root[data-over='true'] .glyph { color: var(--ds-text-primary); }
+.root[data-disabled='true'] {
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: var(--ds-opacity-disabled);
+}
+@media (prefers-reduced-motion: reduce) {
+  .root { transition: none; }
+}
+@media (forced-colors: active) {
+  .root { border-color: CanvasText; }
+  .root[data-over='true'] { border-color: Highlight; outline-color: Highlight; }
+}

@@ -1,0 +1,112 @@
+{
+  "concept": "Fieldset is the printed box on the case of an appliance that says these parts belong together. A hairline box surrounds the related controls, the group's name is printed on the box's top line, and an optional line of small print sits at the foot. Disabling the box switches off every control inside it.",
+  "kind": [
+    "fieldset",
+    "field group",
+    "printed box",
+    "group of controls"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "a Fieldset drawn as a bordered card with a bold heading above it and a soft shadow",
+      "why_not": "A raised card spends depth on a grouping, which is printing and not a part, and a heading above the border leaves the name outside the group it names."
+    },
+    {
+      "pattern": "a Fieldset of loose controls with only a heading and no line around them",
+      "why_not": "Without the printed box the eye cannot tell where the group ends, and the relation between its parts is not drawn as P8 asks."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): keys and scales grouped inside printed boxes, each box named on its edge"
+    },
+    {
+      "source": "Braun TG 1000 tape recorder (1970s): a thin printed outline around the related controls with the function name set into the line"
+    },
+    {
+      "source": "apps/lab/fieldset/index.html: printed box with the legend on the line, bracket hairline, recessed tray"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P8",
+      "axis": "shape",
+      "consequence": "a group of related parts sits inside one printed box",
+      "form": "The native fieldset draws a hairline box in line.ring with corner.media, and every control of the group stands inside it."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The legend sits on the box's top line, with a small gap either side where the line breaks, so the name is printed on the edge of the group."
+    },
+    {
+      "p": "P8",
+      "axis": "depth",
+      "consequence": "relation lines are printing, flat on the body, never a raised rail",
+      "form": "The box has no shadow, no fill and no elevation, so it is a printed line on the body and not a card."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "hierarchy by size and position",
+      "form": "The legend uses the label size and the hint the caption size, both in secondary ink, and the hint sits at the foot of the box."
+    },
+    {
+      "p": "P5",
+      "axis": "interaction",
+      "consequence": "labels name their control through aria-labelledby",
+      "form": "The native legend names the fieldset group, and the hint is tied to it with aria-describedby."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/fieldset/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "printed box with the legend on the line"
+      },
+      {
+        "id": "B",
+        "name": "bracket hairline down the inline-start edge"
+      },
+      {
+        "id": "C",
+        "name": "recessed tray with the legend above"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A closes the group on all four sides and sets the name into the line, so both the extent and the name are printed on the case. B has no top or bottom edge, so a group of one row reads as a rule, and C uses the recess that belongs to readings and fields, which makes a group of keys look like an Input."
+  },
+  "parts": {
+    "group": {
+      "p": "P8",
+      "axis": "shape",
+      "why": "A native fieldset with a hairline box, a gap between children and no fill, so the related parts sit in one printed box that the browser announces as a group."
+    },
+    "legend": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The group's name in the label size and secondary ink, printed on the box's top line, and the accessible name of the group."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "type",
+      "why": "An optional line of small print at the foot in the caption size and secondary ink, announced as the group's description."
+    }
+  },
+  "states": {
+    "disabled": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled fieldset fades its legend, hint and line together; the browser disables every control inside, so the whole box goes flat at once."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the box keeps a real border in the system text colour so the group's extent survives."
+    }
+  },
+  "motion": {}
+}

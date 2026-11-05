@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · FAB · three ways to fix the main action in a corner</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .col{display:grid;gap:10px}
+ .col>h2{font-size:13px;font-weight:500;margin:0;color:var(--ds-text-secondary)}
+ .unit{position:relative;box-sizing:border-box;inline-size:340px;block-size:300px;overflow:hidden;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit p{margin:0 0 12px;font-size:14px;line-height:1.5;color:var(--ds-text-secondary)}
+ .unit h3{margin:0 0 10px;font-size:16px;font-weight:500}
+ .k{position:absolute;inset-block-end:24px;inset-inline-end:24px;display:inline-grid;place-items:center;border:1px solid var(--ds-action-accent-rim);background:var(--ds-action-accent);color:var(--ds-text-on-accent);box-shadow:var(--ds-elevation-part);cursor:pointer;font:inherit;font-weight:500;font-size:14px}
+ .k svg{inline-size:24px;block-size:24px}
+ /* A: bare round disc, shadow only, no pane under it */
+ .A .k{inline-size:56px;block-size:56px;border-radius:50%;padding:0}
+ /* B: extended capsule, word beside a plus, no pane */
+ .B .k{grid-auto-flow:column;gap:8px;block-size:52px;padding-inline:20px 24px;border-radius:999px}
+ /* C: round key sunk into an opaque seat that covers the text below it */
+ .C .seat{position:absolute;inset-block-end:16px;inset-inline-end:16px;inline-size:76px;block-size:76px;border-radius:50%;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);display:grid;place-items:center}
+ .C .k{position:static;inline-size:56px;block-size:56px;border-radius:50%;padding:0}
+</style></head><body>
+<h1>FAB · the unit's one main action, fixed in the corner</h1>
+<div class="row">
+ <div class="col"><h2>A · bare disc, shadow only</h2><div class="unit A"><h3>Rooms</h3><p>Living room, 21.5 degrees. Heating on until 22:40, then the night mode lowers it to 18.</p><p>Kitchen, 19 degrees. Washer finished at 21:05; the door is unlocked.</p><p>Hall, 17 degrees. Lamp off.</p><button class="k" aria-label="Add room"><svg viewBox="0 0 24 24"><path d="M10 6h4v4h4v4h-4v4h-4v-4H6v-4h4z" fill="currentColor"/></svg></button></div></div>
+ <div class="col"><h2>B · extended capsule with the word</h2><div class="unit B"><h3>Rooms</h3><p>Living room, 21.5 degrees. Heating on until 22:40, then the night mode lowers it to 18.</p><p>Kitchen, 19 degrees. Washer finished at 21:05; the door is unlocked.</p><p>Hall, 17 degrees. Lamp off.</p><button class="k"><svg viewBox="0 0 24 24"><path d="M10 6h4v4h4v4h-4v4h-4v-4H6v-4h4z" fill="currentColor"/></svg>Add room</button></div></div>
+ <div class="col"><h2>C · key sunk in an opaque seat</h2><div class="unit C"><h3>Rooms</h3><p>Living room, 21.5 degrees. Heating on until 22:40, then the night mode lowers it to 18.</p><p>Kitchen, 19 degrees. Washer finished at 21:05; the door is unlocked.</p><p>Hall, 17 degrees. Lamp off.</p><span class="seat"><button class="k" aria-label="Add room"><svg viewBox="0 0 24 24"><path d="M10 6h4v4h4v4h-4v4h-4v-4H6v-4h4z" fill="currentColor"/></svg></button></span></div></div>
+</div>
+</body></html>

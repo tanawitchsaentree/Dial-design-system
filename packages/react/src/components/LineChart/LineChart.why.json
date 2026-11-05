@@ -1,0 +1,115 @@
+{
+  "concept": "LineChart reads a trend the way a device prints a reading: one to three lines drawn in ink inside a recessed window, a ruler of numbers on its edge, and one line of text under the window that says what the cursor is on. The lines are told apart by pattern and mark shape, so nothing depends on colour, and the same numbers sit in a table for assistive tech.",
+  "kind": ["line chart", "chart", "trend", "series", "plot"],
+  "default_to_avoid": [
+    {
+      "pattern": "LineChart as a charting-library default: one hue per series, a legend of coloured dots, a curve that draws itself in, and a tooltip that only a mouse can open",
+      "why_not": "Hue is the only thing that tells the series apart, the draw-in is entry choreography, and the tooltip has no keyboard path, but P5 allows no tinted text, P6 allows no entry motion and P3 gives every part its keys."
+    },
+    {
+      "pattern": "LineChart on a white card with a soft shadow, light grey gridlines and rounded smooth curves",
+      "why_not": "The grid disappears on the sunken ground in dark (1:1) and the card floats, while P2 asks for a window cut into the body and P8 draws relations as straight ink hairlines."
+    }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a printed frequency scale in a recessed window with a cursor line that marks the reading" },
+    { "source": "Ulm school instrument dials (Hans Gugelot, Otl Aicher): a ruled scale in ink with the numbers printed at its edge, nothing tinted" },
+    { "source": "system/FORM.md display class: window recessed into the body, tabular figures, readout beside the window" }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The plot sits in a window that takes surface.sunken, elevation.well and a hairline ring, so the trend is a reading cut into the plastic and not a chart card."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "tabular figures everywhere a number changes",
+      "form": "Every tick, every value in the readout and every cell of the table uses tabular numerals, so the axis does not shift when a new value moves the scale."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "Lines, marks, grid and cursor are ink and ring tones only. The series are told apart by dash pattern and mark shape, and a legend prints both."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "arrows step a detent, Home and End reach the ends",
+      "form": "The window is one tab stop. Left and Right arrows step the cursor from point to point, Home and End go to the first and last, and Escape lets go."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "The readout under the window is a polite status that speaks the category and every series value for the point the cursor is on; it holds no control."
+    },
+    {
+      "p": "P4",
+      "axis": "interaction",
+      "consequence": "a grille that shows a value exposes it as text to assistive tech",
+      "form": "Drawn marks carry no text of their own, so a data table with a caption, a row per point and a column per series follows the chart in the reading order."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "Lines are there at once and never draw in. The cursor jumps to the next point with no tween, so nothing moves under reduce motion that does not move otherwise."
+    },
+    {
+      "p": "P5",
+      "axis": "colour",
+      "consequence": "ink on plastic at ≥4.5:1 in both themes",
+      "form": "Tick numerals and the readout are primary or secondary ink on the sunken ground; the lines and the window edge clear 3:1 in both themes."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The chart's name is printed above the window on its inset line and the readout and legend sit under it on the same line."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/line-chart/index.html",
+    "options": [
+      { "id": "A", "name": "plot in a recessed window with a hairline grid, readout printed under it" },
+      { "id": "B", "name": "ruler on the body: axis ticks and no grid, readout in its own small window" },
+      { "id": "C", "name": "one dark window holding the plot and the readout" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps the vocabulary of Stat and Meter, a recess for the reading with the words on the body, so a chart sits in a unit with no new part; B drops the window and reads as a generic axis chart with a second window for the readout, and C copies the OLED Display and turns the grid to faint lines that fail in the light theme."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "A grid of name, window, readout and legend with a gap that stays the same when the readout is idle or a row is absent, so the chart does not reflow." },
+    "label": { "p": "P5", "axis": "space", "why": "The chart's name is printed above the window on the inset line in caption size and names the group for assistive tech." },
+    "window": { "p": "P2", "axis": "depth", "why": "A recess with inverse light and a hairline ring holds the plot, and it is the one tab stop that takes the arrow keys." },
+    "plot": { "p": "P6", "axis": "space", "why": "The drawing fills the window and is measured, so a stroke is two pixels at any width and the marks never stretch." },
+    "grid": { "p": "P3", "axis": "shape", "why": "Hairline rules at each tick are the ruler of the window; they use the ring line because the divider tone is invisible on the dark sunken ground." },
+    "tick": { "p": "P5", "axis": "type", "why": "Axis numerals are caption size, secondary ink and tabular, set on the window's edge like a scale printed on a case." },
+    "line": { "p": "P1", "axis": "colour", "why": "Each series is a two pixel ink line with round joins and no smoothing, and no orange, so a line carries one reading honestly." },
+    "marker": { "p": "P3", "axis": "shape", "why": "A hollow circle, square or diamond sits on every point so the series differ by shape and each reading has a place to point at." },
+    "cursor": { "p": "P2", "axis": "interaction", "why": "A vertical ink hairline and larger marks show which point the readout speaks, a cue that survives a greyscale screen." },
+    "readout": { "p": "P2", "axis": "interaction", "why": "One printed line under the window, polite live, names the point and every series value; idle it prints how to use the arrow keys." },
+    "legend": { "p": "P7", "axis": "space", "why": "The series are printed in one row under the readout so the person can learn which pattern is which without opening anything." },
+    "key": { "p": "P7", "axis": "shape", "why": "Each entry pairs a short drawn sample of the line with its name, so the pattern and the mark are the key and not a colour dot." },
+    "swatch": { "p": "P3", "axis": "shape", "why": "A small drawing with the series' own dash and mark so the legend repeats the line exactly." },
+    "name": { "p": "P5", "axis": "type", "why": "The series name is caption size in primary ink beside its sample." },
+    "table": { "p": "P4", "axis": "interaction", "why": "A clipped real table with the same numbers is read by assistive tech, so the chart is never the only way to get the data." },
+    "sm": { "p": "P5", "axis": "space", "why": "Small charts keep the window to a low block size for a row beside other readings." },
+    "md": { "p": "P5", "axis": "space", "why": "The default window height leaves room for five ticks and the marks at a readable gap." },
+    "lg": { "p": "P5", "axis": "space", "why": "Large charts give the window a taller block for the one set of readings a whole sheet is about." }
+  },
+  "states": {
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "Keyboard focus draws the shared two pixel ring around the window, so the person can see the chart owns the arrow keys." },
+    "data-series=2": { "p": "P1", "axis": "colour", "why": "The second series is drawn dashed so it is told from the first without a hue." },
+    "data-series=3": { "p": "P1", "axis": "colour", "why": "The third series is drawn dotted so it is told from the first two without a hue." },
+    "data-hidden": { "p": "P5", "axis": "space", "why": "With hideLabel the printed name is clipped but stays in the DOM, so the chart keeps its accessible name where a heading above it already says the same." },
+    "data-idle": { "p": "P2", "axis": "interaction", "why": "While the cursor is on no point the readout prints the key hint in secondary ink and keeps its line height." },
+    "@media forced-colors: active": { "p": "P2", "axis": "colour", "why": "In forced colours the window border, lines, marks and numerals take the system text colour and the marks fill with the system background." }
+  },
+  "motion": {}
+}

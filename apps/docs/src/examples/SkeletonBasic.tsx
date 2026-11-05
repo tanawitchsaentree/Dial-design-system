@@ -3,7 +3,7 @@ import { Skeleton, Stack } from 'dial-react';
 
 export default function SkeletonBasic() {
   return (
-    <div className="demo-box demo-card" aria-busy="true" aria-label="Thermostat, loading">
+    <div className="demo-box demo-card" role="group" aria-busy="true" aria-label="Thermostat, loading">
       <Stack gap="md">
         <Skeleton kind="display" digits={3} unit="°C" detail />
         <Stack direction="row" gap="lg" align="center">

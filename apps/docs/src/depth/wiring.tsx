@@ -81,7 +81,7 @@ export const WIRING: Depth = {
       do: <Pair2 label="after 23:00" text="Night mode lowers the heater to 18" />, doNote: 'A short condition on the line and a full sentence.',
       dont: <Pair2 label="When the night mode schedule starts the heater goes down" text="Link 1" />, dontNote: 'A sentence on the line and a number for the sentence.',
     },
-    overflow: { text: 'A long word on a line stays on one line and moves along its run until it clears every part.', render: <div data-overflow-demo="" style={{ inlineSize: 320 }}><Pair2 label="after sunset on weekdays" /></div> },
+    overflow: { text: 'A long word on a line stays on one line and moves along its run until it clears every part.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))' }}><Pair2 label="after sunset on weekdays" /></div> },
     rtl: { text: 'In right to left languages the parts mirror and the lines are routed again from where the parts now stand.', render: <div dir="rtl"><Wiring label="علاقات التدفئة" activeWord="يعمل الآن" waitingWord="ينتظر" links={[{ from: 'a', to: 'b', label: 'بعد 23:00', text: 'الوضع الليلي يخفض المدفأة إلى 18', active: true }]}><Wiring.Node id="a"><Rotary kind="key" label="الحرارة" min={16} max={26} defaultValue={21} /></Wiring.Node><Wiring.Node id="b"><Card padding="unit"><Display label="المدفأة" value="18" unit="°C" digits={2} /></Card></Wiring.Node></Wiring></div> },
     expansion: { text: 'German words run about 30% longer. The word on the line finds a place along the run, and the sentence is never cut.', render: <Pair2 label="nach 23:00 Uhr" text="Der Nachtmodus senkt die Heizung auf 18" /> },
   },

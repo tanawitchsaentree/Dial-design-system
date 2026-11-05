@@ -62,7 +62,7 @@ export const LEGEND: Depth = {
       do: <Legend label="Source" control="none" layout="row" options={SOURCES} defaultValue="radio" />, doNote: 'Short lowercase nouns from the manual.',
       dont: <Legend label="Source" control="none" layout="row" options={['Play the radio', 'Open my library', 'Use the line input']} defaultValue="Play the radio" />, dontNote: 'Sentences make printing read as buttons.',
     },
-    overflow: { text: 'A long word never wraps or cuts. The column takes the width of its longest word, and the mark keeps its place.', render: <div data-overflow-demo="" style={{ inlineSize: 320 }}><Legend label="Programme" options={['cotton', 'synthetics', 'easy care with steam', 'quick 30']} defaultValue="easy care with steam" /></div> },
+    overflow: { text: 'A long word never wraps or cuts. The column takes the width of its longest word, and the mark keeps its place.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))' }}><Legend label="Programme" options={['cotton', 'synthetics', 'easy care with steam', 'quick 30']} defaultValue="easy care with steam" /></div> },
     rtl: { text: 'In right-to-left languages the column sits on the other side of the knob and its mark moves with it. The arc keeps clockwise order, because a knob turns the same way in every script.', render: <div dir="rtl"><Legend label="المروحة" options={['إيقاف', 'منخفض', 'متوسط', 'مرتفع']} defaultValue="منخفض" /></div> },
     expansion: { text: 'German words can run 30% longer. Each word reserves its widest width, so lighting one never shifts the rest.', render: <Legend label="Programm" options={['baumwolle', 'pflegeleicht', 'wolle', 'schleudern']} defaultValue="pflegeleicht" /> },
   },

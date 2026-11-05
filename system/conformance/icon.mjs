@@ -6,8 +6,11 @@ export default async function icon({ check, expect, page, go, main }) {
   await check('Icon', 'every glyph in the set renders with its own pattern of dots', async () => {
     await go('/components/icon/code');
     const r = await main().locator('.icon-grid [data-component="Icon"]').evaluateAll((els) => els.map((e) => {
-      const p = e.querySelector('path'); const b = p ? p.getBBox() : { width: 0, height: 0 };
-      return { name: e.dataset.name, d: p?.getAttribute('d') ?? '', w: b.width, h: b.height, box: e.getBoundingClientRect().width };
+      // the field draws every hole and lights the glyph's own (R-008): the pattern is the set of lit holes
+      const lit = [...e.querySelectorAll('circle[data-on]')];
+      const xs = lit.map((c) => +c.getAttribute('cx')), ys = lit.map((c) => +c.getAttribute('cy'));
+      const w = lit.length ? Math.max(...xs) - Math.min(...xs) + 2 : 0, h = lit.length ? Math.max(...ys) - Math.min(...ys) + 2 : 0;
+      return { name: e.dataset.name, d: lit.map((c) => `${c.getAttribute('cx')},${c.getAttribute('cy')}`).join(' '), w, h, box: e.getBoundingClientRect().width };
     }));
     expect(r.length >= 46, `only ${r.length} glyphs in the set`);
     const empty = r.filter((x) => !x.d || x.w <= 0 || x.h <= 0 || x.box <= 0);
@@ -58,12 +61,37 @@ export default async function icon({ check, expect, page, go, main }) {
       const got = {}; const dots = {};
       for (const e of document.querySelectorAll('main [data-component="Icon"][data-name="settings"]')) {
         got[e.dataset.size] = e.getBoundingClientRect().width;
-        dots[e.dataset.size] = e.querySelector('path').getAttribute('d').match(/a([\d.]+)/)?.[1];
+        dots[e.dataset.size] = e.querySelector('circle')?.getAttribute('r');
       }
       return { want, got, dots };
     });
     for (const s of ['sm', 'md', 'lg']) expect(Math.abs((r.got[s] ?? 0) - r.want[s]) < 0.5, `${s} is ${r.got[s]}px, token says ${r.want[s]}px`);
     expect(Number(r.dots.sm) > Number(r.dots.md), `sm dot ${r.dots.sm} is not larger than md ${r.dots.md}`);
     return `sm ${r.got.sm} md ${r.got.md} lg ${r.got.lg}px, dot r ${r.dots.sm} / ${r.dots.md}`;
+  });
+
+  // R-008 (2026-11-03): "จังหวะกด play, pause ไม่มีความเป็น animation, transition เลย" — a new glyph morphs
+  await check('Icon', 'a new glyph morphs, keeping the shared dots lit and fading the others through their holes, never in one frame', async () => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await go('/components/icon/code');
+    const r = await main().locator('[data-component="Icon"][data-name="play"]').first().evaluate(async (svg) => {
+      const lit = () => [...svg.querySelectorAll('circle')].map((c) => Number(getComputedStyle(c).opacity).toFixed(2));
+      const before = lit();
+      const shared = [...svg.querySelectorAll('circle')].map((c, i) => i).filter(() => true);
+      // swap play for pause the way React does: the same 49 holes, other holes lit
+      const pause = ['.......', '.#...#.', '.#...#.', '.#...#.', '.#...#.', '.#...#.', '.......'];
+      const holes = [...svg.querySelectorAll('circle')];
+      holes.forEach((c, i) => { const on = pause[Math.floor(i / 7)][i % 7] === '#'; c.toggleAttribute('data-on', on); });
+      // sample every frame for 600ms: a morph shows dots part-way between their two states in some frame
+      const frames = []; const t0 = performance.now();
+      while (performance.now() - t0 < 600) { await new Promise((r) => requestAnimationFrame(r)); frames.push(lit()); }
+      const after = frames[frames.length - 1];
+      const moving = Math.max(0, ...frames.map((f) => f.filter((v, i) => v !== before[i] && v !== after[i]).length));
+      return { holes: holes.length, changed: after.filter((v, i) => v !== before[i]).length, moving, shared: shared.length };
+    });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    expect(r.holes === 49, `${r.holes} holes drawn, want the whole 7 × 7 field`);
+    expect(r.changed > 0 && r.moving > 0, `${r.changed} holes changed, ${r.moving} caught mid-way`);
+    return `49 holes, ${r.changed} changed, ${r.moving} caught part-way while it morphed`;
   });
 }

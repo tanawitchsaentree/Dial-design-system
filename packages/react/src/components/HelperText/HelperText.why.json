@@ -1,0 +1,98 @@
+{
+  "concept": "HelperText is the small printed line under a part that says what to enter or what went wrong. It sits on the inset line below the part, carries an id so the part can point to it with aria-describedby, and tells an error by a dot-matrix glyph and words, never by red alone.",
+  "kind": [
+    "helper text",
+    "hint",
+    "error message",
+    "field message"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "red helper text with no mark, or a tooltip-style error bubble over the field",
+      "why_not": "A colour-only error cannot be seen by people who miss red, and a bubble floats off the case; a line of printing under the part keeps its place."
+    }
+  ],
+  "references": [
+    {
+      "source": "system/FORM.md input class: label and messages printed on the inset line, flat on the material"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): small printed words beside each part, never a second control"
+    },
+    {
+      "source": "WCAG 2.2 · 1.4.1 Use of Color and 3.3.1 Error Identification: the error is named in text"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The line is a block under the part in the same column, with no offset, so it reads as printing on the inset line."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "one grotesk, regular and medium only",
+      "form": "The hint is regular in the caption size; the error steps up to medium weight, so the two differ by weight as well as by hue."
+    },
+    {
+      "p": "P5",
+      "axis": "colour",
+      "consequence": "ink on plastic at ≥4.5:1 in both themes",
+      "form": "The hint is secondary ink; the error is the critical mark colour, checked at 4.5:1 or more on the body in both themes."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The error is critical red and the hint is ink, so no message line ever spends the unit's one orange."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/helper-text/index.html",
+    "options": [
+      { "id": "A", "name": "caption line with a glyph before the words" },
+      { "id": "B", "name": "caption with an ink index rule at the edge" },
+      { "id": "C", "name": "caption led by a printed tone word in a small outline" }
+    ],
+    "reason": "A adds the lightest mark that is not colour (a glyph and bolder words) and matches the hint and error already printed in Input; B tells error only by the rule's colour and width, and C draws an outlined tag that reads as a pressable chip."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A paragraph that carries the id the part points to with aria-describedby, printed in the caption size under the part."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A dot-matrix mark before the words means an error is never told by colour alone, and it is read out as the word Error."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The words keep a Thai-safe line box and wrap beside the glyph, so a long message never runs under it."
+    }
+  },
+  "states": {
+    "data-tone=neutral": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "A neutral line is secondary ink in the regular weight and prints no glyph, because it only informs."
+    },
+    "data-tone=error": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "An error line is critical red, medium weight, with a glyph before the words, and it is never orange."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the line uses the system text colour and the error glyph draws its dots in that same colour."
+    }
+  },
+  "motion": {}
+}

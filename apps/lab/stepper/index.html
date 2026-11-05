@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Stepper · three ways to number a long form</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ ol{list-style:none;margin:0;padding:0}
+ li{position:relative;display:grid;grid-template-columns:44px 1fr;column-gap:16px;padding-block-end:28px}
+ li:last-child{padding-block-end:0}
+ .t{font-size:16px;font-weight:500;line-height:44px;margin:0}
+ .b{grid-column:2;font-size:14px;line-height:1.45;color:var(--ds-text-secondary);margin:0}
+ /* A: round resin cap with printed digit, groove rail */
+ .A .n{inline-size:44px;block-size:44px;border-radius:50%;display:grid;place-items:center;font-weight:500;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-key,var(--ds-elevation-unit));border:1px solid var(--ds-line-ring)}
+ .A li:not(:last-child)::before{content:"";position:absolute;inset-inline-start:21px;inset-block:44px 0;inline-size:2px;background:var(--ds-line-divider);box-shadow:var(--ds-elevation-well)}
+ /* B: digit in a recessed window, rail of dots */
+ .B .n{inline-size:44px;block-size:44px;border-radius:var(--ds-corner-media);display:grid;place-items:center;font-weight:500;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring)}
+ .B li:not(:last-child)::before{content:"";position:absolute;inset-inline-start:21px;inset-block:48px 4px;inline-size:2px;background:radial-gradient(circle,var(--ds-line-ring) 1px,transparent 1.5px) 0 0/2px 8px repeat-y}
+ /* C: printed digit on the case, thin ink rail, no cap */
+ .C .n{inline-size:44px;block-size:44px;display:grid;place-items:center;font-size:22px;font-weight:500;border-block-end:1px solid var(--ds-line-ring)}
+ .C li:not(:last-child)::before{content:"";position:absolute;inset-inline-start:21px;inset-block:46px 0;inline-size:1px;background:var(--ds-line-ring)}
+</style></head><body>
+<h1>Stepper · numbered sections of a long form</h1>
+<div class="row">
+ <div class="unit A"><h2>A · resin cap, groove rail</h2><ol><li><span class="n">1</span><p class="t">General</p><p class="b">Owner, name and description.</p></li><li><span class="n">2</span><p class="t">Configuration</p><p class="b">Visibility and defaults.</p></li><li><span class="n">3</span><p class="t">Review</p></li></ol></div>
+ <div class="unit B"><h2>B · digit window, dotted rail</h2><ol><li><span class="n">1</span><p class="t">General</p><p class="b">Owner, name and description.</p></li><li><span class="n">2</span><p class="t">Configuration</p><p class="b">Visibility and defaults.</p></li><li><span class="n">3</span><p class="t">Review</p></li></ol></div>
+ <div class="unit C"><h2>C · printed digit, ink rail</h2><ol><li><span class="n">1</span><p class="t">General</p><p class="b">Owner, name and description.</p></li><li><span class="n">2</span><p class="t">Configuration</p><p class="b">Visibility and defaults.</p></li><li><span class="n">3</span><p class="t">Review</p></li></ol></div>
+</div></body></html>

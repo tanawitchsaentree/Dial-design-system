@@ -9,7 +9,7 @@ const TRACKS = [
 
 export default function QueueFixed() {
   return (
-    <div style={{ inlineSize: 380, maxInlineSize: '100%' }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))', maxInlineSize: '100%' }}>
       <Queue label="Wash steps" defaultTracks={TRACKS} removable={false} />
     </div>
   );

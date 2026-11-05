@@ -1,0 +1,123 @@
+/* ColorPicker — a row of round lens keys of matte ABS, each one the colour it sets, one down at a time
+   (system/FORM.md control class, D-003). The colour on a lens is data passed in as --swatch-color; the chosen
+   key sits down, shows an ink ring around it and prints a tick on a plate, so the choice never relies on the
+   lens colour. A printed line under the keys says which colour is set. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-lg);
+  min-inline-size: var(--ds-gap-none);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.legend {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--ds-control-md), 1fr));
+  justify-items: center;
+  gap: var(--ds-gap-xl);
+  padding: var(--ds-gap-md);
+}
+.swatch {
+  position: relative;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: var(--ds-control-md);
+  block-size: var(--ds-control-md);
+  border-radius: var(--ds-corner-round);
+  cursor: pointer;
+}
+/* Visually hidden, still focusable and announced */
+.input {
+  position: absolute;
+  inset-block-start: var(--ds-gap-none);
+  inset-inline-start: var(--ds-gap-none);
+  inline-size: var(--ds-width-hairline);
+  block-size: var(--ds-width-hairline);
+  margin: var(--ds-gap-none);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.lens {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  inline-size: var(--ds-control-md);
+  block-size: var(--ds-control-md);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-round);
+  background: var(--swatch-color);
+  box-shadow: var(--ds-elevation-part);
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing),
+    border-color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+/* the tick is a plate printed with a check; ink on plate colour reads on any lens colour */
+.tick {
+  display: none;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: var(--ds-control-icon-md);
+  block-size: var(--ds-control-icon-md);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-raised);
+  color: var(--ds-text-primary);
+}
+.readout {
+  margin: var(--ds-gap-none);
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  overflow-wrap: anywhere;
+}
+.extras {
+  display: grid;
+  gap: var(--ds-gap-lg);
+  min-inline-size: var(--ds-gap-none);
+}
+
+.swatch[data-checked] .lens {
+  box-shadow: none;
+  transform: translateY(var(--ds-motion-press-travel));
+  outline: var(--ds-width-ring) solid var(--ds-text-primary);
+  outline-offset: var(--ds-width-ring);
+}
+.swatch[data-checked] .tick { display: grid; }
+
+.swatch:hover .lens { border-color: var(--ds-text-secondary); }
+.swatch:active .lens {
+  transform: translateY(var(--ds-motion-press-travel));
+  box-shadow: none;
+  transition-duration: var(--ds-motion-press);
+}
+.swatch:has(.input:focus-visible) {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: calc(var(--ds-width-ring) + var(--ds-gap-xs));
+}
+.swatch:has(.input:disabled) .lens {
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+}
+.swatch[data-disabled] { cursor: not-allowed; }
+.swatch[data-disabled]:hover .lens { border-color: var(--ds-line-ring); }
+.swatch[data-disabled]:active .lens { box-shadow: none; }
+.swatch[data-disabled]:active:not([data-checked]) .lens { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lens { transition: border-color var(--ds-motion-hover) var(--ds-motion-easing); }
+  .swatch:active:not([data-checked]) .lens { transform: none; }
+}
+@media (forced-colors: active) {
+  .lens { forced-color-adjust: none; border-color: ButtonText; }
+  .swatch[data-checked] .lens { outline-color: CanvasText; }
+  .tick { forced-color-adjust: none; border-color: CanvasText; background: Canvas; color: CanvasText; }
+}

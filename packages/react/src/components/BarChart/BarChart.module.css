@@ -1,0 +1,159 @@
+/* BarChart — a chart-recorder window: a ruled scale cut into the body with bars printed on it in ink
+   (lab apps/lab/bar-chart pick A; FORM.md display class; P2, P3, P4). Series are told apart by pattern
+   and by their printed number, never by hue, and nothing is orange. Nothing animates: new data is
+   there at once. */
+.root {
+  position: relative;
+  display: grid;
+  gap: var(--ds-gap-md);
+  min-inline-size: 0;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+  /* the scale and its words are ink pressed into the body, like the Meter's (D-010) */
+  text-shadow: var(--ds-print-seat);
+}
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-gap-lg);
+}
+.title {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+}
+/* the recess: the drawing fills it, so the window is the element the chart measures */
+.window {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  inline-size: 100%;
+  block-size: var(--h, var(--ds-layout-frame-sm));
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  text-shadow: none;
+}
+.svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+  direction: ltr;
+  font-family: var(--ds-type-family);
+  font-variant-numeric: tabular-nums;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.grid {
+  stroke: var(--ds-line-ring);
+  stroke-width: var(--ds-width-hairline);
+  stroke-dasharray: var(--ds-width-ring) var(--ds-gap-sm);
+}
+.base {
+  stroke: var(--ds-text-secondary);
+  stroke-width: var(--ds-width-hairline);
+}
+.tick {
+  fill: var(--ds-text-secondary);
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  dominant-baseline: central;
+}
+.cat {
+  fill: var(--ds-text-secondary);
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+}
+.bar {
+  stroke: var(--ds-text-primary);
+  stroke-width: var(--ds-width-hairline);
+}
+.bar[data-active] { stroke-width: var(--ds-width-ring); }
+.hit {
+  fill: transparent;
+  stroke: none;
+  cursor: default;
+}
+.value {
+  fill: var(--ds-text-primary);
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+}
+.focusMark {
+  display: none;
+  fill: none;
+  stroke: var(--ds-focus-ring);
+  stroke-width: var(--ds-width-ring);
+}
+.svg:focus-visible { outline: none; }
+.svg:focus-visible .focusMark { display: inline; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-gap-md) var(--ds-gap-xl);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-tight);
+}
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-sm);
+}
+.swatch {
+  flex: none;
+  inline-size: var(--ds-gap-3xl);
+  block-size: var(--ds-gap-xl);
+  stroke: var(--ds-text-primary);
+  stroke-width: var(--ds-width-hairline);
+}
+.name { font-weight: var(--ds-type-weight-regular); }
+
+/* the readout is the display of this unit: it says the active bar and is never a control (P2) */
+.readout {
+  min-block-size: calc(var(--ds-type-caption) * var(--ds-type-leading-body));
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  font-variant-numeric: tabular-nums;
+}
+.readout[data-idle] {
+  font-weight: var(--ds-type-weight-regular);
+  color: var(--ds-text-secondary);
+}
+
+/* the same numbers as a real table, clipped out of sight and kept for assistive tech */
+.table {
+  position: absolute;
+  inline-size: var(--ds-width-hairline);
+  block-size: var(--ds-width-hairline);
+  margin: calc(-1 * var(--ds-width-hairline));
+  padding: var(--ds-gap-none);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* pattern tiles: the ground is the recess, the ink is full step ink; each texture differs without hue */
+.tileBg { fill: var(--ds-surface-sunken); }
+.tileInk { stroke: var(--ds-text-primary); stroke-width: var(--ds-width-ring); fill: none; }
+.tileDot { fill: var(--ds-text-primary); stroke: none; }
+.tileSolid { fill: var(--ds-text-primary); }
+
+@media (forced-colors: active) {
+  .window { border-color: CanvasText; }
+  .grid, .base { stroke: CanvasText; }
+  .tick, .cat, .value { fill: CanvasText; }
+  .bar { stroke: CanvasText; }
+  .tileBg { fill: Canvas; }
+  .tileInk { stroke: CanvasText; }
+  .tileDot, .tileSolid { fill: CanvasText; }
+  .focusMark { stroke: Highlight; }
+  .swatch { stroke: CanvasText; }
+}

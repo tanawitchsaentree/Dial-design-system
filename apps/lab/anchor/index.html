@@ -1,227 +1,41 @@
 <!doctype html>
-<html lang="th" data-theme="light">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>dial · anchor round · device card</title>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Anchor · three ways to mark where you are on a page</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
 <style>
-/* dial anchor round — device card. Every colour and size here is ESTIMATED FROM CHAT and will be
-   re-measured from system/refs/ref-01.png. Lab scaffolding, not tokens: Phase 2 turns the picked
-   variant into three-tier tokens. One light, top-left (CONCEPT.md light model). Material: matte ABS
-   (height 5px, gloss 0.2, roughness 3px, mass 1.4). */
-:root, [data-theme="light"] {
-  --page: #f3f2ef;          /* (estimated from chat) page behind the units, a step lighter than the body */
-  --body: #e8e6e1;          /* (estimated from chat) warm white matte ABS */
-  --seam: #d3d0c9;          /* body seam / groove line */
-  --ink: #4a4844;           /* printing on the case, ≥4.5:1 on --body (P5 overrides the faint reference labels) */
-  --ink-2: #5c5a55;         /* secondary printing, still ≥4.5:1 */
-  --hole: #bfbcb5;          /* grille hole, unlit */
-  --hole-on: #4a4844;       /* grille hole, lit = ink at full step, never orange (P4) */
-  --accent: #ec6a2c;        /* (estimated from chat) the one orange, primary control only (P1) */
-  --accent-shade: #c9531c;
-  --lcd: #c7cbbd;           /* (estimated from chat) grey-green LCD ground */
-  --lcd-ink: #2f322d;
-  --lcd-ghost: rgba(47, 50, 45, .07);
-  --oled: #141414;
-  --oled-ink: #f2f2f0;
-  --lit: rgba(255, 255, 255, .55);   /* lit hairline, top-left; strength from gloss 0.2 */
-  --shade: rgba(60, 50, 40, .16);    /* far-edge hairline */
-  --cast: rgba(60, 50, 40, .20);     /* cast shadow colour */
-  --focus: #1f1e1c;
-  --chrome-ink: #3d3c39;
-  color-scheme: light;
-}
-[data-theme="dark"] {
-  --page: #1c1c1b;
-  --body: #2f2f2d;          /* charcoal ABS (the black edition) */
-  --seam: #232322;
-  --ink: #d2cfc8;
-  --ink-2: #bdbab3;
-  --hole: #1f1f1e;
-  --hole-on: #d2cfc8;
-  --accent: #ec6a2c;
-  --accent-shade: #b94c18;
-  --lcd: #9fa597;
-  --lcd-ink: #1d201c;
-  --lcd-ghost: rgba(29, 32, 28, .08);
-  --oled: #0b0b0b;
-  --oled-ink: #ededeb;
-  --lit: rgba(255, 255, 255, .10);
-  --shade: rgba(0, 0, 0, .45);
-  --cast: rgba(0, 0, 0, .55);
-  --focus: #f2f0ea;
-  --chrome-ink: #d8d5ce;
-  color-scheme: dark;
-}
-
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--page); color: var(--chrome-ink);
-  font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif; }
-
-/* ---------- lab chrome ---------- */
-.lab-head { padding: 20px 28px 8px; max-width: 1400px; margin: 0 auto; }
-.lab-head h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; }
-.lab-note { border: 1px solid var(--ink-2); border-radius: 8px; padding: 10px 14px; font-size: 14px; line-height: 1.5; max-width: 860px; }
-.lab-note strong { font-weight: 600; }
-.lab-tools { display: flex; gap: 8px; margin: 12px 0 0; align-items: center; font-size: 14px; }
-.lab-tools button { font: inherit; min-height: 44px; padding: 0 16px; border-radius: 22px; border: 1px solid var(--chrome-ink);
-  background: transparent; color: var(--chrome-ink); cursor: pointer; }
-.lab-tools button[aria-pressed="true"] { background: var(--chrome-ink); color: var(--page); }
-.lab-grid { display: flex; flex-wrap: wrap; gap: 40px 48px; padding: 28px; max-width: 1400px; margin: 0 auto; }
-.lab-cell { display: flex; flex-direction: column; gap: 14px; }
-.lab-cell h2 { font-size: 15px; font-weight: 600; margin: 0; }
-.lab-cell p { font-size: 13px; line-height: 1.45; margin: 0; max-width: 320px; }
-.lab-cell a { color: inherit; }
-:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
-
-/* ---------- the device card ---------- */
-.unit {
-  --w: 340px;                 /* body width */
-  --short: var(--w);
-  --r: calc(var(--short) * .16);          /* radius ≈ 16% of the short side (estimated from chat, 15–18%) */
-  --inset: calc(var(--short) / 13);       /* face inset ≈ 1/13 of the short side (estimated from chat) */
-  --h: 5px;                   /* material height (matte ABS) — varied per variant */
-  --rough: 3px;
-  --knob: .30;                /* knob diameter as a share of the short side — varied per variant */
-  position: relative; width: var(--w); padding: var(--inset);
-  border-radius: var(--r); background: var(--body); color: var(--ink);
-  box-shadow:
-    calc(var(--h) * .4) var(--h) calc(var(--h) * 2.4 + var(--rough)) var(--cast),
-    inset 1px 1px 0 var(--lit), inset -1px -1px 0 var(--shade);
-  display: grid; gap: calc(var(--inset) * .55);
-}
-.unit[data-h="3"] { --h: 3px; }
-.unit[data-h="5"] { --h: 5px; }
-.unit[data-h="8"] { --h: 8px; }
-
-/* display window: a recess, inverse light; radius nests in the body (inner = outer − inset) */
-.display { grid-area: disp; position: relative; border-radius: max(4px, calc(var(--r) - var(--inset)));
-  padding: 10px 14px; display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-height: 64px;
-  box-shadow: inset 2px 2px 3px rgba(0,0,0,.22), inset -1px -1px 0 var(--lit); }
-.display.lcd { background: var(--lcd); color: var(--lcd-ink); }
-.display.oled { background: var(--oled); color: var(--oled-ink); justify-content: flex-start; align-items: flex-start; flex-direction: column; gap: 2px; }
-.display .unit-label { font-size: 13px; font-weight: 500; align-self: flex-end; padding-bottom: 6px; }
-.seg { display: block; }
-.seg .on { fill: var(--lcd-ink); transition: fill-opacity 80ms linear; }
-.seg .off { fill: var(--lcd-ghost); }
-.oled-big { font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
-.oled-small { font-size: 12px; }
-.oled-bar { width: 100%; height: 4px; border-radius: 2px; background: #3a3a3a; margin-top: 6px; overflow: hidden; }
-.oled-bar i { display: block; height: 100%; background: var(--oled-ink); width: 40%; }
-
-/* grille: holes are recesses that carry the level (P4) */
-.grille { grid-area: grille; display: grid; gap: var(--pitch-gap, 5px); align-content: center;
-  grid-template-columns: repeat(var(--cols, 16), 1fr); }
-.grille i { aspect-ratio: 1; border-radius: 50%; background: var(--hole);
-  box-shadow: inset 1px 1px 1.5px rgba(0,0,0,.35), inset -.5px -.5px 0 var(--lit); transition: background-color 120ms linear; }
-.grille i.on { background: var(--hole-on); }
-
-/* rotary: the one loud thing */
-.knob-wrap { grid-area: knob; display: grid; place-items: center; position: relative; }
-.dial { position: relative; width: calc(var(--short) * var(--knob) + 20px); aspect-ratio: 1; display: grid; place-items: center; }
-.dial .tick { position: absolute; border-inline-start: 2px solid var(--ink); background: none !important; left: 50%; top: 50%; width: 0; height: 5px; transform-origin: 1px 0; }
-.knob { --deg: -135; border: 2px solid transparent; width: calc(var(--short) * var(--knob)); aspect-ratio: 1; border-radius: 50%; position: relative; cursor: grab; touch-action: none;
-  min-width: 44px; background: var(--accent);
-  box-shadow: calc(var(--h) * .4) var(--h) calc(var(--h) * 1.8 + var(--rough)) var(--cast),
-    inset 1px 1px 0 rgba(255,255,255,.35), inset -2px -2px 3px var(--accent-shade); }
-.knob::after { content: ""; position: absolute; left: 50%; top: 9%; width: 3px; height: 16%; margin-left: -1.5px; border-radius: 2px;
-  background: var(--body); transform-origin: 1.5px calc(var(--short) * var(--knob) * .41); transform: rotate(calc(var(--deg) * 1deg)); }
-
-/* keys: secondary, body-coloured, press removes height */
-.keys { grid-area: keys; display: flex; gap: 14px; align-items: flex-end; justify-content: center; }
-.key-cell { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; }
-.key { --t: 0; width: 44px; height: 44px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; background: var(--body);
-  transform: translate(calc(var(--t) * var(--h) * .4), calc(var(--t) * var(--h)));
-  box-shadow: calc((1 - var(--t)) * var(--h) * .4) calc((1 - var(--t)) * var(--h)) calc((1 - var(--t)) * var(--h) * 1.6 + 1px) var(--cast),
-    inset 1px 1px 0 var(--lit), inset -1px -1px 1px var(--shade); }
-.key .lamp { display: block; width: 6px; height: 6px; border-radius: 50%; margin: 0 auto; background: var(--hole); box-shadow: inset 1px 1px 1px rgba(0,0,0,.3); }
-.key[aria-pressed="true"] .lamp { background: var(--ink); }
-
-/* fader with an "audio 1" ruler scale */
-.fader-wrap { grid-area: fader; display: grid; gap: 2px; }
-.fader { position: relative; height: 44px; cursor: pointer; touch-action: none; }
-.fader .groove { position: absolute; left: 12px; right: 12px; top: 18px; height: 8px; border-radius: 4px; background: var(--seam);
-  box-shadow: inset 1.5px 1.5px 2px rgba(0,0,0,.30), inset -1px -1px 0 var(--lit); }
-.fader .rule { position: absolute; left: 12px; right: 12px; top: 6px; height: 8px;
-  background: repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px calc((100% - 1px) / 20)); opacity: 1; }
-.fader .cap { --x: 0; position: absolute; top: 6px; left: calc(var(--x) * (100% - 24px)); width: 24px; height: 32px; border-radius: 6px; background: var(--body);
-  box-shadow: calc(var(--h) * .4) calc(var(--h) * .8) calc(var(--h) * 1.4 + 1px) var(--cast), inset 1px 1px 0 var(--lit), inset -1px -1px 1px var(--shade); }
-.fader .cap::after { content: ""; position: absolute; left: 50%; top: 5px; bottom: 5px; width: 2px; margin-left: -1px; background: var(--ink); }
-.scale { display: flex; justify-content: space-between; padding: 0 9px; font-size: 11px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--ink); }
-
-.readout { font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; text-align: center; min-height: 1.3em; color: var(--ink); }
-
-/* printing: wordmark bottom-left, model lowercase bottom-right (P5) */
-.labels { grid-area: labels; display: flex; justify-content: space-between; align-items: baseline; }
-.wordmark { font-size: 15px; font-weight: 500; letter-spacing: .06em; }
-.model { font-size: 13px; font-weight: 400; color: var(--ink-2); }
-
-/* ---------- the four variants ---------- */
-/* A display-led: wide LCD on top, big knob, shallow shadow, labels on the bottom inset line */
-.v-a { grid-template-columns: 1.15fr 1fr; grid-template-areas: "disp disp" "knob keys" "knob grille" "fader fader" "labels labels"; --knob: .36; }
-.v-a .grille { --cols: 12; --pitch-gap: 4px; }
-/* B grille-led: the grille owns the left half, small display right, medium knob, medium shadow */
-.v-b { grid-template-columns: 1fr 1fr; grid-template-areas: "grille disp" "grille knob" "keys keys" "fader fader" "labels labels"; --knob: .28; }
-.v-b .grille { --cols: 9; --pitch-gap: 5px; }
-.v-b .display { min-height: 56px; }
-/* C fader-led ("audio 1"): ruler fader across the face, small knob, deep shadow, labels on the top inset line */
-.v-c { grid-template-columns: auto 1fr; grid-template-areas: "labels labels" "disp disp" "knob grille" "keys keys" "fader fader"; --knob: .22; }
-.v-c .grille { --cols: 14; --pitch-gap: 4px; }
-/* D OLED player: dark window + square grille side by side, medium knob, medium shadow, model printed under the window */
-.v-d { grid-template-columns: 1.4fr 1fr; grid-template-areas: "disp grille" "model ." "knob keys" "fader fader" "labels labels"; --knob: .30; }
-.v-d .grille { --cols: 7; --pitch-gap: 5px; }
-.v-d .labels .model { display: none; }
-.v-d .model-under { grid-area: model; font-size: 13px; color: var(--ink-2); margin-top: -6px; }
-.unit:not(.v-d) .model-under { display: none; }
-
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
-
-@media (prefers-reduced-motion: reduce) {
-  .seg .on, .grille i { transition: none; }
-}
-@media (forced-colors: active) {
-  .unit, .display, .knob, .key, .fader .cap { border: 1px solid CanvasText; }
-}
-
-</style>
-</head>
-<body>
-<header class="lab-head">
-  <h1>dial · anchor round: device card (4 แบบ)</h1>
-  <div class="lab-note" role="note">
-    <strong>ค่าทั้งหมดเป็นค่าประมาณจากรูปในแชท (estimated from chat)</strong> สี, radius, inset, ความลึกเงา และขนาดลูกบิดจะวัดใหม่จาก
-    <code>system/refs/ref-01.png</code> ทันทีที่มีไฟล์ แล้ว render ทั้ง 4 แบบใหม่ จุดที่ต้องตัดสินตอนนี้คือทิศทาง ยังไม่ใช่ค่าตัวเลข<br>
-    <strong>วิธีเลือก:</strong> ลองหมุนลูกบิดส้ม (ลาก หรือ Tab แล้วกดลูกศร/Home/End), กดปุ่ม FM/AM, เลื่อน fader แล้วสลับ light/dark
-    จากนั้นตอบ agent ว่า <strong>“เลือก A”</strong> (หรือ B, C, D) จะผสมก็ได้ เช่น “B แต่เงาแบบ C”
-  </div>
-  <div class="lab-tools" role="group" aria-label="Theme">
-    <span>theme</span>
-    <button type="button" data-set-theme="light" aria-pressed="true">light</button>
-    <button type="button" data-set-theme="dark" aria-pressed="false">dark</button>
-  </div>
-</header>
-<main class="lab-grid">
-  <section class="lab-cell" aria-labelledby="h-a">
-    <h2 id="h-a">A · display-led</h2>
-    <p>Wide LCD across the top, big knob (36% of the short side), shallow shadow (3px), labels on the bottom inset line. Display:grille ≈ 70:30.</p>
-    <div class="unit v-a" id="card-a" data-anchor="a" data-h="3" data-display="lcd" data-model="tuner 1" data-rows="4" data-seg="44"></div>
-  </section>
-  <section class="lab-cell" aria-labelledby="h-b">
-    <h2 id="h-b">B · grille-led</h2>
-    <p>The grille owns the left half, small LCD on the right, medium knob (28%), medium shadow (5px), labels at the bottom. Display:grille ≈ 35:65.</p>
-    <div class="unit v-b" id="card-b" data-anchor="b" data-h="5" data-display="lcd" data-model="radio 1" data-rows="7" data-seg="34"></div>
-  </section>
-  <section class="lab-cell" aria-labelledby="h-c">
-    <h2 id="h-c">C · fader-led ("audio 1")</h2>
-    <p>Ruler fader across the face, small knob (22%), deep shadow (8px), labels on the top inset line. Display:grille ≈ 55:45.</p>
-    <div class="unit v-c" id="card-c" data-anchor="c" data-h="8" data-display="lcd" data-model="audio 1" data-rows="3" data-seg="36"></div>
-  </section>
-  <section class="lab-cell" aria-labelledby="h-d">
-    <h2 id="h-d">D · OLED player</h2>
-    <p>Black OLED window with a square grille beside it, medium knob (30%), medium shadow (5px), model name printed under the window. Display:grille ≈ 60:40.</p>
-    <div class="unit v-d" id="card-d" data-anchor="d" data-h="5" data-display="oled" data-model="player 1" data-rows="7" data-seg="40"></div>
-  </section>
-</main>
-<script src="anchor.js"></script>
-</body>
-</html>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:300px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 16px;color:var(--ds-text-secondary)}
+ ul{list-style:none;margin:0;padding:0}
+ ul ul{padding-inline-start:20px}
+ a{display:flex;align-items:center;min-block-size:44px;font-size:14px;color:var(--ds-text-secondary);text-decoration:none;box-sizing:border-box}
+ a[aria-current]{color:var(--ds-text-primary);font-weight:500}
+ /* A: a ruled edge with a thick bar on the current one (the scrollspy default) */
+ .A ul{border-inline-start:1px solid var(--ds-line-ring)}
+ .A a{padding-inline-start:16px;margin-inline-start:-1px;border-inline-start:2px solid transparent}
+ .A a[aria-current]{border-inline-start-color:var(--ds-text-primary)}
+ /* B: a legend; one fixed gutter holds the ink index mark, so the words never move */
+ .B a{padding-inline-start:20px;position:relative}
+ .B a[aria-current]::before{content:"";position:absolute;inset-inline-start:0;inline-size:10px;block-size:0;border-block-end:2px solid var(--ds-text-primary);border-radius:99px}
+ /* C: a printed scale; a tick for each heading on a dotted rail, a longer tick for the current */
+ .C ul{position:relative;padding-inline-start:0}
+ .C>ul::before{content:"";position:absolute;inset-block:8px;inset-inline-start:6px;inline-size:2px;background:radial-gradient(circle,var(--ds-line-ring) 50%,transparent 55%) 0 0/100% 8px repeat-y}
+ .C a{padding-inline-start:28px;position:relative}
+ .C a::before{content:"";position:absolute;inset-inline-start:0;inline-size:6px;block-size:0;border-block-end:1px solid var(--ds-line-ring)}
+ .C a[aria-current]::before{inline-size:14px;border-block-end:2px solid var(--ds-text-primary)}
+</style></head><body>
+<h1>Anchor · the "on this page" list</h1>
+<div class="row">
+<script>
+ const list = `<ul>
+  <li><a href="#a">Overview</a></li>
+  <li><a href="#b" aria-current="location">Wiring</a>
+   <ul><li><a href="#b1">Hub</a></li><li><a href="#b2">Sensors</a></li></ul></li>
+  <li><a href="#c">Schedules</a></li>
+  <li><a href="#d">Reset</a></li></ul>`;
+ const set = [['A','a ruled edge, thick bar on the current'],['B','legend gutter with one ink index mark'],['C','printed scale: ticks on a dotted rail']];
+ document.currentScript.insertAdjacentHTML('beforebegin', set.map(([k,n])=>`<div class="unit ${k}"><h2>${k} · ${n}</h2><nav aria-label="On this page">${list}</nav></div>`).join(''));
+</script>
+</div></body></html>

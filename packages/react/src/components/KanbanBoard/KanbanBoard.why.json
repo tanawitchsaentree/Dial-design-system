@@ -1,0 +1,228 @@
+{
+  "concept": "KanbanBoard is a rack of named columns on one panel with a card in each slot, like the cards on a production rack: a card changes column by a hand, by a named key or by the arrow keys, and the count of each column is read from its own small window. Dragging is one way to move a card and never the only way.",
+  "kind": [
+    "kanban board",
+    "task board",
+    "columns of cards",
+    "sortable lists"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "kanban board whose cards move only by dragging between pastel columns with coloured count badges",
+      "why_not": "A drag-only board cannot be reached from a keyboard or a screen reader, and coloured badges tell the limit by hue alone, which breaks P2 and the rule that status is never told by colour."
+    },
+    {
+      "pattern": "task board as grey rounded columns with white cards, a drop shadow from straight above and a blue add button in every column",
+      "why_not": "Boxes inside boxes with one drop shadow and a blue key per column spend the single orange and the single light of the unit on decoration."
+    }
+  ],
+  "references": [
+    {
+      "source": "Toyota kanban card rack (Taiichi Ohno, 1950s): named bays on a board, one card per job, moved by a hand from bay to bay and counted against a limit"
+    },
+    {
+      "source": "Vitsoe 606 Universal Shelving System (Dieter Rams, 1960): fixed tracks with items slotted at set positions and moved by hand without tools"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: listbox pattern, rearrangeable options (https://www.w3.org/WAI/ARIA/apg/patterns/listbox/examples/listbox-rearrangeable/)"
+    },
+    {
+      "source": "Card in this system: each task is a Card with its lit lip, imported and not redrawn; the Move key is the Menu of this system"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "Each column prints how many cards it holds in a small window cut into the body, with the limit beside the count when there is one, and a column with no cards shows a recessed slot."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "A polite status says which card moved, to which column and to what position, and the count windows are printing that takes no focus."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "A card takes Alt with the arrow keys to change column or position, the arrows alone walk the cards of a column, and the Move key opens a choice of columns, so no move needs a pointer."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The grip and the Move key are 44px targets set in the card's header, and the dots they print are smaller than the target that holds them."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "Each column title stands on the inset line of its column, level with its count window, and the card titles start on the inset line of the card."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "Columns keep their width and their place when cards arrive or leave, and the drop mark is a line drawn on a card's edge, so nothing shifts while a card is being carried."
+    },
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "shadows are short and soft; a unit never floats more than its material height",
+      "form": "A card being carried rises by the shadow of a pressed key at most, and returns to the plain card height the moment it is dropped."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Nothing on the board is orange; a limit that is passed is told by a warning mark and the figures, so the one orange stays with the key that saves the board."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/kanban-board/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "columns as recessed wells holding raised cards"
+      },
+      {
+        "id": "B",
+        "name": "open columns split by a seam, with the count in a small recessed window"
+      },
+      {
+        "id": "C",
+        "name": "lanes as rows, each a groove with its cards in a line"
+      }
+    ],
+    "picked": "B",
+    "by": "agent",
+    "reason": "B keeps the cards as the only raised parts and spends the recess on the count, which is the board's state (P2 depth, P1 colour); A buries a raised card in a recessed well of almost the same grey so both lose their edge, and C turns cards into narrow tiles whose titles wrap and whose order is read along the line instead of down it."
+  },
+  "parts": {
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The columns stand in one row inside the board and the row scrolls sideways when they do not fit, so a card arriving never changes the size of the unit."
+    },
+    "column": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A column keeps one fixed width and a seam on its inline start, so columns hold their places whatever cards they contain."
+    },
+    "head": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The title and the count window share one row on the column's inset line, so the printing reads like the label of a rack bay."
+    },
+    "title": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The column title is the emphasis size in the medium weight, one grotesk with hierarchy by size and weight only."
+    },
+    "count": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The count sits in a small recessed window with the well elevation and a ring hairline, the same display recess as every other window."
+    },
+    "flag": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The warning mark shows beside the figures when a column holds more cards than its limit, a shape cue that never uses colour."
+    },
+    "body": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The area under the head holds the list or the empty slot at a minimum height of three cards, so a column does not collapse when it empties."
+    },
+    "list": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The cards of a column stand in one stack with the same gap between each, in the order the person left them."
+    },
+    "card": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "A task is the Card of this system at small padding, so it keeps the raised body, lit lip and radius that nest, and it takes the focus as one part."
+    },
+    "cardHead": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The card title and its keys stand in one row, with the keys at the inline end where the hand expects them."
+    },
+    "cardTitle": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The card title uses the body size in primary ink and wraps instead of cutting, with a line box tall enough for Thai marks."
+    },
+    "detail": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The line under the title is the caption size in secondary ink, so the title stays the first thing read."
+    },
+    "tools": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The grip and the Move key sit side by side with no gap and each is 44px square, so a thumb finds one without touching the other."
+    },
+    "grip": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The grip is the pointer handle of a card: it stops the page scrolling under a finger that drags, and it is hidden from assistive tech because the keys and the Move key do the same job."
+    },
+    "empty": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "A column with no cards prints a recessed slot with one plain line of words, so an empty column reads as a place cards can go."
+    }
+  },
+  "states": {
+    "data-dragging=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "The carried card follows the pointer, is lifted by a pressed key's shadow and stays above its neighbours, so the move is told by position and shadow."
+    },
+    "data-drop=before": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A line drawn on the block-start edge of a card says the carried card will land before it, without moving any card."
+    },
+    "data-drop=after": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A line drawn on the block-end edge of the last card says the carried card will land at the end of the column."
+    },
+    "data-over=true": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "An empty column under a carried card draws its slot with a heavier ring, so the target is told by a line weight."
+    },
+    "data-over-limit=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "A column past its limit prints its figures in the medium weight with the warning mark beside them, which is readable without colour."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A card that cannot be moved loses its grip and fades to half, so it reads as fixed in its place."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A card that holds the keyboard focus shows the same dark focus ring as every part, so the person can see which card the arrow keys will move."
+    },
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "The grip only darkens its ink a step on hover, because a real handle does not rise when a hand comes near."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the cards keep a real border in the text colour and the drop line uses the system highlight, so every edge stays a visible target."
+    }
+  },
+  "motion": {}
+}

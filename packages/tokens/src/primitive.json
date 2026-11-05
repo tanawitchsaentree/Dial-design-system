@@ -40,12 +40,12 @@
         "$description": "control outline, 3.5:1 on the body and 3.1:1 on a sunken well"
       },
       "700": {
-        "$value": "#4A4844",
-        "$description": "printing, secondary"
+        "$value": "#554D41",
+        "$description": "pad ink, secondary, in the body's own warm hue so printing sits in the plastic (D-010)"
       },
       "800": {
-        "$value": "#2E2D2A",
-        "$description": "printing, primary"
+        "$value": "#3F382D",
+        "$description": "pad ink, primary, in the body's own warm hue (D-010)"
       },
       "900": {
         "$value": "#1F1E1C",
@@ -82,12 +82,12 @@
         "$description": "printing, secondary, dark"
       },
       "100": {
-        "$value": "#D2CFC8",
-        "$description": "printing, dark"
+        "$value": "#D6D0C4",
+        "$description": "pad ink for the dark edition, in the body's warm hue (D-010)"
       },
       "50": {
-        "$value": "#EDEBE6",
-        "$description": "primary printing and focus ring, dark"
+        "$value": "#ECE7DD",
+        "$description": "primary pad ink for the dark edition, in the body's warm hue (D-010)"
       }
     },
     "orange": {
@@ -554,6 +554,12 @@
     "knob-min": {
       "$value": "44px"
     },
+    "knob-md": {
+      "$value": "72px"
+    },
+    "knob-lg": {
+      "$value": "108px"
+    },
     "cap-w": {
       "$value": "24px"
     },
@@ -562,6 +568,27 @@
     },
     "tick": {
       "$value": "5px"
+    },
+    "frame-narrow": {
+      "$value": "180px"
+    },
+    "frame-xs": {
+      "$value": "240px"
+    },
+    "frame-sm": {
+      "$value": "300px"
+    },
+    "frame-md": {
+      "$value": "340px"
+    },
+    "frame-phone": {
+      "$value": "375px"
+    },
+    "frame-lg": {
+      "$value": "420px"
+    },
+    "article": {
+      "$value": "960px"
     }
   },
   "radius": {
@@ -677,6 +704,10 @@
     },
     "leading": {
       "$type": "number",
+      "flush": {
+        "$value": 1,
+        "$description": "display lines set solid: titles, the wordmark and single big numerals (R-007)"
+      },
       "tight": {
         "$value": 1.15
       },
@@ -734,6 +765,13 @@
     },
     "well-dark": {
       "$value": "inset 2px 2px 3px #00000066, inset -1px -1px 0 #FFFFFF1A"
+    },
+    "seat": {
+      "$value": "0 1px 0 #FFFDF8B3",
+      "$description": "the lit lip of a shallow pad-print recess under the top-left light, which seats printing in the plastic (D-010)"
+    },
+    "seat-dark": {
+      "$value": "0 -1px 0 #00000073"
     },
     "emit-none": {
       "$value": "0 0 0 0 #00000000",
@@ -854,6 +892,10 @@
     },
     "press": {
       "$value": 1
+    },
+    "dot": {
+      "$value": 0.4,
+      "$description": "an icon dot sunk back into its hole while a glyph morphs (R-008)"
     }
   },
   "spring": {

@@ -45,7 +45,7 @@
       "p": "P5",
       "axis": "motion",
       "consequence": "text does not animate",
-      "form": "The printing appears and leaves at once when the mode changes, with no fade, no slide and no pulse."
+      "form": "The printing fades on where it stands when the mode turns on and fades off faster when it turns off, with no slide and no pulse (D-008)."
     },
     {
       "p": "P8",
@@ -180,14 +180,34 @@
     "@media prefers-reduced-motion: reduce": {
       "p": "P6",
       "axis": "motion",
-      "why": "Under reduced motion the key opens and closes at once, with no change of height over time."
+      "why": "Under reduced motion the key opens and closes with no change of height over time, and the printing keeps only its fade, on motion.hover."
+    },
+    "data-state=closing": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "While it leaves, the part fades and sinks back over motion.exit on the accelerating curve, and no key or reader reaches it (D-008)."
+    },
+    "data-settled": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A note or numeral already printed glides to a new place instead of jumping; a first placement only fades in (D-008)."
     }
   },
   "motion": {
     "block-size": {
       "p": "P6",
       "axis": "motion",
-      "why": "Only the key's height moves, over motion.enter, when the mode turns on or off; the printing itself never animates."
+      "why": "The key's height opens over motion.enter; each name, line and leader fades in over motion.release and the whole layer fades off over motion.exit (D-008). Text never travels (P5)."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A note or numeral already printed glides to its new place over motion.release when the key opening moves it a few pixels; a first placement only fades in, it never travels from a corner (D-008)."
+    },
+    "transform": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A note or numeral already printed glides to its new place over motion.release when the key opening moves it a few pixels; a first placement only fades in, it never travels from a corner (D-008)."
     }
   }
 }

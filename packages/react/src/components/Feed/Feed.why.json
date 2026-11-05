@@ -1,0 +1,184 @@
+{
+  "concept": "Feed is the event log of the house: a column of short posts printed one under another on the case, each with the author's window and name, read by scrolling or by Page Down. It fetches more as you reach the end and says so, and it never moves what you are reading.",
+  "kind": [
+    "feed",
+    "stream of posts",
+    "activity log",
+    "infinite scroll"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "feed of white cards with soft shadows that jumps when new posts load above",
+      "why_not": "A raised card per post spends depth on every row and a second light on the stack, and a list that reflows under the reader's eyes breaks the unit's fixed positions."
+    },
+    {
+      "pattern": "infinite scroll that loads with no key and no notice",
+      "why_not": "Keyboard users cannot ask for more and nobody is told that the list has grown or is still loading."
+    }
+  ],
+  "references": [
+    {
+      "source": "WAI-ARIA Authoring Practices, Feed pattern: role=feed, article items with aria-posinset and aria-setsize, aria-busy while loading, Page Up and Page Down between articles"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): station names printed in rows on the case, each on its own line"
+    },
+    {
+      "source": "system/FORM.md display and separator classes: printing is flat on the material, a seam parts regions, gaps first"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The new-posts notice sits on a zero-height sticky line and the loading mark lives in a footer row of fixed height, so no state pushes a post down."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "Each post prints the author's name and time on one line beside the avatar window, and the text stands under them on the same inset line."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Page Up and Page Down step from post to post, Tab walks the posts, and the load more key is a real key reached at the end of the list."
+    },
+    {
+      "p": "P5",
+      "axis": "interaction",
+      "consequence": "labels name their control through aria-labelledby",
+      "form": "Every post is an article named by its author and time and described by its text, with its position and the size of the set read out."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Feed holds no primary control, so it holds no orange; the load more key and the notice key are plain keys."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "transitions only on state",
+      "form": "The notice fades and rises in when posts arrive and out when it is pressed; nothing else in the Feed moves."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/feed/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "rows on the body with the avatar window at the start and a seam between"
+      },
+      {
+        "id": "B",
+        "name": "log tape with the position number printed in a margin beside a ruler line"
+      },
+      {
+        "id": "C",
+        "name": "a raised slip for each post"
+      }
+    ],
+    "reason": "A reuses the Avatar window and the Divider seam unchanged, so a post reads like a List row but longer; B prints the position number that aria-posinset already announces and its ruler line looks like a Timeline; C raises every post and is the generic card feed the concept refuses."
+  },
+  "parts": {
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A plain block that holds the notice line, the posts and the footer in a fixed order, so the unit's layout stays put."
+    },
+    "slot": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A zero-height sticky line at the top edge. The notice hangs from it over the first post, so showing it never moves anything."
+    },
+    "notice": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The wrapper that fades and rises in on the enter timing and out on the exit timing, as one change of state."
+    },
+    "feed": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The role=feed list of articles, a plain block with no padding so every post shares the unit's inset line."
+    },
+    "item": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A post is a two-column grid: the 44px avatar window, then the name line and the text on one inset line."
+    },
+    "head": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The author's name and the time on one line, wrapping when the name is long so nothing is cut."
+    },
+    "name": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The author's name in medium weight, the label size; it breaks anywhere so a long Thai or German name cannot widen the post."
+    },
+    "time": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The time in secondary ink at the caption size with tabular figures, so times line up down the column."
+    },
+    "body": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The post's text at the body size with the body leading, tall enough for Thai marks, breaking anywhere in a long word."
+    },
+    "seam": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "The Divider between posts: a shade edge over a lit edge, flat on the material, gone after the last post, which ends on the same gap instead."
+    },
+    "foot": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A footer row at least 44px tall that holds the load more key, the loading mark or the end text, so the row keeps its size in all three."
+    },
+    "sentinel": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A one-pixel hidden line after the posts that the IntersectionObserver watches to call onNearEnd; it takes no input."
+    }
+  },
+  "states": {
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A focused post draws the ring outline outside its edge, so the person sees which article Page Up and Page Down will leave from."
+    },
+    "data-state=open": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "A notice that arrives starts faded and a little above its place and settles on the enter timing, because posts arriving is a state change."
+    },
+    "data-state=closing": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "A notice that is pressed fades and rises out on the shorter exit timing before it leaves the page."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the focus outline uses the system highlight, because the ring colour is dropped."
+    }
+  },
+  "motion": {
+    "opacity": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The notice fades with its rise on motion.enter in and motion.exit out; under Reduce motion the tokens set both to zero."
+    },
+    "transform": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The notice rises by motion.rise from the top edge, a state change only, with nothing else in the Feed travelling."
+    }
+  }
+}

@@ -8,6 +8,8 @@
   gap: var(--ds-gap-sm);
   font-family: var(--ds-type-family);
   color: var(--ds-text-primary);
+  /* the legend is pad ink pressed into the body, on the lit lip of its recess (D-010) */
+  text-shadow: var(--ds-print-seat);
 }
 .name {
   font-size: var(--ds-type-label);
@@ -144,4 +146,7 @@
 @media (forced-colors: active) {
   .mark { forced-color-adjust: none; background: CanvasText; }
   .word:focus-visible { outline-color: Highlight; }
+  /* a word is printing, not a key: forced colours must not turn its transparent edge into a box (the boxes of
+     a crowded arc then cross the knob's name) */
+  .word { border-color: Canvas; }
 }

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · PinInput · three ways to enter a short code</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .l{font-size:14px;font-weight:500;margin:0 0 8px}
+ .h{font-size:12px;color:var(--ds-text-secondary);margin:8px 0 0}
+ .cells{display:flex;gap:8px}
+ .c{box-sizing:border-box;inline-size:44px;block-size:44px;display:grid;place-items:center;font-size:20px;font-weight:500;font-variant-numeric:tabular-nums;color:var(--ds-text-primary)}
+ /* A: six separate recessed windows, like six Inputs */
+ .A .c{border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .A .c.on{outline:2px solid var(--ds-focus-ring);outline-offset:2px}
+ /* B: one recessed window cut by seams, the code reads as one reading */
+ .B .cells{gap:0;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);inline-size:max-content}
+ .B .c+.c{border-inline-start:1px solid var(--ds-line-divider)}
+ .B .c.on{outline:2px solid var(--ds-focus-ring);outline-offset:-3px;border-radius:var(--ds-corner-media)}
+ /* C: LCD display window, digits in the display face with ghost segments for the empty cells */
+ .C .cells{gap:0;padding:6px;border-radius:var(--ds-corner-media);background:var(--ds-display-lcd-bg);box-shadow:var(--ds-elevation-well);inline-size:max-content}
+ .C .c{color:var(--ds-display-lcd-ink);font-family:var(--ds-type-mono);font-size:24px}
+ .C .c.e{color:var(--ds-display-lcd-ghost)}
+ .C .c.on{border-block-end:3px solid var(--ds-display-lcd-ink)}
+</style></head><body>
+<h1>PinInput · a short code, one digit a cell</h1>
+<div class="row">
+ <div class="unit A"><h2>A · six separate windows</h2><p class="l">Code</p><div class="cells"><span class="c">4</span><span class="c">8</span><span class="c">1</span><span class="c on"></span><span class="c"></span><span class="c"></span></div><p class="h">Sent to your phone.</p></div>
+ <div class="unit B"><h2>B · one window with seams</h2><p class="l">Code</p><div class="cells"><span class="c">4</span><span class="c">8</span><span class="c">1</span><span class="c on"></span><span class="c"></span><span class="c"></span></div><p class="h">Sent to your phone.</p></div>
+ <div class="unit C"><h2>C · display window, ghost segments</h2><p class="l">Code</p><div class="cells"><span class="c">4</span><span class="c">8</span><span class="c">1</span><span class="c on e">8</span><span class="c e">8</span><span class="c e">8</span></div><p class="h">Sent to your phone.</p></div>
+</div></body></html>

@@ -1,0 +1,37 @@
+/* FormField — places a Label, a control and a HelperText on the body's inset line (system/FORM.md input class, P5).
+   It paints nothing: no box, no colour, no shadow. Layout primitive, no lab (why.json identity false). */
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--ds-gap-md);
+  row-gap: var(--ds-gap-xs);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+}
+.labelCol {
+  flex: 1 1 100%;
+  min-inline-size: 0;
+}
+.body {
+  display: grid;
+  flex: 1 1 100%;
+  min-inline-size: 0;
+  row-gap: var(--ds-gap-xs);
+}
+.messages {
+  display: grid;
+  row-gap: var(--ds-gap-xs);
+  min-inline-size: 0;
+}
+
+.root[data-layout='inline'] .labelCol {
+  flex: 0 0 var(--ds-space-32);
+  padding-block-start: var(--ds-space-3);
+}
+.root[data-layout='inline'] .body {
+  flex: 1 1 var(--ds-space-32);
+}
+
+@media (forced-colors: active) {
+  .root { forced-color-adjust: auto; }
+}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · MultiSelect · three ways to show several choices</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. Chosen rows are ink and weight, never orange (P1). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 18px; }
+  .row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+  .unit { inline-size: 360px; min-block-size: 440px; padding: 26px; border-radius: 54px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 14px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; color: var(--ds-text-secondary); }
+  .lbl { font-size: 14px; font-weight: 500; line-height: 1.15; }
+  .field { display: grid; gap: 6px; position: relative; }
+  .well { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; box-sizing: border-box; min-block-size: 44px; padding: 4px 14px; font-size: 15px; line-height: 1.45;
+          border: 1px solid var(--ds-line-ring); border-radius: 12px; background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .well .v { flex: 1; min-inline-size: 0; }
+  .chev { inline-size: 16px; block-size: 16px; flex: none; color: var(--ds-text-secondary); transform: rotate(180deg); }
+  .panel { box-sizing: border-box; margin: 0; padding: 6px; list-style: none; border-radius: 20px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-float); }
+  .opt { display: flex; align-items: center; gap: 10px; min-block-size: 44px; padding-inline: 12px; border-radius: 14px; font-size: 15px; line-height: 1.45; color: var(--ds-text-secondary); }
+  .opt[aria-selected="true"] { color: var(--ds-text-primary); font-weight: 500; }
+  .opt.active { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+  .tick { inline-size: 16px; block-size: 16px; flex: none; opacity: 0; } [aria-selected="true"] .tick { opacity: 1; }
+  .chip { display: inline-flex; align-items: center; gap: 4px; min-block-size: 36px; padding-inline: 14px 4px; border-radius: 999px; background: var(--ds-surface-raised); box-shadow: var(--ds-elevation-part); font-size: 14px; color: var(--ds-text-secondary); }
+  .chip i { inline-size: 28px; block-size: 28px; display: grid; place-items: center; font-style: normal; }
+  .tally { font-variant-numeric: tabular-nums; }
+  .sq { inline-size: 18px; block-size: 18px; flex: none; border-radius: 6px; border: 1px solid var(--ds-line-ring); background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); display: grid; place-items: center; }
+  [aria-selected="true"] .sq svg { opacity: 1; } .sq svg { opacity: 0; inline-size: 12px; block-size: 12px; }
+</style>
+</head>
+<body>
+<h1>MultiSelect · several choices in one well</h1>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="chev" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="ck" viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5L13 4.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+</defs></svg>
+<div class="row">
+
+  <div class="unit">
+    <h2>A · count in the well, tick rows</h2>
+    <div class="field">
+      <span class="lbl">Rooms</span>
+      <div class="well"><span class="v"><span class="tally">3</span> chosen</span><svg class="chev"><use href="#chev"/></svg></div>
+      <ul class="panel" role="listbox" aria-multiselectable="true">
+        <li class="opt" aria-selected="true"><svg class="tick"><use href="#ck"/></svg>Kitchen</li>
+        <li class="opt active" aria-selected="false"><svg class="tick"><use href="#ck"/></svg>Hall</li>
+        <li class="opt" aria-selected="true"><svg class="tick"><use href="#ck"/></svg>Living room</li>
+        <li class="opt" aria-selected="true"><svg class="tick"><use href="#ck"/></svg>Bedroom</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="unit">
+    <h2>B · chips stand in the well, tick rows</h2>
+    <div class="field">
+      <span class="lbl">Rooms</span>
+      <div class="well"><span class="chip">Kitchen<i>×</i></span><span class="chip">Living room<i>×</i></span><span class="chip">Bedroom<i>×</i></span><span class="v"></span><svg class="chev"><use href="#chev"/></svg></div>
+      <ul class="panel" role="listbox" aria-multiselectable="true">
+        <li class="opt" aria-selected="true"><svg class="tick"><use href="#ck"/></svg>Kitchen</li>
+        <li class="opt active" aria-selected="false"><svg class="tick"><use href="#ck"/></svg>Hall</li>
+        <li class="opt" aria-selected="true"><svg class="tick"><use href="#ck"/></svg>Living room</li>
+        <li class="opt" aria-selected="true"><svg class="tick"><use href="#ck"/></svg>Bedroom</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="unit">
+    <h2>C · printed words in the well, box rows</h2>
+    <div class="field">
+      <span class="lbl">Rooms</span>
+      <div class="well"><span class="v">Kitchen, Living room +1</span><svg class="chev"><use href="#chev"/></svg></div>
+      <ul class="panel" role="listbox" aria-multiselectable="true">
+        <li class="opt" aria-selected="true"><span class="sq"><svg><use href="#ck"/></svg></span>Kitchen</li>
+        <li class="opt active" aria-selected="false"><span class="sq"><svg><use href="#ck"/></svg></span>Hall</li>
+        <li class="opt" aria-selected="true"><span class="sq"><svg><use href="#ck"/></svg></span>Living room</li>
+        <li class="opt" aria-selected="true"><span class="sq"><svg><use href="#ck"/></svg></span>Bedroom</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

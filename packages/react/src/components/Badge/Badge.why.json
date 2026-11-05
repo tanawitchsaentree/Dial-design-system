@@ -1,49 +1,189 @@
 {
   "concept": "Badge is printing on the case of an appliance. It is a small status lamp with its own shape per tone and a word beside it, printed flat on the plastic with no box, no fill, no shadow and never orange; only the lit lamp is a small glass bead in its status hue.",
-  "material": { "accent": "glass", "decision": "D-007", "lab": "apps/lab/glass/index.html", "recipe": "A frosted tinted resin, the lit lamp only" },
-  "kind": ["badge", "status badge", "status label"],
+  "material": {
+    "accent": "glass",
+    "decision": "D-007",
+    "lab": "apps/lab/glass/index.html",
+    "recipe": "A frosted tinted resin, the lit lamp only"
+  },
+  "kind": [
+    "badge",
+    "status badge",
+    "status label"
+  ],
   "default_to_avoid": [
-    { "pattern": "coloured pill badge with white text (Bootstrap badge, Material badge)", "why_not": "A filled pill tells status by colour alone, tints the text, and adds a second loud shape to the unit next to the orange control." },
-    { "pattern": "status dot badge that changes only its colour between tones", "why_not": "A dot that only changes colour fails for colour-blind readers and in forced colours, so each tone needs its own shape and word." }
+    {
+      "pattern": "coloured pill badge with white text (Bootstrap badge, Material badge)",
+      "why_not": "A filled pill tells status by colour alone, tints the text, and adds a second loud shape to the unit next to the orange control."
+    },
+    {
+      "pattern": "status dot badge that changes only its colour between tones",
+      "why_not": "A dot that only changes colour fails for colour-blind readers and in forced colours, so each tone needs its own shape and word."
+    }
   ],
   "references": [
-    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): band names and indicator marks printed flat beside the keys" },
-    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): small printed marks and words on the case, no frames" },
-    { "source": "system/refs/ref-01.png: lowercase model name printed on the inset line (estimated from chat)" }
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): band names and indicator marks printed flat beside the keys"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): small printed marks and words on the case, no frames"
+    },
+    {
+      "source": "system/refs/ref-01.png: lowercase model name printed on the inset line (estimated from chat)"
+    }
   ],
   "derivation": [
-    { "p": "P5", "axis": "depth", "consequence": "printing is flat on the material, with no shadow and no emboss", "form": "A badge has no box, background, border or shadow; the glyph and word are printed straight onto whatever plastic they sit on." },
-    { "p": "P5", "axis": "colour", "consequence": "ink on plastic at ≥4.5:1 in both themes; no tinted text", "form": "The word is always text.primary; only the small glyph carries the tone's status mark colour, never the word." },
-    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Tone marks come from status.positive-mark, warning-mark, critical-mark and info-mark; no tone, not even warning, uses the orange." },
-    { "p": "P5", "axis": "type", "consequence": "tabular figures everywhere a number changes", "form": "The count form prints its number in tabular figures and medium weight before the word, as in 3 offline." },
-    { "p": "P5", "axis": "space", "consequence": "labels sit on the body's inset line, never floating mid-surface", "form": "A badge is an inline line of printing that sits on the text line beside what it describes, never a floating corner bubble." },
-    { "p": "P9", "axis": "colour", "consequence": "text never sits on glass below 4.5:1", "form": "The lit lamp is a glass bead in its status hue with a full-strength edge, and the word beside it stays ink on plastic, never on the glass." }
+    {
+      "p": "P5",
+      "axis": "depth",
+      "consequence": "printing is flat on the material, with no shadow and no emboss",
+      "form": "A badge has no box, background, border or shadow; the glyph and word are printed straight onto whatever plastic they sit on."
+    },
+    {
+      "p": "P5",
+      "axis": "colour",
+      "consequence": "ink on plastic at ≥4.5:1 in both themes; no tinted text",
+      "form": "The word is always text.primary; only the small glyph carries the tone's status mark colour, never the word."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "Tone marks come from status.positive-mark, warning-mark, critical-mark and info-mark; no tone, not even warning, uses the orange."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "tabular figures everywhere a number changes",
+      "form": "The count form prints its number in tabular figures and medium weight before the word, as in 3 offline."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "A badge is an inline line of printing that sits on the text line beside what it describes, never a floating corner bubble."
+    },
+    {
+      "p": "P9",
+      "axis": "colour",
+      "consequence": "text never sits on glass below 4.5:1",
+      "form": "The lit lamp is a glass bead in its status hue with a full-strength edge, and the word beside it stays ink on plastic, never on the glass."
+    }
   ],
   "variants": {
     "lab": "apps/lab/badge/index.html",
     "options": [
-      { "id": "A", "name": "printed lamp and word" },
-      { "id": "B", "name": "word in a printed frame" },
-      { "id": "C", "name": "annunciator window" }
+      {
+        "id": "A",
+        "name": "printed lamp and word"
+      },
+      {
+        "id": "B",
+        "name": "word in a printed frame"
+      },
+      {
+        "id": "C",
+        "name": "annunciator window"
+      }
     ],
     "picked": "A",
     "by": "agent",
     "reason": "A is printing and nothing else, flat on the plastic (P5), with tone told by glyph shape plus word; B's frame makes a status look like a key people try to press (P3), and C adds a second display window per status, which P2 forbids."
   },
   "parts": {
-    "root": { "p": "P5", "axis": "space", "why": "An inline line of printing, glyph then word, that sits on the text line next to what it describes." },
-    "glyph": { "p": "P9", "axis": "depth", "why": "The status lamp is a small shape with no glow, shadow or emboss; when lit it is a glass bead whose body lets the plastic through and whose edge carries the full mark." },
-    "word": { "p": "P5", "axis": "colour", "why": "The word is ink on plastic at 4.5:1 or more, never tinted with the tone, so it always reads." },
-    "count": { "p": "P5", "axis": "type", "why": "A number before the word uses tabular figures in medium weight, so a changing count keeps its width." },
-    "neutral": { "p": "P5", "axis": "colour", "why": "Neutral is a hollow ring in secondary ink, a shape that says no particular state at all." },
-    "positive": { "p": "P1", "axis": "colour", "why": "Positive is a lit round glass lamp in the positive status mark with a full green edge, a green that is never the accent orange." },
-    "warning": { "p": "P1", "axis": "colour", "why": "Warning is a triangle in the warning mark with an ink edge, so the amber holds 3:1 against the plastic." },
-    "critical": { "p": "P1", "axis": "colour", "why": "Critical is a lit square glass lamp in the critical mark with a full red edge, a shape that differs from every other tone's glyph." },
-    "info": { "p": "P1", "axis": "colour", "why": "Info is a lit diamond glass lamp in the info mark, which is dark ink with a full edge, so information never borrows a warm colour." }
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "An inline line of printing, glyph then word, that sits on the text line next to what it describes."
+    },
+    "glyph": {
+      "p": "P9",
+      "axis": "depth",
+      "why": "The status lamp is a small shape with no glow, shadow or emboss; when lit it is a glass bead whose body lets the plastic through and whose edge carries the full mark."
+    },
+    "word": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The word is ink on plastic at 4.5:1 or more, never tinted with the tone, so it always reads."
+    },
+    "count": {
+      "p": "P5",
+      "axis": "type",
+      "why": "A number before the word uses tabular figures in medium weight, so a changing count keeps its width."
+    },
+    "neutral": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "Neutral is a hollow ring in secondary ink, a shape that says no particular state at all."
+    },
+    "positive": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "Positive is a lit round glass lamp in the positive status mark with a full green edge, a green that is never the accent orange."
+    },
+    "warning": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "Warning is a triangle in the warning mark with an ink edge, so the amber holds 3:1 against the plastic."
+    },
+    "critical": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "Critical is a lit square glass lamp in the critical mark with a full red edge, a shape that differs from every other tone's glyph."
+    },
+    "info": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "Info is a lit diamond glass lamp in the info mark, which is dark ink with a full edge, so information never borrows a warm colour."
+    },
+    "shape": {
+      "p": "P4",
+      "axis": "shape",
+      "why": "One lamp shape per tone (ring, dot, triangle, square, diamond); all stand in the one window so a change of tone can fade between them."
+    }
   },
   "states": {
-    "@media forced-colors: active": { "p": "P5", "axis": "colour", "why": "In forced colours every glyph is drawn solid in the text colour, and the shapes alone still tell the tones apart." },
-    "@media prefers-reduced-transparency: reduce": { "p": "P9", "axis": "interaction", "why": "When the reader asks for less transparency each lit lamp fills solid in its status mark, and its shape and word are unchanged." }
+    "@media forced-colors: active": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "In forced colours every glyph is drawn solid in the text colour, and the shapes alone still tell the tones apart."
+    },
+    "@media prefers-reduced-transparency: reduce": {
+      "p": "P9",
+      "axis": "interaction",
+      "why": "When the reader asks for less transparency each lit lamp fills solid in its status mark, and its shape and word are unchanged."
+    },
+    "data-on": {
+      "p": "P4",
+      "axis": "interaction",
+      "why": "The tone's own shape is lit; the others wait unlit in the same window."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion the shapes only fade, on motion.hover."
+    }
   },
-  "motion": {}
+  "motion": {
+    "fill": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A lamp that changes state lights in its new colour over motion.release on the decelerating curve, like a bulb, never in one frame (D-008)."
+    },
+    "fill-opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A lamp that changes state lights in its new colour over motion.release on the decelerating curve, like a bulb, never in one frame (D-008)."
+    },
+    "stroke": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A lamp that changes state lights in its new colour over motion.release on the decelerating curve, like a bulb, never in one frame (D-008)."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Every lamp shape stands in the one window and the tone's own is lit; a change of tone fades the old shape out over motion.exit and the new in over motion.release (D-008, R-008)."
+    }
+  }
 }

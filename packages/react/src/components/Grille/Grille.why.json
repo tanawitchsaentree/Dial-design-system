@@ -1,47 +1,141 @@
 {
   "concept": "Grille is the perforated field of a dial unit whose recessed holes are the meter itself. Lit holes in printing ink show a level, activity or signal, and the value is always named for assistive tech.",
-  "kind": ["grille", "meter", "level meter", "perforation"],
+  "kind": [
+    "grille",
+    "meter",
+    "level meter",
+    "perforation"
+  ],
   "default_to_avoid": [
-    { "pattern": "decorative grille: a CSS radial-gradient dot-pattern background behind content", "why_not": "A printed dot pattern carries no reading, and P4 says holes exist only where they carry a value and are recesses, never printed dots." },
-    { "pattern": "coloured equaliser bar graph used as a grille or level meter", "why_not": "Coloured bars spend hue on a reading, while P4 lights holes in ink at full step and P1 keeps orange for the one control." }
+    {
+      "pattern": "decorative grille: a CSS radial-gradient dot-pattern background behind content",
+      "why_not": "A printed dot pattern carries no reading, and P4 says holes exist only where they carry a value and are recesses, never printed dots."
+    },
+    {
+      "pattern": "coloured equaliser bar graph used as a grille or level meter",
+      "why_not": "Coloured bars spend hue on a reading, while P4 lights holes in ink at full step and P1 keeps orange for the one control."
+    }
   ],
   "references": [
-    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a perforated speaker field on a flat aluminium face" },
-    { "source": "Braun L 2 loudspeaker: a square field of round holes on the module grid of the case" },
-    { "source": "apps/lab/anchor/index.html: card A's 12-column grille that lights columns as the volume level (D-001)" }
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a perforated speaker field on a flat aluminium face"
+    },
+    {
+      "source": "Braun L 2 loudspeaker: a square field of round holes on the module grid of the case"
+    },
+    {
+      "source": "apps/lab/anchor/index.html: card A's 12-column grille that lights columns as the volume level (D-001)"
+    }
   ],
   "derivation": [
-    { "p": "P4", "axis": "space", "consequence": "grille pitch is one module step, so holes sit on the same grid as the body's inset", "form": "Each hole is space-2 across with a space-1 gap, a 12px pitch on the 4px step." },
-    { "p": "P4", "axis": "shape", "consequence": "holes are circles; their field is a rectangle or circle that nests in the body", "form": "Holes have corner.round; shape circle leaves holes outside the inscribed circle undrawn, while their grid cells keep the field square." },
-    { "p": "P4", "axis": "depth", "consequence": "each hole is a recess (inverse light), never a printed dot", "form": "Every hole carries elevation.well so its shade falls on the top-left inner edge, like the display window." },
-    { "p": "P4", "axis": "colour", "consequence": "holes are ink at a lower step; a lit level uses ink at full step, never orange", "form": "An unlit hole is grille.hole and a lit hole grille.hole-on; the accent is never used in a grille." },
-    { "p": "P4", "axis": "motion", "consequence": "a level change fills holes in reading order, ≤120ms, none under Reduce motion", "form": "Holes light in fill order, start of line first or bottom row first, and their colour fades over motion.fill." },
-    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "A grille is a chart of one reading, so neither unlit nor lit holes ever take action.accent." },
-    { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "Holes never pulse or sweep at rest; they change only when the value prop changes." },
-    { "p": "P4", "axis": "interaction", "consequence": "a grille that shows a value exposes it as text to assistive tech; a decorative grille is not allowed to exist", "form": "The root is role meter with a required label, aria-valuenow, aria-valuemin, aria-valuemax and an aria-valuetext sentence." }
+    {
+      "p": "P4",
+      "axis": "space",
+      "consequence": "grille pitch is one module step, so holes sit on the same grid as the body's inset",
+      "form": "Each hole is space-2 across with a space-1 gap, a 12px pitch on the 4px step."
+    },
+    {
+      "p": "P4",
+      "axis": "shape",
+      "consequence": "holes are circles; their field is a rectangle or circle that nests in the body",
+      "form": "Holes have corner.round; shape circle leaves holes outside the inscribed circle undrawn, while their grid cells keep the field square."
+    },
+    {
+      "p": "P4",
+      "axis": "depth",
+      "consequence": "each hole is a recess (inverse light), never a printed dot",
+      "form": "Every hole carries elevation.well so its shade falls on the top-left inner edge, like the display window."
+    },
+    {
+      "p": "P4",
+      "axis": "colour",
+      "consequence": "holes are ink at a lower step; a lit level uses ink at full step, never orange",
+      "form": "An unlit hole is grille.hole and a lit hole grille.hole-on; the accent is never used in a grille."
+    },
+    {
+      "p": "P4",
+      "axis": "motion",
+      "consequence": "a level change fills holes in reading order, ≤120ms, none under Reduce motion",
+      "form": "Holes light in fill order, start of line first or bottom row first, and their colour fades over motion.fill."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "A grille is a chart of one reading, so neither unlit nor lit holes ever take action.accent."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "Holes never pulse or sweep at rest; they change only when the value prop changes."
+    },
+    {
+      "p": "P4",
+      "axis": "interaction",
+      "consequence": "a grille that shows a value exposes it as text to assistive tech; a decorative grille is not allowed to exist",
+      "form": "The root is role meter with a required label, aria-valuenow, aria-valuemin, aria-valuemax and an aria-valuetext sentence."
+    }
   ],
   "variants": {
     "lab": "apps/lab/grille/index.html",
     "options": [
-      { "id": "A", "name": "rectangle field, columns fill along the line" },
-      { "id": "B", "name": "circle field, rows fill bottom to top" },
-      { "id": "C", "name": "sparse strip, one large hole per step" }
+      {
+        "id": "A",
+        "name": "rectangle field, columns fill along the line"
+      },
+      {
+        "id": "B",
+        "name": "circle field, rows fill bottom to top"
+      },
+      {
+        "id": "C",
+        "name": "sparse strip, one large hole per step"
+      }
     ],
     "picked": "A",
     "by": "agent",
     "reason": "A is the anchor card's own grille, a rectangle on the module pitch that reads as a level from the start of the line (P4 space, motion); B's circle field and bottom-up fill stay available as shape and fill options, and C's large holes break the one-step pitch P4 sets."
   },
   "parts": {
-    "root": { "p": "P4", "axis": "space", "why": "The field is a grid of holes on one module pitch, so it sits on the same grid as the body's inset." },
-    "hole": { "p": "P4", "axis": "depth", "why": "Each hole is a round recess with inverse light, shaded on its top-left inner edge, never a printed dot." },
-    "on": { "p": "P4", "axis": "colour", "why": "A lit hole is ink at full step so the level reads at 3:1 or more against unlit holes, never orange." },
-    "void": { "p": "P4", "axis": "shape", "why": "Cells outside the inscribed circle stay empty so a circle field nests in its square without moving holes." }
+    "root": {
+      "p": "P4",
+      "axis": "space",
+      "why": "The field is a grid of holes on one module pitch, so it sits on the same grid as the body's inset."
+    },
+    "hole": {
+      "p": "P4",
+      "axis": "depth",
+      "why": "Each hole is a round recess with inverse light, shaded on its top-left inner edge, never a printed dot."
+    },
+    "on": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "A lit hole is ink at full step so the level reads at 3:1 or more against unlit holes, never orange."
+    },
+    "void": {
+      "p": "P4",
+      "axis": "shape",
+      "why": "Cells outside the inscribed circle stay empty so a circle field nests in its square without moving holes."
+    }
   },
   "states": {
-    "@media prefers-reduced-motion: reduce": { "p": "P4", "axis": "motion", "why": "Under reduce motion holes switch to their new level at once, with no fade between readings." },
-    "@media forced-colors: active": { "p": "P4", "axis": "interaction", "why": "In forced colours each hole keeps a border and lit holes take the system text colour, so the level stays readable." }
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P4",
+      "axis": "motion",
+      "why": "Under reduce motion holes switch to their new level at once, with no fade between readings."
+    },
+    "@media forced-colors: active": {
+      "p": "P4",
+      "axis": "interaction",
+      "why": "In forced colours each hole keeps a border and lit holes take the system text colour, so the level stays readable."
+    }
   },
   "motion": {
-    "background-color": { "p": "P4", "axis": "motion", "why": "A hole's ink fades on or off within 120ms so the level changes as one quick fill." }
+    "background-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A hole lights and dims over motion.segment, the same step as the window's figures, so a level that moves reads as the grille breathing, never as holes blinking (D-008)."
+    }
   }
 }

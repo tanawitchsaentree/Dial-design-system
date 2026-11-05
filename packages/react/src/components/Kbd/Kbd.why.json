@@ -1,0 +1,112 @@
+{
+  "concept": "Kbd prints the name of a key the way a case prints its legends, then gives the word a little height so it reads as the key itself: a flat cap with a hard lower edge. It is a name, not a part, so nothing in it presses, hovers or takes focus.",
+  "kind": [
+    "kbd",
+    "keycap",
+    "key name",
+    "shortcut"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "keycap chip: a rounded pill with a thin outline and a grey fill, the same look as a tag or a badge",
+      "why_not": "With no height it reads as a status chip and not as a key, and a soft blur shadow makes it look pressable when it is only a name."
+    },
+    {
+      "pattern": "keycap drawn as a raised button with the part shadow and a hover lift",
+      "why_not": "A key name is not a mechanism; the shadow of a control tells a hand to press it, and the keycap in running text must not pull the eye from the line."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the band names are printed on the case beside the keys that choose them"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): small flat keys whose height shows as a dark lower edge, not as a blurred shadow"
+    },
+    {
+      "source": "system/FORM.md control class: a key is raised and lit on the top-left edge, and printing is flat ink"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "shadows are short and soft; a unit never floats more than its material height",
+      "form": "The cap casts no blur. Its height is a lit hairline on the top-left edge and a hard lower edge in line.ring, so it is raised by about two pixels and no more."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "one grotesk, regular and medium only",
+      "form": "The key name is set in the same grotesk as the text around it, in medium weight at the label size, so it sits in a line without a second face."
+    },
+    {
+      "p": "P6",
+      "axis": "interaction",
+      "consequence": "hover only darkens a key's ink a step, because a real key does not rise when you approach it",
+      "form": "A Kbd names a key and is not one, so it has no hover, active or focus state at all and keeps the default cursor."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The cap is the knob plastic with primary ink and a ring-coloured edge, never orange, so a shortcuts list does not compete with the unit's one key."
+    },
+    {
+      "p": "P5",
+      "axis": "colour",
+      "consequence": "ink on plastic at ≥4.5:1 in both themes",
+      "form": "Primary ink on surface.knob measures 11.0 to 1 in light and 7.2 to 1 in dark, and the edge is line.ring, which holds 3.2 to 1 or more on the body and the page."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/kbd/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "soft raised cap with the part shadow"
+      },
+      {
+        "id": "B",
+        "name": "flat cap with a hard lower edge"
+      },
+      {
+        "id": "C",
+        "name": "cap nested in a recessed socket"
+      }
+    ],
+    "reason": "B shows height with an edge the size of a key side and stays inside the line box; A is a blurred chip that looks pressable and C is 30px tall with a double frame that breaks the line in running text."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "type",
+      "why": "A kbd element holding the key name in the label size and medium weight, centred in a cap that is at least 24px square so one letter and a word both look like keys."
+    },
+    "combo": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A kbd that groups several caps and the signs between them, so a chord such as Ctrl plus K is one unit in the line and does not break between its keys."
+    },
+    "join": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed plus between two caps, in secondary ink and hidden from assistive tech, which reads the word plus from the hidden text instead."
+    },
+    "hidden": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Words only a screen reader gets: the spoken name of a symbol key such as an arrow and the word plus between the keys of a chord."
+    }
+  },
+  "states": {
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the cap keeps a real border in the text colour on all four sides, so the lower edge and the key shape survive."
+    }
+  },
+  "motion": {}
+}

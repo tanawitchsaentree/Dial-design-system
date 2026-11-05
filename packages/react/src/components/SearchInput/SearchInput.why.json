@@ -1,0 +1,182 @@
+{
+  "concept": "SearchInput is the Input well with a printed search mark at its start and a Clear key at its end. The key shows only when there is text to clear, and it is a printed word on a 44px strip so nobody has to guess what a small cross does. Enter searches and Escape clears, the way a dial on a radio only does one thing per turn.",
+  "kind": [
+    "search input",
+    "search field",
+    "filter field",
+    "query box"
+  ],
+  "family": "Input",
+  "family_difference": "SearchInput adds a printed search mark, a Clear key that appears with text, Enter to search, Escape to clear, and an optional search landmark and results count.",
+  "default_to_avoid": [
+    {
+      "pattern": "search input: a pill with a magnifier inside and a small grey cross that appears on hover",
+      "why_not": "A tiny cross is under the touch size, is told apart by shape alone and hides until hover, while a printed word on a 44px strip is found by everyone."
+    }
+  ],
+  "references": [
+    {
+      "source": "system/FORM.md input class: recessed well, full width of its column, label printed above on the inset line"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the printed word beside the scale names what each part does"
+    },
+    {
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/search.html",
+      "source": "WAI-ARIA APG search landmark"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The well is surface.sunken with elevation.well, as in Input, so the search field reads as cut into the body."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The Clear key is as tall as the well and runs over its hairline, so the strip is a full 44px target."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "transitions only on state",
+      "form": "The Clear key fades in when text arrives and out when it goes, and nothing else in the field moves."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/search-input/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "round raised cap with a cross, set inside the well"
+      },
+      {
+        "id": "B",
+        "name": "printed word key as a divided strip at the end of the well"
+      },
+      {
+        "id": "C",
+        "name": "raised search key beside the well, bare cross for clear"
+      }
+    ],
+    "picked": "B",
+    "by": "agent",
+    "reason": "B keeps the key's meaning in a word that Thai or German can replace and holds a 44px strip without a cap inside a recess. A puts a raised cap inside a recess and shrinks it to 30px of visible target; C needs a second key and prints a bare cross at secondary ink that is hard to see."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The field stacks its label, well and messages in one column so the label sits on the inset line above the well."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight and is the field's accessible name, which a placeholder cannot be."
+    },
+    "well": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The recess takes the inverse light, shade on its top-left inner edge, so the person sees where the query goes."
+    },
+    "mark": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A printed search mark at the start tells the field's purpose at a glance, and it is hidden from assistive tech because the label already says it."
+    },
+    "field": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "Typed text is primary ink on the sunken plastic at more than 4.5:1, with a line box tall enough for Thai marks."
+    },
+    "clear": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The Clear key is a printed word on a strip as tall as the well, so the target is 44px and the meaning is in words, not a small cross."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The hint is secondary ink in the caption size under the well, and the field is described by it."
+    },
+    "error": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The error is critical red with a glyph and words, never orange and never colour alone."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A printed mark beside the words means invalid is never told by colour alone, for people who cannot see the red."
+    },
+    "md": { "p": "P3", "axis": "space", "why": "The default well and Clear strip are 44px tall, the smallest target that every part in dial keeps for a finger." },
+    "lg": { "p": "P3", "axis": "space", "why": "A 52px well and Clear strip with larger text for the main field of a phone sheet held in one hand." }
+  },
+  "states": {
+    "focus-within": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The well shows the same dark ring as every part when the field holds the keyboard focus."
+    },
+    "data-state=open": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The Clear key enters from @starting-style at zero opacity when text arrives, a state change that fades in over motion.release."
+    },
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover only darkens the key's ink a step, because a real key does not rise when you approach it."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The Clear key shows the same dark ring as every part when the keyboard reaches it."
+    },
+    "active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A pressed key goes to full primary ink, so the press is seen as the word darkens under the finger."
+    },
+    "data-state=closing": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "When the text goes the key fades out over motion.exit, and the pointer passes through it so the field never catches a stray tap."
+    },
+    "data-invalid=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "An invalid well draws its edge in the critical red, which is never orange, and the message below names the problem."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled field loses its recess shadow and fades to half, so it reads as not taking input right now."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion the Clear key only fades on motion.hover, which the tokens keep."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the well and the key's divider keep a real border and the focus ring uses the system highlight colour."
+    }
+  },
+  "motion": {
+    "opacity": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The Clear key arriving or leaving is a state change, so it fades in over motion.release and out over motion.exit (D-008)."
+    },
+    "color": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The key's ink darkens a step over motion.hover when the pointer arrives, the only response a key gives to hover."
+    }
+  }
+}

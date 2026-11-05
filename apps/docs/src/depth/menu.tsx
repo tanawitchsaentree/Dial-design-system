@@ -1,10 +1,9 @@
 // Usage tab for Menu (component-depth.md U1–U14). Menu is a key that opens Select's plastic panel of actions.
-import { Button, List, Menu, Stack, Switch } from 'dial-react';
+import { Button, Icon, List, Menu, Stack, Switch } from 'dial-react';
 import type { Depth } from './types';
 
 const Unit = ({ children }: { children: React.ReactNode }) => <div className="demo-box demo-card">{children}</div>;
-const g = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
-const lamp = <svg {...g}><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z" /></svg>;
+const lamp = <Icon name="lamp" />;
 const DEVICE = [
   { value: 'rename', label: 'Rename' },
   { value: 'move', label: 'Move to room' },
@@ -43,7 +42,7 @@ export const MENU: Depth = {
   emphasis: { text: <p>A menu key is a quiet key. It is never orange, because the orange key of a unit is the one thing the unit is for, and a menu holds the things it is rarely for. A unit may hold one menu key. More than one makes a person guess which key holds which action.</p>, pair: { do: <Unit><Stack direction="row" align="center" gap="lg"><Button kind="primary">Start wash</Button><Menu label="More for Washer" items={DEVICE} /></Stack></Unit>, doNote: 'One orange key for the main action, one quiet key for the rest.', dont: <Unit><Stack direction="row" align="center" gap="lg"><Menu label="Programme actions" items={DEVICE} /><Menu label="Device actions" items={DEVICE} /><Menu label="Room actions" items={DEVICE} /></Stack></Unit>, dontNote: 'Three menu keys in one unit, each hiding a guess.' } },
   placement: {
     rows: [['At the end of a device row', 'The round key sits after the switch or the state, on the row’s inset line.'], ['In the corner of a unit', 'Top right, beside the unit’s name, for the unit’s own actions.'], ['Above a list', 'A word key such as Sort, at the start of the list’s heading row.']],
-    examples: [{ title: 'At the end of a device row', render: <List label="Kitchen" style={{ inlineSize: 360, maxInlineSize: '100%' }}><List.Item leading={lamp} label="Ceiling lamp" description="On · 40%" trailing={<Menu label="More for Ceiling lamp" items={DEVICE} />} /></List> }],
+    examples: [{ title: 'At the end of a device row', render: <List label="Kitchen" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))', maxInlineSize: '100%' }}><List.Item leading={lamp} label="Ceiling lamp" description="On · 40%" trailing={<Menu label="More for Ceiling lamp" items={DEVICE} />} /></List> }],
   },
   combinations: {
     good: [['Menu + List', 'One round key at the end of each device row holds that device’s rarer actions.'], ['Menu + Dialog', 'Remove in the menu opens a dialog that names what will be lost before it is gone.'], ['Menu + Toast', 'After Move to room, a toast says where the device went and offers to undo it.']],
@@ -55,7 +54,7 @@ export const MENU: Depth = {
       do: <Menu label="More for Kitchen lamp" items={DEVICE} />, doNote: 'Verbs first, short, and the removal last with its lamp.',
       dont: <Menu label="Options" items={[{ value: 'a', label: 'Click here to rename this device' }, { value: 'b', label: 'Device removal' }, { value: 'c', label: 'Room' }]} />, dontNote: 'A vague key name, an instruction, a noun and no mark on the removal.',
     },
-    overflow: { text: 'The panel grows to its longest action, so a long action shows in full on one line. When the screen is narrower than that line, the words wrap inside the panel instead of being cut.', render: <div data-overflow-demo="" style={{ inlineSize: 240 }}><Menu label="More for the reading lamp" items={[{ value: 'move', label: 'Move to the living room upstairs' }, { value: 'remove', label: 'Remove', destructive: true }]} align="start" /></div> },
+    overflow: { text: 'The panel grows to its longest action, so a long action shows in full on one line. When the screen is narrower than that line, the words wrap inside the panel instead of being cut.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Menu label="More for the reading lamp" items={[{ value: 'move', label: 'Move to the living room upstairs' }, { value: 'remove', label: 'Remove', destructive: true }]} align="start" /></div> },
     rtl: { text: 'In right to left languages the words start on the right, the lamp sits before the word on the right, and the panel lines up with the key’s end edge on the left.', render: <div dir="rtl"><Menu label="خيارات المصباح" items={[{ value: 'rename', label: 'إعادة تسمية' }, { value: 'remove', label: 'إزالة', destructive: true }]} /></div> },
     expansion: { text: 'German actions can run 30% longer. The panel grows to the longest one, so nothing is cut.', render: <Menu label="Mehr für Deckenleuchte" items={[{ value: 'rename', label: 'Umbenennen' }, { value: 'move', label: 'In einen anderen Raum verschieben' }, { value: 'remove', label: 'Entfernen', destructive: true }]} align="start" /> },
   },

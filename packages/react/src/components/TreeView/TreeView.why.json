@@ -1,0 +1,220 @@
+{
+  "concept": "TreeView prints a hierarchy the way a schematic face prints a circuit: each level steps in by half a module, a hairline with one right-angle bend joins every child to its parent, and the chosen item sits in a printed box. People walk it with the arrow keys and see at once what belongs to what.",
+  "kind": [
+    "tree view",
+    "tree",
+    "nested list",
+    "outline",
+    "file tree"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "TreeView as a file explorer: folder icons, a rotating chevron and a coloured highlight bar across the whole selected row",
+      "why_not": "A full-width coloured bar spends the unit's one orange or a second accent on a selection, and folder glyphs print decoration where the hierarchy itself should be drawn."
+    },
+    {
+      "pattern": "indent-only tree view that tells the level by padding alone",
+      "why_not": "Padding alone does not show which items share a parent once a branch is long, and a selection told by a fill disappears for people who cannot tell the two greys apart."
+    }
+  ],
+  "references": [
+    {
+      "source": "IEC 60617 graphical symbols for diagrams: orthogonal conductors with junction dots, one bend at most"
+    },
+    {
+      "source": "The user's wave 4 reference: a pedal whose face is a schematic, with boxes and lines joining the knobs"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices, Tree View pattern: treeitem, group, aria-expanded, aria-level, aria-setsize, aria-posinset and the arrow-key map"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P8",
+      "axis": "space",
+      "consequence": "lines run on the module grid between the parts they join",
+      "form": "Each level steps in by half of control.md, and the line that joins a child to its parent runs down the parent's chevron centre with a stub into the child, so line, node and indent all sit on the 44px module."
+    },
+    {
+      "p": "P8",
+      "axis": "shape",
+      "consequence": "a relation is a hairline of ink with a small node where it meets a part",
+      "form": "The join is a width.hairline line in line.ring that ends in a chevron on a branch and in a small ring node on a leaf, so what has children and what does not is told by shape."
+    },
+    {
+      "p": "P7",
+      "axis": "type",
+      "consequence": "the chosen one turns medium",
+      "form": "The selected item prints in medium weight and primary ink inside a hairline box, and the node of a leaf fills, so the choice is a shape and a weight, never a fill of colour."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Every row is at least control.md tall and the toggle cell is 44px wide, so the 16px chevron is hit anywhere in its cell."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "Home and End reach the ends, Space and Enter press",
+      "form": "Up and Down walk the visible items, Right opens or enters a branch, Left closes it or goes to the parent, Home and End reach the ends, Space and Enter choose, and typing a letter jumps to the next label."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Hairlines, chevrons, the box and the weight are all ink, so the unit's one orange key stays the only orange."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/tree-view/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "legend lines with an ink index bar"
+      },
+      {
+        "id": "B",
+        "name": "schematic elbow lines with a boxed label"
+      },
+      {
+        "id": "C",
+        "name": "sunken row on the selected item"
+      }
+    ],
+    "reason": "B draws the parent-child relation as a printed line, which is the one thing a tree has to say and follows P8; A has only indent, so the bar floats away from its label and the levels blur on a long branch; C sinks the selected row into the Input well, so a chosen item reads as an editable field."
+  },
+  "parts": {
+    "root": {
+      "p": "P8",
+      "axis": "space",
+      "why": "A single column that fills its container with no padding, so every top-level item sits on the unit's inset line and the tree does not shift sideways when a branch opens."
+    },
+    "group": {
+      "p": "P8",
+      "axis": "space",
+      "why": "The children of a branch start half a module in, exactly under the parent's chevron centre, so the join line can run straight down from the parent."
+    },
+    "item": {
+      "p": "P8",
+      "axis": "shape",
+      "why": "One item holds its row and its children and draws the line and the elbow that join it to its parent, with the line stopping at the elbow on the last child so the branch visibly ends."
+    },
+    "row": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The row is at least 44px tall and the full width of the item, so a finger can hit it anywhere along its length."
+    },
+    "toggle": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The toggle cell is 44px square, the chevron draws at 16px inside it, and the cell sits on the join line so the line ends at the chevron."
+    },
+    "node": {
+      "p": "P8",
+      "axis": "shape",
+      "why": "A leaf ends its join line in a small ring node, 6px, where a branch has a chevron, so items with nothing under them are told by shape."
+    },
+    "leading": {
+      "p": "P5",
+      "axis": "space",
+      "why": "An optional dot-matrix glyph or small part sits before the text on the label's inset line, with a fixed gap so the texts of all items align."
+    },
+    "label": {
+      "p": "P8",
+      "axis": "shape",
+      "why": "The label is the printed box that frames the chosen item; every label has the same transparent border, so choosing one moves nothing."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The item's name prints at the body size with a body-height line box, so wrapped lines and Thai marks keep room."
+    },
+    "panel": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The children of an open branch sit in a one-row grid that grows from zero, so the items below move only when the state changes."
+    },
+    "panelInner": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The inner wrapper clips the children while the row grows or shrinks, so no text shows cut at the edge of the panel."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover only darkens an item's ink one step, because a real legend line does not rise when a hand comes near."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The focused item draws the 2px focus ring inside its row, because the clipped panel would cut a ring drawn outside."
+    },
+    "aria-selected=true": {
+      "p": "P7",
+      "axis": "type",
+      "why": "The chosen item steps to primary ink and medium weight, its label gets a hairline box in primary ink and a leaf's node fills, so the choice is told by shape and weight as well as ink."
+    },
+    "data-leaf=true": {
+      "p": "P8",
+      "axis": "shape",
+      "why": "A leaf's join line is longer than a branch's because it ends at a 6px node and not at a 16px chevron, so every line stops just short of what it joins."
+    },
+    "aria-disabled=true": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "An item that cannot be chosen fades to the disabled opacity and shows the not-allowed cursor, and the arrow keys skip it."
+    },
+    "data-state=closing": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "A closing branch shrinks its row to zero and fades on motion.exit before it unmounts, so its children leave instead of vanishing in one frame."
+    },
+    "data-fresh=true": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "A branch opened after the first render starts from a closed row and grows; one open at the start appears at once, so a page load stays still."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Nothing travels under Reduce motion: the panel keeps its full height and the children only fade on the short hover timing."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the join lines and the chosen box keep real borders in the text colour and the filled node is drawn in the text colour."
+    }
+  },
+  "motion": {
+    "grid-template-rows": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The panel grows from zero on motion.enter and shrinks on motion.exit, fast in and slow out, with the children clipped while it travels."
+    },
+    "opacity": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The children fade in and out with the panel on the same timing, so a closing branch does not show cut text at its shrinking edge."
+    },
+    "color": {
+      "p": "P7",
+      "axis": "motion",
+      "why": "An item's ink steps between secondary and primary on motion.hover, so the chosen item changes without a jump."
+    },
+    "border-color": {
+      "p": "P7",
+      "axis": "motion",
+      "why": "The chosen label's box fades in on motion.hover, so the choice moves with the same short timing as its ink."
+    },
+    "background-color": {
+      "p": "P7",
+      "axis": "motion",
+      "why": "A leaf's node fills on motion.hover when its item is chosen, in step with the box and the ink."
+    }
+  }
+}

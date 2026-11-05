@@ -105,19 +105,22 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
           );
         })}
       </div>
-      {items.map((it, i) => (
-        <div
-          key={it.value}
-          role="tabpanel"
-          id={`${auto}-panel-${i}`}
-          aria-labelledby={`${auto}-tab-${i}`}
-          tabIndex={0}
-          hidden={i !== chosen}
-          className={styles.panel}
-        >
-          {it.content}
-        </div>
-      ))}
+      {/* the panels share one cell, so the leaving section fades out where the new one fades in (D-008) */}
+      <div className={styles.panels}>
+        {items.map((it, i) => (
+          <div
+            key={it.value}
+            role="tabpanel"
+            id={`${auto}-panel-${i}`}
+            aria-labelledby={`${auto}-tab-${i}`}
+            tabIndex={0}
+            hidden={i !== chosen}
+            className={styles.panel}
+          >
+            {it.content}
+          </div>
+        ))}
+      </div>
     </div>
   );
 });

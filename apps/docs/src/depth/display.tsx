@@ -59,7 +59,7 @@ export const DISPLAY: Depth = {
       do: <Display label="Washer" value="38" unit="min" detail="Rinse" digits={3} />, doNote: 'A number, its unit and the step.',
       dont: <Display kind="oled" label="Washer" value="Your wash will be ready soon" />, dontNote: 'A sentence in the value line hides the number.',
     },
-    overflow: { text: 'A long detail line wraps under the value. The value line itself never wraps; set digits so the window keeps one width.', render: <div data-overflow-demo="" style={{ inlineSize: 220 }}><Display label="Tuner" value="98.5" unit="MHz" detail="FM · Radio Swiss Classic, stereo" digits={4} /></div> },
+    overflow: { text: 'A long detail line wraps under the value. The value line itself never wraps; set digits so the window keeps one width.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Display label="Tuner" value="98.5" unit="MHz" detail="FM · Radio Swiss Classic, stereo" digits={4} /></div> },
     rtl: { text: 'In right-to-left languages the window keeps the digits in the same order, and the detail line follows the reading direction.', render: <div dir="rtl"><Display kind="oled" label="المؤقت" value="38" unit="دقيقة" detail="شطف" /></div> },
     expansion: { text: 'German and Finnish detail lines can run 30% longer. The detail wraps and the value stays put.', render: <Display label="Waschmaschine" value="38" unit="min" detail="Spülen, danach Schleudern" digits={3} /> },
   },

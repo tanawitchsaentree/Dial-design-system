@@ -1,0 +1,107 @@
+{
+  "concept": "CommandPalette is a small appliance sheet with one recessed window to type in and a printed legend of every command underneath. The lit command carries an ink index mark and its keycap shows the shortcut, so nobody opens a menu to learn what the device can do.",
+  "kind": ["command palette", "command menu", "quick actions", "spotlight search"],
+  "default_to_avoid": [
+    {
+      "pattern": "command palette: a dark floating box centred high on the page with a blurred backdrop, a glowing selected row and fuzzy-match highlights (cmdk, Raycast, VS Code)",
+      "why_not": "A glowing row and a blurred backdrop spend colour and glass on a body, and a floating dark box has no place in a warm-white appliance where only the display emits light."
+    },
+    {
+      "pattern": "command palette that lists commands as full-width coloured rows with a filled accent selection",
+      "why_not": "A filled accent row spends the unit's one orange on a list item, while the legend marks the chosen word with ink and weight."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): every band and station printed on the case, the one in use marked by the pointer"
+    },
+    {
+      "source": "system/FORM.md surface class: Dialog overlay language, elevation.float over a scrim, radius corner.panel"
+    },
+    {
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/",
+      "source": "WAI-ARIA APG combobox with a listbox popup, focus stays in the field and aria-activedescendant names the reached row"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P7",
+      "axis": "space",
+      "consequence": "the legend sits beside or around the control that walks it, in one fixed column or arc",
+      "form": "The commands stand in one column right under the query window, and the section names are printed on the same inset line, so nothing reflows when the lit command moves."
+    },
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "the chosen word carries one ink index mark beside it",
+      "form": "The reached command shows one small ink dot at its inline start; the waiting commands keep the same space empty so the words do not shift."
+    },
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The query field is a window cut into the sheet with surface.sunken and elevation.well, as in Input, so it reads as a reading and the commands stay flat printing."
+    },
+    {
+      "p": "P7",
+      "axis": "depth",
+      "consequence": "a legend is flat printing on the material, never a raised part",
+      "form": "Commands have no shadow and no raised edge; only the lit one gets a hairline plate, and the shortcuts are Kbd caps."
+    },
+    {
+      "p": "P7",
+      "axis": "interaction",
+      "consequence": "every word is also a target that picks itself, and the control's keys walk it word by word",
+      "form": "Each command is a 44px row that runs on a click or Enter, while the arrow keys walk the rows from inside the field, with Home and End for the ends."
+    },
+    {
+      "p": "P3",
+      "axis": "motion",
+      "consequence": "fast in, slow out, through the state motion tokens",
+      "form": "The sheet and scrim arrive over motion.enter and leave over the longer motion.exit, kept mounted by presence until the exit is done."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/command-palette/index.html",
+    "options": [
+      { "id": "A", "name": "query window above a printed legend, ink index mark and plate on the lit row" },
+      { "id": "B", "name": "section names in a fixed left column, a rule beside the lit row" },
+      { "id": "C", "name": "field and list inside one recessed well" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A recesses only the window and prints the rest flat, which is P2 and P7 together; B spends a third of the width on section names and breaks down on a phone, and C recesses the list as well, so the legend reads as a part cut into the body instead of printing."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "shape", "why": "The sheet is a body of matte plastic with the capped panel radius and the same float elevation as Dialog, over a scrim." },
+    "inline": { "p": "P6", "axis": "space", "why": "A palette shown in place sits in the flow of the page at a fixed place and covers nothing." },
+    "well": { "p": "P2", "axis": "depth", "why": "The query window is recessed into the sheet with the inverse light, 44px tall so the whole well is the press area of the field." },
+    "mark": { "p": "P5", "axis": "space", "why": "The printed search mark sits on the inset line at the start of the well and is hidden from assistive tech because the label names the field." },
+    "field": { "p": "P5", "axis": "type", "why": "The query is typed in the body size and primary ink, with the placeholder in secondary ink that still holds 4.5:1." },
+    "list": { "p": "P7", "axis": "space", "why": "The legend is one scrolling column under the window, with a fixed maximum height so the sheet does not reflow as the query narrows it." },
+    "group": { "p": "P7", "axis": "space", "why": "A section keeps its name and its commands together in one block, so the name is printed above the words it covers." },
+    "heading": { "p": "P7", "axis": "type", "why": "A section name is a small label in secondary ink, regular weight, printed on the inset line above its commands." },
+    "option": { "p": "P3", "axis": "space", "why": "Each command is a row of at least 44px, so the whole word is a target a finger can hit." },
+    "index": { "p": "P7", "axis": "shape", "why": "The ink dot is the one index mark beside the lit command; it is drawn with a border and a fill so it also shows in forced colours." },
+    "text": { "p": "P5", "axis": "type", "why": "The command name wraps by character so a long name or Thai text never pushes the keycaps out of the row." },
+    "keys": { "p": "P7", "axis": "interaction", "why": "The shortcut is printed as Kbd caps at the end of the row, so the quick way to run the command is learned from the list." },
+    "empty": { "p": "P7", "axis": "colour", "why": "When no command matches, one line in secondary ink says so, and the same words are announced politely." }
+  },
+  "states": {
+    "data-state=open": { "p": "P3", "axis": "motion", "why": "The open sheet and its scrim arrive quickly on the enter easing, all parts at the same moment." },
+    "data-state=closing": { "p": "P3", "axis": "motion", "why": "The sheet and scrim leave over the slower exit duration while presence keeps them mounted." },
+    "focus-within": { "p": "P3", "axis": "interaction", "why": "The query window shows the focus ring while the field has focus, and the ring stays there as the arrows move the lit row." },
+    "data-active=true": { "p": "P7", "axis": "colour", "why": "The reached command goes to primary ink and medium weight with a hairline plate and the index mark, with no orange." },
+    "aria-disabled=true": { "p": "P3", "axis": "interaction", "why": "A command that cannot run stays printed at reduced opacity, is skipped by the arrow keys and ignores Enter and clicks." },
+    "data-empty=true": { "p": "P7", "axis": "colour", "why": "With no match the list collapses to the empty line and the field drops its list reference, so nothing stale is read." },
+    "@media prefers-reduced-motion: reduce": { "p": "P6", "axis": "motion", "why": "Under reduced motion the sheet appears and leaves at once, with no rise and no fade." },
+    "@media forced-colors: active": { "p": "P6", "axis": "interaction", "why": "In forced colours the sheet, window and lit row keep real borders and the index mark draws in the highlight colour." }
+  },
+  "motion": {
+    "opacity": { "p": "P3", "axis": "motion", "why": "The sheet and scrim fade in fast and out slower, and the index mark appears with the lit row." },
+    "transform": { "p": "P6", "axis": "motion", "why": "A short rise of a few pixels is the only travel, with no scale, no bounce and no stagger." },
+    "background-color": { "p": "P6", "axis": "interaction", "why": "The lit row's plate inks in on the hover duration, because a real key does not rise as the hand nears it." },
+    "border-color": { "p": "P6", "axis": "interaction", "why": "The plate's hairline changes on the hover duration with its fill, so the pair moves as one." },
+    "color": { "p": "P6", "axis": "interaction", "why": "A row's ink steps from secondary to primary on the hover duration when it is reached." }
+  }
+}

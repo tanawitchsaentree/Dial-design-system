@@ -4,7 +4,7 @@ import type { Depth } from './types';
 
 const none = () => {};
 const undo = { label: 'Undo', onAction: none };
-const Phone = ({ children }: { children: React.ReactNode }) => <div style={{ inlineSize: 'min(100%, 375px)' }}>{children}</div>;
+const Phone = ({ children }: { children: React.ReactNode }) => <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))' }}>{children}</div>;
 
 export const SNACKBAR: Depth = {
   overview: (

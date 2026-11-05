@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · SearchInput · three ways to search and clear</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .unit>p.n{font-size:12px;color:var(--ds-text-secondary);margin:6px 0 18px}
+ label{display:block;font-size:13px;font-weight:500;margin-block-end:6px}
+ .well{display:flex;align-items:center;box-sizing:border-box;min-block-size:44px;padding-inline:14px;gap:8px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .well input{flex:1;min-inline-size:0;border:0;background:transparent;font:inherit;font-size:15px;color:var(--ds-text-primary);outline:none;padding-block:10px}
+ .glyph{color:var(--ds-text-secondary);display:inline-grid;flex:none}
+ .glyph svg{inline-size:20px;block-size:20px;fill:currentColor}
+ .gap{block-size:26px}
+ /* A: round raised cap inside the well */
+ .A .k{flex:none;inline-size:44px;block-size:44px;margin-inline-end:-14px;margin-block:-1px;display:grid;place-items:center;border:0;background:transparent;color:var(--ds-text-secondary);padding:0}
+ .A .k i{inline-size:30px;block-size:30px;border-radius:50%;display:grid;place-items:center;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);border:1px solid transparent}
+ .A .k svg{inline-size:16px;block-size:16px;fill:currentColor}
+ /* B: printed word key, a capsule beside the value */
+ .B .k{flex:none;min-block-size:44px;margin-inline-end:-14px;margin-block:-1px;padding-inline:14px;border:0;background:transparent;font:inherit;font-size:13px;font-weight:500;color:var(--ds-text-primary);border-inline-start:1px solid var(--ds-line-divider);border-start-end-radius:var(--ds-corner-media);border-end-end-radius:var(--ds-corner-media)}
+ /* C: submit key on the left outside the well, clear is a printed glyph with no cap */
+ .C .line{display:flex;gap:10px;align-items:center}
+ .C .line .well{flex:1}
+ .C .s{flex:none;inline-size:44px;block-size:44px;border-radius:50%;display:grid;place-items:center;border:1px solid transparent;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);color:var(--ds-text-primary);padding:0}
+ .C .s svg{inline-size:20px;block-size:20px;fill:currentColor}
+ .C .k{flex:none;inline-size:44px;block-size:44px;margin-inline-end:-14px;margin-block:-1px;display:grid;place-items:center;border:0;background:transparent;color:var(--ds-text-secondary);padding:0}
+ .C .k svg{inline-size:20px;block-size:20px;fill:currentColor}
+ .C .glyph{display:none}
+</style></head><body>
+<h1>SearchInput · search glyph, clear key, Enter to submit</h1>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <symbol id="srch" viewBox="0 0 21 21"><g id="sg"></g></symbol>
+</defs></svg>
+<div class="row" id="row"></div>
+<script>
+ const g={search:['.###...','#...#..','#...#..','#...#..','.###...','.....#.','......#'],close:['.......','.#...#.','..#.#..','...#...','..#.#..','.#...#.','.......']};
+ const svg=(n)=>{let s='<svg viewBox="0 0 21 21" aria-hidden="true">';g[n].forEach((r,y)=>{for(let x=0;x<7;x++)if(r[x]=='#')s+=`<circle cx="${x*3+1.5}" cy="${y*3+1.5}" r="1"/>`});return s+'</svg>'};
+ const well=(v,k,glyph=true)=>`<div class="well">${glyph?`<span class="glyph">${svg('search')}</span>`:''}<input value="${v}" placeholder="Search rooms" aria-label="Search">${v?k:''}</div>`;
+ const col=(c,title,note,body)=>`<div class="unit ${c}"><h2>${title}</h2><p class="n">${note}</p>${body}</div>`;
+ const A=(v)=>well(v,`<button class="k" aria-label="Clear"><i>${svg('close')}</i></button>`);
+ const B=(v)=>well(v,`<button class="k">Clear</button>`);
+ const C=(v)=>`<div class="line"><button class="s" aria-label="Search">${svg('search')}</button>${well(v,`<button class="k" aria-label="Clear">${svg('close')}</button>`,false)}</div>`;
+ const rows=[['A','A · glass-less cap in the well','a raised round key in the recess, appears with text',A],['B','B · printed word key','the word Clear, a divided end of the well',B],['C','C · submit key beside, bare clear','search is its own key outside; clear is bare print',C]];
+ document.getElementById('row').innerHTML=rows.map(([c,t,n,f])=>col(c,t,n,`<label>Empty</label>${f('')}<div class="gap"></div><label>With text</label>${f('Kitchen lamp')}`)).join('');
+</script>
+</body></html>

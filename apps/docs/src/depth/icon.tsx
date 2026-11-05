@@ -55,7 +55,7 @@ export const ICON: Depth = {
       do: <Icon name="battery" size="sm" label="Battery half full" />, doNote: 'Says the reading.',
       dont: <Icon name="battery" size="sm" label="Battery icon" />, dontNote: 'Names the drawing and leaves out the reading.',
     },
-    overflow: { text: 'A glyph never shrinks. When the word beside it wraps, the glyph stays on the first line at its full size.', render: <div data-overflow-demo="" style={{ inlineSize: 160 }}><Stack direction="row" gap="sm" align="start"><Icon name="warning" size="sm" /><span>Water tank almost empty, fill it before the next wash</span></Stack></div> },
+    overflow: { text: 'A glyph never shrinks. When the word beside it wraps, the glyph stays on the first line at its full size.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-narrow))' }}><Stack direction="row" gap="sm" align="start"><Icon name="warning" size="sm" /><span>Water tank almost empty, fill it before the next wash</span></Stack></div> },
     rtl: { text: 'In right-to-left pages the glyph moves to the right of the word and keeps its own drawing, so play still points the way the tape runs.', render: <div dir="rtl"><Line><Icon name="lock" size="sm" /><span>الباب الأمامي مقفل</span></Line></div> },
     expansion: { text: 'German and Finnish words can run 30% longer. The word grows sideways and the glyph keeps its size.', render: <Line><Icon name="clock" size="sm" /><span>Heizung schaltet um 06:30 Uhr ein</span></Line> },
   },

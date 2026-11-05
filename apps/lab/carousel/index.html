@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Carousel · three ways to page through slides</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .slide{box-sizing:border-box;display:grid;place-content:center;text-align:center;font-size:14px;color:var(--ds-text-secondary);min-block-size:150px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken)}
+ .slide b{display:block;font-size:16px;font-weight:500;color:var(--ds-text-primary)}
+ .key{inline-size:44px;block-size:44px;border-radius:50%;display:grid;place-items:center;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);border:1px solid transparent;color:var(--ds-text-secondary);font-size:18px}
+ .dots{display:flex;gap:10px;align-items:center}
+ .dots i{inline-size:6px;block-size:6px;border-radius:50%;background:var(--ds-line-ring)}
+ .dots i.on{background:var(--ds-text-primary);transform:scale(1.5)}
+ /* A: slide window with the keys riding on its two edges, dots under it */
+ .A .win{position:relative;box-shadow:var(--ds-elevation-well);border-radius:var(--ds-corner-media)}
+ .A .win .key{position:absolute;inset-block-start:50%;translate:0 -50%}
+ .A .win .key:first-of-type{inset-inline-start:-14px}.A .win .key:last-of-type{inset-inline-end:-14px}
+ .A .dots{justify-content:center;margin-block-start:18px}
+ /* B: window on top, one control strip under it: key, grille of holes, key */
+ .B .slide{box-shadow:var(--ds-elevation-well)}
+ .B .strip{display:flex;align-items:center;justify-content:space-between;margin-block-start:14px}
+ .B .dots i{background:radial-gradient(circle,var(--ds-line-ring) 60%,transparent 65%);box-shadow:var(--ds-elevation-well)}
+ .B .dots i.on{background:var(--ds-text-primary);box-shadow:none;transform:none}
+ /* C: dotted rail down the side with the keys at its two ends, a printed counter */
+ .C .body{display:grid;grid-template-columns:44px 1fr;column-gap:16px}
+ .C .side{display:grid;grid-template-rows:44px 1fr 44px;justify-items:center;row-gap:8px}
+ .C .dots{flex-direction:column;gap:12px;align-self:center}
+ .C .ctr{margin-block-start:12px;font-size:13px;color:var(--ds-text-secondary);font-variant-numeric:tabular-nums}
+</style></head><body>
+<h1>Carousel · slides on a scroll-snap track, a dotted position, two keys</h1>
+<div class="row">
+ <div class="unit A"><h2>A · keys ride the window edges</h2>
+  <div class="win"><div class="key">‹</div><div class="slide"><span><b>Living room</b>21 °C, lamp on</span></div><div class="key">›</div></div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div></div>
+ <div class="unit B"><h2>B · window, then one control strip</h2>
+  <div class="slide"><span><b>Living room</b>21 °C, lamp on</span></div>
+  <div class="strip"><div class="key">‹</div><div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div><div class="key">›</div></div></div>
+ <div class="unit C"><h2>C · dotted rail down the side</h2>
+  <div class="body"><div class="side"><div class="key">‹</div><div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div><div class="key">›</div></div>
+  <div class="slide"><span><b>Living room</b>21 °C, lamp on</span></div></div>
+  <div class="ctr">2 of 5</div></div>
+</div></body></html>

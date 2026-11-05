@@ -1,58 +1,200 @@
 {
   "concept": "Button is a key on the case of an appliance. It is a capsule of the same matte plastic that drops by its height when pressed and returns on the spring, and only the unit's one primary key is dyed orange.",
-  "kind": ["button", "key"],
+  "kind": [
+    "button",
+    "key"
+  ],
   "default_to_avoid": [
-    { "pattern": "flat pill button with primary, secondary and ghost intent fills (Material contained/outlined/text, shadcn button)", "why_not": "Intent fills spend colour on every button, while P1 allows exactly one orange part per unit and everything else must be plastic." },
-    { "pattern": "button that scales down or lifts on hover", "why_not": "A real key neither grows nor rises when a finger approaches it; P6 forbids the hover lift and P3 makes the press a drop in height." }
+    {
+      "pattern": "flat pill button with primary, secondary and ghost intent fills (Material contained/outlined/text, shadcn button)",
+      "why_not": "Intent fills spend colour on every button, while P1 allows exactly one orange part per unit and everything else must be plastic."
+    },
+    {
+      "pattern": "button that scales down or lifts on hover",
+      "why_not": "A real key neither grows nor rises when a finger approaches it; P6 forbids the hover lift and P3 makes the press a drop in height."
+    }
   ],
   "references": [
-    { "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): rows of plain keys printed beside their function" },
-    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): body-coloured keys with one coloured key for the main action" },
-    { "source": "system/refs/ref-01.png: tuner 1 with FM/AM keys and one orange control per unit (estimated from chat)" }
+    {
+      "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): rows of plain keys printed beside their function"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): body-coloured keys with one coloured key for the main action"
+    },
+    {
+      "source": "system/refs/ref-01.png: tuner 1 with FM/AM keys and one orange control per unit (estimated from chat)"
+    }
   ],
   "derivation": [
-    { "p": "P3", "axis": "shape", "consequence": "keys are round or capsule", "form": "A text button is a capsule key with corner.round, wide enough for its printed word, at least 44px tall." },
-    { "p": "P3", "axis": "depth", "consequence": "press drops height to 0 in 60–70ms, return runs on the material's spring", "form": "Active state removes elevation.part and moves the key by motion.press-travel in motion.press; release eases back over motion.release." },
-    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "kind primary paints action.accent with an action.accent-rim edge; kind key stays surface.raised plastic with printed ink." },
-    { "p": "P6", "axis": "interaction", "consequence": "no hover lift; hover only darkens a key's ink a step", "form": "Hover changes the printed ink one step (or the orange one step on primary) and never translates or scales the key." },
-    { "p": "P5", "axis": "type", "consequence": "one grotesk, regular and medium only", "form": "The word on the key is type.label in type.weight-medium, sentence case, never bold and never all caps." }
+    {
+      "p": "P3",
+      "axis": "shape",
+      "consequence": "keys are round or capsule",
+      "form": "A text button is a capsule key with corner.round, wide enough for its printed word, at least 44px tall."
+    },
+    {
+      "p": "P3",
+      "axis": "depth",
+      "consequence": "press drops height to 0 in 60–70ms, return runs on the material's spring",
+      "form": "Active state removes elevation.part and moves the key by motion.press-travel in motion.press; release eases back over motion.release."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "kind primary paints action.accent with an action.accent-rim edge; kind key stays surface.raised plastic with printed ink."
+    },
+    {
+      "p": "P6",
+      "axis": "interaction",
+      "consequence": "no hover lift; hover only darkens a key's ink a step",
+      "form": "Hover changes the printed ink one step (or the orange one step on primary) and never translates or scales the key."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "one grotesk, regular and medium only",
+      "form": "The word on the key is type.label in type.weight-medium, sentence case, never bold and never all caps."
+    }
   ],
   "variants": {
     "lab": "apps/lab/button/index.html",
     "options": [
-      { "id": "A", "name": "capsule key, word on the key" },
-      { "id": "B", "name": "round key, word printed below" },
-      { "id": "C", "name": "calculator key, small radius" }
+      {
+        "id": "A",
+        "name": "capsule key, word on the key"
+      },
+      {
+        "id": "B",
+        "name": "round key, word printed below"
+      },
+      {
+        "id": "C",
+        "name": "calculator key, small radius"
+      }
     ],
     "picked": "A",
     "by": "agent",
     "reason": "A keeps the word on the key, so labels of any length stay legible and the hit area grows with them (P3, P5); B is kept for IconButton where no word is needed, and C's squarish keys belong to dense keypads rather than a unit's main action."
   },
-  "mechanism": { "kind": "key", "travel": "3px", "spring": { "mass": 1.4, "stiffness": 520, "damping": 46 } },
+  "mechanism": {
+    "kind": "key",
+    "travel": "3px",
+    "spring": {
+      "mass": 1.4,
+      "stiffness": 520,
+      "damping": 46
+    }
+  },
   "parts": {
-    "root": { "p": "P3", "axis": "shape", "why": "A capsule key of matte plastic, at least 44px tall, sized by the word printed on it." },
-    "key": { "p": "P5", "axis": "colour", "why": "A body-coloured key carries printed ink at 4.5:1 or more and spends no accent colour." },
-    "primary": { "p": "P1", "axis": "colour", "why": "The unit's one primary key is dyed orange with a darker rim that holds 3:1 against the body." },
-    "md": { "p": "P3", "axis": "space", "why": "The default key is 44px tall, the smallest target every part in dial keeps." },
-    "lg": { "p": "P3", "axis": "space", "why": "A larger 52px key for the main action on a phone sheet held in one hand." },
-    "label": { "p": "P5", "axis": "type", "why": "The printed word uses the label size in medium weight so it reads like printing on a case." },
-    "full": { "p": "P2", "axis": "space", "why": "A full-width key spans the inner width of its unit, aligned to the inset like the display above it." }
+    "root": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "A capsule key of matte plastic, at least 44px tall, sized by the word printed on it."
+    },
+    "key": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "A body-coloured key carries printed ink at 4.5:1 or more and spends no accent colour."
+    },
+    "primary": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The unit's one primary key is dyed orange with a darker rim that holds 3:1 against the body."
+    },
+    "md": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The default key is 44px tall, the smallest target every part in dial keeps."
+    },
+    "lg": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A larger 52px key for the main action on a phone sheet held in one hand."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed word uses the label size in medium weight so it reads like printing on a case."
+    },
+    "full": {
+      "p": "P2",
+      "axis": "space",
+      "why": "A full-width key spans the inner width of its unit, aligned to the inset like the display above it."
+    }
   },
   "states": {
-    "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens the printed ink one step and never lifts the key, because real keys do not rise." },
-    "active": { "p": "P3", "axis": "depth", "why": "Pressing drops the key by its travel and collapses its shadow underneath it, at once." },
-    "focus-visible": { "p": "P3", "axis": "interaction", "why": "Every part shows the same dark ring with a plastic halo, so focus never depends on the orange." },
-    "disabled": { "p": "P6", "axis": "depth", "why": "A disabled key loses its height and fades to half, while its outline stays readable against the body." },
-    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the key changes state at once with no travel and no spring return; only the ink fade stays." },
-    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the key keeps a real border so its edge survives without shadows or fills, and a latched key turns matte." },
-    "aria-pressed=true": { "p": "P9", "axis": "space", "why": "A plastic toggle key latched down stays down by its travel and becomes frosted glass in the neutral range, its word medium ink at 4.5:1; the orange key never turns to glass." },
-    "@media prefers-reduced-transparency: reduce": { "p": "P9", "axis": "interaction", "why": "When the reader asks for less transparency a latched key turns matte in the same grey tone and keeps its travel down." }
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover darkens the printed ink one step and never lifts the key, because real keys do not rise."
+    },
+    "active": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "Pressing drops the key by its travel and collapses its shadow underneath it, at once."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Every part shows the same dark ring with a plastic halo, so focus never depends on the orange."
+    },
+    "disabled": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled key loses its height and fades to half, while its outline stays readable against the body."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion the key changes state at once with no travel and no spring return; only the ink fade stays."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the key keeps a real border so its edge survives without shadows or fills, and a latched key turns matte."
+    },
+    "aria-pressed=true": {
+      "p": "P9",
+      "axis": "space",
+      "why": "A plastic toggle key latched down stays down by its travel and becomes frosted glass in the neutral range, its word medium ink at 4.5:1; the orange key never turns to glass."
+    },
+    "@media prefers-reduced-transparency: reduce": {
+      "p": "P9",
+      "axis": "interaction",
+      "why": "When the reader asks for less transparency a latched key turns matte in the same grey tone and keeps its travel down. Matte is not lit from behind, so the inner glow goes with the frost; on the lighter matte face it would wash the word under 4.5:1."
+    }
   },
   "motion": {
-    "transform": { "p": "P3", "axis": "motion", "why": "The key travels down in 65ms and returns on the spring so a press reads as a physical stroke." },
-    "box-shadow": { "p": "P3", "axis": "depth", "why": "The cast shadow collapses with the press and grows back with the return, following the single light." },
-    "color": { "p": "P3", "axis": "motion", "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing." },
-    "background-color": { "p": "P1", "axis": "colour", "why": "The primary key's orange shifts one step on hover with the same fast in, slow out fade as the ink." },
-    "border-color": { "p": "P3", "axis": "motion", "why": "The glass edge of a latched key arrives and leaves on the release time with its travel, so the latch reads as one stroke." }
+    "transform": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The key travels down in 65ms and returns on the spring so a press reads as a physical stroke."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "The cast shadow collapses with the press and grows back with the return, following the single light."
+    },
+    "color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing."
+    },
+    "background-color": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The primary key's orange shifts one step on hover with the same fast in, slow out fade as the ink."
+    },
+    "border-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The glass edge of a latched key arrives and leaves on the release time with its travel, so the latch reads as one stroke."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A key that becomes pressable, or stops being, fades its print over motion.release instead of switching in one frame (D-008); under Reduce motion the fade stays on motion.hover."
+    }
   }
 }

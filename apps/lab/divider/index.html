@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Divider · three ways to part two regions</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ p{margin:0;font-size:14px;line-height:1.45;color:var(--ds-text-secondary)}
+ .cols{display:flex;align-items:stretch;gap:16px;margin-block-start:20px;min-block-size:56px}
+ .sp{block-size:20px}
+ .lab{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--ds-text-secondary)}
+ .lab::before,.lab::after{content:"";flex:1}
+ .lab::before{flex:0 0 12px}
+ /* A: one hairline in the divider tone */
+ .A .h{border-block-start:1px solid var(--ds-line-divider)}
+ .A .v{border-inline-start:1px solid var(--ds-line-divider)}
+ .A .lab::before,.A .lab::after{border-block-start:1px solid var(--ds-line-divider)}
+ /* B: a seam cut in the plastic: shade edge over a lit edge, inverse of a raised part */
+ .B .h{border-block-start:1px solid var(--ds-line-divider);border-block-end:1px solid var(--ds-material-lit)}
+ .B .v{border-inline-start:1px solid var(--ds-line-divider);border-inline-end:1px solid var(--ds-material-lit)}
+ .B .lab::before,.B .lab::after{block-size:2px;border-block-start:1px solid var(--ds-line-divider);border-block-end:1px solid var(--ds-material-lit)}
+ /* C: dotted leader in ring tone, like a printed scale */
+ .C .h{block-size:2px;background:radial-gradient(circle,var(--ds-line-ring) 50%,transparent 55%) 0 0/12px 100% repeat-x}
+ .C .v{inline-size:2px;background:radial-gradient(circle,var(--ds-line-ring) 50%,transparent 55%) 0 0/100% 12px repeat-y}
+ .C .lab::before,.C .lab::after{block-size:2px;background:radial-gradient(circle,var(--ds-line-ring) 50%,transparent 55%) 0 0/12px 100% repeat-x}
+</style></head><body>
+<h1>Divider · a seam between regions of one unit</h1>
+<div class="row">
+ <div class="unit A"><h2>A · one hairline</h2><p>Heating</p><div class="sp"></div><div class="h"></div><div class="sp"></div><p>Lighting</p><div class="sp"></div><div class="lab">schedule</div><div class="cols"><p>Day</p><div class="v"></div><p>Night</p></div></div>
+ <div class="unit B"><h2>B · cut seam, shade over lit edge</h2><p>Heating</p><div class="sp"></div><div class="h"></div><div class="sp"></div><p>Lighting</p><div class="sp"></div><div class="lab">schedule</div><div class="cols"><p>Day</p><div class="v"></div><p>Night</p></div></div>
+ <div class="unit C"><h2>C · dotted leader</h2><p>Heating</p><div class="sp"></div><div class="h"></div><div class="sp"></div><p>Lighting</p><div class="sp"></div><div class="lab">schedule</div><div class="cols"><p>Day</p><div class="v"></div><p>Night</p></div></div>
+</div></body></html>

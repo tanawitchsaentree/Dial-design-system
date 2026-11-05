@@ -1,0 +1,148 @@
+{
+  "concept": "RangePicker chooses a start day and an end day the way a device sets a span: two recessed windows print the two dates, a short ink bar between them joins them, one round key opens the Calendar, and the days between the two windows are ruled in a strip so the span is a shape.",
+  "kind": [
+    "range picker",
+    "date range",
+    "start and end date",
+    "stay picker"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "range picker where the days between start and end are one continuous accent-coloured band and both ends are solid accent discs",
+      "why_not": "The accent band spends the unit's one orange on a selection, and the span differs from the rest of the month by tint alone, so a grey screen or a colour-blind reader loses the range."
+    },
+    {
+      "pattern": "date range field showing one string such as 4 Nov - 9 Nov with a calendar glyph that opens a floating white card",
+      "why_not": "One string hides which end is being edited and cannot be typed into by part, and the floating card adds a second surface that dial keeps off the body."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): each reading sits in its own window cut into the body"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a printed scale runs as a ruled strip between two marks on the case"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices, date picker dialog example: grid, roving tabindex, aria-selected on the days of a range"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The start and the end each sit in an Input well that takes surface.sunken and elevation.well, and the two end days in the Calendar are cut into the same windows, so both dates read as readings."
+    },
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "the chosen word carries one ink index mark beside it",
+      "form": "A short ink bar stands between the two wells, the same index mark Calendar prints under today, and the days between the end windows are ruled above and below, so the span is told by shape."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The group name stands on the inset line above the row, and Start and End are printed above their own wells by Input, so each field is named where the eye already is."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "arrows step a detent, Home and End reach the ends, Space and Enter press",
+      "form": "The key opens the Calendar with focus on one day; arrows, Home, End and Page keys walk it, Enter or Space picks the first and then the last day, and Escape closes and returns focus to the key."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The wells, the bar, the strip and the calendar key all draw in ink and plastic, so a RangePicker in a unit never takes the orange away from the unit's primary key."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "A line under the Calendar says what to do next, such as Now choose the last day, in a polite live region that cannot be pressed."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/range-picker/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "two wells and a recessed trough through the month"
+      },
+      {
+        "id": "B",
+        "name": "two wells joined by an ink bar and a ruled strip through the month"
+      },
+      {
+        "id": "C",
+        "name": "one shared window and an underline bar along the range"
+      }
+    ],
+    "reason": "B joins the two wells with the index mark Calendar already prints and rules the span with the ring hairline, so the span is a line shape on plastic that survives a grey screen and keeps each date in its own well; A digs seven recesses in a row that read as a heavy band, and C reuses the today bar so a range and today look alike."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The group fills its column and stacks its name, the row of fields and the notes on one inset line."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The group name is printed in the label size in medium weight above the row, and it names the group for assistive tech."
+    },
+    "row": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The start well, the bar, the end well and the key share one bottom edge so the 44px controls stand level."
+    },
+    "join": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "A short ink bar between the two wells is the range's index mark, drawn as a border so it stays a real line in every theme."
+    },
+    "panel": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The Calendar and its status line stand in one column inside the popover, so the panel keeps the same size while a range is chosen."
+    },
+    "status": {
+      "p": "P2",
+      "axis": "type",
+      "why": "The line under the Calendar says what to choose next in the caption size and secondary ink, and it is a polite live region."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "type",
+      "why": "A short line under the row, such as the longest stay, is printed in the caption size in secondary ink."
+    },
+    "error": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The problem with the pair of dates is printed with a critical glyph and a word, so it never depends on a tint and never takes the orange."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "The critical mark in the error line is a dot-matrix glyph at the small icon size, the same mark Input prints."
+    }
+  },
+  "states": {
+    "data-disabled=true": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A disabled RangePicker dims its bar to the disabled step along with its wells and key, so the whole pair reads as switched off."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the bar between the wells draws in the text colour, so the join stays visible when custom colours are dropped."
+    }
+  },
+  "motion": {}
+}

@@ -1,0 +1,85 @@
+{
+  "concept": "VirtualList holds a very long run of rows, such as every device in a building or every track in a library, in one short plastic body. It prints only the rows in view, like a window on a long paper roll, and the rows look and read exactly like List rows.",
+  "kind": ["virtual list", "windowed list", "long list", "listbox", "track list", "device list"],
+  "default_to_avoid": [
+    {
+      "pattern": "infinite scroll feed that loads more cards and keeps growing the page",
+      "why_not": "A feed grows without end and moves what is under the finger, while a VirtualList keeps a fixed body and a fixed row height so nothing reflows (P6)."
+    },
+    {
+      "pattern": "virtual list with a custom drawn scrollbar thumb as the only way to move",
+      "why_not": "A drag-only thumb is a knob without keys, value and label, which FORM forbids for a control; the native scroll and the arrow keys stay the ways to move."
+    }
+  ],
+  "references": [
+    { "source": "Braun TG 60 tape recorder (Dieter Rams, 1965): a counter and functions printed in one column on the case, set apart by space, not rules" },
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a long printed scale seen through one small window" },
+    { "source": "WAI-ARIA Authoring Practices: listbox pattern and aria-setsize / aria-posinset for lists that are only partly in the DOM (https://www.w3.org/WAI/ARIA/apg/patterns/listbox/)" },
+    { "source": "system/FORM.md surface class: rounded body at elevation.unit, rows nested by inner = outer - inset" }
+  ],
+  "derivation": [
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "Rows start their index, name and end part on the same inset line as List, and an even gap sets one row from the next, so the printed column stays straight while it scrolls."
+    },
+    {
+      "p": "P6",
+      "axis": "shape",
+      "consequence": "capped so large panels do not swell into pillows",
+      "form": "The body takes corner.panel and the scroller and each row take corner.inner, so the window nests in the body with inner equal to outer minus the inset."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "Every row has one fixed height and the sizer is count times that height, so a row stays where it is whether or not it is in the DOM and the scroll length never jumps."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "A row is control.lg tall, so the whole row is a target of at least 44px in a body that holds thousands of them."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "The chosen row is told by an ink index mark and medium weight, and the row the keys point to by the dark ring, so no row is ever orange or tinted."
+    },
+    {
+      "p": "P3",
+      "axis": "depth",
+      "consequence": "press drops height to 0",
+      "form": "A pressed row sinks into a small recess with the inverse light, the same as a List row, and it never rises on hover."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/virtual-list/index.html",
+    "options": [
+      { "id": "A", "name": "plastic body with a scroller inside, rows apart by a gap, ink mark on the chosen row" },
+      { "id": "B", "name": "recessed window with seamless rows and a printed reading under it" },
+      { "id": "C", "name": "rows on the body with the scrollbar hidden and a fader groove for position" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A is the List look unchanged, one body with gaps between rows, so a long list and a short one read as the same part; B prints a reading that repeats what the scroll already shows, against P2 where nothing else repeats the state, and C makes a drag cap the way to move, which FORM forbids as a knob without keys, value and label."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "depth", "why": "The body is one piece of matte plastic with the unit shadow, the same as List, so it paints its own surface wherever it is dropped." },
+    "scroller": { "p": "P3", "axis": "interaction", "why": "The window the rows scroll in is the one tab stop of the list, a listbox that the arrow, page, Home and End keys move through." },
+    "sizer": { "p": "P6", "axis": "space", "why": "An empty column as tall as every row together, so the scroll length is true while only the rows in view exist." },
+    "probe": { "p": "P3", "axis": "space", "why": "A hidden zero-width span as tall as one row step, read to learn the real row height from the tokens, so the windowing follows the theme and the text size." },
+    "row": { "p": "P5", "axis": "space", "why": "Each row sits at its place in the column by its index times the row step, so it keeps its place when the rows around it come and go." }
+  },
+  "states": {
+    "active": { "p": "P3", "axis": "depth", "why": "A pressed row sinks into a small recess with the inverse light at once, the way a part drops when it is pressed." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "A focused list shows the same dark ring as every part in dial around the window, so the person can see where the keys will act." },
+    "aria-selected=true": { "p": "P1", "axis": "colour", "why": "The chosen row is medium weight with its ink index mark lit, so the choice is told by shape and weight, not by hue." },
+    "data-active=true": { "p": "P3", "axis": "interaction", "why": "The row the keys point to carries the ring while the list has focus, so the keyboard position is visible even among thousands of rows." },
+    "aria-disabled=true": { "p": "P6", "axis": "depth", "why": "A disabled row fades to half and the keys step over it and the pointer cannot choose it." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the body keeps a real border, and the ring and the index mark use the system highlight colour." }
+  },
+  "motion": {}
+}

@@ -1,0 +1,89 @@
+/* FAB — the unit's one orange key, sunk in an opaque seat cut into the body (system/FORM.md control class
+   inside an input-class well, D-003). One light, top-left. The seat is the pane: text under it is hidden. */
+.root {
+  --fab-edge: var(--ds-gap-lg);
+  position: absolute;
+  inset-block-end: max(var(--fab-edge), env(safe-area-inset-bottom, 0));
+  inset-inline-end: max(var(--fab-edge), env(safe-area-inset-right, 0));
+  z-index: var(--ds-layer-sticky);
+  box-sizing: border-box;
+  display: inline-flex;
+  padding: var(--ds-gap-md);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.root:dir(rtl) { inset-inline-end: max(var(--fab-edge), env(safe-area-inset-left, 0)); }
+.viewport { position: fixed; }
+
+.key {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-gap-md);
+  min-inline-size: var(--ds-control-lg);
+  min-block-size: var(--ds-control-lg);
+  padding: var(--ds-gap-none);
+  border: var(--ds-width-hairline) solid var(--ds-action-accent-rim);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-action-accent);
+  color: var(--ds-text-on-accent);
+  font-family: var(--ds-type-family);
+  cursor: pointer;
+  box-shadow: var(--ds-elevation-part);
+  /* the orange key's glyph and word are light printed on the colour: no warm-paper lip under them (D-010) */
+  --ds-print-seat: none;
+  text-shadow: none;
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing),
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    opacity var(--ds-motion-release) var(--ds-motion-easing);
+}
+.extended .key { padding-inline: var(--ds-gap-xl) var(--ds-gap-2xl); }
+.icon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  inline-size: var(--ds-control-icon-md);
+  block-size: var(--ds-control-icon-md);
+  pointer-events: none;
+}
+.icon > svg { inline-size: 100%; block-size: 100%; }
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+}
+
+.key:hover { background: var(--ds-action-accent-hover); transition-duration: var(--ds-motion-hover); }
+.key:active {
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+  box-shadow: none;
+  transition-duration: var(--ds-motion-press);
+}
+.key:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.key:disabled {
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key {
+    transition:
+      background-color var(--ds-motion-hover) var(--ds-motion-easing),
+      opacity var(--ds-motion-hover) var(--ds-motion-easing);
+  }
+  .key:active { transform: none; }
+}
+@media (forced-colors: active) {
+  .root { border-color: CanvasText; }
+  .key { border-color: ButtonText; }
+}

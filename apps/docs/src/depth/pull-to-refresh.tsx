@@ -4,7 +4,7 @@ import type { Depth } from './types';
 
 const ask = () => new Promise((done) => setTimeout(done, 1200));
 const at = (h: number, m: number) => new Date(2026, 10, 2, h, m);
-const Box = ({ children }: { children: React.ReactNode }) => <div style={{ inlineSize: 340, maxInlineSize: '100%' }}>{children}</div>;
+const Box = ({ children }: { children: React.ReactNode }) => <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))', maxInlineSize: '100%' }}>{children}</div>;
 const rows = (
   <List label="Readings">
     <List.Item label="Kitchen" description="21.5 °C · 44 %" />
@@ -53,7 +53,7 @@ export const PULL_TO_REFRESH: Depth = {
   },
   placement: {
     rows: [['At the top of a phone screen', 'The list of devices or readings that fills the screen.'], ['Inside a unit', 'A list printed on one plastic body, with the bar on the inset line.']],
-    examples: [{ title: 'Inside a unit', render: <Card style={{ inlineSize: 340, maxInlineSize: '100%' }}><PullToRefresh label="Living room" onRefresh={ask} updated={at(10, 38)}><List label="Living room"><List.Item label="Floor lamp" description="On · 60%" /><List.Item label="Speaker" description="Paused" /></List></PullToRefresh></Card> }],
+    examples: [{ title: 'Inside a unit', render: <Card style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))', maxInlineSize: '100%' }}><PullToRefresh label="Living room" onRefresh={ask} updated={at(10, 38)}><List label="Living room"><List.Item label="Floor lamp" description="On · 60%" /><List.Item label="Speaker" description="Paused" /></List></PullToRefresh></Card> }],
   },
   combinations: {
     good: [['PullToRefresh + List', 'The rows are a List; the pull and the key ask for new rows.'], ['PullToRefresh + Banner', 'A Banner above the list says the hub is offline for longer than one try.']],
@@ -68,7 +68,7 @@ export const PULL_TO_REFRESH: Depth = {
       do: <Box><PullToRefresh label="Readings" onRefresh={ask} updated={at(10, 41)}>{rows}</PullToRefresh></Box>, doNote: 'A short name and the time of the readings.',
       dont: <Box><PullToRefresh label="All of the latest readings from your sensors" onRefresh={ask}>{rows}</PullToRefresh></Box>, dontNote: 'A sentence for a name, and no time, so nobody knows how old the rows are.',
     },
-    overflow: { text: 'A long name wraps in the bar, and the time and the key stay at the end of the line.', render: <div data-overflow-demo="" style={{ inlineSize: 260 }}><PullToRefresh label="Sensors in the garden shed" onRefresh={ask} updated={at(10, 41)}>{rows}</PullToRefresh></div> },
+    overflow: { text: 'A long name wraps in the bar, and the time and the key stay at the end of the line.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><PullToRefresh label="Sensors in the garden shed" onRefresh={ask} updated={at(10, 41)}>{rows}</PullToRefresh></div> },
     rtl: { text: 'In right to left languages the bar mirrors. The name starts on the right and the ruler sits at the right edge of the band.', render: <Box><div dir="rtl"><PullToRefresh label="القراءات" onRefresh={ask} updated={at(10, 41)} messages={{ pull: 'اسحب للتحديث', release: 'اترك للتحديث', updated: 'حُدّث', refresh: 'تحديث' }}>{rows}</PullToRefresh></div></Box> },
     expansion: { text: 'German words run about 30% longer. The ruler word stays on one line in the band and the bar wraps the name.', render: <Box><PullToRefresh label="Messwerte" onRefresh={ask} updated={at(10, 41)} messages={{ pull: 'Zum Aktualisieren ziehen', release: 'Loslassen zum Aktualisieren', updated: 'Aktualisiert', refresh: 'Aktualisieren' }}>{rows}</PullToRefresh></Box> },
   },
@@ -89,7 +89,7 @@ export const PULL_TO_REFRESH: Depth = {
       ['Screen reader', 'Read', 'Hears Asking the hub, then Updated with the time, from a polite status line.', 'role status, aria-busy'],
     ],
     loading: <p>Working is the loading state. It is the still row of ticks from Progress, named by the list and reading Working, held in the band while the rows stay readable under it. With reduce motion the band opens and closes at once, with no throw and no settle.</p>,
-    focus: <p>Focus stays where it is during a refresh. The refresh key keeps focus while it works and only ignores presses, so keyboard users never lose their place.</p>,
+    focus: <p>Focus stays where it is during a refresh. The refresh key keeps focus while it works and only ignores presses, so keyboard users never lose their place. A frame of a set height, or one whose list runs past it, is a Tab stop of its own, so the arrow and Page keys scroll it; it shows the focus ring inside its edge.</p>,
   },
   deepDive: { na: 'PullToRefresh has a single variant, so there is no section per variant.' },
   modifiers: [

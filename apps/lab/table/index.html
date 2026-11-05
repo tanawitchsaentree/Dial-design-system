@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Table · three ways to print rows and columns</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:420px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ table{inline-size:100%;border-collapse:separate;border-spacing:0;font-size:14px;line-height:1.45}
+ caption{caption-side:top;text-align:start;font-size:12px;color:var(--ds-text-secondary);padding-block-end:10px}
+ th{font-weight:500;text-align:start;color:var(--ds-text-secondary);padding:10px 12px}
+ td{padding:10px 12px}
+ .num{text-align:end;font-variant-numeric:tabular-nums}
+ .ar{font-size:11px;margin-inline-start:4px}
+ /* A: flat printing, seams between rows (divider over lit edge), no fill */
+ .A th{border-block-end:1px solid var(--ds-line-divider);padding-inline:0 12px}
+ .A td{border-block-start:1px solid var(--ds-material-lit);border-block-end:1px solid var(--ds-line-divider);padding-inline:0 12px}
+ .A tbody tr:last-child td{border-block-end:0}
+ /* B: header sits in a recessed strip, rows plain */
+ .B thead th{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border-block:1px solid var(--ds-line-ring)}
+ .B thead th:first-child{border-start-start-radius:var(--ds-corner-media);border-end-start-radius:var(--ds-corner-media);border-inline-start:1px solid var(--ds-line-ring)}
+ .B thead th:last-child{border-start-end-radius:var(--ds-corner-media);border-end-end-radius:var(--ds-corner-media);border-inline-end:1px solid var(--ds-line-ring)}
+ .B td{border-block-end:1px solid var(--ds-line-divider)}
+ /* C: timetable grid, every cell ruled */
+ .C table{border:1px solid var(--ds-line-ring)}
+ .C th,.C td{border-inline-end:1px solid var(--ds-line-divider);border-block-end:1px solid var(--ds-line-divider)}
+ .C th:last-child,.C td:last-child{border-inline-end:0}
+ .C tbody tr:last-child td{border-block-end:0}
+ .C th{color:var(--ds-text-primary)}
+</style></head><body>
+<h1>Table · rows and columns of readings</h1>
+<div class="row">
+<script>
+ const mk = (c, t) => `<div class="unit ${c}"><h2>${t}</h2><table><caption>Rooms, this week</caption><thead><tr><th scope="col">Room</th><th scope="col">Device</th><th scope="col" class="num">kWh <span class="ar">▲</span></th></tr></thead><tbody><tr><td>Kitchen</td><td>Oven</td><td class="num">12.4</td></tr><tr><td>Living room</td><td>Heater</td><td class="num">8.05</td></tr><tr><td>Laundry</td><td>Washer</td><td class="num">103.2</td></tr></tbody></table></div>`;
+ document.write(mk('A','A · flat printing, row seams') + mk('B','B · header in a recessed strip') + mk('C','C · ruled timetable grid'));
+</script>
+</div></body></html>

@@ -94,7 +94,7 @@ export const BUTTON: Depth = {
       do: <Button kind="primary">Start wash</Button>, doNote: 'A verb that says what happens.',
       dont: <Button kind="primary">OK</Button>, dontNote: 'OK says nothing about what will happen.',
     },
-    overflow: { text: 'A long label wraps onto a second line and the key grows taller, so the whole word stays on the key.', render: <div data-overflow-demo="" style={{ inlineSize: 180 }}><Button full>Turn off every lamp in the living room</Button></div> },
+    overflow: { text: 'A long label wraps onto a second line and the key grows taller, so the whole word stays on the key.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-narrow))' }}><Button full>Turn off every lamp in the living room</Button></div> },
     rtl: { text: 'In right-to-left languages the order of keys mirrors and the word stays centred.', render: <div dir="rtl"><Stack direction="row" gap="sm"><Button kind="primary">ابدأ</Button><Button>إلغاء</Button></Stack></div> },
     expansion: { text: 'German and Finnish labels can run 30% longer. The key widens with the word.', render: <Stack direction="row" gap="sm"><Button kind="primary">Waschgang starten</Button><Button>Abbrechen</Button></Stack> },
   },
@@ -170,7 +170,7 @@ export const BUTTON: Depth = {
     {
       name: 'full',
       rules: <p>Stretches the key to the inner width of its unit. Use it for the single main action at the bottom of a sheet on a phone. A full key keeps its height, and a long word wraps inside it.</p>,
-      pair: { do: <div style={{ inlineSize: 260 }}><Button kind="primary" full>Start wash</Button></div>, doNote: 'One full-width main action.', dont: <div style={{ inlineSize: 260 }}><Stack gap="sm"><Button full>Schedule</Button><Button full>History</Button><Button full>Settings</Button></Stack></div>, dontNote: 'A stack of full-width plastic keys reads like a menu. Use a list.' },
+      pair: { do: <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Button kind="primary" full>Start wash</Button></div>, doNote: 'One full-width main action.', dont: <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Stack gap="sm"><Button full>Schedule</Button><Button full>History</Button><Button full>Settings</Button></Stack></div>, dontNote: 'A stack of full-width plastic keys reads like a menu. Use a list.' },
     },
     {
       name: 'disabled',

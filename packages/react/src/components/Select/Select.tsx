@@ -11,6 +11,8 @@ import {
   type ReactNode,
 } from 'react';
 import { cx } from '../../cx';
+import { usePresence } from '../../presence';
+import { Icon } from '../Icon';
 import styles from './Select.module.css';
 
 export type SelectSize = 'md' | 'lg';
@@ -66,7 +68,8 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(function Select
   const [active, setActive] = useState(-1);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
-  const listRef = useRef<HTMLDivElement>(null);
+  // the panel stays mounted while it leaves, so closing moves out instead of vanishing (D-008)
+  const presence = usePresence<HTMLDivElement>(open);
   const typed = useRef('');
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -181,17 +184,20 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(function Select
         onBlur={(e) => { if (open && !rootRef.current?.contains(e.relatedTarget as Node)) close(); }}
       >
         <span className={cx(styles.value, chosen == null && styles.placeholder)}>{chosen ?? placeholder ?? ' '}</span>
-        <svg className={styles.chevron} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-          <path d="M4 6l4 4 4-4" />
-        </svg>
+        {/* dial's one icon language, the dot matrix (R-005) */}
+        <Icon name="chevron-down" size="sm" className={styles.chevron} />
       </button>
       <div
-        ref={listRef}
+        ref={presence.ref}
         id={listId}
         role="listbox"
         aria-labelledby={labelId}
         tabIndex={-1}
-        hidden={!open}
+        hidden={!presence.mounted}
+        data-state={presence.state}
+        // a leaving panel is only a picture of the list: no key reaches it and assistive tech no longer lists it
+        inert={presence.state === 'closing' || undefined}
+        aria-hidden={presence.state === 'closing' || undefined}
         className={styles.panel}
         onMouseDown={(e) => e.preventDefault()}
       >
@@ -201,14 +207,13 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(function Select
             id={optId(i)}
             role="option"
             aria-selected={i === selected}
-            data-active={open && i === active ? 'true' : undefined}
+            // the reached row keeps its well while the panel leaves, so the panel goes as one piece (D-008)
+            data-active={presence.mounted && i === active ? 'true' : undefined}
             className={styles.option}
             onPointerMove={() => { if (i !== active) setActive(i); }}
             onClick={() => choose(i)}
           >
-            <svg className={styles.tick} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-              {i === selected && <path d="M3 8.5l3.2 3L13 4.5" />}
-            </svg>
+            <Icon name="check" size="sm" className={styles.tick} data-on={i === selected ? 'true' : undefined} />
             <span className={styles.text}>{o.label}</span>
           </div>
         ))}

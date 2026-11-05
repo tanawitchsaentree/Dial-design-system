@@ -30,10 +30,13 @@ export default async function checkbox({ check, expect, page, go, main, tokens }
     await go('/components/checkbox/code');
     const row = main().locator(ROW).first();
     const input = row.locator('input[type="checkbox"]');
-    const vis = () => row.evaluate((el) => [...el.querySelectorAll('svg path')].map((p) => getComputedStyle(p).display !== 'none'));
+    // the tick and dash are dot-matrix Icons that fade (R-005, D-008): a mark shows when it is drawn and opaque,
+    // read once its fade has settled
+    const vis = () => row.evaluate((el) => [...el.querySelectorAll('[data-component="Icon"]')].map((p) => getComputedStyle(p).display !== 'none' && Number(getComputedStyle(p).opacity) > 0.5));
     const was = await input.evaluate((el) => el.checked);
     const before = await vis();
     await row.click();
+    await page.waitForTimeout(400);
     const after = await vis();
     if ((await input.evaluate((el) => el.checked)) !== was) await row.click();
     expect(JSON.stringify(before) !== JSON.stringify(after), `marks ${JSON.stringify(before)} → ${JSON.stringify(after)}`);

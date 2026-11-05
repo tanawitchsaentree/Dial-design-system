@@ -4,13 +4,16 @@
 > **Anchor lab:** http://localhost:4173/lab/anchor/index.html หรือ `open apps/lab/anchor/index.html`
 > ตรวจ contrast lab: `node tooling/kiln/anchor-contrast.mjs`
 
-- **System:** dial (dial-tokens, dial-react) · kiln 2.5.1
-- **Phase ปัจจุบัน:** waves 2–3 built · **wave 4 concept depth (D-006: P7 legend, P8 relations, P9 glass)** กำลังทำ · full verify ครั้งเดียวท้าย wave 4 → milestone M2, M3
-- **งานล่าสุดที่เสร็จ:** full verify 20/20 (recorded), milestone M1 44/44; book shell A (R-001), 24 components
-- **งานถัดไป:** user review ของ system/REVIEW.md + book → RETRO สำหรับสิ่งที่ส่งกลับ → wave 2 (home-iot: RangeSlider, Meter, List, Sheet, Banner, EmptyState, Skeleton, TimePicker + media: player, progress, list)
-- **Wave ปัจจุบัน:** 4 built (48 components) + home scene "Living room, 22:40" · full verify for M2/M3 running
+- **System:** dial (dial-tokens, dial-react) · kiln 2.7.2
+- **Phase ปัจจุบัน:** waves 1–4 built (48 components) · แก้ผล full verify ครั้งแรกของ wave 4 (i18n, evidence, gates 62/75) → full verify ใหม่ → milestone M2, M3
+- **งานล่าสุดที่เสร็จ:** 2026-11-02 แก้ทุกข้อที่ full verify รอบ wave 4 เจอ (ดู log); targeted gates 13/13 บน route ที่แก้
+- **งานถัดไป:** verify:changed → full verify (บันทึก) → `pnpm run milestone` M2 → ตั้ง M3 → milestone M3 → user review REVIEW.md + book
+- **Wave ปัจจุบัน:** 4 built · ทุก wave ของ home-iot (1–3) + wave 4 concept depth เสร็จ
+- **Wave 5 (2026-11-04):** ครบทุก wave ของ docs/CATALOG.md · 123 components (+75 ตัวในวันนี้) · verify:quick 14/14 ยกเว้นรอบสุดท้ายแก้ Onboarding exit แล้วรัน conformance 890/890 · ต่อไป: full verify + milestone
 - **ค้าง/blocked:** ค่าสีและสัดส่วนยังเป็นค่าประมาณ (ref-01.png ไม่มี); ไม่ publish (Phase 8 เป็นของ user)
 ## Log ย่อ (ใหม่สุดบน ≤15 บรรทัด)
+- 2026-11-04 R-005..R-008 + hardcoded audit (R-007) fixed; full verify 2026-11-03 recorded 18/21 (reds since fixed, timeouts from Spotlight load); targeted: conformance 385/385 by parts, tone 229/229, gates rerun green (CL1 IC1 IC2 SP2 BR1 MS1 AN1 OV1 LK1 CH1 MO5 NT2 axe×2); kiln 2.9.3
+- 2026-11-02 full verify wave 4 แดง 3 ขั้น → แก้: i18n 31 คำเข้า messages.ts; Environment style crash (why.json ไม่มี motion); ExplainMode render loop 60fps (โน้ตสลับ key/วางข้าง ทุกเฟรม) → damping; Wiring จุดปลายสายทับคำ; glass matte ไม่มี glow/halo (RT 4.2→ผ่าน); Tabs mark fade (G-MO3); Skeleton/Slot/PTR/Legend axe; kiln 2.7.2 (K-16 G-S3 clip, K-17 G-NT2 printed radio, K-18 spec-capture size)
 - 2026-11-02 wave 4 done: D-007 glass, Legend, Wiring, ExplainMode, SceneCard, Slot, Tray, Icon; home concept scene
 - 2026-11-02 D-007 glass accent material (recipe A frosted tinted resin, lab apps/lab/glass): tokens color.glass/frost/glass.*, 9 components (Slider/RangeSlider/Scrubber tint prop, Chip, SegmentedControl, Switch, Badge, Button/IconButton aria-pressed); gates 7/7, conformance 386/386, tone 229/229
 - 2026-11-02 Icon (wave 4): ชุด dot 7×7 46 glyph, lab D (วัดที่ 16px 1x: ทุกจุด ≥3:1), /foundations/icons ใช้ชุดใหม่
@@ -24,8 +27,5 @@
 - 2026-11-01 full verify 16/20 → triage; K-11 smoke-import แก้ในเครื่อง (27/27); แจ้ง kiln session เรื่อง K-8..K-11
 - 2026-11-01 batch 1 (9 components) verify:quick 14/14, commit c065409; K-9 docs.css lede p, K-10 G-SL1 vs Rotary
 - 2026-11-01 user: "ตัดสินใจเองแล้วไปต่อเลยไม่ต้องถาม" → ทำ wave 1 ต่อใน session เดิม; Button เสร็จ (template), D-003 FORM.md, PLAYBOOK.md
-- 2026-11-01 Phase 2: D-002 tokens (ค่าประมาณตามที่ user สั่ง), Container/Grid/Stack why.json ใหม่, K-8 ลง BACKLOG
-- 2026-11-01 user เลือก anchor A → D-001; anchor-likeness recorded (L 0.9251 C 0.0071 rim 1.056:1, estimated)
-- 2026-11-01 anchor lab A–D + check.mjs; book: overview/foundation ledes, /direction; BACKLOG K-1..K-7
-- 2026-11-01 Phase 0–4 เสร็จ ค่าจาก reference ทั้งหมดเป็น "(estimated from chat, re-measure from ref-01.png)"
-- 2026-11-01 repo สร้างจาก kiln 2.5.1 starter, commit 84e457b; pnpm เปิดผ่าน corepack
+
+- 2026-11-04: R-009 book reading column (one size 16px, one left edge, 68ch; section labels stacked). Shell gates green on /principles, /components/button. Full verify still owed for M2/M3.

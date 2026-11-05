@@ -3,7 +3,7 @@ import { Card, Heading, Text } from 'dial-react';
 
 export default function CardPrinted() {
   return (
-    <div style={{ inlineSize: 300 }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }}>
       <Card as="section" aria-labelledby="card-printed-title" wordmark="dial" model="Clock 2">
         <Heading level={3} id="card-printed-title">Bedroom clock</Heading>
         <Text tone="secondary">Alarm at 06:45, weekdays.</Text>

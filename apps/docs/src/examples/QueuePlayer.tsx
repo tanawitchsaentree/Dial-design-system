@@ -13,7 +13,7 @@ export default function QueuePlayer() {
   return (
     <Stack direction="row" gap="lg" align="start">
       <MediaPlayer tracks={tracks} loading={!made} current={current} onCurrentChange={setCurrent} meter={false} model="mp 3" />
-      <div style={{ inlineSize: 352, maxInlineSize: '100%' }}>
+      <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))', maxInlineSize: '100%' }}>
         <Queue tracks={tracks} onTracksChange={setTracks} playing={current} onPlay={setCurrent} />
       </div>
     </Stack>

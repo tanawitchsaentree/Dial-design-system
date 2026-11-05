@@ -6,7 +6,7 @@ const twelve = (d: Date) => d.toLocaleTimeString('en-US', { hour: 'numeric', min
 
 export default function PullToRefreshMessages() {
   return (
-    <div style={{ display: 'grid', gap: 32, inlineSize: 360, maxInlineSize: '100%' }}>
+    <div style={{ display: 'grid', gap: 'var(--ds-gap-section)', inlineSize: 'min(100%, var(--ds-layout-frame-phone))', maxInlineSize: '100%' }}>
       <PullToRefresh
         label="Messwerte"
         onRefresh={ask}

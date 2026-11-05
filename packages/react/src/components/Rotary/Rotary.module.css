@@ -8,6 +8,8 @@
   gap: var(--ds-gap-xs);
   font-family: var(--ds-type-family);
   color: var(--ds-text-primary);
+  /* the scale and its words are pad ink pressed into the body, on the lit lip of the recess (D-010) */
+  text-shadow: var(--ds-print-seat);
 }
 .dial {
   position: relative;
@@ -24,6 +26,7 @@
   inline-size: 0;
   margin-inline-start: calc(var(--ds-width-ring) / -2);
   border-inline-start: var(--ds-width-ring) solid var(--ds-text-primary);
+  box-shadow: var(--ds-print-seat);
   transform-origin: 50% 0;
   transform: rotate(calc(var(--a) * 1deg)) translateY(calc((var(--d) / 2 + var(--ds-gap-xs) + var(--ds-control-tick)) * -1));
 }

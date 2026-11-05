@@ -1,0 +1,110 @@
+/* InputGroup — Input with a fixed word or key at either end, ruled off inside the one recessed well (system/FORM.md input class, D-003).
+   One light, top-left: the well takes the inverse light. One ring around the whole well. No orange except an IconButton the caller marks primary. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.well {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: var(--ds-control-md);
+  padding-inline: var(--ds-gap-none);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  cursor: text;
+}
+.field {
+  flex: 1 1 auto;
+  align-self: stretch;
+  min-inline-size: 0;
+  inline-size: 100%;
+  /* the field runs over the well's hairline, so the whole well is its press area */
+  margin-block: calc(var(--ds-width-hairline) * -1);
+  margin-inline: 0;
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-xl);
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  outline: none;
+}
+.field::placeholder { color: var(--ds-text-secondary); opacity: 1; }
+.addon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  align-self: stretch;
+  /* the rule runs the full height of the well, over its hairline */
+  margin-block: calc(var(--ds-width-hairline) * -1);
+  padding-inline: var(--ds-gap-xl);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  white-space: nowrap;
+  cursor: default;
+}
+/* a key keeps its own 44px disc and a small inset from the rule */
+.addon:has(> button) { padding-inline: var(--ds-gap-sm); }
+.addon:first-child { border-inline-end: var(--ds-width-hairline) solid var(--ds-line-ring); }
+.field ~ .addon { border-inline-start: var(--ds-width-hairline) solid var(--ds-line-ring); }
+.hint {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-sm);
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-status-critical-mark);
+}
+.glyph {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-block-start: var(--ds-space-0-5);
+}
+.md .well { min-block-size: var(--ds-control-md); }
+.lg .well { min-block-size: var(--ds-control-lg); }
+.lg .field { font-size: var(--ds-type-emphasis); padding-inline: var(--ds-gap-2xl); }
+.lg .addon { font-size: var(--ds-type-body); padding-inline: var(--ds-gap-2xl); }
+.lg .addon:has(> button) { padding-inline: var(--ds-gap-sm); }
+
+.well:focus-within {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.root[data-invalid='true'] .well { border-color: var(--ds-status-critical-mark); }
+.root[data-disabled='true'] .well { box-shadow: none; cursor: not-allowed; }
+.root[data-disabled='true'] .field,
+.root[data-disabled='true'] .addon { opacity: var(--ds-opacity-disabled); cursor: not-allowed; }
+
+@media (forced-colors: active) {
+  .well { border-color: CanvasText; }
+  .addon:first-child { border-inline-end-color: CanvasText; }
+  .field ~ .addon { border-inline-start-color: CanvasText; }
+  .root[data-invalid='true'] .well { border-color: Mark; }
+  .well:focus-within { outline-color: Highlight; }
+}

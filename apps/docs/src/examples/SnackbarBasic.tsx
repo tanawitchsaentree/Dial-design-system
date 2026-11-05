@@ -3,7 +3,7 @@ import { Snackbar } from 'dial-react';
 
 export default function SnackbarBasic() {
   return (
-    <div style={{ inlineSize: 'min(100%, 375px)' }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))' }}>
       <Snackbar action={{ label: 'Undo', onAction: () => {} }}>Lamp removed</Snackbar>
     </div>
   );

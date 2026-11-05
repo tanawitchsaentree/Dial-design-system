@@ -1,0 +1,173 @@
+{
+  "concept": "Table prints rows of readings the way a service label is printed on the case of an appliance: flat ink on the plastic, one seam cut between rows, figures lined up on their right edge so a column reads as one number. It holds readings and never acts like a control.",
+  "kind": [
+    "table",
+    "data table",
+    "rows and columns",
+    "grid of readings"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "zebra-striped data table with a tinted header band, a hover highlight on every row and a full box border",
+      "why_not": "Stripes and hover fills add tints the plastic never had, make rows look pressable when they are not, and the box frame competes with the unit's own edge."
+    },
+    {
+      "pattern": "table scrolled sideways inside a div that keyboard users cannot reach",
+      "why_not": "A scroll box with no focus stop hides its overflowing columns from anyone who does not use a pointer."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): station names and bands printed in ruled rows on the case, no fills"
+    },
+    {
+      "source": "system/FORM.md divider class: a seam cut in the plastic, divider tone over the lit edge"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: sortable table, aria-sort on the column header"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P5",
+      "axis": "depth",
+      "consequence": "printing is flat on the material, with no shadow and no emboss",
+      "form": "Cells carry no fill, no shadow and no raised edge, and the rows are told apart only by a seam between them."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "tabular figures everywhere a number changes",
+      "form": "A numeric column prints in tabular figures and aligns to the end edge, so digits of one place stand in one vertical line."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The first column starts on the unit's inset line with no cell padding, and the caption is printed above it on the same line."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "A sortable header is one key with a visible label, Enter and Space press it, and a scroll region that overflows takes a Tab stop so its columns can be reached."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Header, seams, sort marks and focus ring are ink, so a Table never spends the unit's one orange."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/table/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "flat printing with row seams"
+      },
+      {
+        "id": "B",
+        "name": "header in a recessed strip"
+      },
+      {
+        "id": "C",
+        "name": "ruled timetable grid"
+      }
+    ],
+    "reason": "A is flat printing under P5 and reuses the Divider seam, so rows read as printed lines; B's recessed strip looks like an Input or Display window and invites a press, and C boxes every cell like a spreadsheet and adds more lines than the readings need."
+  },
+  "parts": {
+    "scroll": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A region that scrolls sideways when the columns are wider than the unit, so no column is cut off and none is squeezed below its words."
+    },
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The table fills the width of its column and keeps one grid, so columns line up from the header down to the last row."
+    },
+    "caption": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The caption names the table in small secondary ink above the header, on the inset line like a label printed on the case."
+    },
+    "head": {
+      "p": "P5",
+      "axis": "depth",
+      "why": "The header row is printed in the same flat ink as the body and set apart only by a seam below it."
+    },
+    "body": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The body rows stand in a fixed column grid, so a sort changes the order of the rows and nothing reflows."
+    },
+    "row": {
+      "p": "P5",
+      "axis": "depth",
+      "why": "A row is a line of printing and takes no fill or hover, because nothing in it can be pressed."
+    },
+    "cell": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A cell keeps even padding and breaks long words, so Thai and long names wrap inside the column and are never clipped."
+    },
+    "headCell": {
+      "p": "P5",
+      "axis": "type",
+      "why": "A column header is printed in medium weight and secondary ink so it reads as a label, one step quieter than the readings."
+    },
+    "sortKey": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A sortable header holds one key that fills the cell, at least 44px tall, so a finger can press it and Enter or Space does the same."
+    },
+    "sortMark": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A chevron shows the sort direction by its shape, and its place is held when the column is not sorted so the header does not shift."
+    }
+  },
+  "states": {
+    "data-numeric": {
+      "p": "P5",
+      "axis": "type",
+      "why": "A numeric cell or header aligns to the end edge in tabular figures so the digits of one place line up down the column."
+    },
+    "aria-sort=ascending": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The sorted column's label goes to primary ink and shows an up chevron, so direction is a shape and not a colour."
+    },
+    "aria-sort=descending": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The sorted column's label goes to primary ink and shows a down chevron, so direction is a shape and not a colour."
+    },
+    "hover": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Over a sort key the label goes from secondary to primary ink, the same cue Accordion gives its trigger, with no fill."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The sort key and a scroll region that has taken a Tab stop show the same ink ring with an offset, so keyboard position is always visible."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the seams draw as a single system-colour line and the sort key keeps a visible focus outline."
+    }
+  },
+  "motion": {
+    "color": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Only the label ink of a sort key changes, over the hover duration, and under Reduce motion it changes at once."
+    }
+  }
+}

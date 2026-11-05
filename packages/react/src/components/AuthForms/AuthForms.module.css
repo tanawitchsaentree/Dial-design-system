@@ -1,0 +1,78 @@
+/* AuthForms — sign in, sign up and reset password as one small appliance panel each (lab apps/lab/auth-forms pick C).
+   Title and fields stand on the inset line; one foot row holds the plain link at the start and the unit's one primary key
+   at the end. Ink only here: the orange belongs to the submit key that Form prints. No motion at all. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-lg);
+  inline-size: 100%;
+  min-inline-size: 0;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.title {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+.description {
+  margin: var(--ds-gap-none);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.root .form {
+  gap: var(--ds-gap-lg);
+}
+.fields {
+  display: grid;
+  gap: var(--ds-gap-lg);
+  min-inline-size: 0;
+}
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-gap-md);
+}
+.foot > :last-child {
+  margin-inline-start: auto;
+}
+.alternate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--ds-gap-md);
+}
+.alternateText {
+  margin: var(--ds-gap-none);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.sent {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-md);
+  margin: var(--ds-gap-none);
+  min-inline-size: 0;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  overflow-wrap: anywhere;
+}
+.sent:focus {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.mark {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-block-start: var(--ds-gap-sm);
+}
+
+@media (forced-colors: active) {
+  .description, .alternateText { color: CanvasText; }
+  .sent { color: CanvasText; }
+  .sent:focus { outline-color: Highlight; }
+  .mark { color: CanvasText; }
+}

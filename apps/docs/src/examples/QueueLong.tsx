@@ -10,7 +10,7 @@ const TRACKS = Array.from({ length: 9 }, (_, i) => ({
 
 export default function QueueLong() {
   return (
-    <div data-overflow-demo="" style={{ inlineSize: 300, maxInlineSize: '100%' }}>
+    <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))', maxInlineSize: '100%' }}>
       <Queue defaultTracks={TRACKS} playing="long-3" />
     </div>
   );

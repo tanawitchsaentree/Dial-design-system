@@ -1,7 +1,7 @@
 // @example Thai words for the legend, the lamp and every announcement
 import { Card, SceneCard, Slot, Stack } from 'dial-react';
 
-const slot = { legend: 'การ์ดฉาก', running: 'กำลังทำงาน', empty: 'ว่าง', name: (l: string, s: string | null) => (s ? `ช่อง${l} มี ${s}` : `ช่อง${l} ว่าง`), inserted: (s: string, l: string) => `ใส่ ${s} ใน${l}แล้ว`, removed: (s: string, l: string) => `เอา ${s} ออกจาก${l}แล้ว`, pickFirst: (l: string) => `หยิบการ์ดฉากก่อน แล้วกดช่อง${l}` };
+const slot = { legend: 'การ์ดฉาก', running: 'กำลังทำงาน', empty: 'ว่าง', name: (l: string, s: string | null, p?: string) => (s ? `ช่อง${l} มี ${s}${p ? ` ${p}` : ""}` : `ช่อง${l} ว่าง${p ? ` ${p}` : ""}`), inserted: (s: string, l: string) => `ใส่ ${s} ใน${l}แล้ว`, removed: (s: string, l: string) => `เอา ${s} ออกจาก${l}แล้ว`, pickFirst: (l: string) => `หยิบการ์ดฉากก่อน แล้วกดช่อง${l}` };
 
 export default function SlotThai() {
   return (

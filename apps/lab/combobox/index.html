@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Combobox · three ways to filter a long list while typing</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+ .unit{inline-size:340px;min-block-size:430px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);position:relative}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .lab{display:block;font-size:14px;font-weight:500;margin-block-end:6px}
+ .well{display:flex;align-items:center;gap:12px;box-sizing:border-box;min-block-size:44px;padding-inline:16px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .well input{flex:1;min-inline-size:0;border:0;background:transparent;font:inherit;font-size:16px;color:var(--ds-text-primary);outline:none;padding-block:10px}
+ .chev{inline-size:8px;block-size:8px;border:solid var(--ds-text-secondary);border-width:0 2px 2px 0;transform:rotate(45deg);margin-block-start:-4px}
+ .av{inline-size:28px;block-size:28px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:500;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);flex:none}
+ .opt{display:flex;align-items:center;gap:12px;min-block-size:44px;box-sizing:border-box;padding-inline:14px;border:1px solid transparent;border-radius:var(--ds-corner-media);font-size:16px;color:var(--ds-text-secondary)}
+ .opt.on{color:var(--ds-text-primary);font-weight:500}
+ .opt b{font-weight:500;color:var(--ds-text-primary)}
+ .tk{inline-size:16px;flex:none;font-size:13px}
+ .rel{position:relative}
+ /* A: Select's float panel under the well */
+ .A .pan{position:absolute;inset-inline:0;inset-block-start:calc(100% + 6px);padding:6px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-float);border-radius:var(--ds-corner-inner);z-index:2}
+ .A .opt.act{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ /* B: the recess grows downward; the well and the list are one window, a seam between */
+ .B .well{border-end-start-radius:0;border-end-end-radius:0}
+ .B .pan{position:absolute;inset-inline:0;inset-block-start:100%;padding:6px;box-sizing:border-box;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);border-block-start:0;border-end-start-radius:var(--ds-corner-media);border-end-end-radius:var(--ds-corner-media)}
+ .B .opt.act{background:var(--ds-surface-solid);border-color:var(--ds-line-ring)}
+ /* C: printed legend under the well, no container, ink index bar at the reached word */
+ .C .pan{padding-block:8px;padding-inline:0}
+ .C .opt{border-radius:0;border-inline-start:2px solid transparent;padding-inline:12px;border-block-end:1px solid var(--ds-line-divider)}
+ .C .opt.act{border-inline-start-color:var(--ds-text-primary);color:var(--ds-text-primary)}
+</style></head><body>
+<h1>Combobox · type to narrow a long list, then pick one</h1>
+<div class="row">
+ <div class="unit A"><h2>A · well, float panel under it</h2><span class="lab">Room</span>
+  <div class="rel"><div class="well"><span class="av">KI</span><input value="ki" aria-label="Room"><i class="chev"></i></div>
+  <div class="pan"><div class="opt act"><span class="tk">✓</span><span class="av">KI</span><span><b>Ki</b>tchen</span></div><div class="opt"><span class="tk"></span><span class="av">KI</span><span><b>Ki</b>ds room</span></div><div class="opt"><span class="tk"></span><span class="av">GU</span><span>Guest <b>ki</b>tchenette</span></div></div></div></div>
+ <div class="unit B"><h2>B · one recess that grows downward</h2><span class="lab">Room</span>
+  <div class="rel"><div class="well"><span class="av">KI</span><input value="ki" aria-label="Room"><i class="chev"></i></div>
+  <div class="pan"><div class="opt act"><span class="tk">✓</span><span class="av">KI</span><span><b>Ki</b>tchen</span></div><div class="opt"><span class="tk"></span><span class="av">KI</span><span><b>Ki</b>ds room</span></div><div class="opt"><span class="tk"></span><span class="av">GU</span><span>Guest <b>ki</b>tchenette</span></div></div></div></div>
+ <div class="unit C"><h2>C · printed legend, no container</h2><span class="lab">Room</span>
+  <div class="well"><span class="av">KI</span><input value="ki" aria-label="Room"><i class="chev"></i></div>
+  <div class="pan"><div class="opt act"><span class="tk">✓</span><span class="av">KI</span><span><b>Ki</b>tchen</span></div><div class="opt"><span class="tk"></span><span class="av">KI</span><span><b>Ki</b>ds room</span></div><div class="opt"><span class="tk"></span><span class="av">GU</span><span>Guest <b>ki</b>tchenette</span></div></div></div>
+</div>
+</body></html>

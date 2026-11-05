@@ -1,0 +1,140 @@
+{
+  "concept": "Image shows a picture the way a device shows a reading: a window cut into the body, held at one proportion, with the picture seen through it. The picture is content, so the window never becomes a key, and a caption is printed on the body below it, never over the photo.",
+  "kind": [
+    "image",
+    "picture",
+    "photo",
+    "figure",
+    "media"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "image tag with a broken-image icon and a grey box while loading, a caption laid over the photo on a dark gradient",
+      "why_not": "The browser icon is a drawn glyph from outside the system, a pulsing grey box is idle animation, and text over a photo has no steady ground to hold 4.5:1."
+    },
+    {
+      "pattern": "photo card with a drop shadow and a rounded corner that floats above the page",
+      "why_not": "A picture stuck on the page reads as raised and loud; a window cut into the body keeps the same material height as everything else."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a station scale read through a window cut into the case, its name printed on the case beside it"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the display is a recess in the body and the printing stays outside it"
+    },
+    {
+      "source": "system/FORM.md display class: window recessed into the body, nesting in the body's corner"
+    }
+  ],
+  "family": "Avatar",
+  "family_difference": "Image holds any proportion from AspectRatio, requires alt text, may crop or contain the picture, carries a printed caption on the body below, and shows one dash while loading and two when it fails.",
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The window takes surface.sunken and elevation.well, laid over the picture too, so a photo reads as seen through a hole and not stuck on."
+    },
+    {
+      "p": "P2",
+      "axis": "shape",
+      "consequence": "the window is a rounded rectangle whose radius nests in the body",
+      "form": "The window is a rounded rectangle on corner.media, and the picture is clipped inside its ring so the picture corner is the window radius minus the ring."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The caption is printed on the body under the window, on the same inset line, and never over the picture, so no live text sits on a photo."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The window takes its proportion from AspectRatio, so its height is held before the picture arrives and nothing below it moves on load or failure."
+    },
+    {
+      "p": "P5",
+      "axis": "interaction",
+      "consequence": "the model name is never the only identifier",
+      "form": "A picture is never the only carrier of what it shows: alt is required, and an empty alt is the one explicit way to say the picture is decoration."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/image/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "flat print, hairline only"
+      },
+      {
+        "id": "B",
+        "name": "recessed window, picture to the ring"
+      },
+      {
+        "id": "C",
+        "name": "slide mount, sunken mat"
+      }
+    ],
+    "reason": "B is the recessed window of Avatar, Input and Display, so a picture reads as a reading and the empty window is clearly a hole; A has no depth, so a loading window looks like an empty card; C spends the mat width on a second frame and doubles the edges the corner has to nest in."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A figure that stacks the window and its caption in one column, so the caption sits on the body's inset line below the picture."
+    },
+    "window": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The window is a recess in the body: sunken plastic, a hairline ring and the inverse light laid over the picture. It is not pressed and takes no focus."
+    },
+    "image": {
+      "p": "P2",
+      "axis": "shape",
+      "why": "The picture fills the window and is clipped by its ring, so its corner nests in the window's radius."
+    },
+    "placeholder": {
+      "p": "P6",
+      "axis": "space",
+      "why": "While the picture is not there the window keeps its size and prints a dash at the centre, so the layout does not move when the picture arrives."
+    },
+    "mark": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "One printed dash means the picture is still on its way. Two dashes mean it failed. The count is a shape cue that reads without colour, and no broken-image icon is drawn."
+    },
+    "caption": {
+      "p": "P5",
+      "axis": "type",
+      "why": "One short line in the caption size and secondary ink, printed flat on the body with room above and below for Thai marks."
+    }
+  },
+  "states": {
+    "data-state=loading": {
+      "p": "P6",
+      "axis": "space",
+      "why": "While loading the picture is hidden and one dash holds the window, with no pulse or shimmer, because nothing animates until a state changes."
+    },
+    "data-state=error": {
+      "p": "P5",
+      "axis": "interaction",
+      "why": "When the picture fails the window shows two dashes and stays named by alt, so the failure is seen and the meaning is not lost."
+    },
+    "data-fit=contain": {
+      "p": "P2",
+      "axis": "shape",
+      "why": "Contain shows the whole picture inside the window and leaves sunken plastic at the sides, for a chart or a plan that must not be cropped."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the ring and the dashes draw in the text colour and the inset shadow is dropped, so the window keeps a real edge."
+    }
+  },
+  "motion": {}
+}

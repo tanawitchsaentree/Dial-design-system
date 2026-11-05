@@ -9,7 +9,7 @@ const ROWS: Array<[string, 'positive' | 'critical' | 'neutral', string]> = [
 
 export default function BadgeInList() {
   return (
-    <Stack gap="sm" style={{ maxInlineSize: 320 }}>
+    <Stack gap="sm" style={{ maxInlineSize: 'var(--ds-layout-frame-md)' }}>
       {ROWS.map(([name, tone, word]) => (
         <Stack key={name} direction="row" align="center" style={{ justifyContent: 'space-between' }}>
           <span>{name}</span>

@@ -18,9 +18,8 @@ export type RotaryKind = 'primary' | 'key';
 export type RotarySize = 'sm' | 'md' | 'lg';
 
 /** Knob diameters in px: sm is the 44px touch minimum, lg is corner.knob-ratio (0.36) of a 300px unit. */
-export const ROTARY_DIAMETER: Record<RotarySize, number> = { sm: 44, md: 72, lg: 108 };
-/** The smallest knob dial draws (control.knob-min). */
-const MIN_DIAMETER = 44;
+/** The knob's diameter per size, as the control.knob-* tokens (44, 72 and 108px in dial). */
+export const ROTARY_DIAMETER: Record<RotarySize, string> = { sm: 'var(--ds-control-knob-sm)', md: 'var(--ds-control-knob-md)', lg: 'var(--ds-control-knob-lg)' };
 
 export interface RotaryProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue' | 'children'> {
   /** The printed name under the knob. It is required, because it is also the knob's accessible name. */
@@ -189,7 +188,10 @@ export const Rotary = forwardRef<HTMLDivElement, RotaryProps>(function Rotary(
     commit(min + ((Math.max(-sweep / 2, Math.min(sweep / 2, a)) + sweep / 2) / sweep) * range);
   };
 
-  const d = Math.max(MIN_DIAMETER, Math.round(diameter ?? (unitSide ? unitSide * knobRatio : ROTARY_DIAMETER[size])));
+  // a size reads its control.knob-* token; a measured diameter (or a share of the unit) never goes under
+  // control.knob-min, the touch target, which the CSS max() enforces from the token, not a number here
+  const own = diameter ?? (unitSide ? unitSide * knobRatio : null);
+  const d = own == null ? ROTARY_DIAMETER[size] : `max(${Math.round(own)}px, var(--ds-control-knob-min))`;
   const marks = count <= 40 ? count : 10;
   const ticks = Array.from({ length: marks + 1 }, (_, i) => -sweep / 2 + (i / marks) * sweep);
   const text = formatValue(current);
@@ -202,7 +204,7 @@ export const Rotary = forwardRef<HTMLDivElement, RotaryProps>(function Rotary(
       data-kind={kind}
       data-size={diameter || unitSide ? undefined : size}
       className={cx(styles.root, className)}
-      style={{ ...style, '--d': `${d}px` } as CSSProperties}
+      style={{ ...style, '--d': d } as CSSProperties}
       {...rest}
     >
       <div className={styles.dial} onPointerDown={onRingDown}>

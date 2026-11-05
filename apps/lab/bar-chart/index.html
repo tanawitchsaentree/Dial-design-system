@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · BarChart · three readings of a table of numbers</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+  /* Lab scaffolding. A chart is printing in a recess: ink only, series told apart by pattern, nothing orange (P1, P4). */
+  body { margin: 0; padding: 32px; background: var(--ds-surface-page); color: var(--ds-text-primary); font-family: var(--ds-type-family); }
+  h1 { font-size: 18px; font-weight: 500; margin: 0 0 6px; } p { margin: 0 0 18px; max-width: 72ch; font-size: 14px; line-height: 1.5; }
+  .row { display: flex; flex-wrap: wrap; gap: 32px; }
+  .unit { inline-size: 420px; padding: 24px; border-radius: 48px; background: var(--ds-surface-solid); box-shadow: var(--ds-elevation-unit); display: grid; gap: 14px; align-content: start; }
+  .unit h2 { font-size: 14px; font-weight: 500; margin: 0; } .unit .note { font-size: 13px; margin: 0; color: var(--ds-text-secondary); }
+  svg { display: block; inline-size: 100%; font-family: var(--ds-type-family); font-variant-numeric: tabular-nums; }
+  text { fill: var(--ds-text-primary); font-size: 11px; }
+  .sec { fill: var(--ds-text-secondary); }
+  .win { fill: var(--ds-surface-sunken); stroke: var(--ds-line-ring); stroke-width: 1; }
+  .grid { stroke: var(--ds-line-divider); stroke-width: 1; }
+  .axis { stroke: var(--ds-text-secondary); stroke-width: 1; }
+  .bar { stroke: var(--ds-text-primary); stroke-width: 1; }
+  .ink { fill: var(--ds-text-primary); }
+  .lg { display: flex; gap: 16px; font-size: 12px; align-items: center; }
+  .lg i { display: inline-block; inline-size: 18px; block-size: 12px; border: 1px solid var(--ds-text-primary); border-radius: 2px; vertical-align: -2px; margin-inline-end: 6px; }
+</style>
+</head>
+<body>
+<h1>BarChart · three readings</h1>
+<p>One table: four days, two series (heating, hot water) in kWh. A has the bars in one recessed window with a ruled value scale. B drops the window and prints the rows like a ledger with dotted leaders. C builds each bar from a column of grille holes. Marks differ by pattern or shape and every value is printed on its mark.</p>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="p-solid" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" style="fill:var(--ds-text-primary)"/></pattern>
+    <pattern id="p-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" style="fill:var(--ds-surface-sunken)"/><line x1="0" y1="0" x2="0" y2="6" style="stroke:var(--ds-text-primary);stroke-width:1.5"/></pattern>
+    <pattern id="p-dots" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" style="fill:var(--ds-surface-sunken)"/><circle cx="3" cy="3" r="1.2" style="fill:var(--ds-text-primary)"/></pattern>
+  </defs>
+</svg>
+<div class="row">
+  <section class="unit"><h2>A · bars in a recessed window</h2><p class="note">Ruled scale, a patterned fill per series, the value printed above each bar. Reads like a chart recorder.</p><div id="a"></div><div class="lg"><span><i style="background:url(#)"></i>Heating (hatch)</span><span>Hot water (dots)</span></div></section>
+  <section class="unit"><h2>B · ledger rows</h2><p class="note">Horizontal rows, name left, value right, a thin patterned rule as the bar. No window.</p><div id="b"></div></section>
+  <section class="unit"><h2>C · columns of holes</h2><p class="note">Each bar is a stack of grille holes, lit in ink up to the value. Series differ by hole shape.</p><div id="c"></div></section>
+</div>
+<script>
+  const cats = ['Mon', 'Tue', 'Wed', 'Thu'];
+  const S = [[12, 18, 9, 15], [6, 7, 11, 5]];
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (n, a = {}, parent) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); parent && parent.appendChild(e); return e; };
+  const fills = ['url(#p-hatch)', 'url(#p-dots)'];
+
+  // A
+  { const W = 392, H = 240, L = 30, T = 18, B = 26, R = 6; const s = el('svg', { viewBox: `0 0 ${W} ${H}` }, document.getElementById('a'));
+    el('rect', { class: 'win', x: L - 6, y: T - 12, width: W - L - R + 6, height: H - T - B + 12, rx: 6 }, s);
+    const ph = H - T - B, pw = W - L - R, max = 20;
+    [0, 5, 10, 15, 20].forEach(v => { const y = T + ph - v / max * ph; el('line', { class: 'grid', x1: L - 6, x2: W - R, y1: y, y2: y }, s); const t = el('text', { class: 'sec', x: L - 10, y: y + 4, 'text-anchor': 'end' }, s); t.textContent = v; });
+    const gw = pw / cats.length;
+    cats.forEach((c, i) => { S.forEach((ser, j) => { const bw = (gw - 18) / 2, x = L + i * gw + 9 + j * bw, h = ser[i] / max * ph, y = T + ph - h;
+      el('rect', { class: 'bar', x, y, width: bw - 2, height: h, fill: fills[j] }, s);
+      const t = el('text', { x: x + (bw - 2) / 2, y: y - 4, 'text-anchor': 'middle' }, s); t.textContent = ser[i]; });
+      const t = el('text', { class: 'sec', x: L + i * gw + gw / 2, y: H - 8, 'text-anchor': 'middle' }, s); t.textContent = c; });
+    el('line', { class: 'axis', x1: L - 6, x2: W - R, y1: T + ph, y2: T + ph }, s); }
+
+  // B
+  { const W = 392, row = 44, H = cats.length * row + 8; const s = el('svg', { viewBox: `0 0 ${W} ${H}` }, document.getElementById('b'));
+    cats.forEach((c, i) => { const y = 8 + i * row; const t = el('text', { x: 0, y: y + 12 }, s); t.textContent = c;
+      S.forEach((ser, j) => { const w = ser[i] / 20 * 250, yy = y + 18 + j * 12; el('rect', { class: 'bar', x: 40, y: yy - 8, width: w, height: 9, fill: fills[j] }, s);
+        const v = el('text', { x: 40 + w + 6, y: yy, class: 'sec' }, s); v.textContent = ser[i]; });
+      el('line', { class: 'grid', x1: 0, x2: W, y1: y + row - 4, y2: y + row - 4, 'stroke-dasharray': '1 3' }, s); }); }
+
+  // C
+  { const W = 392, H = 240, T = 18, B = 26; const s = el('svg', { viewBox: `0 0 ${W} ${H}` }, document.getElementById('c'));
+    el('rect', { class: 'win', x: 0, y: 0, width: W, height: H - 18, rx: 6 }, s);
+    const gw = W / cats.length, rows = 14, step = (H - T - B) / rows;
+    cats.forEach((c, i) => { S.forEach((ser, j) => { const lit = Math.round(ser[i] / 20 * rows), x0 = i * gw + 20 + j * 34;
+      for (let r = 0; r < rows; r++) { const y = H - B - r * step - step / 2; const on = r < lit;
+        if (j === 0) el('circle', { cx: x0, cy: y, r: 4, class: on ? 'ink' : '', style: on ? '' : 'fill:var(--ds-grille-hole)' }, s);
+        else el('rect', { x: x0 - 4, y: y - 4, width: 8, height: 8, class: on ? 'ink' : '', style: on ? '' : 'fill:var(--ds-grille-hole)' }, s); } });
+      const t = el('text', { class: 'sec', x: i * gw + gw / 2, y: H - 8, 'text-anchor': 'middle' }, s); t.textContent = c; }); }
+</script>
+</body>
+</html>

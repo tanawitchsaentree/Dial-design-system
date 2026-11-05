@@ -34,6 +34,10 @@
   vertical-align: middle;
   border: var(--ds-width-hairline) solid var(--ds-text-secondary);
   border-radius: var(--ds-corner-round);
+  /* a lamp lights up and dims out like a bulb behind the plastic, never in one frame (D-008) */
+  transition:
+    background-color var(--ds-motion-release) var(--ds-motion-easing),
+    border-color var(--ds-motion-release) var(--ds-motion-easing);
 }
 .lamp[data-on="true"] { background: var(--ds-text-primary); border-color: var(--ds-text-primary); }
 .latch {

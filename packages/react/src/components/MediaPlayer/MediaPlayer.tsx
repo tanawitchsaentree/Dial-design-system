@@ -8,6 +8,8 @@ import {
   type ReactNode,
 } from 'react';
 import { cx } from '../../cx';
+import { Icon, type IconName } from '../Icon';
+import { messages } from '../../messages';
 import { Card } from '../Card';
 import { Grille } from '../Grille';
 import { IconButton } from '../IconButton';
@@ -61,8 +63,8 @@ const WORDS: MediaPlayerWords = {
   error: 'Can’t play this file',
   offline: 'Offline',
   play: 'Play',
-  previous: 'Previous track',
-  next: 'Next track',
+  previous: messages.media.previous,
+  next: messages.media.next,
   volume: 'Volume',
   level: 'Level',
   transport: 'Transport',
@@ -103,20 +105,18 @@ export interface MediaPlayerProps extends Omit<HTMLAttributes<HTMLElement>, 'onC
   words?: Partial<MediaPlayerWords>;
 }
 
-const icon = { viewBox: '0 0 24 24', 'aria-hidden': true, focusable: false } as const;
-const PrevGlyph = () => <svg {...icon} fill="currentColor" stroke="currentColor" strokeWidth={2} strokeLinejoin="round"><path d="M7 6v12M18 6l-8 6 8 6z" /></svg>;
-const NextGlyph = () => <svg {...icon} fill="currentColor" stroke="currentColor" strokeWidth={2} strokeLinejoin="round"><path d="M17 6v12M6 6l8 6-8 6z" /></svg>;
-const PlayGlyph = () => <svg {...icon} fill="currentColor"><path d="M8 5.5v13l11-6.5z" /></svg>;
-const PauseGlyph = () => <svg {...icon} fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round"><path d="M8.5 5.5v13M15.5 5.5v13" /></svg>;
+// the transport keys print dial's one icon language, the dot matrix (R-005)
+const PrevGlyph = () => <Icon name="previous" />;
+const NextGlyph = () => <Icon name="next" />;
 
 /** One printed shape per state, so a state never rests on its word alone or on colour. */
-const STATE_GLYPH: Record<MediaPlayerStatus, ReactNode> = {
-  playing: <path d="M2 1v8l7-4z" />,
-  paused: <path d="M2 1h2v8H2zM6 1h2v8H6z" />,
-  ended: <circle cx="5" cy="5" r="3.75" />,
-  loading: <path d="M1 4h2v2H1zM4 4h2v2H4zM7 4h2v2H7z" />,
-  error: <rect x="1" y="1" width="8" height="8" />,
-  offline: <path d="M5 .9 9.4 9.1H.6z" />,
+const STATE_GLYPH: Record<MediaPlayerStatus, IconName> = {
+  playing: 'play',
+  paused: 'pause',
+  ended: 'stop',
+  loading: 'more',
+  error: 'critical',
+  offline: 'warning',
 };
 
 type Graph = { ctx: AudioContext; an: AnalyserNode; buf: Uint8Array<ArrayBuffer> };
@@ -397,7 +397,7 @@ export const MediaPlayer = forwardRef<HTMLElement, MediaPlayerProps>(function Me
           <span className={styles.reading}>{reading}</span>
           <span className={styles.status} aria-hidden="true">
             <span className={styles.word}>
-              <svg className={styles.glyph} viewBox="0 0 10 10" aria-hidden="true" focusable="false">{STATE_GLYPH[status]}</svg>
+              <Icon name={STATE_GLYPH[status]} size="sm" />
               {word}
             </span>
             {count && <span className={styles.count}>{count}</span>}
@@ -428,7 +428,8 @@ export const MediaPlayer = forwardRef<HTMLElement, MediaPlayerProps>(function Me
               <PrevGlyph />
             </IconButton>
             <IconButton kind="primary" size="lg" label={w.play} aria-pressed={playing} onClick={toggle} disabled={!playable}>
-              {playing ? <PauseGlyph /> : <PlayGlyph />}
+              {/* one dot-matrix glyph that morphs from play to pause and back (R-008) */}
+              <Icon name={playing ? 'pause' : 'play'} />
             </IconButton>
             <IconButton label={w.next} onClick={next} disabled={stopped || index >= tracks.length - 1}>
               <NextGlyph />

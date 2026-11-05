@@ -1,0 +1,160 @@
+{
+  "concept": "Popover is a key that opens a small plastic panel next to it, the same panel Menu and Select open, holding a few lines of printed content and sometimes a field or a key; a title sits on the panel's inset line and a round close key ends it.",
+  "kind": [
+    "popover",
+    "info panel",
+    "popup",
+    "flyout",
+    "dropdown panel"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "tooltip-style bubble with a pointer arrow, a dark fill and white text that opens on hover",
+      "why_not": "A bubble that opens on hover cannot be reached on a phone, and its pointer is a speech-bubble convention that dial's panels do not use; Menu and Select grow out of their key without one."
+    },
+    {
+      "pattern": "Radix or MUI popover: a white card with a drop shadow, an accent focus ring and no way to close it by touch",
+      "why_not": "It ends only by Escape or a click outside, which a person on a phone does not have, and it tells focus by an accent colour that P1 keeps for the one primary control."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a lid that opens over the controls to show a printed panel"
+    },
+    {
+      "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): a plain printed legend beside each part, no decoration"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: dialog (non-modal) pattern (https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "shadows are short and soft",
+      "form": "The open panel is surface.solid plastic with elevation.float and corner.inner on layer.overlay, the same panel Menu and Select open and nothing deeper."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The title is printed on the panel's inset line, level with the close key, and the content stands under it on the same left edge."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The close key is a 44px round key and the header row is control.md tall, so a finger can end the panel."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Enter and Space open it and move focus into the panel, Escape closes and returns focus to the key, and Tab past either end of the panel closes it onto the key."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "The panel rises off the key when it opens and sinks back faster when it closes (D-008), and it flips above the key when there is no room below."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The panel and its title are ink on plastic and the close key is a plain key; a primary key inside the content is the unit's own orange one, never the Popover's."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/popover/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "plastic panel, title on the inset line, round close key at the end"
+      },
+      {
+        "id": "B",
+        "name": "the same panel with a small notch that points at the key"
+      },
+      {
+        "id": "C",
+        "name": "content inside a recessed window with a printed caption under it"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A reuses the panel of Menu and Select so a person learns one popup, and its close key works by touch where the others rely on Escape; B's notch is a speech-bubble convention that breaks when the panel flips or shifts to stay on the screen, and C spends the recessed window, which P2 keeps for the one display of a unit, on running text."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The popover takes only the space of its key in the row, so it sits on the row's inset line like any other part."
+    },
+    "panel": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "The open panel is a plastic body with one short soft shadow on the overlay layer, the same panel as Menu's and Select's list, placed on the screen so no edge cuts it."
+    },
+    "header": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The title and the close key share one row at least 44px tall, so the key keeps its hit area and the title stays on the inset line."
+    },
+    "title": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The title is printed in the emphasis size and the medium weight, and it names the panel for assistive tech through aria-labelledby."
+    },
+    "close": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A round 44px key at the end of the header closes the panel by touch, so ending it never depends on Escape or a tap outside."
+    },
+    "body": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The content stands under the title on the same left edge in the body size and secondary ink, so the panel reads down one column."
+    }
+  },
+  "states": {
+    "data-side=top": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "When the panel flips above its key it rises from below instead, so it always grows out of the key (D-008)."
+    },
+    "data-state=open": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Opening is a state change, so it moves. It rises in from @starting-style over motion.release on the decelerating curve (D-008)."
+    },
+    "data-state=closing": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "While it leaves, the panel fades and sinks back over motion.exit on the accelerating curve, and no key or reader reaches it (D-008)."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion nothing travels; only a fade remains, on motion.hover, which the tokens keep (D-008)."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the panel keeps a real border in the text colour, because its shadow is dropped."
+    }
+  },
+  "motion": {
+    "transform": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The panel rises toward the key (above or below, by data-side) over motion.release on the decelerating curve and leaves over motion.exit on the accelerating one (D-008). Under Reduce motion only the fade stays."
+    },
+    "opacity": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The panel fades in over motion.release on the decelerating curve and leaves over motion.exit on the accelerating one (D-008). Under Reduce motion only the fade stays, on motion.hover."
+    }
+  }
+}

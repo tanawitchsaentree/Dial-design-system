@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · OTPFlow · three ways to ask for a code</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:360px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);display:grid;gap:16px;align-content:start}
+ .unit>h2{font-size:13px;font-weight:500;margin:0;color:var(--ds-text-secondary)}
+ h3{font-size:var(--ds-type-title);font-weight:500;margin:0;line-height:1.2}
+ .cells{display:flex;gap:8px}
+ .c{inline-size:44px;block-size:44px;box-sizing:border-box;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);display:grid;place-items:center;font-weight:500;font-size:18px}
+ .cap{font-size:13px;color:var(--ds-text-secondary);margin:0}
+ .key{inline-size:max-content;min-block-size:44px;padding-inline:20px;border-radius:999px;border:1px solid var(--ds-line-ring);background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part,var(--ds-elevation-unit));font:inherit;font-size:14px;color:var(--ds-text-primary)}
+ .key[disabled]{box-shadow:none;color:var(--ds-text-secondary)}
+ .tab{font-variant-numeric:tabular-nums}
+ /* A: plain stack, countdown inside the key */
+ /* B: display window holds destination and countdown */
+ .win{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 16px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .win b{font-weight:500;font-size:16px;display:block}
+ .win .r{font-size:22px;font-weight:500;font-variant-numeric:tabular-nums}
+ /* C: legend of three printed words, one lit by an index mark */
+ .leg{display:flex;gap:18px;font-size:13px;color:var(--ds-text-secondary);margin:0;padding:0;list-style:none}
+ .leg li[data-on]{color:var(--ds-text-primary);font-weight:500}
+ .leg li[data-on]::before{content:"";display:inline-block;inline-size:6px;block-size:6px;border-radius:50%;background:currentColor;margin-inline-end:6px;vertical-align:middle}
+</style></head><body>
+<h1>OTPFlow · the whole code step</h1>
+<div class="row">
+ <div class="unit A"><h2>A · plain stack, countdown in the key</h2>
+  <h3>Enter the code</h3><p class="cap">We sent six digits to +66 81 234 5678.</p>
+  <div class="cells"><span class="c">4</span><span class="c">8</span><span class="c">1</span><span class="c"></span><span class="c"></span><span class="c"></span></div>
+  <button class="key tab" disabled>Send again in 0:24</button></div>
+ <div class="unit B"><h2>B · display window holds destination and countdown</h2>
+  <h3>Enter the code</h3>
+  <div class="win"><div><p class="cap">Sent to</p><b class="tab">+66 81 234 5678</b></div><span class="r">0:24</span></div>
+  <div class="cells"><span class="c">4</span><span class="c">8</span><span class="c">1</span><span class="c"></span><span class="c"></span><span class="c"></span></div>
+  <button class="key" disabled>Send again</button></div>
+ <div class="unit C"><h2>C · legend: sent, enter, verified</h2>
+  <h3>Enter the code</h3>
+  <ul class="leg"><li>sent</li><li data-on>enter</li><li>verified</li></ul>
+  <p class="cap">+66 81 234 5678</p>
+  <div class="cells"><span class="c">4</span><span class="c">8</span><span class="c">1</span><span class="c"></span><span class="c"></span><span class="c"></span></div>
+  <button class="key tab" disabled>Send again · 0:24</button></div>
+</div>
+</body></html>

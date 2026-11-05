@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · NotificationCenter · three ways to tell unread from read</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+ .unit{inline-size:360px;padding:20px;border-radius:40px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 14px;color:var(--ds-text-secondary)}
+ .head{display:flex;align-items:center;justify-content:space-between;padding:0 8px 8px}
+ .head b{font-size:16px;font-weight:500}
+ .k{block-size:44px;padding-inline:16px;border-radius:999px;border:1px solid transparent;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);font:inherit;font-size:13px;color:var(--ds-text-primary)}
+ .day{margin:10px 8px 4px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ds-text-secondary)}
+ ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+ li{display:flex;align-items:center;gap:12px;padding:8px 8px;border-radius:var(--ds-corner-inner);position:relative}
+ .t{flex:1;min-inline-size:0}
+ .t p{margin:0;font-size:14px;line-height:1.45}
+ .t small{display:block;font-size:12px;color:var(--ds-text-secondary);line-height:1.45}
+ .ik{inline-size:44px;block-size:44px;flex:none;border-radius:50%;border:1px solid transparent;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);color:var(--ds-text-secondary);display:grid;place-items:center;font-size:14px}
+ .ik+.ik{margin-inline-start:-4px}
+ .acts{display:flex;gap:4px;flex:none}
+ /* A: lamp — filled dot unread, ring read; unread title medium */
+ .A .lamp{inline-size:12px;block-size:12px;border-radius:50%;box-sizing:border-box;border:1.5px solid var(--ds-text-primary);flex:none}
+ .A li[data-u] .lamp{background:var(--ds-text-primary)}
+ .A li[data-u] .t p{font-weight:500}
+ .A li:not([data-u]) .t p{color:var(--ds-text-secondary)}
+ /* B: ink index bar at the start edge, as List marks a chosen row */
+ .B li{padding-inline-start:16px}
+ .B li[data-u]::before{content:"";position:absolute;inset-block:10px;inset-inline-start:4px;inline-size:3px;border-radius:2px;background:var(--ds-text-primary)}
+ .B li[data-u] .t p{font-weight:500}
+ .B li:not([data-u]) .t p{color:var(--ds-text-secondary)}
+ /* C: unread row sits in a recessed window, read row is flat printing */
+ .C li[data-u]{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring)}
+ .C li[data-u] .t p{font-weight:500}
+ .C li:not([data-u]) .t p{color:var(--ds-text-secondary)}
+</style></head><body>
+<h1>NotificationCenter · unread told by shape and weight</h1>
+<div class="row">
+<div class="unit A"><h2>A · lamp: dot lit, ring waiting</h2>
+ <div class="head"><b>Notifications</b><button class="k">Mark all read</button></div>
+ <div class="day">Today</div>
+ <ul><li data-u><span class="lamp"></span><div class="t"><p>Washer finished</p><small>Laundry room · 22:40</small></div><div class="acts"><button class="ik">✓</button><button class="ik">×</button></div></li>
+ <li data-u><span class="lamp"></span><div class="t"><p>Night mode started</p><small>Heating set to 18 · 22:30</small></div><div class="acts"><button class="ik">✓</button><button class="ik">×</button></div></li></ul>
+ <div class="day">Yesterday</div>
+ <ul><li><span class="lamp"></span><div class="t"><p>Filter due in the hall</p><small>Hall · 18:05</small></div><div class="acts"><button class="ik">✓</button><button class="ik">×</button></div></li></ul></div>
+<div class="unit B"><h2>B · index bar at the start edge</h2>
+ <div class="head"><b>Notifications</b><button class="k">Mark all read</button></div>
+ <div class="day">Today</div>
+ <ul><li data-u><div class="t"><p>Washer finished</p><small>Laundry room · 22:40</small></div><div class="acts"><button class="ik">✓</button><button class="ik">×</button></div></li>
+ <li data-u><div class="t"><p>Night mode started</p><small>Heating set to 18 · 22:30</small></div><div class="acts"><button class="ik">✓</button><button class="ik">×</button></div></li></ul>
+ <div class="day">Yesterday</div>
+ <ul><li><div class="t"><p>Filter due in the hall</p><small>Hall · 18:05</small></div><div class="acts"><button class="ik">✓</button><button class="ik">×</button></div></li></ul></div>
+<div class="unit C"><h2>C · unread rows sit in a recess</h2>
+ <div class="head"><b>Notifications</b><button class="k">Mark all read</button></div>
+ <div class="day">Today</div>
+ <ul><li data-u><div class="t"><p>Washer finished</p><small>Laundry room · 22:40</small></div><div class="acts"><button class="ik">✓</button><button class="ik">×</button></div></li>
+ <li data-u><div class="t"><p>Night mode started</p><small>Heating set to 18 · 22:30</small></div><div class="acts"><button class="ik">✓</button><button class="ik">×</button></div></li></ul>
+ <div class="day">Yesterday</div>
+ <ul><li><div class="t"><p>Filter due in the hall</p><small>Hall · 18:05</small></div><div class="acts"><button class="ik">✓</button><button class="ik">×</button></div></li></ul></div>
+</div></body></html>

@@ -53,3 +53,25 @@
 - **เพราะ:** P9 "a glass part is lit through from behind by the value it holds" — มีแค่ A ที่ cap ถูกส่องจาก groove; P9/P1 "stays a quiet tone near the plastic; it never becomes a second orange" — amber hue ~40° chroma ต่ำ ต่างจาก orange ~20°; P6 ไม่มี gradient ไม่มี glow นอกตัวชิ้น (inset เท่านั้น); ตัวหนังสือบนกระจก text.primary 7.4–8.8:1 light, 5.4–6.2:1 dark. tactile recipe: "one material and at most one accent material" — glass คือ accent material เดียว; G-MT1 ไม่กระทบเพราะกระจกอยู่บนชิ้นเล็ก ไม่ใช่ surface (`[data-surface]`)
 - **ตัวเลือกที่ตัดทิ้ง:** B clear acrylic + tinted edge (จางจน cap ไม่เด่นเป็นชิ้นที่ขยับ), C milky opal tint only when on (ใน dark key ที่ latched สว่างที่สุดใน unit และตัวหนังสือขาวบน opal ต่ำกว่า 4.5:1), glass bodies/panels (D-006)
 - **กระทบ:** tooling/dial/gen-tokens.py (color.glass.*, frost.*, semantic glass.*), 9 components ข้างบน + why.json + docs (depth, chapters, ตัวอย่าง *Tint/*Glass/*Lamp(s)/*Latched) + conformance; ถ้าเปลี่ยน tint ต้อง re-check contrast ตัวหนังสือบน `glass.<range>.matte` ทั้งสองธีม
+
+### D-008: ทุกการเปลี่ยน state เคลื่อน (P6 อ่านตามที่เขียน)
+- **วันที่:** 2026-11-02 · **Phase:** wave 4 (R-004)
+- **เลือก:** ทุก interaction ที่เปลี่ยนสิ่งที่มองเห็น (เปิด/ปิด popup, active row, chevron, fill, shadow, สี, ขนาด, การโผล่/หาย) เคลื่อนบน motion token: เข้าด้วย `motion.release`/`motion.enter` บน `motion.easing` (decelerate), ออกด้วย `motion.exit` บน `motion.easing-exit` (accelerate, ≤ 0.6 × ขาเข้า); overlay เข้าด้วย fade + rise สั้นๆ จากด้านที่มันงอก; reduced motion เหลือ fade สี/opacity เท่านั้น ไม่มีระยะทาง
+- **เพราะ:** P6 "Surfaces stay put; only a state change moves anything" — state change ต้องเคลื่อน, พื้นผิวที่อยู่นิ่งไม่เคลื่อน; P3 กลไกของเครื่องมีมวล ไม่มีอะไรกระโดดในเฟรมเดียว; user 2026-11-02 "ทุก interaction ที่มีการเปลี่ยนแปลง ต้อง smooth"
+- **ตัวเลือกที่ตัดทิ้ง:** "Nothing animates: the panel appears and goes at once" (Select derivation เดิม, อ่าน P6 ผิด); animation ตอน idle/entry choreography ของหน้า (P6 ยังห้าม)
+- **กระทบ:** Select และทุก component ที่ G-MO5 จับว่า snap + why.json motion ของแต่ละตัว + docs ที่เขียนว่า "at once"; engine kiln: G-MO5 ใหม่, G-MO4 แดงเมื่อ overlay มาในเฟรมเดียว, G-SP2 ระยะ control–stage
+
+### D-009: Focus ring = secondary printing ink on the part that moves; one icon language
+- **วันที่:** 2026-11-02 · **Phase:** wave 4 (R-005)
+- **เลือก:** `focus.ring` = color.abs.700 / color.charcoal.100 (text.secondary ink), 2px at one ring's offset, วาดรอบชิ้นที่ขยับ (cap ของ Slider/Scrubber/RangeSlider, lever cap ของ Switch, knob ของ Rotary, ตัว key) ไม่ใช่กรอบรอบทั้งแถว; Progress fill = `line.ring` + glass.lit ขอบบน (resin rod); ทุก glyph ใน component และใน book ใช้ dot-matrix `Icon` ชุดเดียว
+- **เพราะ:** P3 focus ต้องไม่พึ่งสีส้มและเห็นได้ ≥3:1 (abs.700 บน sunken ≈7:1, charcoal.100 บน charcoal.850 ≈10:1); P5/P4 พิมพ์บนพลาสติก ไม่ใช่จอ; P4 Icon คือรูของ Grille ระดับไอคอน ภาษาเดียวทั้งเครื่อง; user 2026-11-02
+- **ตัวเลือกที่ตัดทิ้ง:** focus A (ink ลึกสุดรอบทั้ง fader, ของเดิม), C (ink ลึกสุดรอบชิ้น, ยังหนัก), D (halo กระจก, รั่วออกเป็นกรอบ); Progress A (ink เต็ม, digital), C (lit glass lamp, ยังหนัก), D (frosted fill, <3:1)
+- **กระทบ:** tooling/dial/gen-tokens.py focus.ring, Slider/Scrubber/Switch focus CSS, Progress CSS + why + docs, 16 components' glyphs → Icon, docs examples' glyphs → Icon; gates G-IC2, G-FR2
+
+### D-010: Printing is pad ink pressed into the plastic
+- **วันที่:** 2026-11-03 · **Phase:** wave 4 (R-006)
+- **เลือก:** หมึกพิมพ์ใช้ hue ของตัวพลาสติก (abs.800 #3F382D, abs.700 #554D41; dark charcoal.50 #ECE7DD, charcoal.100 #D6D0C4) + token `print.seat` (shadow.seat `0 1px 0 #FFFDF8B3` / seat-dark `0 -1px 0 #00000073`) บนทุกตัวหนังสือ ตัวเลข ขีด scale บน unit; เงาร่อง (elevation.well) วาดทับแสงของค่าใน groove (`groove::after`) ให้แสงอยู่ในร่อง; ขีด index บน cap เป็นรอยตัดที่มีขอบสว่างด้านไกล
+- **เพราะ:** P4/P5 งานพิมพ์บนเครื่องคือหมึกที่กดลงในเนื้อ ไม่ใช่สีที่วางทับ; แสงเดียวจากซ้ายบน (P3) ให้ขอบล่างของรอยพิมพ์สว่าง; contrast ไม่ลด (6.0–11.2:1); user 2026-11-03 "ให้มัน blend … ไม่ใช่แก้ด้วยการปรับจางลง"
+- **ตัวเลือกที่ตัดทิ้ง:** B multiply/screen blend (ตัวเลขหายใน light), C B+deboss (เหมือนกัน), D หมึกอุ่น + spread (dark เบลอ); การลด contrast (user ห้าม)
+- **กระทบ:** gen-tokens.py (abs.700/800, charcoal.50/100, shadow.seat, print.seat), Slider/RangeSlider/Scrubber/Rotary/Meter/Legend/Switch/Card/Progress CSS, conformance; ทุกที่ใช้ text.primary/secondary อุ่นขึ้นเล็กน้อย
+- **ขยายทั้งระบบ (user 2026-11-03 "เปลี่ยนทั้งระบบ"):** tokens.css ออก rule จาก token `print.seat` — `:where([data-component]) { text-shadow: var(--ds-print-seat) }`, ปุ่ม/ช่องกรอกรับ inherit (UA ของ button ตั้ง none), `Icon` ได้ lip เดียวกันเป็น drop-shadow, forced-colors ปิด; ยกเว้นด้วย `--ds-print-seat: none` บนหน้าจอ (Display lcd/oled, MediaPlayer window, Skeleton window) และ key สีส้ม (.primary), และ `print.seat-on-light` บนการ์ดสว่าง (SceneCard, Slot face); conformance card "everything printed on a unit is seated"

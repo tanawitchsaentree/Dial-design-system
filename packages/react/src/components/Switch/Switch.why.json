@@ -1,62 +1,219 @@
 {
   "concept": "Switch is the slide switch on the side of an appliance. A plastic cap slides in a recessed groove between two printed positions, and a small lamp beside it is lit as a glass bead in the neutral ink range while it is on.",
-  "material": { "accent": "glass", "decision": "D-007", "lab": "apps/lab/glass/index.html", "recipe": "A frosted tinted resin, the lit lamp only" },
-  "kind": ["switch", "slide switch", "toggle"],
+  "material": {
+    "accent": "glass",
+    "decision": "D-007",
+    "lab": "apps/lab/glass/index.html",
+    "recipe": "A frosted tinted resin, the lit lamp only"
+  },
+  "kind": [
+    "switch",
+    "slide switch",
+    "toggle"
+  ],
   "default_to_avoid": [
-    { "pattern": "iOS-clone pill switch with a sliding white knob and a green or blue track", "why_not": "It tells on by filling the track with colour, while P1 keeps colour for the one primary control and FORM.md forbids status told by colour alone." },
-    { "pattern": "toggle switch that turns orange when on", "why_not": "Orange belongs to the unit's one primary control under P1, so a switch dyed orange would make a second loud part in the unit." }
+    {
+      "pattern": "iOS-clone pill switch with a sliding white knob and a green or blue track",
+      "why_not": "It tells on by filling the track with colour, while P1 keeps colour for the one primary control and FORM.md forbids status told by colour alone."
+    },
+    {
+      "pattern": "toggle switch that turns orange when on",
+      "why_not": "Orange belongs to the unit's one primary control under P1, so a switch dyed orange would make a second loud part in the unit."
+    }
   ],
   "references": [
-    { "source": "Rice cooker with a Cook / Warm slide switch: a cap that slides in a recessed slot, the two positions printed beside it (design brief)" },
-    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): slide switches in short grooves with their positions printed on the case" },
-    { "source": "system/refs/ref-01.png: fader cap riding a recessed groove on tuner 1 (estimated from chat)" }
+    {
+      "source": "Rice cooker with a Cook / Warm slide switch: a cap that slides in a recessed slot, the two positions printed beside it (design brief)"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): slide switches in short grooves with their positions printed on the case"
+    },
+    {
+      "source": "system/refs/ref-01.png: fader cap riding a recessed groove on tuner 1 (estimated from chat)"
+    }
   ],
   "derivation": [
-    { "p": "P3", "axis": "shape", "consequence": "faders ride a groove with a ruler scale", "form": "The switch is a raised cap with an index line riding a short recessed groove, with two printed positions in place of the ruler scale." },
-    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "The cap and groove draw 52 by 32px, but the button that holds them and the printed words is at least 44px tall." },
-    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "Cap, groove and lamp use plastic, sunken plastic and ink only; on is told by the cap's position, the lit lamp and the heavier word, never by a colour fill." },
-    { "p": "P1", "axis": "motion", "consequence": "secondary keys press and return without settle", "form": "The cap is thrown past the middle at once and eases into its end over motion.release with no overshoot, because a switch is never the unit's loud control." },
-    { "p": "P4", "axis": "colour", "consequence": "a lit level uses ink at full step, never orange", "form": "The lamp is a recessed hole while off and fills with the darkest ink while on, never orange and never green." },
-    { "p": "P5", "axis": "interaction", "consequence": "labels name their control", "form": "The printed label sits beside the switch and names it through aria-labelledby, and the position words are printing, hidden from the accessible name." }
+    {
+      "p": "P3",
+      "axis": "shape",
+      "consequence": "faders ride a groove with a ruler scale",
+      "form": "The switch is a raised cap with an index line riding a short recessed groove, with two printed positions in place of the ruler scale."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The cap and groove draw 52 by 32px, but the button that holds them and the printed words is at least 44px tall."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Cap, groove and lamp use plastic, sunken plastic and ink only; on is told by the cap's position, the lit lamp and the heavier word, never by a colour fill."
+    },
+    {
+      "p": "P1",
+      "axis": "motion",
+      "consequence": "secondary keys press and return without settle",
+      "form": "The cap is thrown past the middle at once and eases into its end over motion.release with no overshoot, because a switch is never the unit's loud control."
+    },
+    {
+      "p": "P4",
+      "axis": "colour",
+      "consequence": "a lit level uses ink at full step, never orange",
+      "form": "The lamp is a recessed hole while off and fills with the darkest ink while on, never orange and never green."
+    },
+    {
+      "p": "P5",
+      "axis": "interaction",
+      "consequence": "labels name their control",
+      "form": "The printed label sits beside the switch and names it through aria-labelledby, and the position words are printing, hidden from the accessible name."
+    }
   ],
   "variants": {
     "lab": "apps/lab/switch/index.html",
     "options": [
-      { "id": "A", "name": "slide switch: cap in a recessed groove, positions printed either side" },
-      { "id": "B", "name": "rocker: two faces on a pivot, the pressed face sinks and loses its light" },
-      { "id": "C", "name": "toggle key: a latching round key with a printed lamp beside it" }
+      {
+        "id": "A",
+        "name": "slide switch: cap in a recessed groove, positions printed either side"
+      },
+      {
+        "id": "B",
+        "name": "rocker: two faces on a pivot, the pressed face sinks and loses its light"
+      },
+      {
+        "id": "C",
+        "name": "toggle key: a latching round key with a printed lamp beside it"
+      }
     ],
     "picked": "A",
     "by": "agent",
     "reason": "A tells the state by the cap's position, which reads from across a room and survives forced colours, and prints both positions beside it like the rice cooker (P3, P5); B's rocker tells state only by shading on a 36px part, and C's latching key looks like a Button and tells on by 3px of depth, which breaks P3's one mechanism per part."
   },
-  "mechanism": { "kind": "fader", "detents": 2, "travel": "28px", "spring": { "mass": 1.4, "stiffness": 520, "damping": 46 } },
+  "mechanism": {
+    "kind": "fader",
+    "detents": 2,
+    "travel": "28px",
+    "spring": {
+      "mass": 1.4,
+      "stiffness": 520,
+      "damping": 46
+    }
+  },
   "parts": {
-    "field": { "p": "P5", "axis": "space", "why": "The printed label and the switch sit on one line along the inset, the label first and the mechanism after it." },
-    "label": { "p": "P5", "axis": "type", "why": "The label is printing on the case in the regular weight at label size, with ink at 4.5:1 or more." },
-    "root": { "p": "P3", "axis": "space", "why": "The button that holds the groove and the words is at least 44px tall, so the whole mechanism is the hit area, and its 8px end inset keeps the printed words clear of the focus ring." },
-    "word": { "p": "P5", "axis": "type", "why": "Position words are printed at caption size beside the groove, like Cook and Warm printed on a rice cooker." },
-    "off": { "p": "P5", "axis": "space", "why": "The off position word is printed at the start end of the groove, where the cap rests while off." },
-    "on": { "p": "P5", "axis": "space", "why": "The on position word is printed at the far end of the groove, where the cap rests while on." },
-    "slot": { "p": "P3", "axis": "depth", "why": "The groove is recessed into the body with inverse light, so the cap reads as riding inside it; its hairline edge in line.ring holds 3:1 against the body in both themes." },
-    "cap": { "p": "P3", "axis": "shape", "why": "A raised plastic cap with one printed index line, the same shape family as a fader cap." },
-    "lamp": { "p": "P9", "axis": "depth", "why": "The lamp is a small recessed hole while off and lights as a glass bead lit through, with the top-left hairline, while on, so on never depends on colour alone." }
+    "field": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The printed label and the switch sit on one line along the inset, the label first and the mechanism after it."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The label is printing on the case in the regular weight at label size, with ink at 4.5:1 or more."
+    },
+    "root": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The button that holds the groove and the words is at least 44px tall, so the whole mechanism is the hit area, and its 8px end inset keeps the printed words clear of the focus ring."
+    },
+    "word": {
+      "p": "P5",
+      "axis": "type",
+      "why": "Position words are printed at caption size beside the groove, like Cook and Warm printed on a rice cooker."
+    },
+    "off": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The off position word is printed at the start end of the groove, where the cap rests while off."
+    },
+    "on": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The on position word is printed at the far end of the groove, where the cap rests while on."
+    },
+    "slot": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "The groove is recessed into the body with inverse light, so the cap reads as riding inside it; its hairline edge in line.ring holds 3:1 against the body in both themes."
+    },
+    "cap": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "A raised plastic cap with one printed index line, the same shape family as a fader cap."
+    },
+    "lamp": {
+      "p": "P9",
+      "axis": "depth",
+      "why": "The lamp is a small recessed hole while off and lights as a glass bead lit through, with the top-left hairline, while on, so on never depends on colour alone."
+    }
   },
   "states": {
-    "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens the printed position words one step and never lifts or grows the cap." },
-    "focus-visible": { "p": "P3", "axis": "interaction", "why": "Every part shows the same dark ring outside its hit area, so focus never depends on the orange." },
-    "disabled": { "p": "P6", "axis": "depth", "why": "A disabled switch loses the cap's height and fades to half, while the groove outline stays readable." },
-    "aria-checked=true": { "p": "P3", "axis": "motion", "why": "When on, the cap travels to the far end of the groove and the lamp fills with ink." },
-    "aria-checked=false": { "p": "P5", "axis": "type", "why": "When off, the off word is set in the medium weight so the current position reads in print as well as by place." },
-    "data-glow": { "p": "P6", "axis": "colour", "why": "A lit lamp is one of the emitters P2 allows, so in the dark edition it gives off a few pixels of its own light; in light, unlit or disabled it gives off none." },
-    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the cap jumps to its end and the lamp changes at once, with no travel at all." },
-    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the cap and groove keep real borders and the lamp keeps a system ink fill, so the state survives." },
-    "@media prefers-reduced-transparency: reduce": { "p": "P9", "axis": "interaction", "why": "When the reader asks for less transparency the lit lamp fills with solid ink, and the cap and the printed word still say on." }
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover darkens the printed position words one step and never lifts or grows the cap."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Focus is the system ring in secondary printing ink, drawn round the cap the keys or a press move, at one ring's offset, never as a box round the whole control (R-005, D-009)."
+    },
+    "disabled": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled switch loses the cap's height and fades to half, while the groove outline stays readable."
+    },
+    "aria-checked=true": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "When on, the cap travels to the far end of the groove and the lamp fills with ink."
+    },
+    "aria-checked=false": {
+      "p": "P5",
+      "axis": "type",
+      "why": "When off, the off word is set in the medium weight so the current position reads in print as well as by place."
+    },
+    "data-glow": {
+      "p": "P6",
+      "axis": "colour",
+      "why": "A lit lamp is one of the emitters P2 allows, so in the dark edition it gives off a few pixels of its own light; in light, unlit or disabled it gives off none."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion the cap jumps to its end and the lamp changes at once, with no travel at all."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the cap and groove keep real borders and the lamp keeps a system ink fill, so the state survives."
+    },
+    "@media prefers-reduced-transparency: reduce": {
+      "p": "P9",
+      "axis": "interaction",
+      "why": "When the reader asks for less transparency the lit lamp fills with solid ink, and the cap and the printed word still say on."
+    }
   },
   "motion": {
-    "inset-inline-start": { "p": "P3", "axis": "motion", "why": "The cap slides along the groove fast in and slow out, so the throw reads as one physical stroke." },
-    "background-color": { "p": "P2", "axis": "motion", "why": "The lamp fills or empties in a short fade like a segment turning on, never a slow glow." },
-    "box-shadow": { "p": "P4", "axis": "depth", "why": "The lamp's recess shading fades with its fill, so the hole closes as the ink comes in." },
-    "color": { "p": "P3", "axis": "motion", "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out." }
+    "inset-inline-start": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The cap slides along the groove fast in and slow out, so the throw reads as one physical stroke."
+    },
+    "background-color": {
+      "p": "P2",
+      "axis": "motion",
+      "why": "The lamp fills or empties in a short fade like a segment turning on, never a slow glow."
+    },
+    "box-shadow": {
+      "p": "P4",
+      "axis": "depth",
+      "why": "The lamp's recess shading fades with its fill, so the hole closes as the ink comes in."
+    },
+    "color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out."
+    }
   }
 }

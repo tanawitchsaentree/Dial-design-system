@@ -1,0 +1,105 @@
+/* Onboarding — a full-ink ring round an existing part and Popover's plastic panel beside it (lab apps/lab/onboarding
+   pick A): surface.solid, elevation.float, corner.inner, layer.overlay. Both live on the body, position fixed, and
+   are placed by Onboarding.tsx; the page is neither dimmed nor scrolled. Ink on plastic only, nothing is orange (P1). */
+.ring {
+  position: fixed;
+  z-index: var(--ds-layer-overlay);
+  box-sizing: border-box;
+  margin: 0;
+  border: var(--ds-width-ring) solid var(--ds-text-primary);
+  border-radius: var(--ds-corner-media);
+  pointer-events: none;
+  transition: opacity var(--ds-motion-release) var(--ds-motion-easing);
+}
+@starting-style {
+  .ring[data-state='open'] { opacity: 0; }
+}
+.ring[data-state='closing'] {
+  opacity: 0;
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+}
+.panel {
+  position: fixed;
+  z-index: var(--ds-layer-overlay);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  inline-size: max-content;
+  min-inline-size: var(--ds-control-menu-min);
+  max-inline-size: min(var(--ds-layout-frame-sm), calc(100vw - var(--ds-gap-lg) * 2));
+  margin: 0;
+  padding: var(--ds-gap-lg);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-inner);
+  background: var(--ds-surface-solid);
+  box-shadow: var(--ds-elevation-float);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  outline: none;
+  /* the panel rises off the part when the tour opens and sinks back when it ends (P6, D-008); a step change
+     only swaps the content, so nothing here moves between steps */
+  --tour-from: calc(var(--ds-motion-rise) * -1);
+  transition:
+    opacity var(--ds-motion-release) var(--ds-motion-easing),
+    transform var(--ds-motion-release) var(--ds-motion-easing);
+}
+.panel[data-side='top'] { --tour-from: var(--ds-motion-rise); }
+@starting-style {
+  .panel[data-state='open'] { opacity: 0; transform: translateY(var(--tour-from)); }
+}
+.panel[data-state='closing'] {
+  opacity: 0;
+  transform: translateY(var(--tour-from));
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+  pointer-events: none;
+}
+.count {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-text-secondary);
+}
+.title {
+  margin: 0;
+  min-inline-size: 0;
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  overflow-wrap: anywhere;
+}
+.body {
+  min-inline-size: 0;
+  margin-block-start: var(--ds-gap-xs);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  overflow-wrap: anywhere;
+}
+.body > :first-child { margin-block-start: var(--ds-gap-none); }
+.body > :last-child { margin-block-end: var(--ds-gap-none); }
+.keys {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--ds-gap-md);
+  margin-block-start: var(--ds-gap-lg);
+}
+/* Skip stands alone at the start of the row; Back and Next stay together at the end */
+.skip { margin-inline-end: auto; }
+
+/* under Reduce motion nothing travels (motion.rise is 0); the panel and ring still fade on motion.hover */
+@media (prefers-reduced-motion: reduce) {
+  .panel, .panel[data-state='closing'] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+  .ring, .ring[data-state='closing'] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .panel { border-color: CanvasText; }
+  .ring { border-color: CanvasText; }
+}

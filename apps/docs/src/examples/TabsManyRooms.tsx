@@ -6,7 +6,7 @@ const ROOMS = NAMES.map((n) => ({ value: n.toLowerCase(), label: n, content: <p 
 
 export default function TabsManyRooms() {
   return (
-    <div style={{ maxInlineSize: 320 }}>
+    <div style={{ maxInlineSize: 'var(--ds-layout-frame-md)' }}>
       <Tabs label="Rooms" items={ROOMS} defaultValue="bathroom" />
     </div>
   );

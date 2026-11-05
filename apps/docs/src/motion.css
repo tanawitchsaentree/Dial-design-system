@@ -1,0 +1,8 @@
+/* The book's own controls move like the system's (D-008, R-004): every change of state is carried by a
+   transition on the motion tokens, fast in on the decelerating curve, slower out. One place for the book's
+   motion, so a docs control can never be the one that snaps. */
+.pg-icon {
+  transition:
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    color var(--ds-motion-hover) var(--ds-motion-easing);
+}

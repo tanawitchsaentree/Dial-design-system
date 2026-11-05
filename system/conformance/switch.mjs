@@ -18,7 +18,7 @@ export default async function sw({ check, expect, page, go, main, tokens }) {
     await go('/components/switch/code');
     const b = first();
     await b.focus(); await page.keyboard.press('Shift+Tab'); await page.keyboard.press('Tab');
-    const st = await b.evaluate((el) => ({ focused: document.activeElement === el, w: getComputedStyle(el).outlineWidth, s: getComputedStyle(el).outlineStyle }));
+    const st = await b.evaluate((el) => { /* the ring sits on the part that moves, the cap or the lever (R-005, D-009) */ const r = [el, ...el.querySelectorAll('*')].find((e) => getComputedStyle(e).outlineStyle !== 'none') ?? el; return { focused: document.activeElement === el, w: getComputedStyle(r).outlineWidth, s: getComputedStyle(r).outlineStyle }; });
     expect(st.focused, 'the switch did not take focus');
     expect(st.s !== 'none' && px(st.w) >= 2, `outline ${st.s} ${st.w}`);
     return `outline ${st.w}`;

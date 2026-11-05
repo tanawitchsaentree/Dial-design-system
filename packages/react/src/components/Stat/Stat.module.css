@@ -1,0 +1,71 @@
+/* Stat — one named figure read as a window (lab apps/lab/stat pick A; FORM.md display class, P2, P5).
+   The window holds the figure alone; the name and the change are printed on the body. Nothing is
+   orange, nothing is tinted, and nothing animates: a new reading is there at once. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  min-inline-size: 0;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+  /* the name and the change are ink pressed into the body, like the Meter's scale (D-010) */
+  text-shadow: var(--ds-print-seat);
+}
+.label {
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+}
+.window {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-sm);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  text-shadow: none;
+}
+.figure {
+  display: block;
+  font-weight: var(--ds-type-weight-medium);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--ds-type-leading-tight);
+  overflow-wrap: anywhere;
+}
+.unit {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  color: var(--ds-text-secondary);
+}
+.reading {
+  position: absolute;
+  inline-size: var(--ds-space-px);
+  block-size: var(--ds-space-px);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.sm .figure { font-size: var(--ds-type-emphasis); }
+.md .figure { font-size: var(--ds-type-title); }
+.lg .figure { font-size: var(--ds-type-display); }
+.root[data-empty] .figure { color: var(--ds-text-secondary); }
+
+.change {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--ds-gap-sm);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.word { font-weight: var(--ds-type-weight-medium); color: var(--ds-text-primary); }
+.amount { font-variant-numeric: tabular-nums; }
+.compare { color: var(--ds-text-secondary); }
+
+@media (forced-colors: active) {
+  .window { border-color: CanvasText; }
+}

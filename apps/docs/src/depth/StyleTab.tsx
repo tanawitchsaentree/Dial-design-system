@@ -25,7 +25,7 @@ export function combos(kinds: Record<string, string[]>, sizes: string[]) {
 const keyOf = (p: Record<string, string>) => Object.entries(p).map(([k, v]) => `${k}=${v}`).join(';') || 'default';
 
 // unset is not a value the component chose (no shadow, no fill, no minimum), so it gets no data-value
-const UNSET = new Set(['', 'none', '0px', 'rgba(0, 0, 0, 0)', 'transparent', 'normal', 'auto', '0s', '1']);
+const UNSET = new Set(['', 'none', '0px', 'rgba(0, 0, 0, 0)', 'transparent', 'normal', 'auto', '0s', '1']); // no-hardcode-ok: comparison sentinel, not a style
 const V = ({ c }: { c?: Cell }) => !c || UNSET.has(c.value) ? <td className="muted">none</td> : (
   <td data-value={c.value} data-token={c.token ?? undefined}>{c.token ? <><code>{c.token.replace(/^--ds-/, '')}</code><br /><span className="muted small">{c.value}</span></> : <><span className="fail">no token</span> <span className="muted small">{c.value}</span></>}</td>
 );
@@ -99,14 +99,14 @@ export function StyleTab({ name, kinds, sizes, backdrops }: { name: string; kind
           <h2 id="s3-h" className="flush">Structure and spacing</h2>
           <p>Measured from the DOM per size. The redline shows the same numbers on the live component.</p>
           <Table caption={`${name} structure per size`} head={['Size', 'Height', 'Inline padding', 'Gap', 'Radius', 'Icon']}
-            rows={(sizes.length ? sizeKeys : [kindKeys[0] ?? {}]).map((p) => { const v = find(keyOf(p), 'dark')?.states.default ?? {}; return [p.size ?? 'default', v['min-height']?.value && v['min-height'].value !== '0px' ? v['min-height'] : v.height, v['padding-inline-start'], v['column-gap'], v['border-top-left-radius'], v['icon-size']]; })} />
+            rows={(sizes.length ? sizeKeys : [kindKeys[0] ?? {}]).map((p) => { const v = find(keyOf(p), 'dark')?.states.default ?? {}; return [p.size ?? 'default', v['min-height']?.value && !['0px', 'auto'].includes(v['min-height'].value) ? v['min-height'] : (v.height ?? v['block-size']), v['padding-inline-start'], v['column-gap'], v['border-top-left-radius'], v['icon-size']]; })} />
           {subject && <div className="redlines">{(sizes.length ? sizeKeys : [kindKeys[0] ?? {}]).map((p) => { const v = find(keyOf(p), 'dark')?.states.default ?? {}; return (
             <figure key={keyOf(p)} className="redline" data-example="">
               <Stage backdrop="field"><div className="redline-host">{subject.bare ? <BareHost bare={subject.bare}>{subject.render(p)}</BareHost> : <OnSurface>{subject.render(p)}</OnSurface>}
-                <span className="rl rl-h" aria-hidden="true">{v['min-height']?.value !== '0px' ? v['min-height']?.value : v.height?.value}</span>
+                <span className="rl rl-h" aria-hidden="true">{!['0px', 'auto', undefined].includes(v['min-height']?.value) ? v['min-height']?.value : (v.height ?? v['block-size'])?.value}</span>
                 <span className="rl rl-p" aria-hidden="true">{v['padding-inline-start']?.value}</span>
               </div></Stage>
-              <figcaption>{p.size ?? name}: height {v['min-height']?.value !== '0px' ? v['min-height']?.value : v.height?.value}, padding {v['padding-inline-start']?.value}, radius {v['border-top-left-radius']?.value}</figcaption>
+              <figcaption>{p.size ?? name}: height {!['0px', 'auto', undefined].includes(v['min-height']?.value) ? v['min-height']?.value : (v.height ?? v['block-size'])?.value}, padding {v['padding-inline-start']?.value}, radius {v['border-top-left-radius']?.value}</figcaption>
             </figure>
           ); })}</div>}
         </div>

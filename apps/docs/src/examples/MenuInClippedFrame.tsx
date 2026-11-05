@@ -10,7 +10,7 @@ const ACTIONS = [
 
 export default function MenuInClippedFrame() {
   return (
-    <div className="demo-box demo-card" style={{ overflow: 'hidden', blockSize: 96, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+    <div className="demo-box demo-card" style={{ overflow: 'hidden', blockSize: 'var(--ds-space-24)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <p className="flush">Hall speaker</p>
       <Menu label="More for Hall speaker" items={ACTIONS} />
     </div>

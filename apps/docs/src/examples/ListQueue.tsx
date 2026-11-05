@@ -13,7 +13,7 @@ export default function ListQueue() {
   const [playing, setPlaying] = useState('t2');
   const now = TRACKS.find((t) => t.value === playing);
   return (
-    <Stack gap="md" style={{ inlineSize: 380, maxInlineSize: '100%' }}>
+    <Stack gap="md" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))', maxInlineSize: '100%' }}>
       <List label="Queue" selectable value={playing} onValueChange={setPlaying}>
         {TRACKS.map((t, i) => <List.Item key={t.value} value={t.value} index={i + 1} label={t.title} description={t.by} />)}
       </List>

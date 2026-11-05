@@ -1,48 +1,189 @@
 {
   "concept": "Menu is a key that opens the same plastic panel as Select, holding a few actions printed in ink as words with a glyph; the one that removes something carries the critical lamp shape beside its word, never a colour.",
-  "kind": ["menu", "menu button", "dropdown menu", "actions menu", "overflow menu"],
+  "kind": [
+    "menu",
+    "menu button",
+    "dropdown menu",
+    "actions menu",
+    "overflow menu"
+  ],
   "default_to_avoid": [
-    { "pattern": "Radix or MUI dropdown menu with a blue highlighted row and keyboard shortcut hints", "why_not": "A tinted bar for the focused row tells position by colour alone, and shortcut hints print a second column of text a phone user can never press." },
-    { "pattern": "destructive menu item painted red or orange", "why_not": "A red or orange word tells the danger by colour alone, and orange is kept for the one primary control of a unit under P1." }
+    {
+      "pattern": "Radix or MUI dropdown menu with a blue highlighted row and keyboard shortcut hints",
+      "why_not": "A tinted bar for the focused row tells position by colour alone, and shortcut hints print a second column of text a phone user can never press."
+    },
+    {
+      "pattern": "destructive menu item painted red or orange",
+      "why_not": "A red or orange word tells the danger by colour alone, and orange is kept for the one primary control of a unit under P1."
+    }
   ],
   "references": [
-    { "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): functions printed in plain words beside each part, one column, no colour coding" },
-    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a lid that opens over the controls to show a printed panel of functions" },
-    { "source": "WAI-ARIA Authoring Practices: menu button pattern (https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/)" }
+    {
+      "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): functions printed in plain words beside each part, one column, no colour coding"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a lid that opens over the controls to show a printed panel of functions"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: menu button pattern (https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/)"
+    }
   ],
   "derivation": [
-    { "p": "P6", "axis": "depth", "consequence": "shadows are short and soft", "form": "The open panel is surface.solid plastic with elevation.float and corner.inner on layer.overlay, the same panel Select opens and nothing deeper." },
-    { "p": "P1", "axis": "colour", "consequence": "links, borders, icons, selections and charts never use it", "form": "Every action is primary ink; the focused row is a recess and a destructive action is a square critical lamp beside its word, never orange." },
-    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "The trigger is a 44px round key and every action row is at least control.md tall, as wide as the longest word." },
-    { "p": "P3", "axis": "interaction", "consequence": "every mechanism has its keyboard map", "form": "Enter, Space and Down open on the first action, Up on the last, arrows, Home, End and letters move, Escape closes and returns focus to the key." },
-    { "p": "P6", "axis": "motion", "consequence": "no entry choreography, no idle animation; transitions only on state", "form": "The panel appears and goes at once with no fade or slide, and it flips above the key when there is no room below." }
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "shadows are short and soft",
+      "form": "The open panel is surface.solid plastic with elevation.float and corner.inner on layer.overlay, the same panel Select opens and nothing deeper."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "Every action is primary ink; the focused row is a recess and a destructive action is a square critical lamp beside its word, never orange."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The trigger is a 44px round key and every action row is at least control.md tall, as wide as the longest word."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Enter, Space and Down open on the first action, Up on the last, arrows, Home, End and letters move, Escape closes and returns focus to the key."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "The panel rises off the key when it opens and sinks back toward it faster when it closes (D-008), and it flips above the key when there is no room below."
+    }
   ],
   "variants": {
     "lab": "apps/lab/menu/index.html",
     "options": [
-      { "id": "A", "name": "plastic panel under the key, rows as printing, focused row a recess, destructive action last after a gap" },
-      { "id": "B", "name": "a bank of round keys beside the trigger, each word printed under its key" },
-      { "id": "C", "name": "no popup: the row opens in place into a card of actions with seams" }
+      {
+        "id": "A",
+        "name": "plastic panel under the key, rows as printing, focused row a recess, destructive action last after a gap"
+      },
+      {
+        "id": "B",
+        "name": "a bank of round keys beside the trigger, each word printed under its key"
+      },
+      {
+        "id": "C",
+        "name": "no popup: the row opens in place into a card of actions with seams"
+      }
     ],
     "picked": "A",
     "by": "agent",
     "reason": "A reuses Select's panel so a person learns one popup, grows to its longest action and holds five actions as easily as three (P3 44px rows); B runs out of width at four actions and stacks long words, and C pushes the rows below down when it opens, against P6 fixed positions so a unit's layout does not reflow between states."
   },
   "parts": {
-    "root": { "p": "P5", "axis": "space", "why": "The menu takes only the space of its key in the row, so it sits on the row's inset line like any other part." },
-    "chevron": { "p": "P5", "axis": "depth", "why": "A word key that opens a menu prints a small chevron after its word, flat ink with no shadow and no emboss." },
-    "panel": { "p": "P6", "axis": "depth", "why": "The open menu is a plastic panel with one short soft shadow on the overlay layer, the same panel as Select's list." },
-    "item": { "p": "P3", "axis": "space", "why": "Each action row is at least 44px tall with its words inset from the rounded ends, so a finger can press it." },
-    "icon": { "p": "P5", "axis": "colour", "why": "An action's glyph is printed in secondary ink at the start of the row, above 3:1 on the panel plastic." },
-    "lamp": { "p": "P1", "axis": "colour", "why": "A destructive action carries the critical lamp, a filled square, so the danger is a shape beside a word and never orange." },
-    "text": { "p": "P5", "axis": "type", "why": "Action words use the body size of the one grotesk and stay on one line while the panel grows to the longest word." },
-    "destructive": { "p": "P5", "axis": "space", "why": "A destructive action sits after a gap at the end of the panel, apart from the actions that change nothing for good." }
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The menu takes only the space of its key in the row, so it sits on the row's inset line like any other part."
+    },
+    "chevron": {
+      "p": "P5",
+      "axis": "depth",
+      "why": "A word key that opens a menu prints a small chevron after its word, flat ink with no shadow and no emboss."
+    },
+    "panel": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "The open menu is a plastic panel with one short soft shadow on the overlay layer, the same panel as Select's list."
+    },
+    "item": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Each action row is at least 44px tall with its words inset from the rounded ends, so a finger can press it."
+    },
+    "icon": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "An action's glyph is printed in secondary ink at the start of the row, above 3:1 on the panel plastic."
+    },
+    "lamp": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "A destructive action carries the critical lamp, a filled square, so the danger is a shape beside a word and never orange."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "type",
+      "why": "Action words use the body size of the one grotesk and stay on one line while the panel grows to the longest word."
+    },
+    "destructive": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A destructive action sits after a gap at the end of the panel, apart from the actions that change nothing for good."
+    }
   },
   "states": {
-    "focus": { "p": "P3", "axis": "depth", "why": "The action under the keyboard or the pointer becomes a small recess, so the position is shown by depth instead of a tint." },
-    "focus-visible": { "p": "P3", "axis": "interaction", "why": "When the keyboard moved focus, the row also shows the same dark ring as every part, drawn inside the row." },
-    "aria-disabled=true": { "p": "P6", "axis": "depth", "why": "An action that cannot run now fades to half and does nothing when it is pressed, but stays in its place." },
-    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the panel keeps a real border and the focused row uses the system highlight for its edge." }
+    "focus": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "The action under the keyboard or the pointer becomes a small recess, so the position is shown by depth instead of a tint."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "When the keyboard moved focus, the row also shows the same dark ring as every part, drawn inside the row."
+    },
+    "aria-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "An action that cannot run now fades to half and does nothing when it is pressed, but stays in its place."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the panel keeps a real border and the focused row uses the system highlight for its edge."
+    },
+    "data-side=top": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "When the panel flips above its key it rises from below instead, so it always grows out of the key (D-008)."
+    },
+    "data-state=open": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Opening is a state change, so it moves. It rises in from @starting-style over motion.release on the decelerating curve (D-008)."
+    },
+    "data-state=closing": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "While it leaves, the part fades and sinks back over motion.exit on the accelerating curve, and no key or reader reaches it (D-008)."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion nothing travels; only fades remain, on motion.hover, which the tokens keep (D-008)."
+    }
   },
-  "motion": {}
+  "motion": {
+    "transform": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The panel fades in from a rise toward the key (above or below, by data-side) over motion.release on the decelerating curve and leaves over motion.exit on the accelerating one (D-008). Under Reduce motion only the fade stays, on motion.hover."
+    },
+    "opacity": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The panel fades in from a rise toward the key (above or below, by data-side) over motion.release on the decelerating curve and leaves over motion.exit on the accelerating one (D-008). Under Reduce motion only the fade stays, on motion.hover."
+    },
+    "background-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached row sinks into a well on motion.hover, fast on and slower off, so moving down the panel reads as a walk, never a jump."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached row sinks into a well on motion.hover, fast on and slower off, so moving down the panel reads as a walk, never a jump."
+    }
+  }
 }

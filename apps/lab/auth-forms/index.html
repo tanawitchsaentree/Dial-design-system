@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · AuthForms · three ways to sign in</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+ .unit{inline-size:360px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);display:grid;gap:18px;align-content:start;box-sizing:border-box}
+ .unit>h2{font-size:13px;font-weight:500;margin:0;color:var(--ds-text-secondary)}
+ h3{font-size:var(--ds-type-title);font-weight:500;margin:0;line-height:1.2}
+ .cap{font-size:13px;color:var(--ds-text-secondary);margin:0}
+ .f{display:grid;gap:6px}
+ .f label{font-size:14px;font-weight:500}
+ .w{block-size:44px;box-sizing:border-box;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);padding-inline:14px;display:flex;align-items:center;font-size:15px}
+ .key{min-block-size:44px;padding-inline:22px;border-radius:999px;border:1px solid var(--ds-line-ring);background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part,var(--ds-elevation-unit));font:inherit;font-size:14px;color:var(--ds-text-primary)}
+ .key.p{background:var(--ds-accent-primary,var(--ds-surface-raised))}
+ a{color:var(--ds-text-primary);font-size:14px;text-underline-offset:3px}
+ /* A: plain stack, full-width key, link centred under it */
+ .A .key{inline-size:100%}
+ .A .ctr{text-align:center}
+ /* B: a display window states the task, then the fields */
+ .win{padding:10px 16px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .win b{display:block;font-weight:500;font-size:16px}
+ /* C: fields on the inset line, one row at the foot: link at the start, key at the end */
+ .foot{display:flex;justify-content:space-between;align-items:center;gap:12px}
+ .ck{display:flex;gap:10px;align-items:center;font-size:14px}
+ .ck i{inline-size:22px;block-size:22px;border:1px solid var(--ds-line-ring);border-radius:6px;background:var(--ds-surface-raised);display:inline-block}
+</style></head><body>
+<h1>AuthForms · sign in</h1>
+<div class="row">
+ <div class="unit A"><h2>A · plain stack, full-width key, link centred</h2>
+  <h3>Sign in</h3>
+  <div class="f"><label>Email</label><div class="w">mika@example.com</div></div>
+  <div class="f"><label>Password</label><div class="w">••••••••</div></div>
+  <button class="key p">Sign in</button>
+  <div class="ctr"><a href="#">Forgot your password?</a></div>
+  <div class="ctr cap">No account? <a href="#">Create one</a></div></div>
+ <div class="unit B"><h2>B · a window states the task first</h2>
+  <h3>Sign in</h3>
+  <div class="win"><p class="cap">Account</p><b>Sign in to dial</b></div>
+  <div class="f"><label>Email</label><div class="w">mika@example.com</div></div>
+  <div class="f"><label>Password</label><div class="w">••••••••</div></div>
+  <button class="key p">Sign in</button>
+  <a href="#">Forgot your password?</a></div>
+ <div class="unit C"><h2>C · foot row: link at the start, key at the end</h2>
+  <h3>Sign in</h3>
+  <p class="cap">Use the email you signed up with.</p>
+  <div class="f"><label>Email</label><div class="w">mika@example.com</div></div>
+  <div class="f"><label>Password</label><div class="w">••••••••</div></div>
+  <div class="ck"><i></i>Keep me signed in</div>
+  <div class="foot"><a href="#">Forgot password?</a><button class="key p">Sign in</button></div></div>
+</div>
+</body></html>

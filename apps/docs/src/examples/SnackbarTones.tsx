@@ -5,7 +5,7 @@ const none = () => {};
 
 export default function SnackbarTones() {
   return (
-    <Stack gap="md" style={{ inlineSize: 'min(100%, 420px)' }}>
+    <Stack gap="md" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-lg))' }}>
       <Snackbar tone="positive" action={{ label: 'Undo', onAction: none }}>Lamp removed</Snackbar>
       <Snackbar tone="neutral" action={{ label: 'Undo', onAction: none }}>Scene saved</Snackbar>
       <Snackbar tone="warning" action={{ label: 'Undo', onAction: none }}>Heater set to 28 °C</Snackbar>

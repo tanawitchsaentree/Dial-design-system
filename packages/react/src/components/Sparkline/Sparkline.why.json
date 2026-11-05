@@ -1,0 +1,89 @@
+{
+  "concept": "Sparkline is a trend printed small enough to stand in a line of text: one ink line with no axes, and a solid dot on the last reading so the eye lands where the line ends. It says which way a reading has gone and nothing else, and the words for it live in the label.",
+  "kind": ["sparkline", "trend line", "inline chart", "mini chart"],
+  "default_to_avoid": [
+    {
+      "pattern": "Sparkline as a coloured area fill with a green line for up and a red line for down, and a tooltip on hover",
+      "why_not": "Green and red tell the direction by colour alone and the tooltip has no keyboard path, but P5 allows no tinted text, P1 keeps charts out of colour and P6 wants a thing that does not react to a pointer."
+    },
+    {
+      "pattern": "Sparkline that draws itself in from the start edge when the row appears",
+      "why_not": "The draw-in is entry choreography and a row of them moves like a loading bar, while P6 allows no entry motion and P2 wants values to change at once."
+    }
+  ],
+  "references": [
+    { "source": "Edward Tufte, Beautiful Evidence (2006): the sparkline as a word-sized graphic that sits in the line of text it explains" },
+    { "source": "Braun SK 4 record player status lamp (Dieter Rams, 1956): one small mark printed where the current state is" },
+    { "source": "system/FORM.md display class: values are printing and tabular, nothing tinted, orange stays on the one key" }
+  ],
+  "derivation": [
+    {
+      "p": "P4",
+      "axis": "interaction",
+      "consequence": "a grille that shows a value exposes it as text to assistive tech",
+      "form": "The drawing carries no text, so the root is an image with a label that says the number of readings, the direction, the first and last values and the low and high."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "The line and the dot are ink. Rising and falling are told in the label and by where the line ends, never by a green, a red or the orange."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "tabular figures everywhere a number changes",
+      "form": "When the last value is printed after the line it uses tabular numerals in medium weight, so a column of Sparklines keeps its edges."
+    },
+    {
+      "p": "P5",
+      "axis": "depth",
+      "consequence": "printing is flat on the material, with no shadow and no emboss",
+      "form": "The line is printed ink with no shadow and no fill under it, flat on the body like a character in the line it sits in."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "The line and the dot are there at once and never draw in; a new reading replaces the old drawing in one frame."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "An empty Sparkline keeps its block and prints a flat rule, so a row does not change height when readings are missing."
+    },
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "the chosen word carries one ink index mark beside it",
+      "form": "The one mark on a Sparkline is a solid dot on the last reading, the newest one, which is the point the line is about."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/sparkline/index.html",
+    "options": [
+      { "id": "A", "name": "ink line with a solid dot on the last reading, printed in the line of text" },
+      { "id": "B", "name": "the line inside a small recessed window" },
+      { "id": "C", "name": "a dashed rule at the first value and a ring on the last reading" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A is printing that fits inside a sentence or a table cell at word size and has the one mark; B puts a window around every row so a list of them reads as a stack of displays, and C adds a second line whose job the first and last values in the label already do."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "An inline flex of the drawing and the optional value that sits on the text baseline and keeps its footprint whatever the readings are." },
+    "box": { "p": "P6", "axis": "space", "why": "A fixed block that the line and the dot are placed in by percentages, so the dot always lands on the line's end at any size." },
+    "line": { "p": "P1", "axis": "colour", "why": "A two pixel ink line with round joins and no area under it, scaled to the box without stretching its stroke." },
+    "dot": { "p": "P7", "axis": "shape", "why": "One solid ink dot on the last reading marks where the line ends, a cue that is a shape and survives a greyscale screen." },
+    "value": { "p": "P5", "axis": "type", "why": "The last reading printed after the line in medium weight with tabular numerals, for rows that need the number too." },
+    "sm": { "p": "P5", "axis": "space", "why": "Small Sparklines are word height, for the line of body text they sit in." },
+    "md": { "p": "P5", "axis": "space", "why": "The default is a little taller than the text, for table cells and list rows." },
+    "lg": { "p": "P5", "axis": "space", "why": "Large Sparklines are wide and tall enough to read shape at a glance beside a Stat." }
+  },
+  "states": {
+    "data-empty": { "p": "P6", "axis": "space", "why": "With fewer than one reading the box prints a flat ink rule in the ring tone and the label says No readings, so the row keeps its height." },
+    "@media forced-colors: active": { "p": "P4", "axis": "colour", "why": "In forced colours the line, the dot and the value take the system text colour so the drawing is still there." }
+  },
+  "motion": {}
+}

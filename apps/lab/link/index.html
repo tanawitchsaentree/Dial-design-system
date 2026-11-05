@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Link · three ways to print a reference</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:24px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);font-size:14px;line-height:1.6}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 14px;color:var(--ds-text-secondary)}
+ .unit p{margin:0 0 12px}
+ a{color:var(--ds-text-primary)}
+ a:visited{color:var(--ds-text-secondary)}
+ .stand{display:inline-flex;align-items:center;gap:6px;min-block-size:44px}
+ .ext{inline-size:12px;block-size:12px;display:inline-block;vertical-align:middle;margin-inline-start:4px;background:currentColor;clip-path:polygon(0 0,100% 0,100% 100%,80% 100%,80% 20%,0 20%)}
+ /* A: solid rule, thickens on hover, visited steps to secondary ink */
+ .A a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+ .A a:hover{text-decoration-thickness:2px}
+ .A a.vis{text-decoration-style:dotted;color:var(--ds-text-secondary)}
+ /* B: a dotted leader as the rule (same dots as Breadcrumb), solid on hover */
+ .B a{text-decoration:none;background:radial-gradient(circle,var(--ds-line-ring) 50%,transparent 55%) 0 100%/8px 4px repeat-x;padding-block-end:4px}
+ .B a:hover{background:linear-gradient(var(--ds-text-primary),var(--ds-text-primary)) 0 100%/100% 2px no-repeat}
+ /* C: no rule at rest, ink bar on hover only (the web default) */
+ .C a{text-decoration:none;color:var(--ds-text-secondary)}
+ .C a:hover{color:var(--ds-text-primary);box-shadow:0 2px 0 var(--ds-text-primary)}
+ .C a:focus-visible,.A a:focus-visible,.B a:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:2px;border-radius:4px}
+</style></head><body>
+<h1>Link · a reference printed in a sentence</h1>
+<div class="row">
+ <div class="unit A"><h2>A · solid rule, thickens on hover</h2>
+  <p>Set the night level in <a href="#a">heating rules</a> and read the <a href="#b" class="vis">manual</a>, or open the <a href="#c">vendor page<span class="ext"></span></a>.</p>
+  <a class="stand" href="#d">All lamps</a></div>
+ <div class="unit B"><h2>B · dotted rule, solid on hover</h2>
+  <p>Set the night level in <a href="#a">heating rules</a> and read the <a href="#b">manual</a>, or open the <a href="#c">vendor page<span class="ext"></span></a>.</p>
+  <a class="stand" href="#d">All lamps</a></div>
+ <div class="unit C"><h2>C · no rule at rest, bar on hover</h2>
+  <p>Set the night level in <a href="#a">heating rules</a> and read the <a href="#b">manual</a>, or open the <a href="#c">vendor page<span class="ext"></span></a>.</p>
+  <a class="stand" href="#d">All lamps</a></div>
+</div></body></html>

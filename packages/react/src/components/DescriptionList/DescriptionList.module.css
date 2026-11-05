@@ -1,0 +1,76 @@
+/* DescriptionList — terms and values printed on the inset line (lab apps/lab/description-list pick A).
+   Flat printing with a seam cut between pairs, the same inverse-light seam as Divider and Table.
+   No fill, no box, nothing pressed, nothing orange. */
+.root {
+  margin: 0;
+  padding: 0;
+  min-inline-size: 0;
+  font-family: var(--ds-type-family);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+}
+.term,
+.detail {
+  position: relative;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  overflow-wrap: anywhere;
+  text-align: start;
+}
+.term {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  /* one line box as tall as a value's, so a term and its value share a row top in the inline layout */
+  line-height: calc(var(--ds-type-body) * var(--ds-type-leading-body));
+  color: var(--ds-text-secondary);
+}
+.detail {
+  font-weight: var(--ds-type-weight-regular);
+  font-variant-numeric: tabular-nums;
+}
+
+/* stacked: the term over its values, one column */
+.stacked { display: block; }
+.stacked > .detail { padding-block-start: var(--ds-gap-xs); }
+
+/* inline: one term column sized by the longest term, values start at one edge beside it */
+.inline {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+}
+.inline > .term {
+  grid-column: 1;
+  padding-inline-end: var(--ds-gap-xl);
+}
+.inline > .detail { grid-column: 2; }
+.inline > .detail + .detail { padding-block-start: var(--ds-gap-xs); }
+.inline > .detail[data-numeric] { text-align: end; }
+
+/* the seam: divider tone above, the material's lit tone below, spanning the whole row.
+   A new pair starts after a value: its term (and, inline, its first value) carries the seam. */
+.stacked > .detail + .term,
+.inline > .detail + .term,
+.inline > .detail + .term + .detail {
+  margin-block-start: var(--ds-gap-md);
+  padding-block-start: var(--ds-gap-lg);
+}
+.stacked > .detail + .term::before,
+.inline > .detail + .term::before,
+.inline > .detail + .term + .detail::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  border-block-start: var(--ds-width-hairline) solid var(--ds-line-divider);
+  border-block-end: var(--ds-width-hairline) solid var(--ds-material-lit);
+}
+
+@media (forced-colors: active) {
+  .stacked > .detail + .term::before,
+  .inline > .detail + .term::before,
+  .inline > .detail + .term + .detail::before { border-block-start-color: GrayText; border-block-end-color: transparent; }
+}

@@ -1,0 +1,57 @@
+/* Avatar — a person as a recessed window with a picture or initials (lab apps/lab/avatar pick C).
+   Not a control, so no hover, press or focus rule. No orange. */
+.root {
+  --avatar-size: var(--ds-control-avatar-md);
+  position: relative;
+  box-sizing: border-box;
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  overflow: hidden;
+  inline-size: var(--avatar-size);
+  block-size: var(--avatar-size);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  font-family: var(--ds-type-family);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  vertical-align: middle;
+  user-select: none;
+}
+/* the inverse light lies over the picture too, so a photo reads as seen through a hole */
+.root::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--ds-elevation-well);
+  pointer-events: none;
+}
+.root[data-size='sm'] { --avatar-size: var(--ds-control-avatar-sm); font-size: var(--ds-type-caption); }
+.root[data-size='md'] { --avatar-size: var(--ds-control-avatar-md); font-size: var(--ds-type-label); }
+.root[data-size='lg'] { --avatar-size: var(--ds-control-avatar-lg); font-size: var(--ds-type-title); }
+.image {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+.initials {
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+}
+.mark {
+  display: block;
+  inline-size: var(--ds-control-mark);
+  border-block-start: var(--ds-width-ring) solid var(--ds-text-secondary);
+}
+@media (forced-colors: active) {
+  .root { border-color: CanvasText; }
+  .root::after { box-shadow: none; }
+  .mark { border-color: CanvasText; }
+}

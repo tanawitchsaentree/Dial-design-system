@@ -1,0 +1,91 @@
+/* TagInput — the Input well that keeps its words as removable Chips (family Input, system/FORM.md input class, D-003).
+   Recessed, inverse light, label on the inset line. The well wraps onto more rows; chips are raised parts. No orange. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.well {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-gap-sm);
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-sm);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  cursor: text;
+}
+/* the list adds no box; its chips sit in the well's own rows */
+.list,
+.item {
+  display: contents;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.field {
+  flex: 1 1 var(--ds-control-key);
+  min-inline-size: var(--ds-control-key);
+  min-block-size: var(--ds-control-md);
+  box-sizing: border-box;
+  padding-block: var(--ds-gap-md);
+  padding-inline: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  outline: none;
+}
+.field::placeholder { color: var(--ds-text-secondary); opacity: 1; }
+.hint {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-sm);
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-status-critical-mark);
+}
+.glyph {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-block-start: var(--ds-space-0-5);
+}
+
+.well:focus-within {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.root[data-invalid='true'] .well { border-color: var(--ds-status-critical-mark); }
+.root[data-disabled='true'] .well { box-shadow: none; cursor: not-allowed; }
+.root[data-disabled='true'] .field { opacity: var(--ds-opacity-disabled); }
+
+@media (forced-colors: active) {
+  .well { border-color: CanvasText; }
+  .root[data-invalid='true'] .well { border-color: Mark; }
+  .well:focus-within { outline-color: Highlight; }
+}

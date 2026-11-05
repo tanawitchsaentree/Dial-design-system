@@ -1,12 +1,11 @@
 // Usage tab for List (component-depth.md U1–U14). List prints rows of devices or tracks on one plastic body.
-import { Badge, Button, IconButton, List, Switch } from 'dial-react';
+import { Badge, Button, Icon, IconButton, List, Switch } from 'dial-react';
 import type { Depth } from './types';
 
-const g = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
-const lamp = <svg {...g}><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z" /></svg>;
-const heat = <svg {...g}><circle cx="12" cy="12" r="8" /><path d="M12 7v5l3 2" /></svg>;
-const play = <svg {...g}><path d="M8 5l11 7-11 7z" /></svg>;
-const W = { inlineSize: 360, maxInlineSize: '100%' };
+const lamp = <Icon name="lamp" />;
+const heat = <Icon name="heat" />;
+const play = <Icon name="play" />;
+const W = { inlineSize: 'min(100%, var(--ds-layout-frame-phone))', maxInlineSize: '100%' };
 
 export const LIST: Depth = {
   overview: (
@@ -57,7 +56,7 @@ export const LIST: Depth = {
       do: <List label="Do" style={W}><List.Item leading={lamp} label="Kitchen lamp" description="On · 40%" /></List>, doNote: 'The name a person says, then the state in words.',
       dont: <List label="Don't" style={W}><List.Item leading={lamp} label="Device 0x3F lamp (kitchen)" description="Status is currently set to on" /></List>, dontNote: 'An address as the name and a sentence where two facts would do.',
     },
-    overflow: { text: 'A long name wraps onto a second line inside the row. The row grows and the part at the end keeps its place, so nothing is cut.', render: <div data-overflow-demo="" style={{ inlineSize: 280 }}><List label="Living room"><List.Item leading={lamp} label="โคมไฟห้องนั่งเล่นชั้นบนข้างหน้าต่างบานใหญ่" description="เปิด · 40%" trailing={<Switch aria-label="โคมไฟห้องนั่งเล่น" defaultChecked />} /></List></div> },
+    overflow: { text: 'A long name wraps onto a second line inside the row. The row grows and the part at the end keeps its place, so nothing is cut.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))' }}><List label="Living room"><List.Item leading={lamp} label="โคมไฟห้องนั่งเล่นชั้นบนข้างหน้าต่างบานใหญ่" description="เปิด · 40%" trailing={<Switch aria-label="โคมไฟห้องนั่งเล่น" defaultChecked />} /></List></div> },
     rtl: { text: 'In right to left languages the glyph starts on the right, the part at the end moves to the left, and the chevron turns to point left.', render: <div dir="rtl"><List label="الغرف" style={W}><List.Item leading={lamp} label="مصباح المطبخ" description="مضاء · 40%" trailing={<Switch aria-label="مصباح المطبخ" defaultChecked />} /></List></div> },
     expansion: { text: 'German names can run 30% longer. The name column takes the free width and wraps, so the switch stays in its column.', render: <List label="Küche" style={W}><List.Item leading={lamp} label="Deckenleuchte über der Arbeitsplatte" description="Ein · 40 %" trailing={<Switch aria-label="Deckenleuchte" defaultChecked />} /></List> },
   },

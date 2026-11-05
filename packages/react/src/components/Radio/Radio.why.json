@@ -1,0 +1,204 @@
+{
+  "concept": "Radio is a set of small round keys on the case of an appliance, one per choice, each with its word printed beside it. Only one can be chosen: the chosen key carries a dot of printing ink on its face and its word turns medium, and the arrow keys walk from one to the next.",
+  "kind": [
+    "radio",
+    "radio group",
+    "choice of one",
+    "option key"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "20px ring that fills with a blue dot (Material and Bootstrap radio)",
+      "why_not": "The coloured dot spends a hue on a selection, which P1 forbids, and a flat ring drawn on the page is not a key with height and travel as P3 asks."
+    },
+    {
+      "pattern": "a row of radio circles with the group name left out",
+      "why_not": "A device prints what the choice is for; a group with no printed name leaves the options without a subject, so the group always carries a label."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): a bank of keys, one down at a time, each with its function printed beside it"
+    },
+    {
+      "source": "Braun TG 1000 tape recorder control row (1970s): round selector keys with the chosen mode shown by a mark beside the key"
+    },
+    {
+      "source": "apps/lab/radio/index.html: round key with an ink dot, legend with an index bar, ball seated in a well"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The key draws at control.check, 24px, while the whole printed row is the label and stands control.md tall, so each option is a 44px target."
+    },
+    {
+      "p": "P3",
+      "axis": "depth",
+      "consequence": "press drops height to 0 in 60–70ms, return runs on the material's spring",
+      "form": "Pressing anywhere on a row removes the key's elevation.part and moves it by motion.press-travel; release returns it on motion.release."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "arrows step a detent",
+      "form": "The options are native radio inputs sharing one name, so the arrow keys walk from option to option and choose as they go, and only the chosen option is a tab stop."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "The chosen option is a dot in text.primary printing ink on the plastic key face; no orange and no fill colour mark the selection."
+    },
+    {
+      "p": "P7",
+      "axis": "type",
+      "consequence": "the chosen one turns medium",
+      "form": "The chosen option's word changes from the regular weight to the medium weight, a second cue beside the dot."
+    },
+    {
+      "p": "P7",
+      "axis": "interaction",
+      "consequence": "every word is also a target that picks itself",
+      "form": "Each printed word is inside the native label of its key, so pressing the word chooses the option."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The group's name is printed above the options on the inset line, and each word sits beside its key a gap.lg away."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/radio/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "round key with an ink dot on its face"
+      },
+      {
+        "id": "B",
+        "name": "legend of printed words with an index bar"
+      },
+      {
+        "id": "C",
+        "name": "ball seated in a recessed well"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A is a round sibling of the Checkbox key, so a form of keys reads as one family, and it tells chosen from empty by a dot, a shape. B has no part to press, so nothing shows the words are targets and Legend already covers a words-only choice; C makes the empty option a recessed well that looks like an Input field and cannot be pressed like a key."
+  },
+  "mechanism": {
+    "kind": "key",
+    "travel": "3px",
+    "spring": {
+      "mass": 1.4,
+      "stiffness": 520,
+      "damping": 46
+    }
+  },
+  "parts": {
+    "group": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A native fieldset holds the options in one fixed column, so the group is announced as a radio group and the layout does not reflow when the choice moves."
+    },
+    "legend": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The group's printed name in the label size and secondary ink on the inset line, also the accessible name of the group."
+    },
+    "item": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A whole row, key and printed word, is one native label at least 44px tall and marked as the hit area (data-hit), so any of it chooses the option."
+    },
+    "input": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A native radio sits under the key, hidden from sight but focusable, so the arrow keys walk the group and the state is announced."
+    },
+    "key": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "A small round key of matte plastic with the part shadow and a ring edge that holds 3:1 against the body."
+    },
+    "dot": {
+      "p": "P2",
+      "axis": "shape",
+      "why": "A dot of ink on the key face says chosen, so the state can be read with no colour at all and in forced colours."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed word uses the label size in ink, regular when waiting and medium when chosen, beside the key like printing on a case."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover darkens the key's printed edge one step and never lifts it, because real keys do not rise."
+    },
+    "active": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "Pressing the row drops the key by its travel and collapses its shadow underneath it, at once."
+    },
+    "checked": {
+      "p": "P7",
+      "axis": "motion",
+      "why": "When the input is chosen the dot appears at once on the key and the word turns medium; the previous choice loses both at the same time."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Keyboard focus on the hidden input draws the same dark ring around the visible key as on every part."
+    },
+    "disabled": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled key loses its height and fades to half, while its ring edge and mark stay readable."
+    },
+    "data-disabled": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "A disabled row shows the not-allowed cursor and its key no longer travels when pressed by a pointer."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion the key changes state at once with no travel and no spring return; only the edge fade stays."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the key keeps a system border and the dot uses the text colour, so both survive."
+    }
+  },
+  "motion": {
+    "transform": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The key travels down in 65ms and returns on the spring so a press reads as a physical stroke."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "The cast shadow collapses with the press and grows back with the return, following the single light."
+    },
+    "border-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The edge step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out, and it stays under Reduce motion because it moves nothing."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The dot fades in on motion.release and out faster on motion.exit, through the state motion tokens (D-008)."
+    }
+  }
+}

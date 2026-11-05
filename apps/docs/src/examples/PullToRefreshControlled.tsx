@@ -10,7 +10,7 @@ export default function PullToRefreshControlled() {
     setTimeout(() => { setAt(new Date()); setBusy(false); }, 1500);
   };
   return (
-    <div style={{ inlineSize: 360, maxInlineSize: '100%' }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))', maxInlineSize: '100%' }}>
       <PullToRefresh label="Energy" onRefresh={ask} refreshing={busy} updated={at}>
         <List label="Energy">
           <List.Item label="House" description="1.8 kW now" />

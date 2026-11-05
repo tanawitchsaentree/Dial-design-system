@@ -1,0 +1,110 @@
+{
+  "concept": "Textarea is the same recessed window as Input, made taller so a person can write several lines. It keeps the label printed above on the inset line and takes the inverse light, so a long note and a short value read as the same kind of part.",
+  "kind": [
+    "textarea",
+    "multi-line field",
+    "note field"
+  ],
+  "family": "Input",
+  "family_difference": "Textarea grows to several lines, wraps its text, and offers vertical resize inside its column instead of a single fixed-height row.",
+  "default_to_avoid": [
+    {
+      "pattern": "browser textarea: a bordered box with a diagonal grab handle that can be dragged wider than its column",
+      "why_not": "The corner handle breaks the full-width column and draws a second, unrelated frame; the well already gives the part its edge."
+    }
+  ],
+  "references": [
+    {
+      "source": "system/FORM.md input class: recessed well, full width of its column, label printed above on the inset line"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the entry window is a recess in the body"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The well is surface.sunken with elevation.well, the same as Input, so a note field reads as cut into the body."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the inset line above the part",
+      "form": "The label, well and messages stack in one column, and the well keeps the full inline size of that column."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every part that takes the keyboard shows the same ring",
+      "form": "The well draws the focus ring when the text area holds focus, and resize is vertical only so it can never leave its column."
+    }
+  ],
+  "variants": {
+    "picked": "family",
+    "by": "agent",
+    "reason": "Textarea follows Input, which was derived in its own round with three lab candidates; only the height and the resize rule differ, so no new candidates were rendered."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The field stacks its label, well and message in one column so the label sits on the inset line above the well."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight, like the printing beside every other part of the unit."
+    },
+    "well": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The recess takes the inverse light, shade on its top-left inner edge, so the person sees where text goes."
+    },
+    "field": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "Typed text is primary ink on the sunken plastic at more than 4.5:1, with a line box tall enough for Thai marks."
+    },
+    "count": { "p": "P5", "axis": "type", "why": "The count is printed under the well in secondary ink with tabular figures, like a reading that changes as you type." },
+    "hint": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The hint is secondary ink in the caption size under the well."
+    },
+    "error": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The error is critical red with a glyph and words, never orange and never colour alone."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A printed mark beside the words means invalid is never told by colour alone, for people who cannot see the red."
+    }
+  },
+  "states": {
+    "focus-within": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The well shows the same dark ring as every part when its text area holds the keyboard focus."
+    },
+    "data-invalid=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "An invalid well draws its edge in the critical red, which is never orange, and the message below names the problem."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled field loses its recess shadow and fades to half, so it reads as not taking input right now."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the well keeps a real border and the focus ring uses the system highlight colour."
+    }
+  },
+  "motion": {}
+}

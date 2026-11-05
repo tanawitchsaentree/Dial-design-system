@@ -1,0 +1,144 @@
+{
+  "concept": "TagInput is the Input window with the typed words kept inside it. Each word becomes a removable Chip standing in the well, and the caret follows the last one, so the whole value of the field sits in one place to read. Enter or a comma turns the text into a chip, Backspace on an empty field takes the last one back.",
+  "kind": [
+    "tag input",
+    "tags field",
+    "chip field"
+  ],
+  "family": "Input",
+  "family_difference": "TagInput lets the well wrap onto more rows, holds removable Chips before the caret, and turns text into a chip on Enter or comma instead of keeping one string.",
+  "default_to_avoid": [
+    {
+      "pattern": "tag input built as a bordered 8px box with 24px pills, each holding a 12px cross",
+      "why_not": "A 12px cross is not a part a finger can hit and the bordered box floats on the page, while dial's chips keep a 44px remove key inside a recessed well."
+    },
+    {
+      "pattern": "tag input that adds a tag on every blur with no word and no message when it refuses a duplicate",
+      "why_not": "A silent refusal leaves the person guessing why nothing happened, so every refusal is spoken in words and announced."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the entry window is a recess in the body, and what was keyed in stays visible in it"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the chosen bands stay latched down in a row beside the dial"
+    },
+    {
+      "source": "system/FORM.md input class: recessed well, full width of its column, label printed above on the inset line"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The well is surface.sunken with elevation.well like Input, and the chips stand up out of it as raised parts, so the typed words read as keys in a recess."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line",
+      "form": "The label, well and messages stack in one column on the inset line, and the well keeps the full inline size of that column however many chips it holds."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Each chip is 44px tall with its own remove key, the text field is 44px tall, and the rows of a wrapped well keep a gap so no two targets touch."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "and a visible value and label",
+      "form": "Enter and comma add, Backspace on an empty field removes the last chip, Tab reaches each remove key, and the value is the chips themselves, with a hint and a spoken line for every add, removal and refusal."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "A chip appears and leaves at once, with no slide, so nothing in the well moves except the row the caret is on."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/tag-input/index.html",
+    "options": [
+      { "id": "A", "name": "chips inside the well, caret after the last" },
+      { "id": "B", "name": "one-row well with the chips standing beneath" },
+      { "id": "C", "name": "tags as ruled rows under the well" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps the value and the entry in one recess, so the person looks in one place; B splits the entry from its result and leaves the well looking empty, and C reads as an ordered list, which is Queue's job."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The field stacks its label, well and messages in one column so the label sits on the inset line above the well."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight, and it also names the text field and the list of chips."
+    },
+    "well": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The recess takes the inverse light and wraps its chips onto new rows so every word stays visible without scrolling."
+    },
+    "list": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The chips form a named list so a screen reader says how many tags there are, while the list adds no box of its own."
+    },
+    "item": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Each tag is one list item that adds no box, so its 44px chip sits in the well's own row grid with a gap on every side."
+    },
+    "field": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "Typed text is primary ink on the sunken plastic at more than 4.5:1, with a line box tall enough for Thai marks, and it takes the rest of the row after the last chip."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The hint is secondary ink in the caption size under the well and says which keys add and remove."
+    },
+    "error": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The refusal or error is critical red with a glyph and words, never orange and never colour alone."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A printed mark beside the words means a refusal is never told by colour alone, for people who cannot see the red."
+    }
+  },
+  "states": {
+    "focus-within": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The well shows the same dark ring as every part when the text field or a remove key holds the keyboard focus."
+    },
+    "data-invalid=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "An invalid well draws its edge in the critical red, which is never orange, and the message below names the problem."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled field loses its recess shadow and its text fades to half, and its chips flatten, so it reads as not taking input."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the well keeps a real border and the focus ring uses the system highlight colour."
+    }
+  },
+  "motion": {}
+}

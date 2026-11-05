@@ -3,7 +3,7 @@ import { Button, Card, Heading, Text } from 'dial-react';
 
 export default function CardBasic() {
   return (
-    <div style={{ inlineSize: 320 }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))' }}>
       <Card
         header={<Heading level={3}>Washer</Heading>}
         footer={<><Button kind="primary">Start wash</Button><Button>Schedule</Button></>}

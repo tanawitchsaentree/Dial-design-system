@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · KanbanBoard · three ways to hold columns of cards</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:grid;gap:32px}
+ .unit{padding:24px;border-radius:40px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 18px;color:var(--ds-text-secondary)}
+ .t{font-size:14px;font-weight:500;margin:0}
+ .cap{font-size:12px;color:var(--ds-text-secondary);margin:0;font-variant-numeric:tabular-nums}
+ .card{box-sizing:border-box;padding:14px 14px 14px 16px;border-radius:22px;background:var(--ds-unit-bg);box-shadow:var(--ds-unit-shadow);display:grid;gap:4px;font-size:13px}
+ .card .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+ .card .keys{display:flex;gap:2px;color:var(--ds-text-secondary);font-size:16px}
+ .k{inline-size:44px;block-size:44px;display:grid;place-items:center;margin-block:-14px}
+ .win{padding:2px 10px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);font-size:12px;font-variant-numeric:tabular-nums}
+ .over{font-weight:500}
+ /* A: columns as recessed wells */
+ .A .b{display:grid;grid-template-columns:repeat(3,200px);gap:16px}
+ .A .col{padding:10px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);display:grid;gap:10px;align-content:start;min-block-size:300px}
+ .A .col .h{display:flex;justify-content:space-between;align-items:baseline;padding-inline:4px}
+ /* B: open columns, a recessed count window beside the printed title */
+ .B .b{display:grid;grid-template-columns:repeat(3,200px);gap:0}
+ .B .col{padding-inline:12px;display:grid;gap:10px;align-content:start;min-block-size:300px;border-inline-start:1px solid var(--ds-line-divider)}
+ .B .col:first-child{border-inline-start:0}
+ .B .col .h{display:flex;justify-content:space-between;align-items:center}
+ .B .slot{min-block-size:56px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ /* C: lanes as rows, each a groove with cards in a line */
+ .C .b{display:grid;gap:14px;inline-size:640px}
+ .C .lane{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center}
+ .C .groove{display:flex;gap:10px;padding:8px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);min-block-size:84px}
+ .C .card{inline-size:150px}
+ .drop{box-shadow:0 -3px 0 0 var(--ds-text-primary), var(--ds-unit-shadow)}
+</style></head><body>
+<h1>KanbanBoard · columns of cards</h1>
+<div class="row">
+ <div class="unit A"><h2>A · columns as recessed wells holding raised cards</h2><div class="b">
+  <div class="col"><div class="h"><p class="t">To do</p><p class="cap">2 cards</p></div>
+   <div class="card"><div class="top"><span>Descale the kettle</span><span class="keys"><span class="k">⋮⋮</span><span class="k">⋯</span></span></div></div>
+   <div class="card drop"><div class="top"><span>Order filters</span><span class="keys"><span class="k">⋮⋮</span><span class="k">⋯</span></span></div></div></div>
+  <div class="col"><div class="h"><p class="t">Doing</p><p class="cap">3 of 3</p></div>
+   <div class="card"><div class="top"><span>Replace hall lamp</span><span class="keys"><span class="k">⋮⋮</span><span class="k">⋯</span></span></div></div></div>
+  <div class="col"><div class="h"><p class="t">Done</p><p class="cap">0 cards</p></div></div>
+ </div></div>
+ <div class="unit B"><h2>B · open columns split by a seam, the count in a recessed window</h2><div class="b">
+  <div class="col"><div class="h"><p class="t">To do</p><span class="win">2</span></div>
+   <div class="card"><div class="top"><span>Descale the kettle</span><span class="keys"><span class="k">⋮⋮</span><span class="k">⋯</span></span></div></div>
+   <div class="card drop"><div class="top"><span>Order filters</span><span class="keys"><span class="k">⋮⋮</span><span class="k">⋯</span></span></div></div></div>
+  <div class="col"><div class="h"><p class="t">Doing</p><span class="win over">⚠ 4/3</span></div>
+   <div class="card"><div class="top"><span>Replace hall lamp</span><span class="keys"><span class="k">⋮⋮</span><span class="k">⋯</span></span></div></div></div>
+  <div class="col"><div class="h"><p class="t">Done</p><span class="win">0</span></div><div class="slot"></div></div>
+ </div></div>
+ <div class="unit C"><h2>C · lanes as rows, each a groove with its cards in a line</h2><div class="b">
+  <div class="lane"><p class="t">To do<br><span class="cap">2 cards</span></p><div class="groove"><div class="card">Descale the kettle</div><div class="card drop">Order filters</div></div></div>
+  <div class="lane"><p class="t">Doing<br><span class="cap">1 of 3</span></p><div class="groove"><div class="card">Replace hall lamp</div></div></div>
+  <div class="lane"><p class="t">Done<br><span class="cap">0 cards</span></p><div class="groove"></div></div>
+ </div></div>
+</div></body></html>

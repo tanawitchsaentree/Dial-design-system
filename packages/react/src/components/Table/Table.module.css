@@ -1,0 +1,97 @@
+/* Table — flat printing, a seam between rows (lab apps/lab/table pick A).
+   Seam = divider tone over the material's lit edge, as in Divider. No fill, no hover on rows, no orange. */
+.scroll {
+  inline-size: 100%;
+  overflow-x: auto;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.scroll:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.root {
+  inline-size: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  text-align: start;
+}
+.caption {
+  caption-side: top;
+  padding-block-end: var(--ds-gap-md);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  text-align: start;
+  color: var(--ds-text-secondary);
+}
+.head { color: var(--ds-text-secondary); }
+.body { color: var(--ds-text-primary); }
+.row { background: transparent; }
+.cell {
+  padding-block: var(--ds-gap-md);
+  padding-inline: 0 var(--ds-gap-xl);
+  border-block-start: var(--ds-width-hairline) solid var(--ds-material-lit);
+  border-block-end: var(--ds-width-hairline) solid var(--ds-line-divider);
+  text-align: start;
+  vertical-align: baseline;
+  overflow-wrap: break-word;
+}
+.body .row:last-child .cell { border-block-end: 0; }
+.cell:last-child,
+.headCell:last-child { padding-inline-end: 0; }
+.headCell {
+  padding-block: var(--ds-gap-xs);
+  padding-inline: 0 var(--ds-gap-xl);
+  border-block-end: var(--ds-width-hairline) solid var(--ds-line-divider);
+  font-weight: var(--ds-type-weight-medium);
+  text-align: start;
+  vertical-align: bottom;
+  overflow-wrap: break-word;
+  color: var(--ds-text-secondary);
+}
+.cell[data-numeric],
+.headCell[data-numeric] {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+.sortKey {
+  box-sizing: border-box;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-xs);
+  min-block-size: var(--ds-control-md);
+  min-inline-size: var(--ds-control-md);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.headCell[data-numeric] .sortKey { flex-direction: row-reverse; }
+.sortKey:hover { color: var(--ds-text-primary); }
+.sortKey:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.sortMark {
+  display: grid;
+  place-items: center;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  flex: none;
+}
+.headCell[aria-sort='ascending'],
+.headCell[aria-sort='descending'] { color: var(--ds-text-primary); }
+@media (forced-colors: active) {
+  .cell { border-block-start-width: 0; border-block-end-color: CanvasText; }
+  .headCell { border-block-end-color: CanvasText; }
+  .sortKey:focus-visible,
+  .scroll:focus-visible { outline-color: Highlight; }
+}

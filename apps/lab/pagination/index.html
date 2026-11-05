@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Pagination · three ways to turn pages</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:420px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ ul{list-style:none;margin:0 0 16px;padding:0;display:flex;align-items:center}
+ li{display:flex}
+ .k{inline-size:44px;block-size:44px;border-radius:50%;display:grid;place-items:center;border:1px solid transparent;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);color:var(--ds-text-secondary);font:inherit;font-size:14px}
+ .k.off{box-shadow:none;opacity:.5}
+ .n{min-inline-size:44px;block-size:44px;display:grid;place-items:center;font-size:14px;color:var(--ds-text-secondary)}
+ .dots{min-inline-size:44px;text-align:center;color:var(--ds-text-secondary);letter-spacing:2px}
+ /* A: every page is a round key; the current one is latched glass */
+ .A .n{inline-size:44px;border-radius:50%;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);margin-inline:2px}
+ .A .n.cur{box-shadow:none;transform:translate(1px,2px);border:1px solid var(--ds-glass-neutral-edge);background:var(--ds-glass-neutral-body);color:var(--ds-text-primary)}
+ /* B: printed numerals, ink index mark under the current one */
+ .B .n.cur{color:var(--ds-text-primary);font-weight:500;position:relative}
+ .B .n.cur::after{content:"";position:absolute;inset-block-end:8px;inline-size:12px;border-block-end:2px solid var(--ds-text-primary);border-radius:99px}
+ .B ul{gap:0}
+ /* C: numerals in a recessed strip, the current one a raised cap in the groove */
+ .C ul{padding:4px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);inline-size:max-content}
+ .C .n.cur{border-radius:var(--ds-corner-media);background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);color:var(--ds-text-primary);font-weight:500}
+ .C .k{margin-inline:6px}
+</style></head><body>
+<h1>Pagination · turning pages in a long list</h1>
+<div class="row">
+ <div class="unit A"><h2>A · every page a round key, current latched</h2>
+  <ul><li><span class="k off">&lsaquo;</span></li><li><span class="n">1</span></li><li><span class="n cur">2</span></li><li><span class="n">3</span></li><li><span class="dots">...</span></li><li><span class="n">12</span></li><li><span class="k">&rsaquo;</span></li></ul></div>
+ <div class="unit B"><h2>B · printed numerals, ink index mark</h2>
+  <ul><li><span class="k">&lsaquo;</span></li><li><span class="n">1</span></li><li><span class="dots">...</span></li><li><span class="n">5</span></li><li><span class="n cur">6</span></li><li><span class="n">7</span></li><li><span class="dots">...</span></li><li><span class="n">12</span></li><li><span class="k">&rsaquo;</span></li></ul></div>
+ <div class="unit C"><h2>C · numerals in a recessed strip, current a cap</h2>
+  <ul><li><span class="k off">&lsaquo;</span></li><li><span class="n cur">1</span></li><li><span class="n">2</span></li><li><span class="n">3</span></li><li><span class="dots">...</span></li><li><span class="n">12</span></li><li><span class="k">&rsaquo;</span></li></ul></div>
+</div></body></html>

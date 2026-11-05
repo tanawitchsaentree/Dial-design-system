@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · TreeView · three ways to print a hierarchy</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 16px;color:var(--ds-text-secondary)}
+ ul{list-style:none;margin:0;padding:0}
+ .r{display:flex;align-items:center;min-block-size:44px;font-size:16px;color:var(--ds-text-secondary)}
+ .t{inline-size:44px;block-size:44px;display:grid;place-items:center;flex:none;font-size:14px}
+ .sel>.r{color:var(--ds-text-primary);font-weight:500}
+ /* A: legend lines. Indent only, ink index bar and chevron; selected row lit by the bar */
+ .A ul ul{padding-inline-start:22px}
+ .A .r{position:relative;padding-inline-start:12px}
+ .A .sel>.r::before{content:"";position:absolute;inset-inline-start:0;inset-block:12px;inline-size:4px;border-radius:2px;background:currentColor}
+ /* B: schematic. Hairline relation lines with right-angle elbows, node dots, selected label boxed in ink */
+ .B ul ul{margin-inline-start:22px}
+ .B li{position:relative}
+ .B ul ul>li{padding-inline-start:22px}
+ .B ul ul>li::before{content:"";position:absolute;inset-inline-start:0;inset-block:0;border-inline-start:1px solid var(--ds-line-ring)}
+ .B ul ul>li:last-child::before{inset-block-end:auto;block-size:22px}
+ .B ul ul>li::after{content:"";position:absolute;inset-inline-start:0;inset-block-start:22px;inline-size:22px;border-block-start:1px solid var(--ds-line-ring)}
+ .B ul ul>li>.r .t{margin-inline-start:-22px}
+ .B .lab{padding:4px 10px;border:1px solid transparent;border-radius:8px}
+ .B .sel>.r .lab{border-color:var(--ds-text-primary)}
+ .B .dot{inline-size:6px;block-size:6px;border-radius:50%;border:1px solid currentColor}
+ .B .sel>.r .dot{background:currentColor}
+ /* C: sunken well on the selected row, like a file list */
+ .C ul ul{padding-inline-start:22px}
+ .C .r{padding-inline-start:4px;border-radius:12px;margin-block:1px}
+ .C .sel>.r{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+</style></head><body>
+<h1>TreeView · nested expandable items</h1>
+<div class="row">
+ <div class="unit A"><h2>A · legend lines, index bar</h2>
+  <ul><li><div class="r"><span class="t">▾</span>Rooms</div>
+    <ul><li class="sel"><div class="r"><span class="t"></span>Kitchen</div></li><li><div class="r"><span class="t"></span>Hall</div></li>
+     <li><div class="r"><span class="t">▾</span>Upstairs</div><ul><li><div class="r"><span class="t"></span>Bedroom</div></li><li><div class="r"><span class="t"></span>Bath</div></li></ul></li></ul></li>
+   <li><div class="r"><span class="t">▸</span>Devices</div></li></ul></div>
+ <div class="unit B"><h2>B · schematic, elbow lines, boxed label</h2>
+  <ul><li><div class="r"><span class="t">▾</span><span class="lab">Rooms</span></div>
+    <ul><li class="sel"><div class="r"><span class="t"><i class="dot"></i></span><span class="lab">Kitchen</span></div></li><li><div class="r"><span class="t"><i class="dot"></i></span><span class="lab">Hall</span></div></li>
+     <li><div class="r"><span class="t">▾</span><span class="lab">Upstairs</span></div><ul><li><div class="r"><span class="t"><i class="dot"></i></span><span class="lab">Bedroom</span></div></li><li><div class="r"><span class="t"><i class="dot"></i></span><span class="lab">Bath</span></div></li></ul></li></ul></li>
+   <li><div class="r"><span class="t">▸</span><span class="lab">Devices</span></div></li></ul></div>
+ <div class="unit C"><h2>C · sunken row, file list</h2>
+  <ul><li><div class="r"><span class="t">▾</span>Rooms</div>
+    <ul><li class="sel"><div class="r"><span class="t"></span>Kitchen</div></li><li><div class="r"><span class="t"></span>Hall</div></li>
+     <li><div class="r"><span class="t">▾</span>Upstairs</div><ul><li><div class="r"><span class="t"></span>Bedroom</div></li><li><div class="r"><span class="t"></span>Bath</div></li></ul></li></ul></li>
+   <li><div class="r"><span class="t">▸</span>Devices</div></li></ul></div>
+</div>
+</body></html>

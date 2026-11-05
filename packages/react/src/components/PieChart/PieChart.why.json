@@ -1,0 +1,64 @@
+{
+  "concept": "PieChart is a round dial cut into a recessed window: the whole is a ring or disc, each part is a slice printed in an ink pattern with its name and share tied to it by a hairline, and a legend of names repeats them as rows a finger can reach, so shares read without any hue and every slice is reachable by keys and by a table.",
+  "kind": ["pie chart", "donut chart", "share chart"],
+  "default_to_avoid": [
+    { "pattern": "pie chart of rainbow slices with percentages inside the wedges, an exploded slice on hover and a legend of coloured dots", "why_not": "Slices told apart by hue alone fail anyone who cannot see the hue and spend colour across a unit that keeps one orange part, while text inside thin wedges collides and hover-only values leave out keyboard users." },
+    { "pattern": "donut chart drawn as stacked coloured arcs with a tooltip as the only place that says the numbers", "why_not": "P4 says a mark that shows a value exposes it as text, so every part prints its name and share, a readout says the active part and a hidden table holds the numbers." }
+  ],
+  "references": [
+    { "source": "Braun SK 4 record player (Dieter Rams, 1956): a round dial face read against printed divisions, no colour to decode" },
+    { "source": "Florence Nightingale's polar area diagrams: shares told by position and printed figures, with the key set beside the drawing" },
+    { "source": "Edward Tufte, The Visual Display of Quantitative Information: label the parts directly and keep the ink for the data" }
+  ],
+  "derivation": [
+    { "p": "P2", "axis": "depth", "consequence": "the window is recessed into the body (inverse light)", "form": "The ring sits in one recessed window with elevation.well and surface.sunken, so the chart reads as a display cut into the unit and not a card laid on it." },
+    { "p": "P4", "axis": "shape", "consequence": "their field is a rectangle or circle that nests in the body", "form": "The ring is a circle that sits inside the rectangular window with an even margin all round, and its hole nests in the ring at a fixed ratio." },
+    { "p": "P4", "axis": "colour", "consequence": "a lit level uses ink at full step, never orange", "form": "Every slice is outlined in full step ink and filled with ink or an ink pattern, so no slice, leader or label uses action.accent or any hue." },
+    { "p": "P4", "axis": "interaction", "consequence": "exposes it as text to assistive tech", "form": "Each slice prints its name and share beside the ring, a live readout says the active slice in words, and a visually hidden table holds every value for screen readers." },
+    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "Each row of the legend is at least the control size tall and picks its own slice when pressed, so a thin slice is still easy to reach." },
+    { "p": "P3", "axis": "interaction", "consequence": "arrows step a detent, Home and End reach the ends", "form": "The chart takes one tab stop; the arrow keys step slice by slice round the ring, and Home and End reach the first and the last slice." },
+    { "p": "P2", "axis": "motion", "consequence": "values change at once", "form": "New data redraws the slices in place with no sweeping animation, so there is nothing to switch off under reduce motion." }
+  ],
+  "variants": {
+    "lab": "apps/lab/pie-chart/index.html",
+    "options": [
+      { "id": "A", "name": "a donut in a recessed window with leader lines to printed names, the total in the hole and a legend of names under it" },
+      { "id": "B", "name": "a ring of sixty ticks lit by share, parts told by tick length, like a rotary scale" },
+      { "id": "C", "name": "a whole pie with the name and percentage printed in a label inside each wedge" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A prints every name and share outside the ring on a leader so thin slices never collide, uses the hole for the total, and tells parts apart by pattern; B reads as a second Rotary and gives only sixty coarse steps with no names, and C crowds its labels inside small wedges where they overlap."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "The chart fills the inline size of its column and keeps its block size whatever the data says, so the layout does not reflow when shares change." },
+    "header": { "p": "P5", "axis": "space", "why": "The printed title sits on the inset line above the window, aligned to its start edge, like the label above a fader." },
+    "title": { "p": "P5", "axis": "type", "why": "The title is printed in the label size and regular weight, flat ink with no emphasis, like the name above Meter." },
+    "window": { "p": "P2", "axis": "depth", "why": "The ring sits in a recess with inverse light and a hairline edge in line.ring that holds 3:1 against the body, at a fixed block size so a hover or a focus never moves the chart." },
+    "svg": { "p": "P3", "axis": "interaction", "why": "The drawing is the single tab stop of the chart and takes the arrow, Home and End keys, with no tab stop per slice." },
+    "slice": { "p": "P4", "axis": "colour", "why": "A slice is outlined in full step ink and filled with an ink pattern, so parts differ by texture and not by hue." },
+    "focusMark": { "p": "P3", "axis": "interaction", "why": "The keyboard mark is a ring drawn round the active slice with a gap, in the focus ring ink, so focus is a shape round the part and not a tint." },
+    "lead": { "p": "P8", "axis": "shape", "why": "A leader is a hairline of secondary ink with one bend that ties a slice to its printed name, a relation that is drawn and never crosses a label." },
+    "label": { "p": "P5", "axis": "type", "why": "Each part prints its name and share at the caption size in regular weight, in tabular figures, beside the ring." },
+    "center": { "p": "P2", "axis": "type", "why": "The total in the hole is a figure in medium weight and tabular numerals, the one big reading of the donut." },
+    "centerCaption": { "p": "P5", "axis": "type", "why": "The word under the total names it, at the smallest size step in secondary ink, as a unit sits beside an LCD value." },
+    "legend": { "p": "P4", "axis": "interaction", "why": "The legend lists every part by name beside its own pattern swatch, so the pattern is decoded in words and a part too thin to label still has a row." },
+    "item": { "p": "P3", "axis": "space", "why": "Each legend row is at least the control size tall, so it is a full touch target that picks its slice when pressed." },
+    "swatch": { "p": "P4", "axis": "shape", "why": "The swatch is a small copy of the slice pattern in an outlined rectangle, so it matches without hue." },
+    "name": { "p": "P5", "axis": "type", "why": "The part name is printed at the caption size in primary ink, regular weight." },
+    "figure": { "p": "P2", "axis": "type", "why": "The value and share at the end of a legend row use tabular figures so the column keeps its width as the data changes." },
+    "readout": { "p": "P2", "axis": "interaction", "why": "The readout is a polite live region under the window that says the active slice in words, such as Kitchen: 18 kWh, 18%, and is never a control." },
+    "table": { "p": "P4", "axis": "interaction", "why": "A real table of the same numbers is clipped out of sight and kept for assistive tech, so the data never lives only in the drawing." },
+    "tileBg": { "p": "P4", "axis": "depth", "why": "The ground of every pattern tile is the sunken surface, so the hatch, the dots and the lines read as printing on the recess." },
+    "tileInk": { "p": "P4", "axis": "shape", "why": "Hatch and line patterns are strokes of full step ink at the ring width, a texture that survives a greyscale print." },
+    "tileDot": { "p": "P4", "axis": "shape", "why": "The dot pattern uses full step ink discs, a third texture next to the hatch and the lines." },
+    "tileSolid": { "p": "P4", "axis": "colour", "why": "The solid pattern is a full step ink fill, the one dense texture, so the first part stands out against the lighter ones." }
+  },
+  "states": {
+    "data-active": { "p": "P3", "axis": "interaction", "why": "The active slice, from keys or a pointer, takes a ring-width outline in place of the hairline and its legend row prints in medium weight, cues that are a line weight and a type weight and not a colour." },
+    "data-idle": { "p": "P2", "axis": "type", "why": "Before any slice is active the readout shows the key hint in secondary ink, and the value in primary ink once one is." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "The focus ring round the active slice is drawn only when the keyboard has focus, so a pointer press does not leave a ring." },
+    "@media forced-colors: active": { "p": "P4", "axis": "interaction", "why": "In forced colours the window, slices, patterns and the ring use system colours so the data and the active slice survive." }
+  },
+  "motion": {}
+}

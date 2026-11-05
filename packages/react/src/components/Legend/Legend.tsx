@@ -194,6 +194,7 @@ export const Legend = forwardRef<HTMLDivElement, LegendProps>(function Legend(
         aria-checked={on}
         tabIndex={on ? 0 : -1}
         disabled={disabled}
+        aria-disabled={disabled || undefined}
         data-word=""
         data-state={on ? 'on' : 'off'}
         className={styles.word}
@@ -204,7 +205,8 @@ export const Legend = forwardRef<HTMLDivElement, LegendProps>(function Legend(
     );
   };
 
-  const vars = { ...style, '--n': n, '--a0': a0, '--da': da, '--d': `${d}px` } as CSSProperties;
+  // the knob's diameter is its control.knob-* token, so the printed arc follows the token too
+  const vars = { ...style, '--n': n, '--a0': a0, '--da': da, '--d': d } as CSSProperties;
 
   return (
     <div
@@ -237,7 +239,8 @@ export const Legend = forwardRef<HTMLDivElement, LegendProps>(function Legend(
         <span id={nameId} className={styles.name}>{label}</span>
       )}
       {withKnob ? (
-        <div ref={wordsRef} className={cx(styles.words, layout === 'arc' && styles.hub)} aria-hidden="true">
+        // the printed words belong to the knob: when it is off, they are part of an inactive control (WCAG 1.4.3)
+        <div ref={wordsRef} className={cx(styles.words, layout === 'arc' && styles.hub)} aria-hidden="true" aria-disabled={disabled || undefined}>
           {items.map(word)}
           <span className={styles.mark} />
         </div>

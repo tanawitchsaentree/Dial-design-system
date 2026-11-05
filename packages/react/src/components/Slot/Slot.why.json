@@ -1,6 +1,12 @@
 {
   "concept": "Slot is the narrow mouth a room or a device unit has for a scene card. It is a recessed slit in the plastic with the room's name printed under it and a lamp beside it. Inserting a SceneCard runs the scene, the card then stands half out of the slit with its name readable, and the lamp lights with a word.",
-  "kind": ["slot", "card slot", "card reader", "scene slot", "drop target"],
+  "kind": [
+    "slot",
+    "card slot",
+    "card reader",
+    "scene slot",
+    "drop target"
+  ],
   "default_to_avoid": [
     {
       "pattern": "drop zone slot drawn as a dashed rounded rectangle that says drop here and highlights in the brand colour",
@@ -12,9 +18,15 @@
     }
   ],
   "references": [
-    { "source": "Yoto Player: the card slot on the top of the unit, the card standing half out while it plays" },
-    { "source": "Braun cassette and card slots on Ulm school appliances: a slit in the case with its function printed beside it" },
-    { "source": "WAI-ARIA Authoring Practices, keyboard drag and drop guidance: pick up, move, drop and cancel, each announced" }
+    {
+      "source": "Yoto Player: the card slot on the top of the unit, the card standing half out while it plays"
+    },
+    {
+      "source": "Braun cassette and card slots on Ulm school appliances: a slit in the case with its function printed beside it"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices, keyboard drag and drop guidance: pick up, move, drop and cancel, each announced"
+    }
   ],
   "derivation": [
     {
@@ -57,40 +69,152 @@
   "variants": {
     "lab": "apps/lab/scene-card/index.html",
     "options": [
-      { "id": "A", "name": "top-loading slit: the card stands half out above a slit, name readable, lamp and room printed under it" },
-      { "id": "B", "name": "side reader: a mouth on the unit's side, the card sticking out past the end" },
-      { "id": "C", "name": "dock bed: a recessed bed the whole card lies in" }
+      {
+        "id": "A",
+        "name": "top-loading slit: the card stands half out above a slit, name readable, lamp and room printed under it"
+      },
+      {
+        "id": "B",
+        "name": "side reader: a mouth on the unit's side, the card sticking out past the end"
+      },
+      {
+        "id": "C",
+        "name": "dock bed: a recessed bed the whole card lies in"
+      }
     ],
     "picked": "A",
     "by": "agent",
     "reason": "A keeps a fixed bay so nothing reflows (P6) and shows the name on the edge that stays out, with the slit a true recess (P4); B cuts the name and widens the unit on a phone, and C is a drop zone, not a slot the card goes into."
   },
   "parts": {
-    "root": { "p": "P6", "axis": "space", "why": "The slot takes a card's width and a fixed height, so it sits in a unit beside the knob without moving it." },
-    "mouth": { "p": "P3", "axis": "space", "why": "The bay and the slit together are one button well over 44px, so a press anywhere on the slot inserts or takes out." },
-    "bay": { "p": "P6", "axis": "space", "why": "The bay above the slit keeps half a card's height in every state, so the unit's layout never reflows." },
-    "face": { "p": "P1", "axis": "colour", "why": "The half card standing out is the same light stock and dark ink as the SceneCard, never orange." },
-    "name": { "p": "P5", "axis": "type", "why": "The inserted scene's name is printed medium at body size on the part of the card that stays out." },
-    "step": { "p": "P5", "axis": "type", "why": "The first step of the scene is printed in caption size under its name, when there is room above the slit." },
-    "legend": { "p": "P5", "axis": "depth", "why": "An empty slot prints the words scene card with an arrow above the slit, flat ink on the plastic." },
-    "arrow": { "p": "P5", "axis": "colour", "why": "The printed arrow points into the slit in the legend's own ink, never a colour of its own." },
-    "slit": { "p": "P4", "axis": "depth", "why": "The slit is a narrow recess with the inverse light, the hole the card goes into." },
-    "foot": { "p": "P5", "axis": "space", "why": "The room's name and the lamp sit on one printed line under the slit, on the unit's inset line." },
-    "label": { "p": "P5", "axis": "type", "why": "The room or device name is printed at label size in primary ink, as the slot's own name." },
-    "announce": { "p": "P3", "axis": "interaction", "why": "A polite hidden status says which scene went into which room, or that it was taken out." }
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The slot takes a card's width and a fixed height, so it sits in a unit beside the knob without moving it."
+    },
+    "mouth": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The bay and the slit together are one button well over 44px, so a press anywhere on the slot inserts or takes out."
+    },
+    "bay": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The bay above the slit keeps half a card's height in every state, so the unit's layout never reflows."
+    },
+    "face": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The half card standing out is the same light stock and dark ink as the SceneCard, never orange."
+    },
+    "name": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The inserted scene's name is printed medium at body size on the part of the card that stays out."
+    },
+    "step": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The first step of the scene is printed in caption size under its name, when there is room above the slit."
+    },
+    "legend": {
+      "p": "P5",
+      "axis": "depth",
+      "why": "An empty slot prints the words scene card with an arrow above the slit, flat ink on the plastic."
+    },
+    "arrow": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The printed arrow points into the slit in the legend's own ink, never a colour of its own."
+    },
+    "slit": {
+      "p": "P4",
+      "axis": "depth",
+      "why": "The slit is a narrow recess with the inverse light, the hole the card goes into."
+    },
+    "foot": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The room's name and the lamp sit on one printed line under the slit, on the unit's inset line."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The room or device name is printed at label size in primary ink, as the slot's own name."
+    },
+    "announce": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A polite hidden status says which scene went into which room, or that it was taken out."
+    }
   },
   "states": {
-    "focus-visible": { "p": "P3", "axis": "interaction", "why": "The focused slot shows the same dark ring as every part, drawn around the bay and the slit together." },
-    "disabled": { "p": "P3", "axis": "interaction", "why": "A slot of a unit that is offline takes no card and says so, and its printing stays readable." },
-    "data-ready=true": { "p": "P6", "axis": "interaction", "why": "While a card is held the slit shows a ring and its legend prints at full ink, so the places it can go are seen." },
-    "data-over=true": { "p": "P3", "axis": "interaction", "why": "The slot under a dragged card prints its ring in full ink, so the hand sees where the card will go." },
-    "data-fresh=true": { "p": "P3", "axis": "motion", "why": "Only a card the person just inserted slides into the slit; a card already in when the page opens stays still." },
-    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the card is in the slit at once and the ring appears without a fade." },
-    "@media forced-colors: active": { "p": "P2", "axis": "depth", "why": "In forced colours the slit and the card keep outlines and the ring uses Highlight, because the recess shading fades there." }
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The focused slot shows the same dark ring as every part, drawn around the bay and the slit together."
+    },
+    "disabled": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A slot of a unit that is offline takes no card and says so, and its printing stays readable."
+    },
+    "data-ready=true": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "While a card is held the slit shows a ring and its legend prints at full ink, so the places it can go are seen."
+    },
+    "data-over=true": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The slot under a dragged card prints its ring in full ink, so the hand sees where the card will go."
+    },
+    "data-fresh=true": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Only a card the person just inserted slides into the slit; a card already in when the page opens stays still."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion the card is in the slit at once and the ring appears without a fade."
+    },
+    "@media forced-colors: active": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "In forced colours the slit and the card keep outlines and the ring uses Highlight, because the recess shading fades there."
+    },
+    "data-state=closing": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "While it leaves, the part fades and sinks back over motion.exit on the accelerating curve, and no key or reader reaches it (D-008)."
+    }
   },
   "motion": {
-    "@insert": { "p": "P3", "axis": "motion", "why": "The inserted card travels one rise step down into the slit, fast in and slow out, and then stays still." },
-    "outline-color": { "p": "P3", "axis": "motion", "why": "The slit's ring fades in when a card is held through the state motion tokens, never in one frame." },
-    "color": { "p": "P3", "axis": "motion", "why": "The legend steps to full ink with the ring on the same timing when a card is held." }
+    "@insert": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The inserted card travels one rise step down into the slit, fast in and slow out, and then stays still."
+    },
+    "outline-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The slit's ring fades in when a card is held through the state motion tokens, never in one frame."
+    },
+    "color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The legend steps to full ink with the ring on the same timing when a card is held."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A card taken out lifts out of the slit and fades over motion.exit on the accelerating curve while the printed legend fades back in under it in the same cell, so the slot changes instead of swapping (D-008)."
+    },
+    "transform": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A card taken out lifts out of the slit and fades over motion.exit on the accelerating curve while the printed legend fades back in under it in the same cell, so the slot changes instead of swapping (D-008)."
+    }
   }
 }

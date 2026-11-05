@@ -11,7 +11,7 @@ const START = [
 export default function QueueControlled() {
   const [tracks, setTracks] = useState(START);
   return (
-    <Stack gap="md" style={{ inlineSize: 380, maxInlineSize: '100%' }}>
+    <Stack gap="md" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))', maxInlineSize: '100%' }}>
       <Queue label="Programme" tracks={tracks} onTracksChange={setTracks} playing="a" />
       <Text tone="secondary">Order {tracks.map((t) => t.title).join(', ')}</Text>
     </Stack>

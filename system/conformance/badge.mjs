@@ -16,7 +16,8 @@ export default async function badge({ check, expect, go, main }) {
     await go('/components/badge/code');
     const r = await all().evaluateAll((els) => {
       const by = {};
-      for (const e of els) { const s = e.querySelector('svg > *'); if (s) by[e.dataset.tone] = `${s.tagName}${s.getAttribute('d') ?? ''}${s.getAttribute('r') ?? ''}`; }
+      // the lit shape (R-008: every shape stands in the window and the tone's own is lit)
+      for (const e of els) { const s = e.querySelector('svg > [data-on] > *') ?? e.querySelector('svg > *'); if (s) by[e.dataset.tone] = `${s.tagName}${s.getAttribute('d') ?? ''}${s.getAttribute('r') ?? ''}`; }
       return by;
     });
     const tones = Object.keys(r);

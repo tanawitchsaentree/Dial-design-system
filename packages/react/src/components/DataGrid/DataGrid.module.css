@@ -1,0 +1,44 @@
+/* DataGrid — Table's flat printing (lab apps/lab/table pick A, imported from Table.module.css and not copied)
+   made into a panel you walk by cell. The scroller bounds the rows, the header sticks on the unit's ground,
+   one cell holds the focus ring, a marked row gets a stronger seam. No fill, no hover, no orange, no motion of its own. */
+.scroller {
+  --dg-row: var(--ds-control-lg);
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-block-size: calc((var(--dg-rows) + 1) * var(--dg-row));
+  overflow: auto;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.headCell {
+  position: sticky;
+  inset-block-start: var(--ds-gap-none);
+  background: var(--ds-unit-bg);
+}
+.cell {
+  box-sizing: border-box;
+  min-block-size: var(--ds-control-md);
+}
+.selectCell {
+  inline-size: var(--ds-control-md);
+  min-inline-size: var(--ds-control-md);
+  padding-inline-end: var(--ds-gap-md);
+}
+.empty {
+  padding-block: var(--ds-gap-lg);
+  text-align: start;
+  color: var(--ds-text-secondary);
+}
+.cell:focus-visible,
+.headCell:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: calc(var(--ds-width-ring) * -1);
+}
+[aria-selected='true'] > .cell {
+  border-block-end-color: var(--ds-line-ring);
+}
+@media (forced-colors: active) {
+  .cell:focus-visible,
+  .headCell:focus-visible { outline-color: Highlight; }
+  [aria-selected='true'] > .cell { border-block-end-color: CanvasText; }
+}

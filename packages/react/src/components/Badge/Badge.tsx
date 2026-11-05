@@ -29,8 +29,12 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
 ) {
   return (
     <span ref={ref} data-component="Badge" data-tone={tone} className={cx(styles.root, styles[tone], className)} {...rest}>
+      {/* every lamp shape stands in the one window and the tone's own is lit, so a change of tone fades from one
+          shape to the next instead of swapping it in a frame (D-008, R-008) */}
       <svg className={styles.glyph} viewBox="0 0 10 10" aria-hidden="true" focusable="false">
-        {GLYPH[tone]}
+        {(Object.keys(GLYPH) as BadgeTone[]).map((t) => (
+          <g key={t} className={styles.shape} data-on={t === tone ? '' : undefined}>{GLYPH[t]}</g>
+        ))}
       </svg>
       {count !== undefined && <span className={styles.count}>{count}</span>}
       <span className={styles.word}>{children}</span>

@@ -1,0 +1,50 @@
+/* Link — ink text in the sentence's own size, one thin rule under it (lab apps/lab/link pick A).
+   Printing is flat: no height, no shadow. No orange. */
+.link {
+  color: var(--ds-text-primary);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: var(--ds-width-hairline);
+  text-underline-offset: var(--ds-gap-xs);
+  border-radius: var(--ds-corner-mark);
+  cursor: pointer;
+  transition:
+    text-decoration-thickness var(--ds-motion-hover) var(--ds-motion-easing),
+    color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.link:hover { text-decoration-thickness: var(--ds-width-ring); }
+/* read: one ink step lighter. The visited prop adds the dotted rule, which CSS may not set on :visited */
+.link:visited,
+.link[data-visited] { color: var(--ds-text-secondary); }
+.link[data-visited] { text-decoration-style: dotted; }
+.link:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+/* on its own line: a row as tall as a key, the rule under the words only */
+.standalone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-sm);
+  min-block-size: var(--ds-control-md);
+  min-inline-size: var(--ds-layout-touch);
+}
+/* the external mark: dot-matrix glyph, ink, kept off the rule */
+.mark {
+  margin-inline-start: var(--ds-gap-xs);
+  text-decoration: none;
+}
+.standalone .mark { margin-inline-start: var(--ds-gap-none); }
+@media (prefers-reduced-motion: reduce) {
+  .link { transition: none; }
+}
+@media (forced-colors: active) {
+  .link { color: LinkText; }
+  .link:visited,
+  .link[data-visited] { color: VisitedText; }
+}

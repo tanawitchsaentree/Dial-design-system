@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · NavigationMenu · three ways to open a site menu</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:420px;block-size:360px;padding:20px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);position:relative}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 14px;color:var(--ds-text-secondary)}
+ ul{list-style:none;margin:0;padding:0}
+ .bar{display:flex;gap:4px;position:relative}
+ .k{display:inline-flex;align-items:center;gap:6px;min-block-size:44px;padding-inline:16px;border:1px solid transparent;background:transparent;color:var(--ds-text-secondary);font:inherit;font-size:var(--ds-type-label)}
+ .k[aria-current]{color:var(--ds-text-primary);font-weight:500}
+ .k.on{color:var(--ds-text-primary)}
+ .panel a{display:block;min-block-size:44px;box-sizing:border-box;padding:10px 16px;border-radius:var(--ds-corner-media);color:var(--ds-text-primary);font-size:var(--ds-type-body);line-height:24px}
+ .panel h3{margin:0;padding:8px 16px 4px;font-size:var(--ds-type-label);font-weight:400;color:var(--ds-text-secondary)}
+ .panel a.f{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ /* A: plastic panel dropped under its own key, groups side by side */
+ .A .on{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border-radius:var(--ds-corner-mark)}
+ .A .panel{position:absolute;inset-block-start:52px;inset-inline-start:0;display:flex;gap:12px;padding:6px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-float);border-radius:var(--ds-corner-inner)}
+ /* B: a full-width band under the whole bar, one plate */
+ .B .on{border-block-end:3px solid var(--ds-text-primary)}
+ .B .panel{position:absolute;inset-block-start:100px;inset-inline:20px;display:grid;grid-template-columns:1fr 1fr;padding:8px;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border-radius:var(--ds-corner-media)}
+ /* C: opens in place, pushes the rest of the unit down */
+ .C .bar{flex-direction:column;gap:0}
+ .C .on{border-block-end:1px solid var(--ds-line-divider)}
+ .C .panel{padding-inline-start:16px;border-inline-start:2px dotted var(--ds-line-ring);margin-inline-start:16px}
+</style></head><body>
+<h1>NavigationMenu · a site menu whose top items open grouped links</h1>
+<div class="row">
+ <div class="unit A"><h2>A · plastic panel under its key</h2>
+  <ul class="bar"><li><button class="k" aria-current="page">Home</button></li><li><button class="k on" aria-expanded="true">Rooms ▾</button>
+  <div class="panel"><div><h3>upstairs</h3><a class="f" href="#">Bedroom</a><a href="#">Bathroom</a></div><div><h3>downstairs</h3><a href="#">Kitchen</a><a href="#">Living room</a></div></div></li><li><button class="k">Devices ▾</button></li><li><button class="k">Help</button></li></ul></div>
+ <div class="unit B"><h2>B · band across the bar</h2>
+  <ul class="bar"><li><button class="k" aria-current="page">Home</button></li><li><button class="k on" aria-expanded="true">Rooms ▾</button></li><li><button class="k">Devices ▾</button></li><li><button class="k">Help</button></li></ul>
+  <div class="panel"><div><h3>upstairs</h3><a class="f" href="#">Bedroom</a><a href="#">Bathroom</a></div><div><h3>downstairs</h3><a href="#">Kitchen</a><a href="#">Living room</a></div></div></div>
+ <div class="unit C"><h2>C · opens in place</h2>
+  <ul class="bar"><li><button class="k" aria-current="page">Home</button></li><li><button class="k on" aria-expanded="true">Rooms ▾</button>
+  <div class="panel"><h3>upstairs</h3><a class="f" href="#">Bedroom</a><a href="#">Bathroom</a><h3>downstairs</h3><a href="#">Kitchen</a><a href="#">Living room</a></div></li><li><button class="k">Devices ▾</button></li><li><button class="k">Help</button></li></ul></div>
+</div></body></html>

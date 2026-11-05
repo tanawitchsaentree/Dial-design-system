@@ -14,6 +14,7 @@ import {
 import { createPortal } from 'react-dom';
 import { cx } from '../../cx';
 import { Button } from '../Button';
+import { Icon, type IconName } from '../Icon';
 import styles from './Snackbar.module.css';
 
 export type SnackbarTone = 'neutral' | 'positive' | 'warning' | 'critical';
@@ -42,12 +43,8 @@ export interface SnackbarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
 const WORD: Record<SnackbarTone, string> = { neutral: 'Note', positive: 'Done', warning: 'Check', critical: 'Failed' };
 
 /** One glyph per tone (Toast's set), so the tone is told by shape and word, never by colour alone. */
-const GLYPH: Record<SnackbarTone, ReactNode> = {
-  neutral: <><circle cx="12" cy="12" r="8.5" /><path d="M12 11v5.5M12 7.5v.01" /></>,
-  positive: <path d="M5 12.5l4.5 4.5L19 7.5" />,
-  warning: <><path d="M12 3.5L21.5 20h-19z" /><path d="M12 10v4.5M12 17.5v.01" /></>,
-  critical: <><path d="M8 3.5h8l4.5 4.5v8L16 20.5H8L3.5 16V8z" /><path d="M12 8v5M12 16.5v.01" /></>,
-};
+// printed in dial's one icon language, the dot matrix (R-005)
+const GLYPH: Record<SnackbarTone, IconName> = { neutral: 'info', positive: 'positive', warning: 'warning', critical: 'critical' };
 
 /**
  * A brief message at the bottom of a phone screen with one key that undoes, such as "Lamp removed · Undo".
@@ -69,7 +66,7 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(function Snack
       {...rest}
     >
       <span className={styles.head}>
-        <svg className={styles.glyph} viewBox="0 0 24 24" aria-hidden="true" focusable="false">{GLYPH[tone]}</svg>
+        <Icon name={GLYPH[tone]} className={styles.glyph} />
         <span className={styles.status}>{status ?? WORD[tone]}</span>
       </span>
       <span className={styles.message}>{children}</span>

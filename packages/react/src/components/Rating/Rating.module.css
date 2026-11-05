@@ -1,0 +1,121 @@
+/* Rating — marks printed as round dot lattices; lit = solid disc, empty = hollow ring (lab apps/lab/rating pick A).
+   Shape carries the value; ink steps carry it a second time. No orange. */
+.root {
+  display: grid;
+  justify-items: start;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.legend {
+  margin-block-end: var(--ds-gap-xs);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+.row {
+  display: flex;
+  align-items: center;
+}
+.mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  box-sizing: border-box;
+  inline-size: var(--ds-control-md);
+  block-size: var(--ds-control-md);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+}
+.mark[data-fill='full'],
+.mark[data-fill='half'] { color: var(--ds-text-primary); }
+.mark[data-fill='empty']:hover { color: var(--ds-text-primary); }
+/* Visually hidden, still focusable and announced */
+.input {
+  position: absolute;
+  inset-block-start: var(--ds-gap-none);
+  inset-inline-start: var(--ds-gap-none);
+  inline-size: var(--ds-width-hairline);
+  block-size: var(--ds-width-hairline);
+  margin: var(--ds-gap-none);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.glyph {
+  inline-size: var(--ds-control-check);
+  block-size: var(--ds-control-check);
+  fill: currentColor;
+  overflow: visible;
+  transition: transform var(--ds-motion-release) var(--ds-motion-easing);
+}
+/* The ring is always printed; a core dot rises when its mark is lit and sinks back when it is not (D-008) */
+.dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  transform: scale(var(--ds-motion-dot-scale));
+  transition:
+    opacity var(--ds-motion-exit) var(--ds-motion-easing-exit),
+    transform var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.dot[data-on] {
+  opacity: 1;
+  transform: none;
+  transition-duration: var(--ds-motion-release);
+  transition-timing-function: var(--ds-motion-easing);
+}
+.mark[data-fill='half'] .glyph { transform: none; }
+:dir(rtl) .mark[data-fill='half'] .glyph { transform: scaleX(-1); }
+
+.value {
+  margin-inline-start: var(--ds-gap-lg);
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-text-primary);
+}
+.value span {
+  font-weight: var(--ds-type-weight-regular);
+  color: var(--ds-text-secondary);
+}
+
+.mark:active .glyph {
+  transform: translateY(var(--ds-motion-press-travel));
+  transition-duration: var(--ds-motion-press);
+}
+.mark:has(.input:focus-visible) {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.mark[data-disabled] {
+  opacity: var(--ds-opacity-disabled);
+  cursor: not-allowed;
+}
+.mark[data-disabled]:active .glyph { transform: none; }
+.mark[data-disabled][data-fill='empty']:hover { color: var(--ds-text-secondary); }
+
+/* display mode: small lattices, no target, nothing to press */
+[data-readonly] .mark {
+  inline-size: var(--ds-control-icon-md);
+  block-size: var(--ds-control-icon-md);
+  cursor: default;
+}
+[data-readonly] .mark[data-fill='empty']:hover { color: var(--ds-text-secondary); }
+[data-readonly] .glyph {
+  inline-size: var(--ds-control-icon-md);
+  block-size: var(--ds-control-icon-md);
+}
+[data-readonly] .mark + .mark { margin-inline-start: var(--ds-gap-xs); }
+
+@media (prefers-reduced-motion: reduce) {
+  .glyph, .mark:active .glyph { transform: none; transition: none; }
+  :dir(rtl) .mark[data-fill='half'] .glyph { transform: scaleX(-1); }
+  .dot, .dot[data-on] { transform: none; transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .glyph { forced-color-adjust: none; fill: CanvasText; }
+  .dot:not([data-on]) { opacity: 0; }
+}

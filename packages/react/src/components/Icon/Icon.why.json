@@ -119,8 +119,35 @@
       "p": "P4",
       "axis": "space",
       "why": "The large size adds one module step to control.icon-md so the matrix pitch stays on the grille's ratio."
+    },
+    "dot": {
+      "p": "P4",
+      "axis": "shape",
+      "why": "Every hole of the 7 × 7 field is drawn and only the glyph's own holes are lit, the Grille's field at icon scale, so one glyph can turn into another (R-008)."
     }
   },
-  "states": {},
-  "motion": {}
+  "states": {
+    "data-on": {
+      "p": "P4",
+      "axis": "interaction",
+      "why": "A lit hole is a dot of the current glyph; an unlit one waits sunk in its hole at motion.dot-scale and no opacity."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion the dots keep their size and only fade, on motion.hover."
+    }
+  },
+  "motion": {
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A new glyph morphs. Dots it shares with the last one stay lit, the others fade out over motion.exit on the accelerating curve and new ones fade in over motion.release on the decelerating one (D-008, R-008)."
+    },
+    "transform": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A dot that goes sinks back into its hole to motion.dot-scale, and one that comes rises out of it, so a play key turning to pause reads as the same printed field changing."
+    }
+  }
 }

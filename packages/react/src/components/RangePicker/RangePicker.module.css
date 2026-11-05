@@ -1,0 +1,72 @@
+/* RangePicker — two Input wells (start, end) joined by the ink index mark, and a round key that opens a
+   Popover with the Calendar (lab apps/lab/range-picker pick B). The span is told by shape: windows at both
+   ends, a ruled strip between (Calendar draws it). Wells, key, bar and strip are ink and plastic; no orange (P1). */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto;
+  align-items: end;
+  column-gap: var(--ds-gap-md);
+}
+/* the index mark between the wells, level with the middle of a 44px well */
+.join {
+  display: grid;
+  align-items: center;
+  inline-size: var(--ds-control-thumb);
+  block-size: var(--ds-control-md);
+}
+.join::before {
+  content: '';
+  border-block-end: var(--ds-width-bar) solid var(--ds-text-primary);
+  border-radius: var(--ds-corner-round);
+}
+.panel {
+  display: grid;
+  justify-items: center;
+  row-gap: var(--ds-gap-md);
+}
+.status {
+  margin: var(--ds-gap-none);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.hint {
+  margin: var(--ds-gap-none);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-sm);
+  margin: var(--ds-gap-none);
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-status-critical-mark);
+}
+.glyph {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-block-start: var(--ds-space-0-5);
+}
+.root[data-disabled='true'] .join { opacity: var(--ds-opacity-disabled); }
+
+@media (forced-colors: active) {
+  .join::before { forced-color-adjust: none; border-block-end-color: CanvasText; }
+}

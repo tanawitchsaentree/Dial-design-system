@@ -1,5 +1,6 @@
 import { forwardRef, type HTMLAttributes, type MouseEvent, type ReactNode } from 'react';
 import { cx } from '../../cx';
+import { messages } from '../../messages';
 import styles from './BottomNav.module.css';
 
 export type BottomNavLayout = 'auto' | 'bar' | 'rail';
@@ -37,7 +38,7 @@ export interface BottomNavProps extends Omit<HTMLAttributes<HTMLElement>, 'child
  * On a wide screen the strip becomes a printed rail at the inline start.
  */
 export const BottomNav = forwardRef<HTMLElement, BottomNavProps>(function BottomNav(
-  { items, current, onNavigate, layout = 'auto', fixed = false, label = 'Main', className, ...rest },
+  { items, current, onNavigate, layout = 'auto', fixed = false, label = messages.mainNav, className, ...rest },
   ref,
 ) {
   return (

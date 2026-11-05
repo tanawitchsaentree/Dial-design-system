@@ -24,6 +24,10 @@
   background: var(--ds-surface-light);
   box-shadow: var(--ds-elevation-unit);
   color: var(--ds-text-on-light);
+  /* the card stays a light card in both themes, so its print takes the light theme's lip, never the dark one (D-010) */
+  --ds-print-seat: var(--ds-print-seat-on-light);
+  /* text-shadow inherits as a value, so the card sets it again from its own seat */
+  text-shadow: var(--ds-print-seat);
   font-family: var(--ds-type-family);
   text-align: start;
   cursor: pointer;
@@ -120,7 +124,7 @@
 }
 .card[aria-pressed='true']::after { opacity: 1; }
 .card[data-dragging='true'] {
-  z-index: 1;
+  z-index: var(--ds-layer-raised);
   transform: translate(var(--scene-dx), var(--scene-dy));
   box-shadow: var(--ds-elevation-part);
   pointer-events: none;

@@ -3,7 +3,7 @@ import { Snackbar } from 'dial-react';
 
 export default function SnackbarThai() {
   return (
-    <div lang="th" style={{ inlineSize: 'min(100%, 375px)' }}>
+    <div lang="th" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))' }}>
       <Snackbar status="ลบแล้ว" action={{ label: 'เลิกทำ', onAction: () => {} }}>ลบโคมไฟในครัวแล้ว</Snackbar>
     </div>
   );

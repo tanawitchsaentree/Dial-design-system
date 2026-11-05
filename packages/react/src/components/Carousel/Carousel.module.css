@@ -1,0 +1,103 @@
+/* Carousel — slides in a recessed window on a scroll-snap track, then one strip: key, holes, key
+   (lab apps/lab/carousel pick B). The keys are plain keys; nothing is orange. */
+.root {
+  display: grid;
+  row-gap: var(--ds-gap-xl);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.window {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+}
+/* the inverse light is drawn over the slides, so a full-width image still lies inside the body */
+.window::after {
+  content: '';
+  position: absolute;
+  inset: var(--ds-gap-none);
+  border-radius: inherit;
+  box-shadow: var(--ds-elevation-well);
+  pointer-events: none;
+}
+.window:has(.scroller:focus-visible) {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.scroller {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  outline: none;
+}
+.scroller::-webkit-scrollbar { display: none; }
+.slide {
+  box-sizing: border-box;
+  flex: none;
+  inline-size: 100%;
+  min-inline-size: var(--ds-gap-none);
+  padding: var(--ds-gap-xl);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+}
+.strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: var(--ds-gap-xl);
+  min-block-size: var(--ds-control-key);
+}
+.key { flex: none; }
+/* a key that cannot step is flat: no cast shadow, no height */
+.key:disabled { box-shadow: none; transform: none; }
+.flip:dir(rtl) { scale: -1 1; }
+.dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-inline-size: var(--ds-gap-none);
+}
+/* a cell the width of the lit hole, so the row keeps its pitch when the lit one moves */
+.dot {
+  display: grid;
+  place-items: center;
+  inline-size: var(--ds-control-lamp);
+  block-size: var(--ds-control-lamp);
+  box-sizing: content-box;
+  padding: var(--ds-gap-xs);
+}
+.dot::before {
+  content: '';
+  box-sizing: border-box;
+  inline-size: var(--ds-control-dot);
+  block-size: var(--ds-control-dot);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-line-ring);
+  box-shadow: var(--ds-elevation-well);
+  transition:
+    background-color var(--ds-motion-fill) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-fill) var(--ds-motion-easing);
+}
+.dot[data-on]::before {
+  inline-size: var(--ds-control-mark);
+  block-size: var(--ds-control-mark);
+  background: var(--ds-text-primary);
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot::before { transition: none; }
+}
+@media (forced-colors: active) {
+  .window { border: var(--ds-width-hairline) solid CanvasText; }
+  .dot::before { background: transparent; border: var(--ds-width-hairline) solid CanvasText; }
+  .dot[data-on]::before { background: CanvasText; }
+  .window:has(.scroller:focus-visible) { outline-color: Highlight; }
+}

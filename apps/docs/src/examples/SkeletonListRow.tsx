@@ -3,7 +3,7 @@ import { Skeleton, Stack } from 'dial-react';
 
 export default function SkeletonListRow() {
   return (
-    <div className="demo-box demo-card" aria-busy="true" aria-label="Devices, loading">
+    <div className="demo-box demo-card" role="group" aria-busy="true" aria-label="Devices, loading">
       <Stack gap="lg">
         {[0, 1, 2].map((i) => (
           <Stack key={i} direction="row" gap="md" align="center">

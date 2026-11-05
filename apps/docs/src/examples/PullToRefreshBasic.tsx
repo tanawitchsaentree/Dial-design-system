@@ -5,7 +5,7 @@ const ask = () => new Promise((done) => setTimeout(done, 1200));
 
 export default function PullToRefreshBasic() {
   return (
-    <div style={{ inlineSize: 360, maxInlineSize: '100%' }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))', maxInlineSize: '100%' }}>
       <PullToRefresh label="Readings" onRefresh={ask} updated={new Date(2026, 10, 2, 10, 41)}>
         <List label="Readings">
           <List.Item label="Kitchen" description="21.5 °C · 44 %" />

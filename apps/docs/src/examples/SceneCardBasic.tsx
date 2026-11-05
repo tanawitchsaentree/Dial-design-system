@@ -9,7 +9,7 @@ export default function SceneCardBasic() {
         <SceneCard value="away" name="Away" steps={['Lamps off', 'Heating 16°']} />
         <SceneCard value="night" name="Good night" steps={['All lamps off', 'Doors locked']} />
       </Stack>
-      <div style={{ inlineSize: 300, maxInlineSize: '100%' }}>
+      <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-sm))', maxInlineSize: '100%' }}>
         <Card padding="unit" wordmark="dial" model="scene 1">
           <Slot label="Living room" />
         </Card>

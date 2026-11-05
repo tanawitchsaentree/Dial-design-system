@@ -1,0 +1,52 @@
+/* Tooltip — the printed name of a part on Menu's plastic (system/FORM.md surface class for the panel, D-003):
+   surface.solid, elevation.float, corner.media, layer.overlay. Tooltip.tsx places it in the page's top layer
+   (a portal on the body, position fixed), above the part or below it when there is no room, and shifts it
+   along the part so the screen edge never cuts it. It takes no pointer events while it leaves. */
+.tip {
+  position: fixed;
+  z-index: var(--ds-layer-overlay);
+  box-sizing: border-box;
+  inline-size: max-content;
+  max-inline-size: min(var(--ds-type-measure), calc(100vw - var(--ds-gap-lg) * 2));
+  margin: 0;
+  padding-block: var(--ds-gap-sm);
+  padding-inline: var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-solid);
+  box-shadow: var(--ds-elevation-float);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  --tip-from: var(--ds-motion-rise);
+  /* every change moves (P6, D-008): the tag rises off its part on motion.release and the decelerating
+     curve, and sinks back faster on motion.exit and the accelerating one */
+  transition:
+    opacity var(--ds-motion-release) var(--ds-motion-easing),
+    transform var(--ds-motion-release) var(--ds-motion-easing);
+}
+.tip[data-side='bottom'] { --tip-from: calc(var(--ds-motion-rise) * -1); }
+@starting-style {
+  .tip[data-state='open'] { opacity: 0; transform: translateY(var(--tip-from)); }
+}
+.tip[data-state='closing'] {
+  opacity: 0;
+  transform: translateY(var(--tip-from));
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+  pointer-events: none;
+}
+.text {
+  display: block;
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  overflow-wrap: anywhere;
+}
+
+/* under Reduce motion nothing travels (motion.rise is 0); the tag still fades on motion.hover */
+@media (prefers-reduced-motion: reduce) {
+  .tip, .tip[data-state='closing'] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .tip { border-color: CanvasText; }
+}

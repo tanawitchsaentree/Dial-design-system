@@ -3,7 +3,7 @@
 // it, expect green). Each case is a small page shaped like the book's markup, run through the same probe
 // gates.mjs uses. Usage: node tooling/engine/surface-probes.proof.mjs   (exit 1 when any case is wrong)
 import { chromium } from 'playwright';
-import { glassCssProblems, glassRecipeProbe, bareSurfaceProbe, meshShareProbe, cardStats, anchorDrift, pillCardProbe, rowEdgeProbe } from './surface-probes.mjs';
+import { glassCssProblems, glassRecipeProbe, bareSurfaceProbe, meshShareProbe, cardStats, anchorDrift, pillCardProbe, rowEdgeProbe, controlStageProbe, iconLanguageProbe, focusRingProbe } from './surface-probes.mjs';
 
 // a photo stand-in: a striped bright image as a data URL, so "on a photo" is real pixels and a url() ground
 const PHOTO = `url("data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><rect width="40" height="40" fill="#e8d9a0"/><rect width="20" height="40" fill="#f6f1e0"/></svg>')}")`;
@@ -36,6 +36,15 @@ const cases = [
   { gate: 'G-CH1', want: 'red', html: '<div data-component="Card" style="border-radius:40px;padding:22px;height:60px;box-sizing:border-box;background:#333">Tag</div>', probe: pillCardProbe, arg: { selector: '[data-component="Card"]' } },
   { gate: 'G-CH1', want: 'green', html: '<div data-component="Card" style="border-radius:40px;padding:22px;height:120px;box-sizing:border-box;background:#333">Tag</div>', probe: pillCardProbe, arg: { selector: '[data-component="Card"]' } },
   // G-RW1: a 30px track beside a 32px select is red; equal heights on one line are green
+  // G-IC2 (dial R-005): a stroked glyph beside the icon set is red; the set and a declared drawing are green
+  { gate: 'G-IC2', want: 'red', html: '<button><svg width="20" height="20" viewBox="0 0 24 24"><path d="M6 12h12" stroke="#000"/></svg></button>', probe: iconLanguageProbe, arg: {} },
+  { gate: 'G-IC2', want: 'green', html: '<button><svg data-component="Icon" width="20" height="20"><circle cx="5" cy="5" r="1"/></svg></button><span data-drawing=""><svg width="12" height="12"><rect width="8" height="8"/></svg></span>', probe: iconLanguageProbe, arg: {} },
+  // G-FR2 (dial R-005): a ring round a wide fader row is red; a ring round its cap is green
+  { gate: 'G-FR2', want: 'red', html: '<style>.f:focus-visible{outline:2px solid #000}</style><div data-example-live=""><div class="f" role="slider" tabindex="0" style="width:300px;height:44px"><i style="display:block;width:24px;height:32px;background:#ccc"></i></div></div>', probe: focusRingProbe, arg: {} },
+  { gate: 'G-FR2', want: 'green', html: '<style>.f:focus-visible{outline:none}.f:focus-visible i{outline:2px solid #000}</style><div data-example-live=""><div class="f" role="slider" tabindex="0" style="width:300px;height:44px"><i style="display:block;width:24px;height:32px;background:#ccc"></i></div></div>', probe: focusRingProbe, arg: {} },
+  // G-SP2 (dial R-004): a control flush on the stage it drives is red, one section step away is green
+  { gate: 'G-SP2', want: 'red', html: '<div><div data-component="Select"><label>Breakpoint</label><button role="combobox" style="height:40px;width:200px"></button></div><div data-example-live="" style="height:120px;background:#ddd"></div></div>', probe: controlStageProbe, arg: { min: 24 } },
+  { gate: 'G-SP2', want: 'green', html: '<div style="display:grid;gap:24px"><div data-component="Select"><label>Breakpoint</label><button role="combobox" style="height:40px;width:200px"></button></div><div data-example-live="" style="height:120px;background:#ddd"></div></div>', probe: controlStageProbe, arg: { min: 24 } },
   { gate: 'G-RW1', want: 'red', html: '<div class="row" style="display:flex;gap:12px;align-items:end"><div role="radiogroup" style="height:30px;width:120px;background:#444"></div><button role="combobox" style="height:32px;width:100px"></button></div>', probe: rowEdgeProbe, arg: { rows: '.row', controls: '[role=radiogroup], [role=combobox]' } },
   { gate: 'G-RW1', want: 'green', html: '<div class="row" style="display:flex;gap:12px;align-items:end"><div role="radiogroup" style="height:32px;width:120px;background:#444"></div><button role="combobox" style="height:32px;width:100px"></button></div>', probe: rowEdgeProbe, arg: { rows: '.row', controls: '[role=radiogroup], [role=combobox]' } },
 ];

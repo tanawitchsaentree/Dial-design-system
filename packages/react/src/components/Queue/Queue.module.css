@@ -39,6 +39,7 @@
   inline-size: var(--ds-width-ring);
   border-radius: var(--ds-corner-mark);
   background: transparent;
+  transition: background-color var(--ds-motion-release) var(--ds-motion-easing);
 }
 .handle {
   flex: none;
@@ -103,6 +104,18 @@
   color: var(--ds-text-secondary);
   overflow-wrap: anywhere;
 }
+/* the playing word folds open in the row that plays and shut in the one that stops (D-008) */
+.nowWrap {
+  display: inline-grid;
+  grid-template-columns: 0fr;
+  vertical-align: bottom;
+  opacity: 0;
+  transition:
+    grid-template-columns var(--ds-motion-release) var(--ds-motion-easing),
+    opacity var(--ds-motion-release) var(--ds-motion-easing);
+}
+.nowWrap[data-on='true'] { grid-template-columns: 1fr; opacity: 1; }
+.nowWrap > .now { overflow: hidden; white-space: pre; min-inline-size: 0; }
 .now {
   display: inline-flex;
   align-items: center;

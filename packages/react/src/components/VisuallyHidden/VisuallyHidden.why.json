@@ -1,0 +1,90 @@
+{
+  "identity": false,
+  "identity_reason": "a visually hidden wrapper has no look of its own to derive; it only removes its content from the sight and keeps it for assistive tech, so there is nothing to render in three candidates",
+  "concept": "VisuallyHidden keeps a name on the case that only a screen reader prints, the way a model number sits on the back plate: present for whoever needs it, absent from the face. The focusable form is the skip key that appears when the keyboard lands on it.",
+  "kind": ["visually-hidden", "screen-reader-only", "skip link", "hidden label"],
+  "default_to_avoid": [
+    {
+      "pattern": "VisuallyHidden as display:none or an off-screen box at left:-9999px with a floating dark pill when the skip link is focused",
+      "why_not": "display:none removes the words from assistive tech, an off-screen box scrolls the page sideways in right-to-left, and a floating pill is a second look the unit does not have."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the model name and band names are printed on the case, never repeated on the face"
+    },
+    {
+      "source": "system/FORM.md: a label names its control, and the model name is never the only identifier"
+    },
+    {
+      "source": "WCAG 2.2 technique C7 and 2.4.1 Bypass Blocks: hide visually, keep in the accessibility tree; a skip link becomes visible when focused"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P5",
+      "axis": "interaction",
+      "consequence": "labels name their control through aria-labelledby",
+      "form": "The hidden text stays in the accessibility tree, so it can name a control that has no printed label and be pointed at by aria-labelledby."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The hidden box leaves the flow and takes one pixel, and the revealed form is fixed to the viewport corner, so no neighbour moves when focus arrives."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "The skip key appears at once on focus and disappears at once on blur, with no slide and no fade."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The revealed skip key is at least the 44px control height, so a person who tabs to it and then clicks has a full target."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The revealed key is raised plastic with primary ink and never orange, because a skip key is not the unit's one primary control."
+    }
+  ],
+  "variants": {
+    "picked": "none",
+    "by": "agent",
+    "reason": "VisuallyHidden is a behaviour wrapper with no form of its own, so no candidates were rendered; the focusable reveal reuses the raised part material and the system focus ring."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "interaction",
+      "why": "The wrapper clips its words to one pixel and takes them out of the flow, so they are read aloud and never seen."
+    }
+  },
+  "states": {
+    "data-focusable": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A focusable wrapper holds a link or button that must be reachable by keyboard, so on focus it turns into a visible 44px raised key at the start corner."
+    },
+    "focus": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "When the hidden element is itself the focusable link, keyboard focus on it brings the same raised key into view at once."
+    },
+    "focus-within": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The reveal is fixed to the viewport corner above the page, so showing it never pushes the content below it."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the revealed key takes a real border in the system text colour, so it stays visible when shadows and fills are dropped."
+    }
+  },
+  "motion": {}
+}

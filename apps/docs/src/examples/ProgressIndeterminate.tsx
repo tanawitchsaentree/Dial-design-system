@@ -2,5 +2,5 @@
 import { Progress } from 'dial-react';
 
 export default function ProgressIndeterminate() {
-  return <Progress label="Descaling" valueText="Working, about 20 min" style={{ maxInlineSize: 320 }} />;
+  return <Progress label="Descaling" valueText="Working, about 20 min" style={{ maxInlineSize: 'var(--ds-layout-frame-md)' }} />;
 }

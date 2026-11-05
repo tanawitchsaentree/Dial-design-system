@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · CommandPalette · three ways to find a command</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+ .col>h2{font-size:13px;font-weight:500;margin:0 0 12px;color:var(--ds-text-secondary)}
+ .scrim{padding:28px;background:var(--ds-surface-scrim);border-radius:24px}
+ .sheet{inline-size:420px;box-sizing:border-box;padding:16px;border-radius:var(--ds-corner-panel);background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-float),inset 1px 1px 0 var(--ds-material-lit)}
+ .q{display:flex;align-items:center;gap:12px;min-block-size:44px;padding-inline:16px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);font-size:16px}
+ .q span{color:var(--ds-text-secondary)}
+ .sec{font-size:12px;color:var(--ds-text-secondary);margin:0;padding:12px 16px 4px}
+ .it{display:flex;align-items:center;gap:12px;min-block-size:44px;box-sizing:border-box;padding-inline:16px;font-size:16px;color:var(--ds-text-secondary);border:1px solid transparent;border-radius:var(--ds-corner-media)}
+ .it .w{flex:1}
+ .it.on{color:var(--ds-text-primary);font-weight:500}
+ kbd{font:inherit;font-size:12px;font-weight:500;color:var(--ds-text-primary);min-inline-size:22px;text-align:center;padding:2px 6px;border:1px solid var(--ds-line-ring);border-block-end-width:2px;border-radius:var(--ds-corner-mark);background:var(--ds-surface-knob)}
+ .mk{inline-size:6px;block-size:6px;border-radius:50%;background:var(--ds-text-primary);flex:none}
+ .mk.off{background:transparent}
+ /* A: window on top, legend printed on the body, active word has an ink index mark and a plate */
+ .A .it.on{background:var(--ds-surface-sunken);border-color:var(--ds-line-ring)}
+ .A .list{margin-block-start:8px}
+ /* B: schematic: section names stand in a fixed left column, commands in the right column, no plate, only mark+weight */
+ .B .g{display:grid;grid-template-columns:96px 1fr;border-block-start:1px solid var(--ds-line-divider);margin-block-start:8px}
+ .B .g>h3{font-size:12px;font-weight:400;color:var(--ds-text-secondary);margin:0;padding:14px 0 0 16px}
+ .B .it{border-radius:0}
+ .B .it.on{border-inline-start:2px solid var(--ds-text-primary)}
+ /* C: everything inside one recessed well, like the Listbox */
+ .C .well{border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);padding:8px}
+ .C .q{border:0;box-shadow:none;background:transparent;border-block-end:1px solid var(--ds-line-divider);border-radius:0}
+ .C .it.on{background:var(--ds-surface-solid);border-color:var(--ds-line-ring)}
+</style></head><body>
+<h1>CommandPalette · find and run a command</h1>
+<div class="row">
+ <div class="col A"><h2>A · query window above a printed legend</h2><div class="scrim"><div class="sheet">
+  <div class="q"><svg width="20" height="20" viewBox="0 0 21 21"><circle cx="9" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Type a command</span></div>
+  <div class="list"><p class="sec">Rooms</p>
+   <div class="it on"><i class="mk"></i><span class="w">Turn off all lamps</span><kbd>L</kbd></div>
+   <div class="it"><i class="mk off"></i><span class="w">Lower heating to 18</span><kbd>H</kbd></div>
+   <p class="sec">App</p>
+   <div class="it"><i class="mk off"></i><span class="w">Open settings</span><span><kbd>Ctrl</kbd> <kbd>,</kbd></span></div></div>
+ </div></div></div>
+ <div class="col B"><h2>B · section names in a fixed column</h2><div class="scrim"><div class="sheet">
+  <div class="q"><svg width="20" height="20" viewBox="0 0 21 21"><circle cx="9" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Type a command</span></div>
+  <div class="g"><h3>Rooms</h3><div>
+   <div class="it on"><span class="w">Turn off all lamps</span><kbd>L</kbd></div>
+   <div class="it"><span class="w">Lower heating to 18</span><kbd>H</kbd></div></div></div>
+  <div class="g"><h3>App</h3><div><div class="it"><span class="w">Open settings</span><span><kbd>Ctrl</kbd> <kbd>,</kbd></span></div></div></div>
+ </div></div></div>
+ <div class="col C"><h2>C · one recessed well holds field and list</h2><div class="scrim"><div class="sheet"><div class="well">
+  <div class="q"><svg width="20" height="20" viewBox="0 0 21 21"><circle cx="9" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Type a command</span></div>
+  <p class="sec">Rooms</p>
+   <div class="it on"><span class="w">Turn off all lamps</span><kbd>L</kbd></div>
+   <div class="it"><span class="w">Lower heating to 18</span><kbd>H</kbd></div>
+  <p class="sec">App</p>
+   <div class="it"><span class="w">Open settings</span><span><kbd>Ctrl</kbd> <kbd>,</kbd></span></div>
+ </div></div></div></div>
+</div></body></html>

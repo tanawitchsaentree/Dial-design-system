@@ -1,0 +1,119 @@
+{
+  "concept": "ContextMenu wraps one object on the page and opens Menu's plastic panel of actions at the point the person pressed, by right-click, long-press or the Context Menu key; while it is open the object sinks into a well so the panel says which object it is for.",
+  "kind": [
+    "context menu",
+    "right-click menu",
+    "long-press menu",
+    "shortcut menu",
+    "contextual actions"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "context menu that replaces the browser menu and is the only way to reach an action",
+      "why_not": "Right-click and long-press are hidden gestures that touch, switch and screen reader users may never find, so every action must also be on a visible key such as Menu."
+    },
+    {
+      "pattern": "context menu card with a blue highlighted row and a tinted backdrop over the whole page",
+      "why_not": "A tinted bar tells position by colour alone and a page-wide scrim hides the object the menu is about, against P1 where only the one primary control is coloured."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun TG 60 tape recorder (Dieter Rams, 1965): a lid that opens over the part you point at and prints its functions in plain words, in the same panel as the other lids"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: menu pattern and the Context Menu key / Shift+F10 convention (https://www.w3.org/WAI/ARIA/apg/patterns/menu/)"
+    },
+    {
+      "source": "WCAG 2.2 · 2.5.1 Pointer Gestures and 2.1.1 Keyboard: an action must not depend on a path-based or hidden gesture alone (https://www.w3.org/WAI/WCAG22/Understanding/pointer-gestures.html)"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "shadows are short and soft",
+      "form": "The panel is Menu's own panel, surface.solid with elevation.float and corner.inner on layer.overlay, so a person learns one popup; the object it belongs to sinks into elevation.well instead of getting a second shadow."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "Rows are primary ink, the open object is told by a recess and a destructive row by the critical square, and nothing in the area or the panel is orange."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Each row is at least control.md tall as in Menu, and the panel is kept on the screen so a finger can always reach every row."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "The Context Menu key and Shift+F10 open the panel on the first action, arrows, Home, End and letters move, Escape closes and returns focus to where it was, and a 500ms touch press does the same as a right-click."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "The panel rises in and sinks out on Menu's release and exit motion through presence, and the object's well fades on motion.hover; nothing moves while it sits open."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/context-menu/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "panel corner at the pointer with a small ink index dot marking the point"
+      },
+      {
+        "id": "B",
+        "name": "panel corner at the pointer and the pressed object sinks into a well while the panel is open"
+      },
+      {
+        "id": "C",
+        "name": "flat bordered legend panel on the page colour joined to the point by a printed hairline"
+      }
+    ],
+    "picked": "B",
+    "by": "agent",
+    "reason": "B says which object the menu is for by depth alone, so it needs no extra mark and works on any size of object; A adds a dot that is easily hidden under a finger, and C breaks the one-popup rule by drawing a second panel material and its line crosses the content it names (P8 lines never cross a label)."
+  },
+  "parts": {
+    "root": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The root is the object the menu belongs to; it listens for the right-click, the long-press and the Context Menu key, and it sinks into a well while the panel is open."
+    }
+  },
+  "states": {
+    "data-open": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "While the panel is open the object it belongs to is a recess in elevation.well, so depth tells which object the actions are for and the cue survives a greyscale screen."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "An object that takes focus so the Context Menu key can reach it shows the same dark ring as every part."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the well is removed by the system, so the open object keeps a real Highlight outline as its cue."
+    }
+  },
+  "motion": {
+    "background-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The object sinks into its well on motion.hover, fast on and slower off, so the change reads as a part settling and not a flash."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The object sinks into its well on motion.hover, fast on and slower off, so the change reads as a part settling and not a flash."
+    }
+  }
+}

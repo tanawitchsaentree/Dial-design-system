@@ -3,7 +3,7 @@ import { Button, Dialog, Slider } from 'dial-react';
 import type { Depth } from './types';
 
 const Sheet = (p: { title: string; description?: string; actions?: React.ReactNode; children?: React.ReactNode }) => (
-  <div style={{ inlineSize: 'min(100%, 420px)' }}><Dialog modal={false} open {...p} /></div>
+  <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-lg))' }}><Dialog modal={false} open {...p} /></div>
 );
 const two = (main: string, other = 'Cancel') => <><Button>{other}</Button><Button kind="primary">{main}</Button></>;
 

@@ -1,0 +1,112 @@
+{
+  "concept": "Divider is the seam between two regions of one unit, cut into the plastic the way a panel gap is: a shade edge over a lit edge, one pixel each. It parts what sits above from what sits below and says nothing itself, except an optional lowercase word printed on the line.",
+  "kind": [
+    "divider",
+    "separator",
+    "seam",
+    "rule"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "divider as a single grey 1px rule across the full width, with an 'OR' pill centred on it",
+      "why_not": "A hard rule cuts the unit in two with a drawn line instead of a cut seam, and a centred pill floats mid-surface instead of sitting on the inset line."
+    },
+    {
+      "pattern": "divider with a dark or accent-coloured rule between regions of one unit",
+      "why_not": "FORM.md forbids a hard dark rule inside a unit, and orange belongs to the unit's one primary control only."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun SK 4 radio-phonograph (Dieter Rams and Hans Gugelot, 1956): the panel gap between the lid, the speaker and the controls is the only separator"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): band names printed on the case along a scale line"
+    },
+    {
+      "source": "system/FORM.md separator class: a seam, 1px, no depth, gaps first"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The seam is cut into the body with the inverse light: the divider tone on its top-left edge and the material's lit tone on the bottom-right edge, so it reads as a gap and not as a drawn rule."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "A label is printed on the seam itself, a short inset from its start, and the seam carries on after it, so the word is never set mid-surface."
+    },
+    {
+      "p": "P5",
+      "axis": "depth",
+      "consequence": "printing is flat on the material, with no shadow and no emboss",
+      "form": "The label is flat printing in secondary ink with no shadow, and only the seam either side of it is cut."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The seam takes a fixed two pixels, and a label never changes its height, so the regions it parts do not move."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The seam and its label are ink and plastic tones. A divider is never orange."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/divider/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "one hairline in the divider tone"
+      },
+      {
+        "id": "B",
+        "name": "cut seam, shade edge over lit edge"
+      },
+      {
+        "id": "C",
+        "name": "dotted leader in ring tone"
+      }
+    ],
+    "reason": "B follows the light model (a recess has shade on top-left and a lit edge bottom-right), so it reads as a panel gap; A is the generic one-pixel grey rule, and C copies the dotted rail Stepper and Breadcrumb already own and its dashes read as a dashed border."
+  },
+  "parts": {
+    "root": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The seam: a shade edge over a lit edge, two pixels in all, running the width of its column or the height of its row."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed word sits on the seam in the label size and secondary ink, with the seam running on both sides of it."
+    }
+  },
+  "states": {
+    "data-orientation=vertical": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A vertical seam stretches to the height of its row and takes the two edges on its inline sides, so it parts side-by-side regions at the same two pixels."
+    },
+    "data-labelled": {
+      "p": "P5",
+      "axis": "space",
+      "why": "With a label the seam splits into a short lead and a long run either side of the word, so the word sits on the inset line."
+    },
+    "@media forced-colors: active": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "In forced colours the lit edge is dropped and the shade edge draws in the system grey, so the seam stays one visible line."
+    }
+  },
+  "motion": {}
+}

@@ -10,6 +10,7 @@ import {
   type PointerEvent,
 } from 'react';
 import { cx } from '../../cx';
+import { Icon } from '../Icon';
 import { hand, slotAt, slotOrder, slots, useHand, type SceneInfo } from './sceneStore';
 import styles from './SceneCard.module.css';
 
@@ -173,7 +174,8 @@ export const SceneCard = forwardRef<HTMLButtonElement, SceneCardProps>(function 
         )}
         <span className={styles.foot} aria-hidden="true">
           <span className={styles.kind}>{w.kind}</span>
-          <svg className={styles.arrow} viewBox="0 0 10 10" focusable="false"><path d="M1 2h8L5 8z" /></svg>
+          {/* dial's one icon language, the dot matrix (R-005) */}
+          <Icon name="chevron-down" size="sm" />
         </span>
       </button>
       <span className={styles.announce} role="status" aria-live="polite">{said}</span>

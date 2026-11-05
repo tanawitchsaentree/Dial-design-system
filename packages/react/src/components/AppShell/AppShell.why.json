@@ -1,0 +1,78 @@
+{
+  "concept": "AppShell is the case that holds a whole screen of an appliance app: the header unit across the top, the page legend down the side, the main window beside it and a footer unit under it, each its own unit with a gap between. On a narrow window the legend folds away into a flap that slides in from the side.",
+  "kind": ["app shell", "page frame", "page layout", "layout shell"],
+  "default_to_avoid": [
+    {
+      "pattern": "app shell with a full-bleed top bar, a flush sidebar and a content area divided by hard rules (admin dashboard frame)",
+      "why_not": "Regions glued to the window edge and split by dark rules read as one wall; dial keeps each region a unit with an inset gap and never separates regions of one screen by a hard rule."
+    },
+    {
+      "pattern": "AppShell as a second Container that only centres content",
+      "why_not": "Container only sets a reading width and has no landmarks; the AppShell places header, side navigation, main and footer, folds the side column into a Drawer and moves focus on a route change."
+    }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the dial, the band list and the case set as separate fields on one face, each with its own margin" },
+    { "source": "Vitsoe 606 Universal Shelving (Dieter Rams, 1960): separate units on a fixed module, none touching the wall by its own edge" },
+    { "source": "WAI-ARIA Authoring Practices, Landmark Regions and the skip-link technique: banner, navigation, main and contentinfo, and a first link that jumps to main" }
+  ],
+  "derivation": [
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The header, the side column, main and footer keep their places on one grid; opening and closing the menu, or collapsing the Sidebar, never moves main out of its row."
+    },
+    {
+      "p": "P6",
+      "axis": "shape",
+      "consequence": "capped so large panels do not swell into pillows",
+      "form": "The shell is not a body of its own. It sets the inset gap between the units it holds, and each unit keeps its own capped panel radius."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "Header, side column, main and footer all start on the same inset line at the inline start and stop at the same one at the inline end."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "A skip link is the first stop and moves focus to main; a route change moves focus to main again; below the breakpoint the side column opens in a Drawer from the Menu key."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The shell paints nothing orange; the one primary key of the screen belongs to the unit that holds it, and the shell's own Menu key is plain."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/app-shell/index.html",
+    "options": [
+      { "id": "A", "name": "four separate units on the page ground with gaps between" },
+      { "id": "B", "name": "one case split into regions by hairlines" },
+      { "id": "C", "name": "side column at full height with the header only over main" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A follows the separator rule (gaps first, never a hard rule between regions) and keeps the header across the whole top so it stays the banner; B cuts one body with rules, which FORM forbids, and C breaks the header into a title bar that no longer holds the brand."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "A grid on the page ground with the inset gap on all four sides and between regions, so the units never touch the window or each other." },
+    "body": { "p": "P6", "axis": "space", "why": "The row between header and footer holds the side column and main on one grid, and it takes the height left so the footer stays at the foot." },
+    "header": { "p": "P5", "axis": "space", "why": "The header slot spans the full width on the top inset line, and it can hold at the top edge while the page scrolls." },
+    "side": { "p": "P6", "axis": "space", "why": "The side column keeps the width of its Sidebar at the inline start of the second row, so the legend stays in one fixed column." },
+    "main": { "p": "P6", "axis": "space", "why": "Main takes all the width the side column leaves and is the target of the skip link and of focus on a route change." },
+    "footer": { "p": "P5", "axis": "space", "why": "The optional footer spans the full width on the bottom inset line, like printing at the foot of a case." },
+    "trigger": { "p": "P3", "axis": "space", "why": "Below the breakpoint, and when no header takes the Menu key, a plain 44px key opens the side column in a Drawer." }
+  },
+  "states": {
+    "data-layout=single": { "p": "P6", "axis": "space", "why": "With no side column, or one folded into a Drawer, the grid drops to a single column and main keeps its row." },
+    "data-sticky": { "p": "P6", "axis": "space", "why": "A held header stays at the top inset line while the page scrolls under it, on the page ground so nothing shows through the gap." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "Main takes focus from the skip link or a route change, so it draws the same ring as every part when the keyboard put it there." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the ring on main uses the system highlight colour, because author colours are replaced." }
+  },
+  "motion": {}
+}

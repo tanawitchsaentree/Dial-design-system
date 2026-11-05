@@ -1,15 +1,15 @@
-// Usage tab for Progress (component-depth.md U1–U14). Progress is a recessed groove that fills with ink.
+// Usage tab for Progress (component-depth.md U1–U14). Progress is a recessed groove that fills with a resin rod.
 import { Button, Display, Progress, Stack } from 'dial-react';
 import type { Depth } from './types';
 
 const Unit = ({ children }: { children: React.ReactNode }) => <div className="demo-box demo-card">{children}</div>;
-const W = { maxInlineSize: 320 };
+const W = { maxInlineSize: 'var(--ds-layout-frame-md)' };
 
 export const PROGRESS: Depth = {
   overview: (
     <>
-      <p>Progress shows how far a device task has run, such as a wash cycle, a firmware update or a descaling program. It is a groove sunk into the body that fills with grey ink from the start of the line. The name of the task and the reading, such as 38 min left, are printed on the line above.</p>
-      <p>The fill is ink, never orange. When the device cannot say how far it is, the groove shows a still row of ink ticks and the word Working. Nothing moves while the task runs. The groove only changes when the device reports a new value.</p>
+      <p>Progress shows how far a device task has run, such as a wash cycle, a firmware update or a descaling program. It is a groove sunk into the body that fills with a grey resin rod from the start of the line. The name of the task and the reading, such as 38 min left, are printed on the line above.</p>
+      <p>The fill is a resin rod lit along its upper edge, never orange. When the device cannot say how far it is, the groove shows a still row of ticks and the word Working. Nothing moves while the task runs. The groove only changes when the device reports a new value.</p>
     </>
   ),
   whenToUse: ['For a task with a known end, such as a wash cycle, a download or an update.', 'Under the display, when the display shows the time and the groove shows the share done.', 'In a list of devices, one small groove per row.'],
@@ -24,9 +24,9 @@ export const PROGRESS: Depth = {
     parts: [
       { part: 'Label line', selector: '[data-component="Progress"] > span:nth-of-type(1)', what: 'The task name at the start, the reading at the end, in caption size.' },
       { part: 'Groove', selector: '[data-component="Progress"] > span:nth-of-type(2)', what: 'A recess 8px tall with the shade on its top-left inner edge.' },
-      { part: 'Fill', selector: '[data-component="Progress"] > span:nth-of-type(2) > span', what: 'Full-step ink from the start of the line to the value.' },
+      { part: 'Fill', selector: '[data-component="Progress"] > span:nth-of-type(2) > span', what: 'A resin rod in line.ring, lit along its upper edge, from the start of the line to the value.' },
     ],
-    perVariant: 'The indeterminate form has twelve short ink ticks spread along the groove instead of the fill.',
+    perVariant: 'The indeterminate form has twelve short ticks spread along the groove instead of the fill.',
   },
   sizes: {
     md: { use: 'An 8px groove. The main reading of a unit.', pairs: 'A Display above it and a Button below it.' },
@@ -55,7 +55,7 @@ export const PROGRESS: Depth = {
       do: <Progress label="Washer" value={55} valueText="38 min left" style={W} />, doNote: 'Time left is what people wait for.',
       dont: <Progress label="Progress" value={55} style={W} />, dontNote: 'The label names the component. Name the task that is running.',
     },
-    overflow: { text: 'A long label wraps on the line above the groove, and the reading stays on one line at the end.', render: <div data-overflow-demo="" style={{ inlineSize: 220 }}><Progress label="Firmware update for the hall speaker" value={64} valueText="64%" /></div> },
+    overflow: { text: 'A long label wraps on the line above the groove, and the reading stays on one line at the end.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Progress label="Firmware update for the hall speaker" value={64} valueText="64%" /></div> },
     rtl: { text: 'In right-to-left languages the fill starts from the right, because it follows the reading direction.', render: <div dir="rtl" style={W}><Progress label="الغسالة" value={55} valueText="٣٨ دقيقة" /></div> },
     expansion: { text: 'German and Finnish labels can run 30% longer. The label line wraps first. The groove keeps its height.', render: <Progress label="Firmware-Aktualisierung" value={64} valueText="64 %" style={W} /> },
   },

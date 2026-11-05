@@ -1,0 +1,74 @@
+/* Spinner — a busy indicator drawn as a small grille (lab pick A, apps/lab/spinner).
+   A trail of lit holes walks the edge while mounted; reduced motion stops it on a fixed trail. No orange. */
+.root {
+  --spinner-on: var(--ds-grille-hole-on);
+  --spinner-off: var(--ds-grille-hole);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-lg);
+  vertical-align: middle;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.sm { --spinner-hole: var(--ds-space-2); }
+.md { --spinner-hole: var(--ds-space-3); }
+
+.field {
+  display: inline-grid;
+  grid-template-columns: repeat(3, var(--spinner-hole));
+  grid-template-rows: repeat(3, var(--spinner-hole));
+  gap: var(--ds-space-1);
+  flex: none;
+}
+.hole {
+  display: block;
+  inline-size: var(--spinner-hole);
+  block-size: var(--spinner-hole);
+  border-radius: var(--ds-corner-round);
+  background: var(--spinner-off);
+  box-shadow: var(--ds-elevation-well);
+  /* one step per hole, in reading order round the ring: a stepped change, never eased */
+  animation: walk calc(var(--ds-motion-fill) * var(--spinner-n)) steps(1, end) infinite;
+  animation-delay: calc(var(--ds-motion-fill) * (var(--spinner-i) - var(--spinner-n)));
+}
+/* the centre hole is the last child, takes the free middle cell and never lights */
+.hole:last-child { animation: none; }
+
+@keyframes walk {
+  0% { background-color: var(--spinner-on); }
+  37.5% { background-color: var(--spinner-off); }
+}
+
+.still { }
+
+/* The label is real text for assistive tech; it is drawn only when asked for. */
+.text {
+  position: absolute;
+  inline-size: var(--ds-space-px);
+  block-size: var(--ds-space-px);
+  margin: calc(var(--ds-space-px) * -1);
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.shown {
+  position: static;
+  inline-size: auto;
+  block-size: auto;
+  margin: 0;
+  overflow: visible;
+  clip-path: none;
+  white-space: normal;
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hole { animation: none; }
+  .still { background: var(--spinner-on); }
+}
+@media (forced-colors: active) {
+  .root { --spinner-on: CanvasText; --spinner-off: Canvas; }
+  .hole { forced-color-adjust: none; border: var(--ds-width-hairline) solid CanvasText; }
+}

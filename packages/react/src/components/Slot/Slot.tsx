@@ -8,7 +8,9 @@ import {
   type KeyboardEvent,
 } from 'react';
 import { cx } from '../../cx';
+import { usePresence } from '../../presence';
 import { Badge } from '../Badge';
+import { Icon } from '../Icon';
 import { hand, slotOrder, slots, useHand, type SceneInfo } from '../SceneCard/sceneStore';
 import styles from './Slot.module.css';
 
@@ -20,8 +22,8 @@ export interface SlotWords {
   running: string;
   /** The lamp's word while the slot is empty. */
   empty: string;
-  /** The slot's accessible name. */
-  name: (label: string, scene: string | null) => string;
+  /** The slot's accessible name. `printed` is what the face prints besides the scene name (the first step, or the legend when empty); keep it in the name so a voice user can say what they see (WCAG 2.5.3). */
+  name: (label: string, scene: string | null, printed?: string) => string;
   inserted: (scene: string, label: string) => string;
   removed: (scene: string, label: string) => string;
   pickFirst: (label: string) => string;
@@ -31,7 +33,7 @@ const WORDS: SlotWords = {
   legend: 'scene card',
   running: 'Running',
   empty: 'Empty',
-  name: (l, s) => (s ? `${l} slot, ${s} inserted` : `${l} slot, empty`),
+  name: (l, s, p) => (s ? `${l} slot, ${s}${p ? `, ${p}` : ''}, inserted` : `${l} slot, empty${p ? `, ${p}` : ''}`),
   inserted: (s, l) => `${s} inserted into ${l}`,
   removed: (s, l) => `${s} taken out of ${l}`,
   pickFirst: (l) => `Pick up a scene card first, then press the ${l} slot.`,
@@ -68,6 +70,11 @@ export const Slot = forwardRef<HTMLDivElement, SlotProps>(function Slot(
   const controlled = scene !== undefined;
   const [inner, setInner] = useState<SceneInfo | null>(defaultScene);
   const current = controlled ? scene : inner;
+  // a card taken out stays printed while it lifts away (D-008); the last scene is what it shows meanwhile
+  const presence = usePresence<HTMLSpanElement>(!!current);
+  const lastScene = useRef(current);
+  if (current) lastScene.current = current;
+  const shown = current ?? (presence.mounted ? lastScene.current : null);
   const [fresh, setFresh] = useState<string | null>(null);
   const [said, setSaid] = useState('');
   const mouth = useRef<HTMLButtonElement>(null);
@@ -132,7 +139,7 @@ export const Slot = forwardRef<HTMLDivElement, SlotProps>(function Slot(
         ref={mouth}
         type="button"
         className={styles.mouth}
-        aria-label={w.name(label, current?.name ?? null)}
+        aria-label={w.name(label, current?.name ?? null, current ? first : w.legend)}
         disabled={disabled}
         data-ready={held && !disabled ? 'true' : undefined}
         data-over={over === id ? 'true' : undefined}
@@ -140,15 +147,19 @@ export const Slot = forwardRef<HTMLDivElement, SlotProps>(function Slot(
         onKeyDown={keys}
       >
         <span className={styles.bay} aria-hidden="true">
-          {current ? (
-            <span key={current.value} className={styles.face} data-fresh={fresh === current.value ? 'true' : undefined}>
-              <span className={styles.name}>{current.name}</span>
-              {first && <span className={styles.step}>{first}</span>}
-            </span>
-          ) : (
+          {!current && (
             <span className={styles.legend}>
               {w.legend}
-              <svg className={styles.arrow} viewBox="0 0 10 10" focusable="false"><path d="M1 2h8L5 8z" /></svg>
+              {/* dial's one icon language, the dot matrix (R-005) */}
+              <Icon name="chevron-down" size="sm" />
+            </span>
+          )}
+          {shown && (
+            <span key={shown.value} ref={presence.ref} data-state={current ? 'open' : 'closing'} className={styles.face} data-fresh={fresh === shown.value ? 'true' : undefined}>
+              <span className={styles.name}>{shown.name}</span>
+              {/* a space between the two printed lines, so the face reads as words, not "Movie nightLamps 20%";
+                  the grid face does not render it (WCAG 2.5.3, the name holds what the face prints) */}
+              {shown.steps?.[0] && <>{' '}<span className={styles.step}>{shown.steps[0]}</span></>}
             </span>
           )}
         </span>

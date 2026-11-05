@@ -1,6 +1,12 @@
 {
   "concept": "Queue is the up-next list of a dial player printed on one plastic body like List. Each track is a row with its number in tabular figures, its title, artist and length, the playing row marked by an ink index mark and the word Playing, and every row can be moved or removed from the keyboard as well as by its printed handle.",
-  "kind": ["queue", "play queue", "up next", "playlist", "track list"],
+  "kind": [
+    "queue",
+    "play queue",
+    "up next",
+    "playlist",
+    "track list"
+  ],
   "default_to_avoid": [
     {
       "pattern": "Spotify queue with album thumbnails on every row and a green animated now playing equaliser",
@@ -12,9 +18,15 @@
     }
   ],
   "references": [
-    { "source": "Braun TG 1000 tape recorder and the Braun audio 1 programme selector (Dieter Rams, 1962 to 1970): numbered positions printed in a row beside the keys" },
-    { "source": "packages/react/src/components/List (dial): rows printed on one plastic body, gaps first, the ink index mark on the chosen row" },
-    { "source": "WAI-ARIA Authoring Practices, the listbox rearrangeable example: keyboard reordering with live announcements" }
+    {
+      "source": "Braun TG 1000 tape recorder and the Braun audio 1 programme selector (Dieter Rams, 1962 to 1970): numbered positions printed in a row beside the keys"
+    },
+    {
+      "source": "packages/react/src/components/List (dial): rows printed on one plastic body, gaps first, the ink index mark on the chosen row"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices, the listbox rearrangeable example: keyboard reordering with live announcements"
+    }
   ],
   "derivation": [
     {
@@ -57,41 +69,172 @@
   "variants": {
     "lab": "apps/lab/queue/index.html",
     "options": [
-      { "id": "A", "name": "menu row: a printed handle, number, title, artist, length and one menu key with Move up, Move down and Remove" },
-      { "id": "B", "name": "key rows: up, down and remove keys always out on every row" },
-      { "id": "C", "name": "edit mode: clean rows and a Reorder key that latches the list into an editing state" }
+      {
+        "id": "A",
+        "name": "menu row: a printed handle, number, title, artist, length and one menu key with Move up, Move down and Remove"
+      },
+      {
+        "id": "B",
+        "name": "key rows: up, down and remove keys always out on every row"
+      },
+      {
+        "id": "C",
+        "name": "edit mode: clean rows and a Reorder key that latches the list into an editing state"
+      }
     ],
     "picked": "A",
     "by": "agent",
     "reason": "A keeps one end part per row as List does and every move in reach of keys and a menu (P3), with the handle as a pointer shortcut; B squeezes the title to a third of a phone row behind three 36px keys, and C reflows the rows between two modes, which P6 rules out."
   },
   "parts": {
-    "root": { "p": "P6", "axis": "space", "why": "The queue takes the width of its column and holds the list with its announcer, so it sits under a player in one piece." },
-    "list": { "p": "P6", "axis": "depth", "why": "The rows sit on one body of matte plastic with the unit shadow, as List does, so the queue paints its own surface." },
-    "item": { "p": "P6", "axis": "space", "why": "Each track is one row with a fixed order of parts, handle, button and menu key, that never changes between states." },
-    "mark": { "p": "P1", "axis": "colour", "why": "A 2px ink index mark at the start of the playing row says which track plays, in ink and never in orange." },
-    "handle": { "p": "P3", "axis": "space", "why": "The printed handle takes the full height of the row so a finger can grab it, while the keys do the same move." },
-    "grip": { "p": "P5", "axis": "colour", "why": "The handle is six printed dots in secondary ink, flat on the plastic like printing on a case." },
-    "row": { "p": "P3", "axis": "space", "why": "The row is one button at least 44px tall that plays its track, with the number, the title and the length inside." },
-    "index": { "p": "P5", "axis": "type", "why": "The track number prints in tabular figures at label size so the numbers line up as the queue is reordered." },
-    "text": { "p": "P5", "axis": "space", "why": "Title and artist stack on the row's inset line and take the room left by the number and the length." },
-    "title": { "p": "P5", "axis": "type", "why": "The title prints in body size in primary ink and wraps onto more lines instead of being cut." },
-    "meta": { "p": "P5", "axis": "type", "why": "The artist prints one size smaller in secondary ink, after the word Playing on the playing row." },
-    "now": { "p": "P2", "axis": "type", "why": "The word Playing is printed with a small play glyph, so the playing row is told in words and a shape." },
-    "glyph": { "p": "P5", "axis": "colour", "why": "The play glyph beside the word is ink at the word's own colour and never a moving equaliser." },
-    "time": { "p": "P5", "axis": "type", "why": "The length prints at the row's end in tabular figures and secondary ink, so the lengths line up in one column." },
-    "menu": { "p": "P3", "axis": "interaction", "why": "One round menu key per row holds Move up, Move down and Remove from queue, the keyboard and screen reader way to edit." },
-    "announce": { "p": "P2", "axis": "interaction", "why": "A polite hidden status says where a moved track went and which track was removed, so the change is heard as well as seen." }
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The queue takes the width of its column and holds the list with its announcer, so it sits under a player in one piece."
+    },
+    "list": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "The rows sit on one body of matte plastic with the unit shadow, as List does, so the queue paints its own surface."
+    },
+    "item": {
+      "p": "P6",
+      "axis": "space",
+      "why": "Each track is one row with a fixed order of parts, handle, button and menu key, that never changes between states."
+    },
+    "mark": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "A 2px ink index mark at the start of the playing row says which track plays, in ink and never in orange."
+    },
+    "handle": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The printed handle takes the full height of the row so a finger can grab it, while the keys do the same move."
+    },
+    "grip": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The handle is six printed dots in secondary ink, flat on the plastic like printing on a case."
+    },
+    "row": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The row is one button at least 44px tall that plays its track, with the number, the title and the length inside."
+    },
+    "index": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The track number prints in tabular figures at label size so the numbers line up as the queue is reordered."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "space",
+      "why": "Title and artist stack on the row's inset line and take the room left by the number and the length."
+    },
+    "title": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The title prints in body size in primary ink and wraps onto more lines instead of being cut."
+    },
+    "meta": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The artist prints one size smaller in secondary ink, after the word Playing on the playing row."
+    },
+    "now": {
+      "p": "P2",
+      "axis": "type",
+      "why": "The word Playing is printed with a small play glyph, so the playing row is told in words and a shape."
+    },
+    "glyph": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The play glyph beside the word is ink at the word's own colour and never a moving equaliser."
+    },
+    "time": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The length prints at the row's end in tabular figures and secondary ink, so the lengths line up in one column."
+    },
+    "menu": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "One round menu key per row holds Move up, Move down and Remove from queue, the keyboard and screen reader way to edit."
+    },
+    "announce": {
+      "p": "P2",
+      "axis": "interaction",
+      "why": "A polite hidden status says where a moved track went and which track was removed, so the change is heard as well as seen."
+    },
+    "nowWrap": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The playing word folds open in the row that plays and shut in the one that stops, so the place in the queue moves (D-008)."
+    }
   },
   "states": {
-    "hover": { "p": "P6", "axis": "interaction", "why": "Hover only darkens the handle's dots a step, because a row does not rise when a pointer comes near." },
-    "active": { "p": "P3", "axis": "depth", "why": "A pressed row sinks into a small recess with the inverse light at once, as a pressed part drops by its height." },
-    "focus-visible": { "p": "P3", "axis": "interaction", "why": "The focused row shows the same dark ring as every part in dial, drawn inside the row so the body does not cut it." },
-    "aria-current=true": { "p": "P1", "axis": "colour", "why": "The playing row prints its title in medium weight and lights the ink index mark, never a colour or a fill." },
-    "data-dragging=true": { "p": "P3", "axis": "depth", "why": "The row being dragged sits in a recess while it travels, so the hand sees which track it holds." },
-    "data-drop=before": { "p": "P6", "axis": "colour", "why": "An ink line above a row shows where the dragged track will land, printed and still, never a sliding gap." },
-    "data-drop=after": { "p": "P6", "axis": "colour", "why": "An ink line under the last row shows a dragged track will land at the end of the queue." },
-    "@media forced-colors: active": { "p": "P2", "axis": "depth", "why": "In forced colours the body keeps an outline and the playing mark uses Highlight, because the shadow and the ink fade there." }
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover only darkens the handle's dots a step, because a row does not rise when a pointer comes near."
+    },
+    "active": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "A pressed row sinks into a small recess with the inverse light at once, as a pressed part drops by its height."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The focused row shows the same dark ring as every part in dial, drawn inside the row so the body does not cut it."
+    },
+    "aria-current=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The playing row prints its title in medium weight and lights the ink index mark, never a colour or a fill."
+    },
+    "data-dragging=true": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "The row being dragged sits in a recess while it travels, so the hand sees which track it holds."
+    },
+    "data-drop=before": {
+      "p": "P6",
+      "axis": "colour",
+      "why": "An ink line above a row shows where the dragged track will land, printed and still, never a sliding gap."
+    },
+    "data-drop=after": {
+      "p": "P6",
+      "axis": "colour",
+      "why": "An ink line under the last row shows a dragged track will land at the end of the queue."
+    },
+    "@media forced-colors: active": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "In forced colours the body keeps an outline and the playing mark uses Highlight, because the shadow and the ink fade there."
+    },
+    "data-on=true": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The part that now holds fades or folds in over motion.release, so the change is seen arriving (D-008)."
+    }
   },
-  "motion": {}
+  "motion": {
+    "background-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "When the next track plays, the ink mark fades from one row to the next and the playing word folds shut in the old row while it folds open in the new, over motion.release, so the place in the queue moves instead of jumping (D-008)."
+    },
+    "grid-template-columns": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "When the next track plays, the ink mark fades from one row to the next and the playing word folds shut in the old row while it folds open in the new, over motion.release, so the place in the queue moves instead of jumping (D-008)."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "When the next track plays, the ink mark fades from one row to the next and the playing word folds shut in the old row while it folds open in the new, over motion.release, so the place in the queue moves instead of jumping (D-008)."
+    }
+  }
 }

@@ -1,53 +1,183 @@
 {
   "concept": "DeviceCard is one small appliance on the screen, built from anchor A. Its plastic body has the display across the top, one big orange knob or key where the hand goes, plain keys and a grille beside it, a ruler fader across, and the wordmark and model printed on the bottom edge.",
-  "kind": ["device card", "device tile", "smart home tile", "appliance card"],
+  "kind": [
+    "device card",
+    "device tile",
+    "smart home tile",
+    "appliance card"
+  ],
   "default_to_avoid": [
-    { "pattern": "smart home device card or tile with an icon, a name and an on/off toggle (Google Home, Apple Home, SmartThings tiles)", "why_not": "A tile with a toggle hides the device's state behind an icon, while P2 needs one display that says what the device is doing now." },
-    { "pattern": "device card as a white card with a coloured hero icon and several accent buttons", "why_not": "Several accent buttons spend colour on every action, while P1 allows exactly one orange part per unit, the primary control." }
+    {
+      "pattern": "smart home device card or tile with an icon, a name and an on/off toggle (Google Home, Apple Home, SmartThings tiles)",
+      "why_not": "A tile with a toggle hides the device's state behind an icon, while P2 needs one display that says what the device is doing now."
+    },
+    {
+      "pattern": "device card as a white card with a coloured hero icon and several accent buttons",
+      "why_not": "Several accent buttons spend colour on every action, while P1 allows exactly one orange part per unit, the primary control."
+    }
   ],
   "references": [
-    { "source": "Braun RT 20 tischsuper radio (Dieter Rams, 1961): display window across the top, controls in a row below it" },
-    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): one dominant tuning knob beside keys and a speaker grille" },
-    { "source": "apps/lab/anchor/index.html variant A, picked by the user (D-001): wide LCD, knob at 0.36 of the short side, keys and grille right, ruler fader, wordmark and model on the inset line" }
+    {
+      "source": "Braun RT 20 tischsuper radio (Dieter Rams, 1961): display window across the top, controls in a row below it"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): one dominant tuning knob beside keys and a speaker grille"
+    },
+    {
+      "source": "apps/lab/anchor/index.html variant A, picked by the user (D-001): wide LCD, knob at 0.36 of the short side, keys and grille right, ruler fader, wordmark and model on the inset line"
+    }
   ],
   "derivation": [
-    { "p": "P2", "axis": "space", "consequence": "the display window sits at the top of the unit, aligned to the body's inner inset", "form": "Every layout puts the Display in the first row, spanning the body's inner width at the card's inset." },
-    { "p": "P1", "axis": "space", "consequence": "the loud control gets the largest clear area in the unit and sits where the hand expects it (lower or right of the display)", "form": "The knob takes corner.knob-ratio of the short side, below the display in layouts a and tall and right of it in compact." },
-    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "A knob is the orange part; a primary key is orange only when there is no knob, and every other key stays plastic." },
-    { "p": "P1", "axis": "interaction", "consequence": "the loud control is first in the unit's tab order after the display's label", "form": "The source order is display, then the knob or primary key, then the keys, the meter and the fader." },
-    { "p": "P3", "axis": "space", "consequence": "every part keeps ≥44px hit area even when it draws smaller", "form": "On a narrow body the parts stack in one column instead of shrinking, so keys, knob and fader keep 44px targets." }
+    {
+      "p": "P2",
+      "axis": "space",
+      "consequence": "the display window sits at the top of the unit, aligned to the body's inner inset",
+      "form": "Every layout puts the Display in the first row, spanning the body's inner width at the card's inset."
+    },
+    {
+      "p": "P1",
+      "axis": "space",
+      "consequence": "the loud control gets the largest clear area in the unit and sits where the hand expects it (lower or right of the display)",
+      "form": "The knob takes corner.knob-ratio of the short side, below the display in layouts a and tall and right of it in compact."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "A knob is the orange part; a primary key is orange only when there is no knob, and every other key stays plastic."
+    },
+    {
+      "p": "P1",
+      "axis": "interaction",
+      "consequence": "the loud control is first in the unit's tab order after the display's label",
+      "form": "The source order is display, then the knob or primary key, then the keys, the meter and the fader."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "On a narrow body the parts stack in one column instead of shrinking, so keys, knob and fader keep 44px targets."
+    }
   ],
   "variants": {
     "lab": "apps/lab/device-card/index.html",
     "options": [
-      { "id": "a", "name": "anchor A: display top, knob left, keys and grille right, fader across" },
-      { "id": "tall", "name": "one column: display, meter, centred knob, keys" },
-      { "id": "compact", "name": "wide body: display and keys left, knob right" }
+      {
+        "id": "a",
+        "name": "anchor A: display top, knob left, keys and grille right, fader across"
+      },
+      {
+        "id": "tall",
+        "name": "one column: display, meter, centred knob, keys"
+      },
+      {
+        "id": "compact",
+        "name": "wide body: display and keys left, knob right"
+      }
     ],
     "picked": "a",
     "by": "agent",
     "reason": "Layout a is the anchor the user picked (D-001), so it is the default; tall and compact keep its material, light, radius rule, knob share and printing and only move parts for devices with no fader or a wide window, as P1 and P2 place them."
   },
   "parts": {
-    "root": { "p": "P6", "axis": "shape", "why": "The body is a Card capped at a width of eight touch modules, so the radius rule from the short side holds like the anchor." },
-    "a": { "p": "P2", "axis": "space", "why": "In anchor A the display spans the top, and the knob sits below it on the left with keys and grille on the right." },
-    "tall": { "p": "P1", "axis": "space", "why": "A wall device gets one column, so the knob is centred under the display and takes the largest clear area." },
-    "compact": { "p": "P1", "axis": "space", "why": "A wide body puts the loud control right of the display, the other place P1 says the hand expects it." },
-    "face": { "p": "P4", "axis": "space", "why": "The parts sit on one grid whose gaps are module steps, the same grid the grille holes and the inset use." },
-    "display": { "p": "P2", "axis": "space", "why": "The window always takes the first row across the full inner width, so the state is the first thing read." },
-    "knob": { "p": "P1", "axis": "space", "why": "The knob's cell is the largest clear area in the unit and is centred so its tick ring never touches a key." },
-    "primary": { "p": "P1", "axis": "colour", "why": "With no knob the primary key takes the knob's place and is the unit's only orange part." },
-    "keys": { "p": "P3", "axis": "space", "why": "Secondary keys sit in one row with a gap, each keeping its own 44px target, smaller than the knob." },
-    "lamp": { "p": "P1", "axis": "colour", "why": "A latched key prints a small ink lamp, a ring when off and a disc when on, so selection never spends orange." },
-    "latch": { "p": "P5", "axis": "space", "why": "Under a round icon key the lamp is printed on the case below it, on the same column as the key." },
-    "meter": { "p": "P4", "axis": "space", "why": "The grille sits beside the keys only when it carries a reading, on the same pitch as the body grid." },
-    "fader": { "p": "P3", "axis": "space", "why": "The ruler fader runs across the full inner width so its groove is long enough for every detent." },
-    "extra": { "p": "P6", "axis": "space", "why": "Any further part takes its own last row, so adding it never moves the display, the knob or the keys." }
+    "root": {
+      "p": "P6",
+      "axis": "shape",
+      "why": "The body is a Card capped at a width of eight touch modules, so the radius rule from the short side holds like the anchor."
+    },
+    "a": {
+      "p": "P2",
+      "axis": "space",
+      "why": "In anchor A the display spans the top, and the knob sits below it on the left with keys and grille on the right."
+    },
+    "tall": {
+      "p": "P1",
+      "axis": "space",
+      "why": "A wall device gets one column, so the knob is centred under the display and takes the largest clear area."
+    },
+    "compact": {
+      "p": "P1",
+      "axis": "space",
+      "why": "A wide body puts the loud control right of the display, the other place P1 says the hand expects it."
+    },
+    "face": {
+      "p": "P4",
+      "axis": "space",
+      "why": "The parts sit on one grid whose gaps are module steps, the same grid the grille holes and the inset use."
+    },
+    "display": {
+      "p": "P2",
+      "axis": "space",
+      "why": "The window always takes the first row across the full inner width, so the state is the first thing read."
+    },
+    "knob": {
+      "p": "P1",
+      "axis": "space",
+      "why": "The knob's cell is the largest clear area in the unit and is centred so its tick ring never touches a key."
+    },
+    "primary": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "With no knob the primary key takes the knob's place and is the unit's only orange part."
+    },
+    "keys": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Secondary keys sit in one row with a gap, each keeping its own 44px target, smaller than the knob."
+    },
+    "lamp": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "A latched key prints a small ink lamp, a ring when off and a disc when on, so selection never spends orange."
+    },
+    "latch": {
+      "p": "P5",
+      "axis": "space",
+      "why": "Under a round icon key the lamp is printed on the case below it, on the same column as the key."
+    },
+    "meter": {
+      "p": "P4",
+      "axis": "space",
+      "why": "The grille sits beside the keys only when it carries a reading, on the same pitch as the body grid."
+    },
+    "fader": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The ruler fader runs across the full inner width so its groove is long enough for every detent."
+    },
+    "extra": {
+      "p": "P6",
+      "axis": "space",
+      "why": "Any further part takes its own last row, so adding it never moves the display, the knob or the keys."
+    }
   },
   "states": {
-    "data-fit=narrow": { "p": "P3", "axis": "space", "why": "Below the width where two columns hold 44px parts, every part takes its own row instead of drawing smaller." },
-    "data-on=true": { "p": "P4", "axis": "colour", "why": "An on lamp fills with ink at full step, the same way a lit grille hole does, and never turns orange." },
-    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the lamp keeps a system-colour ring and fill, so a latched key still shows its state." }
+    "data-fit=narrow": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Below the width where two columns hold 44px parts, every part takes its own row instead of drawing smaller."
+    },
+    "data-on=true": {
+      "p": "P4",
+      "axis": "colour",
+      "why": "An on lamp fills with ink at full step, the same way a lit grille hole does, and never turns orange."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the lamp keeps a system-colour ring and fill, so a latched key still shows its state."
+    }
   },
-  "motion": {}
+  "motion": {
+    "background-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A key's lamp lights and dims over motion.release on the decelerating curve, like a bulb warming behind the plastic, never in one frame (D-008)."
+    },
+    "border-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A key's lamp lights and dims over motion.release on the decelerating curve, like a bulb warming behind the plastic, never in one frame (D-008)."
+    }
+  }
 }

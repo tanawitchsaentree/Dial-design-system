@@ -7,6 +7,8 @@
   min-inline-size: var(--ds-control-menu-min);
   font-family: var(--ds-type-family);
   color: var(--ds-text-primary);
+  /* the scale, its words and its ticks are pad ink pressed into the body, on the lit lip of the recess (D-010) */
+  text-shadow: var(--ds-print-seat);
 }
 .header {
   display: flex;
@@ -53,6 +55,7 @@
   inset-inline-start: calc(var(--ds-gap-sm) + var(--p) * (100% - var(--ds-gap-sm) * 2));
   block-size: var(--ds-control-tick);
   border-inline-start: var(--ds-width-hairline) solid var(--ds-text-secondary);
+  box-shadow: var(--ds-print-seat);
 }
 .major {
   block-size: var(--ds-control-mark);

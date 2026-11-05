@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · TransferList · three ways to move rows between two lists</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+ .unit{padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .l{font-size:13px;font-weight:500;margin:0 0 8px}
+ .cap{font-size:12px;color:var(--ds-text-secondary);margin:8px 0 0}
+ .well{box-sizing:border-box;padding:6px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);min-block-size:200px}
+ .o{display:flex;align-items:center;gap:8px;min-block-size:44px;padding:0 12px;border:1px solid transparent;border-radius:var(--ds-corner-media);font-size:14px;color:var(--ds-text-secondary)}
+ .o.on{color:var(--ds-text-primary);font-weight:500}
+ .o.on::before{content:"✓";font-weight:500}
+ .o:not(.on)::before{content:"";inline-size:1em}
+ .o.at{background:var(--ds-surface-solid);border-color:var(--ds-line-ring);color:var(--ds-text-primary)}
+ .key{inline-size:44px;block-size:44px;border-radius:50%;border:1px solid transparent;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);color:var(--ds-text-secondary);display:grid;place-items:center;font-size:16px}
+ .cap-key{min-block-size:44px;padding:0 18px;border-radius:var(--ds-corner-round);border:1px solid transparent;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);color:var(--ds-text-primary);font-size:14px;font-weight:500}
+ /* A: side by side, round keys between */
+ .A .g{display:grid;grid-template-columns:200px auto 200px;gap:14px;align-items:center}
+ .A .keys{display:flex;flex-direction:column;gap:8px}
+ /* B: side by side, word keys under each window */
+ .B .g{display:grid;grid-template-columns:200px 200px;gap:14px}
+ .B .keys{display:flex;gap:8px;margin-block-start:10px}
+ /* C: stacked, one key row between */
+ .C .g{display:grid;gap:12px;inline-size:260px}
+ .C .keys{display:flex;gap:8px;justify-content:center}
+ .C .well{min-block-size:140px}
+</style></head><body>
+<h1>TransferList · available and chosen rows</h1>
+<div class="row">
+ <div class="unit A"><h2>A · windows with a column of round keys between</h2><div class="g">
+  <div><p class="l">Available</p><div class="well"><div class="o on at">Hallway</div><div class="o">Bathroom</div><div class="o on">Garage</div><div class="o">Study</div></div><p class="cap">4 available, 2 marked</p></div>
+  <div class="keys"><span class="key">›</span><span class="key">»</span><span class="key">‹</span><span class="key">«</span></div>
+  <div><p class="l">Chosen</p><div class="well"><div class="o">Kitchen</div><div class="o">Bedroom</div></div><p class="cap">2 chosen</p></div>
+ </div></div>
+ <div class="unit B"><h2>B · windows with word keys under each</h2><div class="g">
+  <div><p class="l">Available</p><div class="well"><div class="o on at">Hallway</div><div class="o">Bathroom</div><div class="o on">Garage</div><div class="o">Study</div></div><div class="keys"><span class="cap-key">Add</span><span class="cap-key">Add all</span></div></div>
+  <div><p class="l">Chosen</p><div class="well"><div class="o">Kitchen</div><div class="o">Bedroom</div></div><div class="keys"><span class="cap-key">Remove</span><span class="cap-key">Remove all</span></div></div>
+ </div></div>
+ <div class="unit C"><h2>C · stacked, one row of keys between</h2><div class="g">
+  <div><p class="l">Available</p><div class="well"><div class="o on at">Hallway</div><div class="o">Bathroom</div><div class="o on">Garage</div></div></div>
+  <div class="keys"><span class="key">⌄</span><span class="key">⌃</span></div>
+  <div><p class="l">Chosen</p><div class="well"><div class="o">Kitchen</div><div class="o">Bedroom</div></div></div>
+ </div></div>
+</div></body></html>

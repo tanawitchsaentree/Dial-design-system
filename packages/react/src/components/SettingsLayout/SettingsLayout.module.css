@@ -1,0 +1,71 @@
+/* SettingsLayout — a titled column of printed boxes of settings (lab apps/lab/settings-layout pick A).
+   Flat printing: no fill, no shadow, no orange. Rows wrap, so a narrow unit drops the part under its name. */
+.root {
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--ds-gap-xl);
+  min-inline-size: var(--ds-gap-none);
+  margin: var(--ds-gap-none);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.title,
+.sectionHeading {
+  margin: var(--ds-gap-none);
+}
+.intro,
+.sectionIntro {
+  margin: var(--ds-gap-none);
+}
+.section {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  min-inline-size: var(--ds-gap-none);
+}
+.box {
+  box-sizing: border-box;
+  display: grid;
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--ds-gap-lg);
+  min-block-size: var(--ds-layout-touch);
+}
+.seam {
+  display: none;
+  flex: 0 0 100%;
+}
+.row + .row > .seam {
+  display: block;
+}
+.text {
+  flex: 1 1 var(--ds-layout-frame-narrow);
+  min-inline-size: var(--ds-gap-none);
+  padding-block: var(--ds-gap-md);
+}
+.label {
+  display: block;
+  margin: var(--ds-gap-none);
+  line-height: var(--ds-type-leading-body);
+}
+.description {
+  margin: var(--ds-gap-none);
+}
+.control {
+  flex: 0 0 auto;
+  max-inline-size: 100%;
+  padding-block: var(--ds-gap-md);
+}
+.row[data-disabled] > .text {
+  opacity: var(--ds-opacity-disabled);
+}
+
+@media (forced-colors: active) {
+  .box { border-color: CanvasText; }
+  .row[data-disabled] > .text { color: GrayText; opacity: 1; }
+}

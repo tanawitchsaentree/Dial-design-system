@@ -1,0 +1,133 @@
+{
+  "concept": "Tooltip is the printed name of a part, lifted for a moment: a small plastic tag that stands above the part on hover, on keyboard focus or when a finger rests on it, and goes away when the part is left or Escape is pressed. It names the part and never explains it.",
+  "kind": [
+    "tooltip",
+    "hint",
+    "name tag",
+    "label on hover"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "tooltip as a near-black rounded bubble with white text and a small triangle pointing at the trigger, shown on hover only",
+      "why_not": "It is a second dark surface with its own light, it needs a pointer to exist, and the triangle is a speech-bubble shape the case never prints."
+    },
+    {
+      "pattern": "the browser's title attribute",
+      "why_not": "It cannot be reached by keyboard or touch, cannot be dismissed, and cannot be styled to hold 4.5:1 in both themes."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): each key named by a small printed plate on the case, in plain lowercase words"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: tooltip pattern (https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/)"
+    },
+    {
+      "source": "WCAG 2.2 · 1.4.13 Content on Hover or Focus: dismissible, hoverable, persistent"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "shadows are short and soft",
+      "form": "The tag is surface.solid plastic with elevation.float and corner.media on layer.overlay, the same plastic as Menu's panel and nothing deeper."
+    },
+    {
+      "p": "P5",
+      "axis": "colour",
+      "consequence": "ink on plastic at ≥4.5:1 in both themes",
+      "form": "The name is primary ink on surface.solid, 9.3:1 in light and 10.9:1 in dark, in the regular weight with no tint."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The tag never takes the accent, even when the part it names is the unit's orange key."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Focus by keyboard shows the tag at once, Escape closes it with focus left where it was, the pointer may move onto the tag without losing it, and a rested finger opens it."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "The tag rises a short step off its part when it opens and sinks back faster when it closes (D-008); it moves only when the state changes."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/tooltip/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "plastic tag floated above the part, hairline ring, Menu's panel material"
+      },
+      {
+        "id": "B",
+        "name": "the name inside a recessed window above the part"
+      },
+      {
+        "id": "C",
+        "name": "flat label joined to the part by a hairline leader"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A reuses the plastic and shadow of Menu and Select, so there is one popup material to learn and it reads over any body or page; B sinks a hole into whatever lies beneath it, so it looks like a window onto the content it covers; C needs a leader that breaks at a screen edge and cannot flip above or below without redrawing."
+  },
+  "parts": {
+    "tip": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "The tag is a short plastic plate with one short soft shadow on the overlay layer, ringed by a real hairline so it parts from the body even where plastic meets plastic."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The name is one short line in the label size of the one grotesk, regular weight, with the body line box so Thai marks above and below the line are not cut."
+    }
+  },
+  "states": {
+    "data-state=open": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The tag rises in from @starting-style over motion.release on the decelerating curve (D-008)."
+    },
+    "data-state=closing": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "While it leaves, the tag fades and sinks back over motion.exit on the accelerating curve, and the pointer passes through it (D-008)."
+    },
+    "data-side=bottom": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "When there is no room above the part the tag stands below it and rises from below instead, so it always grows out of the part it names."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion nothing travels; only the fade remains, on motion.hover, which the tokens keep (D-008)."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the tag keeps a real border in the text colour, because the shadow and the plastic are dropped."
+    }
+  },
+  "motion": {
+    "transform": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The tag rises a short step toward its part (above or below, by data-side) over motion.release on the decelerating curve and leaves over motion.exit on the accelerating one (D-008). Under Reduce motion only the fade stays, on motion.hover."
+    },
+    "opacity": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The tag fades in with its rise over motion.release and out over motion.exit (D-008). Under Reduce motion only the fade stays, on motion.hover."
+    }
+  }
+}

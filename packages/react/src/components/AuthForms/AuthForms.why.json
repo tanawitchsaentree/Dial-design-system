@@ -1,0 +1,172 @@
+{
+  "concept": "AuthForms are the three screens of getting into a unit, sign in, sign up and reset the password, set as small appliance panels: a title on the inset line, the fields in recessed wells, and one foot row where the plain link waits at the start and the unit's one orange key sits at the end. They hand you the values and do no network work.",
+  "kind": [
+    "auth forms",
+    "sign in form",
+    "sign up form",
+    "reset password form",
+    "login form"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "auth forms as a centred white card with a full-width accent button, social login buttons above an 'or' rule and a muted 'forgot password' link floating under it",
+      "why_not": "It spends the accent on the widest part of the card, hangs the secondary links in the middle of nowhere and invites a row of brand buttons; here the key is a normal-sized part at the end of one foot row and there are no brand buttons."
+    },
+    {
+      "pattern": "login form that validates as you type and shows red text under each field with a placeholder in place of the label",
+      "why_not": "The person is scolded before they finish and the label disappears; here Form counts the problems in one window after a send and every field keeps its printed label."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the keys sit together in the lower right corner of the case and the window above only reads"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the printed labels sit on the case's edge and each control has one job"
+    },
+    {
+      "source": "system/FORM.md input class: recessed well, full width of its column, label printed above on the inset line"
+    },
+    {
+      "source": "HTML Standard autofill: the username, email, name, current-password and new-password tokens that let a password manager fill the right field"
+    },
+    {
+      "source": "GOV.UK Design System error summary: one titled list at the top that links to each field"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P1",
+      "axis": "space",
+      "consequence": "sits where the hand expects it (lower or right of the display)",
+      "form": "The submit key stands at the end of the foot row, below the fields, and is not stretched across the width."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The submit key is the form's one primary Button and every link, field and message is ink; the forms print no brand buttons."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The title, the description and every field label start on the same inset line, and the alternate link sits at the foot in the same line."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "hierarchy by size and position",
+      "form": "The title is the only large print; the description is caption size in secondary ink and the field labels are the fields' own."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The fields, the foot row and the alternate link keep their places when a summary appears or the key says Sending."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation",
+      "form": "The confirmation after a reset link replaces the fields at once with no slide or fade."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "The confirmation takes focus and reads as a statement with a check glyph, and holds no key but the way back."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The foot link is a standalone Link 44px tall, beside the 44px key, so both are easy to hit."
+    }
+  ],
+  "variants": {
+    "picked": "C",
+    "by": "agent",
+    "lab": "apps/lab/auth-forms/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "plain stack with a full-width key"
+      },
+      {
+        "id": "B",
+        "name": "display window that restates the task"
+      },
+      {
+        "id": "C",
+        "name": "foot row with the link at the start and the key at the end"
+      }
+    ],
+    "reason": "C puts the one loud key where the hand expects it, at the end of a single foot row, and keeps the plain link on the same line; A stretches the orange across the whole width and scatters two links, and B prints the task twice, once in the title and once in a window, which breaks the rule that nothing in a unit repeats the reading."
+  },
+  "parts": {
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "Each form is one column on the body's inset line, and its blocks keep their places between states."
+    },
+    "title": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The name of the screen is the unit's heading in medium weight and sentence case, the only large print in the form."
+    },
+    "description": {
+      "p": "P5",
+      "axis": "type",
+      "why": "One short line under the title in caption size and secondary ink says what the screen is for, and it holds 4.5:1."
+    },
+    "form": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The Form is the column that holds the summary, the fields and the foot row, spaced by the same unit gap in every state."
+    },
+    "fields": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The wells stack in one column at the large gap, each with its label on the inset line above it."
+    },
+    "foot": {
+      "p": "P1",
+      "axis": "space",
+      "why": "One row at the bottom holds the plain link at the start and the orange key at the end, so the loud part sits lower and right of the fields."
+    },
+    "alternate": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The link to the sibling screen, such as Create an account, is printed on its own line at the foot of the form on the inset line."
+    },
+    "alternateText": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The words before the alternate link are caption size in secondary ink, so the link is the part that reads as a control."
+    },
+    "sent": {
+      "p": "P2",
+      "axis": "interaction",
+      "why": "After a reset link is sent this block replaces the fields and states it in a few words, takes focus so it is read out, and has no control of its own."
+    },
+    "mark": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A check glyph stands before the confirmation, so the state is a mark and words and not a colour."
+    }
+  },
+  "states": {
+    "focus": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The confirmation takes focus from code, so it gets the same ring as a key to show where reading starts."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the description and the confirmation draw in the system text colour and the focus ring in the system highlight."
+    }
+  },
+  "motion": {}
+}

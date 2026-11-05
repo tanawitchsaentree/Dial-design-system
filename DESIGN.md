@@ -3,8 +3,8 @@ name: dial
 packages: { tokens: dial-tokens, components: dial-react }
 themes: [light, dark]
 colors:
-  primary: {"light":"#2E2D2A","dark":"#EDEBE6"}
-  secondary: {"light":"#4A4844","dark":"#D2CFC8"}
+  primary: {"light":"#3F382D","dark":"#ECE7DD"}
+  secondary: {"light":"#554D41","dark":"#D6D0C4"}
   on-light: "#1F1E1C"
   on-accent: "#1F1E1C"
 surfaces:
@@ -29,13 +29,13 @@ status:
   on-warning: "#1F1E1C"
   on-critical: "#FFFFFF"
   on-info: "#FFFFFF"
-  info-mark: {"light":"#4A4844","dark":"#D2CFC8"}
+  info-mark: {"light":"#554D41","dark":"#D6D0C4"}
   positive-mark: {"light":"#2E7D46","dark":"#5DBB7A"}
   warning-mark: "#F2B01E"
   critical-mark: {"light":"#B3261E","dark":"#F07A72"}
   warning: "#F2B01E"
   critical: "#B3261E"
-  info: "#2E2D2A"
+  info: "#3F382D"
 spacing:
   none: "0px"
   xs: "4px"
@@ -74,6 +74,7 @@ type:
   weight-regular: "400"
   weight-medium: "500"
   weight-semibold: "500"
+  leading-flush: "1"
   leading-tight: "1.15"
   leading-body: "1.45"
   leading-reading: "1.6"
@@ -103,9 +104,12 @@ This file cannot check your work, so keep to what kiln would have measured:
 - **P1 One loud thing per unit.** Rams asks that good design be unobtrusive. Each unit has exactly one primary control, and only that control is orange. Everything else is ink, plastic or display. **Therefore** space: the loud control gets the largest clear area in the unit and sits where the hand expects it (lower or right of the display). shape: the loud control is the one round or largest part; secondary controls are smaller keys. depth: same material height as everything else; loudness comes from hue, never from extra elevation. colour: orange appears once per unit, on the primary control's body only; links, borders, icons, selections and charts never use it. type: not affected (P5 decides type). motion: the loud control is the only part whose response may carry the spring's settle; secondary keys press and return without settle. interaction: the loud control is first in the unit's tab order after the display's label.
 - **P2 The display tells the state.** Rams asks that good design make a product understandable. Every unit has one window that says what the device is doing now, in numbers or a few words, and nothing else in the unit repeats it. **Therefore** space: the display window sits at the top of the unit, aligned to the body's inner inset. shape: the window is a rounded rectangle whose radius nests in the body (inner = outer − inset). depth: the window is recessed into the body (inverse light). colour: two display families, LCD (dark grey segments on grey-green, ≥4.5:1) and OLED (white on near-black). type: tabular numerals, a 7-segment face for LCD values, the system grotesk for OLED text. motion: values change at once; only a segment's on/off fades, ≤80ms. interaction: the display is a live region (polite) and never a control.
 - **P3 Parts behave like parts.** Rams asks that good design be honest and thorough down to the last detail. A control in dial is a key, rocker, rotary, fader or slide switch, and it moves like that mechanism and nothing else. **Therefore** space: every part keeps ≥44px hit area even when it draws smaller. shape: keys are round or capsule; rotaries are circles with one index mark; faders ride a groove with a ruler scale. depth: press drops height to 0 in 60–70ms, return runs on the material's spring (ζ 0.75–1, settle <600ms). colour: not affected (P1 decides colour). type: scale numerals on a fader are tabular, the smallest size step, ink at ≥4.5:1. motion: fast in, slow out, through the state motion tokens; rotaries and faders settle into the nearest detent; under Reduce motion nothing overshoots and detents change at once with a short fade. interaction: every mechanism has its keyboard map (arrows step a detent, Home and End reach the ends, Space and Enter press) and a visible value and label.
-- **P4 Holes are information.** Rams asks for as little design as possible. A perforated grille appears only where it carries a reading, such as a level, activity or a signal, and the dots themselves are the meter. **Therefore** space: grille pitch is one module step, so holes sit on the same grid as the body's inset. shape: holes are circles; their field is a rectangle or circle that nests in the body. depth: each hole is a recess (inverse light), never a printed dot. colour: holes are ink at a lower step; a lit level uses ink at full step, never orange. type: not affected (no text in a grille). motion: a level change fills holes in reading order, ≤120ms, none under Reduce motion. interaction: a grille that shows a value exposes it as text to assistive tech; a decorative grille is not allowed to exist.
+- **P4 Holes are information.** Rams asks for as little design as possible. A perforated grille appears only where it carries a reading, such as a level, activity or a signal, and the dots themselves are the meter. **Therefore** space: grille pitch is one module step, so holes sit on the same grid as the body's inset. shape: holes are circles; their field is a rectangle or circle that nests in the body. depth: each hole is a recess (inverse light), never a printed dot. colour: holes are ink at a lower step; a lit level uses ink at full step, never orange; a level that fills a groove is a part, the ring tone lit along its upper edge, never screen ink (D-009). type: not affected (no text in a grille). motion: a level change fills holes in reading order, ≤120ms, none under Reduce motion. interaction: a grille that shows a value exposes it as text to assistive tech; a decorative grille is not allowed to exist.
 - **P5 Type is a label, not a voice.** Rams asks that good design be aesthetic only through usefulness. One grotesk, few sizes. The wordmark sits bottom-left, the model name in lowercase bottom-right, like printing on a case. **Therefore** space: labels sit on the body's inset line, never floating mid-surface. shape: not affected (P3 decides shape). depth: printing is flat on the material, with no shadow and no emboss. colour: ink on plastic at ≥4.5:1 in both themes; no tinted text. type: one grotesk, regular and medium only; hierarchy by size and position; lowercase model names; tabular figures everywhere a number changes. motion: text does not animate. interaction: labels name their control through aria-labelledby, and the model name is never the only identifier.
 - **P6 Lasts, so it stays still.** Rams asks that good design be long-lasting and kind to the environment. dial does not chase attention. Surfaces stay put; only a state change moves anything. **Therefore** space: fixed positions, so a unit's layout does not reflow between states. shape: radius ≈ 15–18% of the body's short side (estimated from chat, re-measure from ref-01.png), capped so large panels do not swell into pillows. depth: shadows are short and soft; a unit never floats more than its material height. colour: no gradients, no glow except P2's emitters. type: not affected (P5 decides type). motion: no entry choreography, no idle animation; transitions only on state. interaction: no hover lift; hover only darkens a key's ink a step, because a real key does not rise when you approach it.
+- **P7 The legend is the state.** A panel prints every choice it has; the one in use is lit, the rest wait in plain sight, so nobody opens a menu to learn what a device can do. **Therefore** space: the legend sits beside or around the control that walks it, in one fixed column or arc, so the lit word moves and nothing reflows. shape: a legend is printing, never a key; the chosen word carries one ink index mark beside it. depth: a legend is flat printing on the material, never a raised part. colour: the chosen word is printed at full ink and the waiting words one step lighter, and both hold 4.5:1; the orange never marks a legend. type: legend words are small lowercase labels in the regular weight, and the chosen one turns medium. motion: when the choice moves, the lit word changes at once and the index mark slides on the spring; under reduce motion it jumps. interaction: the legend is the control's value made visible, so every word is also a target that picks itself, and the control's keys walk it word by word.
+- **P8 Relations are drawn.** When one setting changes what another does, the case shows it with a printed line, the way a schematic face connects a knob to the circuit it shapes. **Therefore** space: lines run on the module grid between the parts they join, with right angles and one bend at most, and never cross a label. shape: a relation is a hairline of ink with a small node where it meets a part; a group of related parts sits inside one printed box. depth: relation lines are printing, flat on the body, never a raised rail. colour: lines are secondary ink; a relation that is active right now prints at full ink. type: a line may carry one short lowercase label, such as after 23:00. motion: a relation does not move; when it becomes active its line steps to full ink with a brief fade. interaction: a line is announced as text ("Night mode lowers the heater to 18"), and moving focus to one end names the other.
+- **P9 Glass is for the part that moves.** The body is matte plastic; only the small parts a finger moves or a light shines through are frosted glass, tinted in the same range as the value they hold, so the eye finds the moving part without a second accent. **Therefore** space: glass appears on caps, lamps, latched keys and chips only, never on a body, panel or card. shape: glass parts keep the shapes of their mechanism and add no outline of their own. depth: a glass part is lit through from behind by the value it holds, and keeps the one top-left light on its surface. colour: glass tint comes from the value's own range, warm for warmth, the room's light for a lamp, and stays a quiet tone near the plastic; it never becomes a second orange, and text never sits on glass below 4.5:1. type: not affected, because printing never sits on glass (P5 decides type). motion: the light behind the glass follows the value at once; only the cap's travel uses the spring. interaction: glass never replaces a state cue; every state still has its shape, word or mark.
 
 ## Semantic tokens
 
@@ -130,8 +134,8 @@ Values are given for light and dark. Component tokens point at these, and primit
 
 | token | light | dark | why |
 |---|---|---|---|
-| `--ds-text-primary` | #2E2D2A | #EDEBE6 | Printing on plastic at 4.5:1 or more in both editions; no tinted text anywhere. |
-| `--ds-text-secondary` | #4A4844 | #D2CFC8 | 〃 |
+| `--ds-text-primary` | #3F382D | #ECE7DD | Printing on plastic at 4.5:1 or more in both editions; no tinted text anywhere. |
+| `--ds-text-secondary` | #554D41 | #D6D0C4 | 〃 |
 | `--ds-text-on-light` | #1F1E1C | #1F1E1C | 〃 |
 | `--ds-text-on-accent` | #1F1E1C | #1F1E1C | 〃 |
 
@@ -155,8 +159,15 @@ Values are given for light and dark. Component tokens point at these, and primit
 
 | token | light | dark | why |
 |---|---|---|---|
-| `--ds-focus-ring` | #1F1E1C | #EDEBE6 | Every part shows the same dark ring with a plastic halo, so focus never depends on the orange. |
+| `--ds-focus-ring` | #554D41 | #D6D0C4 | Every part shows the same ring in secondary printing ink, hugging the part that moves (the cap, the knob, the key), so focus reads as the unit's own printing, never a black box drawn round it, and never depends on the orange (R-005, D-009). |
 | `--ds-focus-halo` | #FAF9F7 | #1C1C1B | 〃 |
+
+### print
+
+| token | light | dark | why |
+|---|---|---|---|
+| `--ds-print-seat` | 0 1px 0 #FFFDF8B3 | 0 -1px 0 #00000073 | Printing is ink pressed into the plastic. Every scale, numeral, legend word and cap line carries the lit lip of its shallow recess (D-010). |
+| `--ds-print-seat-on-light` | 0 1px 0 #FFFDF8B3 | 0 1px 0 #FFFDF8B3 | 〃 |
 
 ### elevation
 
@@ -213,7 +224,7 @@ Values are given for light and dark. Component tokens point at these, and primit
 | token | light | dark | why |
 |---|---|---|---|
 | `--ds-grille-hole` | #BFBCB5 | #1C1C1B | Grille holes are recesses in body colour; a lit hole is printing ink at full step, never the orange. |
-| `--ds-grille-hole-on` | #4A4844 | #D2CFC8 | 〃 |
+| `--ds-grille-hole-on` | #554D41 | #D6D0C4 | 〃 |
 
 ### width
 
@@ -255,6 +266,9 @@ Values are given for light and dark. Component tokens point at these, and primit
 | `--ds-control-avatar-lg` | 80px | 80px | 〃 |
 | `--ds-control-menu-min` | 180px | 180px | 〃 |
 | `--ds-control-knob-min` | 44px | 44px | 〃 |
+| `--ds-control-knob-sm` | 44px | 44px | 〃 |
+| `--ds-control-knob-md` | 72px | 72px | 〃 |
+| `--ds-control-knob-lg` | 108px | 108px | 〃 |
 | `--ds-control-cap-w` | 24px | 24px | 〃 |
 | `--ds-control-cap-h` | 32px | 32px | 〃 |
 | `--ds-control-badge` | 20px | 20px | 〃 |
@@ -301,6 +315,7 @@ Values are given for light and dark. Component tokens point at these, and primit
 | `--ds-type-weight-regular` | 400 | 400 | 〃 |
 | `--ds-type-weight-medium` | 500 | 500 | 〃 |
 | `--ds-type-weight-semibold` | 500 | 500 | 〃 |
+| `--ds-type-leading-flush` | 1 | 1 | 〃 |
 | `--ds-type-leading-tight` | 1.15 | 1.15 | 〃 |
 | `--ds-type-leading-body` | 1.45 | 1.45 | 〃 |
 | `--ds-type-leading-reading` | 1.6 | 1.6 | 〃 |
@@ -324,6 +339,7 @@ Values are given for light and dark. Component tokens point at these, and primit
 | `--ds-motion-easing-exit` | cubic-bezier(0.4, 0, 1, 1) | cubic-bezier(0.4, 0, 1, 1) | 〃 |
 | `--ds-motion-easing-inout` | cubic-bezier(0.45, 0, 0.2, 1) | cubic-bezier(0.45, 0, 0.2, 1) | 〃 |
 | `--ds-motion-press-scale` | 1 | 1 | 〃 |
+| `--ds-motion-dot-scale` | 0.4 | 0.4 | 〃 |
 | `--ds-motion-press-travel` | 3px | 3px | 〃 |
 | `--ds-motion-rise` | 8px | 8px | 〃 |
 | `--ds-motion-lift` | 0px | 0px | 〃 |
@@ -337,13 +353,13 @@ Values are given for light and dark. Component tokens point at these, and primit
 | `--ds-status-on-warning` | #1F1E1C | #1F1E1C | 〃 |
 | `--ds-status-on-critical` | #FFFFFF | #FFFFFF | 〃 |
 | `--ds-status-on-info` | #FFFFFF | #FFFFFF | 〃 |
-| `--ds-status-info-mark` | #4A4844 | #D2CFC8 | 〃 |
+| `--ds-status-info-mark` | #554D41 | #D6D0C4 | 〃 |
 | `--ds-status-positive-mark` | #2E7D46 | #5DBB7A | 〃 |
 | `--ds-status-warning-mark` | #F2B01E | #F2B01E | 〃 |
 | `--ds-status-critical-mark` | #B3261E | #F07A72 | 〃 |
 | `--ds-status-warning` | #F2B01E | #F2B01E | 〃 |
 | `--ds-status-critical` | #B3261E | #B3261E | 〃 |
-| `--ds-status-info` | #2E2D2A | #2E2D2A | 〃 |
+| `--ds-status-info` | #3F382D | #3F382D | 〃 |
 
 ### layout
 
@@ -359,6 +375,13 @@ Values are given for light and dark. Component tokens point at these, and primit
 | `--ds-layout-container-lg` | 1024px | 1024px | 〃 |
 | `--ds-layout-container-xl` | 1200px | 1200px | 〃 |
 | `--ds-layout-container-2xl` | 1440px | 1440px | 〃 |
+| `--ds-layout-frame-narrow` | 180px | 180px | 〃 |
+| `--ds-layout-frame-xs` | 240px | 240px | 〃 |
+| `--ds-layout-frame-sm` | 300px | 300px | 〃 |
+| `--ds-layout-frame-md` | 340px | 340px | 〃 |
+| `--ds-layout-frame-phone` | 375px | 375px | 〃 |
+| `--ds-layout-frame-lg` | 420px | 420px | 〃 |
+| `--ds-layout-article` | 960px | 960px | 〃 |
 
 ### layer
 
@@ -390,8 +413,8 @@ Values are given for light and dark. Component tokens point at these, and primit
 | `--ds-field-line-major` | #1F1E1C24 | #1F1E1C24 | 〃 |
 | `--ds-field-on-column` | #FAF9F7 | #1F1E1C | 〃 |
 | `--ds-field-line` | #1F1E1C0F | #1F1E1C0F | 〃 |
-| `--ds-field-column` | #4A4844 | #BDBAB3 | 〃 |
-| `--ds-field-margin` | #4A4844 | #D2CFC8 | 〃 |
+| `--ds-field-column` | #554D41 | #BDBAB3 | 〃 |
+| `--ds-field-margin` | #554D41 | #D6D0C4 | 〃 |
 
 ### opacity
 
@@ -399,53 +422,166 @@ Values are given for light and dark. Component tokens point at these, and primit
 |---|---|---|---|
 | `--ds-opacity-disabled` | 0.5 | 0.5 | Disabled parts lose height and fade to half, and their outline stays above 3:1. |
 
+### glass
+
+| token | light | dark | why |
+|---|---|---|---|
+| `--ds-glass-body` | #8A87806B | #BDBAB357 | The one accent material. Only caps, lamps, latched keys and chips are frosted glass, tinted in the range of the value they hold and lit through from behind by it; bodies, cards and panels stay matte ABS. |
+| `--ds-glass-edge` | #8A8780B3 | #BDBAB3B3 | 〃 |
+| `--ds-glass-lit` | #FFFFFF8C | #FFFFFF26 | 〃 |
+| `--ds-glass-blur` | 3px | 3px | 〃 |
+| `--ds-glass-saturate` | 1.4 | 1.4 | 〃 |
+| `--ds-glass-brightness` | 1.05 | 0.92 | 〃 |
+| `--ds-glass-fill-opacity` | 0.62 | 0.62 | 〃 |
+| `--ds-glass-solid` | 1 | 1 | 〃 |
+| `--ds-glass-warm-tint` | #D9A55B | #D2A465 | The warm range gives one hue to a cap's body, its edge, the light behind it and a lit lamp, so the part and the value it holds read as one tone. |
+| `--ds-glass-warm-body` | #D9A55B6B | #D2A46557 | 〃 |
+| `--ds-glass-warm-edge` | #D9A55BB3 | #D2A465B3 | 〃 |
+| `--ds-glass-warm-glow` | #D9A55B8C | #D2A46573 | 〃 |
+| `--ds-glass-warm-lamp` | #A8722AE6 | #E8C48CE6 | 〃 |
+| `--ds-glass-warm-matte` | #E2CBA9 | #675740 | 〃 |
+| `--ds-glass-cool-tint` | #7FA0B8 | #86A3B9 | The cool range gives one hue to a cap's body, its edge, the light behind it and a lit lamp, so the part and the value it holds read as one tone. |
+| `--ds-glass-cool-body` | #7FA0B86B | #86A3B957 | 〃 |
+| `--ds-glass-cool-edge` | #7FA0B8B3 | #86A3B9B3 | 〃 |
+| `--ds-glass-cool-glow` | #7FA0B88C | #86A3B973 | 〃 |
+| `--ds-glass-cool-lamp` | #4F7590E6 | #B5CCDDE6 | 〃 |
+| `--ds-glass-cool-matte` | #BCC9D0 | #4D575D | 〃 |
+| `--ds-glass-neutral-tint` | #8A8780 | #BDBAB3 | The neutral range gives one hue to a cap's body, its edge, the light behind it and a lit lamp, so the part and the value it holds read as one tone. |
+| `--ds-glass-neutral-body` | #8A87806B | #BDBAB357 | 〃 |
+| `--ds-glass-neutral-edge` | #8A8780B3 | #BDBAB3B3 | 〃 |
+| `--ds-glass-neutral-glow` | #8A87808C | #BDBAB373 | 〃 |
+| `--ds-glass-neutral-lamp` | #4A4844E6 | #EDEBE6E6 | 〃 |
+| `--ds-glass-neutral-matte` | #C1BEB8 | #5F5E5B | 〃 |
+
 ## Components
 
 What each one is, and the generic default it must not turn into.
 
 | component | what it is | never becomes |
 |---|---|---|
+| Accordion | Accordion prints every section of a unit as a line of the case, like a legend: the sections that are open are lit with an ink index bar and a minus, the ones that wait stay in plain sight with a plus, and nobody has to open a menu to learn what the unit holds. | accordion of bordered cards, each header a full-width bar with a rotating chevron and a tinted fill on the open one |
 | ActionSheet | ActionSheet is a short lid of actions for one object that rises from the bottom of a phone, the rows printed like Menu's and Cancel a separate plastic key, and on a wide screen it opens as a panel by its key. | iOS action sheet with a blue Cancel button and red Delete text on two frosted bodies |
+| Anchor | Anchor prints the sections of a long page the way a device prints its legend on the case: every heading is a small lowercase word in one fixed column, the section you are reading is set at full ink with one short index mark beside it, and the rest wait in plain sight. | an anchor list with a ruled left edge and a thick coloured bar that slides to the section in view |
+| AppShell | AppShell is the case that holds a whole screen of an appliance app: the header unit across the top, the page legend down the side, the main window beside it and a footer unit under it, each its own unit with a gap between. | app shell with a full-bleed top bar, a flush sidebar and a content area divided by hard rules (admin dashboard frame) |
+| AspectRatio | AspectRatio holds a picture, a camera view or a chart window at one of four fixed proportions, so the frame never changes shape while its content loads or changes. |  |
+| AuthForms | AuthForms are the three screens of getting into a unit, sign in, sign up and reset the password, set as small appliance panels: a title on the inset line, the fields in recessed wells, and one foot row where the plain link waits at the start and the unit's one orange key sits at the end. | auth forms as a centred white card with a full-width accent button, social login buttons above an 'or' rule and a muted 'forgot password' link floating under it |
+| Autocomplete | Autocomplete is the recessed text well of Input with a short plastic panel of suggestions that rises under it as you type. | Autocomplete as a browser datalist with a grey native dropdown the page cannot style |
+| Avatar | Avatar shows a person or an owner the way a device shows a reading: a small window cut into the body that holds a picture or one or two letters. | round coloured disc with white initials on a hashed background colour, a status dot on its corner |
 | Badge | Badge is printing on the case of an appliance. | coloured pill badge with white text (Bootstrap badge, Material badge) |
 | Banner | Banner is a strip of the case set into the flow at the top of a screen that says in a printed glyph and a word what condition holds, and stays there until the condition ends. | inline notification banner with a coloured stripe on the start edge, a tinted background and a bold title over muted body (Carbon inline notification) |
+| BarChart | BarChart is a chart-recorder window on the unit: a ruled scale cut into the body, bars printed in ink on it, each told apart by a pattern and carrying its own number, so a person reads a table of values at a glance and every bar can also be reached with the arrow keys and read from a plain table. | bar chart in a dashboard card: one rounded bar per series in blue, green and orange, a legend of coloured dots and a tooltip that appears on hover |
 | BottomNav | BottomNav prints the phone app's main sections along the bottom edge of the case like the scale under a radio's dial, glyph over word, with one ink index mark under the section you are in. | Material bottom navigation with a pill-shaped active indicator behind a filled icon |
+| Box | Box is a plain block that sets how far its content stands from the edge, so insets inside a unit are chosen from the module steps and never typed in. |  |
+| Breadcrumb | Breadcrumb prints the path to this page the way a device prints its menu trail on the case: names in a row, joined by a short run of dots, with the page you are on carrying one ink index mark. | a breadcrumb of grey links split by a greater-than sign or a slash, the last name in bold |
 | Button | Button is a key on the case of an appliance. | flat pill button with primary, secondary and ghost intent fills (Material contained/outlined/text, shadcn button) |
+| Calendar | Calendar prints one month the way a wall sheet does: the days stand flat on the body in a fixed grid, today carries a small index bar under its number, and the day you chose is cut into a small recessed window. | calendar grid of round buttons where the chosen day is a solid accent-coloured disc and today is a tinted circle |
 | Card | Card is the case of a small appliance. | white card with a 12px radius, a soft shadow from straight above and header, content and footer sections (shadcn Card, MUI Card) |
+| Carousel | Carousel pages through a few slides the way a device pages through its memory slots: one slide shows at a time in a window cut into the body, a row of holes under it says which slot is showing, and two round keys step back and forward. | a carousel that autoplays, with arrow buttons floating over the slide and small dots that are the only way to jump |
+| Center | Center puts one part in the middle of the room it is given, on one axis or both, so a lone display or key sits in a fixed place like a lamp in the middle of a panel. |  |
 | Checkbox | Checkbox is a small square key on the case of an appliance with its function printed beside it. | 18px rounded-square checkbox filled blue with a white tick (Material and Bootstrap checkbox) |
 | Chip | Chip is a small capsule key on the case for filters and quick presets. | Material filter chip with a tinted fill and a check icon when selected |
+| ColorPicker | ColorPicker chooses the colour of a lamp the way a lamp's lens caps are chosen: a row of round lens keys, each one the colour it will give, of which one sits down with an ink ring and a tick. | color picker popup with a saturation square, a floating hue strip and a round handle |
+| Combobox | Combobox is Input's recessed well with a list that opens under it and narrows as you type, so a person who knows the word can write it and a person who does not can read the choices; it takes only a listed option and never leaves free text behind. | Combobox as an autocomplete search box with a magnifier, free text accepted and suggestions in a white card with a blue highlighted row |
+| CommandPalette | CommandPalette is a small appliance sheet with one recessed window to type in and a printed legend of every command underneath. | command palette: a dark floating box centred high on the page with a blurred backdrop, a glowing selected row and fuzzy-match highlights (cmdk, Raycast, VS Code) |
 | Container | Container holds a page of units to a width the eye can scan, with a margin from the page edge that grows with the screen. |  |
+| ContextMenu | ContextMenu wraps one object on the page and opens Menu's plastic panel of actions at the point the person pressed, by right-click, long-press or the Context Menu key; while it is open the object sinks into a well so the panel says which object it is for. | context menu that replaces the browser menu and is the only way to reach an action |
+| DataGrid | DataGrid is Table made into a panel of readings you can walk with the arrow keys: the same flat printing and seams between rows, with one cell holding the focus ring at a time, so a person reads, sorts and marks rows without leaving the keyboard. | data grid with zebra stripes, a hover highlight on every row and a Tab stop on every sort button and checkbox |
+| DatePicker | DatePicker is a text window with a round key beside it. | date picker: a bordered input with a calendar icon trapped inside its edge and a masked mm/dd/yyyy template that eats every keystroke |
+| DescriptionList | DescriptionList is the service label printed on the case of an appliance: each term is a small label on the body's inset line and its value is printed under it or beside it, with a seam cut between pairs. | description list as a striped table or a bordered key-value grid with a grey label column and bold values |
 | DeviceCard | DeviceCard is one small appliance on the screen, built from anchor A. | smart home device card or tile with an icon, a name and an on/off toggle (Google Home, Apple Home, SmartThings tiles) |
 | Dialog | Dialog is a small appliance body that rises in front of the room to ask one question about a device, with plastic keys at the bottom and at most one orange key for the answer that acts. | centred white modal dialog with a 12px radius, an X in the corner and a dim black overlay (MUI Dialog, Radix Dialog) |
 | Display | Display is the one window of a dial unit that says what the device is doing now, recessed into the plastic body, drawn as LCD segments or OLED text, announced politely and never pressed. | dashboard display: a stat card or KPI tile with a big bold number and a coloured up/down delta |
+| Divider | Divider is the seam between two regions of one unit, cut into the plastic the way a panel gap is: a shade edge over a lit edge, one pixel each. | divider as a single grey 1px rule across the full width, with an 'OR' pill centred on it |
+| Drawer | Drawer is the side flap of an appliance slid open to show a list of the things the device keeps, such as its rooms, programs or filters. | navigation drawer glued flush to the window edge, full height, with square corners (Material navigation drawer) |
+| Dropzone | Dropzone is a tray window cut into the body where a file can be let go, the way a device has a recess where a card or a tape drops in. | dashed-border dropzone box with a cloud icon that turns blue and tinted when a file is dragged over it |
+| Editable | Editable is a value printed on the case that turns into an Input well when you press it or its key. | editable text that looks like plain text and only shows a pencil or a border on hover |
 | EmptyState | EmptyState is the printing a room or a list shows before it holds anything, with one line that says what is missing, one sentence of what to do, one key, and at most a quiet drawing made of the system's own unlit parts. | empty state with a big grey stock illustration, a headline, a body paragraph and two buttons, all centred |
-| Environment | Environment is one room's air drawn as a small dial appliance: a plastic body whose LCD says the temperature, printed meters under it reading humidity, air quality, carbon dioxide or noise, an optional grille for activity, and the room name and the time of the reading printed at the foot of the case like a wordmark and a model name. | environment card drawn as a weather widget with a big sun or cloud icon, a gradient body and a coloured AQI pill |
+| Environment | Environment is one room's air drawn as a small dial appliance, a plastic body whose LCD says the temperature, printed meters under it reading humidity, air quality, carbon dioxide or noise, an optional grille for activity, and the room name and the time of the reading printed at the foot of the case like a wordmark and a model name. | environment card drawn as a weather widget with a big sun or cloud icon, a gradient body and a coloured AQI pill |
+| ExplainMode | ExplainMode is the SK 4 manual printed on the real screen. | product tour or explain mode in the Intro.js or Shepherd manner, a spotlight hole in a dark scrim with a popover and Next buttons |
+| FAB | FAB is the unit's one main action as a key fixed in its corner. | floating action button: a coloured circle with a large drop shadow hovering over the content at the bottom corner (Material FAB) |
+| Feed | Feed is the event log of the house: a column of short posts printed one under another on the case, each with the author's window and name, read by scrolling or by Page Down. | feed of white cards with soft shadows that jumps when new posts load above |
+| Fieldset | Fieldset is the printed box on the case of an appliance that says these parts belong together. | a Fieldset drawn as a bordered card with a bold heading above it and a soft shadow |
+| FileUpload | FileUpload is a key that opens the system picker, and under it each chosen file read out in its own small window: the name on the left, the size on the right, and a remove key beside the window. | file upload dropzone: a dashed-border box with a cloud icon and the words drag and drop files here, orange browse link inside |
+| Flex | Flex places parts along one line with a gap from the 4px step, and lets one part take the spare room, so a row of keys and a display share a unit face without any part changing its own size. |  |
+| Form | Form is the case that holds a unit's fields and sends them. | form that validates on every keystroke from the first character and shows red inline errors with no summary, or a toast that says there are errors |
+| FormField | FormField is the bit of the case that keeps a name, a part and its small print together. | a FormField that draws its own red border, background tint and asterisk around the control |
 | Grid | Grid places whole units on four, eight or twelve columns, so each appliance keeps one fixed place on the screen and its face is never stretched. |  |
 | Grille | Grille is the perforated field of a dial unit whose recessed holes are the meter itself. | decorative grille: a CSS radial-gradient dot-pattern background behind content |
 | Heading | Heading is the name printed largest on a unit or a page. |  |
+| HelperText | HelperText is the small printed line under a part that says what to enter or what went wrong. | red helper text with no mark, or a tooltip-style error bubble over the field |
+| Icon | Icon is printing on the case made of holes. | generic line icon set: a two pixel rounded stroke icon pack such as Feather or Material outlined |
 | IconButton | IconButton is the round 44px key of an appliance with a symbol printed on it in place of a word. | ghost icon button: a transparent icon with a grey hover circle (Material IconButton, shadcn ghost icon button) |
+| Image | Image shows a picture the way a device shows a reading: a window cut into the body, held at one proportion, with the picture seen through it. | image tag with a broken-image icon and a grey box while loading, a caption laid over the photo on a dark gradient |
 | Input | Input is a window recessed into the appliance's body that takes text. | Material outlined text field: a bordered 8px-radius input rectangle with a floating label |
+| InputGroup | InputGroup is an Input with something fixed at one or both ends of the same recessed window: a word like THB or https://, a unit, or a small key such as Copy. | InputGroup as a bootstrap-style input group: a grey box glued to the side of a bordered input, each with its own border and its own focus state |
+| KanbanBoard | KanbanBoard is a rack of named columns on one panel with a card in each slot, like the cards on a production rack: a card changes column by a hand, by a named key or by the arrow keys, and the count of each column is read from its own small window. | kanban board whose cards move only by dragging between pastel columns with coloured count badges |
+| Kbd | Kbd prints the name of a key the way a case prints its legends, then gives the word a little height so it reads as the key itself: a flat cap with a hard lower edge. | keycap chip: a rounded pill with a thin outline and a grey fill, the same look as a tag or a badge |
+| Label | Label is the printed name of a part, the line of type on the case above a window or a key. | label with a red asterisk after the name and a grey help line floating loose above the field |
+| Legend | Legend is the printing round a knob that names every position it has. | a dropdown select standing in for a legend, hiding the choices behind a trigger |
+| LineChart | LineChart reads a trend the way a device prints a reading: one to three lines drawn in ink inside a recessed window, a ruler of numbers on its edge, and one line of text under the window that says what the cursor is on. | LineChart as a charting-library default: one hue per series, a legend of coloured dots, a curve that draws itself in, and a tooltip that only a mouse can open |
+| Link | Link prints a reference the way a manual does: the words stay in the sentence's own ink and size, and one thin rule runs under them so nobody has to guess what can be pressed. | a link in the brand accent colour with no rule under it, an underline appearing only on hover |
 | List | List prints rows of devices or tracks on one plastic body, the way an appliance prints its programmes on the case, with a glyph or a printed index, a name, the state in words and at most one part to work at the end of the row. | Material list with avatar circles, two line text and divider lines everywhere |
+| Listbox | Listbox is a list that stays open: every choice is printed inside one recessed window the same way Input holds a typed value, and the chosen rows carry a printed tick and weight, so nobody opens anything to learn what the panel can do. | Listbox as a stack of bordered cards with the chosen card filled blue or orange |
 | MediaPlayer | MediaPlayer is the small MP3 player of the reference sheet drawn on a screen, one plastic body with an OLED window that says what is playing and how, the tape fader under it, three round transport keys of which only play is orange, the level in recessed holes and a volume fader, and it really plays the audio it names. | Spotify style media player: a dark bar along the bottom of the screen with album art, a green play circle and a thin progress line |
 | Menu | Menu is a key that opens the same plastic panel as Select, holding a few actions printed in ink as words with a glyph; the one that removes something carries the critical lamp shape beside its word, never a colour. | Radix or MUI dropdown menu with a blue highlighted row and keyboard shortcut hints |
 | Meter | Meter is a printed scale in a narrow recess with one ink needle, like the tuning scale on a radio, that reads a level the person does not set, such as a battery, the air or the water hardness, and names its region with a glyph and a word, never by colour and never in orange. | dashboard donut gauge meter: a coloured arc that runs green to amber to red |
+| MultiSelect | MultiSelect is the recessed window of Select that holds several settings at once. | multi-select dropdown with blue tag pills and a native checkbox in every row |
+| Navbar | Navbar is the strip of printing along the top edge of a product: the model name at one end, the legend of places in the middle with an ink dot before the one you are in, and the keys at the other end. | full-width navbar with a logo, a row of links with an accent underline on the active one, and a hamburger icon on mobile |
+| NavigationMenu | NavigationMenu is the row of section names printed along the top of a case. | NavigationMenu as a mega menu that opens on hover with a full-width white sheet and a blue underline on the current link |
+| NotificationCenter | NotificationCenter is the log tape of one appliance: what the home has said, printed in days, each line with a lamp that is lit while it waits to be read and a ring once it is read. | notification center as a list with a coloured unread dot, a bold red count bubble and a tinted unread row background |
+| NumberInput | NumberInput is a number read in a recessed window with a minus key and a plus key either side, the way a thermostat or a kitchen timer sets a figure. | number input with the browser spin arrows: two tiny stacked triangles at the edge of a bordered box, shown only on hover |
+| OTPFlow | OTPFlow is the whole one-time-code step of a sign-in, drawn as one small appliance: a title, one display window that says where the code went and how long until a new one may be asked for, the row of digit windows, and a plain key to send again. | otp flow as a centred card with a resend link that carries its countdown in brackets and a big accent verify button |
+| Onboarding | Onboarding walks a person through the parts of a screen one at a time the way a printed quick-start card points at an appliance: a full-ink ring is drawn round one part, and a small plastic panel beside it says what the part does, which step this is, and how to go on or stop. | onboarding tour that dims the whole page, cuts a spotlight hole round the target and scrolls the page to it |
+| Pagination | Pagination turns the pages of a long list the way a device steps through its memory: two round keys, previous and next, and the page numbers printed in a row between them. | a row of bordered square buttons, one per page, the current one filled with the accent colour |
+| PasswordInput | PasswordInput is the same recessed window as Input, made for a secret. | password input with an eye icon inside the field that swaps between an open and a struck-through eye and changes only its colour |
+| PieChart | PieChart is a round dial cut into a recessed window: the whole is a ring or disc, each part is a slice printed in an ink pattern with its name and share tied to it by a hairline, and a legend of names repeats them as rows a finger can reach, so shares read without any hue and every slice is reachable by keys and by a table. | pie chart of rainbow slices with percentages inside the wedges, an exploded slice on hover and a legend of coloured dots |
+| PinInput | PinInput is a row of small recessed windows, one for each digit of a short code. | pin input as a row of bordered boxes with a blinking caret and a hidden single input behind them |
+| Popover | Popover is a key that opens a small plastic panel next to it, the same panel Menu and Select open, holding a few lines of printed content and sometimes a field or a key; a title sits on the panel's inset line and a round close key ends it. | tooltip-style bubble with a pointer arrow, a dark fill and white text that opens on hover |
 | Progress | Progress shows how far a device task has run, like a washer's cycle or a firmware update, as a recessed groove in the body that fills with printing ink, with its name and reading printed above, and it never moves while idle. | thin Material linear progress bar in the brand colour with a looping indeterminate stripe |
 | PullToRefresh | PullToRefresh is the one-detent fader of a dial list. | Material pull to refresh with a circular spinner that drops from the top of the list and loops while it waits |
 | Queue | Queue is the up-next list of a dial player printed on one plastic body like List. | Spotify queue with album thumbnails on every row and a green animated now playing equaliser |
-| RangeSlider | RangeSlider is Slider with two plastic caps in the same ruler groove, setting a low and a high end such as a heating schedule's band or a lamp's warm to cool range, and the ruler between the caps is printed in heavier ink while no part turns orange. | two thumb Material range slider with a coloured filled segment between round thumbs |
+| Radio | Radio is a set of small round keys on the case of an appliance, one per choice, each with its word printed beside it. | 20px ring that fills with a blue dot (Material and Bootstrap radio) |
+| RadioCards | RadioCards is a bank of wide plastic key plates on the case of an appliance, one per mode, each with its name and a line of explanation printed on its face. | radio cards where the chosen card gets a thick coloured border and a tinted fill (Radix RadioCards, Shopify plan pickers) |
+| RangePicker | RangePicker chooses a start day and an end day the way a device sets a span: two recessed windows print the two dates, a short ink bar between them joins them, one round key opens the Calendar, and the days between the two windows are ruled in a strip so the span is a shape. | range picker where the days between start and end are one continuous accent-coloured band and both ends are solid accent discs |
+| RangeSlider | RangeSlider is Slider with two frosted glass caps in the same ruler groove, setting a low and a high end such as a heating schedule's band or a lamp's warm to cool range; the ruler between the caps is printed in heavier ink and the groove there is lit in the caps' quiet tint, while no part turns orange. | two thumb Material range slider with a coloured filled segment between round thumbs |
+| Rating | Rating is a short row of five marks printed as round dot lattices, the way a panel prints a scale of levels. | row of five yellow stars, filled yellow against outlined grey, with a hover preview |
+| RichTextEditor | RichTextEditor is a note field that lets a person bold a word, link an address or make a list. | rich text editor shown as a white page with a grey toolbar strip of tiny icon buttons glued to the top edge |
 | Rotary | Rotary is the knob of the appliance. | skeuomorphic chrome audio plugin knob with gradients, knurling and a glowing LED arc |
-| Scrubber | Scrubber is the position of a track or a video on a dial player, a plastic cap riding the fader groove like the tape position on a deck, with chapter marks printed above, the buffered stretch drawn as a thin ink line along the groove floor and the elapsed and remaining time printed in tabular figures under its ends, while the orange stays on the play key. | YouTube style scrubber: a red progress bar that fills as it plays with a round scrubber dot |
+| SceneCard | SceneCard is a scene of the home, such as Movie night or Good night, printed on a small card of light stock that the person picks up and inserts into a room's Slot. | scene card grid of rounded tiles with gradient backgrounds and a big emoji, as in Google Home and SmartThings scenes |
+| Scrubber | Scrubber is the position of a track or a video on a dial player, a frosted glass cap riding the fader groove like the tape position on a deck, the played stretch lit in its quiet tint, with chapter marks printed above, the buffered stretch drawn as a thin ink line along the groove floor and the elapsed and remaining time printed in tabular figures under its ends, while the orange stays on the play key. | YouTube style scrubber: a red progress bar that fills as it plays with a round scrubber dot |
+| SearchInput | SearchInput is the Input well with a printed search mark at its start and a Clear key at its end. | search input: a pill with a magnifier inside and a small grey cross that appears on hover |
 | SegmentedControl | SegmentedControl is the bank of band keys on the case of a radio (FM, AM, AUX). | iOS segmented control: a grey pill track with a sliding white thumb |
 | Select | Select is the same recessed window as Input with a printed chevron, and it opens a plastic panel of options above the page; the chosen option is marked by a printed tick and weight, the way a selector on an appliance marks its setting in ink. | native browser select restyled, opening the operating system's menu |
+| SettingsLayout | SettingsLayout is the back panel of an appliance where every setting is printed in a fixed place: a title, then boxes of settings, each setting a name and its small print on the start side and the part that sets it on the end side. | a SettingsLayout drawn as a stack of white cards, one per section, each with a bold heading and a soft drop shadow |
 | Sheet | Sheet is the lid of an appliance opened to show every control of one device at once, rising from the bottom edge of a phone and standing as its own unit at the lower end of a wide screen. | iOS style bottom sheet with a grey pill handle and a white rounded top |
+| Sidebar | Sidebar is the legend printed down the side of a device: the names of its rooms and settings in one fixed column, grouped under small lowercase headings. | sidebar with an accent-tinted pill behind the active item and a hamburger that slides the panel over the page |
 | Skeleton | Skeleton is the dial unit with its power off. | grey rounded skeleton bars with a looping shimmer gradient sweeping across them |
 | Slider | Slider is the fader on the face of an appliance. | thin Material or iOS slider with a coloured filled track and a round white thumb |
+| Slot | Slot is the narrow mouth a room or a device unit has for a scene card. | drop zone slot drawn as a dashed rounded rectangle that says drop here and highlights in the brand colour |
 | Snackbar | Snackbar is Toast's strip of matte plastic placed once, centred just above the phone's bottom nav, saying what just happened with a printed glyph and word and offering one key that undoes it. | Material dark snackbar, a near-black bar with white text and a coloured action word |
+| Spacer | Spacer is empty room of a fixed size on the 4px step, or room that takes what is left so one part is pushed to the far side of the unit. |  |
+| Sparkline | Sparkline is a trend printed small enough to stand in a line of text: one ink line with no axes, and a solid dot on the last reading so the eye lands where the line ends. | Sparkline as a coloured area fill with a green line for up and a red line for down, and a tooltip on hover |
+| Spinner | Spinner says a device is busy and has no figure to show yet, such as a hub answering or a firmware file loading. | circular spinner, a ring with a coloured arc that turns for ever |
 | Stack | Stack lines up units and parts on the 4px step, so the gaps between appliances on a screen follow the same rhythm as the holes and insets inside them. |  |
+| Stat | Stat is one named figure read the way a device prints a reading: the name on the body's inset line, the number and its unit alone in a recessed window, and an optional change printed under the window as a glyph, a word and an amount. | stat card: a floating tile with a big bold number and a green up arrow or red down arrow for the change |
+| Stepper | Stepper numbers the sections of a long form the way a device numbers its steps: each number shows in a small window cut into the body, and a rail of printed dots runs down to the next window. | filled circle with a white digit joined by a solid coloured line, the accent colour marking the current step |
 | Switch | Switch is the slide switch on the side of an appliance. | iOS-clone pill switch with a sliding white knob and a green or blue track |
+| Table | Table prints rows of readings the way a service label is printed on the case of an appliance: flat ink on the plastic, one seam cut between rows, figures lined up on their right edge so a column reads as one number. | zebra-striped data table with a tinted header band, a hover highlight on every row and a full box border |
 | Tabs | Tabs are the section names printed along the case of an appliance, like the scale under a selector. | Material tabs with a coloured sliding underline indicator |
+| TagInput | TagInput is the Input window with the typed words kept inside it. | tag input built as a bordered 8px box with 24px pills, each holding a 12px cross |
 | Text | Text is the printing on the case of an appliance. | generic typography text component with h1 to h6 variants and bold, italic and colour props (MUI Typography, Chakra Text) |
+| Textarea | Textarea is the same recessed window as Input, made taller so a person can write several lines. | browser textarea: a bordered box with a diagonal grab handle that can be dragged wider than its column |
 | TimePicker | TimePicker is the set window of a clock radio, a recessed well that holds the hour and minute as ink figures, each a field that steps like a detent, with a pair of round set keys under each field and no orange, because a time is a setting and not the unit's loud control. | Material time picker dialog with a round clock face, a sweeping hand and an OK and Cancel bar |
+| Timeline | Timeline prints a log of things that already happened, the way a device prints its last events on a tape: the time in a column at the left, a hairline of ink down the case, and a small node on the line where each event meets it. | timeline of coloured icon discs on a thick coloured line with a card for each event |
 | Toast | Toast is a short strip of plastic that rises at the bottom of the screen after an action and says in a printed glyph and a word what the device just did, then goes away. | dark snackbar toast with a coloured left stripe and an icon disc (Carbon inline notification, Material snackbar) |
+| Tooltip | Tooltip is the printed name of a part, lifted for a moment: a small plastic tag that stands above the part on hover, on keyboard focus or when a finger rests on it, and goes away when the part is left or Escape is pressed. | tooltip as a near-black rounded bubble with white text and a small triangle pointing at the trigger, shown on hover only |
+| TransferList | TransferList is two printed lists on one panel, the rows that are available and the rows that are chosen, with a column of keys between them that carries the marked rows across. | transfer list as two bordered boxes with checkboxes in every row and arrow buttons filled blue |
+| Tray | Tray is a recess pressed into a dial unit that gathers its small secondary keys, such as previous, next, a mode key and a lamp, into one place. | toolbar or ButtonGroup of outlined buttons joined edge to edge, used as a tray of secondary keys |
+| TreeView | TreeView prints a hierarchy the way a schematic face prints a circuit: each level steps in by half a module, a hairline with one right-angle bend joins every child to its parent, and the chosen item sits in a printed box. | TreeView as a file explorer: folder icons, a rotating chevron and a coloured highlight bar across the whole selected row |
+| VirtualList | VirtualList holds a very long run of rows, such as every device in a building or every track in a library, in one short plastic body. | infinite scroll feed that loads more cards and keeps growing the page |
+| VisuallyHidden | VisuallyHidden keeps a name on the case that only a screen reader prints, the way a model number sits on the back plate: present for whoever needs it, absent from the face. | VisuallyHidden as display:none or an off-screen box at left:-9999px with a floating dark pill when the skip link is focused |
+| Wiring | Wiring prints the relations between parts on the face itself, the way a schematic pedal face joins a knob to the circuit it shapes. | node graph editor in the React Flow manner, bezier curve wiring between coloured ports |
+| Wizard | Wizard walks a long setup one step at a time the way a device walks its set-up menu: the Stepper rail stays printed on the case, only the current step opens its fields, and two keys under the rail, Back and Next, move one place along. | wizard modal with a progress bar on top, a grey Back link and a big accent Next button that stays orange on every step |
 
 ## Locked decisions
 
@@ -454,3 +590,8 @@ What each one is, and the generic default it must not turn into.
 - D-003 Form language (system/FORM.md)
 - D-004 Page a step lighter (amends D-002)
 - D-005 dial mark (user's logo)
+- D-006 Concept depth: P7 legend, P8 relations, P9 glass (wave 4)
+- D-007 Glass, the one accent material (recipe A, frosted tinted resin)
+- D-008 ทุกการเปลี่ยน state เคลื่อน (P6 อ่านตามที่เขียน)
+- D-009 Focus ring = secondary printing ink on the part that moves; one icon language
+- D-010 Printing is pad ink pressed into the plastic

@@ -60,7 +60,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(function Skele
     return (
       <div {...common} className={cx(styles.display, styles[size], className)} style={style}>
         <span className={styles.face}>
-          {detail && <span className={styles.detail}>&nbsp;</span>}
+          {detail && <span className={styles.detail}>{' '}</span>}
           <span className={styles.value}>
             <svg className={styles.cells} viewBox={`0 0 ${n * PITCH} ${H}`} focusable="false">
               {Array.from({ length: n }, (_, i) => {

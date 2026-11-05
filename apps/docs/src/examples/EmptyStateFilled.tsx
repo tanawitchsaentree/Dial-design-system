@@ -6,7 +6,7 @@ export default function EmptyStateFilled() {
   const [devices, setDevices] = useState<string[]>([]);
   const add = () => setDevices((d) => [...d, `Lamp ${d.length + 1}`]);
   return (
-    <Card header={<Heading level={3}>Kitchen</Heading>} style={{ inlineSize: 'min(100%, 380px)' }}>
+    <Card header={<Heading level={3}>Kitchen</Heading>} style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))' }}>
       {devices.length ? (
         <Stack gap="md">
           {devices.map((d) => <Stack key={d} direction="row" gap="md" align="center"><Text>{d}</Text><Badge tone="positive">Online</Badge></Stack>)}

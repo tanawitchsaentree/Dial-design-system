@@ -1,0 +1,55 @@
+/* TransferList — two Listbox windows with a column of keys between (system/FORM.md input and control classes, D-003).
+   The windows are the Listbox, imported and not redrawn; the keys are IconButtons. Nothing here is orange and nothing is
+   dragged. A move changes the rows inside the windows, which keep their size, so the unit does not reflow (P6). */
+.root {
+  --tl-min: var(--ds-layout-frame-xs);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  column-gap: var(--ds-gap-xl);
+  row-gap: var(--ds-gap-xl);
+  inline-size: 100%;
+  min-inline-size: 0;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.root[data-stacked='true'] { grid-template-columns: minmax(0, 1fr); }
+
+.column {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ds-gap-sm);
+  min-inline-size: 0;
+}
+/* both windows hold the height of six rows whatever they contain, so a move never resizes them */
+.md .column [role='listbox'] { min-block-size: calc(var(--ds-control-md) * 6 + var(--ds-gap-sm) * 2); }
+.lg .column [role='listbox'] { min-block-size: calc(var(--ds-control-lg) * 6 + var(--ds-gap-sm) * 2); }
+
+.caption {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-text-secondary);
+}
+
+.keys {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  gap: var(--ds-gap-md);
+}
+.root[data-stacked='true'] .keys {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-self: center;
+  justify-content: center;
+}
+.key { flex: none; }
+.pair { display: inline-flex; align-items: center; justify-content: center; }
+
+@media (forced-colors: active) {
+  .key { border-color: ButtonText; }
+}

@@ -1,0 +1,172 @@
+{
+  "concept": "Editable is a value printed on the case that turns into an Input well when you press it or its key. Enter or leaving the well keeps what you typed, Escape puts the old words back, and a round key beside the text means a person on a phone can find the way in without knowing the text is pressable.",
+  "kind": [
+    "editable",
+    "inline edit",
+    "click to edit",
+    "editable text"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "editable text that looks like plain text and only shows a pencil or a border on hover",
+      "why_not": "Hover does not exist on a phone, so the way in would be hidden from the people holding the device; a 44px key stays in plain sight."
+    },
+    {
+      "pattern": "editable field that is always a bordered input and saves on every keystroke",
+      "why_not": "A row of open wells reads as a form to fill in and not as a unit that states its settings; saving per keystroke cannot be undone with Escape."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the figure is read in a window, and the key beside it changes it"
+    },
+    {
+      "source": "system/FORM.md control and input classes: round key 44px, recessed well, label printed above on the inset line"
+    },
+    {
+      "source": "the Input component in this system, whose well Editable swaps in while the value is being edited"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The reading, the edit key and the save and cancel keys are each at least 44px tall, so a thumb finds them, and the reading row and the editing row share the same height."
+    },
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "While editing, the value sits in the same sunken well as Input with elevation.well, so it reads as a place to type; at rest it is flat printing with no well."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The name is printed above the row on the inset line in both states, so it does not move when the well swaps in."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The edit, save and cancel keys are body-coloured keys, never the orange one, because an Editable is a setting and the unit's one loud control stays free."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "transitions only on state",
+      "form": "The reading and the well swap at once when the state changes and nothing fades or slides, so no part of Editable needs to leave with motion."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/editable/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "printing with a round key; well and two keys"
+      },
+      {
+        "id": "B",
+        "name": "dotted rail with a bare printed pencil"
+      },
+      {
+        "id": "C",
+        "name": "reading already inside a window"
+      }
+    ],
+    "reason": "A shows the way in as a 44px key, a mechanism dial already has, and the well plus save and cancel keys give touch a way to commit and undo; B's bare pencil has no edge to press and a dotted rail is a hover-style hint on a screen with no hover, and C already looks like an Input, so editing changes almost nothing the eye can see."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The name, the row and the messages stack in one column so the name sits on the inset line above the value."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight, like the printing beside every other part of the unit."
+    },
+    "row": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The reading and the editing state both sit in a row at least 44px tall, so the unit does not reflow when the state changes."
+    },
+    "reading": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The value is flat printing in primary ink that fills the row, so the whole line is a 44px press area, and it wraps long words and Thai marks with a line box tall enough for them."
+    },
+    "well": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The recess takes the inverse light like Input, so the person sees that this is where the new words go."
+    },
+    "field": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "Typed text is primary ink on the sunken plastic at more than 4.5:1, with a line box tall enough for Thai marks."
+    },
+    "keys": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The cancel and save keys stand side by side after the well at the key size, so touch can finish without a keyboard."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The hint is secondary ink in the caption size under the row."
+    },
+    "error": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The error is critical red with a glyph and words, never orange and never colour alone."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A printed mark beside the words means invalid is never told by colour alone, for people who cannot see the red."
+    }
+  },
+  "states": {
+    "data-empty=true": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "An empty value prints the placeholder words in secondary ink, so a blank row is still a readable, pressable line."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The reading shows the same dark ring as every part when the keyboard is on it."
+    },
+    "focus-within": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The well shows the same dark ring when its field holds the keyboard focus."
+    },
+    "data-invalid=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "An invalid well draws its edge in the critical red, which is never orange, and the message below names the problem."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled Editable fades its value to half and drops the edit key, so it reads as not taking input right now."
+    },
+    "data-readonly=true": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "A read-only Editable prints the value at full ink with no key and no press area, so it reads as a reading and not a setting."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the well keeps a real border and the focus rings use the system highlight colour."
+    }
+  },
+  "motion": {}
+}

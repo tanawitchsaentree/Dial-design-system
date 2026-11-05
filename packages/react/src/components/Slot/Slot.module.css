@@ -27,15 +27,18 @@
   font: inherit;
   cursor: pointer;
 }
+/* the card and the printed legend stand in one cell, so a card taken out lifts away while the legend fades
+   back in under it (D-008) */
 .bay {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  display: grid;
+  align-items: end;
+  justify-items: center;
   inline-size: calc(var(--ds-control-key) * 3);
   max-inline-size: 100%;
   block-size: calc(var(--ds-control-key) * 2);
   overflow: hidden;
 }
+.bay > * { grid-area: 1 / 1; }
 /* the half of the card that stands out: its top edge, square where it enters the slit */
 .face {
   box-sizing: border-box;
@@ -51,6 +54,10 @@
   border-start-end-radius: var(--ds-corner-media);
   background: var(--ds-surface-light);
   color: var(--ds-text-on-light);
+  /* the card stays light in both themes, so its print takes the light theme's lip, never the dark one (D-010) */
+  --ds-print-seat: var(--ds-print-seat-on-light);
+  /* text-shadow inherits as a value, so the face sets it again from its own seat */
+  text-shadow: var(--ds-print-seat);
   text-align: start;
 }
 .name {
@@ -73,7 +80,18 @@
   line-height: var(--ds-type-leading-tight);
   text-transform: lowercase;
   color: var(--ds-text-secondary);
-  transition: color var(--ds-motion-release) var(--ds-motion-easing);
+  transition:
+    color var(--ds-motion-release) var(--ds-motion-easing),
+    opacity var(--ds-motion-release) var(--ds-motion-easing);
+}
+@starting-style { .legend { opacity: 0; } }
+/* a card taken out lifts out of the slit and fades, faster than it went in (motion.exit, accelerating) */
+.face[data-state='closing'] {
+  opacity: 0;
+  transform: translateY(calc(var(--ds-motion-rise) * -1));
+  transition:
+    opacity var(--ds-motion-exit) var(--ds-motion-easing-exit),
+    transform var(--ds-motion-exit) var(--ds-motion-easing-exit);
 }
 .arrow {
   inline-size: var(--ds-control-mark);
@@ -130,8 +148,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .face[data-fresh='true'] { animation: none; }
-  .slit,
-  .legend { transition: none; }
+  .slit { transition: none; }
+  /* nothing travels under Reduce motion; the card and the legend still fade on motion.hover */
+  .legend, .face[data-state='closing'] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
 }
 @media (forced-colors: active) {
   .slit { border: var(--ds-width-hairline) solid CanvasText; }

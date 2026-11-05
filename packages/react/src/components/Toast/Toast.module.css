@@ -22,13 +22,8 @@
   inline-size: var(--ds-control-icon-md);
   block-size: var(--ds-control-icon-md);
   flex: none;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: var(--ds-width-ring);
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
-.mark { fill: none; stroke: currentColor; stroke-width: var(--ds-width-ring); stroke-linecap: round; }
+/* the status glyph and the close key print dial's one icon language, the dot matrix (R-005) */
 .status { font-size: var(--ds-type-label); font-weight: var(--ds-type-weight-medium); line-height: var(--ds-type-leading-tight); }
 .message { flex: 1 1 auto; min-inline-size: 0; font-size: var(--ds-type-body); line-height: var(--ds-type-leading-body); color: var(--ds-text-primary); }
 .keys { display: inline-flex; align-items: center; gap: var(--ds-gap-sm); flex: none; margin-inline-start: auto; }

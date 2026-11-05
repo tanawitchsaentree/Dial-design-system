@@ -11,7 +11,7 @@ const TRACKS = [
 export default function QueueThai() {
   const [playing, setPlaying] = useState('th1');
   return (
-    <div style={{ inlineSize: 360, maxInlineSize: '100%' }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))', maxInlineSize: '100%' }}>
       <Queue
         label="คิวถัดไป"
         defaultTracks={TRACKS}

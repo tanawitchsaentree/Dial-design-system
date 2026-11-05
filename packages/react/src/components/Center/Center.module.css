@@ -1,0 +1,27 @@
+.root {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  margin-inline: auto;
+  min-inline-size: 0;
+}
+.a-both {
+  align-items: center;
+  justify-content: center;
+  block-size: 100%;
+  text-align: center;
+}
+.a-inline {
+  align-items: center;
+  text-align: center;
+}
+.a-block {
+  justify-content: center;
+  block-size: 100%;
+}
+.s-sm { max-inline-size: var(--ds-container-max-sm); }
+.s-md { max-inline-size: var(--ds-container-max-md); }
+.s-lg { max-inline-size: var(--ds-container-max-lg); }
+.s-xl { max-inline-size: var(--ds-container-max-xl); }
+.s-2xl { max-inline-size: var(--ds-container-max-2xl); }

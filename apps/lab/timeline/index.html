@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Timeline · three ways to print a log of past events</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:360px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ ol{list-style:none;margin:0;padding:0}
+ li{position:relative}
+ .tm{font-variant-numeric:tabular-nums;font-size:13px;color:var(--ds-text-secondary)}
+ .t{font-size:15px;font-weight:500;margin:0}
+ .d{font-size:14px;line-height:1.45;color:var(--ds-text-secondary);margin:2px 0 0}
+ /* A: time column left, hairline rail with a node on it (P8 relation line) */
+ .A li{display:grid;grid-template-columns:52px 16px 1fr;column-gap:12px;padding-block-end:22px}
+ .A li:last-child{padding-block-end:0}
+ .A .tm{line-height:20px;text-align:end}
+ .A .r{position:relative}
+ .A .r::before{content:"";position:absolute;inset-block:0 -22px;inset-inline-start:7px;inline-size:1px;background:var(--ds-line-ring)}
+ .A li:last-child .r::before{display:none}
+ .A .r::after{content:"";position:absolute;inset-block-start:5px;inset-inline-start:3px;inline-size:10px;block-size:10px;box-sizing:border-box;border-radius:50%;border:1px solid var(--ds-text-primary);background:var(--ds-surface-solid)}
+ .A li.n .r::after{background:var(--ds-text-primary)}
+ /* B: the time sits in a small recessed window, no rail */
+ .B li{display:grid;grid-template-columns:64px 1fr;column-gap:14px;padding-block-end:18px}
+ .B .tm{box-sizing:border-box;block-size:28px;display:grid;place-items:center;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);color:var(--ds-text-primary)}
+ /* C: tape - time above the title, ruler ticks down the edge */
+ .C li{padding-inline-start:20px;padding-block-end:20px;border-inline-start:1px solid var(--ds-line-ring)}
+ .C li::before{content:"";position:absolute;inset-inline-start:0;inset-block-start:9px;inline-size:10px;border-block-start:1px solid var(--ds-text-primary)}
+ .C .tm{display:block;margin-block-end:2px}
+</style></head><body>
+<h1>Timeline · a log of past events</h1>
+<div class="row">
+ <div class="unit A"><h2>A · time column, hairline rail with nodes</h2><ol>
+  <li class="n"><span class="tm">22:40</span><span class="r"></span><div><p class="t">Night mode started</p><p class="d">Heater set to 18.</p></div></li>
+  <li><span class="tm">21:05</span><span class="r"></span><div><p class="t">Washer finished</p></div></li>
+  <li><span class="tm">18:30</span><span class="r"></span><div><p class="t">Kitchen lamp dimmed</p><p class="d">From 80 to 30 by the evening schedule.</p></div></li></ol></div>
+ <div class="unit B"><h2>B · time in a recessed window</h2><ol>
+  <li><span class="tm">22:40</span><div><p class="t">Night mode started</p><p class="d">Heater set to 18.</p></div></li>
+  <li><span class="tm">21:05</span><div><p class="t">Washer finished</p></div></li>
+  <li><span class="tm">18:30</span><div><p class="t">Kitchen lamp dimmed</p><p class="d">From 80 to 30 by the evening schedule.</p></div></li></ol></div>
+ <div class="unit C"><h2>C · tape with ticks, time above</h2><ol>
+  <li><span class="tm">22:40</span><p class="t">Night mode started</p><p class="d">Heater set to 18.</p></li>
+  <li><span class="tm">21:05</span><p class="t">Washer finished</p></li>
+  <li><span class="tm">18:30</span><p class="t">Kitchen lamp dimmed</p><p class="d">From 80 to 30 by the evening schedule.</p></li></ol></div>
+</div></body></html>

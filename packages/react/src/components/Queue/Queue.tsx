@@ -10,6 +10,8 @@ import {
   type RefAttributes,
 } from 'react';
 import { cx } from '../../cx';
+import { messages } from '../../messages';
+import { Icon } from '../Icon';
 import { Menu } from '../Menu';
 import { formatTime } from '../Scrubber/Scrubber';
 import styles from './Queue.module.css';
@@ -39,9 +41,9 @@ export interface QueueWords {
 
 const WORDS: QueueWords = {
   playing: 'Playing',
-  moveUp: 'Move up',
-  moveDown: 'Move down',
-  remove: 'Remove from queue',
+  moveUp: messages.queue.moveUp,
+  moveDown: messages.queue.moveDown,
+  remove: messages.queue.remove,
   more: (t) => `More for ${t}`,
   moved: (t, p, n) => `${t} moved to ${p} of ${n}`,
   removed: (t) => `${t} removed from the queue`,
@@ -80,7 +82,7 @@ type Drop = { at: number; side: 'before' | 'after' };
  *  in ink with the word Playing, moved with Alt and the arrows, a row menu or the printed handle, and removed with
  *  Delete or the menu. */
 const QueueInner = forwardRef<HTMLDivElement, QueueProps>(function Queue(
-  { label = 'Up next', tracks, defaultTracks, onTracksChange, playing = null, onPlay, removable = true, words, className, ...rest },
+  { label = messages.queue.label, tracks, defaultTracks, onTracksChange, playing = null, onPlay, removable = true, words, className, ...rest },
   ref,
 ) {
   const w = { ...WORDS, ...words };
@@ -214,18 +216,17 @@ const QueueInner = forwardRef<HTMLDivElement, QueueProps>(function Queue(
                 <span className={styles.index} aria-hidden="true">{i + 1}</span>
                 <span className={styles.text}>
                   <span className={styles.title}>{t.title}</span>
-                  {(now || t.artist) && (
-                    <span className={styles.meta}>
-                      {now && (
-                        <span className={styles.now}>
-                          <svg className={styles.glyph} viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M2 1v8l7-4z" /></svg>
-                          {w.playing}
-                        </span>
-                      )}
-                      {now && t.artist ? ' · ' : null}
-                      {t.artist}
+                  <span className={styles.meta}>
+                    {/* every row carries the playing word, folded shut; the track that plays opens it and the one
+                        that stops folds it away, so the mark moves between rows instead of jumping (D-008) */}
+                    <span className={styles.nowWrap} data-on={now ? 'true' : undefined} aria-hidden={now ? undefined : true}>
+                      <span className={styles.now}>
+                        <Icon name="play" size="sm" className={styles.glyph} />
+                        {w.playing}{t.artist ? ' · ' : ''}
+                      </span>
                     </span>
-                  )}
+                    {t.artist}
+                  </span>
                 </span>
                 {t.duration != null && t.duration > 0 && <span className={styles.time}>{formatTime(t.duration)}</span>}
               </button>

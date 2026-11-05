@@ -1,0 +1,100 @@
+/* DatePicker — Input's recessed window with a round key beside it (lab apps/lab/date-picker pick B, D-003).
+   The window takes the inverse light; the key is Popover's round IconButton, a separate raised part on the
+   same row. The panel and the month are Popover's and Calendar's own. No orange. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-md);
+  inline-size: 100%;
+}
+.well {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  min-block-size: var(--ds-control-md);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  cursor: text;
+}
+.field {
+  flex: 1 1 auto;
+  align-self: stretch;
+  min-inline-size: 0;
+  inline-size: 100%;
+  /* the field runs over the well's hairline, so the whole 44px well is its press area */
+  margin-block: calc(var(--ds-width-hairline) * -1);
+  margin-inline: 0;
+  padding-block: var(--ds-gap-md);
+  padding-inline: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--ds-type-body);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  outline: none;
+}
+.field::placeholder { color: var(--ds-text-secondary); opacity: 1; }
+.key { flex: none; }
+.sheet {
+  display: grid;
+  justify-items: center;
+  min-inline-size: 0;
+}
+.hint {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-sm);
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-status-critical-mark);
+}
+.glyph {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-block-start: var(--ds-space-0-5);
+}
+
+.well:focus-within {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.root[data-invalid='true'] .well { border-color: var(--ds-status-critical-mark); }
+.root[data-disabled='true'] .well { box-shadow: none; cursor: not-allowed; }
+.root[data-disabled='true'] .field { opacity: var(--ds-opacity-disabled); }
+.root[data-readonly='true'] .well { cursor: default; }
+.root[data-readonly='true'] .field { cursor: default; }
+
+@media (forced-colors: active) {
+  .well { border-color: CanvasText; }
+  .root[data-invalid='true'] .well { border-color: Mark; }
+  .well:focus-within { outline-color: Highlight; }
+}

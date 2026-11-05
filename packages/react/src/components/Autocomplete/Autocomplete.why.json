@@ -1,0 +1,212 @@
+{
+  "concept": "Autocomplete is the recessed text well of Input with a short plastic panel of suggestions that rises under it as you type. The words in the well are always the person's own, so free text stays valid, and a suggestion only replaces them when it is reached and chosen.",
+  "kind": [
+    "autocomplete",
+    "suggestion field",
+    "type-ahead field",
+    "search suggestions"
+  ],
+  "family": "Select",
+  "family_difference": "Autocomplete keeps a free text well that a person types into and accepts whatever they typed, while Select has no typing and only a closed list of choices. Its panel can show a busy row and an empty line.",
+  "default_to_avoid": [
+    {
+      "pattern": "Autocomplete as a browser datalist with a grey native dropdown the page cannot style",
+      "why_not": "The system draws its own list, ignores the material and light, and announces nothing about busy or empty, so it cannot follow dial's well and panel."
+    },
+    {
+      "pattern": "Autocomplete that forces a match and wipes the text when it is not on the list",
+      "why_not": "A person who types a city the list does not know loses their words; the part must keep free text valid and only offer help."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the dial scale is printed on the case, and what you reach for is marked in ink, not hidden in a menu"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: combobox with list autocomplete (https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/)"
+    },
+    {
+      "source": "system/FORM.md input class and the Select panel: the recessed well with a plastic panel above the page; Input and Listbox are reused in shape, not copied"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The text well is Input itself, so it is surface.sunken with elevation.well, and the reached suggestion sinks into the same kind of recess inside the panel."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The label is printed above the well by Input and names the combobox, and the panel opens flush with the well's start edge."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Focus stays in the well. Arrows walk the suggestions through aria-activedescendant, Enter chooses the reached one or keeps the typed text, Escape closes, Tab leaves."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Every suggestion row is at least 44px tall, and the busy and empty lines keep the same row height."
+    },
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "a unit never floats more than its material height",
+      "form": "The panel floats only as far as elevation.float, which is the same lift as the Select panel, and only while suggestions exist."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite)",
+      "form": "A hidden polite status line says how many suggestions there are, that the list is busy, or that nothing matched, so a person who cannot see the panel hears the same reading."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "The panel moves only when it opens or closes, and the busy spinner is mounted only while the source is working."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/autocomplete/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "plastic panel floating under the well, the reached row sinks into a well, the typed part printed in medium weight"
+      },
+      {
+        "id": "B",
+        "name": "the well itself opens downward into rows divided by seams, one continuous recess"
+      },
+      {
+        "id": "C",
+        "name": "legend printed straight on the body with no panel, an ink bar beside the reached row"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A lifts the suggestions off the page so they never read as part of the form below them, and keeps the person's own text in a clean well above; B turns the field into a hole that overlaps the content under it, and C has no edge, so its rows mix with whatever the page prints beneath (P2 depth, P6 depth)."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The wrapper is the anchor for the panel: it keeps the field's full column width and lets the panel open flush with the well's start edge."
+    },
+    "panel": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A short plastic panel at elevation.float on surface.solid, the same lift as the Select panel, holds the suggestions and the busy and empty lines so the well above stays clean."
+    },
+    "list": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The listbox is the element the combobox controls; it has no tab stop of its own because focus stays in the well."
+    },
+    "option": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Every suggestion row is at least 44px tall with its words inset from the rounded ends, so a finger can choose it."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "type",
+      "why": "Suggestion words use the body size of the one grotesk with a line box tall enough for stacked Thai marks, and long words wrap instead of being cut."
+    },
+    "match": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The part of a suggestion the person already typed is printed in medium weight and primary ink, so the match is told by weight and not by colour."
+    },
+    "busy": {
+      "p": "P4",
+      "axis": "motion",
+      "why": "While the source works, a Spinner grille and the word Searching stand in the panel in one row; the holes are the activity reading."
+    },
+    "empty": {
+      "p": "P2",
+      "axis": "colour",
+      "why": "When nothing matches, one plain line in secondary ink says so and says the text stays as typed, so the person knows free text is accepted."
+    },
+    "md": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The default row is 44px tall, the smallest target every part in dial keeps for a finger."
+    },
+    "lg": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A 52px row with larger text matches the large Input for the main field of a phone sheet."
+    }
+  },
+  "states": {
+    "aria-selected=true": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The suggestion under the arrows or the pointer sinks into a well with a hairline and takes primary ink, so the reached row is told by depth and an edge, not by hue."
+    },
+    "aria-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A suggestion that cannot be chosen fades to half and the arrows skip it, so it stays readable but is plainly not part of the walk."
+    },
+    "data-state=open": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so the panel rises out of the well from a small offset and fades in, rather than appearing in one frame."
+    },
+    "data-state=closing": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Closing sinks the panel back faster than it rose and fades it out, then it unmounts; while it leaves no key or pointer reaches it."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the panel keeps a real border and the reached row draws a system highlight border, since the sunken fill is dropped."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion the panel does not travel and only fades on motion.hover; rows still ink in on the same token."
+    }
+  },
+  "motion": {
+    "transform": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The panel rises from a small offset over motion.release on the decelerating curve and leaves over motion.exit on the accelerating one. Under Reduce motion only the fade stays."
+    },
+    "opacity": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Opening is a state change, so it moves. The panel fades in over motion.release on the decelerating curve and out over motion.exit on the accelerating one. Under Reduce motion the fade runs on motion.hover."
+    },
+    "background-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached suggestion sinks into a well and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached suggestion sinks into a well and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    },
+    "border-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached suggestion sinks into a well and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    },
+    "color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached suggestion sinks into a well and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    }
+  }
+}

@@ -39,6 +39,9 @@
     calc(var(--display-outer, calc(var(--ds-corner-inner) + var(--ds-gap-inset))) - var(--display-inset, var(--ds-gap-inset)))
   );
   background: var(--ds-display-lcd-bg);
+  /* a window shows light, not ink: no print seat inside it (D-010) */
+  --ds-print-seat: none;
+  text-shadow: none;
   box-shadow: var(--ds-elevation-well);
   font-family: var(--ds-type-family);
   line-height: var(--ds-type-leading-tight);

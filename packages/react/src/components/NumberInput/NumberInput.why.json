@@ -1,0 +1,182 @@
+{
+  "concept": "NumberInput is a number read in a recessed window with a minus key and a plus key either side, the way a thermostat or a kitchen timer sets a figure. The window prints the value in tabular figures with its unit, the keys are the same round secondary keys as the rest of the unit, and none of it is orange.",
+  "kind": [
+    "number input",
+    "number field",
+    "spin button",
+    "quantity stepper",
+    "numeric field"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "number input with the browser spin arrows: two tiny stacked triangles at the edge of a bordered box, shown only on hover",
+      "why_not": "The arrows are about 10px tall, appear only on hover so touch users never see them, and do not hold a value in tabular figures or a printed unit."
+    },
+    {
+      "pattern": "number field with flat plus and minus buttons fused into the ends of a bordered rectangle, the accent colour on the plus",
+      "why_not": "Fused flat buttons read as part of the text, spend the unit's one orange on a secondary action, and give the keys no height to press."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the figure reads in a window cut into the body, the keys sit apart from it"
+    },
+    {
+      "source": "Braun KF 20 coffee maker timer and Braun AB 20 alarm clock (Dieter Rams, 1970s): a figure set with two plain keys either side of the display"
+    },
+    {
+      "source": "system/FORM.md input class and display class: recessed well, value right-aligned with the unit beside it"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices spinbutton pattern: Up and Down step, Page keys step a larger amount, Home and End reach the limits"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The value sits in a well with surface.sunken and elevation.well, so the figure reads as a reading and the keys beside it as the parts that change it."
+    },
+    {
+      "p": "P2",
+      "axis": "type",
+      "consequence": "tabular numerals, a 7-segment face for LCD values",
+      "form": "The field uses tabular figures and aligns the value to the end of the well with the unit after it, so digits do not shift as the number changes."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The minus and plus keys are 44px discs (52px at size lg) and the well is the same height, so the three parts share top and bottom edges."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "ArrowUp and ArrowDown step by one step, PageUp and PageDown by the page step, Home and End reach the limits, and the keys hold to repeat."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Both keys are the body-coloured secondary key and the well is ink on plastic, so the unit's one orange stays free for its primary control."
+    },
+    {
+      "p": "P3",
+      "axis": "shape",
+      "consequence": "keys are round or capsule",
+      "form": "The minus and plus keys are round discs from IconButton with a dot-matrix glyph, and the window keeps the corner radius of Input."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/number-input/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "flat ink keys fused inside the well"
+      },
+      {
+        "id": "B",
+        "name": "raised round keys either side of the window"
+      },
+      {
+        "id": "C",
+        "name": "window with a joined capsule key pair after it"
+      }
+    ],
+    "reason": "B keeps the recess for the reading and gives each key its own raised disc, so reading and mechanism stay apart and the keys reuse IconButton; A fuses flat keys into the well and reads as the generic spin box, and C leaves the window off the keys' line and puts both keys on one side so a thumb can hit the wrong one."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The field stacks its label, the row of keys and window, and the messages in one column, so the label sits on the inset line above the window."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight, like the printing beside every other part of the unit."
+    },
+    "row": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The minus key, the window and the plus key stand in one line with equal gaps, and the window takes the width the keys leave."
+    },
+    "well": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The recess takes the inverse light, shade on its top-left inner edge, so the person sees where the number is read and typed."
+    },
+    "field": {
+      "p": "P2",
+      "axis": "type",
+      "why": "The value is primary ink in tabular figures with a line box tall enough for Thai marks, aligned to the end of the window."
+    },
+    "unit": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The unit is printed after the value in secondary ink at the label size, like the unit beside an LCD reading."
+    },
+    "key": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The keys block text selection and double-tap zoom, so holding a key to repeat never selects the figure or zooms the page."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The hint is secondary ink in the caption size under the row, for the range or the format."
+    },
+    "error": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The error is critical red with a glyph and words, never orange and never colour alone."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A printed mark beside the words means invalid is never told by colour alone, for people who cannot see the red."
+    },
+    "md": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The default size is a 44px well between 44px keys, the touch target every part of the unit keeps."
+    },
+    "lg": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The large size is a 52px well between 52px keys with larger figures, for the main number of a phone sheet."
+    }
+  },
+  "states": {
+    "focus-within": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The window shows the same dark ring as every part when the field holds the keyboard focus."
+    },
+    "data-invalid=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "An invalid window draws its edge in the critical red, which is never orange, and the message below names the problem."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled field loses its recess shadow and fades, and its keys go flat, so it reads as not taking input right now."
+    },
+    "data-readonly=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A read-only window keeps its recess and ink so the figure can be read and copied, while its keys go flat and cannot be pressed."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the window keeps a real border and the focus ring uses the system highlight colour."
+    }
+  },
+  "motion": {}
+}

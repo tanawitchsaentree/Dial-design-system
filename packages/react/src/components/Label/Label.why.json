@@ -1,0 +1,112 @@
+{
+  "concept": "Label is the printed name of a part, the line of type on the case above a window or a key. It says what the part is in medium ink, tells in a word whether the part must be filled in, and may add one line of help. It is printing, so it has no box, no shadow and no colour of its own.",
+  "kind": [
+    "label",
+    "field label",
+    "printed name",
+    "form label"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "label with a red asterisk after the name and a grey help line floating loose above the field",
+      "why_not": "The red star tells required by colour alone and means nothing to a screen reader, and loose grey text drifts off the inset line the other printing sits on."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the name of each control is printed on the case on one fixed line beside it"
+    },
+    {
+      "source": "system/FORM.md input class: label printed above on the inset line, never a placeholder used as the label"
+    },
+    {
+      "source": "WCAG 2.2 · 3.3.2 Labels or Instructions and 1.4.1 Use of Color"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The name, the mark and the help stack in one column that takes the full width of the part below, so they start on the same inset line as the well."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "one grotesk, regular and medium only; hierarchy by size and position",
+      "form": "The name is label size in medium weight; the mark and the help are caption size in regular weight. Size and position make the order, not a second face."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The name is primary ink and the mark and help are secondary ink, at 6.7:1 or more on the body in both themes. Required is told by a word or a star, never by orange or a red tint."
+    },
+    {
+      "p": "P5",
+      "axis": "interaction",
+      "consequence": "labels name their control through aria-labelledby",
+      "form": "The label is a real label element tied to the part by htmlFor, so the mark is part of the part's accessible name, and the help carries an id the part can list in aria-describedby."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/label/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "the word inline after the name"
+      },
+      {
+        "id": "B",
+        "name": "the name at the start and the word at the end of the same line"
+      },
+      {
+        "id": "C",
+        "name": "a star after the name, a rule under the line"
+      }
+    ],
+    "reason": "B prints the mark like the model name on a case, at the far end of the inset line, so the name keeps its position whether or not a mark is there; A moves the next word around as the mark changes, and C needs a star that says nothing without a legend and a rule that the Input well already draws."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The label and its help stack in one column on the inset line, and the column takes the full width of the part below."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "interaction",
+      "why": "A real label element tied to the part by htmlFor, so pressing the words focuses the part and the whole line is read as its name."
+    },
+    "name": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The name uses the label size in medium weight in primary ink, the same printing Input, Textarea and Select give their labels, with a line box tall enough for Thai marks."
+    },
+    "mark": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The word required or optional in caption size and secondary ink at the far end of the line, so the state is read in words and not in a tint."
+    },
+    "help": {
+      "p": "P5",
+      "axis": "type",
+      "why": "One line of help under the name in caption size and secondary ink, with an id so the part can list it in aria-describedby."
+    }
+  },
+  "states": {
+    "data-mark=glyph": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The star sits straight after the name in primary ink, with the word kept for screen readers, so it is a printed mark and never a red one."
+    },
+    "@media forced-colors: active": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "In forced colours the name and mark use the system text colour and the help uses the system grey-text colour, so they stay readable on any palette."
+    }
+  },
+  "motion": {}
+}

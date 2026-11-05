@@ -1,5 +1,5 @@
 {
-  "concept": "Environment is one room's air drawn as a small dial appliance: a plastic body whose LCD says the temperature, printed meters under it reading humidity, air quality, carbon dioxide or noise, an optional grille for activity, and the room name and the time of the reading printed at the foot of the case like a wordmark and a model name.",
+  "concept": "Environment is one room's air drawn as a small dial appliance, a plastic body whose LCD says the temperature, printed meters under it reading humidity, air quality, carbon dioxide or noise, an optional grille for activity, and the room name and the time of the reading printed at the foot of the case like a wordmark and a model name.",
   "kind": [
     "environment",
     "room air",
@@ -132,5 +132,6 @@
       "axis": "colour",
       "why": "In forced colours the caption and the notice use the system text colour, so the room's state stays readable."
     }
-  }
+  },
+  "motion": {}
 }

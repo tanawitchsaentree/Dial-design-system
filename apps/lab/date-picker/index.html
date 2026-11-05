@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · DatePicker · three ways to type or pick a date</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:28px}
+ .unit{inline-size:300px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ label{display:block;font-size:14px;font-weight:500;margin-block-end:6px}
+ .hint{margin:6px 0 0;font-size:12px;color:var(--ds-text-secondary)}
+ .dots{display:grid;grid-template-columns:repeat(7,3px);gap:2px;justify-content:center}
+ .dots i{inline-size:3px;block-size:3px;border-radius:50%;background:currentColor;display:block}
+ .dots i.o{opacity:.0}
+ .txt{border:0;background:transparent;font:inherit;font-size:16px;color:var(--ds-text-primary);outline:none;inline-size:100%;min-inline-size:0}
+ .well{box-sizing:border-box;display:flex;align-items:center;min-block-size:44px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .key{flex:none;inline-size:44px;block-size:44px;display:grid;place-items:center;color:var(--ds-text-secondary)}
+ /* A: one well, the key is a raised round part sitting inside its trailing end */
+ .A .well{padding-inline:14px 0;overflow:visible}
+ .A .key{border-radius:50%;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);margin-block:-1px;margin-inline-end:-1px;border:1px solid transparent}
+ /* B: the well keeps its full recess; the round key stands beside it on the same row */
+ .B .line{display:flex;gap:8px;align-items:flex-start}
+ .B .well{flex:1;padding-inline:14px}
+ .B .key{border-radius:50%;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);border:1px solid transparent}
+ /* C: one well, a seam, and a flat printed glyph as the last 44px of the window */
+ .C .well{padding-inline-start:14px}
+ .C .key{border-inline-start:1px solid var(--ds-line-divider);border-radius:0 var(--ds-corner-media) var(--ds-corner-media) 0}
+</style></head><body>
+<h1>DatePicker · typing a date and opening a month</h1>
+<div class="row">
+ <div class="unit A"><h2>A · raised key inside the well</h2>
+  <label>Start date</label>
+  <div class="well"><input class="txt" value="11/04/2026"><span class="key"><span class="dots"><i></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></span></div>
+  <p class="hint">Format: mm/dd/yyyy</p></div>
+ <div class="unit B"><h2>B · well, key beside it</h2>
+  <label>Start date</label>
+  <div class="line"><div class="well"><input class="txt" value="11/04/2026"></div><span class="key"><span class="dots"><i></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></span></div>
+  <p class="hint">Format: mm/dd/yyyy</p></div>
+ <div class="unit C"><h2>C · flat glyph behind a seam</h2>
+  <label>Start date</label>
+  <div class="well"><input class="txt" value="11/04/2026"><span class="key"><span class="dots"><i></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i class="o"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></span></div>
+  <p class="hint">Format: mm/dd/yyyy</p></div>
+</div></body></html>

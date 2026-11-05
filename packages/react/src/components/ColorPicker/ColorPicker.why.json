@@ -1,0 +1,188 @@
+{
+  "concept": "ColorPicker chooses the colour of a lamp the way a lamp's lens caps are chosen: a row of round lens keys, each one the colour it will give, of which one sits down with an ink ring and a tick. A line printed under the keys names the colour chosen, and an optional fader and hex well fine-tune it.",
+  "kind": [
+    "color picker",
+    "colour swatches",
+    "lamp colour",
+    "hue chooser"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "color picker popup with a saturation square, a floating hue strip and a round handle",
+      "why_not": "It is a drag-only surface with no names, no steps for a keyboard and no recess to read the value from, and a lamp has a short list of colours, not sixteen million."
+    },
+    {
+      "pattern": "grid of colour squares where the chosen one gets a thicker coloured border",
+      "why_not": "The border is told by colour alone and vanishes on a swatch of the same hue, so the choice needs a ring and a tick that do not depend on the swatch."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun SK 4 phono combination (Rams and Gugelot, 1956): round, coloured, 44px-class keys set in a row, each told by its position and its lowered state"
+    },
+    {
+      "source": "Braun LE 1 loudspeaker (Dieter Rams, 1959): printed names on the case beside the controls, not inside them"
+    },
+    {
+      "source": "system/FORM.md control class: round key, raised part, pressed state lowers the key"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P3",
+      "axis": "shape",
+      "consequence": "keys are round or capsule",
+      "form": "Each swatch is a round 44px lens key whose face is the colour it sets, so the control reads as a key of the same family as Button and Switch."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The whole 44px label is the target for a swatch, and the keys stand a gap apart so two targets never touch."
+    },
+    {
+      "p": "P3",
+      "axis": "depth",
+      "consequence": "press drops height to 0 in 60–70ms",
+      "form": "The chosen lens sits down and loses its shadow, so the choice is told by height and by a ring and a tick, never by the swatch colour."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "A line under the keys prints the chosen colour's name, or its hex when it is custom, and is announced politely while the keys stay the only things that can be pressed."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The picker's own parts are ink and plastic; the colour on a lens is the person's data, passed in, and the ring and tick never take it."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/color-picker/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "round lens keys with ring and tick"
+      },
+      {
+        "id": "B",
+        "name": "named tiles in a recessed well"
+      },
+      {
+        "id": "C",
+        "name": "plate rows with dot and hex"
+      }
+    ],
+    "reason": "A makes each swatch a round key of the control class, fits eight in two rows of a phone sheet and tells the choice by height, ring and tick; B prints names at the smallest size under every tile and recesses a control, and C is a RadioCards column with a dot, so it adds no form of its own."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "One column holds the legend, the keys, the readout and the extras on the body's inset line, so the picker reads down a single left edge."
+    },
+    "legend": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The picker's printed name in the label size and secondary ink, which is also the accessible name of the radio group."
+    },
+    "group": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A radio group laid out as a grid that fills the column with 44px cells and a gap wide enough for each key's ring, so no ring touches the next key."
+    },
+    "swatch": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A whole 44px label is one native hit area (data-hit) around a lens, so any part of the cell chooses the colour."
+    },
+    "input": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A native radio sits under the lens, hidden from sight but focusable, so the arrow keys walk the group and the name and state are announced."
+    },
+    "lens": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "A round key whose face is the colour passed in as data, with a hairline edge so a pale colour still separates from the plastic body."
+    },
+    "tick": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "A small plastic plate printed with a check sits on the chosen lens, in ink on plate colour, so the mark reads on any lens colour."
+    },
+    "readout": {
+      "p": "P2",
+      "axis": "interaction",
+      "why": "One printed line that says which colour is set, in the body size and primary ink, with a line box tall enough for Thai marks."
+    },
+    "extras": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The optional hue fader and hex well stand in one column under the readout, each with its own printed label, spaced one gap apart."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Hover darkens the lens edge one step and never lifts it, because real keys do not rise."
+    },
+    "active": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "Pressing a lens drops it by its travel and collapses its shadow underneath it, at once."
+    },
+    "data-checked": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "The chosen lens lowers, shows an ink ring around it and prints the tick; the previous choice loses all three at the same time."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Keyboard focus on the hidden radio draws the shared dark ring outside the choice ring, so a focused and chosen key shows both."
+    },
+    "disabled": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "A disabled picker loses the keys' height and fades to half, while the ring of a chosen key and its tick stay drawn."
+    },
+    "data-disabled": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A disabled key shows the not-allowed cursor and no longer travels when pressed by a pointer."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion a key changes state at once with no travel and no spring return; only the edge fade stays."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the lens keeps its own colour and a system border, and the ring and tick use the text colour, so the choice survives."
+    }
+  },
+  "motion": {
+    "transform": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The lens travels down in 65ms and returns on the spring so a press reads as a physical stroke."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "The cast shadow collapses with the press and grows back with the return."
+    },
+    "border-color": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The lens edge darkens on hover over the hover time, a short fade that tells the key can be pressed."
+    }
+  }
+}

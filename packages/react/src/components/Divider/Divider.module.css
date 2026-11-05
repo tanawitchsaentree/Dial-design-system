@@ -1,0 +1,50 @@
+/* Divider — a seam cut in the plastic: divider tone over the material's lit edge (lab apps/lab/divider pick B).
+   Inverse light, like a recess. Two pixels in all and no orange. */
+.root {
+  box-sizing: content-box;
+  block-size: 0;
+  inline-size: auto;
+  margin: 0;
+  border-block-start: var(--ds-width-hairline) solid var(--ds-line-divider);
+  border-block-end: var(--ds-width-hairline) solid var(--ds-material-lit);
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-secondary);
+}
+.root[data-orientation='vertical'] {
+  block-size: auto;
+  align-self: stretch;
+  border-block: 0;
+  border-inline-start: var(--ds-width-hairline) solid var(--ds-line-divider);
+  border-inline-end: var(--ds-width-hairline) solid var(--ds-material-lit);
+}
+/* With a label the root carries no border; the seam is drawn either side of the word. */
+.root[data-labelled] {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  block-size: auto;
+  border: 0;
+}
+.root[data-labelled]::before,
+.root[data-labelled]::after {
+  content: '';
+  flex: 1 1 0;
+  border-block-start: var(--ds-width-hairline) solid var(--ds-line-divider);
+  border-block-end: var(--ds-width-hairline) solid var(--ds-material-lit);
+}
+.root[data-labelled]::before { flex: 0 0 var(--ds-gap-lg); }
+.label {
+  flex: 0 1 auto;
+  min-inline-size: 0;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+@media (forced-colors: active) {
+  .root { border-block-start-color: GrayText; border-block-end-color: transparent; }
+  .root[data-orientation='vertical'] { border-inline-start-color: GrayText; border-inline-end-color: transparent; }
+  .root[data-labelled]::before,
+  .root[data-labelled]::after { border-block-start-color: GrayText; border-block-end-color: transparent; }
+  .label { color: CanvasText; }
+}

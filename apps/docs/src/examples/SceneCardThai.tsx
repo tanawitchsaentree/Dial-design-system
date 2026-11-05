@@ -2,7 +2,7 @@
 import { Card, SceneCard, Slot, Stack } from 'dial-react';
 
 const card = { kind: 'ฉาก', picked: (n: string) => `หยิบ ${n} แล้ว เลือกช่องแล้วกด Enter หรือกด Escape เพื่อวางคืน`, putBack: (n: string) => `วาง ${n} คืนแล้ว` };
-const slot = { legend: 'การ์ดฉาก', running: 'กำลังทำงาน', empty: 'ว่าง', name: (l: string, s: string | null) => (s ? `ช่อง${l} มี ${s}` : `ช่อง${l} ว่าง`), inserted: (s: string, l: string) => `ใส่ ${s} ใน${l}แล้ว`, removed: (s: string, l: string) => `เอา ${s} ออกจาก${l}แล้ว`, pickFirst: (l: string) => `หยิบการ์ดฉากก่อน แล้วกดช่อง${l}` };
+const slot = { legend: 'การ์ดฉาก', running: 'กำลังทำงาน', empty: 'ว่าง', name: (l: string, s: string | null, p?: string) => (s ? `ช่อง${l} มี ${s}${p ? ` ${p}` : ""}` : `ช่อง${l} ว่าง${p ? ` ${p}` : ""}`), inserted: (s: string, l: string) => `ใส่ ${s} ใน${l}แล้ว`, removed: (s: string, l: string) => `เอา ${s} ออกจาก${l}แล้ว`, pickFirst: (l: string) => `หยิบการ์ดฉากก่อน แล้วกดช่อง${l}` };
 
 export default function SceneCardThai() {
   return (

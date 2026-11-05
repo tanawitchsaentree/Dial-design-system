@@ -66,7 +66,7 @@ export const TIME_PICKER: Depth = {
       do: <TimePicker label="Heating comes on at" defaultValue="06:00" />, doNote: 'The label says what the time does.',
       dont: <TimePicker label="Time" defaultValue="06:00" />, dontNote: 'Time names the field, not what happens.',
     },
-    overflow: { text: 'A long label wraps above the well and the well keeps its width. The fields never grow.', render: <div data-overflow-demo="" style={{ inlineSize: 220 }}><TimePicker label="Hall and stairs lights dim to night level at" kind="text" defaultValue="22:30" /></div> },
+    overflow: { text: 'A long label wraps above the well and the well keeps its width. The fields never grow.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><TimePicker label="Hall and stairs lights dim to night level at" kind="text" defaultValue="22:30" /></div> },
     rtl: { text: 'In right-to-left languages the label and hint follow the reading direction. The time keeps hour before minute, as clocks are read in those languages too.', render: <div dir="rtl"><TimePicker label="يبدأ الوضع الليلي" kind="text" defaultValue="22:30" hourLabel="الساعة" minuteLabel="الدقيقة" /></div> },
     expansion: { text: 'German and Finnish labels run about 30% longer. The label wraps; the fields and keys keep their size.', render: <TimePicker label="Nachtmodus beginnt um" defaultValue="22:30" hint="Jeden Tag" hourLabel="Stunde" minuteLabel="Minute" /> },
   },
@@ -103,7 +103,7 @@ export const TIME_PICKER: Depth = {
     },
     text: {
       purpose: <p>The same fields in the grotesk, for a settings form where many fields sit one per row. It has no set keys unless you pass keys, so it takes less height.</p>,
-      context: <Stack gap="md" style={{ maxInlineSize: 320 }}><Input label="Schedule name" defaultValue="Night" /><TimePicker label="Starts" kind="text" defaultValue="22:30" /><Select label="Repeat" options={[{ value: 'day', label: 'Every day' }, { value: 'week', label: 'Weekdays' }]} defaultValue="day" /></Stack>,
+      context: <Stack gap="md" style={{ maxInlineSize: 'var(--ds-layout-frame-md)' }}><Input label="Schedule name" defaultValue="Night" /><TimePicker label="Starts" kind="text" defaultValue="22:30" /><Select label="Repeat" options={[{ value: 'day', label: 'Every day' }, { value: 'week', label: 'Weekdays' }]} defaultValue="day" /></Stack>,
       practices: ['Use it with other fields in a form.', 'Pass keys when the form is used on a touch screen.'],
       pair: { do: <TimePicker label="Ends" kind="text" defaultValue="07:00" />, doNote: 'Grotesk figures with the other fields.', dont: <TimePicker label="Ends" kind="text" defaultValue="07:00" keys hint="Keys in a dense form add height to every row." />, dontNote: 'Keys in every row of a long form.' },
     },

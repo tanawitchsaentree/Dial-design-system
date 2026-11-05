@@ -197,14 +197,14 @@
         "p": [
           "P3"
         ],
-        "why": "Every part shows the same dark ring with a plastic halo, so focus never depends on the orange."
+        "why": "Every part shows the same ring in secondary printing ink, hugging the part that moves (the cap, the knob, the key), so focus reads as the unit's own printing, never a black box drawn round it, and never depends on the orange (R-005, D-009)."
       }
     },
     "ring": {
-      "$value": "{color.abs.900}",
+      "$value": "{color.abs.700}",
       "$extensions": {
         "kiln.theme": {
-          "dark": "{color.charcoal.50}"
+          "dark": "{color.charcoal.100}"
         }
       },
       "$type": "color"
@@ -217,6 +217,30 @@
         }
       },
       "$type": "color"
+    }
+  },
+  "print": {
+    "$extensions": {
+      "kiln.why": {
+        "p": [
+          "P4",
+          "P5"
+        ],
+        "why": "Printing is ink pressed into the plastic. Every scale, numeral, legend word and cap line carries the lit lip of its shallow recess (D-010)."
+      }
+    },
+    "seat": {
+      "$value": "{shadow.seat}",
+      "$extensions": {
+        "kiln.theme": {
+          "dark": "{shadow.seat-dark}"
+        }
+      },
+      "$type": "shadow"
+    },
+    "seat-on-light": {
+      "$value": "{shadow.seat}",
+      "$type": "shadow"
     }
   },
   "elevation": {
@@ -598,6 +622,18 @@
       "$value": "{size.knob-min}",
       "$type": "dimension"
     },
+    "knob-sm": {
+      "$value": "{size.knob-min}",
+      "$type": "dimension"
+    },
+    "knob-md": {
+      "$value": "{size.knob-md}",
+      "$type": "dimension"
+    },
+    "knob-lg": {
+      "$value": "{size.knob-lg}",
+      "$type": "dimension"
+    },
     "cap-w": {
       "$value": "{size.cap-w}",
       "$type": "dimension"
@@ -764,6 +800,10 @@
       "$description": "P5 allows two weights; the strongest role uses medium",
       "$type": "fontWeight"
     },
+    "leading-flush": {
+      "$value": "{font.leading.flush}",
+      "$type": "number"
+    },
     "leading-tight": {
       "$value": "{font.leading.tight}",
       "$type": "number"
@@ -852,6 +892,10 @@
     },
     "press-scale": {
       "$value": "{scale.press}",
+      "$type": "number"
+    },
+    "dot-scale": {
+      "$value": "{scale.dot}",
       "$type": "number"
     },
     "press-travel": {
@@ -1006,6 +1050,34 @@
     },
     "container-2xl": {
       "$value": "{container.2xl}",
+      "$type": "dimension"
+    },
+    "frame-narrow": {
+      "$value": "{size.frame-narrow}",
+      "$type": "dimension"
+    },
+    "frame-xs": {
+      "$value": "{size.frame-xs}",
+      "$type": "dimension"
+    },
+    "frame-sm": {
+      "$value": "{size.frame-sm}",
+      "$type": "dimension"
+    },
+    "frame-md": {
+      "$value": "{size.frame-md}",
+      "$type": "dimension"
+    },
+    "frame-phone": {
+      "$value": "{size.frame-phone}",
+      "$type": "dimension"
+    },
+    "frame-lg": {
+      "$value": "{size.frame-lg}",
+      "$type": "dimension"
+    },
+    "article": {
+      "$value": "{size.article}",
       "$type": "dimension"
     }
   },

@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import 'dial-tokens/css';
 import 'dial-react/styles.css';
 import './docs.css';
+import './motion.css';
 import { App } from './App';
 
 createRoot(document.getElementById('root')!).render(

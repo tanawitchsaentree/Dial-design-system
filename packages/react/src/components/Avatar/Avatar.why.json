@@ -1,0 +1,128 @@
+{
+  "concept": "Avatar shows a person or an owner the way a device shows a reading: a small window cut into the body that holds a picture or one or two letters. It names who and does nothing else, so it is a window and never a key.",
+  "kind": [
+    "avatar",
+    "person",
+    "owner",
+    "initials",
+    "profile picture"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "round coloured disc with white initials on a hashed background colour, a status dot on its corner",
+      "why_not": "A raised round disc reads as a key that can be pressed, a hashed hue spends colour on a label, and a corner dot repeats a state the row already prints."
+    },
+    {
+      "pattern": "round photo with a head-and-shoulders silhouette as the empty state",
+      "why_not": "The silhouette is a drawn figure from a stock kit, not a reading; an empty window should say nothing."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): figures read inside windows cut into the body"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a station name printed in a small window beside the scale"
+    },
+    {
+      "source": "system/FORM.md display class: window recessed into the body, nesting in the body's corner"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The window takes surface.sunken and elevation.well, laid over the picture too, so a photo reads as seen through a hole and not stuck on."
+    },
+    {
+      "p": "P2",
+      "axis": "shape",
+      "consequence": "the window is a rounded rectangle whose radius nests in the body",
+      "form": "The window is a rounded square on corner.media, never a disc, so a person never looks like a round key; the picture is clipped inside the ring so its corner is the outer radius minus the ring."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "one grotesk, regular and medium only",
+      "form": "Initials are printed in the one grotesk in medium weight at three sizes, one per window size, with a line box tall enough for Thai marks."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Every window is the same grey plastic with ink, whoever it shows; there is no hashed hue and no orange."
+    },
+    {
+      "p": "P5",
+      "axis": "interaction",
+      "consequence": "the model name is never the only identifier",
+      "form": "A picture is never the only identifier of a person: the name is printed beside it, or the window carries a label."
+    }
+  ],
+  "variants": {
+    "picked": "C",
+    "by": "agent",
+    "lab": "apps/lab/avatar/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "resin cap, round"
+      },
+      {
+        "id": "B",
+        "name": "printed monogram, ring only"
+      },
+      {
+        "id": "C",
+        "name": "recessed window, rounded square"
+      }
+    ],
+    "reason": "C is the recessed window already used by Input, Display and Stepper, so a person reads as a reading; A is a raised disc that looks like a key and sits oddly beside the real keys of a row, and B is a plain ring that is the generic avatar and has no depth of its own."
+  },
+  "parts": {
+    "root": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The window is a recess in the body: sunken plastic, a hairline ring and the inverse light. It is a span, not a button, so nothing in it is pressed."
+    },
+    "image": {
+      "p": "P2",
+      "axis": "shape",
+      "why": "The picture fills the window and is clipped by its ring, so its corner nests in the window's radius."
+    },
+    "initials": {
+      "p": "P5",
+      "axis": "type",
+      "why": "One or two letters in medium ink, centred in the window; the line box has room above and below for Thai vowel and tone marks."
+    },
+    "mark": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "With no picture and no name the window shows one printed dash, a reading of nothing, instead of a drawn figure."
+    }
+  },
+  "states": {
+    "data-size=sm": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The small window is 32px with the caption size, for a row of dense text; it is not pressed, so it needs no 44px target."
+    },
+    "data-size=md": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The medium window is 44px with the label size, level with the row of controls beside it."
+    },
+    "data-size=lg": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The large window is 80px with the title size, for the head of a profile or a device card."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the ring draws in the text colour and the inset shadow is dropped, so the window keeps a real edge."
+    }
+  },
+  "motion": {}
+}

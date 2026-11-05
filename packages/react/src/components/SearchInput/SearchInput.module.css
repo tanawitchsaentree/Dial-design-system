@@ -1,0 +1,144 @@
+/* SearchInput — the Input well (family Input) with a printed search mark at the start and a Clear key at the
+   end. The key is a printed word on a strip as tall as the well. One light, top-left: inverse light. No orange. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.well {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: var(--ds-control-md);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  cursor: text;
+}
+.mark {
+  flex: none;
+  display: inline-grid;
+  color: var(--ds-text-secondary);
+}
+.field {
+  flex: 1 1 auto;
+  align-self: stretch;
+  min-inline-size: 0;
+  inline-size: 100%;
+  /* the field runs over the well's hairline, so the whole 44px well is its press area */
+  margin-block: calc(var(--ds-width-hairline) * -1);
+  margin-inline: 0;
+  padding-block: var(--ds-gap-md);
+  padding-inline: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  outline: none;
+  appearance: none;
+}
+.field::placeholder { color: var(--ds-text-secondary); opacity: 1; }
+/* the browser's own cross would be a second clear key */
+.field::-webkit-search-cancel-button,
+.field::-webkit-search-decoration { appearance: none; display: none; }
+.clear {
+  flex: none;
+  align-self: stretch;
+  box-sizing: border-box;
+  /* as tall as the well and running over its hairline: a full 44px strip; it also runs to the well's end edge */
+  min-block-size: var(--ds-control-md);
+  margin-block: calc(var(--ds-width-hairline) * -1);
+  margin-inline-end: calc(var(--ds-gap-xl) * -1);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-xl);
+  border: 0;
+  border-inline-start: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-start-end-radius: var(--ds-corner-media);
+  border-end-end-radius: var(--ds-corner-media);
+  background: transparent;
+  font: inherit;
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  white-space: nowrap;
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition:
+    color var(--ds-motion-hover) var(--ds-motion-easing),
+    opacity var(--ds-motion-release) var(--ds-motion-easing);
+}
+@starting-style {
+  .clear[data-state='open'] { opacity: 0; }
+}
+.clear[data-state='closing'] {
+  opacity: 0;
+  pointer-events: none;
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+}
+.clear:hover,
+.clear:active { color: var(--ds-text-primary); }
+.clear:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: calc(var(--ds-width-ring) * -1);
+}
+.hint {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-sm);
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-status-critical-mark);
+}
+.glyph {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-block-start: var(--ds-space-0-5);
+}
+.md .well { min-block-size: var(--ds-control-md); }
+.lg .well { min-block-size: var(--ds-control-lg); padding-inline: var(--ds-gap-2xl); }
+.lg .field { font-size: var(--ds-type-emphasis); }
+.lg .clear { min-block-size: var(--ds-control-lg); margin-inline-end: calc(var(--ds-gap-2xl) * -1); padding-inline: var(--ds-gap-2xl); font-size: var(--ds-type-body); }
+
+.well:focus-within {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.root[data-invalid='true'] .well { border-color: var(--ds-status-critical-mark); }
+.root[data-disabled='true'] .well { box-shadow: none; cursor: not-allowed; }
+.root[data-disabled='true'] .field,
+.root[data-disabled='true'] .mark { opacity: var(--ds-opacity-disabled); }
+
+@media (prefers-reduced-motion: reduce) {
+  .clear, .clear[data-state='closing'] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .well { border-color: CanvasText; }
+  .clear { border-inline-start-color: CanvasText; color: ButtonText; }
+  .root[data-invalid='true'] .well { border-color: Mark; }
+  .well:focus-within { outline-color: Highlight; }
+  .clear:focus-visible { outline-color: Highlight; }
+}

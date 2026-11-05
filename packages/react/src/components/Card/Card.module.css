@@ -59,10 +59,12 @@
   margin-block-start: auto;
   line-height: var(--ds-type-leading-tight);
 }
+/* the wordmark and the model name are pad ink pressed into the case, on the lit lip of the recess (D-010) */
 .wordmark {
   font-size: var(--ds-type-body);
   font-weight: var(--ds-type-weight-medium);
   letter-spacing: var(--ds-type-tracking-caps);
+  text-shadow: var(--ds-print-seat);
 }
 .model {
   margin-inline-start: auto;
@@ -70,6 +72,7 @@
   font-weight: var(--ds-type-weight-regular);
   color: var(--ds-text-secondary);
   text-transform: lowercase;
+  text-shadow: var(--ds-print-seat);
 }
 
 @media (forced-colors: active) {

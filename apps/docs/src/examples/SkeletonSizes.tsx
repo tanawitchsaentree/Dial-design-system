@@ -3,7 +3,7 @@ import { Skeleton, Stack } from 'dial-react';
 
 export default function SkeletonSizes() {
   return (
-    <div aria-busy="true" aria-label="Loading">
+    <div role="group" aria-busy="true" aria-label="Loading">
       <Stack gap="lg">
         <Skeleton size="sm" extent={200} />
         <Skeleton size="md" extent={200} />

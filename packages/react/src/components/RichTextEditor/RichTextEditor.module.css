@@ -1,0 +1,120 @@
+/* RichTextEditor — the Textarea well with a row of round keys printed above it (lab A). Recessed well, inverse light,
+   label on the inset line. The latched key is IconButton's glass. Nothing here is orange. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-md);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+  cursor: default;
+}
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-gap-sm);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+}
+.linkRow {
+  display: grid;
+  gap: var(--ds-gap-md);
+}
+.linkKeys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-gap-sm);
+}
+.well {
+  display: flex;
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  cursor: text;
+}
+.field {
+  position: relative;
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  inline-size: 100%;
+  min-block-size: calc(var(--ds-control-lg) * 2);
+  box-sizing: border-box;
+  padding-block: var(--ds-gap-md);
+  padding-inline: 0;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  overflow-wrap: anywhere;
+  outline: none;
+}
+.field > * { margin: 0; }
+.field > * + * { margin-block-start: var(--ds-gap-sm); }
+.field h2 {
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+}
+.field ul,
+.field ol { padding-inline: var(--ds-gap-2xl) 0; }
+.field strong { font-weight: var(--ds-type-weight-semibold); }
+.field em { font-style: italic; }
+.field a {
+  color: var(--ds-text-primary);
+  text-decoration: underline;
+  text-decoration-thickness: var(--ds-width-hairline);
+}
+.field[data-empty='true']::before {
+  content: attr(data-placeholder);
+  position: absolute;
+  inset-block-start: var(--ds-gap-md);
+  inset-inline-start: 0;
+  color: var(--ds-text-secondary);
+  pointer-events: none;
+}
+.hint {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-sm);
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-status-critical-mark);
+}
+.glyph {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-block-start: var(--ds-space-0-5);
+}
+.well:focus-within {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.root[data-invalid='true'] .well { border-color: var(--ds-status-critical-mark); }
+.root[data-disabled='true'] .well { box-shadow: none; cursor: not-allowed; }
+.root[data-disabled='true'] .field { opacity: var(--ds-opacity-disabled); }
+.root[data-readonly='true'] .well { box-shadow: none; cursor: default; }
+
+@media (forced-colors: active) {
+  .well { border-color: CanvasText; }
+  .root[data-invalid='true'] .well { border-color: Mark; }
+  .well:focus-within { outline-color: Highlight; }
+  .field a { color: LinkText; text-decoration: underline; }
+}

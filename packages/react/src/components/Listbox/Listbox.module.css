@@ -1,0 +1,104 @@
+/* Listbox — a list that stays open (system/FORM.md input class, D-003). One recessed window holds every
+   option, the same well as Input and the closed Select (surface.sunken, elevation.well, line.ring).
+   A chosen row is a printed tick and weight, never orange; the reached row is a plate with a hairline.
+   Nothing floats and nothing leaves, so only state changes move (P6, D-008): a row inks in, the tick fades. */
+.root {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ds-gap-sm);
+  inline-size: 100%;
+  min-inline-size: 0;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-block-size: calc(var(--ds-control-md) * 6 + var(--ds-gap-sm) * 2);
+  margin: 0;
+  padding: var(--ds-gap-sm);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  outline: none;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  flex: none;
+  box-sizing: border-box;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-media);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  /* the row the pointer or the arrows reach inks in, fast on and slower off (motion.hover) */
+  transition:
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    border-color var(--ds-motion-hover) var(--ds-motion-easing),
+    color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.tick {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  opacity: 0;
+  transition: opacity var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.tick[data-on='true'] { opacity: 1; }
+.leading {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--ds-text-secondary);
+}
+.text { flex: 1 1 auto; min-inline-size: 0; overflow-wrap: anywhere; }
+.empty {
+  box-sizing: border-box;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-lg);
+  color: var(--ds-text-secondary);
+}
+.md .option { min-block-size: var(--ds-control-md); }
+.lg .option { min-block-size: var(--ds-control-lg); padding-inline: var(--ds-gap-xl); }
+.lg .list { font-size: var(--ds-type-emphasis); max-block-size: calc(var(--ds-control-lg) * 6 + var(--ds-gap-sm) * 2); }
+
+.list:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.list[aria-disabled='true'] { box-shadow: none; cursor: not-allowed; opacity: var(--ds-opacity-disabled); }
+.list[aria-disabled='true'] .option { cursor: not-allowed; }
+.option[aria-selected='true'] { color: var(--ds-text-primary); font-weight: var(--ds-type-weight-medium); }
+.option[aria-disabled='true'] { cursor: not-allowed; opacity: var(--ds-opacity-disabled); }
+.option[data-active='true'] { background: var(--ds-surface-solid); border-color: var(--ds-line-ring); color: var(--ds-text-primary); }
+
+/* under Reduce motion nothing travels; the rows and the tick still change on motion.hover */
+@media (prefers-reduced-motion: reduce) {
+  .option, .tick { transition-duration: var(--ds-motion-hover); }
+}
+@media (forced-colors: active) {
+  .list { border-color: ButtonText; }
+  .option[data-active='true'] { border-color: Highlight; }
+  .option[aria-selected='true'] { border-color: ButtonText; }
+  .list:focus-visible { outline-color: Highlight; }
+}

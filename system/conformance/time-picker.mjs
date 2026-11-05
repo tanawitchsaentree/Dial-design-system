@@ -120,4 +120,23 @@ export default async function timePicker({ check, expect, page, go, main, tokens
     expect(r.invalid === 'true' && r.words.split(/\s+/).length >= 2, `aria-invalid ${r.invalid}, message "${r.words}"`);
     return `"${r.words}"`;
   });
+  // user complaint 2026-11-04: a small white "22" showed over the drawn figures. The field's own digits are hidden
+  // text; once the value is selected the browser prints it in the selection colour unless that colour is clear.
+  await check('TimePicker', 'a selected value prints no text of its own over the drawn figures', async () => {
+    await go('/components/time-picker/code');
+    const f = main().locator('[data-component="TimePicker"][data-kind="segment"] input[role="spinbutton"], [data-component="TimePicker"] input[role="spinbutton"]').first();
+    await f.focus();
+    await f.evaluate((el) => el.select());
+    // the computed style of ::selection does not show the browser's own selected-text colour, so read the rule
+    const r = await f.evaluate((el) => {
+      const kind = el.closest('[data-kind]')?.dataset.kind ?? 'segment';
+      const cls = [...el.classList];
+      let clear = false;
+      const walk = (rules) => { for (const rule of rules) { if (rule.cssRules) walk(rule.cssRules); if (rule.selectorText && rule.selectorText.includes('::selection') && cls.some((c) => rule.selectorText.includes('.' + c)) && /transparent|rgba\(0, 0, 0, 0\)/.test(rule.style.color)) clear = true; } };
+      for (const sheet of document.styleSheets) { try { walk(sheet.cssRules); } catch { /* cross-origin sheet */ } }
+      return { kind, clear };
+    });
+    expect(r.kind !== 'segment' || r.clear, 'the field has no ::selection rule that clears its text colour, so selected digits print over the figures');
+    return r.kind === 'segment' ? 'selection colour is clear' : 'text kind prints its own digits';
+  });
 }

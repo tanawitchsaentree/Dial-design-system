@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · ColorPicker · three ways to choose a lamp colour</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .lab{font-size:14px;color:var(--ds-text-secondary);margin:0 0 12px}
+ .out{font-size:14px;margin:14px 0 0}
+ .hex{margin-block-start:16px;display:grid;gap:6px;font-size:14px;color:var(--ds-text-secondary)}
+ .hex i{display:block;block-size:44px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring)}
+ .hue{margin-block-start:16px;block-size:44px;border-radius:22px;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ /* A: round lens keys, 44px discs of colour; chosen sits down, ink ring around it, tick plate on the face */
+ .A .g{display:grid;grid-template-columns:repeat(4,44px);gap:16px 20px;justify-content:space-between}
+ .A .s{position:relative;inline-size:44px;block-size:44px;border-radius:50%;border:1px solid var(--ds-line-ring);box-shadow:var(--ds-elevation-part);display:grid;place-items:center}
+ .A .s.on{box-shadow:none;transform:translateY(2px);outline:2px solid var(--ds-text-primary);outline-offset:3px}
+ .A .s.on b{display:grid;place-items:center;inline-size:20px;block-size:20px;border-radius:50%;background:var(--ds-surface-raised);color:var(--ds-text-primary);font-size:13px;line-height:1}
+ /* B: tiles set in one recessed well, names printed under each; chosen has a thick ink frame and a corner tick */
+ .B .g{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:10px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .B .s{display:grid;gap:4px;justify-items:center;font-size:11px;color:var(--ds-text-secondary)}
+ .B .s i{position:relative;display:block;inline-size:100%;block-size:44px;border-radius:8px;border:1px solid var(--ds-line-ring)}
+ .B .s.on{color:var(--ds-text-primary);font-weight:500}
+ .B .s.on i{outline:3px solid var(--ds-text-primary);outline-offset:-3px}
+ .B .s.on i::after{content:"✓";position:absolute;inset-block-start:2px;inset-inline-end:2px;inline-size:16px;block-size:16px;border-radius:50%;background:var(--ds-surface-raised);display:grid;place-items:center;font-size:11px;color:var(--ds-text-primary)}
+ /* C: printed plate rows: colour dot, name, hex; chosen shows an ink bar at the start and a tick at the end */
+ .C .g{display:grid;gap:8px}
+ .C .s{position:relative;display:flex;align-items:center;gap:14px;min-block-size:44px;padding:6px 14px 6px 22px;border:1px solid var(--ds-line-ring);border-radius:18px;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);font-size:14px}
+ .C .s i{inline-size:20px;block-size:20px;border-radius:50%;border:1px solid var(--ds-line-ring)}
+ .C .s em{margin-inline-start:auto;font-style:normal;color:var(--ds-text-secondary);font-size:12px}
+ .C .s.on{box-shadow:none;transform:translateY(2px);font-weight:500}
+ .C .s.on::before{content:"";position:absolute;inset-inline-start:9px;inset-block:10px;inline-size:3px;border-radius:2px;background:var(--ds-text-primary)}
+</style></head><body>
+<h1>ColorPicker · a lamp colour chosen from named swatches</h1>
+<div class="row">
+ <div class="unit A"><h2>A · round lens keys, ring and tick</h2><p class="lab">Lamp colour</p>
+  <div class="g">
+   <span class="s" style="background:#ffd9a0"></span><span class="s on" style="background:#ffb347"><b>✓</b></span><span class="s" style="background:#f4f7ff"></span><span class="s" style="background:#ff8fa3"></span>
+   <span class="s" style="background:#8fd694"></span><span class="s" style="background:#6fa8ff"></span><span class="s" style="background:#b08cff"></span><span class="s" style="background:#ffe9c7"></span>
+  </div><p class="out">Chosen: Amber</p><div class="hue"></div><div class="hex">Hex<i></i></div></div>
+ <div class="unit B"><h2>B · tiles in a well, names printed</h2><p class="lab">Lamp colour</p>
+  <div class="g">
+   <span class="s"><i style="background:#ffd9a0"></i>Warm</span><span class="s on"><i style="background:#ffb347"></i>Amber</span><span class="s"><i style="background:#f4f7ff"></i>Day</span><span class="s"><i style="background:#ff8fa3"></i>Rose</span>
+   <span class="s"><i style="background:#8fd694"></i>Green</span><span class="s"><i style="background:#6fa8ff"></i>Blue</span><span class="s"><i style="background:#b08cff"></i>Violet</span><span class="s"><i style="background:#ffe9c7"></i>Soft</span>
+  </div><p class="out">Chosen: Amber</p><div class="hue"></div><div class="hex">Hex<i></i></div></div>
+ <div class="unit C"><h2>C · plate rows with dot and hex</h2><p class="lab">Lamp colour</p>
+  <div class="g">
+   <span class="s"><i style="background:#ffd9a0"></i>Warm white<em>#ffd9a0</em></span><span class="s on"><i style="background:#ffb347"></i>Amber<em>#ffb347</em></span><span class="s"><i style="background:#f4f7ff"></i>Daylight<em>#f4f7ff</em></span><span class="s"><i style="background:#ff8fa3"></i>Rose<em>#ff8fa3</em></span>
+  </div><div class="hue"></div><div class="hex">Hex<i></i></div></div>
+</div></body></html>

@@ -13,6 +13,7 @@
   inline-size: var(--ds-control-icon-sm);
   block-size: var(--ds-control-icon-sm);
   color: var(--ds-text-secondary);
+  transition: transform var(--ds-motion-release) var(--ds-motion-easing);
 }
 .panel {
   position: fixed;
@@ -34,6 +35,23 @@
   color: var(--ds-text-primary);
   font-family: var(--ds-type-family);
   outline: none;
+  /* every change moves (P6, D-008): the panel rises off the key it grows from on motion.release and the
+     decelerating curve, and sinks back faster on motion.exit and the accelerating one */
+  --menu-from: calc(var(--ds-motion-rise) * -1);
+  transition:
+    opacity var(--ds-motion-release) var(--ds-motion-easing),
+    transform var(--ds-motion-release) var(--ds-motion-easing);
+}
+.panel[data-side='top'] { --menu-from: var(--ds-motion-rise); }
+@starting-style {
+  .panel[data-state='open'] { opacity: 0; transform: translateY(var(--menu-from)); }
+}
+.panel[data-state='closing'] {
+  opacity: 0;
+  transform: translateY(var(--menu-from));
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+  pointer-events: none;
 }
 .item {
   display: flex;
@@ -50,6 +68,10 @@
   color: var(--ds-text-primary);
   cursor: pointer;
   outline: none;
+  /* the row the pointer or the arrows reach inks in, fast on and slower off (motion.hover) */
+  transition:
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .icon {
   flex: none;
@@ -75,6 +97,10 @@
 .item:focus-visible { outline: var(--ds-width-ring) solid var(--ds-focus-ring); outline-offset: var(--ds-gap-none); }
 .item[aria-disabled='true'] { cursor: not-allowed; opacity: var(--ds-opacity-disabled); }
 
+/* under Reduce motion nothing travels (motion.rise is 0); the panel still fades on motion.hover */
+@media (prefers-reduced-motion: reduce) {
+  .panel, .panel[data-state='closing'] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+}
 @media (forced-colors: active) {
   .panel { border-color: CanvasText; }
   .item:focus { border-color: Highlight; }

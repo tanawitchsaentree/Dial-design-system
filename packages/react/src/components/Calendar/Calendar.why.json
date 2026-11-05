@@ -1,0 +1,214 @@
+{
+  "concept": "Calendar prints one month the way a wall sheet does: the days stand flat on the body in a fixed grid, today carries a small index bar under its number, and the day you chose is cut into a small recessed window. Two round keys turn the month.",
+  "kind": [
+    "calendar",
+    "month grid",
+    "date grid",
+    "date picker"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "calendar grid of round buttons where the chosen day is a solid accent-coloured disc and today is a tinted circle",
+      "why_not": "The accent disc spends the unit's one orange on a selection, and today and chosen differ only by tint, so a grey screen or a colour-blind reader cannot tell them apart."
+    },
+    {
+      "pattern": "calendar in a floating white card with a drop shadow, dates greyed out as small low-contrast numbers",
+      "why_not": "Greyed numbers fall under 4.5:1 and the floating card adds a second surface, while dial keeps the month on the body of its unit."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun AB 20 quartz alarm clock (Dietrich Lubs, 1975): numerals printed flat on the case with one index mark beside the hour in use"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the chosen reading sits in a window cut into the body"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices, date picker dialog example: grid, roving tabindex and the arrow, Home, End and Page keys"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The chosen day sits in a window that takes surface.sunken and elevation.well with a ring-ink border, so the date you picked reads as the reading and is the only recessed thing in the month."
+    },
+    {
+      "p": "P7",
+      "axis": "type",
+      "consequence": "the chosen one turns medium",
+      "form": "The chosen day's number turns medium weight while every other day stays regular, so weight tells the choice a second time and a flat copy of the grid still shows it."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Each day is a 44px square and the two month keys are 44px discs, so the whole month is as easy to hit as the rest of the unit."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "arrows step a detent, Home and End reach the ends, Space and Enter press",
+      "form": "Arrows step a day or a week, Home and End reach the ends of the week, Page keys turn the month, and Space and Enter choose, with one day in the tab order."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Today, the chosen day and the focus all draw in ink and shape, so a Calendar in a unit never takes the orange away from the unit's primary key."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The grid always prints six weeks, with empty cells for days that belong to another month, so turning the month never changes the height of the unit."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/calendar/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "one display window with a solid ink disc and a ring"
+      },
+      {
+        "id": "B",
+        "name": "printed sheet with an index bar and a chosen window"
+      },
+      {
+        "id": "C",
+        "name": "keypad of small raised keys"
+      }
+    ],
+    "reason": "B is printing with one recessed window for the reading, like Stepper and Input, and its index bar and window survive a grey screen; A is a solid disc that reads as a loud round key, and C raises forty-two keys so the month is noisy and the pressed key is hard to find."
+  },
+  "parts": {
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The Calendar shrinks to its own grid so the two keys line up with the edges of the first and last column."
+    },
+    "header": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The month name sits between the two keys on one line, printed on the inset line of the grid below it."
+    },
+    "heading": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The month and year use the emphasis size in medium weight, and it is a live region, so turning the month is read out."
+    },
+    "key": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "The previous and next month keys are round 44px keys with a dot-matrix chevron, because they are the only parts that act on the Calendar itself."
+    },
+    "grid": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A table with the grid role, seven columns of 44px, so the cells hold fixed positions and screen readers can walk it by row and column."
+    },
+    "weekday": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The weekday names are small secondary-ink labels printed over the columns, and the full name is read out."
+    },
+    "week": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A row of seven cells, always six rows, so the block size of the month is constant."
+    },
+    "cell": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A 44px cell holds one day or stays empty, so a day keeps the same position under its weekday in every month."
+    },
+    "day": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The day is a button the full size of its cell, so the hit area is 44px; its number is printed flat in tabular figures."
+    },
+    "mark": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "A short ink bar under today's number, the same index mark Pagination prints under the current page, so today is a shape and not a tint."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover darkens a day's ink one step and lifts nothing, because a printed number does not rise when you approach it."
+    },
+    "active": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "Pressing a day cuts its recess in at once, with the same well as the chosen day, so the press shows the window that the choice will fill."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The focused day, and a focused month key, get the system focus ring offset from the cell, so the roving position is always visible."
+    },
+    "data-selected": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The chosen day gets the recessed window, a ring-ink border and medium weight, which is shape and weight and needs no colour."
+    },
+    "data-today": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "Today shows the index bar under its number and is announced with aria-current, so today is told by a shape that still shows when it is also chosen."
+    },
+    "data-readonly": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A read-only Calendar keeps focus and arrow keys but shows a default cursor and no press recess, because nothing can be chosen."
+    },
+    "aria-disabled=true": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A day outside min and max, or one the caller blocks, loses its ink to the disabled step, shows a not-allowed cursor, ignores a press and is announced as unavailable."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion the month keys no longer travel on press and only the ink colour changes."
+    },
+    "data-range=inside": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "A day inside a marked range is ruled above and below by a ring-ink hairline, with square corners, so the days between two windows read as one strip by shape and a grey screen still shows the range."
+    },
+    "data-preview": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "While the end of a range is still being chosen, the ruled strip is dotted instead of solid, so a range that is only a preview differs from a chosen one by its line and not by a tint."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the chosen day takes the system Highlight pair, days inside a range keep a real border in the text colour, today's bar draws in the text colour and unavailable days use GrayText."
+    }
+  },
+  "motion": {
+    "color": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "A day's ink step on hover comes in over the hover duration on the decelerating curve, and nothing else about a day moves."
+    },
+    "transform": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A month key drops by the press travel over the press duration and returns on the release duration, like every secondary key."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The month key's shadow collapses under it over the press duration and returns over the release duration, so the drop reads as height going to 0."
+    }
+  }
+}

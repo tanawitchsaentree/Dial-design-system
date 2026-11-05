@@ -1,16 +1,8 @@
 // Usage tab for IconButton (component-depth.md U1–U14). IconButton is a round key with a printed symbol.
-import { Button, IconButton, Stack } from 'dial-react';
+import { Button, Icon, IconButton, Stack } from 'dial-react';
 import type { Depth } from './types';
 
 const Unit = ({ children }: { children: React.ReactNode }) => <div className="demo-box demo-card">{children}</div>;
-const ic = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
-const Play = () => <svg {...ic}><path d="M8 5l11 7-11 7z" /></svg>;
-const Pause = () => <svg {...ic}><path d="M9 6v12M15 6v12" /></svg>;
-const Prev = () => <svg {...ic}><path d="M18 6l-8 6 8 6zM6 6v12" /></svg>;
-const Next = () => <svg {...ic}><path d="M6 6l8 6-8 6zM18 6v12" /></svg>;
-const Power = () => <svg {...ic}><path d="M12 4v8M7 7a7 7 0 1 0 10 0" /></svg>;
-const Plus = () => <svg {...ic}><path d="M12 5v14M5 12h14" /></svg>;
-const Minus = () => <svg {...ic}><path d="M5 12h14" /></svg>;
 
 export const ICON_BUTTON: Depth = {
   overview: (
@@ -30,10 +22,10 @@ export const ICON_BUTTON: Depth = {
     primary: { purpose: 'The one action the unit exists for, such as Play. Dyed orange with a darker rim.', pairing: 'Once per unit. Never next to a primary Button or an orange knob.' },
   },
   anatomy: {
-    render: <IconButton label="Play" kind="primary"><Play /></IconButton>,
+    render: <IconButton label="Play" kind="primary"><Icon name="play" /></IconButton>,
     parts: [
       { part: 'Key body', selector: '[data-component="IconButton"]', what: 'A disc of matte plastic, 44px across, with a short shadow down and to the right.' },
-      { part: 'Printed symbol', selector: '[data-component="IconButton"] svg', what: 'A 20px icon drawn with a 2px stroke in the key’s ink. Hidden from screen readers.' },
+      { part: 'Printed symbol', selector: '[data-component="IconButton"] svg', what: 'A 20px dot-matrix Icon in the key’s ink. Hidden from screen readers.' },
     ],
     perVariant: 'The primary key is dyed orange and carries a darker rim. The plastic key has no rim.',
   },
@@ -44,29 +36,29 @@ export const ICON_BUTTON: Depth = {
   emphasis: {
     text: <p>One orange key per unit, counting Buttons and knobs too. A row of transport keys has one orange key in the middle, and that is the one that starts or pauses.</p>,
     pair: {
-      do: <Unit><Stack direction="row" gap="sm"><IconButton label="Previous track"><Prev /></IconButton><IconButton label="Play" kind="primary"><Play /></IconButton><IconButton label="Next track"><Next /></IconButton></Stack></Unit>,
+      do: <Unit><Stack direction="row" gap="sm"><IconButton label="Previous track"><Icon name="previous" /></IconButton><IconButton label="Play" kind="primary"><Icon name="play" /></IconButton><IconButton label="Next track"><Icon name="next" /></IconButton></Stack></Unit>,
       doNote: 'One orange key in the row.',
-      dont: <Unit><Stack direction="row" gap="sm"><IconButton label="Previous track" kind="primary"><Prev /></IconButton><IconButton label="Play" kind="primary"><Play /></IconButton><IconButton label="Next track" kind="primary"><Next /></IconButton></Stack></Unit>,
+      dont: <Unit><Stack direction="row" gap="sm"><IconButton label="Previous track" kind="primary"><Icon name="previous" /></IconButton><IconButton label="Play" kind="primary"><Icon name="play" /></IconButton><IconButton label="Next track" kind="primary"><Icon name="next" /></IconButton></Stack></Unit>,
       dontNote: 'Three orange keys. Nothing reads as the main action.',
     },
   },
   placement: {
     rows: [['Bottom of a unit, after the display', 'Transport and power keys, where the hand expects them.'], ['Top end of a sheet', 'A plastic close key, the only key in that corner.']],
-    examples: [{ title: 'Under a display', render: <Unit><Stack gap="md"><p className="flush">Kitchen speaker · Track 4 of 12</p><Stack direction="row" gap="sm"><IconButton label="Previous track"><Prev /></IconButton><IconButton label="Pause" kind="primary"><Pause /></IconButton><IconButton label="Next track"><Next /></IconButton></Stack></Stack></Unit> }],
+    examples: [{ title: 'Under a display', render: <Unit><Stack gap="md"><p className="flush">Kitchen speaker · Track 4 of 12</p><Stack direction="row" gap="sm"><IconButton label="Previous track"><Icon name="previous" /></IconButton><IconButton label="Pause" kind="primary"><Icon name="pause" /></IconButton><IconButton label="Next track"><Icon name="next" /></IconButton></Stack></Stack></Unit> }],
   },
   combinations: {
     good: [['Primary + plastic icon keys', 'A player, with the main action in orange and the alternatives in plastic.'], ['Plastic icon keys + a plastic Button', 'Volume keys next to a worded action such as Group speakers.']],
-    avoid: [{ title: 'an orange icon key next to an orange Button', why: 'Two orange parts in one unit split attention, and neither reads as the main action.', render: <Unit><Stack direction="row" gap="sm"><IconButton label="Play" kind="primary"><Play /></IconButton><Button kind="primary">Start wash</Button></Stack></Unit> }],
+    avoid: [{ title: 'an orange icon key next to an orange Button', why: 'Two orange parts in one unit split attention, and neither reads as the main action.', render: <Unit><Stack direction="row" gap="sm"><IconButton label="Play" kind="primary"><Icon name="play" /></IconButton><Button kind="primary">Start wash</Button></Stack></Unit> }],
   },
   content: {
     formula: <p>The <code>label</code> is a verb, then the object if needed, as in <em>Next track</em>, <em>Turn off</em> or <em>Volume up</em>. Sentence case, no full stop. Pick a symbol people already know.</p>,
     pair: {
-      do: <IconButton label="Volume up"><Plus /></IconButton>, doNote: 'The label says what happens, here Volume up.',
-      dont: <IconButton label="Plus"><Plus /></IconButton>, dontNote: 'Plus names the picture instead of the action.',
+      do: <IconButton label="Volume up"><Icon name="plus" /></IconButton>, doNote: 'The label says what happens, here Volume up.',
+      dont: <IconButton label="Plus"><Icon name="plus" /></IconButton>, dontNote: 'Plus names the picture instead of the action.',
     },
-    overflow: { text: 'The key never grows. A long label is read out but never printed, so it cannot overflow the disc.', render: <div data-overflow-demo=""><IconButton label="Turn off every lamp in the living room"><Power /></IconButton></div> },
-    rtl: { text: 'In right-to-left languages the order of keys mirrors. Direction symbols such as previous and next swap places with the row.', render: <div dir="rtl"><Stack direction="row" gap="sm"><IconButton label="السابق"><Next /></IconButton><IconButton label="تشغيل" kind="primary"><Play /></IconButton><IconButton label="التالي"><Prev /></IconButton></Stack></div> },
-    expansion: { text: 'German and Finnish labels can run 30% longer. Only the spoken name gets longer; the key stays 44px.', render: <Stack direction="row" gap="sm"><IconButton label="Lautstärke verringern"><Minus /></IconButton><IconButton label="Lautstärke erhöhen"><Plus /></IconButton></Stack> },
+    overflow: { text: 'The key never grows. A long label is read out but never printed, so it cannot overflow the disc.', render: <div data-overflow-demo=""><IconButton label="Turn off every lamp in the living room"><Icon name="power" /></IconButton></div> },
+    rtl: { text: 'In right-to-left languages the order of keys mirrors. Direction symbols such as previous and next swap places with the row.', render: <div dir="rtl"><Stack direction="row" gap="sm"><IconButton label="السابق"><Icon name="next" /></IconButton><IconButton label="تشغيل" kind="primary"><Icon name="play" /></IconButton><IconButton label="التالي"><Icon name="previous" /></IconButton></Stack></div> },
+    expansion: { text: 'German and Finnish labels can run 30% longer. Only the spoken name gets longer; the key stays 44px.', render: <Stack direction="row" gap="sm"><IconButton label="Lautstärke verringern"><Icon name="minus" /></IconButton><IconButton label="Lautstärke erhöhen"><Icon name="plus" /></IconButton></Stack> },
   },
   behaviours: {
     states: [
@@ -89,15 +81,15 @@ export const ICON_BUTTON: Depth = {
   deepDive: {
     key: {
       purpose: <p>The plastic key carries every icon action that is not the reason the unit exists. It spends no colour, so it never competes with the orange part.</p>,
-      context: <Unit><Stack direction="row" gap="sm"><IconButton label="Volume down"><Minus /></IconButton><IconButton label="Volume up"><Plus /></IconButton></Stack></Unit>,
-      practices: ['Use it for skip, volume and close.', 'Keep the symbol simple, with one stroke shape and no text inside it.'],
-      pair: { do: <IconButton label="Turn off"><Power /></IconButton>, doNote: 'Power as a plastic key on a unit with another main action.', dont: <IconButton label="Turn off" kind="primary"><Power /></IconButton>, dontNote: 'An orange power key next to a main action takes its place.' },
+      context: <Unit><Stack direction="row" gap="sm"><IconButton label="Volume down"><Icon name="minus" /></IconButton><IconButton label="Volume up"><Icon name="plus" /></IconButton></Stack></Unit>,
+      practices: ['Use it for skip, volume and close.', 'Use a glyph from the Icon set, never a drawing of your own and never text inside the key.'],
+      pair: { do: <IconButton label="Turn off"><Icon name="power" /></IconButton>, doNote: 'Power as a plastic key on a unit with another main action.', dont: <IconButton label="Turn off" kind="primary"><Icon name="power" /></IconButton>, dontNote: 'An orange power key next to a main action takes its place.' },
     },
     primary: {
       purpose: <p>The primary key is the one orange part of a unit that has no knob or primary Button. On a player it is play or pause.</p>,
-      context: <Unit><Stack direction="row" gap="sm"><IconButton label="Previous track"><Prev /></IconButton><IconButton label="Play" kind="primary"><Play /></IconButton><IconButton label="Next track"><Next /></IconButton></Stack></Unit>,
+      context: <Unit><Stack direction="row" gap="sm"><IconButton label="Previous track"><Icon name="previous" /></IconButton><IconButton label="Play" kind="primary"><Icon name="play" /></IconButton><IconButton label="Next track"><Icon name="next" /></IconButton></Stack></Unit>,
       practices: ['Use it once per unit.', 'Leave it out when the unit already has an orange knob or Button.'],
-      pair: { do: <Unit><IconButton label="Play" kind="primary"><Play /></IconButton></Unit>, doNote: 'One orange key in the unit.', dont: <Unit><Stack direction="row" gap="sm"><IconButton label="Play" kind="primary"><Play /></IconButton><IconButton label="Turn off" kind="primary"><Power /></IconButton></Stack></Unit>, dontNote: 'Two orange keys in the unit.' },
+      pair: { do: <Unit><IconButton label="Play" kind="primary"><Icon name="play" /></IconButton></Unit>, doNote: 'One orange key in the unit.', dont: <Unit><Stack direction="row" gap="sm"><IconButton label="Play" kind="primary"><Icon name="play" /></IconButton><IconButton label="Turn off" kind="primary"><Icon name="power" /></IconButton></Stack></Unit>, dontNote: 'Two orange keys in the unit.' },
     },
   },
   modifiers: { na: 'IconButton has no optional slots or booleans besides disabled. The label is required.' },

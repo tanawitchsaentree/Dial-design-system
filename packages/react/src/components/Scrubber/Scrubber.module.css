@@ -34,10 +34,12 @@
   display: flex;
   align-items: baseline;
 }
+/* every word, time and chapter mark is pad ink pressed into the body, on the lit lip of its recess (D-010) */
 .label {
   font-size: var(--ds-type-label);
   font-weight: var(--ds-type-weight-medium);
   line-height: var(--ds-type-leading-tight);
+  text-shadow: var(--ds-print-seat);
 }
 .fader {
   position: relative;
@@ -58,6 +60,7 @@
   inset-block: calc(var(--ds-space-0-5) * -1) 0;
   inset-inline-start: calc(var(--p) * 100% - var(--ds-width-ring) / 2);
   border-inline-start: var(--ds-width-ring) solid var(--ds-text-primary);
+  box-shadow: var(--ds-print-seat);
 }
 .groove {
   position: absolute;
@@ -69,7 +72,17 @@
   border: var(--ds-width-hairline) solid var(--ds-line-ring);
   border-radius: var(--ds-corner-round);
   background: var(--ds-surface-sunken);
+  isolation: isolate;
+}
+/* the recess's own shadow lies over the played light and the buffer, so both sit inside the groove (D-010) */
+.groove::after {
+  content: "";
+  position: absolute;
+  inset: var(--ds-gap-none);
+  z-index: var(--ds-layer-raised);
+  border-radius: inherit;
   box-shadow: var(--ds-elevation-well);
+  pointer-events: none;
 }
 .buffer {
   position: absolute;
@@ -108,6 +121,8 @@
   inset-block: var(--ds-gap-sm);
   inset-inline-start: calc(50% - var(--ds-width-ring) / 2);
   border-inline-start: var(--ds-width-ring) solid var(--ds-text-secondary);
+  /* the index is cut into the cap: ink in the cut, the lit edge on its far side (D-010) */
+  box-shadow: var(--ds-width-hairline) 0 0 var(--ds-glass-lit);
   transition: border-color var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .times {
@@ -122,10 +137,13 @@
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: var(--ds-text-secondary);
+  text-shadow: var(--ds-print-seat);
 }
 
 .fader:hover .cap::after { border-inline-start-color: var(--ds-text-primary); }
-.fader:focus-visible {
+/* focus is drawn round the cap, the part the keys move, never as a box round the whole fader (R-005) */
+.fader:focus-visible { outline: none; }
+.fader:focus-visible .cap {
   outline: var(--ds-width-ring) solid var(--ds-focus-ring);
   outline-offset: var(--ds-width-ring);
 }
@@ -146,5 +164,5 @@
   .groove { border-color: CanvasText; }
   .buffer { forced-color-adjust: none; background: GrayText; }
   .chapter { border-inline-start-color: CanvasText; }
-  .fader:focus-visible { outline-color: Highlight; }
+  .fader:focus-visible .cap { outline-color: Highlight; }
 }

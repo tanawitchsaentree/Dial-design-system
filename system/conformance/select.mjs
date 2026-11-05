@@ -30,6 +30,8 @@ export default async function select({ check, expect, page, go, main, tokens }) 
     expect(o.open && o.visible, `expanded ${o.open}, listbox visible ${o.visible}`);
     expect(o.active === Math.max(0, o.selected), `active ${o.active}, selected ${o.selected}`);
     await page.keyboard.press('Escape');
+    // the panel sinks out over motion.exit before it is hidden (D-008)
+    await page.waitForTimeout(400);
     const s = await state(c);
     expect(!s.open && !s.visible && s.focused, `after Escape: expanded ${s.open}, visible ${s.visible}, focused ${s.focused}`);
     return `opened on option ${o.active + 1} of ${o.count}`;
@@ -84,7 +86,8 @@ export default async function select({ check, expect, page, go, main, tokens }) 
       const cs = sel ? getComputedStyle(sel) : null;
       return {
         well: el.getBoundingClientRect().height, rows: opts.map((o) => o.getBoundingClientRect().height),
-        glyph: !!sel?.querySelector('svg path'), weight: cs ? Number(cs.fontWeight) : 0,
+        // the tick is the dot-matrix check (R-005), lit on the chosen row and faded on the others (D-008)
+        glyph: (() => { const t = sel?.querySelector('[data-component="Icon"]'); return !!t && Number(getComputedStyle(t).opacity) > 0.5 && !!t.querySelector('circle[data-on]'); })(), weight: cs ? Number(cs.fontWeight) : 0,
         orange: !!cs && [cs.color, cs.backgroundColor].includes(orange),
       };
     });

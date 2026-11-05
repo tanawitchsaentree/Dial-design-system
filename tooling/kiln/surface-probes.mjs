@@ -177,3 +177,62 @@ export function rowEdgeProbe({ rows, controls }) {
   }
   return out;
 }
+
+/** G-SP2 (dial R-004): a control outside a stage and the stage it sits beside stand at least `min` px apart
+ *  ("spacing เหี้ยมาก": the Breakpoint select stood flush on the grid stage it drives). The control is measured
+ *  by its component box (label and field together); stages are the live examples and previews. */
+export function controlStageProbe({ min = 24, stages = 'main :is([data-example-live], [data-preview]):not([data-controls])', controls = 'main :is([role=combobox], input:not([type=hidden]), select, textarea, [role=slider], [role=switch], [role=radiogroup], [role=tablist])' } = {}) {
+  const out = [];
+  const st = [...document.querySelectorAll(stages)].filter((s) => s.getBoundingClientRect().width > 0 && !s.parentElement?.closest(stages));
+  const seen = new Set();
+  for (const c of document.querySelectorAll(controls)) {
+    if (c.closest(stages) || c.closest('[data-controls], nav, header, aside, [role=dialog], [popover]')) continue;
+    const box = c.closest('[data-component]') ?? c;
+    if (seen.has(box)) continue; seen.add(box);
+    const a = box.getBoundingClientRect(); if (!a.width || !a.height) continue;
+    for (const s of st) {
+      if (s.contains(box)) continue;
+      const b = s.getBoundingClientRect();
+      const across = Math.min(a.right, b.right) - Math.max(a.left, b.left) > 0, along = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 0;
+      const gap = across ? Math.max(b.top - a.bottom, a.top - b.bottom) : along ? Math.max(b.left - a.right, a.left - b.right) : Infinity;
+      if (gap < min - 0.5) out.push(`${box.getAttribute('data-component') ?? c.tagName.toLowerCase()} "${(box.textContent ?? '').trim().slice(0, 28)}" stands ${Math.round(gap)}px from the stage it drives (needs ${min}px)`);
+    }
+  }
+  return [...new Set(out)];
+}
+
+/** G-IC2 (dial R-005): one icon language. Every small glyph the book shows is the system's icon component; a
+ *  component or an example that draws its own stroked glyph beside it is red ("icon ควรจะ digital เท่าๆกัน").
+ *  Drawings that are not icons (segment windows, lamps, scales, leader lines) are named by the system in
+ *  docs.iconExempt, a selector list. */
+export function iconLanguageProbe({ icon = '[data-component="Icon"]', exempt = '', max = 32, scope = 'main' } = {}) {
+  const out = [];
+  const skip = ['[data-drawing]', exempt].filter(Boolean).join(', ');
+  for (const svg of document.querySelectorAll(`${scope} svg`)) {
+    if (svg.matches(icon) || svg.closest(icon)) continue;
+    if (svg.parentElement?.closest('svg')) continue;
+    if (skip && (svg.matches(skip) || svg.closest(skip))) continue;
+    const r = svg.getBoundingClientRect(); if (!r.width || !r.height || r.width > max || r.height > max) continue;
+    if (getComputedStyle(svg).visibility === 'hidden') continue;
+    const owner = svg.closest('[data-component]')?.getAttribute('data-component') ?? svg.parentElement?.tagName.toLowerCase();
+    out.push(`${owner} draws its own ${Math.round(r.width)}×${Math.round(r.height)} glyph (${String(svg.getAttribute('class') ?? '').split(' ')[0].replace(/^.*module__/, '') || 'svg'}), not the system icon`);
+  }
+  return [...new Set(out)];
+}
+
+/** G-FR2 (dial R-005): the focus ring sits on the part that moves. Each slider and switch is focused as by the
+ *  keyboard; if the ring is drawn round the control's own box and that box is a wide row (more than `ratio`
+ *  times as wide as tall), the ring is a box round the row ("ไม่ชอบ focus ring"). */
+export function focusRingProbe({ controls = 'main [data-example-live] :is([role="slider"], [role="switch"])', ratio = 2.2 } = {}) {
+  const out = [];
+  for (const el of document.querySelectorAll(controls)) {
+    const r = el.getBoundingClientRect(); if (!r.width || el.matches('[aria-disabled="true"], :disabled')) continue;
+    el.focus({ focusVisible: true, preventScroll: true }); if (document.activeElement !== el) continue;
+    const ringed = [el, ...el.querySelectorAll('*')].filter((e) => { const cs = getComputedStyle(e); return cs.outlineStyle !== 'none' && parseFloat(cs.outlineWidth) > 0; });
+    const name = el.closest('[data-component]')?.getAttribute('data-component') ?? el.getAttribute('role');
+    if (!ringed.length) { out.push(`${name}: no focus ring drawn`); continue; }
+    for (const e of ringed) { const b = e.getBoundingClientRect(); if (e === el && b.width > b.height * ratio) out.push(`${name}: the ring is drawn round the whole ${Math.round(b.width)}×${Math.round(b.height)} row, not the part that moves`); }
+    el.blur();
+  }
+  return [...new Set(out)];
+}

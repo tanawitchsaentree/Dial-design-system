@@ -47,7 +47,7 @@ export default async function sceneCard({ check, expect, page, go, main, tokens 
     await card('Good night').click();
     await slot().click();
     const label = await slot().getAttribute('aria-label');
-    expect(/Good night inserted/.test(label ?? ''), `slot name "${label}"`);
+    expect(/Good night\b.*inserted/.test(label ?? ''), `slot name "${label}"`);
     return label;
   });
 
@@ -63,7 +63,7 @@ export default async function sceneCard({ check, expect, page, go, main, tokens 
     await page.mouse.up();
     const label = await slot().getAttribute('aria-label');
     expect(over === 'true', `data-over while dragging ${over}`);
-    expect(/Away inserted/.test(label ?? ''), `slot name "${label}"`);
+    expect(/Away\b.*inserted/.test(label ?? ''), `slot name "${label}"`);
     return label;
   });
 

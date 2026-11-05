@@ -1,13 +1,12 @@
 // Usage tab for Tray (component-depth.md U1–U14). The recess that gathers a unit's small keys.
-import { Badge, Button, Card, IconButton, Stack, Tray } from 'dial-react';
+import { Badge, Button, Card, Icon, IconButton, Stack, Tray } from 'dial-react';
 import type { Depth } from './types';
 
-const icon = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
-const Prev = () => <IconButton label="Previous track"><svg {...icon}><path d="M18 6l-8 6 8 6zM6 6v12" /></svg></IconButton>;
-const Next = () => <IconButton label="Next track"><svg {...icon}><path d="M6 6l8 6-8 6zM18 6v12" /></svg></IconButton>;
-const Play = () => <IconButton label="Play" kind="primary" size="lg"><svg {...icon}><path d="M8 5l11 7-11 7z" /></svg></IconButton>;
+const Prev = () => <IconButton label="Previous track"><Icon name="previous" /></IconButton>;
+const Next = () => <IconButton label="Next track"><Icon name="next" /></IconButton>;
+const Play = () => <IconButton label="Play" kind="primary" size="lg"><Icon name="play" /></IconButton>;
 const Unit = ({ children }: { children: React.ReactNode }) => (
-  <div style={{ inlineSize: 340, maxInlineSize: '100%' }}>
+  <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))', maxInlineSize: '100%' }}>
     <Card padding="unit" wordmark="dial" model="player 2">
       <Stack direction="row" gap="md" align="center" style={{ justifyContent: 'space-between' }}>{children}</Stack>
     </Card>
@@ -67,7 +66,7 @@ export const TRAY: Depth = {
       dont: <Tray label="Buttons"><Prev /><Next /></Tray>,
       dontNote: 'Named Buttons, which says nothing.',
     },
-    overflow: { text: 'When the keys do not fit, the tray wraps to a second row with the same inset and gap. No key gets smaller.', render: <div data-overflow-demo="" style={{ inlineSize: 200 }}><Tray label="Radio keys"><Prev /><Next /><Button>FM</Button><Button>DAB</Button></Tray></div> },
+    overflow: { text: 'When the keys do not fit, the tray wraps to a second row with the same inset and gap. No key gets smaller.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-narrow))' }}><Tray label="Radio keys"><Prev /><Next /><Button>FM</Button><Button>DAB</Button></Tray></div> },
     rtl: { text: 'In right-to-left languages the keys run from the right. Previous and next keep their meaning, so swap their glyphs if your icons point.', render: <div dir="rtl"><Tray label="التشغيل"><Next /><Prev /><Button>عشوائي</Button></Tray></div> },
     expansion: { text: 'German and Finnish key words run about 30% longer. The word keys grow and the tray grows with them, or wraps.', render: <Tray label="Wiedergabe"><Prev /><Next /><Button>Zufallswiedergabe</Button></Tray> },
   },

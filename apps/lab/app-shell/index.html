@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · AppShell · three ways to frame a page</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-solid);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .cell>h2{font-size:13px;font-weight:500;margin:0 0 12px;color:var(--ds-text-secondary)}
+ .frame{inline-size:420px;block-size:360px;box-sizing:border-box;padding:var(--ds-gap-inset);background:var(--ds-surface-page);display:grid;gap:var(--ds-gap-inset);overflow:hidden;font-size:13px}
+ .u{background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);border-radius:var(--ds-corner-panel);padding:var(--ds-gap-lg);box-sizing:border-box}
+ .nav{display:grid;gap:6px;align-content:start}
+ .nav b{font-weight:500}.nav span{color:var(--ds-text-secondary)}
+ .bar{display:flex;justify-content:space-between;align-items:center;min-block-size:44px}
+ .ph{border:1px dashed var(--ds-line-ring);border-radius:var(--ds-corner-media);min-block-size:56px;display:grid;place-items:center;color:var(--ds-text-secondary)}
+ /* A: separate units on the page ground, gaps between */
+ .A{grid-template-columns:110px 1fr;grid-template-rows:auto 1fr auto}
+ .A .bar{grid-column:1/-1}.A .foot{grid-column:1/-1;min-block-size:32px;color:var(--ds-text-secondary)}
+ /* B: one case, regions divided by hairlines inside it */
+ .B{display:block}
+ .B .case{block-size:100%;display:grid;grid-template-columns:110px 1fr;grid-template-rows:auto 1fr auto;padding:0;overflow:hidden}
+ .B .case>*{padding:var(--ds-gap-lg)}
+ .B .bar{grid-column:1/-1;border-block-end:1px solid var(--ds-line-divider)}
+ .B .nav{border-inline-end:1px solid var(--ds-line-divider)}
+ .B .foot{grid-column:1/-1;border-block-start:1px solid var(--ds-line-divider);color:var(--ds-text-secondary)}
+ /* C: the sidebar runs full height at the start, header only over main */
+ .C{grid-template-columns:110px 1fr;grid-template-rows:auto 1fr auto}
+ .C .nav{grid-row:1/-1}
+ .C .foot{min-block-size:32px;color:var(--ds-text-secondary)}
+</style></head><body>
+<h1>AppShell · the frame of a page</h1>
+<div class="row">
+ <div class="cell"><h2>A · separate units, gaps between</h2><div class="frame A">
+  <div class="u bar"><b>dial</b><span>Rooms · Devices</span></div>
+  <div class="u nav"><b>Rooms</b><span>Kitchen</span><span>Hall</span></div>
+  <div class="ph">main</div>
+  <div class="u foot">dial 3</div></div></div>
+ <div class="cell"><h2>B · one case, hairline regions</h2><div class="frame B"><div class="u case">
+  <div class="bar"><b>dial</b><span>Rooms · Devices</span></div>
+  <div class="nav"><b>Rooms</b><span>Kitchen</span><span>Hall</span></div>
+  <div class="ph" style="border:0">main</div>
+  <div class="foot">dial 3</div></div></div></div>
+ <div class="cell"><h2>C · sidebar full height, header over main</h2><div class="frame C">
+  <div class="u nav"><b>dial</b><span>Kitchen</span><span>Hall</span></div>
+  <div class="u bar"><b>Kitchen</b><span>Menu</span></div>
+  <div class="ph">main</div>
+  <div class="foot">dial 3</div></div></div>
+</div></body></html>

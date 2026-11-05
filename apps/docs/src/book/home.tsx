@@ -3,7 +3,7 @@
 // of the product it shows, and a small rack of four more units set on one module grid like the reference
 // sheet. The anchor's knob is the page's one orange part (P1); every other unit uses key-kind controls.
 import { useLayoutEffect, useRef, useState } from 'react';
-import { Button, Card, DeviceCard, Display, Explain, ExplainMode, Grille, Icon as DotIcon, IconButton, Legend, Progress, Rotary, SceneCard, Slider, Slot, Switch, TimePicker, Tray, Wiring, type SceneInfo } from 'dial-react';
+import { Button, Card, DeviceCard, Display, Explain, ExplainMode, Grille, Icon, IconButton, Legend, Progress, Rotary, SceneCard, Slider, Slot, Switch, TimePicker, Tray, Wiring, type SceneInfo } from 'dial-react';
 import { Section, Stage } from './kit';
 
 type Callout = { label: string; side: 'start' | 'end'; find: (host: HTMLElement) => Element | null };
@@ -25,8 +25,8 @@ function AnchorHero() {
   const [volume, setVolume] = useState(4);
   // under 480px the two-column anchor no longer fits beside its 44px parts, so the same unit stands in
   // its one-column layout (DeviceCard layout="tall") and the part names become a printed list under it
-  const [narrow, setNarrow] = useState(() => matchMedia('(max-width: 480px)').matches);
-  useLayoutEffect(() => { const mq = matchMedia('(max-width: 480px)'); const on = () => setNarrow(mq.matches); mq.addEventListener('change', on); return () => mq.removeEventListener('change', on); }, []);
+  const [narrow, setNarrow] = useState(() => matchMedia('(width <= 640px)').matches);
+  useLayoutEffect(() => { const mq = matchMedia('(width <= 640px)'); const on = () => setNarrow(mq.matches); mq.addEventListener('change', on); return () => mq.removeEventListener('change', on); }, []);
   const fig = useRef<HTMLDivElement>(null);
   const card = useRef<HTMLDivElement>(null);
   const [marks, setMarks] = useState<Array<{ label: string; side: 'start' | 'end'; y: number; py: number; px: number }>>([]);
@@ -78,8 +78,6 @@ function AnchorHero() {
   );
 }
 
-const Icon = ({ d }: { d: string }) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>;
-
 function Rack() {
   const [target, setTarget] = useState(22);
   const [lamp, setLamp] = useState(true);
@@ -101,9 +99,9 @@ function Rack() {
         <Display kind="oled" label="Speaker" value="So What" detail={`${playing ? 'Playing' : 'Paused'} · Kind of Blue`} />
         <Grille label="Volume" value={5} cols={12} rows={3} />
         <div className="rack-row">
-          <IconButton kind="key" label="Previous track"><Icon d="M18 6l-8 6 8 6zM6 6v12" /></IconButton>
-          <IconButton kind="key" label={playing ? 'Pause' : 'Play'} onClick={() => setPlaying(!playing)}><Icon d={playing ? 'M8 5v14M16 5v14' : 'M8 5l11 7-11 7z'} /></IconButton>
-          <IconButton kind="key" label="Next track"><Icon d="M6 6l8 6-8 6zM18 6v12" /></IconButton>
+          <IconButton kind="key" label="Previous track"><Icon name="previous" /></IconButton>
+          <IconButton kind="key" label={playing ? 'Pause' : 'Play'} onClick={() => setPlaying(!playing)}><Icon name={playing ? 'pause' : 'play'} /></IconButton>
+          <IconButton kind="key" label="Next track"><Icon name="next" /></IconButton>
         </div>
       </Card>
       <Card padding="unit" wordmark="dial" model="wash 1" className="rack-unit">
@@ -196,12 +194,12 @@ function LivingRoom() {
             <div className="scene-transport">
               <Explain name="Track keys" does="Skip back or forward one track.">
                 <Tray label="Tracks">
-                  <IconButton label="Previous track"><DotIcon name="previous" /></IconButton>
-                  <IconButton label="Next track"><DotIcon name="next" /></IconButton>
+                  <IconButton label="Previous track"><Icon name="previous" /></IconButton>
+                  <IconButton label="Next track"><Icon name="next" /></IconButton>
                 </Tray>
               </Explain>
               <Explain name="Play" does="Starts or pauses the music.">
-                <IconButton kind="primary" size="lg" label={playing ? 'Pause' : 'Play'} onClick={() => setPlaying(!playing)}><DotIcon name={playing ? 'pause' : 'play'} /></IconButton>
+                <IconButton kind="primary" size="lg" label={playing ? 'Pause' : 'Play'} onClick={() => setPlaying(!playing)}><Icon name={playing ? 'pause' : 'play'} /></IconButton>
               </Explain>
             </div>
           </Card>

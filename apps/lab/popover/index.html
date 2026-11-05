@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Popover · three ways to hang a small panel on a key</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;min-block-size:300px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);position:relative}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .key{inline-size:44px;block-size:44px;border-radius:50%;border:1px solid var(--ds-line-ring);background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part,var(--ds-elevation-unit));color:var(--ds-text-primary);font:inherit;font-weight:500}
+ .pop{position:absolute;inset-inline-start:28px;inset-block-start:128px;inline-size:280px;box-sizing:border-box;padding:var(--ds-gap-lg);color:var(--ds-text-primary)}
+ .pop h3{font-size:14px;font-weight:500;margin:0 0 8px}
+ .pop p{font-size:14px;line-height:1.45;margin:0;color:var(--ds-text-secondary)}
+ /* A: plastic panel, title on the inset line, close key at the end */
+ .A .pop{background:var(--ds-surface-solid);border-radius:var(--ds-corner-inner);box-shadow:var(--ds-elevation-float);border:1px solid transparent}
+ .A .pop header{display:flex;justify-content:space-between;align-items:center;min-block-size:44px}
+ .A .pop header h3{margin:0}
+ /* B: same plastic with a notch that points at the key */
+ .B .pop{background:var(--ds-surface-solid);border-radius:var(--ds-corner-inner);box-shadow:var(--ds-elevation-float)}
+ .B .pop::before{content:"";position:absolute;inset-block-start:-7px;inset-inline-start:15px;inline-size:14px;block-size:14px;transform:rotate(45deg);background:var(--ds-surface-solid);box-shadow:-2px -2px 3px rgba(0,0,0,.06)}
+ /* C: content sits in a recessed window in the panel, caption printed under it */
+ .C .pop{background:var(--ds-surface-solid);border-radius:var(--ds-corner-inner);box-shadow:var(--ds-elevation-float);padding:var(--ds-gap-md)}
+ .C .well{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border-radius:var(--ds-corner-media);padding:var(--ds-gap-lg);border:1px solid var(--ds-line-ring)}
+ .C .cap{font-size:12px;margin-block-start:8px;padding-inline:8px;color:var(--ds-text-secondary)}
+ .x{font:inherit;border:0;background:none;inline-size:44px;block-size:44px;color:var(--ds-text-secondary)}
+</style></head><body>
+<h1>Popover · a small panel hung on a key</h1>
+<div class="row">
+ <div class="unit A"><h2>A · plastic panel, printed title, close key</h2><button class="key" aria-label="Info">i</button>
+  <div class="pop"><header><h3>Water filter</h3><button class="x" aria-label="Close">×</button></header><p>Change it every three months. The lamp turns on when 10 days are left.</p></div></div>
+ <div class="unit B"><h2>B · panel with a notch to the key</h2><button class="key" aria-label="Info">i</button>
+  <div class="pop"><h3>Water filter</h3><p>Change it every three months. The lamp turns on when 10 days are left.</p></div></div>
+ <div class="unit C"><h2>C · content in a recessed window</h2><button class="key" aria-label="Info">i</button>
+  <div class="pop"><div class="well"><h3>Water filter</h3><p>Change it every three months. The lamp turns on when 10 days are left.</p></div><div class="cap">filter · 78 days left</div></div></div>
+</div>
+</body></html>

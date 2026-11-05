@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Accordion · three ways to fold sections</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 16px;color:var(--ds-text-secondary)}
+ .item{margin:0}
+ button{all:unset;box-sizing:border-box;display:grid;align-items:center;inline-size:100%;min-block-size:44px;cursor:pointer;font-size:16px}
+ button:focus-visible{outline:2px solid var(--ds-focus-ring);outline-offset:2px}
+ .p{font-size:14px;line-height:1.45;color:var(--ds-text-secondary);margin:0;padding-block:4px 14px}
+ /* A: legend lines. Printed words on seams; the open one is lit with an index bar; plus turns to minus */
+ .A .item+.item{border-block-start:1px solid var(--ds-line-divider)}
+ .A button{grid-template-columns:12px 1fr 20px;column-gap:8px;color:var(--ds-text-secondary)}
+ .A .item.open button{color:var(--ds-text-primary);font-weight:500}
+ .A .bar{inline-size:4px;block-size:20px;border-radius:2px;background:transparent}
+ .A .open .bar{background:var(--ds-text-primary)}
+ .A .g{font-size:20px;line-height:1;text-align:center}
+ .A .p{padding-inline-start:20px}
+ /* B: recessed drawers. Each section is a window cut into the body; the open one holds its content inside */
+ .B .item{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);padding-inline:14px}
+ .B .item+.item{margin-block-start:10px}
+ .B button{grid-template-columns:1fr 20px;column-gap:8px;font-weight:500}
+ .B .g{display:block;inline-size:8px;block-size:8px;border-inline-end:2px solid currentColor;border-block-end:2px solid currentColor;transform:rotate(45deg);justify-self:center}
+ .B .open .g{transform:rotate(-135deg)}
+ /* C: keys. Every header is a raised capsule key that presses; content stands flat under it */
+ .C .item+.item{margin-block-start:10px}
+ .C button{grid-template-columns:1fr 20px;column-gap:8px;padding-inline:18px;border-radius:999px;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);border:1px solid var(--ds-line-ring)}
+ .C .open button{box-shadow:none;transform:translateY(2px)}
+ .C .g{font-size:20px;line-height:1;text-align:center}
+ .C .p{padding-inline:18px}
+</style></head><body>
+<h1>Accordion · three ways to fold the sections of a unit (open items shown; the first and third are open)</h1>
+<div class="row">
+ <section class="unit A"><h2>A · legend lines</h2>
+  <div class="item open"><button><span class="bar"></span><span>Schedule</span><span class="g">&minus;</span></button><p class="p">Heating starts at 06:30 on weekdays and drops to 18 at 23:00.</p></div>
+  <div class="item"><button><span class="bar"></span><span>Away mode</span><span class="g">+</span></button></div>
+  <div class="item open"><button><span class="bar"></span><span>Notifications</span><span class="g">&minus;</span></button><p class="p">Tell me when a window stays open for ten minutes.</p></div>
+  <div class="item"><button><span class="bar"></span><span>Firmware</span><span class="g">+</span></button></div>
+ </section>
+ <section class="unit B"><h2>B · recessed drawers</h2>
+  <div class="item open"><button><span>Schedule</span><span class="g"></span></button><p class="p">Heating starts at 06:30 on weekdays and drops to 18 at 23:00.</p></div>
+  <div class="item"><button><span>Away mode</span><span class="g"></span></button></div>
+  <div class="item open"><button><span>Notifications</span><span class="g"></span></button><p class="p">Tell me when a window stays open for ten minutes.</p></div>
+  <div class="item"><button><span>Firmware</span><span class="g"></span></button></div>
+ </section>
+ <section class="unit C"><h2>C · capsule keys</h2>
+  <div class="item open"><button><span>Schedule</span><span class="g">&minus;</span></button><p class="p">Heating starts at 06:30 on weekdays and drops to 18 at 23:00.</p></div>
+  <div class="item"><button><span>Away mode</span><span class="g">+</span></button></div>
+  <div class="item open"><button><span>Notifications</span><span class="g">&minus;</span></button><p class="p">Tell me when a window stays open for ten minutes.</p></div>
+  <div class="item"><button><span>Firmware</span><span class="g">+</span></button></div>
+ </section>
+</div>
+</body></html>

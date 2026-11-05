@@ -73,11 +73,16 @@
   line-height: var(--ds-type-leading-body);
   text-align: center;
   color: transparent;
+  /* the field's own text is invisible over the drawn figures, so it casts no print seat either (D-010) */
+  text-shadow: none;
   caret-color: transparent;
   outline: none;
   cursor: text;
 }
-.field::selection { background: transparent; }
+/* the drawn figures are the reading: a selected value must not print its own text over them (the selection
+   colour would show the field's hidden digits in white) */
+.field::selection { background: transparent; color: transparent; text-shadow: none; }
+.text .hour .field::selection, .text .minute .field::selection { color: var(--ds-text-primary); }
 .text .hour .field, .text .minute .field {
   font-size: var(--ds-type-title);
   font-variant-numeric: tabular-nums;

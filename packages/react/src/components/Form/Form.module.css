@@ -1,0 +1,98 @@
+/* Form — a native form whose failed send is read in one recessed window at the top (lab apps/lab/form pick B).
+   The window is a reading (FORM.md display class), so it takes surface.sunken and elevation.well. Ink only: the one
+   orange part of the unit is the submit key. No motion: the window and its rows appear and leave at once. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-xl);
+  inline-size: 100%;
+  min-inline-size: 0;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+
+.summary {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  padding-block: var(--ds-gap-lg);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+/* focus is moved here by the form after a failed send, with a key or a pointer, so the ring shows for both */
+.summary:focus {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.summaryTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--ds-gap-md);
+  margin: var(--ds-gap-none);
+  padding-block-end: var(--ds-gap-sm);
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+}
+.count {
+  font-size: var(--ds-type-title);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--ds-type-leading-body);
+}
+.list {
+  display: grid;
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  list-style: none;
+}
+.item {
+  display: grid;
+  padding-block: var(--ds-gap-xs);
+  border-block-start: var(--ds-width-hairline) solid var(--ds-line-divider);
+}
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  min-block-size: var(--ds-control-md);
+  min-inline-size: var(--ds-layout-touch);
+  color: var(--ds-text-primary);
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  text-decoration-line: underline;
+  text-decoration-thickness: var(--ds-width-hairline);
+  text-underline-offset: var(--ds-gap-xs);
+  border-radius: var(--ds-corner-mark);
+}
+.link:hover { text-decoration-thickness: var(--ds-width-ring); }
+.link:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.message {
+  padding-block-end: var(--ds-gap-sm);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+
+/* while a send runs the key is flat and faded; the word also changes to Sending, so the state is not colour alone */
+.submit[aria-disabled='true'],
+.submit[aria-disabled='true']:hover,
+.submit[aria-disabled='true']:active {
+  cursor: progress;
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+  transform: none;
+}
+
+@media (forced-colors: active) {
+  .summary { border-color: CanvasText; }
+  .summary:focus,
+  .link:focus-visible { outline-color: Highlight; }
+  .link { color: LinkText; }
+}

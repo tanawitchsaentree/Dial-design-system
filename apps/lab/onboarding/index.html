@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Onboarding · three ways to point at a part</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;min-block-size:380px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);position:relative;box-sizing:border-box}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .key{display:inline-flex;align-items:center;justify-content:center;inline-size:44px;block-size:44px;border-radius:50%;border:1px solid var(--ds-line-ring);background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-unit);color:var(--ds-text-primary);font:inherit;font-size:13px}
+ .cap{display:inline-flex;align-items:center;padding-inline:20px;block-size:44px;border-radius:22px;border:1px solid var(--ds-line-ring);background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-unit);color:var(--ds-text-primary);font:inherit;font-size:14px}
+ .tgt{position:relative;display:inline-block}
+ .pop{position:absolute;inset-inline-start:20px;inset-block-start:150px;inline-size:290px;box-sizing:border-box;padding:var(--ds-gap-lg);background:var(--ds-surface-solid);border-radius:var(--ds-corner-inner);box-shadow:var(--ds-elevation-float);border:1px solid transparent}
+ .pop h3{font-size:15px;font-weight:500;margin:0 0 6px}
+ .pop p{font-size:14px;line-height:1.45;margin:0;color:var(--ds-text-secondary)}
+ .keys{display:flex;gap:8px;align-items:center;margin-block-start:14px}
+ .keys .sp{flex:1}
+ .k{font:inherit;font-size:14px;block-size:44px;padding-inline:16px;border-radius:22px;border:1px solid var(--ds-line-ring);background:var(--ds-surface-raised);color:var(--ds-text-primary)}
+ .k.t{border-color:transparent;background:none;color:var(--ds-text-secondary)}
+ /* A: ring around the target, count printed in the header */
+ .A .ring{position:absolute;inset:-6px;border:2px solid var(--ds-text-primary);border-radius:28px;pointer-events:none}
+ .A .n{font-size:12px;color:var(--ds-text-secondary);font-variant-numeric:tabular-nums;margin:0 0 4px}
+ /* B: hairline leader from a node on the target to the panel, dots as the legend */
+ .B .node{position:absolute;inset-block-end:-4px;inset-inline-start:50%;inline-size:8px;block-size:8px;border-radius:50%;background:var(--ds-text-primary);translate:-50% 0}
+ .B .lead{position:absolute;inset-inline-start:calc(28px + 22px);inset-block-start:calc(28px + 20px + 44px + 8px);inline-size:1px;block-size:80px;background:var(--ds-text-primary)}
+ .B .dots{display:flex;gap:6px;margin-block-end:8px}
+ .B .dots i{inline-size:8px;block-size:8px;border-radius:50%;border:1px solid var(--ds-text-primary)}
+ .B .dots i.on{background:var(--ds-text-primary)}
+ /* C: count in a recessed window beside the text */
+ .C .tgt{outline:2px dashed var(--ds-text-primary);outline-offset:6px;border-radius:22px}
+ .C .pop{display:grid;grid-template-columns:auto 1fr;gap:var(--ds-gap-lg)}
+ .C .win{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border-radius:var(--ds-corner-media);border:1px solid var(--ds-line-ring);inline-size:56px;block-size:64px;display:grid;place-items:center;font-size:20px;font-variant-numeric:tabular-nums}
+ .C .keys{grid-column:1 / -1;margin:0}
+</style></head><body>
+<h1>Onboarding · a callout that points at a part</h1>
+<div class="row">
+ <div class="unit A"><h2>A · ring on the part, "2 of 5" printed on the panel</h2>
+  <span class="tgt"><button class="cap">Schedule</button><i class="ring"></i></span>
+  <div class="pop"><p class="n">2 of 5</p><h3>Set the heating times</h3><p>Pick the hours the radiator runs. It drops to 18 outside them.</p>
+   <div class="keys"><button class="k t">Skip</button><span class="sp"></span><button class="k">Back</button><button class="k">Next</button></div></div></div>
+ <div class="unit B"><h2>B · a drawn line from a node, dots as the legend</h2>
+  <span class="tgt"><button class="cap">Schedule</button><i class="node"></i></span><i class="lead"></i>
+  <div class="pop"><div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div><h3>Set the heating times</h3><p>Pick the hours the radiator runs. It drops to 18 outside them.</p>
+   <div class="keys"><button class="k t">Skip</button><span class="sp"></span><button class="k">Back</button><button class="k">Next</button></div></div></div>
+ <div class="unit C"><h2>C · count in a recessed window</h2>
+  <span class="tgt"><button class="cap">Schedule</button></span>
+  <div class="pop"><div class="win">2/5</div><div><h3>Set the heating times</h3><p>Pick the hours the radiator runs. It drops to 18 outside them.</p></div>
+   <div class="keys"><button class="k t">Skip</button><span class="sp"></span><button class="k">Back</button><button class="k">Next</button></div></div></div>
+</div>
+</body></html>

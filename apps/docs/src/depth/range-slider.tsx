@@ -60,7 +60,7 @@ export const RANGE_SLIDER: Depth = {
       do: <RangeSlider label="Quiet hours" min={0} max={24} step={1} defaultValue={[22, 24]} formatValue={(v) => `${v}:00`} />, doNote: 'The label names the band and the values carry the hour.',
       dont: <RangeSlider label="Drag both handles to pick the start and end" min={0} max={24} step={1} defaultValue={[22, 24]} />, dontNote: 'An instruction as the label, and bare numbers with no unit.',
     },
-    overflow: { text: 'A long label wraps above the groove and the values stay at the end. The track keeps its length.', render: <div data-overflow-demo="" style={{ inlineSize: 240 }}><RangeSlider label="Temperature band for the bedroom at night" min={14} max={26} step={1} defaultValue={[16, 19]} formatValue={deg} /></div> },
+    overflow: { text: 'A long label wraps above the groove and the values stay at the end. The track keeps its length.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><RangeSlider label="Temperature band for the bedroom at night" min={14} max={26} step={1} defaultValue={[16, 19]} formatValue={deg} /></div> },
     rtl: { text: 'In right-to-left languages the groove starts on the right. The low cap is on the right and the arrow keys follow the direction of the groove.', render: <div dir="rtl"><RangeSlider label="نطاق الحرارة" min={14} max={26} step={1} defaultValue={[18, 22]} scale /></div> },
     expansion: { text: 'German and Finnish labels can run 30% longer. The label wraps and the groove does not change.', render: <RangeSlider label="Temperaturbereich der Heizung" min={14} max={26} step={1} defaultValue={[18, 22]} formatValue={deg} /> },
   },

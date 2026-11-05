@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Sidebar · three ways to print a side column of pages</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 6px}
+ p.lead{margin:0 0 22px;font-size:13px;color:var(--ds-text-secondary)}
+ .set{display:flex;gap:36px;flex-wrap:wrap;margin-block-end:34px}
+ .cap{font-size:13px;font-weight:500;color:var(--ds-text-secondary);margin:0 0 10px}
+ .pair{display:flex;gap:16px;align-items:flex-start}
+ nav{box-sizing:border-box;padding:12px;border-radius:var(--ds-corner-panel);background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ nav.open{inline-size:240px}
+ nav.shut{inline-size:68px}
+ ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+ h3{margin:14px 0 4px;padding-inline:14px;font-size:12px;font-weight:400;color:var(--ds-text-secondary)}
+ h3:first-child{margin-block-start:2px}
+ a{position:relative;box-sizing:border-box;display:flex;align-items:center;gap:12px;min-block-size:44px;padding-inline:14px;border-radius:var(--ds-corner-inner);color:var(--ds-text-secondary);text-decoration:none;font-size:14px;line-height:1.3}
+ a svg{flex:none;inline-size:20px;block-size:20px}
+ .shut a{justify-content:center;padding-inline:0}
+ .shut a span, .shut h3{display:none}
+ .shut hr{display:block}
+ hr{display:none;border:0;border-block-start:1px solid var(--ds-line-divider);margin:8px 10px}
+ a[aria-current]{color:var(--ds-text-primary);font-weight:500}
+ /* A: index mark (Tabs language, turned to the side): a short ink bar at the inline start of the row */
+ .A a[aria-current]::before{content:"";position:absolute;inset-inline-start:2px;inset-block:50%;block-size:20px;inline-size:3px;transform:translateY(-50%);border-radius:99px;background:var(--ds-text-primary)}
+ /* B: printed scale: a dotted rail down the column, the index tick sits on the rail beside the current page */
+ .B ul{position:relative;padding-inline-start:16px}
+ .B ul::before{content:"";position:absolute;inset-inline-start:5px;inset-block:6px;inline-size:2px;background:radial-gradient(circle,var(--ds-line-ring) 1px,transparent 1.5px) 0 0/2px 8px repeat-y}
+ .B a[aria-current]::before{content:"";position:absolute;inset-inline-start:-14px;inset-block-start:50%;inline-size:10px;block-size:2px;background:var(--ds-text-primary)}
+ .B.shut ul{padding-inline-start:0}.B.shut ul::before{display:none}.B.shut a[aria-current]::before{inset-inline-start:2px;inline-size:6px}
+ /* C: the current row is a recess (inverse light), the others are flat print */
+ .C a[aria-current]{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring)}
+ .btn{margin-block-start:10px;display:flex;align-items:center;justify-content:center;min-block-size:44px;border:0;background:none;font:inherit;font-size:12px;color:var(--ds-text-secondary)}
+ .dot{inline-size:20px;block-size:20px;display:inline-grid;place-items:center}
+ .dot::before{content:"";inline-size:10px;block-size:10px;border-radius:50%;border:2px solid currentColor;box-sizing:border-box}
+</style></head><body>
+<h1>Sidebar · a side column of pages</h1>
+<p class="lead">Each candidate open and collapsed to icons. Icon stand-ins are plain circles; the real component uses the dot-matrix Icon.</p>
+<template id="t">
+ <h3>Rooms</h3>
+ <ul><li><a href="#"><i class="dot"></i><span>Living room</span></a></li>
+ <li><a href="#" aria-current="page"><i class="dot"></i><span>Kitchen</span></a></li>
+ <li><a href="#"><i class="dot"></i><span>Bedroom</span></a></li></ul>
+ <hr><h3>House</h3>
+ <ul><li><a href="#"><i class="dot"></i><span>Schedules</span></a></li>
+ <li><a href="#"><i class="dot"></i><span>Settings</span></a></li></ul>
+ <button class="btn" type="button"></button>
+</template>
+<div class="set" id="set"></div>
+<script>
+ const names={A:'A · ink bar at the edge of the row',B:'B · dotted scale with a tick on the rail',C:'C · current row recessed into the body'};
+ const t=document.getElementById('t'), set=document.getElementById('set');
+ for(const k of ['A','B','C']){
+  const wrap=document.createElement('div'); wrap.innerHTML='<p class="cap">'+names[k]+'</p><div class="pair"></div>';
+  for(const s of ['open','shut']){
+   const n=document.createElement('nav'); n.className=k+' '+s; n.setAttribute('aria-label','Main');
+   n.append(t.content.cloneNode(true)); n.querySelector('.btn').textContent=s==='open'?'collapse':'›';
+   wrap.querySelector('.pair').append(n);
+  }
+  set.append(wrap);
+ }
+</script>
+</body></html>

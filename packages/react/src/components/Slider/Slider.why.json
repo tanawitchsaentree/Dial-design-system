@@ -1,65 +1,243 @@
 {
   "concept": "Slider is the fader on the face of an appliance. A frosted glass cap, tinted in the value's own range, rides a recessed groove under a printed ruler scale, the groove behind it lit in the same tint, follows the hand and settles into the nearest detent on the material's spring, while the orange stays on the unit's rotary.",
-  "material": { "accent": "glass", "decision": "D-007", "lab": "apps/lab/glass/index.html", "recipe": "A frosted tinted resin, lit from behind by the value" },
-  "kind": ["slider", "fader"],
+  "material": {
+    "accent": "glass",
+    "decision": "D-007",
+    "lab": "apps/lab/glass/index.html",
+    "recipe": "A frosted tinted resin, lit from behind by the value"
+  },
+  "kind": [
+    "slider",
+    "fader"
+  ],
   "default_to_avoid": [
-    { "pattern": "thin Material or iOS slider with a coloured filled track and a round white thumb", "why_not": "A saturated brand fill spends the accent on a secondary control, while P1 keeps orange for the rotary and P9 allows only a quiet tint from the value's own range behind a glass cap." },
-    { "pattern": "range slider that shrinks to its label or grows with its value text", "why_not": "P6 keeps positions fixed between states, so the fader holds its length and size from its lowest value to its highest (gate G-SL1)." }
+    {
+      "pattern": "thin Material or iOS slider with a coloured filled track and a round white thumb",
+      "why_not": "A saturated brand fill spends the accent on a secondary control, while P1 keeps orange for the rotary and P9 allows only a quiet tint from the value's own range behind a glass cap."
+    },
+    {
+      "pattern": "range slider that shrinks to its label or grows with its value text",
+      "why_not": "P6 keeps positions fixed between states, so the fader holds its length and size from its lowest value to its highest (gate G-SL1)."
+    }
   ],
   "references": [
-    { "source": "Braun audio 1 / audio 2 compact systems (Dieter Rams, 1962): linear faders in a slot with a printed ruler scale and numerals under it" },
-    { "source": "Braun TG 60 tape recorder (Dieter Rams, 1965): level faders with plain rectangular caps and an ink index line" },
-    { "source": "apps/lab/anchor (D-001, card A): the volume fader with 11 detents on the ruler" },
-    { "source": "user reference, wave 4 (D-006): translucent frosted fader caps tinted like their track, the track behind filling with the same tint" }
+    {
+      "source": "Braun audio 1 / audio 2 compact systems (Dieter Rams, 1962): linear faders in a slot with a printed ruler scale and numerals under it"
+    },
+    {
+      "source": "Braun TG 60 tape recorder (Dieter Rams, 1965): level faders with plain rectangular caps and an ink index line"
+    },
+    {
+      "source": "apps/lab/anchor (D-001, card A): the volume fader with 11 detents on the ruler"
+    },
+    {
+      "source": "user reference, wave 4 (D-006): translucent frosted fader caps tinted like their track, the track behind filling with the same tint"
+    }
   ],
   "derivation": [
-    { "p": "P3", "axis": "shape", "consequence": "faders ride a groove with a ruler scale", "form": "A recessed groove runs the full length of the control, with ruler ticks printed above it and an optional row of numerals printed below." },
-    { "p": "P3", "axis": "motion", "consequence": "rotaries and faders settle into the nearest detent", "form": "The cap follows the pointer while dragged and, when released, travels to the nearest step on a spring of mass 1.4, stiffness 520 and damping 46." },
-    { "p": "P3", "axis": "type", "consequence": "scale numerals on a fader are tabular, the smallest size step, ink at ≥4.5:1", "form": "Ruler numerals are type.micro in medium weight with tabular figures, in text.secondary ink on the plastic body." },
-    { "p": "P1", "axis": "colour", "consequence": "orange appears once per unit, on the primary control's body only", "form": "The cap is tinted glass with a printed ink line and the groove is surface.sunken plastic, so no part of the fader uses action.accent." },
-    { "p": "P9", "axis": "colour", "consequence": "glass tint comes from the value's own range, warm for warmth, the room's light for a lamp, and stays a quiet tone near the plastic", "form": "The tint prop picks the warm, cool or neutral glass range, and the cap body, its edge and the light in the groove all take that one hue." },
-    { "p": "P9", "axis": "depth", "consequence": "a glass part is lit through from behind by the value it holds, and keeps the one top-left light on its surface", "form": "The groove fills with the tint up to the cap's centre, the frosted cap shows that light through itself and keeps the lit hairline and short shadow of the single light." },
-    { "p": "P6", "axis": "space", "consequence": "fixed positions, so a unit's layout does not reflow between states", "form": "The fader takes the full inline size of its column, at least five touch targets long, and its value text never changes the track length." },
-    { "p": "P3", "axis": "interaction", "consequence": "every mechanism has its keyboard map (arrows step a detent, Home and End reach the ends, Space and Enter press) and a visible value and label", "form": "The track is a role slider: arrows step one detent, PageUp and PageDown a larger step, Home and End the ends, with the printed label and value above it." }
+    {
+      "p": "P3",
+      "axis": "shape",
+      "consequence": "faders ride a groove with a ruler scale",
+      "form": "A recessed groove runs the full length of the control, with ruler ticks printed above it and an optional row of numerals printed below."
+    },
+    {
+      "p": "P3",
+      "axis": "motion",
+      "consequence": "rotaries and faders settle into the nearest detent",
+      "form": "The cap follows the pointer while dragged and, when released, travels to the nearest step on a spring of mass 1.4, stiffness 520 and damping 46."
+    },
+    {
+      "p": "P3",
+      "axis": "type",
+      "consequence": "scale numerals on a fader are tabular, the smallest size step, ink at ≥4.5:1",
+      "form": "Ruler numerals are type.micro in medium weight with tabular figures, in text.secondary ink on the plastic body."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The cap is tinted glass with a printed ink line and the groove is surface.sunken plastic, so no part of the fader uses action.accent."
+    },
+    {
+      "p": "P9",
+      "axis": "colour",
+      "consequence": "glass tint comes from the value's own range, warm for warmth, the room's light for a lamp, and stays a quiet tone near the plastic",
+      "form": "The tint prop picks the warm, cool or neutral glass range, and the cap body, its edge and the light in the groove all take that one hue."
+    },
+    {
+      "p": "P9",
+      "axis": "depth",
+      "consequence": "a glass part is lit through from behind by the value it holds, and keeps the one top-left light on its surface",
+      "form": "The groove fills with the tint up to the cap's centre, the frosted cap shows that light through itself and keeps the lit hairline and short shadow of the single light."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The fader takes the full inline size of its column, at least five touch targets long, and its value text never changes the track length."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map (arrows step a detent, Home and End reach the ends, Space and Enter press) and a visible value and label",
+      "form": "The track is a role slider: arrows step one detent, PageUp and PageDown a larger step, Home and End the ends, with the printed label and value above it."
+    }
   ],
   "variants": {
     "lab": "apps/lab/slider/index.html",
     "options": [
-      { "id": "A", "name": "ruler fader: ticks above a narrow groove, numerals below" },
-      { "id": "B", "name": "channel fader: the whole track is a wide well with the cap inside" },
-      { "id": "C", "name": "notch rail: a recessed notch per detent and a round cap that drops between them" }
+      {
+        "id": "A",
+        "name": "ruler fader: ticks above a narrow groove, numerals below"
+      },
+      {
+        "id": "B",
+        "name": "channel fader: the whole track is a wide well with the cap inside"
+      },
+      {
+        "id": "C",
+        "name": "notch rail: a recessed notch per detent and a round cap that drops between them"
+      }
     ],
     "picked": "A",
     "by": "agent",
     "reason": "A is the fader of anchor card A and P3's groove with a ruler scale, and it keeps the recess narrow so the display stays the deepest window (P2); B's 44px well competes with the display, and C's notch rail only reads with a few steps and drops the free travel of a fader."
   },
-  "mechanism": { "kind": "fader", "detents": 11, "travel": "full track length", "spring": { "mass": 1.4, "stiffness": 520, "damping": 46 } },
+  "mechanism": {
+    "kind": "fader",
+    "detents": 11,
+    "travel": "full track length",
+    "spring": {
+      "mass": 1.4,
+      "stiffness": 520,
+      "damping": 46
+    }
+  },
   "parts": {
-    "root": { "p": "P6", "axis": "space", "why": "The fader fills the inline size of its column and keeps at least five touch targets of length in every state." },
-    "header": { "p": "P5", "axis": "space", "why": "The label and the value sit on one printed line above the track, aligned to its two ends." },
-    "label": { "p": "P5", "axis": "type", "why": "The printed name uses the label size in medium weight, like the word printed above a fader on a case." },
-    "value": { "p": "P5", "axis": "type", "why": "The current value is printed with tabular figures so the digits do not shift sideways while the cap moves." },
-    "fader": { "p": "P3", "axis": "space", "why": "The whole track is the hit area and stays at least 44px tall although the groove itself draws narrower." },
-    "rule": { "p": "P3", "axis": "shape", "why": "The ruler band above the groove holds one printed tick per detent, spanning the travel of the cap's centre." },
-    "tick": { "p": "P5", "axis": "depth", "why": "Each tick is a hairline of printing, flat on the material with no shadow, so it never reads as a part." },
-    "major": { "p": "P5", "axis": "colour", "why": "The ends and the middle of the ruler are printed in the primary ink so the scale can be read at a glance." },
-    "groove": { "p": "P3", "axis": "shape", "why": "The cap rides a narrow recessed slot drawn with inverse light, the groove every fader on the case runs in; its hairline edge in line.ring holds 3:1 against the body in both themes." },
-    "cap": { "p": "P9", "axis": "depth", "why": "The cap is a raised part of frosted glass in the value's tint, showing the groove's light through itself and casting the short part shadow down and to the right of the single light." },
-    "fill": { "p": "P9", "axis": "colour", "why": "The groove behind the cap is lit in the same tint up to the cap's centre, a quiet tone near the plastic and never the orange." },
-    "scale": { "p": "P3", "axis": "type", "why": "The optional numeral row under the groove prints the scale values in the smallest type step, as on the reference." },
-    "numeral": { "p": "P5", "axis": "type", "why": "Each numeral is centred under its tick with tabular figures, in medium weight at the smallest size step." }
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The fader fills the inline size of its column and keeps at least five touch targets of length in every state."
+    },
+    "header": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The label and the value sit on one printed line above the track, aligned to its two ends."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight, like the word printed above a fader on a case."
+    },
+    "value": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The current value is printed with tabular figures so the digits do not shift sideways while the cap moves."
+    },
+    "fader": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The whole track is the hit area and stays at least 44px tall although the groove itself draws narrower."
+    },
+    "rule": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "The ruler band above the groove holds one printed tick per detent, spanning the travel of the cap's centre."
+    },
+    "tick": {
+      "p": "P5",
+      "axis": "depth",
+      "why": "Each tick is a hairline of printing, flat on the material with no shadow, so it never reads as a part."
+    },
+    "major": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The ends and the middle of the ruler are printed in the primary ink so the scale can be read at a glance."
+    },
+    "groove": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "The cap rides a narrow recessed slot drawn with inverse light, the groove every fader on the case runs in; its hairline edge in line.ring holds 3:1 against the body in both themes."
+    },
+    "cap": {
+      "p": "P9",
+      "axis": "depth",
+      "why": "The cap is a raised part of frosted glass in the value's tint, showing the groove's light through itself and casting the short part shadow down and to the right of the single light."
+    },
+    "fill": {
+      "p": "P9",
+      "axis": "colour",
+      "why": "The groove behind the cap is lit in the same tint up to the cap's centre, a quiet tone near the plastic and never the orange."
+    },
+    "scale": {
+      "p": "P3",
+      "axis": "type",
+      "why": "The optional numeral row under the groove prints the scale values in the smallest type step, as on the reference."
+    },
+    "numeral": {
+      "p": "P5",
+      "axis": "type",
+      "why": "Each numeral is centred under its tick with tabular figures, in medium weight at the smallest size step."
+    }
   },
   "states": {
-    "hover": { "p": "P6", "axis": "interaction", "why": "Hover darkens the cap's printed index one step and never lifts or grows the cap toward the pointer." },
-    "focus-visible": { "p": "P3", "axis": "interaction", "why": "The keyboard focus ring wraps the whole track with the same dark ring every part in dial shows." },
-    "aria-disabled=true": { "p": "P6", "axis": "depth", "why": "A disabled fader loses the cap's height and fades to half, while the groove and ruler stay readable." },
-    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion the cap jumps to its detent at once and the index ink changes with no fade." },
-    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the cap turns matte with a real border, the groove's light becomes Highlight, and the index and ticks are drawn in system colours." },
-    "data-tint=warm": { "p": "P9", "axis": "colour", "why": "A warmth, such as a heating setpoint, takes the warm amber glass range for its cap and the groove light behind it." },
-    "data-tint=cool": { "p": "P9", "axis": "colour", "why": "A coolness, such as a cooling setpoint, takes the cool steel glass range for its cap and the groove light behind it." },
-    "@media prefers-reduced-transparency: reduce": { "p": "P9", "axis": "interaction", "why": "When the reader asks for less transparency the cap and the groove light turn matte in the same tint, so the position still reads at once." }
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover darkens the cap's printed index one step and never lifts or grows the cap toward the pointer."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Focus is the system ring in secondary printing ink, drawn round the cap the keys or a press move, at one ring's offset, never as a box round the whole control (R-005, D-009)."
+    },
+    "aria-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled fader loses the cap's height and fades to half, while the groove and ruler stay readable."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion the cap jumps to its detent at once and the index ink changes with no fade."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the cap turns matte with a real border, the groove's light becomes Highlight, and the index and ticks are drawn in system colours."
+    },
+    "data-tint=warm": {
+      "p": "P9",
+      "axis": "colour",
+      "why": "A warmth, such as a heating setpoint, takes the warm amber glass range for its cap and the groove light behind it."
+    },
+    "data-tint=cool": {
+      "p": "P9",
+      "axis": "colour",
+      "why": "A coolness, such as a cooling setpoint, takes the cool steel glass range for its cap and the groove light behind it."
+    },
+    "@media prefers-reduced-transparency: reduce": {
+      "p": "P9",
+      "axis": "interaction",
+      "why": "When the reader asks for less transparency the cap and the groove light turn matte in the same tint, so the position still reads at once."
+    }
   },
   "motion": {
-    "border-color": { "p": "P3", "axis": "motion", "why": "The index ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out." }
+    "border-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The index ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A fader switched off fades its print and lowers its cap's shadow over motion.release, and rises again the same way, never in one frame (D-008)."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Every change of state moves on the motion tokens, fast in on the decelerating curve and faster out on the accelerating one (D-008)."
+    }
   }
 }

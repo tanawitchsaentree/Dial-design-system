@@ -1,0 +1,69 @@
+/* AppShell — the frame of a screen: header, side column, main and footer as separate units on the page ground
+   (lab apps/lab/app-shell pick A). The shell has no body of its own; it only sets the inset gap and the grid.
+   Nothing here moves or is orange (P6, P1). */
+.root {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-gap-inset);
+  inline-size: 100%;
+  min-block-size: 100%;
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-inset);
+  background: var(--ds-surface-page);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+}
+
+.header {
+  min-inline-size: 0;
+}
+.header[data-sticky] {
+  position: sticky;
+  inset-block-start: var(--ds-gap-none);
+  z-index: var(--ds-layer-sticky);
+  /* the inset gap around the bar is part of the held header, so the page never shows through it */
+  margin-block: calc(-1 * var(--ds-gap-inset));
+  padding-block: var(--ds-gap-inset);
+  background: var(--ds-surface-page);
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  min-block-size: var(--ds-control-md);
+}
+
+.body {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--ds-gap-inset);
+  min-inline-size: 0;
+}
+.body[data-layout='single'] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.side {
+  min-inline-size: 0;
+}
+
+.main {
+  min-inline-size: 0;
+  outline: none;
+}
+.main:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+  border-radius: var(--ds-corner-media);
+}
+
+.footer {
+  min-inline-size: 0;
+}
+
+@media (forced-colors: active) {
+  .main:focus-visible { outline-color: Highlight; }
+}

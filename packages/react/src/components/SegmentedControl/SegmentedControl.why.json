@@ -55,7 +55,7 @@
     "data-glow": { "p": "P6", "axis": "colour", "why": "A lit lamp is one of the emitters P2 allows, so in the dark edition it gives off a few pixels of its own light; in light, unlit or disabled it gives off none." },
     "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under reduce motion a key latches at once with no travel animation and no spring return of the others; only the ink fade stays." },
     "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the keys keep system borders and the lit lamp fills with the button text colour, so the choice survives; the latched key turns matte." },
-    "@media prefers-reduced-transparency: reduce": { "p": "P9", "axis": "interaction", "why": "When the reader asks for less transparency the latched key turns matte in the same grey tone, keeping its travel, lamp and word." }
+    "@media prefers-reduced-transparency: reduce": { "p": "P9", "axis": "interaction", "why": "When the reader asks for less transparency the latched key turns matte in the same grey tone, keeping its travel, lamp and word. Matte is not lit from behind, so the inner glow and the lamp's halo go with the frost; on the lighter matte face they would wash the word under 4.5:1." }
   },
   "motion": {
     "transform": { "p": "P3", "axis": "motion", "why": "A key travels down in 65ms when pressed and the released key returns on the spring, so latching reads as a stroke." },

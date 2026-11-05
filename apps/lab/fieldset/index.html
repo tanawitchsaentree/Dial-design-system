@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Fieldset · three ways to group related controls</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ fieldset{margin:0;min-inline-size:0;border:0;padding:0}
+ .k{display:flex;align-items:center;gap:16px;min-block-size:44px;font-size:14px}
+ .k i{inline-size:24px;block-size:24px;border-radius:50%;background:var(--ds-surface-raised);border:1px solid var(--ds-line-ring);box-shadow:var(--ds-elevation-part,var(--ds-elevation-unit))}
+ .hint{margin:8px 0 0;font-size:12px;color:var(--ds-text-secondary)}
+ /* A: printed box, legend breaks the top line (native fieldset) */
+ .A fieldset{border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);padding:8px 16px 12px}
+ .A legend{padding-inline:8px;font-size:13px;color:var(--ds-text-secondary)}
+ /* B: legend above, a bracket hairline down the inline-start edge */
+ .B fieldset{border-inline-start:1px solid var(--ds-line-ring);padding-inline-start:16px}
+ .B legend{padding:0;margin-block-end:4px;font-size:13px;color:var(--ds-text-secondary)}
+ /* C: recessed tray, legend printed on the inset line above it */
+ .C legend{padding:0;margin-block-end:8px;font-size:13px;color:var(--ds-text-secondary)}
+ .C fieldset>.in{padding:8px 16px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring)}
+</style></head><body>
+<h1>Fieldset · related controls in one group</h1>
+<div class="row">
+ <div class="unit A"><h2>A · printed box, legend on the line</h2><fieldset><legend>Night mode</legend><label class="k"><i></i>Lower the heater</label><label class="k"><i></i>Dim the lamps</label><p class="hint">Starts at 23:00.</p></fieldset></div>
+ <div class="unit B"><h2>B · bracket hairline</h2><fieldset><legend>Night mode</legend><label class="k"><i></i>Lower the heater</label><label class="k"><i></i>Dim the lamps</label><p class="hint">Starts at 23:00.</p></fieldset></div>
+ <div class="unit C"><h2>C · recessed tray</h2><fieldset><legend>Night mode</legend><div class="in"><label class="k"><i></i>Lower the heater</label><label class="k"><i></i>Dim the lamps</label></div><p class="hint">Starts at 23:00.</p></fieldset></div>
+</div></body></html>

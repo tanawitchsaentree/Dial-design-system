@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · LineChart · three ways to read a trend</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:32px}
+ .unit{inline-size:420px;padding:26px;border-radius:44px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 6px;color:var(--ds-text-secondary)}
+ .unit>p{font-size:12px;margin:0 0 16px;color:var(--ds-text-secondary)}
+ .cap{font-size:13px;margin:0 0 8px;text-shadow:var(--ds-print-seat)}
+ svg{display:block;inline-size:100%;overflow:visible;font-family:var(--ds-type-family);font-variant-numeric:tabular-nums}
+ .t{font-size:11px;fill:var(--ds-text-secondary)}
+ .ln{fill:none;stroke:var(--ds-text-primary);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+ .s2{stroke-dasharray:7 5}.s3{stroke-dasharray:1 5}
+ .mk{fill:var(--ds-surface-sunken);stroke:var(--ds-text-primary);stroke-width:2}
+ .leg{display:flex;gap:18px;margin:12px 0 0;font-size:12px;text-shadow:var(--ds-print-seat)}
+ .leg span{display:inline-flex;align-items:center;gap:6px}
+ .rd{margin:10px 0 0;font-size:13px;font-variant-numeric:tabular-nums;text-shadow:var(--ds-print-seat)}
+ .rd b{font-weight:500}
+ /* A: recessed window holds the plot, hairline grid, readout printed under */
+ .A .w{border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);padding:14px 14px 8px}
+ .A .gl{stroke:var(--ds-line-divider);stroke-width:1}
+ /* B: no window; ruler ticks on the two axes of the body, readout in a small window */
+ .B .ax{stroke:var(--ds-line-ring);stroke-width:1}
+ .B .mk{fill:var(--ds-surface-solid)}
+ .B .rdw{display:inline-block;margin-block-start:10px;padding:6px 12px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);font-size:13px}
+ /* C: one OLED window holds plot and readout */
+ .C .w{border-radius:var(--ds-corner-media);background:var(--ds-color-oled-bg);color:var(--ds-color-oled-ink);padding:14px 14px 10px;box-shadow:var(--ds-elevation-well)}
+ .C .t{fill:var(--ds-color-oled-ink)}
+ .C .ln{stroke:var(--ds-color-oled-ink)}.C .mk{fill:var(--ds-color-oled-bg);stroke:var(--ds-color-oled-ink)}
+ .C .gl{stroke:var(--ds-color-oled-ink);stroke-opacity:.25}
+ .C .rd{text-shadow:none}
+</style></head><body>
+<h1>LineChart · seven days of temperature, three series told apart by line pattern and marker shape</h1>
+<div class="row" id="row"></div>
+<script>
+const cats=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const S=[{n:'Indoor',v:[20.5,21,21.5,20.8,21.2,22,21.6],m:'c'},{n:'Outdoor',v:[8,6,9,12,10,7,5],m:'s'},{n:'Target',v:[21,21,21,21,21,21,21],m:'d'}];
+const W=368,H=190,L=34,R=10,T=10,B=24,lo=0,hi=25,act=4;
+const x=i=>L+(W-L-R)*i/6, y=v=>T+(H-T-B)*(1-(v-lo)/(hi-lo));
+function mk(m,cx,cy,r){return m==='c'?`<circle class="mk" cx="${cx}" cy="${cy}" r="${r}"/>`:m==='s'?`<rect class="mk" x="${cx-r}" y="${cy-r}" width="${2*r}" height="${2*r}"/>`:`<polygon class="mk" points="${cx},${cy-r-1} ${cx+r+1},${cy} ${cx},${cy+r+1} ${cx-r-1},${cy}"/>`}
+function chart(kind){
+ let g='';
+ const ticks=[0,5,10,15,20,25];
+ if(kind==='B'){
+  g+=`<line class="ax" x1="${L}" x2="${L}" y1="${T}" y2="${H-B}"/><line class="ax" x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}"/>`;
+  ticks.forEach(t=>g+=`<line class="ax" x1="${L-6}" x2="${L}" y1="${y(t)}" y2="${y(t)}"/><text class="t" x="${L-10}" y="${y(t)+4}" text-anchor="end">${t}</text>`);
+  cats.forEach((c,i)=>g+=`<line class="ax" x1="${x(i)}" x2="${x(i)}" y1="${H-B}" y2="${H-B+5}"/><text class="t" x="${x(i)}" y="${H-6}" text-anchor="middle">${c}</text>`);
+ } else {
+  ticks.forEach(t=>g+=`<line class="gl" x1="${L}" x2="${W-R}" y1="${y(t)}" y2="${y(t)}"/><text class="t" x="${L-8}" y="${y(t)+4}" text-anchor="end">${t}</text>`);
+  cats.forEach((c,i)=>g+=`<text class="t" x="${x(i)}" y="${H-6}" text-anchor="middle">${c}</text>`);
+ }
+ g+=`<line class="${kind==='B'?'ax':'gl'}" style="stroke:var(--ds-text-primary)" x1="${x(act)}" x2="${x(act)}" y1="${T}" y2="${H-B}"/>`;
+ S.forEach((s,k)=>{g+=`<polyline class="ln s${k+1}" points="${s.v.map((v,i)=>x(i)+','+y(v)).join(' ')}"/>`;s.v.forEach((v,i)=>{g+=mk(s.m,x(i),y(v),i===act?5:3.5)})});
+ const svg=`<svg viewBox="0 0 ${W} ${H}">${g}</svg>`;
+ const leg=`<div class="leg">${S.map((s,k)=>`<span><svg viewBox="0 0 28 10" style="inline-size:28px;block-size:10px"><polyline class="ln s${k+1}" points="0,5 28,5"/>${mk(s.m,14,5,3)}</svg>${s.n}</span>`).join('')}</div>`;
+ const rd=`<b>Fri</b> · Indoor 21.2 °C · Outdoor 10 °C · Target 21 °C`;
+ if(kind==='A')return `<div class="w">${svg}</div>${leg}<p class="rd">${rd}</p>`;
+ if(kind==='B')return `${svg}${leg}<div class="rdw">${rd}</div>`;
+ return `<div class="w">${svg}<p class="rd">${rd}</p></div>${leg}`;
+}
+const names={A:['A · plot in a recessed window','hairline grid inside the window, readout printed under it'],B:['B · ruler on the body','no window and no grid: ticks like a scale on the case, readout in its own small window'],C:['C · one dark window','plot and readout on an OLED window, light ink on near-black']};
+document.getElementById('row').innerHTML=['A','B','C'].map(k=>`<div class="unit ${k}"><h2>${names[k][0]}</h2><p>${names[k][1]}</p>${chart(k)}</div>`).join('');
+</script></body></html>

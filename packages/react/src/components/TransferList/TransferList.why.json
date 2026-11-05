@@ -1,0 +1,152 @@
+{
+  "concept": "TransferList is two printed lists on one panel, the rows that are available and the rows that are chosen, with a column of keys between them that carries the marked rows across. Like a patch field on a Braun hi-fi, nothing is dragged: you mark, press a named key, and the row stands in its new window.",
+  "kind": [
+    "transfer list",
+    "dual listbox",
+    "shuttle",
+    "available and chosen"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "transfer list as two bordered boxes with checkboxes in every row and arrow buttons filled blue",
+      "why_not": "A checkbox in each row repeats a mechanism the Listbox already marks with a tick, and a blue key spends the hue that P1 keeps for one part per unit."
+    },
+    {
+      "pattern": "dual list that moves rows only by dragging them from one box to the other",
+      "why_not": "Dragging cannot be reached from a keyboard or a screen reader, so the mechanism has no key map and rows cannot be moved by everyone."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun Studio 1 hi-fi (Dieter Rams, 1957): two banks of printed sources with the patch keys set between them on the case"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the bands printed in one window and the chosen band marked in another"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: listbox pattern, multiple selection with a move button (https://www.w3.org/WAI/ARIA/apg/patterns/listbox/examples/listbox-rearrangeable/)"
+    },
+    {
+      "source": "Listbox in this system: each window is a multiple Listbox, imported and not redrawn"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "Each side is a Listbox, so both lists are windows of surface.sunken with elevation.well and a line.ring hairline, cut into the same body and equal in size."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "A polite status says how many rows moved and where, then how many are available and chosen; it is printed nowhere else and takes no focus."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The move keys are round 44px IconButtons named in words, with the same gap as the rows, so a thumb finds one without touching its neighbour."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Space marks a row in a list, Tab reaches the key and Enter presses it, and Alt with the arrow toward the other list moves the marked rows without leaving the list."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "Each list is named by a printed label above its window on the inset line, with its count under the window on the same line."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "Both windows keep the same size and the keys keep their column, so a move changes the rows inside the windows and nothing else."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The keys are body-coloured keys and a marked row is a tick and weight, so the unit's one orange stays free for the key that saves the choice."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/transfer-list/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "two windows side by side with a column of round keys between them"
+      },
+      {
+        "id": "B",
+        "name": "two windows with word keys printed under each window"
+      },
+      {
+        "id": "C",
+        "name": "two windows stacked with one row of keys between them"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A puts the keys on the line between the lists, so the direction of each key matches the direction the row travels and the keys read as a patch column in black and white (P3 interaction, P6 space); B splits the keys into four word capsules that wrap in other languages, and C is kept as the narrow layout of A, because side by side does not fit a phone."
+  },
+  "parts": {
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The two lists and the key column sit in one row, and the row wraps into a stack only when the width cannot hold them, so nothing moves between states."
+    },
+    "column": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A list, its label and its count stack in one column on the same inset line, so both sides read the same way."
+    },
+    "caption": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The count under each window uses the caption size in secondary ink, a plain printed line with a tabular figure that does not shift as rows move."
+    },
+    "keys": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The keys stand in one column on the middle line, 44px apart from their neighbours, and turn into a row when the lists stack."
+    },
+    "key": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "Each key is the round 44px key of the control class with one printed arrow, and a key with no rows to carry fades like any disabled part."
+    },
+    "pair": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "The keys that move every row print two arrows side by side, so a sighted person tells all from marked without reading the name."
+    },
+    "md": {
+      "p": "P6",
+      "axis": "space",
+      "why": "Both windows keep the height of six 44px rows whatever they hold, so a move never changes the size of the unit."
+    },
+    "lg": {
+      "p": "P6",
+      "axis": "space",
+      "why": "Both windows keep the height of six 52px rows for a phone sheet, so a move never changes the size of the unit."
+    }
+  },
+  "states": {
+    "data-stacked=true": {
+      "p": "P6",
+      "axis": "space",
+      "why": "When the width holds only one window the lists stack and the keys lie in a row between them, with arrows turned to point down and up."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the keys keep a real border in the text colour, so each stays a visible target, while the windows come from Listbox."
+    }
+  },
+  "motion": {}
+}

@@ -50,3 +50,8 @@
   is reported "478px of it is off the screen" after a Menu opens. It should only measure a listbox that a trigger owns while
   open (`[aria-expanded=true][aria-controls]` → its id) or one inside `[popover]`/`[role=dialog]`. Found 2026-11-02 (wave 2, List/Menu).
 - **K-15 sweep.mjs counts a :modal dialog as cut by its ancestors.** "ActionSheet dialog: 211px of it is cut by … div.demo-box" while the dialog is in the top layer and shows whole (screenshot) and G-PC1 passes. Reported to kiln.
+- **K-16 gate for the reading column (R-009).** Running text (p, li outside demos) in main should use one font size and one left edge per page, at ≥ 60ch where the column allows. Write it in kiln, prove it red on the hanging-column build (commit 65be244), then sync. Found 2026-11-04.
+
+- 2026-11-04 · Select: an option cannot carry a leading node, so an Avatar cannot sit in a Select option (GitHub create-repository owner picker). Combobox already takes leading nodes.
+- 2026-11-04 · The 75 wave-5 components have only passed verify:quick (conformance, lint, rationale, i18n, types, meta). Gates/evidence (full verify) and a visual review by the user are still to do.
+- 2026-11-04 · Calendar chapter limitation text about ranges is now out of date (RangePicker extended Calendar with `range`).

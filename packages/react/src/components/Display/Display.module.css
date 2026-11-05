@@ -14,8 +14,9 @@
   font-variant-numeric: tabular-nums;
   line-height: var(--ds-type-leading-tight);
 }
-.lcd { background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); }
-.oled { background: var(--ds-display-oled-bg); color: var(--ds-display-oled-ink); }
+/* a window shows light, not ink, so its words carry no print seat (D-010) */
+.lcd { background: var(--ds-display-lcd-bg); color: var(--ds-display-lcd-ink); text-shadow: none; --ds-print-seat: none; }
+.oled { background: var(--ds-display-oled-bg); color: var(--ds-display-oled-ink); text-shadow: none; --ds-print-seat: none; }
 /* the OLED window is one of P2's emitters: its own light in the dark edition, nothing in light (emit.display) */
 .oled[data-glow] { box-shadow: var(--ds-elevation-well), var(--ds-emit-display); }
 

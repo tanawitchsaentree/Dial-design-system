@@ -13,6 +13,8 @@ import {
 import { createPortal } from 'react-dom';
 import { cx } from '../../cx';
 import { useIsoLayoutEffect } from '../../spring';
+import { usePresence } from '../../presence';
+import { Icon } from '../Icon';
 import { Button } from '../Button';
 import { IconButton } from '../IconButton';
 import styles from './Menu.module.css';
@@ -52,13 +54,8 @@ export interface MenuProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'childr
 
 const TYPEAHEAD_MS = 500;
 
-const dots = (
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-    <circle cx="5" cy="12" r="2" />
-    <circle cx="12" cy="12" r="2" />
-    <circle cx="19" cy="12" r="2" />
-  </svg>
-);
+// dial's one icon language, the dot matrix (R-005)
+const dots = <Icon name="more" />;
 
 const px = (v: string, fallback: number) => {
   const n = parseFloat(v);
@@ -76,6 +73,8 @@ export const Menu = forwardRef<HTMLButtonElement, MenuProps>(function Menu(
   const [start, setStart] = useState<'first' | 'last'>('first');
   const key = useRef<HTMLButtonElement | null>(null);
   const panel = useRef<HTMLDivElement | null>(null);
+  // the panel stays on the body while it leaves, so closing moves out instead of vanishing (D-008)
+  const presence = usePresence<HTMLDivElement>(open);
   const typed = useRef('');
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const edge = align ?? (trigger === 'icon' ? 'end' : 'start');
@@ -219,8 +218,12 @@ export const Menu = forwardRef<HTMLButtonElement, MenuProps>(function Menu(
 
   const menu = (
     <div
-      ref={panel}
+      ref={(el) => { panel.current = el; presence.ref(el); }}
       id={menuId}
+      data-state={presence.state}
+      // a leaving panel is only a picture of the menu: no key reaches it and assistive tech no longer lists it
+      inert={presence.state === 'closing' || undefined}
+      aria-hidden={presence.state === 'closing' || undefined}
       role="menu"
       aria-label={label}
       data-component="Menu"
@@ -256,14 +259,12 @@ export const Menu = forwardRef<HTMLButtonElement, MenuProps>(function Menu(
       {trigger === 'word' ? (
         <Button {...keyProps}>
           {label}
-          <svg className={styles.chevron} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-            <path d="M4 6l4 4 4-4" />
-          </svg>
+          <Icon name="chevron-down" size="sm" className={styles.chevron} />
         </Button>
       ) : (
         <IconButton {...keyProps} label={label}>{icon ?? dots}</IconButton>
       )}
-      {open && typeof document !== 'undefined' ? createPortal(menu, document.body) : null}
+      {presence.mounted && typeof document !== 'undefined' ? createPortal(menu, document.body) : null}
     </span>
   );
 });

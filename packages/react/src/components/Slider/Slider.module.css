@@ -35,10 +35,13 @@
   align-items: baseline;
   gap: var(--ds-gap-md);
 }
+/* every word, numeral and tick is pad ink pressed into the body: warm ink on the lit lip of its recess
+   (print.seat, D-010), so the printing belongs to the plastic instead of floating on it */
 .label {
   font-size: var(--ds-type-label);
   font-weight: var(--ds-type-weight-medium);
   line-height: var(--ds-type-leading-tight);
+  text-shadow: var(--ds-print-seat);
 }
 .value {
   font-size: var(--ds-type-label);
@@ -46,6 +49,7 @@
   line-height: var(--ds-type-leading-tight);
   font-variant-numeric: tabular-nums;
   color: var(--ds-text-secondary);
+  text-shadow: var(--ds-print-seat);
 }
 .fader {
   position: relative;
@@ -66,6 +70,7 @@
   inset-block: 0;
   inset-inline-start: calc(var(--p) * 100%);
   border-inline-start: var(--ds-width-hairline) solid var(--ds-text-secondary);
+  box-shadow: var(--ds-print-seat);
 }
 .major {
   inset-block-start: calc(var(--ds-space-0-5) * -1);
@@ -80,8 +85,18 @@
   border: var(--ds-width-hairline) solid var(--ds-line-ring);
   border-radius: var(--ds-corner-round);
   background: var(--ds-surface-sunken);
-  box-shadow: var(--ds-elevation-well);
   overflow: hidden;
+  isolation: isolate;
+}
+/* the recess's own shadow lies over the light in it, so the fill sits inside the groove, not on top (D-010) */
+.groove::after {
+  content: "";
+  position: absolute;
+  inset: var(--ds-gap-none);
+  z-index: var(--ds-layer-raised);
+  border-radius: inherit;
+  box-shadow: var(--ds-elevation-well);
+  pointer-events: none;
 }
 /* the value's light in the groove, from the start up to the cap's centre, in the cap's own tint */
 .fill {
@@ -113,6 +128,8 @@
   inset-block: var(--ds-gap-sm);
   inset-inline-start: calc(50% - var(--ds-width-ring) / 2);
   border-inline-start: var(--ds-width-ring) solid var(--ds-text-secondary);
+  /* the index is cut into the cap: ink in the cut, the lit edge on its far side (D-010) */
+  box-shadow: var(--ds-width-hairline) 0 0 var(--ds-glass-lit);
   transition: border-color var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .scale {
@@ -132,13 +149,19 @@
   line-height: var(--ds-type-leading-tight);
   font-variant-numeric: tabular-nums;
   color: var(--ds-text-secondary);
+  text-shadow: var(--ds-print-seat);
 }
 
 .fader:hover .cap::after { border-inline-start-color: var(--ds-text-primary); }
-.fader:focus-visible {
+/* focus is drawn round the cap, the part the keys move, never as a box round the whole fader (R-005) */
+.fader:focus-visible { outline: none; }
+.fader:focus-visible .cap {
   outline: var(--ds-width-ring) solid var(--ds-focus-ring);
   outline-offset: var(--ds-width-ring);
 }
+/* a fader that is switched off (or on again) fades its print and lowers its cap, never in one frame (D-008) */
+.fader { transition: opacity var(--ds-motion-release) var(--ds-motion-easing); }
+.cap { transition: box-shadow var(--ds-motion-release) var(--ds-motion-easing); }
 .fader[aria-disabled='true'] { cursor: not-allowed; opacity: var(--ds-opacity-disabled); }
 .fader[aria-disabled='true'] .cap { box-shadow: none; }
 
@@ -155,5 +178,5 @@
   .cap::after, .fader:hover .cap::after { border-inline-start-color: ButtonText; }
   .groove { border-color: CanvasText; }
   .tick, .major { border-inline-start-color: CanvasText; }
-  .fader:focus-visible { outline-color: Highlight; }
+  .fader:focus-visible .cap { outline-color: Highlight; }
 }

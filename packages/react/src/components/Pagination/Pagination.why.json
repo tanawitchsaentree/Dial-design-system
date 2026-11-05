@@ -1,0 +1,184 @@
+{
+  "concept": "Pagination turns the pages of a long list the way a device steps through its memory: two round keys, previous and next, and the page numbers printed in a row between them. The page you are on carries one ink index mark, and a long range folds into a printed gap so the row keeps the same number of places on every page.",
+  "kind": [
+    "pagination",
+    "pager",
+    "page numbers",
+    "page navigation"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "a row of bordered square buttons, one per page, the current one filled with the accent colour",
+      "why_not": "Every page becomes a key competing for a press and the accent fill spends the unit's one orange on a page number; the current page is then told by colour alone."
+    },
+    {
+      "pattern": "a pagination that reflows as you go, with a different count of buttons and ellipses on each page",
+      "why_not": "The keys move under the finger between presses, so the person cannot press next twice without looking."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the band numbers printed in a row on the case, one pair of keys to step through them"
+    },
+    {
+      "source": "system/FORM.md control class: round key, 44px disc, printed beside the part"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices, Landmark navigation: a nav with a name, links or buttons in a list, aria-current=page on the current one"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "the chosen word carries one ink index mark beside it",
+      "form": "The current page number is medium weight and carries a short ink bar under it, the same shape Tabs and Breadcrumb use, so it is told by a mark that shows in grey."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Each page number and each key is 44px tall and at least 44px wide, though the printed number is small, and the numbers touch so no gap between them is dead."
+    },
+    {
+      "p": "P3",
+      "axis": "shape",
+      "consequence": "keys are round or capsule",
+      "form": "Only previous and next are keys: round discs with a dotted arrow, because they are the two parts that step; the page numbers stay printing."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "A long range always prints the same count of places, with the gap marks standing in for what is hidden, so the keys and numbers do not move when the page changes."
+    },
+    {
+      "p": "P6",
+      "axis": "interaction",
+      "consequence": "hover only darkens a key's ink a step",
+      "form": "A page number darkens one ink step on hover and nothing rises; the keys keep the plain press of every key."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The keys, the numbers, the index mark and the gap are all ink and plastic, never orange."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/pagination/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "every page a round key, the current one latched"
+      },
+      {
+        "id": "B",
+        "name": "printed numerals with an ink index mark and two round keys"
+      },
+      {
+        "id": "C",
+        "name": "numerals in a recessed strip, the current one a raised cap"
+      }
+    ],
+    "reason": "B keeps only two keys in the row, so previous and next are the only parts that look pressable, and the current page uses the index mark Tabs and Breadcrumb already print; A makes ten keys out of a row of numbers and C makes the window a second display next to the unit's own."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A nav landmark with a name, so assistive tech lists it among the page's regions and the row sits on the unit's inset line."
+    },
+    "list": {
+      "p": "P6",
+      "axis": "space",
+      "why": "An unordered row that never wraps and keeps its places fixed, so the keys and numbers stay where the finger found them."
+    },
+    "item": {
+      "p": "P3",
+      "axis": "space",
+      "why": "One place in the row, 44px tall, so a number, a key or a gap holds its full slot."
+    },
+    "page": {
+      "p": "P5",
+      "axis": "type",
+      "why": "A page number is printing in the label size with tabular figures, a real link or button so the browser keeps its own open and copy behaviour."
+    },
+    "mark": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "One short ink bar under the current number, the same shape Tabs uses for its chosen name, so the current page is told by a mark you can see in grey."
+    },
+    "key": {
+      "p": "P3",
+      "axis": "shape",
+      "why": "Previous and next are round keys of the same matte plastic as every key, with a dotted arrow printed on them, and they drop by their height when pressed."
+    },
+    "gap": {
+      "p": "P4",
+      "axis": "shape",
+      "why": "Three printed dots stand where pages are hidden, the way a printed scale skips marks; it is hidden from assistive tech because the numbers beside it already say which pages are missing."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover darkens a page number one ink step and nothing rises, because printing on a case does not move."
+    },
+    "active": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "A pressed key drops to height 0 and its shadow collapses under it, then comes back, as every key in the system does."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Keyboard focus draws the same dark ring around a number or a key as on every part of the system."
+    },
+    "data-current": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "The current number turns to primary ink and medium weight and shows the index mark, and aria-current=page announces it; it is not a link to itself."
+    },
+    "aria-disabled=true": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "At the first page the previous key, and at the last page the next key, lose their height and fade, so a key that cannot step looks flat; focus moves to the current number when the key it was on goes flat."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion a pressed key does not travel, and the ink step on hover keeps its short fade because a fade of colour moves nothing."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the keys keep a real border, and the index mark and the gap dots draw in the system text colour."
+    }
+  },
+  "motion": {
+    "color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out; only the colour changes."
+    },
+    "transform": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A key drops by the press travel over the press duration and returns on the release duration (motion.press, motion.release); the numbers do not travel."
+    },
+    "box-shadow": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The key's shadow collapses under it over the press duration and comes back over the release duration, so the drop reads as height going to 0."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "A key that goes flat at the end of the range fades its print down over the release duration and does not switch in one frame."
+    }
+  }
+}

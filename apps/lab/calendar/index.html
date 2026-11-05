@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Calendar · three ways to print a month</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+ .unit{padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .head{display:flex;align-items:center;justify-content:space-between;margin-block-end:12px}
+ .head b{font-size:16px;font-weight:500}
+ .k{inline-size:44px;block-size:44px;border-radius:999px;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);display:grid;place-items:center;color:var(--ds-text-secondary);font-size:16px}
+ table{border-collapse:collapse}
+ th{font-size:12px;font-weight:400;color:var(--ds-text-secondary);min-inline-size:44px;block-size:32px;padding:0}
+ td{padding:0;inline-size:44px;block-size:44px;text-align:center;font-size:14px;font-variant-numeric:tabular-nums;position:relative}
+ td.dis{opacity:.5}
+ /* A: whole month in one recessed display window; selected = solid ink disc, today = ring */
+ .A .win{padding:8px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring)}
+ .A td span{display:grid;place-items:center;inline-size:40px;block-size:40px;margin:2px;border-radius:50%;box-sizing:border-box}
+ .A td.t span{border:2px solid var(--ds-text-primary)}
+ .A td.s span{background:var(--ds-text-primary);color:var(--ds-surface-solid);font-weight:500}
+ /* B: flat printed sheet; today = index bar; selected = its own small recessed window with weight */
+ .B td span{display:grid;place-items:center;inline-size:100%;block-size:100%;box-sizing:border-box;border-radius:var(--ds-corner-media);border:1px solid transparent;position:relative}
+ .B td.t span::after{content:"";position:absolute;inset-inline:0;inset-block-end:7px;margin-inline:auto;inline-size:12px;border-block-end:3px solid var(--ds-text-primary);border-radius:99px}
+ .B td.s span{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border-color:var(--ds-line-ring);font-weight:500}
+ .B tr+tr td{border-block-start:1px solid var(--ds-line-divider)}
+ /* C: keypad, every day a small raised key; selected = pressed flat; today = printed lamp dot */
+ .C td span{display:grid;place-items:center;inline-size:36px;block-size:36px;margin:4px;border-radius:50%;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);box-sizing:border-box;position:relative}
+ .C td.t span::before{content:"";position:absolute;inset-block-start:4px;inline-size:5px;block-size:5px;border-radius:50%;background:var(--ds-text-primary)}
+ .C td.s span{box-shadow:var(--ds-elevation-well);background:var(--ds-surface-sunken);font-weight:500}
+</style></head><body>
+<h1>Calendar · a month grid for choosing one date (today is 4, chosen is 12, 1 to 3 and 15 are unavailable)</h1>
+<div class="row" id="row"></div>
+<script>
+const names = {A:'A · one display window, ink disc and ring', B:'B · printed sheet, index bar and chosen window', C:'C · keypad of small keys'};
+const wd = ['M','T','W','T','F','S','S'];
+function month(){ // Nov 2026, week starts Monday: 1 Nov is a Sunday
+  let rows=''; let d=1; const lead=6;
+  for(let r=0;r<6;r++){ let tds='';
+    for(let c=0;c<7;c++){ const i=r*7+c; if(i<lead||d>30){tds+='<td></td>';continue}
+      const cls=[d===4?'t':'',d===12?'s':'',(d<4||d===15)?'dis':''].join(' ');
+      tds+=`<td class="${cls}"><span>${d}</span></td>`; d++; }
+    rows+=`<tr>${tds}</tr>`; }
+  return `<div class="head"><span class="k">‹</span><b>November 2026</b><span class="k">›</span></div><div class="win"><table><tr>${wd.map(w=>`<th>${w}</th>`).join('')}</tr>${rows}</table></div>`;
+}
+document.getElementById('row').innerHTML = ['A','B','C'].map(k=>`<div class="unit ${k}"><h2>${names[k]}</h2>${month()}</div>`).join('');
+</script></body></html>

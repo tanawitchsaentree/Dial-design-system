@@ -1,0 +1,82 @@
+{
+  "concept": "Drawer is the side flap of an appliance slid open to show a list of the things the device keeps, such as its rooms, programs or filters. It stands at the inline end of the screen as a unit of its own, inset from every edge, and slides back in when you are done.",
+  "kind": ["drawer", "side panel", "navigation drawer", "off-canvas panel"],
+  "default_to_avoid": [
+    {
+      "pattern": "navigation drawer glued flush to the window edge, full height, with square corners (Material navigation drawer)",
+      "why_not": "A panel fused to the window edge is a wall, not a unit, and P6 caps panels so they do not swell; the drawer keeps the panel radius and an inset gap on all four sides."
+    },
+    {
+      "pattern": "Drawer as a second Sheet that holds a device's controls",
+      "why_not": "Sheet already holds one device's controls that act at once; the Drawer holds a list to pick from or filter by, so it fills the full height and scrolls its list between a fixed header and fixed keys."
+    }
+  ],
+  "references": [
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): side flaps that open to show the band list and close flat against the case" },
+    { "source": "Vitsoe 606 Universal Shelving (Dieter Rams, 1960): a vertical unit with a fixed header and a fixed inset on every side, never touching the wall by its own edge" },
+    { "source": "WAI-ARIA Authoring Practices, Dialog (Modal) pattern: focus moves in, Tab stays inside, Escape closes, focus returns to the opener" }
+  ],
+  "derivation": [
+    {
+      "p": "P1",
+      "axis": "space",
+      "consequence": "sits where the hand expects it",
+      "form": "The drawer slides in from the inline end, the right in left-to-right text, where the thumb of a held phone rests, and its one key sits at the bottom of the same column."
+    },
+    {
+      "p": "P6",
+      "axis": "shape",
+      "consequence": "capped so large panels do not swell into pillows",
+      "form": "The panel keeps corner.panel as its radius and an inset gap on all four sides, so a full-height panel stays a unit and never turns into a wall."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The title and the close key share one header row on the top inset line, and the list and keys start on the same inline inset."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Tab stays inside the drawer, Escape, the close key and a click on the scrim all close it, and focus goes back to the key that opened it."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "transitions only on state",
+      "form": "The drawer slides in from its edge as one piece on the decelerating curve and leaves faster on the accelerating one; nothing inside it moves on its own."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/drawer/index.html",
+    "options": [
+      { "id": "A", "name": "full-height unit with a header, a scrolling list and keys split by hairlines" },
+      { "id": "B", "name": "full-height unit with the list cut into a recessed window" },
+      { "id": "C", "name": "content-height unit hanging from the top inline end" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A gives a long list the full height to scroll in while title and keys stay put (P6 fixed positions) and keeps the recess for the display (P2); B spends the recess on a list of words, and C changes height with its content and reads as Sheet's twin."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "shape", "why": "The drawer is a body of matte plastic with the capped panel radius, inset from the window on all four sides, lit from the top left." },
+    "start": { "p": "P1", "axis": "space", "why": "side start puts the drawer at the inline start, for a screen whose main control sits on the other side, and the slide direction follows it." },
+    "inline": { "p": "P6", "axis": "space", "why": "A drawer shown in place sits in the flow of the page at a fixed place and covers nothing, for previews and docs." },
+    "head": { "p": "P5", "axis": "space", "why": "Title and close key share the top inset line, and a hairline under them sets the header apart from the list that scrolls." },
+    "title": { "p": "P5", "axis": "type", "why": "The title is printed at the emphasis size in the medium weight, so it is the first thing read and it names the drawer." },
+    "close": { "p": "P3", "axis": "space", "why": "A round 44px key at the end of the header closes the drawer by touch, so closing never depends on Escape or the scrim." },
+    "content": { "p": "P6", "axis": "space", "why": "The list takes all the height left between header and keys and scrolls inside itself, so header and keys keep their places." },
+    "actions": { "p": "P1", "axis": "space", "why": "Optional keys sit together at the bottom and inline end under a hairline, where the hand expects the main key." }
+  },
+  "states": {
+    "data-state=open": { "p": "P3", "axis": "interaction", "why": "Opening is a state change, so it moves: the body slides in from its edge over motion.release on the decelerating curve while the scrim fades in (D-008)." },
+    "data-state=closing": { "p": "P3", "axis": "interaction", "why": "While it leaves, the drawer slides back out over motion.exit on the accelerating curve and no key or reader reaches it (D-008)." },
+    "@media prefers-reduced-motion: reduce": { "p": "P3", "axis": "motion", "why": "Under Reduce motion nothing travels; only a fade remains, on motion.hover, which the tokens keep (D-008)." },
+    "@media forced-colors: active": { "p": "P6", "axis": "interaction", "why": "In forced colours the drawer keeps a real border in the text colour and the hairlines use it too, because shadows are dropped." }
+  },
+  "motion": {
+    "transform": { "p": "P6", "axis": "motion", "why": "Opening is a state change, so it moves. The only travel is the slide from the drawer's own edge over motion.release in and the shorter motion.exit out (D-008)." },
+    "opacity": { "p": "P6", "axis": "motion", "why": "The body and the scrim fade with the slide, so both arrive and leave as one change of state, on the same curves (D-008)." }
+  }
+}

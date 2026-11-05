@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · TagInput · three ways to hold typed tags</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ label{display:block;font-size:14px;font-weight:500;margin-block-end:8px}
+ .well{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 16px;min-block-size:44px;box-sizing:border-box;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .well input{flex:1 1 80px;min-inline-size:0;border:0;background:transparent;font:inherit;font-size:16px;block-size:44px;outline:none;color:inherit}
+ .chip{display:inline-flex;align-items:center;gap:8px;min-block-size:44px;box-sizing:border-box;padding-inline:16px 6px;border-radius:var(--ds-corner-round);background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);font-size:14px;color:var(--ds-text-secondary)}
+ .chip i{font-style:normal;inline-size:32px;block-size:32px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--ds-line-ring)}
+ .hint{font-size:12px;color:var(--ds-text-secondary);margin:8px 0 0}
+ /* A: chips live inside the well and the caret follows them */
+ /* B: well stays one row, chips stand under it as a printed legend */
+ .B .well{flex-wrap:nowrap}
+ .B .tags{display:flex;flex-wrap:wrap;gap:8px;margin-block-start:12px}
+ /* C: tags are rows, like a queue, each with its own key */
+ .C .rows{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:4px}
+ .C .rows li{display:flex;justify-content:space-between;align-items:center;min-block-size:44px;padding-inline:16px 6px;border-block-end:1px solid var(--ds-line-divider);font-size:14px}
+ .C .rows i{font-style:normal;inline-size:44px;block-size:44px;display:grid;place-items:center}
+</style></head><body>
+<h1>TagInput · typed words become removable chips</h1>
+<div class="row">
+ <div class="unit A"><h2>A · chips inside the well</h2><label>Rooms</label>
+  <div class="well"><span class="chip">Kitchen<i>x</i></span><span class="chip">Hall<i>x</i></span><span class="chip">Upstairs landing<i>x</i></span><input placeholder="Add a room"></div><p class="hint">Enter or comma adds. Backspace removes the last.</p></div>
+ <div class="unit B"><h2>B · one-row well, chips beneath</h2><label>Rooms</label>
+  <div class="well"><input placeholder="Add a room"></div>
+  <div class="tags"><span class="chip">Kitchen<i>x</i></span><span class="chip">Hall<i>x</i></span><span class="chip">Upstairs landing<i>x</i></span></div><p class="hint">Enter or comma adds.</p></div>
+ <div class="unit C"><h2>C · tags as ruled rows</h2><label>Rooms</label>
+  <div class="well"><input placeholder="Add a room"></div>
+  <ul class="rows"><li>Kitchen<i>x</i></li><li>Hall<i>x</i></li><li>Upstairs landing<i>x</i></li></ul><p class="hint">Enter or comma adds.</p></div>
+</div>
+</body></html>

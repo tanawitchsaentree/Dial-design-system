@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · ContextMenu · three ways to open actions at a point</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;block-size:300px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit);position:relative;box-sizing:border-box}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 16px;color:var(--ds-text-secondary)}
+ .area{position:relative;block-size:150px;border-radius:var(--ds-corner-inner);display:grid;place-items:center;font-size:14px;color:var(--ds-text-secondary);border:1px solid var(--ds-line-divider)}
+ .panel{position:absolute;display:grid;padding:6px;inline-size:max-content;border-radius:var(--ds-corner-inner);background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-float);border:1px solid transparent}
+ .it{min-block-size:44px;display:flex;align-items:center;padding:0 16px;border-radius:var(--ds-corner-media);font-size:16px}
+ .it.f{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .it.x::before{content:"";inline-size:12px;block-size:12px;margin-inline-end:12px;background:var(--ds-status-critical-mark)}
+ .mark{position:absolute;inline-size:8px;block-size:8px;border-radius:50%;background:var(--ds-text-primary)}
+ /* A: panel corner at the pointer; a small ink index dot marks the point */
+ .A .panel{inset-block-start:60px;inset-inline-start:110px}
+ .A .mark{inset-block-start:56px;inset-inline-start:106px}
+ /* B: the pressed area sinks into a well while open; panel at the point */
+ .B .area{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well)}
+ .B .panel{inset-block-start:66px;inset-inline-start:100px}
+ /* C: panel docks beside the area as a printed legend column, a hairline relation to the point */
+ .C .panel{inset-block-start:110px;inset-inline-start:150px;box-shadow:none;border-color:var(--ds-line-ring);background:var(--ds-surface-page)}
+ .C .mark{inset-block-start:100px;inset-inline-start:110px}
+ .C hr{position:absolute;margin:0;border:0;border-block-start:1px solid var(--ds-line-ring);inset-block-start:104px;inset-inline:114px 150px}
+</style></head><body>
+<h1>ContextMenu · actions opened at a point</h1>
+<div class="row">
+ <div class="unit A"><h2>A · panel at the point, ink index dot</h2><div class="area">Kitchen lamp</div><span class="mark"></span><div class="panel"><div class="it f">Rename</div><div class="it">Move to room</div><div class="it x">Remove</div></div></div>
+ <div class="unit B"><h2>B · the area sinks while open</h2><div class="area">Kitchen lamp</div><div class="panel"><div class="it f">Rename</div><div class="it">Move to room</div><div class="it x">Remove</div></div></div>
+ <div class="unit C"><h2>C · flat legend on the case, hairline from the point</h2><div class="area">Kitchen lamp</div><span class="mark"></span><hr><div class="panel"><div class="it f">Rename</div><div class="it">Move to room</div><div class="it x">Remove</div></div></div>
+</div></body></html>

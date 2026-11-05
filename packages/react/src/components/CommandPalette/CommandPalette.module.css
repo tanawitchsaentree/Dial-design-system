@@ -1,0 +1,188 @@
+/* CommandPalette — a sheet of matte ABS (Dialog's surface class, elevation.float, D-003) with one recessed query
+   window and a printed legend of commands under it (P7). Lab pick A. One light, top-left. The legend is flat
+   printing: only the lit row gets a hairline plate and one ink index mark. No orange, no glass, no glow. */
+.root {
+  box-sizing: border-box;
+  inline-size: calc(100% - var(--ds-gap-lg) * 2);
+  max-inline-size: var(--ds-layout-frame-lg);
+  max-block-size: calc(100% - var(--ds-gap-lg) * 2);
+  margin: auto;
+  padding: var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-panel);
+  background: var(--ds-surface-solid);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  box-shadow: var(--ds-elevation-float), inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-material-lit);
+  z-index: var(--ds-layer-overlay);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(var(--ds-motion-rise));
+  transition:
+    opacity var(--ds-motion-exit) var(--ds-motion-easing-exit),
+    transform var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.root::backdrop {
+  background: var(--ds-surface-scrim);
+  opacity: 0;
+  transition: opacity var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.root[data-state='open'] {
+  opacity: 1;
+  transform: none;
+  transition-duration: var(--ds-motion-enter);
+  transition-timing-function: var(--ds-motion-easing);
+}
+.root[data-state='open']::backdrop {
+  opacity: 1;
+  transition-duration: var(--ds-motion-enter);
+  transition-timing-function: var(--ds-motion-easing);
+}
+@starting-style {
+  .root[data-state='open'] { opacity: 0; transform: translateY(var(--ds-motion-rise)); }
+  .root[data-state='open']::backdrop { opacity: 0; }
+}
+.root[data-state='closing'] {
+  opacity: 0;
+  transform: translateY(var(--ds-motion-rise));
+  pointer-events: none;
+}
+.root[data-state='closing']::backdrop { opacity: 0; }
+
+/* modal={false}: the palette shown in place, in the flow of the page, with no scrim. */
+.inline {
+  position: relative;
+  inset: auto;
+  inline-size: 100%;
+  max-block-size: none;
+  margin: 0;
+  z-index: auto;
+}
+
+.well {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  box-sizing: border-box;
+  min-block-size: var(--ds-control-md);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  cursor: text;
+}
+.well:focus-within {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.mark {
+  flex: none;
+  display: inline-grid;
+  color: var(--ds-text-secondary);
+}
+.field {
+  flex: 1 1 auto;
+  align-self: stretch;
+  min-inline-size: 0;
+  inline-size: 100%;
+  /* the field runs over the well's hairline, so the whole 44px well is its press area */
+  margin-block: calc(var(--ds-width-hairline) * -1);
+  padding-block: var(--ds-gap-md);
+  padding-inline: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  outline: none;
+  appearance: none;
+}
+.field::placeholder { color: var(--ds-text-secondary); opacity: 1; }
+
+/* a fixed height, so the sheet keeps its place and size as the query narrows the list (P6) */
+.list {
+  box-sizing: border-box;
+  block-size: calc(var(--ds-control-md) * 7);
+  margin-block-start: var(--ds-gap-md);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+}
+.group { display: block; }
+.heading {
+  padding-block: var(--ds-gap-lg) var(--ds-gap-xs);
+  padding-inline: var(--ds-gap-xl);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  box-sizing: border-box;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-media);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  /* the lit row inks in, fast on and slower off (motion.hover) */
+  transition:
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    border-color var(--ds-motion-hover) var(--ds-motion-easing),
+    color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+/* the index mark keeps its space on every row, so words do not shift when the lit row moves */
+.index {
+  flex: none;
+  box-sizing: border-box;
+  inline-size: var(--ds-control-dot);
+  block-size: var(--ds-control-dot);
+  border: var(--ds-width-hairline) solid currentColor;
+  border-radius: var(--ds-corner-round);
+  background: currentColor;
+  opacity: 0;
+  transition: opacity var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.text { flex: 1 1 auto; min-inline-size: 0; overflow-wrap: anywhere; }
+.keys { flex: none; }
+.empty {
+  box-sizing: border-box;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-xl);
+  color: var(--ds-text-secondary);
+}
+
+.option[data-active='true'] {
+  background: var(--ds-surface-sunken);
+  border-color: var(--ds-line-ring);
+  color: var(--ds-text-primary);
+  font-weight: var(--ds-type-weight-medium);
+}
+.option[data-active='true'] .index { opacity: 1; }
+.option[aria-disabled='true'] { cursor: not-allowed; opacity: var(--ds-opacity-disabled); }
+.list[data-empty='true'] { overflow-y: hidden; }
+
+/* under Reduce motion nothing travels or fades: the sheet appears and leaves at once */
+@media (prefers-reduced-motion: reduce) {
+  .root,
+  .root::backdrop,
+  .root[data-state='closing'],
+  .root[data-state='closing']::backdrop { transition: none; }
+  .root { transform: none; }
+  .root[data-state='closing'] { transform: none; }
+  .option, .index { transition-duration: var(--ds-motion-hover); }
+}
+@media (forced-colors: active) {
+  .root { border-color: CanvasText; }
+  .well { border-color: ButtonText; }
+  .option[data-active='true'] { border-color: Highlight; }
+  .option[data-active='true'] .index { background: Highlight; color: Highlight; }
+}

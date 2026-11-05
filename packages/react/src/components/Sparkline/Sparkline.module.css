@@ -1,0 +1,65 @@
+/* Sparkline — a trend small enough for a line of text (lab apps/lab/sparkline pick A; FORM.md display class, P1, P5, P7).
+   One ink line, no axes, one solid dot on the last reading. It is printing: flat, untinted, never orange, never animated. */
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  vertical-align: middle;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.box {
+  position: relative;
+  flex: none;
+  display: block;
+  /* the last dot sits half outside the line's end; keep that room so a neighbour never touches it */
+  margin-inline-end: calc(var(--ds-size-mark) / 2);
+  /* the line runs left to right like a clock face, in every writing direction */
+  direction: ltr;
+}
+.sm .box { inline-size: var(--ds-space-12); block-size: var(--ds-space-4); }
+.md .box { inline-size: var(--ds-space-16); block-size: var(--ds-space-6); }
+.lg .box { inline-size: var(--ds-space-24); block-size: var(--ds-space-8); }
+.box[data-empty]::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  border-block-start: var(--ds-width-hairline) solid var(--ds-line-ring);
+}
+
+.line {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: var(--ds-text-primary);
+  stroke-width: var(--ds-width-ring);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.line polyline { vector-effect: non-scaling-stroke; }
+.dot {
+  position: absolute;
+  box-sizing: border-box;
+  inline-size: var(--ds-size-mark);
+  block-size: var(--ds-size-mark);
+  translate: -50% -50%;
+  border: var(--ds-width-ring) solid var(--ds-text-primary);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-text-primary);
+}
+.value {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (forced-colors: active) {
+  .line { stroke: CanvasText; }
+  .dot { border-color: CanvasText; background: CanvasText; }
+  .box[data-empty]::after { border-color: CanvasText; }
+}

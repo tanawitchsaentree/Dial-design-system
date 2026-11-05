@@ -1,0 +1,159 @@
+/* TreeView — a hierarchy drawn as a schematic (lab apps/lab/tree-view pick B).
+   Each level steps in by half a module. A hairline with one right-angle bend joins a child to its parent,
+   the chosen label sits in a hairline box. No orange, no fill. */
+.root {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.group {
+  display: block;
+  margin: 0;
+  padding: 0;
+  margin-inline-start: calc(var(--ds-control-md) / 2);
+  list-style: none;
+}
+.item {
+  position: relative;
+  display: block;
+  margin: 0;
+  outline: none;
+}
+/* the join: a vertical hairline down the parent's chevron centre, stopping at the elbow on the last child */
+.group > .item { padding-inline-start: calc(var(--ds-control-md) / 2); }
+.group > .item::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block: 0;
+  border-inline-start: var(--ds-width-hairline) solid var(--ds-line-ring);
+}
+.group > .item:last-child::before {
+  inset-block-end: auto;
+  block-size: calc(var(--ds-control-md) / 2);
+}
+.group > .item::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: calc(var(--ds-control-md) / 2);
+  inline-size: calc(var(--ds-control-md) / 2 - var(--ds-control-icon-sm) / 2);
+  border-block-start: var(--ds-width-hairline) solid var(--ds-line-ring);
+}
+.group > .item[data-leaf='true']::after {
+  inline-size: calc(var(--ds-control-md) / 2 - var(--ds-control-dot) / 2);
+}
+.row {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-block-size: var(--ds-control-md);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.row:hover { color: var(--ds-text-primary); }
+.item:focus-visible > .row {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: calc(var(--ds-width-ring) * -1);
+}
+.item[aria-selected='true'] > .row {
+  color: var(--ds-text-primary);
+  font-weight: var(--ds-type-weight-medium);
+}
+.item[aria-disabled='true'] > .row {
+  opacity: var(--ds-opacity-disabled);
+  cursor: not-allowed;
+}
+.toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: var(--ds-control-md);
+  block-size: var(--ds-control-md);
+}
+/* a nested toggle cell reaches back over the stub so the join line ends at its centre */
+.group > .item > .row > .toggle { margin-inline-start: calc(var(--ds-control-md) / -2); }
+.node {
+  box-sizing: border-box;
+  display: block;
+  inline-size: var(--ds-control-dot);
+  block-size: var(--ds-control-dot);
+  border: var(--ds-width-hairline) solid currentColor;
+  border-radius: var(--ds-corner-round);
+  background-color: transparent;
+  transition: background-color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.item[aria-selected='true'] > .row .node { background-color: currentColor; }
+.leading {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  margin-inline-end: var(--ds-gap-sm);
+}
+.label {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  min-inline-size: 0;
+  padding-block: var(--ds-gap-xs);
+  padding-inline: var(--ds-gap-md);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-media);
+  transition: border-color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.item[aria-selected='true'] > .row .label { border-color: var(--ds-text-primary); }
+.text {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+.panel {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-rows var(--ds-motion-enter) var(--ds-motion-easing),
+    opacity var(--ds-motion-enter) var(--ds-motion-easing);
+}
+.panelInner {
+  min-block-size: 0;
+  overflow: hidden;
+}
+/* a branch opened after the first render grows from a closed row; one open at the start is simply there */
+@starting-style {
+  .panel[data-fresh='true'] {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+}
+.panel[data-state='closing'] {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--ds-motion-exit) var(--ds-motion-easing-exit),
+    opacity var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* nothing travels: the panel keeps its height and the children only fade on motion.hover */
+  .panel,
+  .panel[data-state='closing'] {
+    transition: opacity var(--ds-motion-hover) var(--ds-motion-easing);
+  }
+  .panel[data-state='closing'] { grid-template-rows: 1fr; }
+  @starting-style {
+    .panel[data-fresh='true'] { grid-template-rows: 1fr; }
+  }
+}
+@media (forced-colors: active) {
+  .group > .item::before { border-inline-start-color: CanvasText; }
+  .group > .item::after { border-block-start-color: CanvasText; }
+  .item[aria-selected='true'] > .row .label { border-color: CanvasText; }
+  .item[aria-selected='true'] > .row .node { forced-color-adjust: none; background-color: CanvasText; }
+  .item[aria-disabled='true'] > .row { color: GrayText; opacity: 1; }
+}

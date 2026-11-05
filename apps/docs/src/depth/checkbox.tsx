@@ -51,7 +51,7 @@ export const CHECKBOX: Depth = {
       do: <Checkbox label="Child lock" />, doNote: 'A tick means the lock is on.',
       dont: <Checkbox label="Don’t lock the door" />, dontNote: 'A tick on a negative is hard to read.',
     },
-    overflow: { text: 'A long name wraps onto more lines beside the key. The key stays on the first line.', render: <div data-overflow-demo="" style={{ inlineSize: 220 }}><Checkbox label="Send me a message when the wash has finished and the door unlocks" /></div> },
+    overflow: { text: 'A long name wraps onto more lines beside the key. The key stays on the first line.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Checkbox label="Send me a message when the wash has finished and the door unlocks" /></div> },
     rtl: { text: 'In right-to-left languages the key moves to the right of its name.', render: <div dir="rtl"><Checkbox label="غسيل مسبق" defaultChecked /></div> },
     expansion: { text: 'German and Finnish names can run 30% longer. The row grows sideways and the key keeps its size.', render: <Checkbox label="Zusätzlicher Spülgang" defaultChecked /> },
   },

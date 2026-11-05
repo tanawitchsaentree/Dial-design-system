@@ -4,10 +4,10 @@ import { Button, Display, Grille, Skeleton, Stack, Text } from 'dial-react';
 import type { Depth } from './types';
 
 const Unit = ({ children, label }: { children: React.ReactNode; label: string }) => (
-  <div className="demo-box demo-card" aria-busy="true" aria-label={label}>{children}</div>
+  <div className="demo-box demo-card" role="group" aria-busy="true" aria-label={label}>{children}</div>
 );
-const Busy = ({ children, label }: { children: React.ReactNode; label: string }) => <div aria-busy="true" aria-label={label}>{children}</div>;
-const W = { maxInlineSize: 320 };
+const Busy = ({ children, label }: { children: React.ReactNode; label: string }) => <div role="group" aria-busy="true" aria-label={label}>{children}</div>;
+const W = { maxInlineSize: 'var(--ds-layout-frame-md)' };
 
 export const SKELETON: Depth = {
   overview: (
@@ -92,8 +92,8 @@ export const SKELETON: Depth = {
       do: <Busy label="Room name, loading"><Skeleton extent={160} /></Busy>, doNote: 'One line for a room name, about its usual width.',
       dont: <Busy label="Room name, loading"><Skeleton lines={4} /></Busy>, dontNote: 'Four full lines for a two word name. The card shrinks when it lands.',
     },
-    overflow: { text: 'A text skeleton never grows past its column. In a narrow column the lines keep their height and take the width there is.', render: <div data-overflow-demo="" aria-busy="true" aria-label="Loading" style={{ inlineSize: 160 }}><Skeleton lines={3} extent={400} lastLine={0.5} /></div> },
-    rtl: { text: 'In right-to-left languages the short last line starts from the right, the way the text will.', render: <div dir="rtl" aria-busy="true" aria-label="جارٍ التحميل" style={W}><Skeleton lines={2} lastLine={0.5} extent={280} /></div> },
+    overflow: { text: 'A text skeleton never grows past its column. In a narrow column the lines keep their height and take the width there is.', render: <div data-overflow-demo="" role="group" aria-busy="true" aria-label="Loading" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-narrow))' }}><Skeleton lines={3} extent={400} lastLine={0.5} /></div> },
+    rtl: { text: 'In right-to-left languages the short last line starts from the right, the way the text will.', render: <div dir="rtl" role="group" aria-busy="true" aria-label="جارٍ التحميل" style={W}><Skeleton lines={2} lastLine={0.5} extent={280} /></div> },
     expansion: { text: 'Text that runs 30% longer in German or Finnish needs one more line more often. Hold the number of lines the longest language uses.', render: <Busy label="Lädt"><Stack gap="sm" style={W}><Text size="caption">Wohnzimmerbeleuchtung</Text><Skeleton lines={2} lastLine={0.7} /></Stack></Busy> },
   },
   behaviours: {

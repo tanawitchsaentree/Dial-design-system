@@ -1,0 +1,149 @@
+{
+  "concept": "Wizard walks a long setup one step at a time the way a device walks its set-up menu: the Stepper rail stays printed on the case, only the current step opens its fields, and two keys under the rail, Back and Next, move one place along. The last step swaps Next for Finish, the unit's one orange key.",
+  "kind": [
+    "wizard",
+    "multi-step flow",
+    "setup flow",
+    "step by step form"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "wizard modal with a progress bar on top, a grey Back link and a big accent Next button that stays orange on every step",
+      "why_not": "A progress bar repeats what the numbered windows already say, a link is not a key, and an accent button that stays lit on every step spends the unit's one orange without telling the last step apart."
+    },
+    {
+      "pattern": "wizard that blocks Next with a greyed-out button and no word as to why",
+      "why_not": "A dead key gives no reason and cannot be reached by a person who tabs; the key stays live and the display says what is missing."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): one band is lit at a time on a printed scale that stays in view"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the key row sits under the window and does not move when the reading changes"
+    },
+    {
+      "source": "system/FORM.md control class: capsule keys printed with one word, the single orange key at the end of the row"
+    },
+    {
+      "source": "packages/react/src/components/Stepper: the numbered windows and the dotted rail are reused as they are"
+    },
+    {
+      "source": "packages/react/src/components/Button: Back and Next are its keys, Finish is its primary"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The current step's fields stand under its title in the Stepper's own column, and the keys sit on the same inset line below the last window."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The message line under the fields is always reserved, so a step that is blocked prints its words without pushing the keys down."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "A step opens and closes at once, with no slide or fade between panels, and nothing else in the Wizard moves."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Next is a plain key, and only Finish on the last step is the orange key, so one orange key is on screen at any time."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Back, Next and Finish are native keys in reading order, and moving to another step puts focus on that step's printed title so the new place is read out."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "When a step cannot be left, the reason is printed in a polite status line and the Next key stays live."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/wizard/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "the Stepper opens the current step in place"
+      },
+      {
+        "id": "B",
+        "name": "legend row of step names over one recessed panel"
+      },
+      {
+        "id": "C",
+        "name": "windows in a side column with the panel beside"
+      }
+    ],
+    "reason": "A keeps the Stepper whole, so the number windows, the dotted rail and the title stay the only record of where you are and the fields stand under their own title on one inset line. B prints the step a second time as a legend row and as step 2 of 3, which repeats the state, and C cuts the title away from its window so the rail and the content no longer share a column."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A single column holding the Stepper, the status line and the key row, so the keys stay on the body's inset line under the rail."
+    },
+    "step": {
+      "p": "P5",
+      "axis": "space",
+      "why": "Hides the empty gap the Stepper leaves under the title of a step that is not open, so a closed step is one window and one title."
+    },
+    "panel": {
+      "p": "P5",
+      "axis": "space",
+      "why": "Holds the open step's fields under its title; the other steps keep their fields mounted but hidden so a typed value is still there when you come back."
+    },
+    "heading": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The step's printed title is the place focus lands when the step changes, so a screen reader hears the new step before its fields."
+    },
+    "message": {
+      "p": "P2",
+      "axis": "interaction",
+      "why": "A polite status line that prints why Next did nothing; it holds one line even when empty so the keys stay where they are."
+    },
+    "keys": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The key row: Back at the start edge, Next or Finish at the end edge, where the hand expects the loud control."
+    }
+  },
+  "states": {
+    "data-blocked": {
+      "p": "P2",
+      "axis": "interaction",
+      "why": "The status line holds words in medium weight and a warning glyph, so a blocked step is told by text and shape and never by colour."
+    },
+    "focus": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Focus lands on the title by script when a step changes; a pointer or script landing draws no ring, because nothing there can be pressed."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "When the keyboard puts focus on the title it draws the same ring as every part that takes the keyboard."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the focus ring on the title draws in the system highlight colour so it stays visible."
+    }
+  },
+  "motion": {}
+}

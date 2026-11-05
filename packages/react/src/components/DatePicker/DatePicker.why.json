@@ -1,0 +1,83 @@
+{
+  "concept": "DatePicker is a text window with a round key beside it. The window is the same recess as Input and takes a typed date; the key is a real part that opens the Calendar on a small plastic panel, so a person can type the date they know or turn to a month and press the one they want.",
+  "kind": ["date picker", "date field", "date input"],
+  "default_to_avoid": [
+    {
+      "pattern": "date picker: a bordered input with a calendar icon trapped inside its edge and a masked mm/dd/yyyy template that eats every keystroke",
+      "why_not": "The icon inside the field is a flat glyph with no mechanism and no edge of its own, and the rigid mask rejects a date typed in the format the person already knows."
+    },
+    {
+      "pattern": "native date input with its browser calendar popup",
+      "why_not": "The browser draws its own popup in a second material and second language, so the display, the key and the panel stop belonging to one appliance."
+    }
+  ],
+  "references": [
+    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the entry window is a recess in the body, and the keys that fill it stand beside it as separate parts" },
+    { "source": "Braun AB 20 quartz alarm clock (Dietrich Lubs, 1975): the setting wheel is its own part beside the dial it sets, never printed inside the dial" },
+    { "source": "WAI-ARIA Authoring Practices, date picker combobox example: a text field with a button that opens a dialog holding the grid" },
+    { "source": "system/FORM.md input class: recessed well, full width of its column, label printed above on the inset line" }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The date window is surface.sunken with elevation.well, the same recess as Input, and it keeps its whole edge because the key stands outside it."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The label, the row of window and key, and the messages stack in one column with the label at the start edge above the window."
+    },
+    {
+      "p": "P3",
+      "axis": "shape",
+      "consequence": "keys are round or capsule",
+      "form": "The calendar key is the round IconButton inside Popover with the schedule glyph, a separate raised part beside the recess instead of a mark printed in it."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The window is control.md tall and the key is control.key square, so both share top and bottom edges on one row at 44px."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "Focus is the shared dark ring and an invalid date is a red mark with a glyph and words, so the picker never spends the unit's orange."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/date-picker/index.html",
+    "options": [
+      { "id": "A", "name": "raised round key sitting inside the window's end" },
+      { "id": "B", "name": "full recessed window with the round key standing beside it" },
+      { "id": "C", "name": "flat printed glyph behind a seam inside the window" }
+    ],
+    "picked": "B",
+    "by": "agent",
+    "reason": "B keeps the window a whole recess and the key a real raised part on the same row, so a typed date and a pressed key each look like what they are; A pushes a raised key out over the recess edge, and C prints a flat glyph that has no edge, reads as a second field and gives the 44px target no visible shape."
+  },
+  "parts": {
+    "root": { "p": "P5", "axis": "space", "why": "The picker stacks its label, its row and its messages in one column so the label sits on the inset line above the window." },
+    "label": { "p": "P5", "axis": "type", "why": "The printed name uses the label size in medium weight, the same as Input, and is the accessible name of the text field." },
+    "row": { "p": "P3", "axis": "space", "why": "The window and the key stand in one row at the same height with a gap between them, so their top and bottom edges line up." },
+    "well": { "p": "P2", "axis": "depth", "why": "The recess takes the inverse light, shade on its top-left inner edge, so the person sees where the date is typed." },
+    "field": { "p": "P5", "axis": "colour", "why": "The typed date is primary ink on the sunken plastic above 4.5:1, with tabular figures and a line box tall enough for Thai marks, and it fills the well so the whole 44px is its press area." },
+    "key": { "p": "P3", "axis": "shape", "why": "The Popover root that holds the round calendar key is held at its own width so the window takes all the spare room." },
+    "sheet": { "p": "P6", "axis": "space", "why": "The Calendar stands centred in a fixed-width block on the panel so choosing a day or turning a month never moves the panel's contents." },
+    "hint": { "p": "P5", "axis": "colour", "why": "The hint prints the accepted format in secondary ink above 4.5:1 under the row, so it never covers the typed date." },
+    "error": { "p": "P1", "axis": "colour", "why": "The error message is a red mark with words, never the orange, which stays reserved for the unit's primary control." },
+    "glyph": { "p": "P3", "axis": "interaction", "why": "A printed mark beside the words means an invalid date is never told by colour alone, for people who cannot see the red." }
+  },
+  "states": {
+    "focus-within": { "p": "P3", "axis": "interaction", "why": "The window shows the same dark ring as every part when the text field holds the keyboard focus." },
+    "data-invalid=true": { "p": "P1", "axis": "colour", "why": "An invalid window draws its edge in the critical red, which is never orange, and the message below says what to type." },
+    "data-disabled=true": { "p": "P6", "axis": "depth", "why": "A disabled picker loses its recess shadow and the text fades to half, and the key is switched off, so it reads as taking nothing now." },
+    "data-readonly=true": { "p": "P3", "axis": "interaction", "why": "A read-only picker keeps the recess but shows a default cursor, because the date can be read and copied and cannot be changed." },
+    "@media forced-colors: active": { "p": "P3", "axis": "interaction", "why": "In forced colours the window keeps a real border and the focus ring uses the system highlight colour." }
+  },
+  "motion": {}
+}

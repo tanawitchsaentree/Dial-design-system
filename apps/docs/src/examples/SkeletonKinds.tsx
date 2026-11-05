@@ -3,7 +3,7 @@ import { Skeleton, Stack } from 'dial-react';
 
 export default function SkeletonKinds() {
   return (
-    <div aria-busy="true" aria-label="Loading">
+    <div role="group" aria-busy="true" aria-label="Loading">
       <Stack gap="lg">
         <Skeleton kind="text" lines={2} extent={240} />
         <Skeleton kind="display" digits={4} />

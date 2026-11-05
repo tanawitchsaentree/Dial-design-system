@@ -7,7 +7,7 @@ export default async function slider({ check, expect, page, go, main, tokens }) 
     await go('/components/slider/code');
     const s = first();
     await s.focus(); await page.keyboard.press('Shift+Tab'); await page.keyboard.press('Tab');
-    const st = await s.evaluate((el) => ({ focused: document.activeElement === el, w: getComputedStyle(el).outlineWidth, s: getComputedStyle(el).outlineStyle }));
+    const st = await s.evaluate((el) => { /* the ring sits on the part that moves, the cap or the lever (R-005, D-009) */ const r = [el, ...el.querySelectorAll('*')].find((e) => getComputedStyle(e).outlineStyle !== 'none') ?? el; return { focused: document.activeElement === el, w: getComputedStyle(r).outlineWidth, s: getComputedStyle(r).outlineStyle }; });
     expect(st.focused, 'the fader did not take focus');
     expect(st.s !== 'none' && px(st.w) >= 2, `outline ${st.s} ${st.w}`);
     return `outline ${st.w}`;
@@ -102,5 +102,28 @@ export default async function slider({ check, expect, page, go, main, tokens }) 
       expect(a.filter === 'none' && alpha === 1, `filter ${a.filter}, background ${a.bg}`);
       return `matte ${a.bg}`;
     } finally { await cdp.send('Emulation.setEmulatedMedia', { features: [] }); await cdp.detach(); }
+  });
+
+  // R-006 (2026-11-03): "มันดูแปลกแยกไม่เป็นส่วนหนึ่งกับชิ้นงาน … ให้มัน blend" — printing is pad ink pressed into
+  // the plastic: every word, numeral and tick carries print.seat, and the groove's shadow lies over the level
+  await check('Slider', 'the faders\' printing is seated in the plastic and their level sits inside the groove, in both themes', async () => {
+    const out = [];
+    for (const theme of ['light', 'dark']) for (const slug of ['slider', 'range-slider', 'scrubber']) {
+      await go(`/components/${slug}/code?theme=${theme}`);
+      const r = await main().locator('[data-example-live] [data-component]:is([data-component="Slider"], [data-component="RangeSlider"], [data-component="Scrubber"])').first().evaluate((root) => {
+        const probe = document.createElement('i'); probe.style.textShadow = 'var(--ds-print-seat)'; root.appendChild(probe); const seat = getComputedStyle(probe).textShadow; probe.remove();
+        // only text that is drawn: a hidden name span for assistive tech is not printing
+        const printed = [...root.querySelectorAll('*')].filter((e) => e.getClientRects().length && [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && !e.closest('[role="slider"] [class*="cap"]'));
+        const bare = printed.filter((e) => getComputedStyle(e).textShadow !== seat).map((e) => e.textContent.trim().slice(0, 12));
+        const groove = root.querySelector('[class*="groove"]');
+        const over = groove ? getComputedStyle(groove, '::after').boxShadow : 'none';
+        return { seat, n: printed.length, bare, over: over !== 'none' && over.includes('inset') };
+      });
+      if (r.seat === 'none' || !r.n) out.push(`${theme} ${slug}: no print.seat token`);
+      if (r.bare.length) out.push(`${theme} ${slug}: unseated ${JSON.stringify(r.bare.slice(0, 3))}`);
+      if (!r.over) out.push(`${theme} ${slug}: the groove's shadow is not drawn over the level`);
+    }
+    expect(!out.length, out.join(' | '));
+    return 'printing seated and the level inside the groove on 3 faders in both themes';
   });
 }

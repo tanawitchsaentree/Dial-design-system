@@ -50,7 +50,7 @@ export const GRILLE: Depth = {
       do: <Grille label="Battery" value={7} cols={10} rows={2} valueText="Battery 70 percent" />, doNote: 'A name and a reading in words.',
       dont: <Grille label="Grille" value={7} cols={10} rows={2} />, dontNote: 'The name says what it is, not what it measures.',
     },
-    overflow: { text: 'The field never wraps. It keeps cols holes per row. Choose cols that fit the narrowest column you expect, about 12 holes per 144px.', render: <div data-overflow-demo="" style={{ inlineSize: 160 }}><Grille label="Volume" value={6} cols={12} rows={3} /></div> },
+    overflow: { text: 'The field never wraps. It keeps cols holes per row. Choose cols that fit the narrowest column you expect, about 12 holes per 144px.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-narrow))' }}><Grille label="Volume" value={6} cols={12} rows={3} /></div> },
     rtl: { text: 'In right-to-left languages fill inline starts from the right, because it follows the reading direction.', render: <div dir="rtl"><Grille label="الصوت" value={6} cols={12} rows={3} /></div> },
     expansion: { text: 'The grille has no words of its own. A longer label only changes what a screen reader says.', render: <Grille label="Lüftergeschwindigkeit" value={4} cols={12} rows={3} /> },
   },

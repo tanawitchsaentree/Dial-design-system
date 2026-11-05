@@ -3,7 +3,7 @@ import { Skeleton, Stack } from 'dial-react';
 
 export default function SkeletonInUnit() {
   return (
-    <div className="demo-box demo-card" aria-busy="true" aria-label="Washer, loading">
+    <div className="demo-box demo-card" role="group" aria-busy="true" aria-label="Washer, loading">
       <Stack gap="md">
         <Skeleton kind="display" digits={4} detail />
         <Skeleton kind="block" extent={8} />

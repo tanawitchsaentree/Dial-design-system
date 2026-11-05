@@ -1,6 +1,6 @@
 /* ExplainMode — the SK 4 manual printed on the real screen (P5, P8): each part's name and one line of what it
    does, printed flat in free space next to it, joined by a hairline leader. The layer never takes a pointer,
-   so every control keeps working; nothing animates (P5: text does not animate). */
+   so every control keeps working. The printing fades on and off where it stands (D-008); text never travels (P5). */
 .root {
   position: relative;
   font-family: var(--ds-type-family);
@@ -12,6 +12,21 @@
   inset: 0;
   pointer-events: none;
   z-index: var(--ds-layer-raised);
+  /* the printing fades off faster than it came (motion.exit, accelerating) before it is cleared (D-008) */
+  transition: opacity var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.layer[data-state='closing'] { opacity: 0; }
+/* each name and its leader fade in where they are printed (motion.release, decelerating); text never travels (P5) */
+.note, .lead, .mark { transition: opacity var(--ds-motion-release) var(--ds-motion-easing); }
+/* once printed, a note or numeral that has to move glides there instead of jumping (ExplainMode.tsx marks it) */
+.note[data-settled], .mark[data-settled] {
+  transition:
+    opacity var(--ds-motion-release) var(--ds-motion-easing),
+    transform var(--ds-motion-release) var(--ds-motion-easing);
+}
+@starting-style { .note, .lead, .mark { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .layer, .note, .lead, .mark { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
 }
 .leads {
   position: absolute;
@@ -62,7 +77,7 @@
   border: var(--ds-width-hairline) solid var(--ds-text-secondary);
   border-radius: var(--ds-corner-round);
   font-size: var(--ds-type-micro);
-  line-height: 1;
+  line-height: var(--ds-type-leading-flush);
   font-variant-numeric: tabular-nums;
   color: var(--ds-text-primary);
 }

@@ -1,0 +1,93 @@
+{
+  "identity": false,
+  "identity_reason": "a layout primitive that only places a Label, a control and a HelperText in one column; every visible part is drawn by those three, so FormField has no look of its own to derive",
+  "concept": "FormField is the bit of the case that keeps a name, a part and its small print together. It prints the Label above, holds the control on the same inset line, and prints the hint or the error under it, then joins the three for assistive tech so nobody has to wire ids by hand.",
+  "kind": [
+    "form field",
+    "field wrapper",
+    "labelled control"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "a FormField that draws its own red border, background tint and asterisk around the control",
+      "why_not": "The control and HelperText already carry the error with a glyph and words; a second frame spends colour and depth on a wrapper that should only place things."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): the name of each control is printed on the case on one fixed line, and its small print sits under it"
+    },
+    {
+      "source": "system/FORM.md input class: label printed above on the inset line, messages under the well"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: aria-describedby and aria-invalid for form fields"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The label, the control and the messages stack in one column on the same inset line; the inline layout puts the label in a fixed column at the start."
+    },
+    {
+      "p": "P5",
+      "axis": "interaction",
+      "consequence": "labels name their control through aria-labelledby",
+      "form": "FormField gives the control an id, points the Label's htmlFor at it, and lists the hint and error ids in aria-describedby, so the printed name is the accessible name."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "The messages sit in a live region under the control that is always in the tree, so an error appears in its own place and does not move the control."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "FormField paints nothing; the mark, hint and error come from Label and HelperText in ink and critical red, never orange."
+    }
+  ],
+  "variants": {
+    "picked": "none",
+    "by": "agent",
+    "reason": "FormField is a layout primitive with no form of its own, so no lab candidates were rendered; the stacked and inline layouts only move the Label, which already has its own lab pick."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "One field is one block: the Label and the body sit on the same inset line and wrap when the column is narrow."
+    },
+    "labelCol": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The Label keeps its own column so the printed name stays level with the control in the inline layout."
+    },
+    "body": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The control and its messages stack in one column and share the control's inline size."
+    },
+    "messages": {
+      "p": "P6",
+      "axis": "space",
+      "why": "The hint and error print under the control in a polite live region that is always present, so an error is announced and the layout holds still."
+    }
+  },
+  "states": {
+    "data-layout=inline": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The inline layout prints the Label in a column at the start and the control beside it, for settings lists with short controls."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "FormField draws no colour of its own, so forced colours leave it untouched; Label and HelperText switch to system text colours themselves."
+    }
+  },
+  "motion": {}
+}

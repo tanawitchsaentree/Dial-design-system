@@ -1,0 +1,194 @@
+/* NavigationMenu — section names printed along the case; a name that holds links is a key that drops the
+   plastic panel Menu and Select open (system/FORM.md control and surface classes, D-003). The names are flat
+   printing; only the panel has height (elevation.float, corner.inner, layer.overlay). The panel hangs from its
+   own item, so Tab walks from the name into its links in reading order, and it is shifted along the row by
+   NavigationMenu.tsx when a screen edge would cut it. No orange anywhere (P1). */
+.root {
+  display: block;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-gap-xs);
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  list-style: none;
+}
+.item {
+  position: relative;
+  display: block;
+  margin: var(--ds-gap-none);
+}
+.trigger {
+  display: inline-grid;
+  justify-items: center;
+  align-content: center;
+  gap: var(--ds-gap-sm);
+  box-sizing: border-box;
+  min-inline-size: var(--ds-layout-touch);
+  min-block-size: var(--ds-control-md);
+  margin: var(--ds-gap-none);
+  padding-block: var(--ds-gap-sm) var(--ds-gap-xs);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-mark);
+  background: transparent;
+  color: var(--ds-text-secondary);
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color var(--ds-motion-hover) var(--ds-motion-easing),
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.word {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-sm);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  white-space: nowrap;
+}
+.chevron {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+}
+.mark {
+  inline-size: var(--ds-control-thumb);
+  block-size: var(--ds-width-bar);
+  border-radius: var(--ds-corner-round);
+  background: transparent;
+}
+.panel {
+  position: absolute;
+  inset-block-start: calc(100% + var(--ds-gap-sm));
+  inset-inline-start: var(--ds-gap-none);
+  z-index: var(--ds-layer-overlay);
+  box-sizing: border-box;
+  inline-size: max-content;
+  min-inline-size: var(--ds-control-menu-min);
+  max-inline-size: calc(100vw - var(--ds-gap-lg) * 2);
+  padding: var(--ds-gap-sm);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-inner);
+  background: var(--ds-surface-solid);
+  box-shadow: var(--ds-elevation-float);
+  color: var(--ds-text-primary);
+  /* the screen-edge shift is set by NavigationMenu.tsx and never animates */
+  translate: var(--nav-shift, var(--ds-gap-none)) var(--ds-gap-none);
+  /* every change moves (P6, D-008): the panel rises off its key on motion.release and the decelerating curve,
+     and sinks back faster on motion.exit and the accelerating one */
+  --nav-from: calc(var(--ds-motion-rise) * -1);
+  transition:
+    opacity var(--ds-motion-release) var(--ds-motion-easing),
+    transform var(--ds-motion-release) var(--ds-motion-easing);
+}
+@starting-style {
+  .panel[data-state='open'] { opacity: 0; transform: translateY(var(--nav-from)); }
+}
+.panel[data-state='closing'] {
+  opacity: 0;
+  transform: translateY(var(--nav-from));
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+  pointer-events: none;
+}
+.groups {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--ds-gap-lg);
+}
+.group {
+  display: grid;
+  align-content: start;
+  min-inline-size: var(--ds-control-menu-min);
+  flex: 1 1 auto;
+}
+.groupTitle {
+  margin: var(--ds-gap-none);
+  padding-block: var(--ds-gap-md) var(--ds-gap-xs);
+  padding-inline: var(--ds-gap-lg);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+.links {
+  display: grid;
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  list-style: none;
+}
+.link {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  box-sizing: border-box;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-media);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  transition:
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.link .mark {
+  flex: none;
+  inline-size: var(--ds-width-bar);
+  block-size: var(--ds-control-icon-sm);
+}
+.linkText {
+  display: grid;
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}
+.description {
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+
+.trigger:hover { color: var(--ds-text-primary); }
+.trigger[aria-expanded='true'] {
+  color: var(--ds-text-primary);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.trigger[aria-current='page'] { color: var(--ds-text-primary); }
+.trigger[aria-current='page'] .word,
+.link[aria-current='page'] .linkText { font-weight: var(--ds-type-weight-medium); }
+.trigger[aria-current='page'] .mark,
+.link[aria-current='page'] .mark { background: var(--ds-text-primary); }
+.trigger:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.link:hover,
+.link:focus { background: var(--ds-surface-sunken); box-shadow: var(--ds-elevation-well); }
+.link:focus-visible { outline: var(--ds-width-ring) solid var(--ds-focus-ring); outline-offset: var(--ds-gap-none); }
+
+/* under Reduce motion nothing travels (motion.rise is 0); the panel still fades on motion.hover */
+@media (prefers-reduced-motion: reduce) {
+  .panel, .panel[data-state='closing'] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .panel { border-color: CanvasText; }
+  .trigger[aria-expanded='true'] { border-color: CanvasText; }
+  .trigger[aria-current='page'] .mark,
+  .link[aria-current='page'] .mark { forced-color-adjust: none; background: ButtonText; }
+  .link:focus { border-color: Highlight; }
+  .link:focus-visible { outline-color: Highlight; }
+}

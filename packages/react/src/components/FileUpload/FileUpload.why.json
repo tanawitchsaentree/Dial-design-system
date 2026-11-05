@@ -1,0 +1,142 @@
+{
+  "concept": "FileUpload is a key that opens the system picker, and under it each chosen file read out in its own small window: the name on the left, the size on the right, and a remove key beside the window. It reports the files and does nothing else; sending them is the product's job.",
+  "kind": [
+    "file upload",
+    "file picker",
+    "attachments",
+    "file list"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "file upload dropzone: a dashed-border box with a cloud icon and the words drag and drop files here, orange browse link inside",
+      "why_not": "A dashed box is a bordered rectangle floating on the page and spends the unit's orange on a link; the key already says what to press, and the files are readings, so they sit in windows."
+    },
+    {
+      "pattern": "file upload list as rows with a coloured file-type tile and a red trash icon",
+      "why_not": "Tiles and trash icons add a second visual language; the name and size are the information, and remove is one plain key with a name."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): each reading stands in its own window cut into the body, and the keys sit outside the windows"
+    },
+    {
+      "source": "system/FORM.md display class: window recessed into the body, value right-aligned and the unit beside it"
+    },
+    {
+      "source": "packages/react/src/components/Button, IconButton, HelperText, Progress: the key, the remove key, the message lines and the optional per-file groove are those parts imported as they are"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "Each chosen file stands in a window that takes surface.sunken and elevation.well, so a file reads as a reading and never as a key."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "The choose key, each window and each remove key are at least control.md tall, so a row is one 44px strip and the remove key is never smaller."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "The choose key and each remove key are real buttons reached by Tab and pressed with Space or Enter; after a removal focus moves to the next remove key, or back to the choose key."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The choose key is a plain key and the windows are ink, so FileUpload spends no orange and leaves it to the unit's own primary key."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "The message lines and the removal note sit in polite live regions, and a window itself takes no focus and does nothing when pressed."
+    }
+  ],
+  "variants": {
+    "picked": "C",
+    "by": "agent",
+    "lab": "apps/lab/file-upload/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "one well holds the key and the rows"
+      },
+      {
+        "id": "B",
+        "name": "key, then flat printed rows"
+      },
+      {
+        "id": "C",
+        "name": "a display window per file"
+      }
+    ],
+    "reason": "C makes each file a reading in its own window, with the remove key outside on the body, as FORM.md puts keys outside displays; A sets a raised key inside a recess and looks like an Input, and B has no form of its own and drifts to the generic attachment list."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The label, key, hint, windows and messages stack in one column on the body's inset line, with gaps and no rules between them."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight above the key, and it names the group for assistive tech."
+    },
+    "list": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A list of rows kept apart by gaps, so the count of files is read out and the layout does not reflow between files."
+    },
+    "item": {
+      "p": "P3",
+      "axis": "space",
+      "why": "One file is a window and its remove key in a two-column strip, 44px tall at least, so both ends of the row are full-size targets."
+    },
+    "window": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The recess takes the inverse light and holds the name, the size and the optional groove, so the file reads as a reading."
+    },
+    "name": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The file name is body size in primary ink with a line box tall enough for Thai marks, and a long name wraps instead of being cut."
+    },
+    "size": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The size is printed right-aligned in the caption size with tabular figures, in secondary ink at more than 4.5:1."
+    },
+    "progress": {
+      "p": "P2",
+      "axis": "space",
+      "why": "The optional Progress groove spans the window under the name and size, so the sending state is told inside the same reading."
+    },
+    "issues": {
+      "p": "P2",
+      "axis": "interaction",
+      "why": "The error lines stand under the list in a polite live region, so a refused file is announced without moving focus."
+    }
+  },
+  "states": {
+    "data-disabled=true": {
+      "p": "P3",
+      "axis": "depth",
+      "why": "A disabled FileUpload loses the recess shadow of its windows and fades to half, and its keys are disabled, so it reads as not taking files now."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours each window keeps a real border in the text colour, so the files stay separate without a shadow."
+    }
+  },
+  "motion": {}
+}

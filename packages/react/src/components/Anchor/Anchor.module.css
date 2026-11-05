@@ -1,0 +1,61 @@
+/* Anchor — the legend of a page: one fixed column of heading words, one ink index mark in the gutter
+   beside the section in view (lab apps/lab/anchor pick B). Printing is flat: no height, no shadow. No orange. */
+.root {
+  display: block;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.list {
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  list-style: none;
+}
+/* each level steps in by one module, so the headings' structure is drawn by position */
+.list .list { padding-inline-start: var(--ds-gap-xl); }
+.item { margin: var(--ds-gap-none); padding: var(--ds-gap-none); }
+.link {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-md);
+  min-block-size: var(--ds-control-md);
+  padding-inline: var(--ds-gap-none) var(--ds-gap-md);
+  border-radius: var(--ds-corner-mark);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  text-decoration: none;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.link:hover { color: var(--ds-text-primary); }
+.link[aria-current='location'] {
+  color: var(--ds-text-primary);
+  font-weight: var(--ds-type-weight-medium);
+}
+.link:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+/* the gutter is always there, so the word never moves; only the bar inks in */
+.mark {
+  flex: none;
+  inline-size: var(--ds-control-thumb);
+  block-size: var(--ds-gap-none);
+  border-block-end: var(--ds-width-bar) solid transparent;
+  border-radius: var(--ds-corner-round);
+  transition: border-color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.link[aria-current='location'] .mark { border-block-end-color: var(--ds-text-primary); }
+.label {
+  min-inline-size: var(--ds-gap-none);
+  overflow-wrap: anywhere;
+}
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .mark { transition-duration: var(--ds-motion-hover); }
+}
+@media (forced-colors: active) {
+  .link { color: LinkText; }
+  .link[aria-current='location'] .mark { forced-color-adjust: none; border-block-end-color: ButtonText; }
+}

@@ -46,8 +46,29 @@
   block-size: var(--ds-width-bar);
   border-radius: var(--ds-corner-round);
   background: transparent;
+  /* the index mark is ink too: it fades in with the word's ink instead of snapping on (G-MO3) */
+  transition: background-color var(--ds-motion-hover) var(--ds-motion-easing);
 }
-.panel { border-radius: var(--ds-corner-mark); }
+/* the sections stand in one cell: the chosen one fades in where the last one fades out (P6 state change moves,
+   D-008), on motion.release in and motion.exit out; nothing slides, so the page does not travel */
+.panels { display: grid; grid-template-columns: minmax(0, 1fr); }
+.panel {
+  grid-area: 1 / 1;
+  border-radius: var(--ds-corner-mark);
+  opacity: 1;
+  transition:
+    opacity var(--ds-motion-release) var(--ds-motion-easing),
+    display var(--ds-motion-release) allow-discrete;
+}
+.panel[hidden] {
+  display: none;
+  opacity: 0;
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+}
+@starting-style {
+  .panel:not([hidden]) { opacity: 0; }
+}
 
 .tab:hover { color: var(--ds-text-primary); }
 .tab[aria-selected='true'] { color: var(--ds-text-primary); }
@@ -62,6 +83,8 @@
 @media (prefers-reduced-motion: reduce) {
   /* the ink fade moves nothing, so it stays (motion.hover is kept under Reduce motion) */
   .tab { transition: color var(--ds-motion-hover) var(--ds-motion-easing); }
+  /* the sections' fade moves nothing either, so it stays on motion.hover */
+  .panel, .panel[hidden] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing), display var(--ds-motion-hover) allow-discrete; }
 }
 @media (forced-colors: active) {
   .tab[aria-selected='true'] .mark { forced-color-adjust: none; background: ButtonText; }

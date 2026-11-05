@@ -1,0 +1,58 @@
+/* Label — the printed name of a part, on the body's inset line (system/FORM.md input class, P5).
+   Printing is flat on the material: no shadow, no emboss, no orange. Lab pick B (apps/lab/label). */
+.root {
+  display: grid;
+  gap: var(--ds-gap-xs);
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  column-gap: var(--ds-gap-md);
+  cursor: default;
+}
+.name {
+  min-inline-size: 0;
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  overflow-wrap: anywhere;
+}
+.mark {
+  flex: none;
+  margin-inline-start: auto;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  white-space: nowrap;
+}
+.help {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+
+.root[data-mark='glyph'] .label {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  column-gap: var(--ds-gap-xs);
+}
+.root[data-mark='glyph'] .mark {
+  margin-inline-start: 0;
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  color: var(--ds-text-primary);
+}
+
+@media (forced-colors: active) {
+  .name, .mark { color: CanvasText; }
+  .help { color: GrayText; }
+}

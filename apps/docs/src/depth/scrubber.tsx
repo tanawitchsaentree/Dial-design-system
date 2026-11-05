@@ -58,7 +58,7 @@ export const SCRUBBER: Depth = {
       do: <Scrubber label="Ruhe, side A" duration={225} defaultValue={83} />, doNote: 'The label says what is playing.',
       dont: <Scrubber label="Seek position (drag to scrub)" duration={225} defaultValue={83} />, dontNote: 'An instruction as the label, and nothing about the track.',
     },
-    overflow: { text: 'A long title wraps above the groove. The times stay under the two ends and the track keeps its length.', render: <div data-overflow-demo="" style={{ inlineSize: 240 }}><Scrubber label="The long interview with the designer of the radio, part two" duration={3725} defaultValue={600} /></div> },
+    overflow: { text: 'A long title wraps above the groove. The times stay under the two ends and the track keeps its length.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Scrubber label="The long interview with the designer of the radio, part two" duration={3725} defaultValue={600} /></div> },
     rtl: { text: 'In right-to-left languages the groove starts on the right. The elapsed time is under the right end and the arrow keys follow the groove.', render: <div dir="rtl"><Scrubber label="نشرة الأخبار" duration={1260} defaultValue={240} buffered={600} /></div> },
     expansion: { text: 'German and Finnish titles can run 30% longer. The title wraps and the groove does not change.', render: <Scrubber label="Abendnachrichten mit Wetterbericht" duration={1260} defaultValue={240} /> },
   },

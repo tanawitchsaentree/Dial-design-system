@@ -1,0 +1,126 @@
+{
+  "concept": "Stepper numbers the sections of a long form the way a device numbers its steps: each number shows in a small window cut into the body, and a rail of printed dots runs down to the next window. It names where you are and does nothing else.",
+  "kind": [
+    "stepper",
+    "steps",
+    "numbered sections",
+    "progress rail"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "filled circle with a white digit joined by a solid coloured line, the accent colour marking the current step",
+      "why_not": "A raised filled disc reads as a button that can be pressed, and an accent fill spends the unit's one orange on a label."
+    },
+    {
+      "pattern": "horizontal wizard bar that turns green as steps complete",
+      "why_not": "It reports progress by colour alone and cannot hold a form section's content beside its number."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): figures read inside windows cut into the body"
+    },
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): printed scale and band names on the case beside each window"
+    },
+    {
+      "source": "system/FORM.md display and input classes: recessed window, printing on the inset line"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "Each number sits in a 44px window that takes surface.sunken and elevation.well, so it reads as a reading and never as a key."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The title is printed beside the window and the section's content stands under the title, in the same column."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "The window is flat plastic with no raised edge, and the rail is dots, not a line, so nothing in the Stepper invites a press."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The current step is told by weight, a check on done steps and aria-current, and all of it is ink, never orange."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/stepper/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "resin cap with a groove rail"
+      },
+      {
+        "id": "B",
+        "name": "digit window with a dotted rail"
+      },
+      {
+        "id": "C",
+        "name": "printed digit with an ink rail"
+      }
+    ],
+    "reason": "B uses the recessed window already used by Input and Display, so the number reads as a reading and not a key; A is a raised disc that looks pressable though it is not, and C has no form of its own and drifts to the generic numbered list."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "An ordered list, one row per step, so the order is read out and the rail runs down the same column."
+    },
+    "step": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A step holds its window, title and content in a two-column grid with the content under the title."
+    },
+    "marker": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The number sits in a window cut into the body with the inverse light, 44px square so it matches the row of controls beside it."
+    },
+    "title": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The step's name uses the emphasis size in medium weight, printed level with the window."
+    },
+    "rail": {
+      "p": "P5",
+      "axis": "space",
+      "why": "A column of printed dots joins one window to the next, the way a printed scale joins marks, and it stops after the last step."
+    },
+    "body": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The step's content aligns under the title so the form reads down one left edge."
+    }
+  },
+  "states": {
+    "data-status=current": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The current step's number and title go to primary ink, and aria-current announces it, with no orange; an upcoming step stays in secondary ink."
+    },
+    "data-status=done": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A done step prints a check in its window in place of the digit, so completion is a mark and not a colour."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the window keeps a real border and the rail dots draw in the text colour."
+    }
+  },
+  "motion": {}
+}

@@ -1,0 +1,201 @@
+{
+  "concept": "Listbox is a list that stays open: every choice is printed inside one recessed window the same way Input holds a typed value, and the chosen rows carry a printed tick and weight, so nobody opens anything to learn what the panel can do.",
+  "kind": [
+    "listbox",
+    "option list",
+    "multi-select list",
+    "picker list"
+  ],
+  "family": "Select",
+  "family_difference": "Listbox keeps its options open in a recessed window in the page, takes more than one choice, and has no trigger, chevron or floating panel.",
+  "default_to_avoid": [
+    {
+      "pattern": "Listbox as a stack of bordered cards with the chosen card filled blue or orange",
+      "why_not": "A tinted fill tells the state by colour alone and spends a hue that P1 keeps for one part per unit; the printed tick and weight work in black and white."
+    },
+    {
+      "pattern": "native select element with the size attribute, drawn by the operating system",
+      "why_not": "The system draws its own highlight and type, which ignore the material and cannot follow dial's light or keep a tick on the chosen rows."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): every band printed on the case at once, the one in use marked in ink"
+    },
+    {
+      "source": "Braun SK 4 radio-phonograph (Dieter Rams, Hans Gugelot, 1956): settings printed beside plain plastic parts, no coloured marking"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: listbox pattern (https://www.w3.org/WAI/ARIA/apg/patterns/listbox/)"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The list is one window of surface.sunken with elevation.well and a line.ring hairline, the same recess as Input and the closed Select, full width of its column."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The label is printed above the window at its start edge and names the list through aria-labelledby."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "A chosen row is told by a printed tick and medium weight in primary ink; no row is ever filled orange or blue."
+    },
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "shadows are short and soft",
+      "form": "The window sits in the page with only its inner well shade and no float shadow, because a list that stays open has nothing to leave."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "One tab stop, then arrows, Home, End, Page keys, type-ahead, Space and Enter choose, and in multiple mode Shift with arrows and Control with A extend the choice."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation; transitions only on state",
+      "form": "A row inks in when it is reached and the tick fades with the choice; nothing moves while the list sits still."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/listbox/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "rows inside one recessed well, tick and weight on chosen rows, the reached row a plate with a hairline"
+      },
+      {
+        "id": "B",
+        "name": "legend printed on the body with no container, an ink index bar beside chosen rows"
+      },
+      {
+        "id": "C",
+        "name": "raised plastic panel with seams between rows and a tick at the end"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A gives the list an edge in the form column like Input and Select, so it reads as a field that takes a choice and its tick and weight work in black and white (P2 depth, P1 colour); B has no edge, so a long multiple list loses its column and its reached row, and C is a floating panel that repeats the open Select, though nothing here leaves (P6)."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The field stacks the label above the window in one column and keeps the full inline size of that column."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight, like the printing beside every other part of the unit."
+    },
+    "list": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The list is a recess with the inverse light, the same window that Input uses for typed text, so the rows read as cut into the body."
+    },
+    "option": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Every option row is at least 44px tall so a finger can pick it, with its text inset from the rounded ends."
+    },
+    "tick": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "A printed tick in ink marks each chosen row, so a choice never uses the orange or any tinted fill; an empty tick keeps the column so words do not shift."
+    },
+    "leading": {
+      "p": "P5",
+      "axis": "space",
+      "why": "An optional mark such as an icon or an avatar stands between the tick and the words on the same inset line, so rows with and without one still align."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "type",
+      "why": "Option words use the body size of the one grotesk, with a line box tall enough for stacked Thai marks, and long words wrap instead of being cut."
+    },
+    "empty": {
+      "p": "P2",
+      "axis": "colour",
+      "why": "A list with no options prints one plain line in secondary ink inside the window, so an empty list says so and the window never collapses."
+    },
+    "md": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The default row is 44px tall, the smallest target that every part in dial keeps for a finger."
+    },
+    "lg": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A 52px row with larger text for the main choice of a phone sheet held in one hand."
+    }
+  },
+  "states": {
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The whole list shows the same dark ring as every part when it holds keyboard focus, and the reached row inside it carries its own plate."
+    },
+    "aria-selected=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "A chosen row is primary ink in medium weight with its tick, never a coloured fill behind the words."
+    },
+    "aria-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled list loses its recess shadow and fades to half; a row that cannot be chosen fades to half and the arrows skip it, so both stay readable but are plainly not part of the walk."
+    },
+    "data-active=true": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The row under the keyboard or the pointer becomes a plate with a hairline, so the reached row is shown by depth and an edge, not hue."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the window keeps a real border, the reached row uses the system highlight and a chosen row keeps its tick."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under Reduce motion the rows and the tick still change on motion.hover, which the tokens keep, and nothing travels (D-008)."
+    },
+    "data-on=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The tick of a chosen row fades in over motion.hover, so the choice is told by a printed mark that appears and not by a coloured fill."
+    }
+  },
+  "motion": {
+    "background-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached row sinks into a plate and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    },
+    "border-color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached row sinks into a plate and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    },
+    "color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The reached row sinks into a plate and inks in on motion.hover, fast on and slower off, so the arrows read as walking down the list instead of jumping."
+    },
+    "opacity": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The tick fades in and out with the choice on motion.hover, so a change of choice is seen arriving."
+    }
+  }
+}

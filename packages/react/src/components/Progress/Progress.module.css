@@ -1,4 +1,4 @@
-/* Progress — a recessed groove that fills with printing ink (system/FORM.md display class, P4).
+/* Progress — a recessed groove that fills with a smoky resin rod (system/FORM.md display class, P4).
    The label and reading are printed on the line above (P5). Indeterminate is a still row of ticks (P6). */
 .root {
   display: grid;
@@ -13,6 +13,8 @@
   gap: var(--ds-gap-lg);
   font-size: var(--ds-type-caption);
   line-height: var(--ds-type-leading-tight);
+  /* the label and the reading are pad ink pressed into the body, on the lit lip of the recess (D-010) */
+  text-shadow: var(--ds-print-seat);
 }
 .label { color: var(--ds-text-primary); font-weight: var(--ds-type-weight-regular); }
 .value {
@@ -27,7 +29,17 @@
   overflow: hidden;
   border-radius: var(--ds-corner-round);
   background: var(--ds-surface-sunken);
+  isolation: isolate;
+}
+/* the recess's own shadow lies over the rod, so the level sits inside the groove, not on top (D-010) */
+.groove::after {
+  content: "";
+  position: absolute;
+  inset: var(--ds-gap-none);
+  z-index: var(--ds-layer-raised);
+  border-radius: inherit;
   box-shadow: var(--ds-elevation-well);
+  pointer-events: none;
 }
 .md { block-size: var(--ds-control-track); }
 .sm { block-size: var(--ds-width-bar); }
@@ -36,7 +48,10 @@
   inline-size: var(--progress-fill);
   block-size: 100%;
   border-radius: var(--ds-corner-round);
-  background: var(--ds-grille-hole-on);
+  /* a smoky resin rod in the groove, not screen ink: the ring tone (3:1 off the groove in both themes) with
+     the single top-left light on its upper edge (R-005, lab apps/lab/progress, pick B) */
+  background: var(--ds-line-ring);
+  box-shadow: inset 0 var(--ds-width-hairline) 0 var(--ds-glass-lit);
   transition: inline-size var(--ds-motion-fill) var(--ds-motion-easing);
 }
 .ticks {
@@ -51,7 +66,7 @@
   block-size: 50%;
   min-block-size: var(--ds-width-ring);
   border-radius: var(--ds-corner-round);
-  background: var(--ds-grille-hole-on);
+  background: var(--ds-line-ring);
 }
 
 @media (prefers-reduced-motion: reduce) {

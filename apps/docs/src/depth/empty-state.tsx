@@ -3,7 +3,7 @@ import { Button, Card, EmptyState, Heading } from 'dial-react';
 import type { Depth } from './types';
 
 const Room = ({ name, children }: { name: string; children: React.ReactNode }) => (
-  <Card header={<Heading level={3}>{name}</Heading>} style={{ inlineSize: 'min(100%, 380px)' }}>{children}</Card>
+  <Card header={<Heading level={3}>{name}</Heading>} style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))' }}>{children}</Card>
 );
 const kitchen = (key: React.ReactNode = <Button kind="primary">Add a device</Button>) => (
   <EmptyState drawing="display" title="No devices in the kitchen yet" action={key}>Plug one in near the hub, then add it here.</EmptyState>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · VirtualList · three ways to hold a long list in a short body</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .col{inline-size:340px}
+ .col>h2{font-size:13px;font-weight:500;margin:0 0 12px;color:var(--ds-text-secondary)}
+ ul{list-style:none;margin:0;padding:0}
+ .r{display:flex;align-items:center;gap:16px;min-block-size:52px;box-sizing:border-box;padding-inline:16px;font-size:16px}
+ .n{inline-size:28px;font-size:13px;color:var(--ds-text-secondary);font-variant-numeric:tabular-nums}
+ .r.on{font-weight:500}
+ /* A: one plastic body, a scroller inside, rows kept apart by a gap, ink mark on the chosen row */
+ .A .body{padding:8px;border-radius:var(--ds-corner-panel);background:var(--ds-unit-bg);box-shadow:var(--ds-elevation-unit)}
+ .A .sc{block-size:328px;overflow:auto;border-radius:var(--ds-corner-inner)}
+ .A li{margin-block-end:4px;position:relative;border-radius:var(--ds-corner-inner)}
+ .A li.on::before{content:"";position:absolute;inset-block:12px;inset-inline-start:4px;inline-size:2px;background:var(--ds-text-primary)}
+ .A li.act{outline:2px solid var(--ds-focus-ring)}
+ /* B: a recessed window, rows seamless inside it, a printed reading under the window */
+ .B .win{border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);overflow:hidden}
+ .B .sc{block-size:312px;overflow:auto}
+ .B li.on{background:var(--ds-surface-solid);font-weight:500}
+ .B .read{margin-block-start:10px;font-size:13px;color:var(--ds-text-secondary);font-variant-numeric:tabular-nums}
+ /* C: rows on the body, scrollbar hidden, a groove with a cap shows where you are */
+ .C .body{display:grid;grid-template-columns:1fr 20px;gap:8px;padding:8px;border-radius:var(--ds-corner-panel);background:var(--ds-unit-bg);box-shadow:var(--ds-elevation-unit)}
+ .C .sc{block-size:328px;overflow:hidden}
+ .C .groove{inline-size:8px;justify-self:center;border-radius:4px;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);position:relative}
+ .C .cap{position:absolute;inset-inline:-6px;inset-block-start:30%;block-size:44px;border-radius:var(--ds-corner-media);background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);border:1px solid var(--ds-line-ring)}
+ .C li.on{font-weight:500;text-decoration:underline}
+</style></head><body>
+<h1>VirtualList · 5,000 rows in a short body</h1>
+<div class="row">
+ <div class="col A"><h2>A · plastic body, scroller inside, gaps, ink mark</h2><div class="body"><div class="sc"><ul>
+  <li><div class="r"><span class="n">1</span>Kitchen lamp</div></li><li class="on"><div class="r on"><span class="n">2</span>Hall heating</div></li><li class="act"><div class="r"><span class="n">3</span>Washer</div></li><li><div class="r"><span class="n">4</span>Bedroom blind</div></li><li><div class="r"><span class="n">5</span>Garden pump</div></li><li><div class="r"><span class="n">6</span>Dryer</div></li><li><div class="r"><span class="n">7</span>Doorbell</div></li></ul></div></div></div>
+ <div class="col B"><h2>B · recessed window, seamless rows, printed reading</h2><div class="win"><div class="sc"><ul>
+  <li><div class="r"><span class="n">1</span>Kitchen lamp</div></li><li class="on"><div class="r on"><span class="n">2</span>Hall heating</div></li><li><div class="r"><span class="n">3</span>Washer</div></li><li><div class="r"><span class="n">4</span>Bedroom blind</div></li><li><div class="r"><span class="n">5</span>Garden pump</div></li><li><div class="r"><span class="n">6</span>Dryer</div></li><li><div class="r"><span class="n">7</span>Doorbell</div></li></ul></div></div><div class="read">rows 1 to 6 of 5000</div></div>
+ <div class="col C"><h2>C · rows on the body, fader groove for position</h2><div class="body"><div class="sc"><ul>
+  <li><div class="r"><span class="n">1</span>Kitchen lamp</div></li><li class="on"><div class="r on"><span class="n">2</span>Hall heating</div></li><li><div class="r"><span class="n">3</span>Washer</div></li><li><div class="r"><span class="n">4</span>Bedroom blind</div></li><li><div class="r"><span class="n">5</span>Garden pump</div></li><li><div class="r"><span class="n">6</span>Dryer</div></li><li><div class="r"><span class="n">7</span>Doorbell</div></li></ul></div><div class="groove"><div class="cap"></div></div></div></div>
+</div></body></html>

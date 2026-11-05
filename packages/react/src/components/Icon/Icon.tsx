@@ -6,7 +6,7 @@ import styles from './Icon.module.css';
 export type IconSize = 'sm' | 'md' | 'lg';
 
 export interface IconProps extends Omit<SVGAttributes<SVGSVGElement>, 'children' | 'role' | 'fill'> {
-  /** Which glyph to print, from dial's set (see `IconName`). */
+  /** Which glyph to print, from dial's set (see `IconName`). Changing it morphs the dots from one glyph to the next. */
   name: IconName;
   /** `sm` is control.icon-sm (16px) and draws its dots larger so they keep their contrast; `md` (default) is control.icon-md (20px), the glyph on a key; `lg` is 24px. */
   size?: IconSize;
@@ -20,7 +20,7 @@ const PITCH = 3;
 const RADIUS: Record<IconSize, number> = { sm: 1.2, md: 1, lg: 1 };
 const cache = new Map<string, string>();
 
-/** The glyph as one path of round dots, so a glyph is a single node however many dots it has. */
+/** The glyph as one path of round dots (for drawings that need a single node, such as a CSS mask). */
 export function iconPath(name: IconName, size: IconSize = 'md'): string {
   const key = `${name}:${size}`;
   const hit = cache.get(key);
@@ -38,12 +38,21 @@ export function iconPath(name: IconName, size: IconSize = 'md'): string {
   return d;
 }
 
-/** A glyph from dial's set, printed as round dots on the Grille's grid in currentColor. Hidden from assistive tech unless it has a label. */
+const CELLS = Array.from({ length: ICON_GRID * ICON_GRID }, (_, i) => ({ x: i % ICON_GRID, y: Math.floor(i / ICON_GRID) }));
+
+/**
+ * A glyph from dial's set, printed as round dots on the Grille's grid in currentColor. Every hole of the 7 × 7
+ * field is drawn and only the glyph's own holes are lit, so a new `name` morphs: dots the two glyphs share stay,
+ * the others sink back into their holes or rise out of them (D-008, R-008). Hidden from assistive tech unless
+ * it has a label.
+ */
 export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   { name, size = 'md', label, className, ...rest },
   ref,
 ) {
   const box = ICON_GRID * PITCH;
+  const r = RADIUS[size];
+  const glyph = ICON_GLYPHS[name];
   const a11y = label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': true };
   return (
     <svg
@@ -57,7 +66,9 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
       {...a11y}
       {...rest}
     >
-      <path d={iconPath(name, size)} />
+      {CELLS.map(({ x, y }) => (
+        <circle key={`${x}-${y}`} className={styles.dot} cx={x * PITCH + PITCH / 2} cy={y * PITCH + PITCH / 2} r={r} data-on={glyph[y][x] === '#' ? '' : undefined} />
+      ))}
     </svg>
   );
 });

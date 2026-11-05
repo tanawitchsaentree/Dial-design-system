@@ -1,5 +1,6 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { cx } from '../../cx';
+import { messages } from '../../messages';
 import { Display } from '../Display';
 import { Grille } from '../Grille';
 import styles from './EmptyState.module.css';
@@ -30,7 +31,7 @@ export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(function E
     <div ref={ref} data-component="EmptyState" data-drawing={drawing} className={cx(styles.root, className)} {...rest}>
       {drawing !== 'none' ? (
         <div data-part="drawing" className={styles.drawing} aria-hidden="true">
-          {drawing === 'display' ? <Display value="--" digits={2} size="sm" label="No reading" /> : <Grille value={0} cols={12} rows={3} label="Empty" />}
+          {drawing === 'display' ? <Display value="--" digits={2} size="sm" label={messages.noReading} /> : <Grille value={0} cols={12} rows={3} label={messages.empty} />}
         </div>
       ) : null}
       <p className={styles.line}>{title}</p>

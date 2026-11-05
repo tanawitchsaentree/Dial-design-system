@@ -1,5 +1,5 @@
 // Usage tab for Chip (component-depth.md U1–U14). Chip is a small capsule key that latches down when chosen.
-import { Button, Chip, Display, Stack } from 'dial-react';
+import { Button, Chip, Display, Icon, Stack } from 'dial-react';
 import type { Depth } from './types';
 
 const Unit = ({ children }: { children: React.ReactNode }) => <div className="demo-box demo-card">{children}</div>;
@@ -56,7 +56,7 @@ export const CHIP: Depth = {
       do: <Chip>Night</Chip>, doNote: 'Names the preset.',
       dont: <Chip>Turn on night mode now</Chip>, dontNote: 'A sentence on a key. Use a Button for an action.',
     },
-    overflow: { text: 'A long word makes the key wider. It does not wrap inside the key, so the row of chips wraps instead.', render: <div data-overflow-demo="" style={{ inlineSize: 220 }}><Row><Chip size="sm">Kitchen</Chip><Chip size="sm">Downstairs bathroom</Chip><Chip size="sm">Hall</Chip></Row></div> },
+    overflow: { text: 'A long word makes the key wider. It does not wrap inside the key, so the row of chips wraps instead.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Row><Chip size="sm">Kitchen</Chip><Chip size="sm">Downstairs bathroom</Chip><Chip size="sm">Hall</Chip></Row></div> },
     rtl: { text: 'In right-to-left languages the lamp sits to the right of the word, and the remove key moves to the left end.', render: <div dir="rtl"><Row><Chip defaultSelected>ليلي</Chip><Chip onRemove={noop}>المطبخ</Chip></Row></div> },
     expansion: { text: 'German and Finnish words can run 30% longer. The key grows sideways and keeps its height.', render: <Row><Chip defaultSelected>Nachtmodus</Chip><Chip>Abwesenheit</Chip></Row> },
   },
@@ -88,8 +88,8 @@ export const CHIP: Depth = {
     },
     {
       name: 'icon',
-      rules: <p>Prints a small stroke symbol before the word. The word always stays, because the word names the chip.</p>,
-      pair: { do: <Chip icon={<svg viewBox="0 0 16 16"><path d="M12.5 10.5A5.5 5.5 0 0 1 5.5 3.5a5.5 5.5 0 1 0 7 7z" /></svg>}>Night</Chip>, doNote: 'A moon and the word Night.', dont: <Row><Chip icon={<svg viewBox="0 0 16 16"><path d="M12.5 10.5A5.5 5.5 0 0 1 5.5 3.5a5.5 5.5 0 1 0 7 7z" /></svg>}>Night</Chip><Chip icon={<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="3" /></svg>}>Day</Chip><Chip icon={<svg viewBox="0 0 16 16"><path d="M3 13l10-10" /></svg>}>Away</Chip></Row>, dontNote: 'An icon on every chip adds noise and says nothing new.' },
+      rules: <p>Prints a small Icon before the word. The word always stays, because the word names the chip.</p>,
+      pair: { do: <Chip icon={<Icon name="schedule" size="sm" />}>Night</Chip>, doNote: 'The schedule glyph and the word Night.', dont: <Row><Chip icon={<Icon name="schedule" size="sm" />}>Night</Chip><Chip icon={<Icon name="heat" size="sm" />}>Day</Chip><Chip icon={<Icon name="door" size="sm" />}>Away</Chip></Row>, dontNote: 'An icon on every chip adds noise and says nothing new.' },
     },
   ],
   related: [['/components/segmented-control', 'SegmentedControl', 'Only one of a few options may be on.'], ['/components/switch', 'Switch', 'A setting that takes effect at once.'], ['/components/badge', 'Badge', 'A status nobody presses.']],

@@ -16,6 +16,7 @@ import {
   type SyntheticEvent,
 } from 'react';
 import { cx } from '../../cx';
+import { messages } from '../../messages';
 import { useIsoLayoutEffect } from '../../spring';
 import { Button } from '../Button';
 import styles from './ActionSheet.module.css';
@@ -81,7 +82,7 @@ const tall = () => typeof window !== 'undefined' && window.matchMedia?.('(orient
  * and focus returns to the opener.
  */
 export const ActionSheet = forwardRef<HTMLDialogElement, ActionSheetProps>(function ActionSheet(
-  { open: openProp, defaultOpen = false, onOpenChange, title, detail, items, onAction, trigger, placement = 'auto', modal = true, cancelLabel = 'Cancel', className, ...rest },
+  { open: openProp, defaultOpen = false, onOpenChange, title, detail, items, onAction, trigger, placement = 'auto', modal = true, cancelLabel = messages.cancel, className, ...rest },
   ref,
 ) {
   const el = useRef<HTMLDialogElement>(null);

@@ -1,0 +1,16 @@
+{
+  "identity": false,
+  "identity_reason": "a layout primitive only holds its child at a proportion and has no look of its own to derive",
+  "concept": "AspectRatio holds a picture, a camera view or a chart window at one of four fixed proportions, so the frame never changes shape while its content loads or changes.",
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "The frame takes its height from its width, so the space is kept before the content arrives and nothing below it moves." },
+    "fill": { "p": "P6", "axis": "space", "why": "The child fills the frame edge to edge, so a window is never half empty and its size is the frame's, not the picture's." },
+    "r-1-1": { "p": "P6", "axis": "space", "why": "The square suits a speaker cover, a room tile or an avatar, where width and height count the same." },
+    "r-4-3": { "p": "P6", "axis": "space", "why": "The four to three frame suits a still from an older camera or a chart window that needs some height." },
+    "r-16-9": { "p": "P6", "axis": "space", "why": "The sixteen to nine frame suits a video or a doorbell view, which arrive wide and keep that shape." },
+    "r-3-2": { "p": "P6", "axis": "space", "why": "The three to two frame suits a photograph and sits between the square and the wide frame." },
+    "corner": { "p": "P3", "axis": "shape", "why": "The optional corner reuses the media radius that windows and number cells already use, so a picture nests in its unit the same way." }
+  },
+  "states": {},
+  "motion": {}
+}

@@ -1,0 +1,153 @@
+{
+  "concept": "RichTextEditor is a note field that lets a person bold a word, link an address or make a list. It is the Textarea well with a row of round keys printed above it, so the writing stays in a recess and the formatting stays on keys you can press. Its output is a small, whitelisted piece of HTML, the way a label printer accepts only the marks it can print.",
+  "kind": [
+    "rich text editor",
+    "formatted note field",
+    "editor with toolbar"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "rich text editor shown as a white page with a grey toolbar strip of tiny icon buttons glued to the top edge",
+      "why_not": "Tiny glued icons fall below the 44px hit area and make the field and its tools one pale panel; here the keys are separate parts and the writing sits in its own recess."
+    }
+  ],
+  "references": [
+    {
+      "source": "system/FORM.md input class: recessed well, full width of its column, label printed above on the inset line"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): a row of round keys above the entry window, each key one function"
+    },
+    {
+      "source": "WAI-ARIA Authoring Practices: toolbar pattern with one tab stop and arrow-key movement between the keys"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The writing area is the same recessed well as Input and Textarea, so formatted text reads as written into the body and the keys above stay raised."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Each formatting key is a 44px round IconButton, so a thumb finds Bold or Link without the tiny glued icons of a typical editor bar."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "The toolbar is one tab stop; arrows, Home and End walk the keys, and Ctrl or Command with B, I and K work inside the writing area."
+    },
+    {
+      "p": "P9",
+      "axis": "space",
+      "consequence": "glass appears on caps, lamps, latched keys and chips only",
+      "form": "A format that is on, such as bold at the caret, latches its key as frosted glass through IconButton, and nothing else in the editor is glass."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line",
+      "form": "The printed label, the keys, the well and the messages stack in one column on the inset line."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/rich-text-editor/index.html",
+    "options": [
+      { "id": "A", "name": "round keys in a row above the well" },
+      { "id": "B", "name": "legend words docked inside the well under a seam" },
+      { "id": "C", "name": "capsule key column at the inline-end side" }
+    ],
+    "reason": "A keeps the well a pure Input-family recess and uses the 44px latched round key dial already has, so the on state is a real shape change. B puts text-height words inside the well, which blurs where writing ends and tools begin, and its underline is the only cue. C takes 56px of width from the well, which is the scarce thing on a phone."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The field stacks label, keys, well and messages in one column so everything sits on the inset line and the layout does not reflow between states."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight like the printing beside every other part, and it names the writing area for assistive tech."
+    },
+    "bar": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The row of keys is one toolbar with a single tab stop and arrow-key movement, so a keyboard user does not tab through six keys to reach the text."
+    },
+    "well": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "The recess takes the inverse light, shade on its top-left inner edge, so the person sees where text goes."
+    },
+    "field": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "Typed text is primary ink on the sunken plastic at more than 4.5:1, with a line box tall enough for Thai marks, and links are underlined ink, never orange."
+    },
+    "linkRow": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The address is asked in an Input well that appears under the keys, so a link is typed in a real field with its own label rather than a browser prompt."
+    },
+    "linkKeys": {
+      "p": "P3",
+      "axis": "space",
+      "why": "Apply, Remove and Cancel are 44px keys in one row beside the address, wrapping under it on a narrow phone."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The hint is secondary ink in the caption size under the well."
+    },
+    "error": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The error is critical red with a glyph and words, never orange and never colour alone."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A printed mark beside the words means invalid is never told by colour alone, for people who cannot see the red."
+    }
+  },
+  "states": {
+    "focus-within": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The well shows the same dark ring as every part when the writing area holds the keyboard focus."
+    },
+    "data-empty=true": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "An empty area prints its prompt in secondary ink so the person knows where to write, and the prompt disappears with the first character."
+    },
+    "data-invalid=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "An invalid well draws its edge in the critical red, which is never orange, and the message below names the problem."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled editor loses its recess shadow and fades, so it reads as not taking input right now."
+    },
+    "data-readonly=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A read-only editor keeps full ink and drops the keys, because it is a reading and not an unavailable setting."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the well keeps a real border, links keep their underline and the focus ring uses the system highlight colour."
+    }
+  },
+  "motion": {}
+}

@@ -13,6 +13,81 @@ One line per change, `- Component: what changed`, under a heading of the version
 - Badge: A lit lamp is a glass bead in its status hue with a full edge.
 - Button: A plastic key with aria-pressed true latches down as frosted ink grey glass; the primary key never does.
 - IconButton: A plastic disc with aria-pressed true latches down as frosted ink grey glass; the primary disc never does.
+- Textarea: First release. Multi-line text field, the Input well made taller.
+- Stepper: First release. Numbered sections of a long form.
+- Avatar: First release. A person or owner as a picture or initials in a recessed window.
+- Popover: First release. A small plastic panel anchored to a key.
+- Radio: First release. Choose one of a few visible options with round keys.
+- Tooltip: First release. A short printed name for a part, on hover, focus and long press.
+- Accordion: First release. Sections that open to show content, printed on seams.
+- Breadcrumb: First release. Where you are, as names joined by a dotted leader.
+- Divider: First release. A seam cut in the body, with an optional printed label.
+- Timeline: First release. Past events on a hairline rail with a time column.
+- Stat: First release. One named figure in a recessed window, with its change printed under it.
+- Pagination: First release. Printed page numbers with an ink mark and two round keys.
+- Spinner: First release. A trail of lit holes walking a 3 by 3 field while work runs.
+- Link: First release. Ink text with a hairline rule that thickens on hover.
+- Center: First release. Centres its child on one or both axes.
+- Box: First release. A block with token padding, surface and corner.
+- AspectRatio: First release. Keeps its child at a ratio from a closed set.
+- Spacer: First release. Empty or flexible space on the token scale.
+- Flex: First release. Row or column layout on the token gap scale.
+- VisuallyHidden: First release. Hides content from sight and keeps it for screen readers.
+- Fieldset: First release. A printed box with the legend set into its top line.
+- HelperText: First release. The hint or error line printed under a part.
+- Label: First release. The printed name of a part, with a required or optional word.
+- InputGroup: First release. An Input well with ruled add-on cells.
+- Kbd: First release. A key name printed as a flat keycap.
+- Image: First release. A picture in a recessed window with a dash fallback.
+- FormField: First release. Wires a label, a control and its messages together.
+- FAB: First release. The unit's one orange key, sunk in an opaque seat.
+- Table: First release. Printed rows on seams, with sortable headers.
+- Rating: First release. A dot-lattice scale of one to five.
+- Drawer: First release. A full-height side panel with fixed title and keys.
+- Listbox: First release. Always-visible options in one recessed well, single or multiple.
+- TagInput: First release. Typed text becomes removable chips inside one well.
+- RadioCards: First release. Radio options as key plates that sit down when chosen.
+- ContextMenu: First release. Menu actions at the pointer, on long-press and from the keyboard.
+- MultiSelect: First release. A well that opens a panel of ticked options.
+- Autocomplete: First release. A text field that suggests completions and keeps free text valid.
+- Combobox: First release. A text field with a filtered list of options.
+- Sidebar: First release. A vertical nav column that collapses to icons.
+- Anchor: First release. An on-this-page list with one ink mark on the section in view.
+- DescriptionList: First release. Terms and values on seams, stacked or side by side.
+- NavigationMenu: First release. A menu bar whose keys open panels of grouped links.
+- Navbar: First release. A top bar with a dotted legend of links that folds behind a Menu key.
+- NumberInput: First release. A recessed window with a minus key and a plus key.
+- PasswordInput: First release. An Input well for a secret with a show and hide key.
+- Editable: First release. Printed text that becomes an Input well on press.
+- Dropzone: First release. A recessed tray that takes dragged files or opens the picker.
+- FileUpload: First release. A key and a list of chosen files, each in its own window.
+- PinInput: First release. A row of recessed single-digit cells for a short code.
+- SearchInput: First release. An Input well for search with a printed Clear key.
+- VirtualList: First release. Windowed rows in a scroll container, built on List rows.
+- Carousel: First release. Scroll-snap slides with two keys and a strip of position holes.
+- ColorPicker: First release. Round lens swatches with a ring and tick, plus hue and hex.
+- TransferList: First release. Two listbox windows with named keys that move rows between them.
+- Calendar: First release. A month grid for one date, with printed numbers and a chosen-day window.
+- TreeView: First release. Nested items joined by schematic elbow lines.
+- Wizard: First release. A multi-step flow built on Stepper with a validation gate.
+- OTPFlow: First release. A one-time-code step with a destination, a countdown and a resend key.
+- DataGrid: First release. An interactive grid on the Table look, with sorting and selection.
+- DatePicker: First release. An Input-style date well with a calendar key and a Calendar popover.
+- Form: First release. A native form with a summary window that links to the invalid fields.
+- RangePicker: First release. Two wells joined by an ink bar, with the span ruled in the Calendar.
+- AppShell: First release. The page frame: header, sidebar that folds into a drawer, main and footer.
+- CommandPalette: First release. A dialog with a query window and a flat legend of commands.
+- AuthForms: First release. Sign-in, sign-up and reset-password forms on Form.
+- RichTextEditor: First release. A contenteditable editor with a toolbar and a sanitised HTML value.
+- LineChart: First release. LineChart on the recessed window language.
+- Sparkline: First release. Sparkline on the recessed window language.
+- BarChart: First release. BarChart in a recessed window, told apart by pattern.
+- PieChart: First release. PieChart in a recessed window, told apart by pattern.
+- SettingsLayout: First release. Sections as printed boxes with rows parted by seams.
+- Feed: First release. Posts on the body with seams, page keys and a load-more key.
+- Onboarding: First release. A guided tour: a ring round the target and a panel with n of N.
+- NotificationCenter: First release. Notifications by day with a lamp for unread and named keys.
+- KanbanBoard: First release. Open columns split by a seam; cards move by key or drag.
 
 - Button: First release. A capsule key with kind key or primary and sizes md and lg.
 - Switch: First release. A slide switch with a cap in a recessed groove, printed position words and a lamp; role switch, Space and Enter throw it.

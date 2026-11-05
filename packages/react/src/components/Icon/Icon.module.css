@@ -13,3 +13,24 @@
   inline-size: calc(var(--ds-control-icon-md) + var(--ds-space-1));
   block-size: calc(var(--ds-control-icon-md) + var(--ds-space-1));
 }
+/* every hole is drawn; the glyph's own holes are lit. A new glyph morphs: shared dots stay, dots that go sink
+   back into their holes over motion.exit (accelerating), new ones rise over motion.release (decelerating) (D-008) */
+.dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  transform: scale(var(--ds-motion-dot-scale));
+  transition:
+    opacity var(--ds-motion-exit) var(--ds-motion-easing-exit),
+    transform var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+.dot[data-on] {
+  opacity: 1;
+  transform: none;
+  transition-duration: var(--ds-motion-release);
+  transition-timing-function: var(--ds-motion-easing);
+}
+/* under Reduce motion nothing changes size; the dots only fade, on motion.hover */
+@media (prefers-reduced-motion: reduce) {
+  .dot, .dot[data-on] { transform: none; transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+}

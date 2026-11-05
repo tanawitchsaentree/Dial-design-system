@@ -1,0 +1,90 @@
+/* Feed — posts printed as rows on the body, a seam between each (lab apps/lab/feed pick A).
+   Avatar, Text, Divider, Button and Spinner are imported, not redrawn. No orange. */
+.root {
+  position: relative;
+  display: block;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+/* the new-posts notice sits on a zero-height sticky line, so it covers the top row and never pushes the list down */
+.slot {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--ds-layer-sticky);
+  display: flex;
+  justify-content: center;
+  block-size: 0;
+  overflow: visible;
+}
+.notice {
+  margin-block-start: var(--ds-gap-md);
+  transition:
+    opacity var(--ds-motion-enter) var(--ds-motion-easing),
+    transform var(--ds-motion-enter) var(--ds-motion-easing);
+}
+@starting-style {
+  .notice[data-state='open'] { opacity: 0; transform: translateY(calc(var(--ds-motion-rise) * -1)); }
+}
+.notice[data-state='closing'] {
+  opacity: 0;
+  transform: translateY(calc(var(--ds-motion-rise) * -1));
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+}
+.feed {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--ds-control-md) minmax(0, 1fr);
+  column-gap: var(--ds-gap-xl);
+  row-gap: var(--ds-gap-xs);
+  padding-block-start: var(--ds-gap-xl);
+  scroll-margin-block-start: calc(var(--ds-control-md) + var(--ds-gap-2xl));
+  border-radius: var(--ds-corner-media);
+}
+.item:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.item > :first-child { grid-row: 1 / span 2; }
+.head {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--ds-gap-md);
+  min-inline-size: 0;
+}
+.name { overflow-wrap: anywhere; }
+.time { font-variant-numeric: tabular-nums; }
+.body {
+  grid-column: 2;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  line-height: var(--ds-type-leading-body);
+}
+.seam {
+  grid-column: 1 / -1;
+  margin-block-start: var(--ds-gap-xl);
+}
+.item:last-child .seam { display: none; }
+.item:last-child { padding-block-end: var(--ds-gap-xl); }
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-xl);
+}
+.sentinel {
+  block-size: var(--ds-space-px);
+  inline-size: 100%;
+  pointer-events: none;
+}
+@media (forced-colors: active) {
+  .item:focus-visible { outline-color: Highlight; }
+}

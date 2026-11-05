@@ -1,0 +1,80 @@
+/* FileUpload — a key, and each chosen file read out in its own recessed window (lab apps/lab/file-upload, pick C).
+   The remove key stands outside the window, on the body. Nothing moves on its own (P6), so there is no
+   motion here and nothing to reduce. No orange. */
+.root {
+  display: grid;
+  justify-items: start;
+  inline-size: 100%;
+  min-inline-size: 0;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+/* a section sets itself off by a gap above it; the live region for messages adds its gap only with its lines */
+.root > * + *:not(.issues) { margin-block-start: var(--ds-gap-md); }
+.label {
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-primary);
+}
+.list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ds-gap-md);
+  inline-size: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--ds-control-md);
+  align-items: center;
+  column-gap: var(--ds-gap-md);
+  min-block-size: var(--ds-control-md);
+}
+.window {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: var(--ds-gap-lg);
+  row-gap: var(--ds-gap-sm);
+  min-inline-size: 0;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-sm);
+  padding-inline: var(--ds-gap-xl);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.name {
+  min-inline-size: 0;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+  overflow-wrap: anywhere;
+}
+.size {
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-text-secondary);
+  white-space: nowrap;
+}
+.window .progress {
+  grid-column: 1 / -1;
+  min-inline-size: 0;
+}
+.issues {
+  display: grid;
+  gap: var(--ds-gap-sm);
+  justify-items: start;
+}
+.issues > :first-child { margin-block-start: var(--ds-gap-md); }
+.root[data-disabled='true'] .window { box-shadow: none; opacity: var(--ds-opacity-disabled); }
+
+@media (forced-colors: active) {
+  .window { border-color: CanvasText; }
+}

@@ -1,5 +1,7 @@
 import { forwardRef, useCallback, useEffect, useId, useRef, useState, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react';
 import { cx } from '../../cx';
+import { messages } from '../../messages';
+import { Icon } from '../Icon';
 import { MECHANISM, useSpring } from '../../spring';
 import { IconButton } from '../IconButton';
 import { Progress } from '../Progress';
@@ -46,11 +48,11 @@ export interface PullToRefreshProps extends Omit<HTMLAttributes<HTMLDivElement>,
 }
 
 const MESSAGES: PullToRefreshMessages = {
-  pull: 'Pull to refresh',
-  release: 'Release to refresh',
-  working: 'Asking the hub',
+  pull: messages.pull.pull,
+  release: messages.pull.release,
+  working: messages.pull.asking,
   updated: 'Updated',
-  failed: 'Not updated, the hub did not answer',
+  failed: messages.pull.failed,
   refresh: 'Refresh',
 };
 const clock = (d: Date) => `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
@@ -61,12 +63,8 @@ const RESIST = 0.5;
 const STRETCH = 1.4;
 const TICKS = [0, 0.25, 0.5, 0.75];
 
-const RefreshIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 12a8 8 0 1 1-2.34-5.66" />
-    <path d="M20 4v4h-4" />
-  </svg>
-);
+// dial's one icon language, the dot matrix (R-005)
+const RefreshIcon = () => <Icon name="refresh" />;
 
 /** A list that asks the hub for fresh readings when it is pulled down past one detent, or when its refresh key is pressed. */
 export const PullToRefresh = forwardRef<HTMLDivElement, PullToRefreshProps>(function PullToRefresh(
@@ -168,6 +166,21 @@ export const PullToRefresh = forwardRef<HTMLDivElement, PullToRefreshProps>(func
     };
   }, [disabled, run, spring]);
 
+  // a frame of a set height, one whose list runs past it, or one whose list the open band pushes down while
+  // working, takes a Tab stop, so the arrows and Page keys scroll it (WCAG 2.1.1); a frame that grows with
+  // its list stays out of the Tab order
+  const [scrolls, setScrolls] = useState(false);
+  useEffect(() => {
+    const el = scroller.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const check = () => setScrolls(el.scrollHeight > el.clientHeight + 1);
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    Array.from(el.children).forEach((c) => ro.observe(c));
+    check();
+    return () => ro.disconnect();
+  }, []);
+
   const setRoot = useCallback((node: HTMLDivElement | null) => {
     root.current = node;
     if (typeof ref === 'function') ref(node);
@@ -200,7 +213,7 @@ export const PullToRefresh = forwardRef<HTMLDivElement, PullToRefreshProps>(func
           <RefreshIcon />
         </IconButton>
       </div>
-      <div ref={scroller} role="region" aria-labelledby={labelId} className={styles.scroller}>
+      <div ref={scroller} role="region" aria-labelledby={labelId} tabIndex={scrolls || height !== undefined || state === 'working' ? 0 : undefined} className={styles.scroller}>
         <div className={styles.gauge}>
           {state === 'working' ? (
             <div className={styles.work}><Progress size="sm" label={label} /></div>

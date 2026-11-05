@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Navbar · three ways to print a top bar</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ h2{font-size:13px;font-weight:500;margin:26px 0 10px;color:var(--ds-text-secondary)}
+ .bar{box-sizing:border-box;display:flex;align-items:center;gap:8px;inline-size:860px;padding:6px;border-radius:var(--ds-corner-panel);background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .bar.narrow{inline-size:340px}
+ .brand{padding-inline:14px;font-size:16px;font-weight:500;letter-spacing:0}
+ nav{display:flex;gap:2px;margin-inline-end:auto}
+ a{display:inline-flex;align-items:center;min-block-size:44px;padding-inline:14px;font-size:14px;color:var(--ds-text-secondary);text-decoration:none;border-radius:var(--ds-corner-mark)}
+ .key{display:inline-grid;place-items:center;inline-size:44px;block-size:44px;border-radius:50%;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);border:1px solid var(--ds-line-ring);font-size:12px}
+ .word{display:inline-flex;align-items:center;block-size:44px;padding-inline:18px;border-radius:999px;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);border:1px solid var(--ds-line-ring);font-size:14px}
+ /* A: printed words, ink bar under the current one (Tabs family) */
+ .A a[aria-current]{color:var(--ds-text-primary);font-weight:500;box-shadow:inset 0 -4px 0 -2px var(--ds-text-primary)}
+ /* B: legend, one ink index dot before the lit word, the rest wait lighter */
+ .B a{gap:8px}
+ .B a::before{content:"";inline-size:6px;block-size:6px;border-radius:50%;background:transparent}
+ .B a[aria-current]{color:var(--ds-text-primary);font-weight:500}
+ .B a[aria-current]::before{background:var(--ds-text-primary)}
+ /* C: links sit in a recessed window, the lit word on a raised plate */
+ .C nav{padding:3px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);margin-inline-end:auto}
+ .C a{min-block-size:38px;border-radius:var(--ds-corner-mark)}
+ .C a[aria-current]{color:var(--ds-text-primary);font-weight:500;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part)}
+</style></head><body>
+<h1>Navbar · brand, links, actions, Menu key</h1>
+<h2>A · printed words, ink bar under the current one</h2>
+<div class="bar A"><span class="brand">dial</span><nav aria-label="A"><a href="#" aria-current="page">Rooms</a><a href="#">Schedules</a><a href="#">Devices</a><a href="#">Help</a></nav><span class="word">Sign in</span></div>
+<div class="bar A narrow" style="margin-top:12px"><span class="brand">dial</span><span style="margin-inline-end:auto"></span><span class="word">Menu</span></div>
+<h2>B · legend, ink index dot before the lit word</h2>
+<div class="bar B"><span class="brand">dial</span><nav aria-label="B"><a href="#" aria-current="page">Rooms</a><a href="#">Schedules</a><a href="#">Devices</a><a href="#">Help</a></nav><span class="word">Sign in</span></div>
+<div class="bar B narrow" style="margin-top:12px"><span class="brand">dial</span><span style="margin-inline-end:auto"></span><span class="word">Menu</span></div>
+<h2>C · links in a recessed window, lit word on a plate</h2>
+<div class="bar C"><span class="brand">dial</span><nav aria-label="C"><a href="#" aria-current="page">Rooms</a><a href="#">Schedules</a><a href="#">Devices</a><a href="#">Help</a></nav><span class="word">Sign in</span></div>
+<div class="bar C narrow" style="margin-top:12px"><span class="brand">dial</span><span style="margin-inline-end:auto"></span><span class="word">Menu</span></div>
+</body></html>

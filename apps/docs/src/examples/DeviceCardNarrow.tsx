@@ -3,7 +3,7 @@ import { DeviceCard } from 'dial-react';
 
 export default function DeviceCardNarrow() {
   return (
-    <div style={{ inlineSize: 260 }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}>
       <DeviceCard
         model="tuner 1"
         display={{ label: 'Radio', value: '88.6', unit: 'MHz', digits: 4 }}

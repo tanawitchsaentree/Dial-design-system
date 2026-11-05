@@ -45,7 +45,7 @@ export const HEADING: Depth = {
       do: <Heading level={3}>Heater settings</Heading>, doNote: 'Sentence case and a plain name.',
       dont: <Heading level={3}>Configure Your Heater Settings Here</Heading>, dontNote: 'Title case and extra words.',
     },
-    overflow: { text: 'A long heading wraps onto the next line and keeps its tight leading. A long word breaks inside the column.', render: <div data-overflow-demo style={{ inlineSize: 200, overflowWrap: 'anywhere' }}><Heading level={3}>Kitchen extractor hood boost schedule</Heading></div> },
+    overflow: { text: 'A long heading wraps onto the next line and keeps its tight leading. A long word breaks inside the column.', render: <div data-overflow-demo style={{ inlineSize: 'min(100%, var(--ds-layout-frame-narrow))', overflowWrap: 'anywhere' }}><Heading level={3}>Kitchen extractor hood boost schedule</Heading></div> },
     rtl: { text: 'In right-to-left languages the heading starts on the right.', render: <div dir="rtl"><Heading level={3}>غرفة المعيشة</Heading></div> },
     expansion: { text: 'German and Finnish names run about 30% longer and wrap within the column.', render: <Heading level={3}>Wohnzimmerheizung Einstellungen</Heading> },
   },

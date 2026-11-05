@@ -1,19 +1,18 @@
 // Usage tab for BottomNav (component-depth.md U1–U14). BottomNav prints the app's main sections on the case.
-import { BottomNav } from 'dial-react';
+import { BottomNav, Icon } from 'dial-react';
 import type { Depth } from './types';
 
-const g = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
 const icon = {
-  home: <svg {...g}><path d="M4 11l8-7 8 7v9H4z" /><path d="M10 20v-5h4v5" /></svg>,
-  rooms: <svg {...g}><rect x="4" y="4" width="7" height="7" /><rect x="13" y="4" width="7" height="7" /><rect x="4" y="13" width="7" height="7" /><rect x="13" y="13" width="7" height="7" /></svg>,
-  media: <svg {...g}><circle cx="12" cy="12" r="8.5" /><path d="M10 8.5l5.5 3.5-5.5 3.5z" /></svg>,
-  settings: <svg {...g}><path d="M4 7h10M18 7h2M4 17h2M10 17h10" /><circle cx="16" cy="7" r="2" /><circle cx="8" cy="17" r="2" /></svg>,
+  home: <Icon name="home" />,
+  rooms: <Icon name="room" />,
+  media: <Icon name="play" />,
+  settings: <Icon name="settings" />,
 };
 type Sec = { value: string; label: string };
 const make = (list: Sec[]) => list.map((s) => ({ ...s, href: `/${s.value}`, icon: icon[s.value as keyof typeof icon] ?? icon.home }));
 const FOUR = make([{ value: 'home', label: 'Home' }, { value: 'rooms', label: 'Rooms' }, { value: 'media', label: 'Media' }, { value: 'settings', label: 'Settings' }]);
 const stop = (_v: string, e: React.MouseEvent) => e.preventDefault();
-const Phone = ({ children }: { children: React.ReactNode }) => <div style={{ inlineSize: 'min(100%, 375px)' }}>{children}</div>;
+const Phone = ({ children }: { children: React.ReactNode }) => <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))' }}>{children}</div>;
 const Bar = (p: { items?: ReturnType<typeof make>; current?: string; label?: string }) => <Phone><BottomNav layout="bar" items={p.items ?? FOUR} current={p.current ?? 'rooms'} label={p.label} onNavigate={stop} /></Phone>;
 
 export const BOTTOM_NAV: Depth = {
@@ -36,7 +35,7 @@ export const BOTTOM_NAV: Depth = {
     parts: [
       { part: 'Strip', selector: '[data-component="BottomNav"]', what: 'A plastic band at unit height along the bottom edge, with room under it for the phone’s home indicator.' },
       { part: 'Link', selector: '[data-component="BottomNav"] a', what: 'One section, a quarter of the strip wide and at least 52px tall.' },
-      { part: 'Glyph', selector: '[data-component="BottomNav"] a > span:first-child', what: 'A 20px stroke drawing printed over the word.' },
+      { part: 'Glyph', selector: '[data-component="BottomNav"] a > span:first-child', what: 'A 20px dot-matrix Icon printed over the word.' },
       { part: 'Word', selector: '[data-component="BottomNav"] a > span:nth-child(2)', what: 'The section name at the label size; the current one is set in medium weight.' },
       { part: 'Mark', selector: '[data-component="BottomNav"] a[aria-current] > span:last-child', what: 'A short ink bar under the current word, the same mark Tabs uses.' },
     ],
@@ -55,7 +54,7 @@ export const BOTTOM_NAV: Depth = {
       ['Down the inline start on a wide screen', 'layout auto prints the rail beside the page when the screen is wider than it is tall.'],
       ['In the flow of a page', 'Leave fixed off to place it in your own shell, as in these examples.'],
     ],
-    examples: [{ title: 'The rail beside a page', render: <div style={{ blockSize: 240, display: 'flex' }}><BottomNav layout="rail" items={FOUR} current="media" onNavigate={stop} /></div> }],
+    examples: [{ title: 'The rail beside a page', render: <div style={{ blockSize: 'var(--ds-layout-frame-xs)', display: 'flex' }}><BottomNav layout="rail" items={FOUR} current="media" onNavigate={stop} /></div> }],
   },
   combinations: {
     good: [['BottomNav + Snackbar', 'The snackbar sits just above the strip, so Undo is under the thumb.'], ['BottomNav + Sheet', 'A sheet rises over the strip and the strip stays where it was when it closes.'], ['BottomNav + DeviceCard', 'The Rooms section shows a card per device on the page above the strip.']],
@@ -92,7 +91,7 @@ export const BOTTOM_NAV: Depth = {
     {
       name: 'layout',
       rules: <p>Leave it on auto, so a phone held upright gets the strip and a wide screen the rail. Use bar or rail only in a shell that has already decided its own layout.</p>,
-      pair: { do: <Bar />, doNote: 'The strip on a phone.', dont: <div style={{ inlineSize: 'min(100%, 375px)', blockSize: 220, display: 'flex' }}><BottomNav layout="rail" items={FOUR} current="rooms" onNavigate={stop} /></div>, dontNote: 'A rail forced on a phone takes most of the width.' },
+      pair: { do: <Bar />, doNote: 'The strip on a phone.', dont: <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))', blockSize: 'var(--ds-layout-frame-xs)', display: 'flex' }}><BottomNav layout="rail" items={FOUR} current="rooms" onNavigate={stop} /></div>, dontNote: 'A rail forced on a phone takes most of the width.' },
     },
     {
       name: 'fixed',

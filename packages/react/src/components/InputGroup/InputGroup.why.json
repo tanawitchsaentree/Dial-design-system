@@ -1,0 +1,136 @@
+{
+  "concept": "InputGroup is an Input with something fixed at one or both ends of the same recessed window: a word like THB or https://, a unit, or a small key such as Copy. The window stays one part with one ring, and a hairline rule shows where the typed text stops and the fixed printing begins.",
+  "kind": [
+    "input group",
+    "field with add-on",
+    "prefix and suffix field"
+  ],
+  "family": "Input",
+  "family_difference": "InputGroup takes a leading and a trailing add-on, a word or an IconButton, ruled off inside the one well, where Input only prints a short unit after the value.",
+  "default_to_avoid": [
+    {
+      "pattern": "InputGroup as a bootstrap-style input group: a grey box glued to the side of a bordered input, each with its own border and its own focus state",
+      "why_not": "Two frames mean two edges and two focus states, so the person cannot tell what is typed and what is printed; here the single recess holds both."
+    }
+  ],
+  "references": [
+    {
+      "source": "system/FORM.md input class: recessed well, full width of its column, label printed above on the inset line"
+    },
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the entry window is a recess in the body, with its unit printed on the case beside it"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The window is one surface.sunken with elevation.well. The add-ons sit inside it and never raise their own plate."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The label stays printed above the well on the inset line, and the add-ons are printing inside the well, not labels of their own."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every part that takes the keyboard shows the same ring",
+      "form": "One ring is drawn around the whole well when the text field or a key in an add-on holds focus, so the group reads as one part."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "A key in an add-on keeps its 44px disc and runs the full height of the well, so the well stays 44px tall."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/input-group/index.html",
+    "options": [
+      { "id": "A", "name": "ruled cells in one well" },
+      { "id": "B", "name": "printed words inside the well, no rule" },
+      { "id": "C", "name": "raised plates butted onto the well" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps one recess and one ring, and the hairline rule tells typed text from printing (P2 depth, P3 interaction). B has no rule, so THB beside 1,250 reads as one typed string. C raises a plate that looks pressable when it is only a word, splits the window in two edges and breaks the single ring."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The field stacks its label, well and messages in one column so the label sits on the inset line above the well."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The printed name uses the label size in medium weight, like the printing beside every other part of the unit."
+    },
+    "well": {
+      "p": "P2",
+      "axis": "depth",
+      "why": "One recess holds the add-ons and the text field, with shade on its top-left inner edge, so the group is a single window."
+    },
+    "field": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "Typed text is primary ink on the sunken plastic at more than 4.5:1, with a line box tall enough for Thai marks."
+    },
+    "addon": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "A fixed word is printed in secondary ink at the label size and ruled off from the text by a hairline, so printing and typing are told apart without colour."
+    },
+    "hint": {
+      "p": "P5",
+      "axis": "colour",
+      "why": "The hint is secondary ink in the caption size under the well."
+    },
+    "error": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The error is critical red with a glyph and words, never orange and never colour alone."
+    },
+    "glyph": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A printed mark beside the words means invalid is never told by colour alone, for people who cannot see the red."
+    },
+    "md": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The default well is 44px tall so the text field and a key in an add-on both meet the 44px target."
+    },
+    "lg": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The large well is 52px tall with larger text, to hold the 52px key of a phone sheet."
+    }
+  },
+  "states": {
+    "focus-within": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The whole well shows the same dark ring when the text field or a key inside it holds the keyboard focus."
+    },
+    "data-invalid=true": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "An invalid well draws its edge in the critical red, which is never orange, and the message below names the problem."
+    },
+    "data-disabled=true": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled group loses its recess shadow and its print fades to half, so it reads as not taking input right now."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the well and the rules keep real borders and the focus ring uses the system highlight colour."
+    }
+  },
+  "motion": {}
+}

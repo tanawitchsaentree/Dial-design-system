@@ -1,5 +1,5 @@
 // Behaviour checks for Progress, run by tooling/kiln/conformance.mjs on the built book. Progress is a
-// recessed groove that fills with ink (P4); its indeterminate form is a still row of ticks (P6).
+// recessed groove that fills with a resin rod (P4, R-005); its indeterminate form is a still row of ticks (P6).
 export default async function progress({ check, expect, page, go, main }) {
   const all = () => main().locator('[data-component="Progress"]');
   const DET = '[data-component="Progress"][data-state="determinate"]';
@@ -32,14 +32,14 @@ export default async function progress({ check, expect, page, go, main }) {
     return `${r.n} indeterminate, nothing moves`;
   });
 
-  await check('Progress', 'the fill is ink, never the accent', async () => {
+  await check('Progress', 'the fill is never the accent', async () => {
     await go('/components/progress/code');
     const r = await main().locator(DET).first().evaluate((e) => {
       const probe = (c) => { const d = document.createElement('span'); d.style.color = `var(${c})`; document.body.append(d); const x = getComputedStyle(d).color; d.remove(); return x; };
       const fill = e.children[1]?.firstElementChild;
-      return { fill: fill ? getComputedStyle(fill).backgroundColor : null, ink: probe('--ds-grille-hole-on'), accent: probe('--ds-action-accent') };
+      return { fill: fill ? getComputedStyle(fill).backgroundColor : null, accent: probe('--ds-action-accent') };
     });
-    expect(r.fill && r.fill === r.ink && r.fill !== r.accent, `fill ${r.fill}, ink ${r.ink}, accent ${r.accent}`);
+    expect(r.fill && r.fill !== r.accent, `fill ${r.fill}, accent ${r.accent}`);
     return `fill ${r.fill}`;
   });
 
@@ -62,5 +62,24 @@ export default async function progress({ check, expect, page, go, main }) {
     const n = await all().evaluateAll((els) => els.filter((e) => e.tabIndex >= 0).length);
     expect(n === 0, `${n} focusable progress bars`);
     return 'not focusable';
+  });
+
+  // R-005 (2026-11-02): "สีมันดู digital เกินไป … สีมันแข็ง" — a level is a resin rod in the groove, not screen ink
+  await check('Progress', 'the fill is the resin tone lit on its upper edge, never the screen ink, and 3:1 off its groove', async () => {
+    for (const theme of ['light', 'dark']) {
+      await go(`/components/progress/code?theme=${theme}`);
+      const r = await main().locator(DET).first().evaluate((e) => {
+        const fill = e.querySelector('[class*="fill"]'); const groove = fill?.parentElement;
+        const probe = (v) => { const d = document.createElement('i'); d.style.color = `var(${v})`; e.appendChild(d); const c = getComputedStyle(d).color; d.remove(); return c; };
+        const lum = (c) => { const [r, g, b] = c.match(/[\d.]+/g).slice(0, 3).map(Number).map((x) => { x /= 255; return x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+        const f = getComputedStyle(fill).backgroundColor, g = getComputedStyle(groove).backgroundColor;
+        const [a, b] = [lum(f), lum(g)].sort((x, y) => y - x);
+        return { fill: f, ring: probe('--ds-line-ring'), ink: probe('--ds-grille-hole-on'), lit: getComputedStyle(fill).boxShadow.includes('inset'), ratio: (a + 0.05) / (b + 0.05) };
+      });
+      expect(r.fill === r.ring && r.fill !== r.ink, `${theme}: fill ${r.fill} (ring ${r.ring}, ink ${r.ink})`);
+      expect(r.lit, `${theme}: no lit upper edge on the fill`);
+      expect(r.ratio >= 3, `${theme}: fill ${r.ratio.toFixed(2)}:1 off the groove`);
+    }
+    return 'resin fill, lit, ≥3:1 in both themes';
   });
 }

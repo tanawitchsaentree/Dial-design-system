@@ -1,0 +1,137 @@
+{
+  "concept": "Timeline prints a log of things that already happened, the way a device prints its last events on a tape: the time in a column at the left, a hairline of ink down the case, and a small node on the line where each event meets it. It reports the past and does nothing else.",
+  "kind": [
+    "timeline",
+    "event log",
+    "history",
+    "activity feed"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "timeline of coloured icon discs on a thick coloured line with a card for each event",
+      "why_not": "Coloured discs tell the kind of event by colour alone and look like keys that can be pressed, and a card around every event turns a log into a pile of boxes."
+    },
+    {
+      "pattern": "Timeline copied from Stepper with numbered windows and a dotted rail",
+      "why_not": "A Stepper counts sections still to come; a log has no numbers, so the time is printed and the line is solid ink."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): figures printed in a fixed column beside the keys"
+    },
+    {
+      "source": "Schematic faces of Braun audio gear: a hairline joins parts and a small node marks where it meets one"
+    },
+    {
+      "source": "system/CONCEPT.md P8 Relations are drawn: lines run between the parts they join with a node at each part"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P8",
+      "axis": "shape",
+      "consequence": "a relation is a hairline of ink with a small node where it meets a part",
+      "form": "The rail is a one-pixel hairline in ring ink and each event has a small ring node on it, so the line joins the events in order."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "tabular figures everywhere a number changes",
+      "form": "The time is printed in tabular figures in a fixed column, so the minutes of every event line up under each other."
+    },
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "the chosen word carries one ink index mark beside it",
+      "form": "The latest event is the one lit entry: its node is filled with ink and its title turns medium, and the rest stay plain rings."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "The node, the line and the text are all ink, so a log never takes the unit's one orange."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "no entry choreography, no idle animation",
+      "form": "Events are printed in place and nothing slides in or fades, so a log that grows adds a row and moves nothing else."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/timeline/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "time column with a hairline rail and nodes"
+      },
+      {
+        "id": "B",
+        "name": "time in a recessed window"
+      },
+      {
+        "id": "C",
+        "name": "tape with ticks and the time above"
+      }
+    ],
+    "reason": "A follows P8, a hairline with a node where it meets a part, and keeps the times in one aligned column; B repeats the recessed window of Stepper and Input so the times look like fields, and C reads as a block quote with a ruler and breaks the time column."
+  },
+  "parts": {
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "An ordered list, one row per event in the order given, so the order is read out and positions do not reflow when an event is added."
+    },
+    "item": {
+      "p": "P5",
+      "axis": "space",
+      "why": "An event holds its time, rail and text in a three-column grid so every time, node and title shares one column."
+    },
+    "time": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The time is a time element in the label size and secondary ink with tabular figures, right-aligned to the rail."
+    },
+    "rail": {
+      "p": "P8",
+      "axis": "shape",
+      "why": "The column that holds the hairline; it runs to the next event and stops after the last one."
+    },
+    "node": {
+      "p": "P8",
+      "axis": "shape",
+      "why": "A small ring where the hairline meets an event, level with the first line of its title; the lit event's node carries the word Latest as its label."
+    },
+    "content": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The column that holds the title and detail, with a gap under it so the next event starts one clear step down."
+    },
+    "title": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The event's name in the body size in primary ink, level with the first line of the row; the lit event turns it medium."
+    },
+    "detail": {
+      "p": "P5",
+      "axis": "space",
+      "why": "Optional text under the title in secondary ink, aligned to the title's left edge so the log reads down one line."
+    }
+  },
+  "states": {
+    "data-latest": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "The node fills with ink and the title turns medium, and the node is read out as Latest, so the lit entry is a shape, a weight and a word, not a colour."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the hairline and the node draw in the text colour and the filled node stays filled."
+    }
+  },
+  "motion": {}
+}

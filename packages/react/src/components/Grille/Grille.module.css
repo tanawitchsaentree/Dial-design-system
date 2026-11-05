@@ -12,6 +12,8 @@
   border-radius: var(--ds-corner-round);
   background: var(--ds-grille-hole);
   box-shadow: var(--ds-elevation-well);
+  /* a hole lights and dims over one segment step, like the window's figures, never in one frame (D-008) */
+  transition: background-color var(--ds-motion-segment) var(--ds-motion-easing);
   transition: background-color var(--ds-motion-fill) var(--ds-motion-easing);
 }
 .on { background: var(--ds-grille-hole-on); }

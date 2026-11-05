@@ -1,0 +1,61 @@
+/* Image — a picture in a recessed window (lab apps/lab/image pick B). The window is AspectRatio, so the height is held
+   before the picture loads. Not a control, so no hover, press or focus rule. No orange, no motion. */
+.root {
+  display: block;
+  box-sizing: border-box;
+  inline-size: 100%;
+  margin: 0;
+  font-family: var(--ds-type-family);
+}
+.window {
+  box-sizing: border-box;
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+}
+/* the inverse light lies over the picture too, so a photo reads as seen through a hole */
+.window::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--ds-elevation-well);
+  pointer-events: none;
+}
+.image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+.window[data-fit='contain'] .image { object-fit: contain; }
+/* until the picture is known to be there, the browser's own alt text or icon must not show */
+.window[data-state='loading'] .image { color: transparent; }
+.placeholder {
+  display: grid;
+  place-items: center;
+}
+.mark {
+  display: block;
+  inline-size: var(--ds-control-mark);
+  border-block-start: var(--ds-width-ring) solid var(--ds-text-secondary);
+}
+/* a failed picture prints a second dash: the count tells loading from failed without colour */
+.window[data-state='error'] .mark {
+  block-size: var(--ds-space-1-5);
+  border-block-end: var(--ds-width-ring) solid var(--ds-text-secondary);
+}
+.caption {
+  margin-block-start: var(--ds-space-2);
+  font-size: var(--ds-type-caption);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  overflow-wrap: anywhere;
+}
+@media (forced-colors: active) {
+  .window { border-color: CanvasText; }
+  .window::after { box-shadow: none; }
+  .mark,
+  .window[data-state='error'] .mark { border-color: CanvasText; }
+}

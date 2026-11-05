@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Autocomplete · three ways to suggest under a field</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:320px;min-block-size:380px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ .lab{font-size:14px;font-weight:500;margin:0 0 8px}
+ .f{position:relative}
+ .well{display:flex;align-items:center;box-sizing:border-box;min-block-size:44px;padding-inline:16px;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);font-size:16px}
+ .opt{display:flex;align-items:center;box-sizing:border-box;min-block-size:44px;padding-inline:16px;font-size:16px;color:var(--ds-text-secondary);border:1px solid transparent;border-radius:var(--ds-corner-media)}
+ .opt b{font-weight:500;color:var(--ds-text-primary)}
+ .note{font-size:12px;color:var(--ds-text-secondary);padding:8px 16px;margin:0}
+ /* A: plastic panel floating under the well, reached row sinks into a well, typed part in medium weight */
+ .A .panel{position:absolute;inset-inline:0;inset-block-start:calc(100% + 4px);padding:4px;border-radius:var(--ds-corner-inner);background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-float);z-index:2}
+ .A .on{background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);color:var(--ds-text-primary)}
+ /* B: the well opens downward: one recess, a seam between field and rows, square corners where they meet */
+ .B .well{border-end-start-radius:0;border-end-end-radius:0}
+ .B .panel{position:absolute;inset-inline:0;inset-block-start:100%;padding:4px;border:1px solid var(--ds-line-ring);border-block-start:0;border-end-start-radius:var(--ds-corner-media);border-end-end-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);z-index:2}
+ .B .opt{border-radius:0;border-block-start:1px solid var(--ds-line-divider)}
+ .B .on{border-color:var(--ds-line-ring);background:var(--ds-surface-solid);color:var(--ds-text-primary);border-radius:var(--ds-corner-media)}
+ /* C: legend: no container, printed rows on the body, ink index bar beside the reached one */
+ .C .panel{position:absolute;inset-inline:0;inset-block-start:calc(100% + 4px);background:var(--ds-surface-solid);z-index:2}
+ .C .opt{border-radius:0;position:relative}
+ .C .on{color:var(--ds-text-primary)}
+ .C .on::before{content:"";position:absolute;inset-inline-start:0;inset-block:8px;inline-size:2px;background:var(--ds-text-primary)}
+ .spin{display:inline-grid;grid-template-columns:repeat(3,8px);gap:4px;margin-inline-end:12px}
+ .spin i{inline-size:8px;block-size:8px;border-radius:50%;background:var(--ds-grille-hole);box-shadow:var(--ds-elevation-well)}
+ .spin i.l{background:var(--ds-grille-hole-on)}
+</style></head><body>
+<h1>Autocomplete · suggestions under a text field that stays valid with free text</h1>
+<div class="row">
+ <div class="unit A"><h2>A · plastic panel under the well, reached row sinks</h2><p class="lab">City</p>
+  <div class="f"><div class="well">ba</div>
+   <div class="panel"><div class="opt on"><b>Ba</b>ngkok</div><div class="opt"><b>Ba</b>ngalore</div><div class="opt"><b>Ba</b>rcelona</div><p class="note"><span class="spin"><i class="l"></i><i class="l"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Searching</p></div></div></div>
+ <div class="unit B"><h2>B · the well opens downward, rows divided by seams</h2><p class="lab">City</p>
+  <div class="f"><div class="well">ba</div>
+   <div class="panel"><div class="opt on"><b>Ba</b>ngkok</div><div class="opt"><b>Ba</b>ngalore</div><div class="opt"><b>Ba</b>rcelona</div><p class="note"><span class="spin"><i class="l"></i><i class="l"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Searching</p></div></div></div>
+ <div class="unit C"><h2>C · legend on the body, ink bar on the reached row</h2><p class="lab">City</p>
+  <div class="f"><div class="well">ba</div>
+   <div class="panel"><div class="opt on"><b>Ba</b>ngkok</div><div class="opt"><b>Ba</b>ngalore</div><div class="opt"><b>Ba</b>rcelona</div><p class="note"><span class="spin"><i class="l"></i><i class="l"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Searching</p></div></div></div>
+</div>
+</body></html>

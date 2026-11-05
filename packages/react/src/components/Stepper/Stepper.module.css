@@ -1,0 +1,70 @@
+/* Stepper — numbers in recessed windows joined by a dotted rail (lab apps/lab/stepper pick B).
+   The digit is a CSS counter, so it is printed by position. No orange. */
+.root {
+  counter-reset: step;
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.step {
+  counter-increment: step;
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--ds-control-md) 1fr;
+  column-gap: var(--ds-gap-xl);
+  padding-block-end: var(--ds-gap-2xl);
+}
+.step:last-child { padding-block-end: 0; }
+.marker {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  inline-size: var(--ds-control-md);
+  block-size: var(--ds-control-md);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-medium);
+  color: var(--ds-text-secondary);
+}
+.marker::before { content: counter(step); }
+.step[data-status='done'] .marker::before { content: none; }
+.step[data-status='current'] .marker { color: var(--ds-text-primary); }
+.step[data-status='done'] .marker { color: var(--ds-text-primary); }
+.title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  min-block-size: var(--ds-control-md);
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-tight);
+  color: var(--ds-text-secondary);
+}
+.step[data-status='current'] .title,
+.step[data-status='done'] .title { color: var(--ds-text-primary); }
+.body {
+  grid-column: 2;
+  padding-block-start: var(--ds-gap-md);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.rail {
+  position: absolute;
+  inset-block: calc(var(--ds-control-md) + var(--ds-gap-sm)) var(--ds-gap-sm);
+  inset-inline-start: calc(var(--ds-control-md) / 2);
+  inline-size: var(--ds-width-hairline);
+  background: radial-gradient(circle, var(--ds-line-ring) 50%, transparent 55%) 0 0 / 100% var(--ds-gap-lg) repeat-y;
+  transform: translateX(-50%);
+}
+.step:last-child .rail { display: none; }
+@media (forced-colors: active) {
+  .marker { border-color: CanvasText; }
+  .rail { background: radial-gradient(circle, CanvasText 50%, transparent 55%) 0 0 / 100% var(--ds-gap-lg) repeat-y; }
+}

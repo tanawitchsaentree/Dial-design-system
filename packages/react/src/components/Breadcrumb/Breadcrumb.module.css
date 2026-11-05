@@ -1,0 +1,96 @@
+/* Breadcrumb — names in a row, dotted leaders between, one ink index mark under the current page
+   (lab apps/lab/breadcrumb pick C). Printing is flat: no height, no shadow. No orange. */
+.root {
+  display: block;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.list {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  list-style: none;
+}
+/* open (or fold never): the path may wrap onto more lines instead of folding */
+.list[data-open] { flex-wrap: wrap; }
+.item {
+  display: flex;
+  flex: none;
+  align-items: center;
+  min-block-size: var(--ds-control-md);
+}
+/* folded: the last name may shrink and wrap so a long page name never pushes the row wider than the unit */
+.list[data-collapsed] .item:last-child { flex: 0 1 auto; min-inline-size: var(--ds-gap-none); }
+.item[data-hidden] { display: none; }
+.item[data-more] { flex: none; }
+.link,
+.current {
+  display: inline-grid;
+  align-items: center;
+  justify-items: center;
+  min-block-size: var(--ds-control-md);
+  padding-inline: var(--ds-gap-md);
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-body);
+  overflow-wrap: anywhere;
+}
+.link {
+  min-inline-size: var(--ds-layout-touch);
+  border-radius: var(--ds-corner-mark);
+  color: var(--ds-text-secondary);
+  font-weight: var(--ds-type-weight-regular);
+  text-decoration: none;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.link:hover { color: var(--ds-text-primary); }
+.current {
+  align-content: center;
+  gap: var(--ds-gap-xs);
+  color: var(--ds-text-primary);
+  font-weight: var(--ds-type-weight-medium);
+}
+.mark {
+  inline-size: var(--ds-control-thumb);
+  block-size: var(--ds-gap-none);
+  border-block-end: var(--ds-width-bar) solid var(--ds-text-primary);
+  border-radius: var(--ds-corner-round);
+}
+/* the leader: a short run of printed dots, drawn like the Stepper rail but along the row */
+.leader {
+  inline-size: var(--ds-gap-3xl);
+  block-size: var(--ds-gap-sm);
+  background: radial-gradient(circle, var(--ds-line-ring) 50%, transparent 55%) 0 0 / var(--ds-gap-lg) 100% repeat-x;
+}
+.more {
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: var(--ds-layout-touch);
+  min-block-size: var(--ds-control-md);
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-mark);
+  background: transparent;
+  color: var(--ds-text-secondary);
+  font-family: inherit;
+  cursor: pointer;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.more:hover { color: var(--ds-text-primary); }
+.link:focus-visible,
+.more:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .more { transition: color var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .leader { background: radial-gradient(circle, CanvasText 50%, transparent 55%) 0 0 / var(--ds-gap-lg) 100% repeat-x; }
+  .mark { border-block-end-color: CanvasText; }
+  .link { color: LinkText; }
+  .more { color: ButtonText; border-color: ButtonText; }
+}

@@ -1,0 +1,119 @@
+/* Pagination — printed page numbers, an ink index mark under the current one, two round keys (lab apps/lab/pagination pick B).
+   Numbers are printing (flat); only previous and next are keys. No orange. */
+.root {
+  display: block;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.list {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  list-style: none;
+}
+.item {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-block-size: var(--ds-control-md);
+}
+.page,
+.key {
+  box-sizing: border-box;
+  display: inline-grid;
+  place-items: center;
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  border: var(--ds-width-hairline) solid transparent;
+  background: transparent;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.page {
+  position: relative;
+  min-inline-size: var(--ds-layout-touch);
+  min-block-size: var(--ds-control-md);
+  padding-inline: var(--ds-gap-sm);
+  border-radius: var(--ds-corner-mark);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--ds-type-leading-body);
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.page:hover { color: var(--ds-text-primary); }
+.page[data-current] {
+  color: var(--ds-text-primary);
+  font-weight: var(--ds-type-weight-medium);
+  cursor: default;
+}
+.mark {
+  position: absolute;
+  inset-block-end: var(--ds-gap-sm);
+  inset-inline: var(--ds-gap-none);
+  margin-inline: auto;
+  inline-size: var(--ds-control-thumb);
+  block-size: var(--ds-gap-none);
+  border-block-end: var(--ds-width-bar) solid var(--ds-text-primary);
+  border-radius: var(--ds-corner-round);
+  visibility: hidden;
+}
+.page[data-current] .mark { visibility: visible; }
+.key {
+  flex: none;
+  inline-size: var(--ds-control-key);
+  block-size: var(--ds-control-key);
+  border-radius: var(--ds-corner-round);
+  background: var(--ds-surface-raised);
+  box-shadow: var(--ds-elevation-part);
+  color: var(--ds-text-secondary);
+  transition:
+    transform var(--ds-motion-release) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-release) var(--ds-motion-easing),
+    color var(--ds-motion-hover) var(--ds-motion-easing),
+    opacity var(--ds-motion-release) var(--ds-motion-easing);
+}
+.key:hover { color: var(--ds-text-primary); }
+.key:active {
+  transform: translate(calc(var(--ds-motion-press-travel) / 3), var(--ds-motion-press-travel));
+  box-shadow: none;
+  transition-duration: var(--ds-motion-press);
+}
+.key[aria-disabled='true'] {
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: var(--ds-opacity-disabled);
+  transform: none;
+}
+.gap {
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: var(--ds-layout-touch);
+  color: var(--ds-text-secondary);
+}
+.page:focus-visible,
+.key:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+@media (prefers-reduced-motion: reduce) {
+  .key {
+    transition:
+      color var(--ds-motion-hover) var(--ds-motion-easing),
+      opacity var(--ds-motion-hover) var(--ds-motion-easing);
+  }
+  .key:active { transform: none; }
+}
+@media (forced-colors: active) {
+  .key { border-color: ButtonText; color: ButtonText; }
+  .key[aria-disabled='true'] { border-color: GrayText; color: GrayText; }
+  .page { color: LinkText; }
+  .page[data-current] { color: CanvasText; }
+  .mark { forced-color-adjust: none; border-block-end-color: ButtonText; }
+  .gap { color: CanvasText; }
+}

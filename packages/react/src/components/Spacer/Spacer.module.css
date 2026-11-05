@@ -1,0 +1,9 @@
+.root { display: block; flex-shrink: 0; box-sizing: border-box; pointer-events: none; }
+.block { block-size: var(--sp); }
+.inline { inline-size: var(--sp); }
+.flexible { flex-grow: 1; }
+.s-xs { --sp: var(--ds-stack-gap-xs); }
+.s-sm { --sp: var(--ds-stack-gap-sm); }
+.s-md { --sp: var(--ds-stack-gap-md); }
+.s-lg { --sp: var(--ds-stack-gap-lg); }
+.s-xl { --sp: var(--ds-stack-gap-xl); }

@@ -1,0 +1,18 @@
+{
+  "identity": false,
+  "identity_reason": "a layout primitive only places other components and has no look of its own to derive",
+  "concept": "Spacer is empty room of a fixed size on the 4px step, or room that takes what is left so one part is pushed to the far side of the unit. It prints nothing and is hidden from assistive tech.",
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "A spacer holds a fixed place and draws nothing, so the layout does not reflow between states." },
+    "block": { "p": "P6", "axis": "space", "why": "Vertical room between two stacked parts is cut to a token size so the rhythm of the column stays on the module." },
+    "inline": { "p": "P6", "axis": "space", "why": "Horizontal room between two parts in a row is cut to a token size so keys keep the same pitch along the row." },
+    "flexible": { "p": "P1", "axis": "space", "why": "Flexible room pushes the loud control to the lower or right edge, where the hand expects to find it." },
+    "s-xs": { "p": "P6", "axis": "space", "why": "The smallest room is one 4px step, the same pitch the grille holes sit on." },
+    "s-sm": { "p": "P6", "axis": "space", "why": "Two steps of room separate a label from the part it names, matching the small stack gap." },
+    "s-md": { "p": "P6", "axis": "space", "why": "Four steps of room separate neighbouring parts inside one unit face, matching the medium stack gap." },
+    "s-lg": { "p": "P6", "axis": "space", "why": "Six steps of room separate one unit from the next so each reads as its own appliance." },
+    "s-xl": { "p": "P6", "axis": "space", "why": "Eight steps of room separate groups of units, the same as the section gap of a stack." }
+  },
+  "states": {},
+  "motion": {}
+}

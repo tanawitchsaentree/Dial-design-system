@@ -1,0 +1,220 @@
+{
+  "concept": "NotificationCenter is the log tape of one appliance: what the home has said, printed in days, each line with a lamp that is lit while it waits to be read and a ring once it is read. It is built from List, Badge, IconButton, Button and EmptyState, adds no look of its own beyond the lamp, and says in words what the lamp says in shape.",
+  "kind": [
+    "notification center",
+    "notifications",
+    "inbox",
+    "activity feed"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "notification center as a list with a coloured unread dot, a bold red count bubble and a tinted unread row background",
+      "why_not": "The coloured dot and tint tell unread by colour alone and spend the unit's one orange on a count."
+    },
+    {
+      "pattern": "notification center of cards, one per item, with a swipe-to-dismiss gesture and a toast-style slide in",
+      "why_not": "A swipe has no keyboard map, and a slide in is entry choreography that a still appliance does not have."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): a lit segment against an unlit one is the only mark of state"
+    },
+    {
+      "source": "Braun TG 1000 tape recorder (Dieter Rams, 1963): printed counter and indicator lamps lit while the tape runs"
+    },
+    {
+      "source": "system/FORM.md display class: badge = printed lamp + word, status never told by colour alone"
+    },
+    {
+      "source": "WCAG 2.2 · 1.4.1 Use of Color and 4.1.3 Status Messages"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "the chosen word carries one ink index mark beside it",
+      "form": "A notification still waiting carries one lamp beside its title, a filled ink dot; a read one carries the same lamp as an empty ring, so the two differ by shape in greyscale."
+    },
+    {
+      "p": "P7",
+      "axis": "type",
+      "consequence": "the chosen one turns medium",
+      "form": "An unread title prints in the medium weight and a read one in regular, so the weight says the same as the lamp."
+    },
+    {
+      "p": "P7",
+      "axis": "colour",
+      "consequence": "the chosen word is printed at full ink and the waiting words one step lighter",
+      "form": "An unread line is primary ink and a read line is secondary ink, both at 4.5:1; neither is orange and the colour step is the third cue after shape and weight."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Mark-as-read and dismiss are IconButtons at 44px with a gap between them, and Mark all read is a 44px Button."
+    },
+    {
+      "p": "P3",
+      "axis": "interaction",
+      "consequence": "every mechanism has its keyboard map",
+      "form": "Every key is a real button reached by Tab and pressed with Space or Enter; on dismiss focus moves to the next line's dismiss key, so a run of lines can be cleared from the keyboard."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The title, the day headings and the lines all start on the body's inset line, and a day heading is printed above its lines, not beside them."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "A hidden status region says that a new notification arrived, politely and once, while the lines themselves stay a plain list that is not announced again."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Nothing in the center is orange; the unit that holds it keeps its one orange key for its own action."
+    },
+    {
+      "p": "P6",
+      "axis": "motion",
+      "consequence": "transitions only on state",
+      "form": "A dismissed line fades out on the exit motion and then leaves the list; lines arriving do not slide or fade in, they are announced instead."
+    }
+  ],
+  "variants": {
+    "picked": "A",
+    "by": "agent",
+    "lab": "apps/lab/notification-center/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "lamp: filled dot while unread, ring once read"
+      },
+      {
+        "id": "B",
+        "name": "ink index bar at the start edge of unread lines"
+      },
+      {
+        "id": "C",
+        "name": "unread lines sit in a recess"
+      }
+    ],
+    "reason": "A reuses the lamp shapes of Badge and the node of Timeline, so a filled dot against a ring differs in greyscale and in forced colours; B copies the bar List prints for a chosen row and would read as selected, and C puts a recess round each line, which makes a row look like an input and crowds the two 44px keys."
+  },
+  "parts": {
+    "root": {
+      "p": "P5",
+      "axis": "space",
+      "why": "One plastic body that holds the title, the days and the lines on a shared inset line, sized by its container so a popover or drawer can hold it."
+    },
+    "header": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The title, the unread count and Mark all read sit in one row on the inset line, with the key at the end where the hand rests."
+    },
+    "title": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The center's name in the emphasis size and medium weight; it also takes focus when the last line is gone, so focus is not lost."
+    },
+    "count": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "A Badge in its lamp and word form prints how many are unread, as text, so the count never rests on colour."
+    },
+    "markAll": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A 44px key that marks every line read; when none is unread it is dimmed and flat but keeps focus, so pressing it never drops the focus ring."
+    },
+    "group": {
+      "p": "P5",
+      "axis": "space",
+      "why": "One day: its heading and its lines, set apart from the next day by the section gap."
+    },
+    "day": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The day is a small label in secondary ink, a heading for navigation by assistive tech."
+    },
+    "list": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The List of one day, stripped of its own body so the center has one body and not a body per day."
+    },
+    "item": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "A line is a List row that stays in place; only its leaving moves, by fading."
+    },
+    "lamp": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "The unread mark: an 8px ink dot when unread and an empty ring when read, drawn with a real border so it survives forced colours."
+    },
+    "heading": {
+      "p": "P7",
+      "axis": "type",
+      "why": "The notification's title, medium while unread and regular once read."
+    },
+    "time": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The time of the notification in tabular figures, printed in the label size under the title."
+    },
+    "keys": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The two 44px IconButtons at the end of a line, set a gap apart so a thumb cannot hit both."
+    },
+    "empty": {
+      "p": "P2",
+      "axis": "space",
+      "why": "The EmptyState shown when no line is left, filling the body so the center does not collapse to a header."
+    }
+  },
+  "states": {
+    "data-unread": {
+      "p": "P7",
+      "axis": "colour",
+      "why": "An unread line fills its lamp, turns its title medium and keeps primary ink; a read line shows an empty ring and secondary ink."
+    },
+    "data-state=closing": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "A dismissed line fades out on the exit motion and is then removed from the list."
+    },
+    "aria-disabled=true": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Mark all read with nothing to mark loses its height and fades, as a disabled part does, but stays focusable."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "The title takes a ring when focus is moved to it after the last line is dismissed, so the person can see where they are."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Under reduced motion a dismissed line leaves on the short hover fade instead of the exit motion."
+    },
+    "@media forced-colors: active": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "In forced colours the lamp is drawn in the text colour, filled when unread and an empty ring when read, so the shape difference survives."
+    }
+  },
+  "motion": {
+    "opacity": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The only thing that moves is a dismissed line fading out on the exit easing, which reads as the end of the line."
+    }
+  }
+}

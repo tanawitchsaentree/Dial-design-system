@@ -1,0 +1,84 @@
+/* OTPFlow — the whole code step as one small appliance (lab apps/lab/otp-flow pick B).
+   One display window at the top says where the code went and how long until a new one; the key only acts.
+   Blocks keep their places between states. No orange: the host unit owns its one primary control. */
+.root {
+  display: grid;
+  gap: var(--ds-gap-lg);
+  inline-size: 100%;
+  min-inline-size: 0;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.title {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+.window {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-gap-lg);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-radius: var(--ds-corner-media);
+  background: var(--ds-surface-sunken);
+  box-shadow: var(--ds-elevation-well);
+}
+.sent {
+  margin: 0;
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.destination {
+  margin: 0;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+}
+.reading {
+  flex: none;
+  font-size: var(--ds-type-title);
+  font-weight: var(--ds-type-weight-medium);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.window[data-ready] .reading { color: var(--ds-text-primary); }
+.field {
+  min-inline-size: 0;
+}
+.line {
+  min-block-size: calc(var(--ds-type-caption) * var(--ds-type-leading-body));
+  margin-block-start: calc(var(--ds-gap-sm) - var(--ds-gap-lg));
+}
+.root[data-status='success'] .line > *,
+.root[data-status='verifying'] .line > * {
+  color: var(--ds-text-primary);
+}
+.mark {
+  display: inline-block;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-inline-end: var(--ds-gap-sm);
+  vertical-align: middle;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+.resend {
+  min-block-size: var(--ds-control-md);
+}
+
+@media (forced-colors: active) {
+  .window { border-color: CanvasText; }
+  .sent, .destination, .reading { color: CanvasText; }
+  .mark { color: CanvasText; }
+}

@@ -1,0 +1,86 @@
+{
+  "concept": "DescriptionList is the service label printed on the case of an appliance: each term is a small label on the body's inset line and its value is printed under it or beside it, with a seam cut between pairs. It holds facts about one thing and never acts like a control.",
+  "kind": ["description list", "terms and values", "key-value list", "spec list"],
+  "default_to_avoid": [
+    {
+      "pattern": "description list as a striped table or a bordered key-value grid with a grey label column and bold values",
+      "why_not": "Stripes and a boxed label column draw a second frame inside the unit and make the value louder than the term, but P5 wants flat printing on one inset line and a hierarchy by size and position."
+    },
+    {
+      "pattern": "description list with a colon after each term and the value in bold",
+      "why_not": "The colon and the weight are decoration that repeats what the layout already says, and P5 keeps only regular and medium type with hierarchy by size and position."
+    }
+  ],
+  "references": [
+    { "source": "Braun HT 4 heater (Dieter Rams, 1970s): model, power and voltage printed as small labels with their values on the back plate, a seam between lines" },
+    { "source": "Ulm school data plate: terms start on one inset line and values follow, with no box around the pairs" },
+    { "source": "system/FORM.md separator class: a seam of one pixel, gaps first, never a hard dark rule between regions of one unit" }
+  ],
+  "derivation": [
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "Every term starts on the list's inline-start edge, which is the body's inset line, in both orientations. The term column in the inline layout is never centred or right-aligned."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "hierarchy by size and position",
+      "form": "A term is label size in secondary ink and a value is body size in primary ink, so the pair reads by size and position and no weight or colour is added."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "tabular figures everywhere a number changes",
+      "form": "Values set tabular numerals, and a value marked numeric lines up on the end edge in the inline layout so a column of readings reads as one number."
+    },
+    {
+      "p": "P5",
+      "axis": "colour",
+      "consequence": "ink on plastic at ≥4.5:1 in both themes",
+      "form": "Terms use text.secondary and values use text.primary, both measured against the body, and nothing is tinted."
+    },
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The seam between pairs is cut with the inverse light, divider tone above and the material's lit tone below, as in Divider and Table, so it reads as a gap and not as a drawn rule."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "In the inline layout the terms share one column that sizes to the longest term, so every value starts at the same place however many pairs there are."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "A description list is printing and never a control, so no term, value or seam is orange."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/description-list/index.html",
+    "options": [
+      { "id": "A", "name": "stacked, term on the inset line over its value, a seam cut between pairs" },
+      { "id": "B", "name": "side by side, term column and value column, numbers on the end edge, seams across" },
+      { "id": "C", "name": "data plate, terms right-aligned against one vertical seam, no rows" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps every term on the inset line and cuts the seam the way Divider and Table do, and its inline orientation is the same seam laid across two columns; C right-aligns terms off the inset line and its single vertical seam leaves rows with no edge to read along, and B alone fails on a narrow unit where two columns do not fit."
+  },
+  "parts": {
+    "root": { "p": "P5", "axis": "space", "why": "A definition list in body type that holds terms and values on the inset line, with no box, no fill and no padding of its own." },
+    "term": { "p": "P5", "axis": "type", "why": "The name of a fact printed at label size in secondary ink, so the value under or beside it stays the louder ink." },
+    "detail": { "p": "P5", "axis": "type", "why": "The value of a fact at body size in primary ink with tabular numerals, wrapping inside its column instead of widening the unit." },
+    "stacked": { "p": "P5", "axis": "space", "why": "Each term sits on the inset line over its values, which is the layout that fits a narrow unit and needs no column." },
+    "inline": { "p": "P6", "axis": "space", "why": "Terms share one column and values start at one edge beside them, so a long list keeps fixed positions and reads along rows." }
+  },
+  "states": {
+    "data-numeric": { "p": "P5", "axis": "type", "why": "A numeric value lines up on the end edge in the inline layout so figures of different length share their last digit." },
+    "@media forced-colors: active": { "p": "P2", "axis": "colour", "why": "In forced colours the seam keeps one real line in GrayText, because the lit tone is dropped and a two-line seam would read as a double rule." }
+  },
+  "motion": {}
+}

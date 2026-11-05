@@ -1,0 +1,32 @@
+/* HelperText — the line printed under a part (system/FORM.md input class: messages on the inset line, flat
+   on the material). Neutral is secondary ink; an error adds a glyph and medium weight. No orange. */
+.root {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-gap-sm);
+  margin: 0;
+  font-family: var(--ds-type-family);
+  font-size: var(--ds-type-caption);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.glyph {
+  flex: none;
+  inline-size: var(--ds-control-icon-sm);
+  block-size: var(--ds-control-icon-sm);
+  margin-block-start: var(--ds-space-0-5);
+}
+.text {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+.root[data-tone='neutral'] { color: var(--ds-text-secondary); }
+.root[data-tone='error'] {
+  font-weight: var(--ds-type-weight-medium);
+  color: var(--ds-status-critical-mark);
+}
+
+@media (forced-colors: active) {
+  .root, .root[data-tone='error'] { color: CanvasText; }
+  .glyph { color: CanvasText; }
+}

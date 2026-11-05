@@ -1,0 +1,154 @@
+{
+  "concept": "Anchor prints the sections of a long page the way a device prints its legend on the case: every heading is a small lowercase word in one fixed column, the section you are reading is set at full ink with one short index mark beside it, and the rest wait in plain sight. Pressing a word goes to that section.",
+  "kind": [
+    "anchor",
+    "on this page",
+    "table of contents",
+    "in-page links",
+    "scrollspy"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "an anchor list with a ruled left edge and a thick coloured bar that slides to the section in view",
+      "why_not": "The bar travels as the page scrolls, so the list is never at rest, and a coloured bar spends the unit's one orange on a table of contents."
+    },
+    {
+      "pattern": "a sticky table of contents whose current link turns the accent colour and bold",
+      "why_not": "The current section is told by colour and weight alone, and the accent marks a link where only the primary control may carry it."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): band names printed in one column on the case, the chosen band shown by a mark beside it"
+    },
+    {
+      "source": "system/CONCEPT.md P7 the legend is the state, and the Legend component built from it"
+    },
+    {
+      "source": "WAI-ARIA 1.2 aria-current=location, and the W3C technique for a table of contents as a nav landmark with a list of fragment links"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P7",
+      "axis": "space",
+      "consequence": "in one fixed column or arc, so the lit word moves and nothing reflows",
+      "form": "Every heading has its own row in one column and the mark has its own gutter, so the lit word changes and no row, indent or word shifts when the section changes."
+    },
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "the chosen word carries one ink index mark beside it",
+      "form": "The section in view carries one short ink bar in the gutter before its word, the same single mark Breadcrumb and Tabs use, so it is told by a shape you can see in grey."
+    },
+    {
+      "p": "P7",
+      "axis": "interaction",
+      "consequence": "every word is also a target that picks itself",
+      "form": "Each word is a real link to its heading, so pressing it goes there, and the list follows the page by itself while the person scrolls."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Each link is a full-width row 44px tall though the printed word is small."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "Links and the index mark are ink, never orange; the current link is full ink and the others secondary ink."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/anchor/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "ruled edge with a thick bar on the current link"
+      },
+      {
+        "id": "B",
+        "name": "legend gutter with one ink index mark beside the current word"
+      },
+      {
+        "id": "C",
+        "name": "printed scale of ticks, a longer tick at the current word"
+      }
+    ],
+    "reason": "B is the legend of P7 and reuses the index mark of Breadcrumb and Tabs, and its gutter is fixed so nothing shifts when the section changes; A is the ruled-bar scrollspy every docs site has, and C puts a tick on every row so the one mark that matters is hard to find."
+  },
+  "parts": {
+    "root": {
+      "p": "P7",
+      "axis": "space",
+      "why": "A nav landmark with a name, so assistive tech lists the table of contents among the page's regions and the legend sits in one column."
+    },
+    "list": {
+      "p": "P7",
+      "axis": "space",
+      "why": "A list of links, one row each; a list inside a list steps in by one module for each level so the structure of the headings is drawn by position."
+    },
+    "item": {
+      "p": "P7",
+      "axis": "space",
+      "why": "One heading in the legend, holding its link and, below it, the list of its own sub-headings."
+    },
+    "link": {
+      "p": "P3",
+      "axis": "space",
+      "why": "A plain anchor to the heading, 44px tall and as wide as the column so the whole row is the target, with the gutter for the index mark before the word."
+    },
+    "mark": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "One short ink bar in the gutter, hidden from assistive tech because aria-current already says where you are; only the current link shows it."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The heading's words in the label size, regular in secondary ink and medium in primary ink for the current one, with a line box tall enough for Thai marks."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover darkens a link one ink step and nothing moves, because printing on a case does not rise."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "Keyboard focus draws the same dark ring around a link as on every part of the system."
+    },
+    "aria-current=location": {
+      "p": "P7",
+      "axis": "colour",
+      "why": "The section in view prints at full ink in medium weight with the index mark in its gutter, and aria-current=location announces it, so it is told by a shape as well as by ink."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "Under reduce motion nothing on the list moves, and the ink step keeps its short fade because a fade of colour moves nothing."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the links draw in the link colour and the index mark in the system text colour, so the current section keeps its mark."
+    }
+  },
+  "motion": {
+    "color": {
+      "p": "P7",
+      "axis": "motion",
+      "why": "When the section changes, the word's ink steps over 120ms in and 240ms out on the decelerating curve (motion.hover with kiln.state); the mark does not slide down the list, because a mark crossing many rows while the page scrolls would keep the list moving, so it inks in beside the new word like the Tabs mark."
+    },
+    "border-color": {
+      "p": "P7",
+      "axis": "motion",
+      "why": "The index mark inks in with the word on motion.hover, the same fade as the Tabs mark, and no part of it travels."
+    }
+  }
+}

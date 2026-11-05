@@ -1,0 +1,168 @@
+{
+  "concept": "SettingsLayout is the back panel of an appliance where every setting is printed in a fixed place: a title, then boxes of settings, each setting a name and its small print on the start side and the part that sets it on the end side. Rows are parted by seams, and on a narrow unit the part drops under its name instead of squeezing it.",
+  "kind": [
+    "settings layout",
+    "settings page",
+    "settings rows",
+    "preferences panel"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "a SettingsLayout drawn as a stack of white cards, one per section, each with a bold heading and a soft drop shadow",
+      "why_not": "A raised card per section spends depth on a grouping, which is printing and not a part, and a page of cards puts boxes inside the unit's own body."
+    },
+    {
+      "pattern": "a settings page of loose rows with a switch floated far from its label across the full width",
+      "why_not": "When the part sits a whole page away from its name, the eye loses the pair, and nothing draws the extent of the group."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): back and side panels with every function printed in a fixed place, grouped in boxes with the name on the line"
+    },
+    {
+      "source": "Braun RT 20 radio (Dieter Rams, 1961): controls in a ruled grid, each key with its word printed beside it"
+    },
+    {
+      "source": "apps/lab/settings-layout/index.html: printed box per section, margin heading, raised panel per section"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P8",
+      "axis": "shape",
+      "consequence": "a group of related parts sits inside one printed box",
+      "form": "Each section's rows stand inside one hairline box in line.ring with corner.media, so the extent of the group is drawn and not implied."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "Every row prints its name and small print against the inline-start edge of the box, and the part stands at the inline-end edge, so the name is never in the middle of the surface."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "A row holds its place whatever the part inside does; the only reflow is by width, when the part drops under its name on a narrow unit."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "A row is never shorter than layout.touch, so a switch or a field inside it keeps its full target with room to spare."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "hierarchy by size and position",
+      "form": "The title is a Heading one step above the section headings, so size alone tells page from section; the row name is body size and the small print caption size in secondary ink."
+    },
+    {
+      "p": "P5",
+      "axis": "interaction",
+      "consequence": "labels name their control through aria-labelledby",
+      "form": "Each section is a region named by its heading through aria-labelledby, and a row hands its name and small print ids to the part so it can point at them."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/settings-layout/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "printed box per section, heading above the box"
+      },
+      {
+        "id": "B",
+        "name": "heading in a margin column, rows parted by seams only"
+      },
+      {
+        "id": "C",
+        "name": "a raised panel per section"
+      }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A closes each group on four sides and keeps the name above it, so both the extent and the name are printed and a phone-width unit keeps its full row. B puts the heading in a margin column that takes a third of a 400px unit, so a field drops under its name even in the first row. C spends the unit's material height on a grouping, which makes every section look like a card."
+  },
+  "parts": {
+    "root": {
+      "p": "P6",
+      "axis": "space",
+      "why": "A single column with a token gap between title and sections, so the page keeps one fixed rhythm and does not reflow between states."
+    },
+    "title": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The page title, one Heading level above the section headings, set on the inset line and naming the whole layout."
+    },
+    "intro": {
+      "p": "P5",
+      "axis": "type",
+      "why": "An optional line of small print under the title in secondary ink, tied to the layout as its description."
+    },
+    "section": {
+      "p": "P8",
+      "axis": "shape",
+      "why": "A region that holds one heading and one printed box of rows, named by its heading through aria-labelledby."
+    },
+    "sectionHeading": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The section name, a Heading a step below the title, printed above the box on the inset line; its id names the region."
+    },
+    "sectionIntro": {
+      "p": "P5",
+      "axis": "type",
+      "why": "An optional note under the section heading in caption size and secondary ink, read out as the region's description."
+    },
+    "box": {
+      "p": "P8",
+      "axis": "shape",
+      "why": "The hairline box in line.ring with corner.media and no fill or shadow, so it is a printed line on the body and not a card."
+    },
+    "row": {
+      "p": "P3",
+      "axis": "space",
+      "why": "One setting: a flex row at least layout.touch tall that wraps, so the part keeps its size and drops under the name when the unit is narrow."
+    },
+    "seam": {
+      "p": "P8",
+      "axis": "depth",
+      "why": "A Divider between two rows, flat on the body; it is drawn only between rows, so the first row has no seam above it."
+    },
+    "text": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The column of name and small print, sitting on the inline-start edge and taking the room the part leaves."
+    },
+    "label": {
+      "p": "P5",
+      "axis": "interaction",
+      "why": "The setting's name in body size and primary ink; its id is passed to the part for aria-labelledby."
+    },
+    "description": {
+      "p": "P5",
+      "axis": "type",
+      "why": "The setting's small print in caption size and secondary ink; its id is passed to the part for aria-describedby."
+    },
+    "control": {
+      "p": "P3",
+      "axis": "space",
+      "why": "The part that sets the value, at the inline-end edge at its own size, never stretched to fill the row."
+    }
+  },
+  "states": {
+    "data-disabled": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A disabled row fades its name and small print together; the part inside is disabled by the caller, so the whole row goes flat at once."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the box keeps a real border in the system text colour so the extent of each group survives."
+    }
+  },
+  "motion": {}
+}

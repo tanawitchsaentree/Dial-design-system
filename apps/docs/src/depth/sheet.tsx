@@ -4,7 +4,7 @@ import type { Depth } from './types';
 
 type P = { title: string; model?: string; placement?: 'auto' | 'bottom' | 'end'; actions?: React.ReactNode; children?: React.ReactNode };
 const Panel = ({ placement = 'bottom', ...p }: P) => (
-  <div style={{ inlineSize: 'min(100%, 420px)' }}><Sheet modal={false} open placement={placement} {...p} /></div>
+  <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-lg))' }}><Sheet modal={false} open placement={placement} {...p} /></div>
 );
 const lamp = (
   <>

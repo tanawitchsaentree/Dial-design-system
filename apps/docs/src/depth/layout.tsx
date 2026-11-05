@@ -80,7 +80,7 @@ export const STACK: Depth = {
   sizes: { na: 'Stack has no size prop. Its gap prop picks from the spacing scale, shown under Modifiers.' },
   emphasis: NO_EMPHASIS,
   placement: { rows: [['Inside a component', 'Column, gap md. The usual layout inside a component.'], ['A row of controls', 'Row, gap sm.']], examples: [{ title: 'Content in a column', render: <div className="demo-box"><Stack gap="md"><b>Lysefjord</b><span className="muted">Saved to Trips</span></Stack></div> }] },
-  combinations: { good: [['Stack inside a component', 'Content in a column.'], ['Row stack of labels', 'Labels under a title.']], avoid: [{ title: 'margins on children', why: 'Margins fight the gap and differ between items. Let the Stack own the space.', render: <div className="demo-box"><Stack gap="md"><b style={{ marginBlockEnd: 24 }}>Title with its own margin</b><span className="muted">Text</span></Stack></div> }] },
+  combinations: { good: [['Stack inside a component', 'Content in a column.'], ['Row stack of labels', 'Labels under a title.']], avoid: [{ title: 'margins on children', why: 'Margins fight the gap and differ between items. Let the Stack own the space.', render: <div className="demo-box"><Stack gap="md"><b style={{ marginBlockEnd: 'var(--ds-gap-3xl)' }}>Title with its own margin</b><span className="muted">Text</span></Stack></div> }] },
   content: { na: 'Stack holds no text of its own.' },
   behaviours: LAYOUT_BEHAVIOUR('Children in a line with an even gap.'),
   deepDive: NO_DIVE,

@@ -1,0 +1,162 @@
+/* Sidebar — the legend printed down the side of the case (lab apps/lab/sidebar pick A).
+   Rows are flat printing with one ink index mark at the start of the current page (the Tabs mark turned
+   to the side). Collapsed, the words leave and the icons stay. No orange, no height, no shadow on a row. */
+.root {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  align-content: start;
+  gap: var(--ds-gap-lg);
+  inline-size: var(--ds-layout-sidebar);
+  max-inline-size: 100%;
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-md);
+  border-radius: var(--ds-corner-panel);
+  background: var(--ds-unit-bg);
+  box-shadow: var(--ds-unit-shadow);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  transition: inline-size var(--ds-motion-release) var(--ds-motion-easing);
+}
+.root[data-collapsed] {
+  inline-size: calc(var(--ds-control-md) + var(--ds-gap-md) * 2);
+}
+.group {
+  display: grid;
+  gap: var(--ds-gap-xs);
+  min-inline-size: 0;
+}
+.heading {
+  margin: var(--ds-gap-none);
+  padding-inline: var(--ds-gap-xl);
+  padding-block: var(--ds-gap-xs);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  overflow-wrap: anywhere;
+}
+.list {
+  display: grid;
+  gap: var(--ds-gap-xs);
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  list-style: none;
+}
+.item {
+  min-inline-size: 0;
+  margin: var(--ds-gap-none);
+  padding: var(--ds-gap-none);
+  border-radius: var(--ds-corner-inner);
+}
+.link {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-xl);
+  inline-size: 100%;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-sm);
+  padding-inline: var(--ds-gap-xl);
+  border-radius: var(--ds-corner-inner);
+  color: var(--ds-text-secondary);
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: var(--ds-control-icon-md);
+  min-block-size: var(--ds-control-icon-md);
+}
+.icon > svg { inline-size: 100%; block-size: 100%; }
+.label {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  font-size: var(--ds-type-body);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  overflow-wrap: anywhere;
+}
+/* the index mark is ink too: it fades in with the word's ink instead of snapping on */
+.mark {
+  position: absolute;
+  inset-inline-start: var(--ds-width-ring);
+  inset-block-start: 50%;
+  inline-size: var(--ds-width-bar);
+  block-size: var(--ds-control-icon-md);
+  transform: translateY(-50%);
+  border-radius: var(--ds-corner-round);
+  background: transparent;
+  transition: background-color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.toggle {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-xl);
+  inline-size: 100%;
+  min-block-size: var(--ds-control-md);
+  margin: var(--ds-gap-none);
+  padding-block: var(--ds-gap-sm);
+  padding-inline: var(--ds-gap-xl);
+  border: 0;
+  border-radius: var(--ds-corner-inner);
+  background: transparent;
+  color: var(--ds-text-secondary);
+  font-family: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.toggle .icon:dir(rtl) { transform: scaleX(-1); }
+.toggleLabel {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-body);
+}
+
+.link:hover,
+.toggle:hover { color: var(--ds-text-primary); }
+.link[aria-current='page'] { color: var(--ds-text-primary); }
+.link[aria-current='page'] .label { font-weight: var(--ds-type-weight-medium); }
+.link[aria-current='page'] .mark { background: var(--ds-text-primary); }
+.link:focus-visible,
+.toggle:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+
+/* collapsed: the words stay in the page as each link's name but are not drawn; icons centre in a 44px cell */
+.root[data-collapsed] .heading,
+.root[data-collapsed] .label,
+.root[data-collapsed] .toggleLabel {
+  position: absolute;
+  inline-size: var(--ds-width-hairline);
+  block-size: var(--ds-width-hairline);
+  margin: calc(-1 * var(--ds-width-hairline));
+  padding: var(--ds-gap-none);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.root[data-collapsed] .group + .group { margin-block-start: var(--ds-gap-lg); }
+.root[data-collapsed] .link,
+.root[data-collapsed] .toggle {
+  justify-content: center;
+  padding-inline: var(--ds-gap-none);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* the column changes width at once; the ink fade moves nothing, so it stays on motion.hover */
+  .root { transition: none; }
+  .link, .toggle { transition: color var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .link[aria-current='page'] .mark { forced-color-adjust: none; background: ButtonText; }
+}

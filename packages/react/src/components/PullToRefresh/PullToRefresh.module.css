@@ -38,6 +38,11 @@
   overscroll-behavior-y: contain;
   max-block-size: var(--ptr-height, none);
 }
+/* a frame reached by Tab shows the system ring inside its edge, where the frame cannot clip it */
+.scroller:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: calc(var(--ds-width-ring) * -1);
+}
 /* the band the pull reveals: as tall as the pull, never taller than the detent */
 .gauge {
   position: absolute;

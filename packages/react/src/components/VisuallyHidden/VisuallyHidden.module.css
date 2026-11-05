@@ -1,0 +1,48 @@
+.root {
+  position: absolute;
+  inline-size: var(--ds-width-hairline);
+  block-size: var(--ds-width-hairline);
+  margin: calc(-1 * var(--ds-width-hairline));
+  padding: var(--ds-gap-none);
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* focusable: the content shows as a raised key at the start corner while the keyboard is on it */
+.root[data-focusable]:focus,
+.root[data-focusable]:focus-within {
+  position: fixed;
+  inset-block-start: var(--ds-gap-lg);
+  inset-inline-start: var(--ds-gap-lg);
+  z-index: var(--ds-layer-toast);
+  inline-size: auto;
+  block-size: auto;
+  min-block-size: var(--ds-control-md);
+  margin: var(--ds-gap-none);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-2xl);
+  display: inline-flex;
+  align-items: center;
+  overflow: visible;
+  clip-path: none;
+  white-space: normal;
+  background: var(--ds-surface-raised);
+  color: var(--ds-text-primary);
+  border-radius: var(--ds-corner-media);
+  box-shadow: var(--ds-elevation-part);
+  font-family: var(--ds-type-family);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+
+@media (forced-colors: active) {
+  .root[data-focusable]:focus,
+  .root[data-focusable]:focus-within {
+    border: var(--ds-width-ring) solid CanvasText;
+  }
+}

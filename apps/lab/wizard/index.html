@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Wizard · three ways to walk one step at a time</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+ .unit{inline-size:390px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 20px;color:var(--ds-text-secondary)}
+ ol{list-style:none;margin:0;padding:0}
+ .n{box-sizing:border-box;inline-size:44px;block-size:44px;border-radius:var(--ds-corner-media);display:grid;place-items:center;font-weight:500;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);color:var(--ds-text-secondary)}
+ .n.on{color:var(--ds-text-primary)}
+ .t{font-size:16px;font-weight:500;line-height:44px;margin:0;color:var(--ds-text-secondary)}
+ .t.on{color:var(--ds-text-primary)}
+ .b{font-size:14px;line-height:1.45;color:var(--ds-text-secondary);margin:0}
+ .field{box-sizing:border-box;block-size:44px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);padding:0 14px;display:flex;align-items:center;margin-block-start:8px;font-size:14px}
+ .keys{display:flex;justify-content:space-between;gap:12px}
+ .k{box-sizing:border-box;min-block-size:44px;padding-inline:20px;border-radius:999px;border:1px solid transparent;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);color:var(--ds-text-secondary);font:500 14px var(--ds-type-family);display:inline-flex;align-items:center}
+ .k.go{background:var(--ds-action-accent);color:var(--ds-text-on-accent);border-color:var(--ds-action-accent-rim)}
+ /* A: the Stepper rail stays whole; only the current step opens its content in place; keys under the rail */
+ .A li{position:relative;display:grid;grid-template-columns:44px 1fr;column-gap:16px;padding-block-end:20px}
+ .A li:last-child{padding-block-end:0}
+ .A li:not(:last-child)::before{content:"";position:absolute;inset-inline-start:21px;inset-block:48px 4px;inline-size:2px;background:radial-gradient(circle,var(--ds-line-ring) 1px,transparent 1.5px) 0 0/2px 8px repeat-y}
+ .A .b{grid-column:2}
+ .A .keys{margin-block-start:28px}
+ /* B: a printed legend row of step names with a lit word, one wide recessed panel under it */
+ .B .leg{display:flex;gap:18px;font-size:13px;margin-block-end:16px;border-block-end:1px solid var(--ds-line-divider);padding-block-end:10px}
+ .B .leg span{color:var(--ds-text-secondary)} .B .leg span.on{color:var(--ds-text-primary);font-weight:500}
+ .B .leg span.on::before{content:"\25B8 "}
+ .B .win{box-sizing:border-box;padding:18px;border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);min-block-size:150px;margin-block-end:20px}
+ .B .win h3{margin:0 0 10px;font-size:16px;font-weight:500}
+ .B .cnt{font-size:13px;color:var(--ds-text-secondary);margin-block-end:10px}
+ /* C: rail beside, a narrow column of windows, panel to its right with its own title */
+ .C .split{display:grid;grid-template-columns:44px 1fr;gap:20px}
+ .C ol{display:grid;gap:12px;align-content:start}
+ .C .panel h3{margin:0 0 10px;font-size:16px;font-weight:500;line-height:44px}
+ .C .panel{border-inline-start:1px solid var(--ds-line-divider);padding-inline-start:20px}
+ .C .keys{margin-block-start:22px}
+</style></head><body>
+<h1>Wizard · one step at a time, Back / Next / Finish</h1>
+<div class="row">
+ <div class="unit A"><h2>A · the Stepper opens the current step in place</h2>
+  <ol>
+   <li><span class="n on">&#10003;</span><p class="t on">General</p></li>
+   <li><span class="n on">2</span><p class="t on">Configuration</p><div class="b">Who can see the room.<div class="field">Everyone at home</div></div></li>
+   <li><span class="n">3</span><p class="t">Review</p></li>
+  </ol>
+  <div class="keys"><span class="k">Back</span><span class="k go">Next</span></div></div>
+ <div class="unit B"><h2>B · legend row, one recessed panel</h2>
+  <div class="leg"><span>General</span><span class="on">Configuration</span><span>Review</span></div>
+  <div class="win"><div class="cnt">step 2 of 3</div><h3>Configuration</h3><div class="b">Who can see the room.</div><div class="field">Everyone at home</div></div>
+  <div class="keys"><span class="k">Back</span><span class="k go">Next</span></div></div>
+ <div class="unit C"><h2>C · windows in a side column, panel beside</h2>
+  <div class="split"><ol><li><span class="n on">&#10003;</span></li><li><span class="n on">2</span></li><li><span class="n">3</span></li></ol>
+   <div class="panel"><h3>Configuration</h3><div class="b">Who can see the room.</div><div class="field">Everyone at home</div></div></div>
+  <div class="keys"><span class="k">Back</span><span class="k go">Next</span></div></div>
+</div></body></html>

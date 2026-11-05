@@ -1,0 +1,101 @@
+/* Autocomplete — Input's recessed well with a plastic panel of suggestions under it (lab pick A, apps/lab/autocomplete).
+   The well is Input itself; the panel is the Select panel in shape (elevation.float, surface.solid, corner.inner,
+   layer.overlay). The reached row sinks into a well with a hairline; the typed part of a word is medium weight.
+   Nothing here is orange. Only a state change moves (P6, D-008): the panel rises on open and sinks on close. */
+.root {
+  position: relative;
+  min-inline-size: 0;
+  inline-size: 100%;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.panel {
+  position: absolute;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  z-index: var(--ds-layer-overlay);
+  box-sizing: border-box;
+  max-block-size: calc(var(--ds-control-md) * 6 + var(--ds-gap-sm) * 2);
+  margin-block-start: var(--ds-gap-sm);
+  padding: var(--ds-gap-sm);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-inner);
+  background: var(--ds-surface-solid);
+  box-shadow: var(--ds-elevation-float);
+  transform-origin: top center;
+  transition:
+    opacity var(--ds-motion-release) var(--ds-motion-easing),
+    transform var(--ds-motion-release) var(--ds-motion-easing);
+}
+@starting-style {
+  .panel[data-state='open'] { opacity: 0; transform: translateY(calc(var(--ds-motion-rise) * -1)); }
+}
+.panel[data-state='closing'] {
+  opacity: 0;
+  transform: translateY(calc(var(--ds-motion-rise) * -1));
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+  pointer-events: none;
+}
+.panel[hidden], .list[hidden] { display: none; }
+.list {
+  display: flex;
+  flex-direction: column;
+}
+.option {
+  display: flex;
+  align-items: center;
+  flex: none;
+  box-sizing: border-box;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-lg);
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-media);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  /* the row the pointer or the arrows reach inks in, fast on and slower off (motion.hover) */
+  transition:
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    border-color var(--ds-motion-hover) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-hover) var(--ds-motion-easing),
+    color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.text { flex: 1 1 auto; min-inline-size: 0; overflow-wrap: anywhere; }
+.match { font-weight: var(--ds-type-weight-medium); color: var(--ds-text-primary); }
+.busy, .empty {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-block-size: var(--ds-control-md);
+  padding-block: var(--ds-gap-md);
+  padding-inline: var(--ds-gap-lg);
+  font-size: var(--ds-type-label);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+.md .option { min-block-size: var(--ds-control-md); }
+.lg .option { min-block-size: var(--ds-control-lg); padding-inline: var(--ds-gap-xl); font-size: var(--ds-type-emphasis); }
+.lg .busy, .lg .empty { min-block-size: var(--ds-control-lg); padding-inline: var(--ds-gap-xl); }
+.lg .panel { max-block-size: calc(var(--ds-control-lg) * 6 + var(--ds-gap-sm) * 2); }
+
+.option[aria-selected='true'] {
+  background: var(--ds-surface-sunken);
+  border-color: var(--ds-line-ring);
+  box-shadow: var(--ds-elevation-well);
+  color: var(--ds-text-primary);
+}
+.option[aria-disabled='true'] { cursor: not-allowed; opacity: var(--ds-opacity-disabled); }
+
+/* under Reduce motion nothing travels (motion.rise is 0); the panel and the rows still fade on motion.hover */
+@media (prefers-reduced-motion: reduce) {
+  .panel, .panel[data-state='closing'] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .panel { border-color: CanvasText; }
+  .option[aria-selected='true'] { border-color: Highlight; }
+}

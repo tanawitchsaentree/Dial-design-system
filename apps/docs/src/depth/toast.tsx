@@ -58,7 +58,7 @@ export const TOAST: Depth = {
       do: <Toast tone="positive" onClose={none}>Lamp turned off</Toast>, doNote: 'What happened, in four words.',
       dont: <Toast tone="positive" onClose={none}>Success! Your request was processed.</Toast>, dontNote: 'Says nothing about the lamp.',
     },
-    overflow: { text: 'A long message wraps onto more lines. The glyph, word and keys stay centred on the strip.', render: <div data-overflow-demo="" style={{ inlineSize: 360 }}><Toast tone="warning" onClose={none}>The hallway lamp lost its connection and will try again in two minutes</Toast></div> },
+    overflow: { text: 'A long message wraps onto more lines. The glyph, word and keys stay centred on the strip.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))' }}><Toast tone="warning" onClose={none}>The hallway lamp lost its connection and will try again in two minutes</Toast></div> },
     rtl: { text: 'In right-to-left languages the glyph and word move to the right and the keys to the left.', render: <div dir="rtl"><Toast tone="positive" status="تم" onClose={none} closeLabel="إغلاق">أُطفئ المصباح</Toast></div> },
     expansion: { text: 'German runs about 30% longer. The message takes the room; the keys keep their size.', render: <Toast tone="critical" status="Fehler" action={{ label: 'Erneut versuchen', onAction: none }} onClose={none} closeLabel="Schließen">Waschmaschine antwortet nicht</Toast> },
   },

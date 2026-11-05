@@ -5,7 +5,7 @@ import { Button, Progress, Stack } from 'dial-react';
 export default function ProgressControlled() {
   const [mb, setMb] = useState(12);
   return (
-    <Stack gap="md" style={{ maxInlineSize: 320 }}>
+    <Stack gap="md" style={{ maxInlineSize: 'var(--ds-layout-frame-md)' }}>
       <Progress label="Firmware update" value={mb} max={48} valueText={`${mb} of 48 MB`} />
       <Stack direction="row" gap="sm">
         <Button onClick={() => setMb((x) => Math.min(48, x + 6))}>Next report</Button>

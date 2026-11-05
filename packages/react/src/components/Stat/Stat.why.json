@@ -1,0 +1,94 @@
+{
+  "concept": "Stat is one named figure read the way a device prints a reading: the name on the body's inset line, the number and its unit alone in a recessed window, and an optional change printed under the window as a glyph, a word and an amount. It says one thing and is never pressed.",
+  "kind": ["stat", "figure", "reading", "key figure"],
+  "default_to_avoid": [
+    {
+      "pattern": "stat card: a floating tile with a big bold number and a green up arrow or red down arrow for the change",
+      "why_not": "The tile floats on the page with its own shadow, and the green and red tell the change by colour alone, but P2 asks for a window cut into the body and P5 allows no tinted text."
+    },
+    {
+      "pattern": "stat figure that counts up from zero when it appears",
+      "why_not": "A count-up is entry choreography and shows wrong numbers on the way, while P2 and P6 want the value to change at once."
+    }
+  ],
+  "references": [
+    { "source": "Braun ET 66 calculator (Dietrich Lubs, 1987): the figure sits alone in a recessed window with its name printed on the case" },
+    { "source": "Braun LE 1 speaker (Dieter Rams, 1959): a printed legend beside the part, never inside it" },
+    { "source": "system/FORM.md display class: window recessed into the body, value with the unit beside it" }
+  ],
+  "derivation": [
+    {
+      "p": "P2",
+      "axis": "depth",
+      "consequence": "the window is recessed into the body (inverse light)",
+      "form": "The figure sits alone in a window that takes surface.sunken, elevation.well and a hairline ring, so it reads as a reading cut into the plastic and never as a tile."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The name is printed above the window on the same inset line as the window's edge, and the change is printed under it on that line too."
+    },
+    {
+      "p": "P5",
+      "axis": "type",
+      "consequence": "tabular figures everywhere a number changes",
+      "form": "The figure and the change amount use tabular numerals, so a new reading keeps its width; the unit is a smaller medium weight beside the number."
+    },
+    {
+      "p": "P5",
+      "axis": "colour",
+      "consequence": "ink on plastic at ≥4.5:1 in both themes",
+      "form": "Every word is primary or secondary ink and the change is told by a glyph and a word, never by a green or a red."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "orange appears once per unit, on the primary control's body only",
+      "form": "A Stat is a reading and never a control, so nothing in it is orange, however good or bad the change."
+    },
+    {
+      "p": "P6",
+      "axis": "space",
+      "consequence": "fixed positions, so a unit's layout does not reflow between states",
+      "form": "An empty reading prints a dash in the same window, so a missing value does not change the height of the Stat."
+    },
+    {
+      "p": "P2",
+      "axis": "interaction",
+      "consequence": "the display is a live region (polite) and never a control",
+      "form": "The root is a labelled group with nothing focusable; set live and it becomes a polite status that reads the whole reading."
+    }
+  ],
+  "variants": {
+    "lab": "apps/lab/stat/index.html",
+    "options": [
+      { "id": "A", "name": "printed name, figure alone in a recessed window, change printed under" },
+      { "id": "B", "name": "everything printed on the body, a large figure over a hairline rule" },
+      { "id": "C", "name": "one dark window holding the name, the figure and the change" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps the window for the reading alone and prints the name and the change on the body, so a row of Stats reads as several windows and not as a dashboard; B has no window and drifts to the large bold number of a KPI tile, and C copies the OLED Display and moves the name into the light."
+  },
+  "parts": {
+    "root": { "p": "P5", "axis": "space", "why": "A grid of three rows, the name, the window and the change, all on one inset line, with a gap that does not change when a row is absent." },
+    "label": { "p": "P5", "axis": "space", "why": "The name is printed above the window in caption size on the inset line and names the group for assistive tech." },
+    "window": { "p": "P2", "axis": "depth", "why": "A recess with inverse light and a hairline ring holds the figure alone, so the reading is the only thing cut into the body." },
+    "figure": { "p": "P5", "axis": "type", "why": "The number is set in medium weight with tabular numerals, start-aligned in the window, and steps with the size." },
+    "unit": { "p": "P5", "axis": "type", "why": "The unit sits beside the number at label size in secondary ink, so the number stays the loudest ink in the window." },
+    "reading": { "p": "P2", "axis": "interaction", "why": "When there is no value the window prints a dash and this hidden text says No reading for assistive tech." },
+    "change": { "p": "P5", "axis": "space", "why": "One printed line under the window, on the inset line, holds the glyph, the word, the amount and the comparison." },
+    "word": { "p": "P5", "axis": "colour", "why": "The direction is written as a word in medium weight beside its glyph, so change is never told by colour." },
+    "amount": { "p": "P5", "axis": "type", "why": "The size of the change keeps tabular numerals so it lines up from one Stat to the next in a row." },
+    "compare": { "p": "P5", "axis": "type", "why": "What the change is measured against, such as since yesterday, is printed in secondary ink at caption size." },
+    "sm": { "p": "P5", "axis": "type", "why": "Small Stats set the figure at emphasis size for dense rows beside other readings." },
+    "md": { "p": "P5", "axis": "type", "why": "The default sets the figure at title size, big enough to read at a glance and smaller than a Display." },
+    "lg": { "p": "P5", "axis": "type", "why": "Large Stats set the figure at display size for the one number a whole sheet is about." }
+  },
+  "states": {
+    "data-empty": { "p": "P6", "axis": "space", "why": "With no value the figure prints a dash in secondary ink inside the same window, so the Stat keeps its height." },
+    "@media forced-colors: active": { "p": "P2", "axis": "colour", "why": "In forced colours the window keeps a real border drawn in the text colour so the recess still reads." }
+  },
+  "motion": {}
+}

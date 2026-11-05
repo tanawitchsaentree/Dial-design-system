@@ -1,16 +1,15 @@
 // @example modal false shows the docked lid in place, for a preview of its rows and its Cancel key
-import { ActionSheet } from 'dial-react';
+import { ActionSheet, Icon } from 'dial-react';
 
-const g = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
 const ACTIONS = [
-  { value: 'rename', label: 'Rename', icon: <svg {...g}><path d="M4 20h4L19 9l-4-4L4 16v4z" /></svg> },
-  { value: 'move', label: 'Move to room', icon: <svg {...g}><path d="M5 12h14M13 6l6 6-6 6" /></svg> },
+  { value: 'rename', label: 'Rename', icon: <Icon name="edit" /> },
+  { value: 'move', label: 'Move to room', icon: <Icon name="room" /> },
   { value: 'remove', label: 'Remove', destructive: true },
 ];
 
 export default function ActionSheetInPlace() {
   return (
-    <div style={{ inlineSize: 'min(100%, 375px)' }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))' }}>
       <ActionSheet modal={false} open title="Kitchen lamp" detail="lamp 02 · Kitchen" items={ACTIONS} />
     </div>
   );

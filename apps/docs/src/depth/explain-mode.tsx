@@ -77,7 +77,7 @@ export const EXPLAIN_MODE: Depth = {
       do: <Lamp name="Brightness" does="Sets how bright the lamp is." />, doNote: 'A name and a verb.',
       dont: <Lamp name="Rotary 1" does="Rotary control." />, dontNote: 'A part number and a line that says nothing.',
     },
-    overflow: { text: 'A long line wraps under its name and the note stays narrower than a menu, so it never runs over another part.', render: <div data-overflow-demo="" style={{ inlineSize: 320 }}><Lamp does="Sets how bright the lamp is, from a night glow to full reading light in the evening." /></div> },
+    overflow: { text: 'A long line wraps under its name and the note stays narrower than a menu, so it never runs over another part.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))' }}><Lamp does="Sets how bright the lamp is, from a night glow to full reading light in the evening." /></div> },
     rtl: { text: 'In right to left languages the unit mirrors and each note is placed again from where its part now stands.', render: <div dir="rtl"><ExplainMode defaultOpen toggleLabel="كيف يعمل"><Card padding="unit"><Stack direction="row" gap="xl"><Explain name="السطوع" does="يضبط سطوع المصباح."><Rotary kind="key" label="السطوع" min={0} max={10} defaultValue={7} /></Explain></Stack></Card></ExplainMode></div> },
     expansion: { text: 'German words run about 30% longer. The line wraps inside the note and the leader still meets the name.', render: <Lamp name="Helligkeit" does="Stellt ein, wie hell die Lampe leuchtet." /> },
   },

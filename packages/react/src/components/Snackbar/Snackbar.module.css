@@ -22,12 +22,8 @@
   inline-size: var(--ds-control-icon-md);
   block-size: var(--ds-control-icon-md);
   flex: none;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: var(--ds-width-ring);
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
+/* the status glyph prints dial's one icon language, the dot matrix (R-005) */
 .status { font-size: var(--ds-type-label); font-weight: var(--ds-type-weight-medium); line-height: var(--ds-type-leading-tight); }
 .message { flex: 1 1 auto; min-inline-size: 0; font-size: var(--ds-type-body); line-height: var(--ds-type-leading-body); color: var(--ds-text-primary); }
 .key { display: inline-flex; flex: none; margin-inline-start: auto; }

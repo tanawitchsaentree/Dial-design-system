@@ -5,7 +5,7 @@ import type { Depth } from './types';
 type It = { value: string; label: string; destructive?: boolean; disabled?: boolean };
 const LAMP: It[] = [{ value: 'rename', label: 'Rename' }, { value: 'move', label: 'Move to room' }, { value: 'remove', label: 'Remove', destructive: true }];
 const Lid = ({ title = 'Kitchen lamp', detail = 'lamp 02 · Kitchen', items = LAMP, cancelLabel }: { title?: string; detail?: string; items?: It[]; cancelLabel?: string }) => (
-  <div style={{ inlineSize: 'min(100%, 375px)' }}><ActionSheet modal={false} open title={title} detail={detail} items={items} cancelLabel={cancelLabel} /></div>
+  <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))' }}><ActionSheet modal={false} open title={title} detail={detail} items={items} cancelLabel={cancelLabel} /></div>
 );
 
 export const ACTION_SHEET: Depth = {

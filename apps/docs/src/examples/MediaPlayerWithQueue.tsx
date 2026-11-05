@@ -11,7 +11,7 @@ export default function MediaPlayerWithQueue() {
     if (made) { setTracks(made); setCurrent(made[0]?.id); }
   }, [made]);
   return (
-    <Stack gap="lg" style={{ inlineSize: 352, maxInlineSize: '100%' }}>
+    <Stack gap="lg" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))', maxInlineSize: '100%' }}>
       <MediaPlayer tracks={tracks} loading={!made} current={current} onCurrentChange={setCurrent} />
       <Queue
         tracks={tracks}

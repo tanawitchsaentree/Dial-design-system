@@ -1,0 +1,61 @@
+/* Kbd — a key name as a flat cap with a hard lower edge (lab apps/lab/kbd pick B).
+   Raised by a lit top-left hairline and a thicker lower edge, no cast blur. It is a name,
+   not a control, so there is no hover, active or focus rule. No orange. */
+.root {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: var(--ds-control-check);
+  min-block-size: var(--ds-control-check);
+  padding-block: var(--ds-gap-none);
+  padding-inline: var(--ds-gap-md);
+  vertical-align: middle;
+  border: var(--ds-width-hairline) solid var(--ds-line-ring);
+  border-block-end-width: var(--ds-width-ring);
+  border-radius: var(--ds-corner-mark);
+  background: var(--ds-surface-knob);
+  box-shadow: inset var(--ds-width-hairline) var(--ds-width-hairline) 0 var(--ds-material-lit);
+  font-family: var(--ds-type-family);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  white-space: nowrap;
+  color: var(--ds-text-primary);
+  cursor: default;
+}
+.combo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-gap-xs);
+  vertical-align: middle;
+  white-space: nowrap;
+  font-family: var(--ds-type-family);
+  font-size: var(--ds-type-label);
+  font-weight: var(--ds-type-weight-regular);
+}
+.join {
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-type-leading-body);
+}
+.hidden {
+  position: absolute;
+  inline-size: var(--ds-width-hairline);
+  block-size: var(--ds-width-hairline);
+  margin: calc(-1 * var(--ds-width-hairline));
+  padding: var(--ds-gap-none);
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (forced-colors: active) {
+  .root {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+  .join { color: CanvasText; }
+}

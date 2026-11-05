@@ -1,0 +1,23 @@
+{
+  "identity": false,
+  "identity_reason": "a layout primitive only sets inset, ground and corner from closed token sets and has no look of its own to derive",
+  "concept": "Box is a plain block that sets how far its content stands from the edge, so insets inside a unit are chosen from the module steps and never typed in.",
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "A box takes no size or position of its own, so its place does not shift between states." },
+    "p-none": { "p": "P6", "axis": "space", "why": "No inset lets a child such as a display window run to the edge of the box." },
+    "p-xs": { "p": "P4", "axis": "space", "why": "The smallest inset is one 4px step, the pitch of the grille holes." },
+    "p-sm": { "p": "P4", "axis": "space", "why": "A two-step inset suits a chip or a label printed close to a part." },
+    "p-md": { "p": "P5", "axis": "space", "why": "A four-step inset keeps printing off the edge and on the inner line of the body." },
+    "p-lg": { "p": "P5", "axis": "space", "why": "The body inset of six steps puts labels on the inset line where case printing sits." },
+    "p-xl": { "p": "P6", "axis": "space", "why": "The section inset of eight steps gives a whole unit room around its face." },
+    "s-page": { "p": "P6", "axis": "colour", "why": "The page ground is the plain colour the units stand on, so a box on it adds nothing." },
+    "s-raised": { "p": "P6", "axis": "colour", "why": "The raised ground is the body plastic of a unit, the same material height as its neighbours." },
+    "s-sunken": { "p": "P2", "axis": "colour", "why": "The sunken ground is a recess in the body, used behind a display or a tray of parts." },
+    "c-mark": { "p": "P6", "axis": "shape", "why": "The smallest corner suits a tag or key legend and stays well inside any larger body." },
+    "c-media": { "p": "P6", "axis": "shape", "why": "The media corner matches picture and window areas that nest inside the body." },
+    "c-inner": { "p": "P6", "axis": "shape", "why": "The inner corner is the outer radius minus the inset, so a box nests in a panel evenly." },
+    "c-panel": { "p": "P6", "axis": "shape", "why": "The panel corner is the body radius itself, capped so a large box does not swell into a pillow." }
+  },
+  "states": {},
+  "motion": {}
+}

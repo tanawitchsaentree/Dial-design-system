@@ -3,7 +3,7 @@ import { Card, Display, Switch, Wiring } from 'dial-react';
 
 export default function WiringStacked() {
   return (
-    <div style={{ inlineSize: 'min(100%, 340px)' }}>
+    <div style={{ inlineSize: 'min(100%, var(--ds-layout-frame-md))' }}>
       <Wiring
         label="Morning relations"
         links={[

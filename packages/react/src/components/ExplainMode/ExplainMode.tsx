@@ -11,6 +11,8 @@ import {
   type ReactNode,
 } from 'react';
 import { cx } from '../../cx';
+import { usePresence } from '../../presence';
+import { messages } from '../../messages';
 import { Button } from '../Button';
 import styles from './ExplainMode.module.css';
 
@@ -73,8 +75,8 @@ export const Explain = forwardRef<HTMLDivElement, ExplainProps>(function Explain
  */
 export const ExplainMode = forwardRef<HTMLDivElement, ExplainModeProps>(function ExplainMode(
   {
-    children, open: openProp, defaultOpen = false, onOpenChange, toggle = true, toggleLabel = 'How this works', shortcut = '?',
-    openText = 'How this works is on. Each part is named beside it. Escape closes it.', closeText = 'How this works is off.',
+    children, open: openProp, defaultOpen = false, onOpenChange, toggle = true, toggleLabel = messages.explain.toggle, shortcut = '?',
+    openText = messages.explain.open, closeText = messages.explain.close,
     className, onKeyDown, ...rest
   },
   ref,
@@ -85,7 +87,19 @@ export const ExplainMode = forwardRef<HTMLDivElement, ExplainModeProps>(function
   const host = useRef<HTMLDivElement | null>(null);
   const field = useRef<HTMLDivElement | null>(null);
   const noteEls = useRef<Array<HTMLDivElement | null>>([]);
+  const history = useRef<[string, string]>(['', '']);
   const [notes, setNotes] = useState<Note[]>([]);
+  // the printing fades off before it is cleared (D-008)
+  const presence = usePresence<HTMLDivElement>(open);
+  useEffect(() => { if (presence.state === 'closed') setNotes((p) => (p.length ? [] : p)); }, [presence.state]);
+  // a note or numeral printed in an earlier frame glides to a new place (the key opening moves things a few
+  // pixels); its first placement is not a move, so it appears where it belongs and only fades in (D-008)
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      host.current?.querySelectorAll<HTMLElement>(`.${styles.note}[data-side], .${styles.mark}`).forEach((el) => { el.dataset.settled = ''; });
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [notes]);
   const [said, setSaid] = useState('');
   const touched = useRef(false);
 
@@ -100,11 +114,15 @@ export const ExplainMode = forwardRef<HTMLDivElement, ExplainModeProps>(function
   const parts = (): HTMLElement[] => (field.current ? Array.from(field.current.querySelectorAll<HTMLElement>('[data-explain]')) : []);
 
   const measure = useCallback(() => {
-    const h = host.current; if (!h || !open) { setNotes((p) => (p.length ? [] : p)); return; }
+    const h = host.current; if (!h || !open) return;
     const o = h.getBoundingClientRect();
     const rtl = getComputedStyle(h).direction === 'rtl';
-    const span = o.right - o.left, deep = o.bottom - o.top;
-    const g = (parseFloat(getComputedStyle(h).getPropertyValue('--ds-gap-md')) || 8) * 2;
+    // the free space ends where the key starts, never at its foot: a key that opens must not make room for the
+    // note it holds, or the note moves out, the key closes and the two take turns every frame
+    const keyTop = h.querySelector(`.${styles.keyWrap}`)?.getBoundingClientRect().top ?? o.bottom;
+    const span = o.right - o.left, deep = keyTop - o.top;
+    // the clearance is two gap.md, read from the token (no number of its own here)
+    const g = (parseFloat(getComputedStyle(h).getPropertyValue('--ds-gap-md')) || 0) * 2;
     const els = parts();
     // a wrapper may be wider than the part it holds, so a single child is measured itself
     const rel = (el: Element): Rect => { const r = el.getBoundingClientRect(); return { l: r.left - o.left, t: r.top - o.top, r: r.right - o.left, b: r.bottom - o.top }; };
@@ -162,12 +180,23 @@ export const ExplainMode = forwardRef<HTMLDivElement, ExplainModeProps>(function
       const side: Side = rtl && pick.side === 'end' ? 'start' : rtl && pick.side === 'start' ? 'end' : pick.side;
       return { name, does, x: Math.round(pick.x), tx: Math.round(rtl ? pick.x + w - span : pick.x), y: Math.round(pick.y), side, lead };
     });
-    setNotes((p) => (JSON.stringify(p) === JSON.stringify(out) ? p : out));
+    // a placement can change the unit it is measured on (a note moved into the key lets a Card that sizes its
+    // inset from its short side grow, which frees the space beside the part again); a layout that would go back
+    // to the one before last is a swing, so the current one stays and the two never take turns every frame
+    // (the swing is judged by the layout's shape, which note is in the key and which side each printed one
+    // takes, since the leaders' sub-pixel ends differ between the two turns)
+    const shape = (out as Note[]).map((n) => (n.key !== undefined ? 'k' : n.x !== undefined ? n.side : '-')).join(',');
+    if (shape === history.current[0] && shape !== history.current[1]) return;
+    history.current = [history.current[1], shape];
+    const next = JSON.stringify(out);
+    setNotes((p) => (JSON.stringify(p) === next ? p : out));
   }, [open]);
 
   // first pass renders the notes unplaced so they can be measured, the second places them
   useLayoutEffect(() => {
-    if (!open) { setNotes([]); return; }
+    history.current = ['', ''];
+    // closing keeps the printing where it is while the layer fades; it is cleared once it has gone (D-008)
+    if (!open) return;
     setNotes(parts().map((el) => ({ ...parse(el.getAttribute('data-explain')) })));
   }, [open]);
   useLayoutEffect(() => { if (open && notes.length && notes.some((n) => n.x === undefined && n.key === undefined)) measure(); });
@@ -221,7 +250,7 @@ export const ExplainMode = forwardRef<HTMLDivElement, ExplainModeProps>(function
     <div ref={setRef} data-component="ExplainMode" data-state={open ? 'open' : 'closed'} className={cx(styles.root, className)} onKeyDown={keys} {...rest}>
       <div ref={field}>{children}</div>
       {/* the layer stays mounted, empty while closed, so nothing beside the key comes and goes */}
-      <div className={styles.layer} aria-hidden="true" data-explain-layer={open ? '' : undefined}>
+      <div ref={presence.ref} className={styles.layer} aria-hidden="true" data-state={presence.state} data-explain-layer={open ? '' : undefined}>
           <svg className={styles.leads} focusable="false">
             {notes.map((n, i) => (n.x !== undefined ? <path key={i} className={styles.lead} d={n.lead} /> : null))}
           </svg>

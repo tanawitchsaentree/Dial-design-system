@@ -59,4 +59,30 @@ export default async function card({ check, expect, page, go, main }) {
     expect(px(w) >= 1, `border ${w}`);
     return `border ${w}`;
   });
+
+  // R-006 (2026-11-03): "เปลี่ยนทั้งระบบ" — every word and glyph printed on a unit is pad ink seated in it; a window
+  // (LCD, OLED) shows light and carries no seat
+  await check('Card', 'everything printed on a unit is seated in the plastic, and nothing in a window is', async () => {
+    const out = [];
+    for (const theme of ['light', 'dark']) {
+      await go(`/?theme=${theme}`);
+      const r = await main().evaluate(() => {
+        const units = [...document.querySelectorAll('[data-component="Card"]')];
+        const win = (e) => !!e.closest('[class*="module__lcd"], [class*="module__oled"], [class*="module__window"]');
+        let seated = 0, windowed = 0; const bare = [], lit = [];
+        for (const u of units) for (const e of u.querySelectorAll('*')) {
+          if (!e.getClientRects().length || ![...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) continue;
+          const ts = getComputedStyle(e).textShadow;
+          if (win(e)) { windowed++; if (ts !== 'none') lit.push(e.textContent.trim().slice(0, 12)); }
+          else if (ts === 'none') bare.push(e.textContent.trim().slice(0, 12)); else seated++;
+        }
+        return { units: units.length, seated, windowed, bare: [...new Set(bare)], lit: [...new Set(lit)] };
+      });
+      if (!r.units || !r.seated) out.push(`${theme}: nothing seated on ${r.units} units`);
+      if (r.bare.length) out.push(`${theme}: unseated ${JSON.stringify(r.bare.slice(0, 4))}`);
+      if (r.lit.length) out.push(`${theme}: seated inside a window ${JSON.stringify(r.lit.slice(0, 4))}`);
+    }
+    expect(!out.length, out.join(' | '));
+    return 'every unit word seated in both themes, windows clean';
+  });
 }

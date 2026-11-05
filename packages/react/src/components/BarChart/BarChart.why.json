@@ -1,0 +1,65 @@
+{
+  "concept": "BarChart is a chart-recorder window on the unit: a ruled scale cut into the body, bars printed in ink on it, each told apart by a pattern and carrying its own number, so a person reads a table of values at a glance and every bar can also be reached with the arrow keys and read from a plain table.",
+  "kind": ["bar chart", "column chart", "chart"],
+  "default_to_avoid": [
+    { "pattern": "bar chart in a dashboard card: one rounded bar per series in blue, green and orange, a legend of coloured dots and a tooltip that appears on hover", "why_not": "Series told apart by hue alone fail anyone who cannot see the hue, spend orange outside the one primary control, and a hover tooltip leaves keyboard users without the numbers." },
+    { "pattern": "chart drawn as a flat image or canvas with no text alternative", "why_not": "P4 says a mark that shows a value exposes it as text, so every bar must have its number printed, a readout and a table behind it." }
+  ],
+  "references": [
+    { "source": "Chart recorders and pen plotters of the 1960s: a ruled paper scale behind a window, marks printed in one ink" },
+    { "source": "Braun T 1000 world receiver (Dieter Rams, 1963): a printed scale in a window read against ruled divisions" },
+    { "source": "Edward Tufte, The Visual Display of Quantitative Information: label the marks directly and keep the ink for the data" }
+  ],
+  "derivation": [
+    { "p": "P2", "axis": "depth", "consequence": "the window is recessed into the body (inverse light)", "form": "The ruled scale and the bars sit in one recessed window with elevation.well and surface.sunken, so the chart reads as a display cut into the unit, not a card laid on it." },
+    { "p": "P4", "axis": "colour", "consequence": "a lit level uses ink at full step, never orange", "form": "Every bar is outlined in full step ink and filled with ink or an ink pattern, so no series, bar or gridline uses action.accent or any hue." },
+    { "p": "P4", "axis": "interaction", "consequence": "exposes it as text to assistive tech", "form": "Each bar prints its number on itself, a live readout says the focused bar in words, and a visually hidden table holds every value for screen readers." },
+    { "p": "P2", "axis": "type", "consequence": "tabular numerals, a 7-segment face for LCD values", "form": "Axis numbers, bar values and the readout use tabular figures so a number keeps its width as the data changes." },
+    { "p": "P3", "axis": "interaction", "consequence": "arrows step a detent, Home and End reach the ends", "form": "The chart takes one tab stop; the arrow keys step bar by bar along the categories and across the series, and Home and End reach the first and the last category." },
+    { "p": "P2", "axis": "motion", "consequence": "values change at once", "form": "New data redraws the bars in place with no growing animation, so there is nothing to switch off under reduce motion." },
+    { "p": "P5", "axis": "colour", "consequence": "ink on plastic at ≥4.5:1 in both themes", "form": "Axis numbers, category names and values are printed in text.primary or text.secondary on the sunken window, 8.4:1 and 6.0:1 in light and higher in dark." }
+  ],
+  "variants": {
+    "lab": "apps/lab/bar-chart/index.html",
+    "options": [
+      { "id": "A", "name": "bars with patterned fills in one recessed window, a ruled value scale and the value printed on each bar" },
+      { "id": "B", "name": "ledger rows with dotted leaders and a thin patterned rule as the bar, no window and no scale" },
+      { "id": "C", "name": "each bar built from a column of grille holes lit in ink up to the value, series told by hole shape" }
+    ],
+    "picked": "A",
+    "by": "agent",
+    "reason": "A keeps a ruled scale so values compare against a true zero, prints each number on its mark, and tells series apart by pattern in the one recessed display window P2 allows; B has no scale and is the horizontal case A already covers, and C gives only coarse hole steps with no printed value, which breaks P4's rule that a grille carries a reading as text."
+  },
+  "parts": {
+    "root": { "p": "P6", "axis": "space", "why": "The chart fills the inline size of its column and keeps its block size whatever the data says, so the layout does not reflow when values change." },
+    "header": { "p": "P5", "axis": "space", "why": "The printed title sits on the inset line above the window, aligned to its start edge, like the label above a fader." },
+    "title": { "p": "P5", "axis": "type", "why": "The title is printed in the label size and regular weight, flat ink with no emphasis, like the name above Meter." },
+    "svg": { "p": "P3", "axis": "interaction", "why": "The drawing is the single tab stop of the chart and takes the arrow, Home and End keys, with no tab stop per bar." },
+    "window": { "p": "P2", "axis": "depth", "why": "The plot is a recess with inverse light and a hairline edge in line.ring that holds 3:1 against the body, at a fixed block size so a hover or a focus never moves the chart." },
+    "grid": { "p": "P4", "axis": "shape", "why": "Value gridlines are dashed hairlines of printing across the window, a different shape from the solid bar outlines." },
+    "base": { "p": "P4", "axis": "shape", "why": "The zero line is the one solid hairline in the window, so every bar visibly starts from the same true zero." },
+    "tick": { "p": "P2", "axis": "type", "why": "The value-axis numbers are tabular figures at the caption size in secondary ink, the same printing as a fader scale." },
+    "cat": { "p": "P5", "axis": "type", "why": "Category names are printed at the caption size in regular weight under or beside their group, never inside a bar." },
+    "bar": { "p": "P4", "axis": "colour", "why": "A bar is a rectangle outlined in full step ink and filled with an ink pattern, so series differ by texture and not by hue." },
+    "hit": { "p": "P3", "axis": "space", "why": "A transparent band over each category column gives a pointer a target at least as wide as the column, larger than the bars it covers." },
+    "value": { "p": "P2", "axis": "type", "why": "Each bar prints its value at its end in medium weight and tabular figures, so no one reads a number off the scale." },
+    "focusMark": { "p": "P3", "axis": "interaction", "why": "The keyboard mark is a ring drawn round the active bar with a gap, in the focus ring ink, so focus is a shape round the part and not a tint." },
+    "legend": { "p": "P4", "axis": "interaction", "why": "The legend lists every series by name beside its own pattern swatch, so the pattern is decoded in words." },
+    "key": { "p": "P5", "axis": "space", "why": "Each legend entry puts the swatch and the name on one line at the same height, aligned to the inset line." },
+    "swatch": { "p": "P4", "axis": "shape", "why": "The swatch is a small copy of the series pattern in an outlined rectangle, the same shape as the bar so it matches without hue." },
+    "name": { "p": "P5", "axis": "type", "why": "The series name is printed at the caption size in primary ink, regular weight." },
+    "readout": { "p": "P2", "axis": "interaction", "why": "The readout is a polite live region under the window that says the focused bar in words, such as Tue, Hot water: 7 kWh, and is never a control." },
+    "table": { "p": "P4", "axis": "interaction", "why": "A real table of the same numbers is clipped out of sight and kept for assistive tech, so the data never lives only in the drawing." },
+    "tileBg": { "p": "P4", "axis": "depth", "why": "The ground of every pattern tile is the sunken surface, so the hatch, the dots and the lines read as printing on the recess." },
+    "tileInk": { "p": "P4", "axis": "shape", "why": "Hatch and line patterns are strokes of full step ink at the ring width, a texture that survives a greyscale print." },
+    "tileDot": { "p": "P4", "axis": "shape", "why": "The dot pattern uses full step ink discs, a third texture next to the hatch and the lines." },
+    "tileSolid": { "p": "P4", "axis": "colour", "why": "The solid pattern is a full step ink fill, the one dense texture, so the first series stands out against the lighter ones." }
+  },
+  "states": {
+    "data-active": { "p": "P3", "axis": "interaction", "why": "The active bar, from keys or a pointer, takes a ring-width outline in place of the hairline, a cue that is a line weight and not a colour." },
+    "data-idle": { "p": "P2", "axis": "type", "why": "Before any bar is active the readout shows the key hint in secondary ink, and the value in primary ink once one is." },
+    "focus-visible": { "p": "P3", "axis": "interaction", "why": "The focus ring round the active bar is drawn only when the keyboard has focus, so a pointer press does not leave a ring." },
+    "@media forced-colors: active": { "p": "P4", "axis": "interaction", "why": "In forced colours the window, bars, patterns and the ring use system colours so the data and the active bar survive." }
+  },
+  "motion": {}
+}

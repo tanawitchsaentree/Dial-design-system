@@ -12,6 +12,7 @@ import {
   type ReactNode,
 } from 'react';
 import { cx } from '../../cx';
+import { Icon } from '../Icon';
 import styles from './List.module.css';
 
 interface ListContextValue {
@@ -174,9 +175,7 @@ const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListItem(
         <span ref={trail} className={styles.trail}>
           {trailing}
           {showChevron && (
-            <svg className={styles.chevron} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-              <path d="M6 4l4 4-4 4" />
-            </svg>
+            <Icon name="chevron-right" size="sm" className={styles.chevron} />
           )}
         </span>
       )}

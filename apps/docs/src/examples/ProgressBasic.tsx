@@ -2,5 +2,5 @@
 import { Progress } from 'dial-react';
 
 export default function ProgressBasic() {
-  return <Progress label="Washer" value={55} valueText="38 min left" style={{ maxInlineSize: 320 }} />;
+  return <Progress label="Washer" value={55} valueText="38 min left" style={{ maxInlineSize: 'var(--ds-layout-frame-md)' }} />;
 }

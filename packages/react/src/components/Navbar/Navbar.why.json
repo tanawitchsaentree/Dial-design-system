@@ -1,0 +1,195 @@
+{
+  "concept": "Navbar is the strip of printing along the top edge of a product: the model name at one end, the legend of places in the middle with an ink dot before the one you are in, and the keys at the other end. On a narrow unit the legend folds behind one Menu key.",
+  "kind": [
+    "navbar",
+    "top bar",
+    "app header",
+    "site navigation"
+  ],
+  "default_to_avoid": [
+    {
+      "pattern": "full-width navbar with a logo, a row of links with an accent underline on the active one, and a hamburger icon on mobile",
+      "why_not": "The accent underline spends the unit's one orange on a selection, the underline repeats the Tabs mark so a bar of links reads as tabs, and an icon-only hamburger hides the one word that names the key."
+    },
+    {
+      "pattern": "frosted translucent sticky header that blurs the page behind it",
+      "why_not": "Glass belongs to caps, lamps, latched keys and chips; a blurred bar is a glass body, and text on it loses contrast as the page scrolls under it."
+    }
+  ],
+  "references": [
+    {
+      "source": "Braun T 1000 world receiver (Dieter Rams, 1963): band names printed in a row along the case, the chosen band marked by a single index"
+    },
+    {
+      "source": "Braun SK 4 radio-phono (Rams and Gugelot, 1956): model name set small on the case edge, controls at the other end"
+    },
+    {
+      "source": "system/CONCEPT.md P7 legend: every choice printed, the lit one marked by an ink index"
+    }
+  ],
+  "derivation": [
+    {
+      "p": "P7",
+      "axis": "shape",
+      "consequence": "a legend is printing, never a key; the chosen word carries one ink index mark beside it",
+      "form": "The links are printed words, not keys, and the page you are on carries one ink dot before it. The dot is reserved on every link so the words do not shift."
+    },
+    {
+      "p": "P7",
+      "axis": "space",
+      "consequence": "so the lit word moves and nothing reflows",
+      "form": "The legend sits in one fixed row between the model name and the keys, and a bold ghost of each word holds its width so the lit word never pushes its neighbours."
+    },
+    {
+      "p": "P5",
+      "axis": "space",
+      "consequence": "labels sit on the body's inset line, never floating mid-surface",
+      "form": "The model name starts on the bar's inset line at the inline start, and the keys end on the same inset at the inline end."
+    },
+    {
+      "p": "P3",
+      "axis": "space",
+      "consequence": "every part keeps ≥44px hit area even when it draws smaller",
+      "form": "Each link, the model name when it is a link, and the Menu key are at least 44px tall; the printed words are smaller than the target they sit in."
+    },
+    {
+      "p": "P9",
+      "axis": "space",
+      "consequence": "glass appears on caps, lamps, latched keys and chips only, never on a body, panel or card",
+      "form": "The bar is matte plastic at the body surface with no blur and no tint, even when it is sticky, so text on it holds its contrast at any scroll position."
+    },
+    {
+      "p": "P6",
+      "axis": "depth",
+      "consequence": "shadows are short and soft; a unit never floats more than its material height",
+      "form": "The bar takes the unit elevation and no more, sticky or not, so it sits on the page like a strip of case and not a floating layer."
+    },
+    {
+      "p": "P1",
+      "axis": "colour",
+      "consequence": "links, borders, icons, selections and charts never use it",
+      "form": "The current page is told by an ink dot and the medium weight, never orange. The one orange key on a screen is the consumer's primary Button in the actions slot."
+    }
+  ],
+  "variants": {
+    "picked": "B",
+    "by": "agent",
+    "lab": "apps/lab/navbar/index.html",
+    "options": [
+      {
+        "id": "A",
+        "name": "printed words with an ink bar under the current one"
+      },
+      {
+        "id": "B",
+        "name": "legend with an ink dot before the lit word"
+      },
+      {
+        "id": "C",
+        "name": "links in a recessed window with the lit word on a plate"
+      }
+    ],
+    "reason": "B follows the P7 legend, so the chosen word carries an index beside it and the others wait in plain sight; A is the Tabs mark on a wider strip and a bar of links would read as tabs, and C is a SegmentedControl in a window, which makes a page link look like a mode switch and raises a plate that invites a press."
+  },
+  "parts": {
+    "root": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A header landmark in the body surface with the unit elevation, 28px radius that nests the 44px round Menu key with an even 6px inset; sticky keeps it at the top edge on the sticky layer."
+    },
+    "brand": {
+      "p": "P5",
+      "axis": "space",
+      "why": "The model name prints on the inset line at the inline start in emphasis size and medium weight, with a 44px tall target when it is a link."
+    },
+    "links": {
+      "p": "P7",
+      "axis": "space",
+      "why": "The nav landmark holds the legend in one fixed row between the model name and the keys, and its auto margin pushes the actions to the inline end."
+    },
+    "list": {
+      "p": "P7",
+      "axis": "space",
+      "why": "A plain list of links in a row with a small gap, so assistive tech counts the places and the row never wraps."
+    },
+    "link": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "A printed word at least 44px tall and wide, with no fill and no edge, because a legend word is printing and not a key."
+    },
+    "mark": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "The ink index dot before a word; it is drawn on every link and filled only on the current one so no word moves."
+    },
+    "text": {
+      "p": "P7",
+      "axis": "type",
+      "why": "The visible word, regular weight, turning medium when it is the chosen one."
+    },
+    "ghost": {
+      "p": "P7",
+      "axis": "space",
+      "why": "The same word in medium weight, hidden, sharing the cell with the visible one so the link keeps the width of its lit state."
+    },
+    "actions": {
+      "p": "P1",
+      "axis": "colour",
+      "why": "The keys at the inline end, in the consumer's order; the primary Button here is the only orange on the bar, and the Menu key joins them when the legend folds."
+    },
+    "menuList": {
+      "p": "P7",
+      "axis": "space",
+      "why": "The folded legend in a Popover panel: the same links in one column, each the full width of the panel and 44px tall."
+    }
+  },
+  "states": {
+    "hover": {
+      "p": "P6",
+      "axis": "interaction",
+      "why": "Hover darkens a link's ink one step; a bar link does not lift, because a printed word is not a part that rises."
+    },
+    "focus-visible": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "A 2px ring in the focus colour offset by the same width, on the link and on the model name link, so the keyboard position is always drawn."
+    },
+    "aria-current=page": {
+      "p": "P7",
+      "axis": "shape",
+      "why": "The current page prints in primary ink and medium weight with the ink dot filled; it is told by the dot and the weight, so it still reads in grey scale."
+    },
+    "data-sticky": {
+      "p": "P6",
+      "axis": "depth",
+      "why": "A sticky bar holds the top edge on the sticky layer and keeps the same unit elevation, so it does not float higher while the page moves under it."
+    },
+    "data-folded": {
+      "p": "P6",
+      "axis": "space",
+      "why": "When the legend does not fit, it leaves the row and the Menu key takes its place at the inline end, so the bar never wraps to a second line."
+    },
+    "@media prefers-reduced-motion: reduce": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "Under Reduce motion the ink steps still change, with no slide or travel, since only a state change moves and nothing here travels."
+    },
+    "@media forced-colors: active": {
+      "p": "P3",
+      "axis": "interaction",
+      "why": "In forced colours the bar keeps a real border, links use LinkText, and the current dot draws in CanvasText so the mark still shows."
+    }
+  },
+  "motion": {
+    "color": {
+      "p": "P3",
+      "axis": "motion",
+      "why": "The ink step on hover comes in over 120ms and goes back over 240ms on the decelerating curve (motion.hover with kiln.state), fast in and slow out; only the colour changes and no part travels."
+    },
+    "background-color": {
+      "p": "P6",
+      "axis": "motion",
+      "why": "The index dot fades into ink with the word's own ink on the same hover timing instead of snapping on, and it does not move."
+    }
+  }
+}

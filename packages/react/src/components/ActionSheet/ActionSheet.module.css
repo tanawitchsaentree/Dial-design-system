@@ -111,6 +111,10 @@
   text-align: start;
   cursor: pointer;
   outline: none;
+  /* the row the finger or the arrows reach sinks into a well on motion.hover, fast on and slower off (D-008) */
+  transition:
+    background-color var(--ds-motion-hover) var(--ds-motion-easing),
+    box-shadow var(--ds-motion-hover) var(--ds-motion-easing);
 }
 .icon {
   flex: none;

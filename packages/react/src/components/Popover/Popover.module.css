@@ -1,0 +1,83 @@
+/* Popover — a key that opens Menu's plastic panel with printed content (lab apps/lab/popover pick A, D-003):
+   surface.solid, elevation.float, corner.inner, layer.overlay. The panel is placed by Popover.tsx in the
+   page's top layer (a portal on the body, position fixed), at most layout.frame-sm wide, flipped above the key
+   or shifted along it so the screen edge never cuts it. Ink on plastic only, nothing is orange (P1). */
+.root {
+  display: inline-flex;
+  flex: none;
+  vertical-align: middle;
+}
+.panel {
+  position: fixed;
+  z-index: var(--ds-layer-overlay);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  inline-size: max-content;
+  min-inline-size: var(--ds-control-menu-min);
+  max-inline-size: min(var(--ds-layout-frame-sm), calc(100vw - var(--ds-gap-lg) * 2));
+  margin: 0;
+  padding-block: var(--ds-gap-sm) var(--ds-gap-lg);
+  padding-inline: var(--ds-gap-lg);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--ds-width-hairline) solid transparent;
+  border-radius: var(--ds-corner-inner);
+  background: var(--ds-surface-solid);
+  box-shadow: var(--ds-elevation-float);
+  color: var(--ds-text-primary);
+  font-family: var(--ds-type-family);
+  outline: none;
+  /* every change moves (P6, D-008): the panel rises off the key it grows from on motion.release and the
+     decelerating curve, and sinks back faster on motion.exit and the accelerating one */
+  --pop-from: calc(var(--ds-motion-rise) * -1);
+  transition:
+    opacity var(--ds-motion-release) var(--ds-motion-easing),
+    transform var(--ds-motion-release) var(--ds-motion-easing);
+}
+.panel[data-side='top'] { --pop-from: var(--ds-motion-rise); }
+@starting-style {
+  .panel[data-state='open'] { opacity: 0; transform: translateY(var(--pop-from)); }
+}
+.panel[data-state='closing'] {
+  opacity: 0;
+  transform: translateY(var(--pop-from));
+  transition-duration: var(--ds-motion-exit);
+  transition-timing-function: var(--ds-motion-easing-exit);
+  pointer-events: none;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-gap-md);
+  min-block-size: var(--ds-control-md);
+  /* the key hangs a little past the inset so its centre lines up with the title */
+  margin-inline-end: calc(var(--ds-gap-md) * -1);
+}
+.title {
+  margin: 0;
+  min-inline-size: 0;
+  font-size: var(--ds-type-emphasis);
+  font-weight: var(--ds-type-weight-medium);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-primary);
+}
+.close { flex: none; }
+.body {
+  min-inline-size: 0;
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+  overflow-wrap: anywhere;
+}
+.body > :first-child { margin-block-start: var(--ds-gap-none); }
+.body > :last-child { margin-block-end: var(--ds-gap-none); }
+
+/* under Reduce motion nothing travels (motion.rise is 0); the panel still fades on motion.hover */
+@media (prefers-reduced-motion: reduce) {
+  .panel, .panel[data-state='closing'] { transition: opacity var(--ds-motion-hover) var(--ds-motion-easing); }
+}
+@media (forced-colors: active) {
+  .panel { border-color: CanvasText; }
+}

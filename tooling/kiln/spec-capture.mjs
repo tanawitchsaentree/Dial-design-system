@@ -41,7 +41,7 @@ const TOKEN_MAP = () => {
   // a primitive. A name that does not fit the property (a padding token for a font size) is never chosen.
   const FAMILY = [[/^color$/, /fg|text|ink|on-|label/], [/^background-color$/, /bg|surface|fill|accent/], [/border.*color$/, /border|line|rim|ring/],
     [/^font-size$/, /type|font|text|label|body|title/], [/^font-weight$/, /weight/], [/^line-height$/, /leading|line/], [/^letter-spacing$/, /tracking|letter/],
-    [/height$/, /height|control|size/], [/^padding|gap$/, /padding|gap|inset|space/], [/radius$/, /radius|corner/], [/^min-width$/, /width|min|size/],
+    [/height$/, /height|control|size/], [/^(block|inline)-size$/, /size|control|icon|height|width|layout/], [/^padding|gap$/, /padding|gap|inset|space/], [/radius$/, /radius|corner/], [/^min-width$/, /width|min|size/],
     [/^outline-(width|offset)$/, /focus|ring|width/], [/^icon-size$/, /icon|size/], [/duration$/, /motion|duration/], [/timing-function$/, /easing|ease|motion/], [/^opacity$/, /opacity|alpha|disabled/]];
   const PRIMITIVE = /^--ds-(color|duration|size|space|ease|easing|font|weight)-/;
   window.__specPick = (names, prop, comp, options = []) => {

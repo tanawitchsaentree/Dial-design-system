@@ -1,0 +1,117 @@
+/* Accordion — sections printed as a legend (lab apps/lab/accordion pick A).
+   The open section is lit by an ink index bar, a minus and medium weight. No orange, no fill, no raised edge. */
+.root {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-family: var(--ds-type-family);
+  color: var(--ds-text-primary);
+}
+.item + .item {
+  border-block-start: var(--ds-width-hairline) solid var(--ds-line-divider);
+}
+.heading {
+  margin: 0;
+  font: inherit;
+}
+.trigger {
+  box-sizing: border-box;
+  appearance: none;
+  display: grid;
+  grid-template-columns: var(--ds-width-bar) 1fr var(--ds-control-icon-md);
+  align-items: center;
+  column-gap: var(--ds-gap-lg);
+  inline-size: 100%;
+  min-block-size: var(--ds-control-md);
+  margin: 0;
+  padding-block: var(--ds-gap-sm);
+  padding-inline: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--ds-type-reading);
+  font-weight: var(--ds-type-weight-regular);
+  line-height: var(--ds-type-leading-body);
+  text-align: start;
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition: color var(--ds-motion-hover) var(--ds-motion-easing);
+}
+.trigger:hover { color: var(--ds-text-primary); }
+.trigger:focus-visible {
+  outline: var(--ds-width-ring) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-width-ring);
+}
+.trigger:disabled {
+  opacity: var(--ds-opacity-disabled);
+  cursor: not-allowed;
+}
+.trigger[aria-expanded='true'] {
+  font-weight: var(--ds-type-weight-medium);
+  color: var(--ds-text-primary);
+}
+.mark {
+  inline-size: var(--ds-width-bar);
+  block-size: var(--ds-control-icon-md);
+  border-radius: var(--ds-corner-mark);
+  background: transparent;
+}
+.trigger[aria-expanded='true'] .mark { background: currentColor; }
+.label {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+.glyph {
+  display: grid;
+  place-items: center;
+}
+.panel {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-rows var(--ds-motion-enter) var(--ds-motion-easing),
+    opacity var(--ds-motion-enter) var(--ds-motion-easing);
+}
+.panelInner {
+  min-block-size: 0;
+  overflow: hidden;
+}
+.body {
+  padding-block: var(--ds-gap-xs) var(--ds-gap-xl);
+  padding-inline: calc(var(--ds-width-bar) + var(--ds-gap-lg)) var(--ds-gap-xs);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-leading-body);
+  color: var(--ds-text-secondary);
+}
+/* a section opened after the first render grows from a closed row; one open at the start is simply there */
+@starting-style {
+  .panel[data-fresh='true'] {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+}
+.panel[data-state='closing'] {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--ds-motion-exit) var(--ds-motion-easing-exit),
+    opacity var(--ds-motion-exit) var(--ds-motion-easing-exit);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* nothing travels: the row keeps its height and the content only fades on motion.hover */
+  .panel,
+  .panel[data-state='closing'] {
+    transition: opacity var(--ds-motion-hover) var(--ds-motion-easing);
+  }
+  .panel[data-state='closing'] { grid-template-rows: 1fr; }
+  @starting-style {
+    .panel[data-fresh='true'] { grid-template-rows: 1fr; }
+  }
+}
+@media (forced-colors: active) {
+  .item + .item { border-block-start-color: CanvasText; }
+  .trigger[aria-expanded='true'] .mark { forced-color-adjust: none; background: ButtonText; }
+  .trigger:disabled { color: GrayText; opacity: 1; }
+}

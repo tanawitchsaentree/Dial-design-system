@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dial lab · Dropzone · three ways to take a dropped file</title>
+<link rel="stylesheet" href="../../../packages/tokens/build/css/tokens.css">
+<style>
+ body{margin:0;padding:32px;background:var(--ds-surface-page);color:var(--ds-text-primary);font-family:var(--ds-type-family)}
+ h1{font-size:18px;font-weight:500;margin:0 0 18px}
+ .row{display:flex;flex-wrap:wrap;gap:36px}
+ .unit{inline-size:340px;padding:28px;border-radius:54px;background:var(--ds-surface-solid);box-shadow:var(--ds-elevation-unit)}
+ .unit>h2{font-size:13px;font-weight:500;margin:0 0 14px;color:var(--ds-text-secondary)}
+ .unit>h3{font-size:12px;font-weight:400;margin:18px 0 8px;color:var(--ds-text-secondary)}
+ .t{font-size:16px;font-weight:500;margin:0}
+ .s{font-size:14px;color:var(--ds-text-secondary);margin:0}
+ .key{min-block-size:44px;padding-inline:20px;border:0;border-radius:999px;background:var(--ds-surface-raised);box-shadow:var(--ds-elevation-part);font:inherit;font-size:14px;font-weight:500;color:var(--ds-text-primary)}
+ /* A: recessed tray window, centred legend and key. Over: heavier ring, words swap, plus mark. */
+ .A .z{display:grid;justify-items:center;gap:8px;padding:24px 16px;min-block-size:168px;align-content:center;box-sizing:border-box;border:1px solid var(--ds-line-ring);border-radius:var(--ds-corner-media);background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);text-align:center}
+ .A .z.over{border-width:3px;padding:22px 14px}
+ /* B: card slot. A slim slit, the legend at its side. Over: the slit opens to twice its height. */
+ .B .z{display:grid;gap:12px;box-sizing:border-box}
+ .B .slit{block-size:10px;border-radius:999px;background:var(--ds-surface-sunken);box-shadow:var(--ds-elevation-well);border:1px solid var(--ds-line-ring);box-sizing:border-box}
+ .B .z.over .slit{block-size:22px}
+ .B .line{display:flex;align-items:center;justify-content:space-between;gap:12px}
+ /* C: crop marks on flat plastic. Over: the four marks close in. */
+ .C .z{position:relative;display:grid;justify-items:center;gap:8px;padding:36px 16px;text-align:center;min-block-size:168px;align-content:center;box-sizing:border-box}
+ .C .z i{position:absolute;inline-size:18px;block-size:18px;border:0 solid var(--ds-text-primary)}
+ .C .z i:nth-of-type(1){inset-block-start:0;inset-inline-start:0;border-block-start-width:2px;border-inline-start-width:2px}
+ .C .z i:nth-of-type(2){inset-block-start:0;inset-inline-end:0;border-block-start-width:2px;border-inline-end-width:2px}
+ .C .z i:nth-of-type(3){inset-block-end:0;inset-inline-start:0;border-block-end-width:2px;border-inline-start-width:2px}
+ .C .z i:nth-of-type(4){inset-block-end:0;inset-inline-end:0;border-block-end-width:2px;border-inline-end-width:2px}
+ .C .z.over i:nth-of-type(1){transform:translate(14px,14px)}
+ .C .z.over i:nth-of-type(2){transform:translate(-14px,14px)}
+ .C .z.over i:nth-of-type(3){transform:translate(14px,-14px)}
+ .C .z.over i:nth-of-type(4){transform:translate(-14px,-14px)}
+</style></head><body>
+<h1>Dropzone · a place that takes dropped files (idle above, a file held over it below)</h1>
+<div class="row">
+ <div class="unit A"><h2>A · tray window</h2>
+  <div class="z"><p class="t">Drop files here</p><p class="s">or choose them from this device</p><button class="key">Choose files</button></div>
+  <h3>file held over</h3>
+  <div class="z over"><p class="t">Release to add</p><p class="s">Files are taken when you let go</p><button class="key">Choose files</button></div></div>
+ <div class="unit B"><h2>B · card slot</h2>
+  <div class="z"><div class="slit"></div><div class="line"><div><p class="t">Drop files here</p><p class="s">or choose them</p></div><button class="key">Choose</button></div></div>
+  <h3>file held over</h3>
+  <div class="z over"><div class="slit"></div><div class="line"><div><p class="t">Release to add</p><p class="s">Slot open</p></div><button class="key">Choose</button></div></div></div>
+ <div class="unit C"><h2>C · crop marks</h2>
+  <div class="z"><i></i><i></i><i></i><i></i><p class="t">Drop files here</p><p class="s">or choose them from this device</p><button class="key">Choose files</button></div>
+  <h3>file held over</h3>
+  <div class="z over"><i></i><i></i><i></i><i></i><p class="t">Release to add</p><p class="s">Files are taken when you let go</p><button class="key">Choose files</button></div></div>
+</div></body></html>

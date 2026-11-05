@@ -151,6 +151,23 @@ assertCase('error: a knob drawn only as a background', 'knob.module.css', '.knob
 assertCase('a knob drawn as a border passes', 'knob-ok.module.css', '.knob {\n  border-block-start: var(--ds-switch-knob-size) solid var(--ds-switch-knob);\n}\n', (r) => r.exitCode === 0);
 assertCase('a hover re-tint of a ruled track is not flagged', 'track-hover.module.css', '.root:hover .track {\n  background: var(--ds-switch-hover);\n}\n', (r, c) => r.exitCode === 0 && !/background-only/.test(c));
 
+// v5 (dial R-007): breakpoints come from the tokens, media queries use range syntax, inline styles carry tokens only
+assertCase('a media query off the breakpoint scale is red', 'bp.module.css', '@media (width < 860px) {\n  .page { display: block; }\n}\n', (r) => r.exitCode === 1);
+assertCase('a media query in max-width form is red', 'bp2.module.css', '@media (max-width: 768px) {\n  .page { display: block; }\n}\n', (r) => r.exitCode === 1);
+assertCase('a breakpoint token value in range syntax passes', 'bp-ok.module.css', '@media (width < 768px) {\n  .page { display: block; }\n}\n', (r) => r.exitCode === 0);
+assertCase('matchMedia off the scale is red', 'mm.tsx', "const narrow = matchMedia('(width < 480px)').matches;\n", (r) => r.exitCode === 1);
+assertCase('an inline numeric frame width is red', 'frame.tsx', 'export const A = () => <div style={{ inlineSize: 360 }} />;\n', (r) => r.exitCode === 1);
+assertCase('an inline px string is red', 'frame2.tsx', "export const A = () => <div style={{ maxInlineSize: '320px' }} />;\n", (r) => r.exitCode === 1);
+assertCase('an inline token passes', 'frame-ok.tsx', "export const A = () => <div style={{ inlineSize: 'var(--ds-layout-frame-md)' }} />;\n", (r) => r.exitCode === 0);
+
+assertCase('a unitless line-height is red', 'lh.module.css', '.t {\n  line-height: 1.5;\n}\n', (r) => r.exitCode === 1);
+assertCase('a leading token passes', 'lh-ok.module.css', '.t {\n  line-height: var(--ds-type-leading-body);\n}\n', (r) => r.exitCode === 0);
+assertCase('a numeric z-index is red', 'z.module.css', '.t {\n  z-index: 3;\n}\n', (r) => r.exitCode === 1);
+assertCase('a layer token passes', 'z-ok.module.css', '.t {\n  z-index: var(--ds-layer-raised);\n}\n', (r) => r.exitCode === 0);
+assertCase('a numeric font-weight is red', 'fw.module.css', '.t {\n  font-weight: 500;\n}\n', (r) => r.exitCode === 1);
+assertCase('a raw transition duration is red', 'tr.module.css', '.t {\n  transition: opacity 200ms ease;\n}\n', (r) => r.exitCode === 1);
+assertCase('a motion token with a 0s delay passes', 'tr-ok.module.css', '.t {\n  transition: opacity var(--ds-motion-exit) var(--ds-motion-easing), visibility 0s linear var(--ds-motion-exit);\n}\n', (r) => r.exitCode === 0);
+
 rmSync(dir, { recursive: true, force: true });
 
 console.log(`\n${total - failures}/${total} gate-proof cases passed`);

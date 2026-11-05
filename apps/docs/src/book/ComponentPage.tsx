@@ -28,7 +28,7 @@ const whyOf = (name: string) => WHYS[`../../../../packages/react/src/components/
 function Reasons({ name }: { name: string }) {
   const w = whyOf(name);
   if (!w) return <p className="fail" data-reasons="">No reasons recorded for {name}.</p>;
-  const block = (title: string, rows: Record<string, Why>, what: string) => Object.keys(rows).length ? (
+  const block = (title: string, rows: Record<string, Why> | undefined, what: string) => rows && Object.keys(rows).length ? (
     <>
       <h3>{title}</h3>
       <div className="table-wrap">

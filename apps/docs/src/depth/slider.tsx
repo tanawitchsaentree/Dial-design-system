@@ -54,7 +54,7 @@ export const SLIDER: Depth = {
       do: <Slider label="Brightness" min={0} max={100} step={10} defaultValue={60} formatValue={(v) => `${v} %`} />, doNote: 'The label names the amount and the value carries the unit.',
       dont: <Slider label="Drag to change the brightness in percent" min={0} max={100} step={10} defaultValue={60} />, dontNote: 'An instruction as the label, with the unit buried in it.',
     },
-    overflow: { text: 'A long label wraps above the groove and the value stays at the end. The track keeps its length.', render: <div data-overflow-demo="" style={{ inlineSize: 240 }}><Slider label="Brightness of the lamp above the dining table" min={0} max={10} step={1} defaultValue={6} /></div> },
+    overflow: { text: 'A long label wraps above the groove and the value stays at the end. The track keeps its length.', render: <div data-overflow-demo="" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-xs))' }}><Slider label="Brightness of the lamp above the dining table" min={0} max={10} step={1} defaultValue={6} /></div> },
     rtl: { text: 'In right-to-left languages the groove starts on the right. The lowest value is on the right and the arrow keys follow the direction of the groove.', render: <div dir="rtl"><Slider label="مستوى الصوت" min={0} max={10} step={1} defaultValue={3} scale /></div> },
     expansion: { text: 'German and Finnish labels can run 30% longer. The label wraps and the groove does not change.', render: <Slider label="Lautstärke der Lautsprecher" min={0} max={10} step={1} defaultValue={5} /> },
   },

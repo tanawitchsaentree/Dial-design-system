@@ -12,6 +12,8 @@ import {
   type ReactNode,
 } from 'react';
 import { cx } from '../../cx';
+import { messages } from '../../messages';
+import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
 import styles from './TimePicker.module.css';
 
@@ -91,17 +93,17 @@ function Figures({ text }: { text: string }) {
   );
 }
 
-const icon = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', 'aria-hidden': true, focusable: false } as const;
-const minus = <svg {...icon}><path d="M6 12h12" /></svg>;
-const plus = <svg {...icon}><path d="M6 12h12M12 6v12" /></svg>;
+// the keys print dial's one icon language, the dot matrix (R-005)
+const minus = <Icon name="minus" />;
+const plus = <Icon name="plus" />;
 
 /** A time of day set in a recessed well: hour and minute are spinbuttons that step with the arrow keys, PageUp and
  *  PageDown, Home and End, typed digits and the round set keys under them. The value is always `HH:MM` on the 24 hour clock. */
 export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(function TimePicker(
   {
     label, kind = 'segment', hourCycle = '24', value, defaultValue, onValueChange, minuteStep = 1, keys, hint, error,
-    disabled = false, readOnly = false, required = false, name, hourLabel = 'Hour', minuteLabel = 'Minute', periodLabel = 'AM or PM',
-    periodWords = ['AM', 'PM'], keyLabels = ['Earlier hour', 'Later hour', 'Earlier minute', 'Later minute'],
+    disabled = false, readOnly = false, required = false, name, hourLabel = messages.time.hour, minuteLabel = messages.time.minute, periodLabel = messages.time.period,
+    periodWords = ['AM', 'PM'], keyLabels = messages.time.keys,
     className, style, ...rest
   },
   ref,
@@ -288,7 +290,7 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(function T
             aria-valuemin={twelve ? 1 : 0}
             aria-valuemax={twelve ? 12 : 23}
             aria-valuenow={hShown ?? undefined}
-            aria-valuetext={hShown === null ? 'Not set' : twelve ? `${hShown} ${periodWord}` : two(hShown)}
+            aria-valuetext={hShown === null ? messages.notSet : twelve ? `${hShown} ${periodWord}` : two(hShown)}
             value={hText}
           />
           {kind === 'segment' && <Figures text={hText} />}
@@ -303,7 +305,7 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(function T
             aria-valuemin={0}
             aria-valuemax={59}
             aria-valuenow={draft.m ?? undefined}
-            aria-valuetext={draft.m === null ? 'Not set' : two(draft.m)}
+            aria-valuetext={draft.m === null ? messages.notSet : two(draft.m)}
             value={mText}
           />
           {kind === 'segment' && <Figures text={mText} />}
@@ -342,10 +344,7 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(function T
       {hint != null && <p id={hintId} className={styles.hint}>{hint}</p>}
       {invalid && (
         <p id={errorId} className={styles.error}>
-          <svg className={styles.glyph} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden="true" focusable="false">
-            <circle cx="8" cy="8" r="6.5" />
-            <path d="M8 4.5v4M8 11.25v.01" />
-          </svg>
+          <Icon name="critical" size="sm" className={styles.glyph} />
           <span>{error}</span>
         </p>
       )}

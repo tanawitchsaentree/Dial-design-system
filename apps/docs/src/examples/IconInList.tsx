@@ -3,7 +3,7 @@ import { Icon, List, Switch } from 'dial-react';
 
 export default function IconInList() {
   return (
-    <List label="Living room" style={{ inlineSize: 380, maxInlineSize: '100%' }}>
+    <List label="Living room" style={{ inlineSize: 'min(100%, var(--ds-layout-frame-phone))', maxInlineSize: '100%' }}>
       <List.Item leading={<Icon name="lamp" />} label="Floor lamp" description="On · 60%" trailing={<Switch aria-label="Floor lamp" defaultChecked />} />
       <List.Item leading={<Icon name="fan" />} label="Ceiling fan" description="Off" trailing={<Switch aria-label="Ceiling fan" />} />
       <List.Item leading={<Icon name="speaker" />} label="Shelf speaker" description="Paused" trailing={<Switch aria-label="Shelf speaker" defaultChecked />} />
